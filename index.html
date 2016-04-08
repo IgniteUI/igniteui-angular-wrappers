@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+	<title>IgniteUI Angular 2 Samples</title>
+
+	<!-- Ignite UI Required Combined CSS Files -->
+	<link href="http://cdn-na.infragistics.com/igniteui/latest/css/themes/infragistics/infragistics.theme.css" rel="stylesheet" />
+	<link href="http://cdn-na.infragistics.com/igniteui/latest/css/structure/infragistics.css" rel="stylesheet" />
+
+	<!-- 1. Load libraries -->
+	<script src="http://code.jquery.com/jquery-1.12.3.js"></script>
+	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+
+	<script src="https://code.angularjs.org/2.0.0-beta.14/angular2-polyfills.js"></script>
+	<script src="https://code.angularjs.org/tools/system.js"></script>
+	<script src="https://code.angularjs.org/tools/typescript.js"></script>
+	<script src="https://code.angularjs.org/2.0.0-beta.14/Rx.js"></script>
+	<script src="https://code.angularjs.org/2.0.0-beta.14/angular2.dev.js"></script>
+
+	<!-- Ignite UI Required Combined JavaScript Files -->
+	<script src="http://cdn-na.infragistics.com/igniteui/latest/js/infragistics.core.js"></script>
+	<script src="http://cdn-na.infragistics.com/igniteui/latest/js/infragistics.lob.js"></script>
+
+	<link type="text/css" rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" type="text/css" />
+	<link rel="stylesheet" href="samples/sample.css" />
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<!-- 2. Configure SystemJS -->
+	<script>
+		System.config({
+		transpiler: 'typescript',
+		typescriptOptions: { emitDecoratorMetadata: true },
+		packages: {'app': {defaultExtension: 'ts'}}
+		});
+		System.import('app/boot')
+			.then(null, console.error.bind(console));
+	</script>
+	
+	<style>
+		.links a, .links button {
+			font-size: 1.75em;
+			color:#999;
+			margin:.75em .75em 0 0;
+		}
+		
+		.billboard {
+			background: url(http://www.igniteui.com/images/marketing/Homepage/Homepage_Header_Background.jpg) no-repeat scroll top !important;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+			color:#fff;
+			background-color: #aa8c68;
+			border-bottom: 10px solid #d16717;
+		}
+		
+		.billboard .row {
+			margin: 1em;
+		}
+		
+		.billboard .header-fg {
+			background: url(http://www.igniteui.com/images/marketing/Homepage/Homepage_Header_Foreground.png) no-repeat scroll right bottom;
+			height: 400px;
+		}
+		
+		.lead {
+			margin-top:1em;
+		}
+		
+		@media only screen and (min-width:641px){
+			
+			.lead {
+				margin-top:0;
+			}
+			
+			.billboard {
+				min-height: 400px;
+			}
+			
+
+			.billboard .lead {
+				font-size: 1.2em;
+				text-transform: uppercase;
+			}
+			
+			.billboard .row {
+				margin:0;
+				margin-top: 1em;
+			}
+
+			.billboard h1 {
+				font-size: 6em;
+				margin-bottom:0;
+			}
+
+			.billboard h2 {
+				font-size: 2.5em;
+				margin-top: 0;
+			}
+		}
+	</style>
+
+	</head>
+
+	<!-- 3. Display the application -->
+	<body>
+		<div class="billboard">
+		<div class="container">
+			<div class="row">
+				<a href="http://www.igniteui.com" target="_blank"><img src="http://www.igniteui.com/images/headerIcon.PNG" style="width: 200px" /></a>
+			</div>
+			<div class="row">
+				<div class="col-sm-12 col-lg-5">
+				<h1>Ignite UI</h1>
+				<h2>Angular 2 Directives</h2>
+				</div>
+				<div class="col-sm-12 header-fg col-lg-7"></div>
+			</div>
+
+		</div>
+	</div>
+	<div class="container">
+
+		<div class="row">
+			<div class="col-sm-12 col-lg-6">
+			<h2>Live sample...</h2>
+	<my-app>Loading...</my-app>
+			</div>
+			<div class="col-sm-12 col-lg-6">
+			<h2>Code...</h2>
+			<div style="height: 511px; overflow-y: scroll;">
+			<pre>
+import {Component, Inject, ElementRef, EventEmitter, HostListener} from 'angular2/core';
+import {IgGridComponent} from "../src/igniteui.angular2.ts";
+
+declare var jQuery: any;
+@Component({
+	selector: 'my-app',
+	template: `
+		&lt;ig-grid 
+			[(options)]=&quot;gridOptions&quot; 
+			[(widgetId)]='id' 
+			(cellClick)=&quot;cellClickHandler($event)&quot; 
+			(rendering)='renderedEventHandler($event)' 
+		&gt;&lt;/ig-grid&gt;
+		`,
+	directives: [IgGridComponent]
+})
+export class AppComponent {
+	private gridOptions: IgGrid;
+	private cellClickHandler: any;
+	private renderedEventHandler:any;
+	private data: Array<any>;
+	private id: string = "grid1";
+	
+	constructor() {
+		this.data = [/* data omitted */];
+
+		this.cellClickHandler= function(ui){
+			console.log("grid cell click event fired");
+		};
+
+		this.renderedEventHandler= function(ui){
+			console.log("grid rendered event fired");
+		};
+
+		this.gridOptions = {
+			dataSource: this.data,
+			width: "100%",
+			primaryKey: "ProductID",
+			autoCommit: true,
+			autoGenerateColumns: false,
+			columns: [
+					 { "headerText": "Product ID", "key": "ProductID", "dataType": "number", "width": "10%" },
+					 { "headerText": "Name", "key": "ProductName", "dataType": "string", "width": "40%" },
+					 { "headerText": "Quantity per unit", "key": "QuantityPerUnit", "dataType": "string", "width": "25%" },
+					 { "headerText": "Unit Price", "key": "UnitPrice", "dataType": "string", "width": "25%" }
+			],
+			features: [{
+				name: "Updating",
+				columnSettings: [{
+					columnKey: "ProductID",
+					readOnly: true
+				}]
+			}, {
+				name: "Paging",
+				pageSize: 10
+			}, {
+				name: "Filtering"
+			}, {
+				name: "Sorting"
+			}]
+		};
+	}
+}
+			</pre>
+			</div>
+			</div>
+		</div>
+		<hr />
+		
+		<h2>Samples</h2>
+		<div class="links">
+			<a class="btn btn-default" href="samples/igGrid/igGrid.html">igGrid</a>
+			<a class="btn btn-default" href="samples/igHierarchicalGrid/igHierarchicalGrid.html">igHierarchicalGrid</a>
+			<a class="btn btn-default" href="samples/igTreeGrid/igTreeGrid.html">igTreeGrid</a>
+			<!--<div class="btn-group">
+				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					igPivotGrid <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="samples/igPivotGrid-FlatDataSource/igPivotGrid-FlatDataSource.html">igPivotGrid with Flat Data Source</a></li>
+					<li><a href="samples/igPivotGrid-XmlaDataSource/igPivotGrid-XmlaDataSource.html">igPivotGrid with Xmla Data Source</a></li>
+				</ul>
+			</div>
+			<a class="btn btn-default" href="samples/igCombo/igCombo.html">igCombo</a>-->
+			<a class="btn btn-default" href="samples/igDataChart/igDataChart.html">igDataChart</a>
+			<a class="btn btn-default" href="samples/igDialog/igDialog.html">igDialog</a>
+			<a class="btn btn-default" href="samples/igEditors/igEditors.html">igEditors</a>
+			<!--<a class="btn btn-default" href="samples/igHtmlEditor/igHtmlEditor.html">igHtmlEditor</a>
+			<a class="btn btn-default" href="samples/igLayoutManager/igLayoutManager.html">igLayoutManager</a>
+			<a class="btn btn-default" href="samples/igTileManager/igTileManager.html">igTileManager</a>
+			<a class="btn btn-default" href="samples/igMap/igMap.html">igMap</a>
+			<a class="btn btn-default" href="samples/igTree/igTree.html">igTree</a>
+			<a class="btn btn-default" href="samples/igUpload/igUpload.html">igUpload</a>
+			<a class="btn btn-default" href="samples/igVideoPlayer/igVideoPlayer.html">igVideoPlayer</a>-->
+		</div>
+
+		<div class="push-down-md">
+			<a href="https://github.com/IgniteUI/igniteui-angular2" class="btn btn-default btn-primary btn-lg"><i class="fa fa-github"></i> View source on GitHub</a>
+		</div>
+
+	</div>
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<p><a href="https://github.com/IgniteUI/igniteui-angular2/issues">Feedback &amp; Questions</a></p>
+					<p class="small">For more information or to download a trial of Ignite UI, please visit: <a href="http://www.igniteui.com">http://www.igniteui.com</a></p>
+				</div>
+			</div>
+		</div>
+	</footer>
+	</body>
+
+</html>
