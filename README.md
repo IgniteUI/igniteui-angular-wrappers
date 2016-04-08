@@ -1,4 +1,5 @@
-#Ignite UI components for Angular 2 (Preview)
+#Ignite UI components for Angular 2
+[![Build Status](https://travis-ci.org/IgniteUI/igniteui-angular2.svg?branch=master)](https://travis-ci.org/IgniteUI/igniteui-angular2)
 
 Use the components found in `src\igniteui.angular2.ts` to use [Ignite UI](http://igniteui.com) controls in [Angular 2](https://angular.io/) applications.
 
