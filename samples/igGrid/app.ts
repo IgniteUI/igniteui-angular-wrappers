@@ -6,24 +6,7 @@ import {bootstrap }    from 'angular2/platform/browser'
 declare var jQuery: any;
 @Component({
 	selector: 'my-app',
-	template: `
-		<h1 class="push-down-md"><a href="http://www.igniteui.com/grid/overview" target="_blank">igGrid</a></h1>
-
-		<div class="row description">
-			<div class="alert alert-info col-md-5 try-it-out">
-				<span class="h4">TRY IT OUT:</span>
-				<hr />
-				<ul>
-					<li>Add a new product either through the grid's UI or the form on the right of the grid</li>
-					<li>Change a product's name in the group of textboxes below and see how the names change in the grid</li>
-					<li>Delete a product either through the grid's UI or with the button next to each product in the table under the grid</li>
-				</ul>
-			</div>
-			<div class="col-md-4">
-				<p class="lead">This sample demonstrates how Angular 2 components are used with the igGrid to allow for two-way binding in the grid.</p>
-			</div>
-		</div>
-
+	template: `		
 		<div class="row">
 			<div class="col-md-8">
 				<ig-grid [(options)]="gridOptions" [(widgetId)]='id'></ig-grid>

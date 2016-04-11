@@ -7,14 +7,6 @@ declare var jQuery: any;
 @Component({
 	selector: 'my-app',
 	template: `
-		<h1 class="push-down-md"><a href="http://www.igniteui.com/hierarchical-grid/overview" target="_blank">igHierarchicalGrid</a></h1>
-	
-		<div class="row description">
-			<div class="col-md-12">
-				<p class="lead">This sample demonstrates how Angular 2 components are used to instantiate igHierarchicalGrid.</p>
-			</div>
-		</div>
-		
 		<div class="row">
 			<div class="col-md-12">
 				<ig-hierarchical-grid 

@@ -11,7 +11,10 @@
 	<!-- 1. Load libraries -->
 	<script src="http://code.jquery.com/jquery-1.12.3.js"></script>
 	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-
+    <!-- IE required polyfills, in this exact order -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.0/es6-shim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.20/system-polyfills.js"></script>
+    <script src="https://npmcdn.com/angular2@2.0.0-beta.14/es6/dev/src/testing/shims_for_IE.js"></script>
 	<script src="https://code.angularjs.org/2.0.0-beta.14/angular2-polyfills.js"></script>
 	<script src="https://code.angularjs.org/tools/system.js"></script>
 	<script src="https://code.angularjs.org/tools/typescript.js"></script>
@@ -218,8 +221,8 @@ export class AppComponent {
 			<a class="btn btn-default" href="samples/igDataChart/igDataChart.html">igDataChart</a>
 			<a class="btn btn-default" href="samples/igDialog/igDialog.html">igDialog</a>
 			<a class="btn btn-default" href="samples/igEditors/igEditors.html">igEditors</a>
-			<!--<a class="btn btn-default" href="samples/igHtmlEditor/igHtmlEditor.html">igHtmlEditor</a>
-			<a class="btn btn-default" href="samples/igLayoutManager/igLayoutManager.html">igLayoutManager</a>
+			<a class="btn btn-default" href="samples/igHtmlEditor/igHtmlEditor.html">igHtmlEditor</a>
+			<!--<a class="btn btn-default" href="samples/igLayoutManager/igLayoutManager.html">igLayoutManager</a>
 			<a class="btn btn-default" href="samples/igTileManager/igTileManager.html">igTileManager</a>
 			<a class="btn btn-default" href="samples/igMap/igMap.html">igMap</a>
 			<a class="btn btn-default" href="samples/igTree/igTree.html">igTree</a>
