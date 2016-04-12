@@ -5,7 +5,7 @@ import {bootstrap}    from 'angular2/platform/browser'
 declare var jQuery: any;
 @Component({
 	selector: 'my-app',
-	templateUrl: `../igVideoPlayer/igVideoPlayerTemplate.hml`,
+	templateUrl: `../igVideoPlayer/igVideoPlayerTemplate.html`,
 	directives: [IgVideoPlayerComponent]
 })
 export class AppComponent {

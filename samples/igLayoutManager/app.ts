@@ -5,7 +5,7 @@ import {bootstrap }    from 'angular2/platform/browser'
 declare var jQuery: any;
 @Component({
 	selector: 'my-app',
-	templateUrl:".../igLayoutManager/igLayoutManagerTemplate.html",
+	templateUrl:"../igLayoutManager/igLayoutManagerTemplate.html",
 	directives: [IgLayoutManagerComponent]
 })
 export class AppComponent {
