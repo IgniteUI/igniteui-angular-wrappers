@@ -5,7 +5,7 @@ import {bootstrap}    from 'angular2/platform/browser'
 declare var jQuery: any;
 @Component({
 	selector: 'my-app',
-	template: `<ig-upload id="upload1" [options]="{mode:'multiple'}"></ig-upload>`,
+	templateUrl: '../igUpload/igUploadTemplate.html',
 	directives: [IgUploadComponent]
 })
 export class AppComponent {

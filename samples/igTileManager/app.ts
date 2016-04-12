@@ -6,10 +6,7 @@ import {candidates} from "./../data/candidates.ts";
 declare var jQuery: any;
 @Component({
 	selector: 'my-app',
-	template: `
-     <ig-tile-manager widgetId="dashboard"  [(options)]="options">
-     </ig-tile-manager>
-    `,
+	templateUrl: "../igTileManager/igTileManagerTemplate.html",
 	directives: [IgTileManagerComponent]
 })
 export class AppComponent {

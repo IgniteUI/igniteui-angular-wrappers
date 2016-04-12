@@ -5,16 +5,7 @@ import {bootstrap }    from 'angular2/platform/browser'
 declare var jQuery: any;
 @Component({
 	selector: 'my-app',
-	template: `
-    <div class="col-md-8">
-        <ig-html-editor widgetId='htmlEditor' [(options)]='options' [(ngModel)]="data">
-        </ig-html-editor>
-     </div>
-    <div class="col-md-4">
-        <textarea [(ngModel)]="data"></textarea>
-     </div>
-     
-    `,
+	templateUrl: `../igHtmlEditor/igHtmlEditorTemplate.html`,
 	directives: [IgHtmlEditorComponent]
 })
 export class AppComponent {

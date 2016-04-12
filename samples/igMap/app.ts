@@ -5,8 +5,7 @@ import {bootstrap }    from 'angular2/platform/browser'
 declare var jQuery: any;
 @Component({
 	selector: 'my-app',
-	template: `<ig-map [options]="{zoomable:true}"></ig-map>
-    `,
+	templateUrl: "../igMap/igMapTemplate.html",
 	directives: [IgMapComponent]
 })
 export class AppComponent {

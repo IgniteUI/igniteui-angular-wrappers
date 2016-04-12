@@ -5,9 +5,7 @@ import {bootstrap }    from 'angular2/platform/browser'
 declare var jQuery: any;
 @Component({
 	selector: 'my-app',
-	template: `<ig-data-chart [(options)]="options" widgetId='datachart1'></ig-data-chart>
-               <ig-zoombar [(options)]="zoombarOptions" widgetId='zoombar'></ig-zoombar>
-    `,
+	templateUrl: `../igDataChart/igDataChartTemplate.html`,
 	directives: [IgDataChartComponent, IgZoombarComponent]
 })
 export class AppComponent {
