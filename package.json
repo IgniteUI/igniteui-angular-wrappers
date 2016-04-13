@@ -5,7 +5,7 @@
     "start": "npm run lite",
     "lite": "lite-server"
   },
-  "license": "ISC",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/IgniteUI/igniteui-angular2.git"
