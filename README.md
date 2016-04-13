@@ -11,12 +11,13 @@ Use the components found in `src\igniteui.angular2.ts` to use [Ignite UI](http:/
 - [Ignite UI](http://www.igniteui.com) 15.2 and later
 
 #Running the samples
-To run the sampels you need [Node.js](http://nodejs.org/) installed on your machine.  
-To run the samples use the following steps:
+To run the samples, you need [Node.js](http://nodejs.org/) installed on your machine.
+Afterwards, from your terminal run the following commands:
 
-1. Open a console in the folder where the **igniteui-angular2** project is located
-2. Run `npm install`
-3. Run `npm start`
+1. `git clone https://github.com/IgniteUI/igniteui-angular2`
+2. `cd igniteui-angular2` 
+3. `npm install`
+4. `npm start`
 
 #Getting Started
 
