@@ -38,7 +38,7 @@ export class AppComponent {
 			autoGenerateColumnLayouts: false,
 			primaryKey: "id",
 			childDataKey: "products",
-			renderExpansionIndicatorColumn: "true",
+			renderExpansionIndicatorColumn: true,
 			columns: [
 				{ key: "id", headerText: "ID", width:"100px", dataType:"number" },
 				{ key: "tasks", headerText: "Task", width:"250px", dataType:"string" },
