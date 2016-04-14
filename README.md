@@ -11,17 +11,18 @@ Use the components found in `src\igniteui.angular2.ts` to use [Ignite UI](http:/
 - [Ignite UI](http://www.igniteui.com) 15.2 and later
 
 #Running the samples
-To run the sampels you need [Node.js](http://nodejs.org/) installed on your machine.  
-To run the samples use the following steps:
+To run the samples, you need [Node.js](http://nodejs.org/) installed on your machine.
+Afterwards, from your terminal run the following commands:
 
-1. Open a console in the folder where the **igniteui-angular2** project is located
-2. Run `npm install`
-3. Run `npm start`
+1. `git clone https://github.com/IgniteUI/igniteui-angular2`
+2. `cd igniteui-angular2` 
+3. `npm install`
+4. `npm start`
 
 #Getting Started
 
 ## Initializing controls
-In an Angular 2 application Ignite UI controls support markup initialization which is done using custom tags.
+In an Angular 2 application, Ignite UI controls support markup initialization which is done by using custom tags.
 
 ### Custom tags
 Each control implements a custom tag component where the tag name is formed by splitting each capital letter in the control name with the `-` symbol.
@@ -50,8 +51,8 @@ igVideoPlayer	| `<ig-video-player>`
 ### Configuring Control Options
 
 There are two mandatory attributes that need to be set to an Ignite UI control custom tag:
-  `options` - points to a property on the application component class containing control's configuration.
-  `widgetId` - in order to function properly the control requires an id to be assigned to it.
+  `options` - points to a property on the application component class containing the control's configuration.
+  `widgetId` - the control requires an id to be assigned to it.
 
 #### Example:
 
@@ -84,7 +85,7 @@ In this example `options` attribute points to `gridOptions` property on the appl
 
 ### Handling events
 
-Binding to control events is done again in attributes where the name of the attribute is the name of the control's event name surrounded by parentheses and the value is the name of the event handler.
+Binding to control events is achieved by assigning attributes where the name of the attribute is the name of the control's event name surrounded by parenthesis and the value is the name of the event handler.
 
 #### Examples:
 
