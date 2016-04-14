@@ -1,66 +1,12 @@
 import {Component, Inject, ElementRef, EventEmitter, HostListener} from 'angular2/core';
 import {IgGridComponent} from "../../src/igniteui.angular2.ts";
 import {Northwind} from "./../data/northwind.ts";
-import {bootstrap }    from 'angular2/platform/browser'
+import {bootstrap }    from 'angular2/platform/browser';
 
 declare var jQuery: any;
 @Component({
 	selector: 'my-app',
-	template: `
-		<h1 class="push-down-md"><a href="http://www.igniteui.com/grid/overview" target="_blank">igGrid</a></h1>
-
-		<div class="row description">
-			<div class="alert alert-info col-md-5 try-it-out">
-				<span class="h4">TRY IT OUT:</span>
-				<hr />
-				<ul>
-					<li>Add a new product either through the grid's UI or the form on the right of the grid</li>
-					<li>Change a product's name in the group of textboxes below and see how the names change in the grid</li>
-					<li>Delete a product either through the grid's UI or with the button next to each product in the table under the grid</li>
-				</ul>
-			</div>
-			<div class="col-md-4">
-				<p class="lead">This sample demonstrates how Angular 2 components are used with the igGrid to allow for two-way binding in the grid.</p>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-8">
-				<ig-grid [(options)]="gridOptions" [(widgetId)]='id'></ig-grid>
-			</div>
-			<div class="col-md-4">
-				<h3>Add Product</h3>
-				<div class="well well-sm">
-					<input type="text" [(ngModel)]="newProduct.ProductName" class="form-control" placeholder="name">
-					<input type="text" [(ngModel)]="newProduct.QuantityPerUnit" class="form-control" placeholder="quantity per unit">
-					<input type="number" [(ngModel)]="newProduct.UnitPrice" class="form-control" placeholder="unit price">
-					<input type="button" value="Add" (click)="addRecord()" class="btn btn-default"/>
-				</div>
-			</div>
-		</div>
-
-		<hr/>
-		<table id="simpletable" class="table table-striped table-hover">
-			<thead>
-				<tr>
-					<th>Product ID</th>
-					<th>Name</th>
-					<th>Quantity per unit</th>
-					<th>Unit Price</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr *ngFor="#product of data">
-					<td>{{product.ProductID}}</td>
-					<td><input type="text" [(ngModel)]="product.ProductName" class="form-control" /></td>
-					<td>{{product.QuantityPerUnit}}</td>
-					<td> <input type="number" [(ngModel)]="product.UnitPrice" class="form-control" /> </td>
-					<td><input type="button" value="Delete" (click)="deleteRecord(product.ProductID)" class="btn btn-default"/></td>
-				</tr>
-			</tbody>
-		</table>
-		`,
+	templateUrl: "./igGridTemplate.html",
 	directives: [IgGridComponent]
 })
 export class AppComponent {

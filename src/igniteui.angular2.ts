@@ -2,7 +2,7 @@
 /// <reference path="igniteui.d.ts" />
 /// <reference path="./../typings/main.d.ts"/>
 
-import {Component, Directive, Inject, ElementRef, EventEmitter, Output, Input, Query, QueryList, Renderer, OnChanges,
+import {Component, Directive, Inject, ElementRef, EventEmitter, Output, Input, Query, QueryList, Renderer, OnChanges, NgZone,
 	SimpleChange, ChangeDetectionStrategy, IterableDiffers, DoCheck, Optional} from 'angular2/core';
 import {NgModel, ControlValueAccessor} from 'angular2/common';
 
@@ -18,7 +18,7 @@ var NODES = {
 	"ig-date-editor": "input",
 	"ig-currency-editor": "input",
 	"ig-checkbox-editor": "input",
-	"ig-html-editor": "input",
+	"ig-html-editor": "div",
 	"ig-combo": "input",
 	"ig-grid": "table",
 	"ig-tree-grid": "table",
@@ -99,7 +99,7 @@ export class IgControlBase<Model> implements DoCheck {
 	@Input() set options(v: Model) {
 		this._config = v;
 		this._differ = this._differs.find([]).create(null);
-		this._opts = JSON.parse(JSON.stringify(this._config));
+		this._opts = jQuery.extend(true, {}, this._config);
 		if (this._opts.dataSource) {
 			delete this._opts.dataSource;
 		}
@@ -144,7 +144,7 @@ export class IgControlBase<Model> implements DoCheck {
 			var diff = [];
 			var element = jQuery(this._el);
 			var i, j, valKey = this._config.valueKey, option;
-			var opts = JSON.parse(JSON.stringify(this._config));
+			var opts = jQuery.extend(true, {}, this._config);
 			if (opts.dataSource) {
 				delete opts.dataSource;
 			}
@@ -652,7 +652,49 @@ export class IgLayoutManagerComponent extends IgContentControlBase<IgLayoutManag
 export class IgTileManagerComponent extends IgContentControlBase<IgTileManager> { constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); } }
 
 @IgComponent()
-export class IgHtmlEditorComponent extends IgControlBase<IgHtmlEditor> { constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); } }
+export class IgHtmlEditorComponent extends IgControlBase<IgHtmlEditor> implements ControlValueAccessor { 
+    protected _model: any;
+    protected _zone: any;
+    constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, @Optional() public model: NgModel, private zone:NgZone ) { super(el, renderer, differs);
+        if (model) {
+			model.valueAccessor = this;
+            this._zone = zone;
+			this._model = model;
+		}    
+     }
+    ngOnInit() {
+		super.ngOnInit();
+        let that = this;
+        if (this._model) {
+             var iframe=jQuery(this._el).find("iframe")[0].contentWindow.document;
+			jQuery(iframe).find("body[contenteditable=true]").on("keyup", function (evt, ui) {
+				that._model.viewToModelUpdate(jQuery(evt.target).html());       
+                that._zone.run(() => {
+                        that._model.viewToModelUpdate(jQuery(evt.target).html());
+                    });
+			});
+		}
+		
+	}
+    writeValue(value: any) {       
+		if (!!jQuery(this._el).data(this._widgetName) && value !== null && value !== jQuery(this._el)[this._widgetName]("getContent","html")) {
+			jQuery(this._el)[this._widgetName]("setContent", value, "html");
+		}
+	}
+
+	onChange = (_: any) => {
+	};
+	onTouched = () => {
+	};
+
+	registerOnChange(fn: (_: any) => {}): void {
+		this.onChange = fn;
+	}
+
+	registerOnTouched(fn: () => {}): void {
+		this.onTouched = fn;
+	}
+ }
 
 
 @IgComponent()

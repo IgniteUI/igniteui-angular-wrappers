@@ -1,7 +1,7 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-	<title>igHierarchicalGrid - Ignite UI integration with AngularJS</title>
+	<title>igPivotGrid - Ignite UI integration with Angular 2</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link type="text/css" href="http://cdn-na.infragistics.com/igniteui/latest/css/themes/infragistics/infragistics.theme.css" rel="stylesheet" />
@@ -10,8 +10,19 @@
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" type="text/css" />
 	<link rel="stylesheet" href="/samples/sample.css" />
 	
-<link type="text/css" href="http://cdn-na.infragistics.com/igniteui/latest/css/structure/modules/infragistics.ui.grid.css" rel="stylesheet" />
-<link type="text/css" href="http://cdn-na.infragistics.com/igniteui/latest/css/structure/modules/infragistics.ui.editors.css" rel="stylesheet" />
+	<link type="text/css" href="http://cdn-na.infragistics.com/igniteui/latest/css/structure/modules/infragistics.ui.grid.css" rel="stylesheet" />    
+	<link type="text/css" href="http://cdn-na.infragistics.com/igniteui/latest/css/structure/modules/infragistics.ui.pivot.css" rel="stylesheet" />
+	<link type="text/css" href="http://cdn-na.infragistics.com/igniteui/latest/css/structure/modules/infragistics.ui.tree.css" rel="stylesheet" />
+	<link type="text/css" href="http://cdn-na.infragistics.com/igniteui/latest/css/structure/modules/infragistics.ui.validator.css" rel="stylesheet" />
+	<link type="text/css" href="http://cdn-na.infragistics.com/igniteui/latest/css/structure/modules/infragistics.ui.combo.css" rel="stylesheet" />
+	<style>
+		#dataSelector, #pivotGrid {
+			float: left;
+		}
+		#pivotGrid {
+			width: 75%;
+		}
+	</style>
 
 </head>
 <body class="container">
@@ -25,7 +36,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/">Ignite UI Angular 2 components <span class="badge alert-info">Preview</span></a> 
+				<a class="navbar-brand" href="/">Ignite UI Angular 2 Components <span class="badge alert-info">Preview</span></a> 
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
@@ -34,34 +45,27 @@
 				</ul>
 			</div>
 		</div>
-	</div>    
-    <div>
-    <h1 class="push-down-md"><a href="http://igniteui.com/hierarchical-grid/overview" target="_blank">igHierarchicalGrid</a></h1>
-    <div class="row description">
-        <div class="col-md-12">
-            <p class="lead">This sample demonstrates how AngularJS components are used to instantiate igHierarchicalGrid.</p>
-            <p><a href="https://github.com/IgniteUI/igniteui-angular/blob/master/samples/igHierarchicalGrid/igHierarchicalGrid.html" class="btn btn-default btn-lg btn-primary" target="_blank"><i class="fa fa-code fa-lg"></i> Explore the Code</a></p>
-        </div>
-    </div>
-    
+	</div>
+	
 	<my-app></my-app>
-    </div>
+
 	<footer>
 		<p>
 			<a href="/igniteui-angular2/index.html">Home</a> |
 			<a href="https://github.com/IgniteUI/igniteui-angular2/issues">Feedback &amp; Questions</a> |
 			<a href="https://github.com/IgniteUI/igniteui-angular2">Clone &amp; Fork</a>
 		</p>
-		<p class="small">For more information or to download a trial of Ignite UI, please visit: <a href="http://www.igniteui.com">http://www.igniteui.com</a></p>
+		<p class="small">For more information or to download a trial of Ignite UI, please visit: <a href="http://igniteui.com">http://igniteui.com</a></p>
 	</footer>
 
 	<!-- 1. Load libraries -->
 	<script src="http://code.jquery.com/jquery-1.12.3.js"></script>
 	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
-    <!-- IE required polyfills, in this exact order -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.0/es6-shim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.20/system-polyfills.js"></script>
-    <script src="https://npmcdn.com/angular2@2.0.0-beta.14/es6/dev/src/testing/shims_for_IE.js"></script>    
+	<!-- IE required polyfills, in this exact order -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.0/es6-shim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.20/system-polyfills.js"></script>
+	<script src="https://npmcdn.com/angular2@2.0.0-beta.14/es6/dev/src/testing/shims_for_IE.js"></script>
+
 	<script src="https://code.angularjs.org/2.0.0-beta.14/angular2-polyfills.js"></script>
 	<script src="https://code.angularjs.org/tools/system.js"></script>
 	<script src="https://code.angularjs.org/tools/typescript.js"></script>
@@ -82,6 +86,13 @@
 		System.import('app.ts')
 			.then(null, console.error.bind(console));
 	</script>
-
+	<style>
+		#dataSelector, #pivotGrid_container {
+			float: left;
+		}
+		#pivotGrid_container {
+			width: 70%;
+		}
+	</style>
 </body>
 </html>
