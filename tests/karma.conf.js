@@ -1,6 +1,5 @@
 module.exports = function(config){
-	config.set({
-
+	var cfg = {
 		basePath : '../',
 
 		files : [
@@ -41,6 +40,15 @@ module.exports = function(config){
 
 		browsers : ['Chrome'],
 
+		singleRun: true,
+
+		customLaunchers: {
+    			Chrome_travis_ci: {
+	                	base: "Chrome",
+		                flags: ["--no-sandbox"]
+    			}
+		},
+
 		plugins : [
                     'karma-chrome-launcher',
                     'karma-jasmine'
@@ -52,6 +60,11 @@ module.exports = function(config){
 			outputFile: 'test_out/unit.xml',
 			suite: 'unit'
 		}*/
-
-	});
+	
+	};
+	
+	if (process.env.TRAVIS) {
+		cfg.browsers = ["Chrome_travis_ci"];
+	}
+	config.set(cfg);
 };
