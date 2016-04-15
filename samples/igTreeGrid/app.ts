@@ -6,16 +6,7 @@ import {bootstrap }    from 'angular2/platform/browser'
 declare var jQuery: any;
 @Component({
 	selector: 'my-app',
-	template: `
-		<div class="row">
-			<div class="col-md-12">
-				<ig-tree-grid 
-						[(widgetId)]='id'
-						[options]="tgridOptions">
-				</ig-tree-grid>
-			</div>
-		</div>
-		`,
+	template: "./igTreeGridTemplate.html",
 	directives: [IgTreeGridComponent]
 })
 export class AppComponent {
