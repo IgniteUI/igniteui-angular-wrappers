@@ -1,5 +1,6 @@
+/// <reference path="jquery.d.ts" />
 /// <reference path="igniteui.d.ts" />
-///<reference path="../node_modules/angular2/typings/browser.d.ts"/>
+/// <reference path="./../typings/main.d.ts"/>
 
 import {Component, Directive, Inject, ElementRef, EventEmitter, Output, Input, Query, QueryList, Renderer, OnChanges, NgZone,
 	SimpleChange, ChangeDetectionStrategy, IterableDiffers, DoCheck, Optional} from 'angular2/core';
@@ -100,7 +101,7 @@ export class IgControlBase<Model> implements DoCheck {
 	@Input() set options(v: Model) {
 		this._config = v;
 		this._differ = this._differs.find([]).create(null);
-		this._opts = JSON.parse(JSON.stringify(this._config));
+		this._opts = jQuery.extend(true, {}, this._config);
 		if (this._opts.dataSource) {
 			delete this._opts.dataSource;
 		}
@@ -151,7 +152,7 @@ export class IgControlBase<Model> implements DoCheck {
 			var diff = [];
 			var element = jQuery(this._el);
 			var i, j, valKey = this._config.valueKey, option;
-			var opts = JSON.parse(JSON.stringify(this._config));
+			var opts = jQuery.extend(true, {}, this._config);
 			if (opts.dataSource) {
 				delete opts.dataSource;
 			}

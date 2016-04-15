@@ -6,17 +6,7 @@ import {bootstrap }    from 'angular2/platform/browser'
 declare var jQuery: any;
 @Component({
 	selector: 'my-app',
-	template: `
-		<div class="row">
-			<div class="col-md-12">
-				<ig-hierarchical-grid 
-						[(widgetId)]='id'
-						[options]="hgridOptions">
-				</ig-hierarchical-grid>
-				
-			</div>
-		</div>
-		`,
+	templateUrl: "./igHierarchicalGridTemplate.html",
 	directives: [IgHierarchicalGridComponent]
 })
 export class AppComponent {
