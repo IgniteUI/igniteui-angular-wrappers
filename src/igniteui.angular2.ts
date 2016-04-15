@@ -96,7 +96,7 @@ export class IgControlBase<Model> implements DoCheck {
 	protected _differ: any;
 	protected _config: any;
 	protected _events: Map<string, string>;
-    private _allowCheckOnDataSource = false;
+    private _allowChangeDetection = false;
     
 	@Input() set options(v: Model) {
 		this._config = v;
@@ -107,6 +107,7 @@ export class IgControlBase<Model> implements DoCheck {
 		}
 	};
 	@Input() widgetId: string;
+    @Input() changeDetectionInterval:number;
 
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) {
 		this._differs = differs;
@@ -116,11 +117,6 @@ export class IgControlBase<Model> implements DoCheck {
 		for (var propt in jQuery.ui[this._widgetName].prototype.events) {
 			this[propt] = new EventEmitter();
 		}
-        
-        let that = this;
-        setInterval(function(){
-                that._allowCheckOnDataSource = true;        
-        }, 500); 
         
 	}
 
@@ -138,13 +134,23 @@ export class IgControlBase<Model> implements DoCheck {
 				that[that._events[evt.type]].emit({ event: evt, ui: ui });
 			});
 		}
+        
+        if(this.changeDetectionInterval === undefined && this.changeDetectionInterval === null){
+            this.changeDetectionInterval= 500;            
+        }
+       
+        setInterval(function(){
+          that._allowChangeDetection = true;        
+        },this.changeDetectionInterval); 
 
 		jQuery(this._el).attr("id", this.widgetId);
 		jQuery(this._el)[this._widgetName](this._config);
 	}
 
 	ngDoCheck() {
-		this.optionChange();
+        if(this._allowChangeDetection){
+            this.optionChange();
+        }
 	}
 
 	optionChange() {
@@ -315,10 +321,10 @@ export class IgGridBase<Model> extends IgControlBase<Model> {
 		}
 	}
 
-	ngDoCheck() {
-		this.optionChange();
-		if (this._differ != null && this._allowCheckOnDataSource) {        
-            this._allowCheckOnDataSource = false;
+	ngDoCheck() {		
+		if (this._differ != null && this._allowChangeDetection) {        
+            this.optionChange();
+            this._allowChangeDetection = false;
 			var diff = [],
 			element = jQuery(this._el),
 			grid = element.data(this._widgetName),
@@ -405,8 +411,8 @@ export class IgHierarchicalGridComponent extends IgGridBase<IgHierarchicalGrid> 
 
 	ngDoCheck() {
 		this.optionChange();
-		if (this._differ != null && this._allowCheckOnDataSource) {
-            this._allowCheckOnDataSource = false;
+		if (this._differ != null && this._allowChangeDetection) {
+            this._allowChangeDetection = false;
 			var diff = [],
 			element = jQuery(this._el),
 			colIndex, td, i, j, pkKey = this._config.primaryKey, newFormattedVal, record, column,
@@ -504,10 +510,10 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
 		this.onTouched = fn;
 	}
 
-	ngDoCheck() {
-		this.optionChange();
-		if (this._differ != null && this._allowCheckOnDataSource) {
-            this._allowCheckOnDataSource = false;
+	ngDoCheck() {		
+		if (this._differ != null && this._allowChangeDetection) {
+            this.optionChange();
+            this._allowChangeDetection = false;
 			var diff = [];
 			var element = jQuery(this._el);
 			var i, j, valKey = this._config.valueKey, record, item;
@@ -618,10 +624,10 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
 		this._dataSource = JSON.parse(JSON.stringify(this._config.dataSource));
 	}
 
-	ngDoCheck() {
-		this.optionChange();
-		if (this._differ != null && this._allowCheckOnDataSource) {
-            this._allowCheckOnDataSource = false;
+	ngDoCheck() {		
+		if (this._differ != null && this._allowChangeDetection) {
+            this.optionChange();
+            this._allowChangeDetection = false;
 			var diff = [];
 			var element = jQuery(this._el);
 			var i, j, valKey = this._config.valueKey, record, item;
