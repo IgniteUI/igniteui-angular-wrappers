@@ -1,7 +1,6 @@
 #Ignite UI components for Angular 2
-[![Build Status](https://travis-ci.org/IgniteUI/igniteui-angular2.svg?branch=master)](https://travis-ci.org/IgniteUI/igniteui-angular2)
 
-Use the components found in `src\igniteui.angular2.ts` to use [Ignite UI](http://igniteui.com) controls in [Angular 2](https://angular.io/) applications. [Work with the running samples here](http://igniteui.github.io/igniteui-angular2).
+Use the `igniteui.angular2.js` to taka advantage from the [Ignite UI](http://igniteui.com) controls in [Angular 2](https://angular.io/) applications. [Work with the running samples here](http://igniteui.github.io/igniteui-angular2).
 
 #Requirements
 
@@ -9,15 +8,6 @@ Use the components found in `src\igniteui.angular2.ts` to use [Ignite UI](http:/
 - [jQuery UI](http://www.jqueryui.com) v1.9.0 and later
 - [AngularJS 2](https://angular.io/) v2.0 beta and later
 - [Ignite UI](http://www.igniteui.com) 15.2 and later
-
-#Running the samples
-To run the samples, you need [Node.js](http://nodejs.org/) installed on your machine.
-Afterwards, from your terminal run the following commands:
-
-1. `git clone https://github.com/IgniteUI/igniteui-angular2`
-2. `cd igniteui-angular2` 
-3. `npm install`
-4. `npm start`
 
 #Getting Started
 
@@ -96,6 +86,7 @@ Binding to control events is achieved by assigning attributes where the name of 
 |igCombo.events.textChanged   | `<ig-combo (textChanged)="textChangedHandler">` |
 |igDateEditor.events.keypress | `<ig-date-editor (keypress)="keypressHandler">` |
 
+#### Example:
 
     @Component({
         selector: 'my-app',
