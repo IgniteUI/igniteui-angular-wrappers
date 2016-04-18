@@ -6,10 +6,11 @@
     "start": "npm run lite",
     "lite": "lite-server",
     "pretest": "npm run build",
-    "build": "node node_modules/typescript/bin/tsc",
+    "build": "node node_modules/typescript/bin/tsc && npm run prepare-dist",
     "watch": "node node_modules/typescript/bin/tsc -w",
     "typings": "node node_modules/typings/dist/bin.js install",
-    "test": "karma start tests/karma.conf.js"
+    "test": "karma start tests/karma.conf.js",
+    "prepare-dist": "cp src/igniteui.angular2.js dist/npm/ && cp src/igniteui.d.ts dist/npm/ && cp src/jquery.d.ts dist/npm/"
   },
   "license": "MIT",
   "repository": {
