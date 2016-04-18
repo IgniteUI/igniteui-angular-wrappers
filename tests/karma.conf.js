@@ -52,14 +52,16 @@ module.exports = function(config){
 		plugins : [
                     'karma-chrome-launcher',
                     'karma-jasmine'
-                    // ,
-                    // 'karma-junit-reporter'
+                     ,
+                    'karma-junit-reporter'
                     ],
+					
+		//reporters: ['junit'],
 
-		/*junitReporter : {
+		junitReporter : {
 			outputFile: 'test_out/unit.xml',
 			suite: 'unit'
-		}*/
+		}
 	
 	};
 	
