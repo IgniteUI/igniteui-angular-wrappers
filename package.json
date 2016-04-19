@@ -1,28 +1,6 @@
 {
   "name": "igniteui-angular2",
   "version": "1.0.0",
-  "scripts": {
-    "postinstall": "npm run typings && npm prune",
-    "start": "npm run lite",
-    "lite": "lite-server",
-    "pretest": "npm run build",
-    "build": "node node_modules/typescript/bin/tsc && npm run prepare-dist",
-    "watch": "node node_modules/typescript/bin/tsc -w",
-    "typings": "node node_modules/typings/dist/bin.js install",
-    "test": "karma start tests/karma.conf.js && npm run remap-istanbul",
-
-    "_comment": "We use remap, because we can cover the igniteui.angular2.js file, but we want to see what is being covered on the igniteui.angular2.ts file",
-    "_comment": "main remap command and removes temporary files resulted from karma-coverage of the igniteui.angular2.js file",
-    "remap-istanbul": "npm run copy-coverage-report && npm run remap-istanbul-html && npm run remap-istanbul-json",
-
-    "remap-istanbul-html": "remap-istanbul -i coverage/karma-tmp/coverage.json -o coverage/html-report -t html",
-    "remap-istanbul-json": "remap-istanbul -i coverage/karma-tmp/coverage.json -o coverage/coverage-remapped.json",
-
-    "_comment": "copy the coverage.json from karma-coverage, because the folder resulted from karma coverage is not always the same",
-    "copy-coverage-report": "cp coverage/karma-tmp/**/coverage*.json coverage/karma-tmp/",
-
-    "prepare-dist": "cp src/igniteui.angular2.js dist/npm/ && cp src/igniteui.d.ts dist/npm/ && cp src/jquery.d.ts dist/npm/"
-  },
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -47,6 +25,26 @@
     "karma-remap-istanbul": "",
     "lite-server": "^2.2.0",
     "typescript": "^1.8.9",
-    "typings": "^0.7.12"
+    "typings": "^0.7.12",
+    "coveralls": "^2.11.9"
+  },
+  "scripts": {
+    "postinstall": "npm run typings && npm prune",
+    "typings": "node node_modules/typings/dist/bin.js install",
+
+    "start": "npm run lite",
+    "lite": "lite-server",
+
+    "watch": "node node_modules/typescript/bin/tsc -w",
+    "build": "node node_modules/typescript/bin/tsc && npm run prepare-dist",
+    "prepare-dist": "cp src/igniteui.angular2.js dist/npm/ && cp src/igniteui.d.ts dist/npm/ && cp src/jquery.d.ts dist/npm/",
+
+    "pretest": "npm run build",
+    "test": "karma start tests/karma.conf.js && npm run remap-istanbul",
+
+    "remap-istanbul": "npm run copy-coverage-report && npm run remap-istanbul-html && npm run remap-istanbul-lcov",
+    "remap-istanbul-html": "remap-istanbul -i coverage/karma-tmp/coverage.json -o coverage/html-report -t html",
+    "remap-istanbul-lcov": "remap-istanbul -i coverage/karma-tmp/coverage.json -o coverage/lcov.info -t lcovonly",
+    "copy-coverage-report": "cp coverage/karma-tmp/**/coverage*.json coverage/karma-tmp/"
   }
 }

@@ -1,5 +1,8 @@
 #Ignite UI components for Angular 2
+
+[![NPM version](https://img.shields.io/npm/v/igniteui-angular2.svg?style=flat)](https://www.npmjs.com/package/igniteui-angular2)
 [![Build Status](https://travis-ci.org/IgniteUI/igniteui-angular2.svg?branch=master)](https://travis-ci.org/IgniteUI/igniteui-angular2)
+[![Coverage Status](https://coveralls.io/repos/github/IgniteUI/igniteui-angular2/badge.svg?branch=master)](https://coveralls.io/github/IgniteUI/igniteui-angular2?branch=master)
 
 Use the components found in `src\igniteui.angular2.ts` to use [Ignite UI](http://igniteui.com) controls in [Angular 2](https://angular.io/) applications. [Work with the running samples here](http://igniteui.github.io/igniteui-angular2).
 
@@ -175,6 +178,19 @@ The following controls currently support two-way data binding:
 4. igCombo
 5. igEditors
 6. igTree
+
+## Running tests
+
+The command for running the tests is:
+
+    npm test
+
+After that, if all tests successfully passed a code coverage for the `igniteui.angular2.ts` filse will be generated under the `./coverage` folder.
+
+To see the code coverage you can open one of the html files under `./coverage/html-report/src`.
+
+**Note:** The code coverage is actually being generated on the `igniteui.angular2.js` file (comes from compilation of the source .ts file). That coverage is saved under the `coverage/karma-tmp` folder.
+Since we need the code coverage of the `igniteui.angular2.js` file itself, we use the remap-istanbul module to remap the report from the .js file to the .ts file and save it under the `coverage/html-report` and `coverage/lcov.info`.
 
 ---------------------------------------
 
