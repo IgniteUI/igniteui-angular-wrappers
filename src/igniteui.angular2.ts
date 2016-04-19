@@ -96,7 +96,7 @@ export class IgControlBase<Model> implements DoCheck {
 	protected _differ: any;
 	protected _config: any;
 	protected _events: Map<string, string>;
-    protected _allowChangeDetection = false;
+    protected _allowChangeDetection = true;
     
 	@Input() set options(v: Model) {
 		this._config = v;
