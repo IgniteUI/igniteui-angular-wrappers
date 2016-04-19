@@ -8,6 +8,7 @@ module.exports = function(config){
 			"http://code.jquery.com/ui/1.10.3/jquery-ui.min.js",
 			"http://cdn-na.infragistics.com/igniteui/latest/js/infragistics.core.js",
 			"http://cdn-na.infragistics.com/igniteui/latest/js/infragistics.lob.js",
+            "http://cdn-na.infragistics.com/igniteui/latest/js/infragistics.dv.js",
 			"https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js",
 
             // IE required polyfills, in this exact order
