@@ -96,13 +96,12 @@ export class IgControlBase<Model> implements DoCheck {
 	protected _differ: any;
 	protected _config: any;
 	protected _events: Map<string, string>;
-    protected _allowChangeDetection = false;
+    protected _allowChangeDetection = true;
     
 	@Input() set options(v: Model) {
 		this._config = v;
 		this._differ = this._differs.find([]).create(null);
-		this._opts = jQuery.extend(true, {}, this._config);
-        this._differ.diff(this._config.dataSource);		
+		this._opts = jQuery.extend(true, {}, this._config);		
 		if (this._opts.dataSource) {
 			delete this._opts.dataSource;
 		}
