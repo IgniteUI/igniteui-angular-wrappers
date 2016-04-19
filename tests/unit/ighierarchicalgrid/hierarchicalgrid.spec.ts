@@ -99,7 +99,7 @@ export function main() {
                });
          }));
          
-         it('should reflect changes when a child records are changes',
+         it('should reflect changes when child records are changes',
          inject([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
            var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-hierarchical-grid></div>';
            tcb.overrideTemplate(TestComponent, template)
@@ -111,13 +111,13 @@ export function main() {
                     $("#grid1").igHierarchicalGrid("expand", row);
                     //change data child data
 					fixture.componentInstance.data[0].Orders.results.removeAt(0);
-                    fixture.detectChanges();
+                 
 					setTimeout(() => {
 						fixture.detectChanges();
 						expect($(fixture.debugElement.nativeElement).find("#grid1").igHierarchicalGrid("option", "dataSource")[0].Orders.results.length)
 						.toBe(122);  
                          async.done();						
-					}, 200);
+					}, 100);
                });
          }));
          
@@ -133,7 +133,6 @@ export function main() {
                     $("#grid1").igHierarchicalGrid("expand", row);
                     //change data child data
 					fixture.componentInstance.data[0].Orders.results[0].ShipName = "Custom ShipName";
-                    fixture.detectChanges();
 					setTimeout(() => {
 						fixture.detectChanges();
 						expect($($(fixture.debugElement.nativeElement).find("#grid1_1_Orders_child").igGrid("cellAt", 2, 0)).text())
