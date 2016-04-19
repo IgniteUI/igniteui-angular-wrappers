@@ -25,6 +25,11 @@ System.config({
   paths: {
     'angular2/*': 'node_modules/angular2/*.js',
     'rxjs/*': 'node_modules/rxjs/*.js'
+  },
+  meta: {
+    'src/*': {
+      format: 'register'
+    }
   }
 });
 
