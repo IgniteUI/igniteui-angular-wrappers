@@ -117,7 +117,7 @@ export function main() {
 						expect($(fixture.debugElement.nativeElement).find("#grid1").igHierarchicalGrid("option", "dataSource")[0].Orders.results.length)
 						.toBe(122);  
                          async.done();						
-					}, 100);
+					}, 10);
                });
          }));
          
@@ -138,7 +138,7 @@ export function main() {
 						expect($($(fixture.debugElement.nativeElement).find("#grid1_1_Orders_child").igGrid("cellAt", 2, 0)).text())
 						.toBe("Custom ShipName");  
                          async.done();						
-					}, 200);
+					}, 10);
                });
          }));
     });
