@@ -36,7 +36,7 @@ export function main() {
                });
          }));
          
-          it('should reflect changes when a record is added/removed from the data',
+          it('should reflect changes when a record is removed from the data',
          inject([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
            var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-hierarchical-grid></div>';
            tcb.overrideTemplate(TestComponent, template)
@@ -51,18 +51,29 @@ export function main() {
 						expect($(fixture.debugElement.nativeElement).find("#grid1 tr").length)
 						.toBe(8);
                         expect($(fixture.debugElement.nativeElement).find("#grid1 tr:first td[aria-describedby='grid1_FirstName']").text())
-                        .toBe("Andrew");                        
+                        .toBe("Andrew");
+                         async.done();
+					}, 10);
+               });
+         }));
+         
+          it('should reflect changes when a record is added from the data',
+         inject([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+           var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-hierarchical-grid></div>';
+           tcb.overrideTemplate(TestComponent, template)
+               .createAsync(TestComponent)
+               .then((fixture) => {
+             	fixture.detectChanges();                          
                         //add item
                         fixture.componentInstance.data.push({ EmployeeID: 200, LastName: "Snow", FirstName: "John", Title: "Vice President, Sales"});
                         	setTimeout(() => {					
                             fixture.detectChanges();
                             expect($(fixture.debugElement.nativeElement).find("#grid1 tr").length)
-                            .toBe(9);   
-                                expect($(fixture.debugElement.nativeElement).find("#grid1 tr:last td[aria-describedby='grid1_FirstName']").text())
-                                .toBe("John");                         
+                            .toBe(10);   
+                            expect($(fixture.debugElement.nativeElement).find("#grid1 tr:last td[aria-describedby='grid1_FirstName']").text())
+                            .toBe("John");                         
                             async.done();
-                        }, 10);						
-					}, 10);
+                 }, 10);	
                });
          }));
          
