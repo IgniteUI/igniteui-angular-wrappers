@@ -2,7 +2,6 @@
 import { it, iit, describe, expect, inject, injectAsync, beforeEachProviders, fakeAsync, tick, TestComponentBuilder, AsyncTestCompleter } from 'angular2/testing_internal';
 import {Component, ViewChild, TemplateRef} from 'angular2/core';
 import * as Infragistics from '../../../src/igniteui.angular2';
-import {NorthwindEmployees} from "../../../samples/data/northwind-employees";
 
 export function main() {
     describe('Infragistics Angular2 HierarchicalGrid', function() {
@@ -25,11 +24,11 @@ export function main() {
                .createAsync(TestComponent)
                .then((fixture) => {
              	    fixture.detectChanges();
-					fixture.componentInstance.data[0].FirstName = "Test";
+					fixture.componentInstance.data[0].Name = "Test";
                     fixture.detectChanges();
 					setTimeout(() => {
 						fixture.detectChanges();
-						expect($(fixture.debugElement.nativeElement).find("#grid1 tr:first td[aria-describedby='grid1_FirstName']").text())
+						expect($(fixture.debugElement.nativeElement).find("#grid1 tr:first td[aria-describedby='grid1_Name']").text())
 						.toBe("Test");  
 						async.done();
 					}, 10);
@@ -49,9 +48,9 @@ export function main() {
 					setTimeout(() => {					
                         fixture.detectChanges();
 						expect($(fixture.debugElement.nativeElement).find("#grid1 tr").length)
-						.toBe(8);
-                        expect($(fixture.debugElement.nativeElement).find("#grid1 tr:first td[aria-describedby='grid1_FirstName']").text())
-                        .toBe("Andrew");
+						.toBe(2);
+                        expect($(fixture.debugElement.nativeElement).find("#grid1 tr:first td[aria-describedby='grid1_Name']").text())
+                        .toBe("Beverages");
                          async.done();
 					}, 10);
                });
@@ -65,13 +64,13 @@ export function main() {
                .then((fixture) => {
              	fixture.detectChanges();                          
                         //add item
-                        fixture.componentInstance.data.push({ EmployeeID: 200, LastName: "Snow", FirstName: "John", Title: "Vice President, Sales"});
+                        fixture.componentInstance.data.push({ ID: 200, Name: "John Snow"});
                         	setTimeout(() => {					
                             fixture.detectChanges();
                             expect($(fixture.debugElement.nativeElement).find("#grid1 tr").length)
-                            .toBe(10);   
-                            expect($(fixture.debugElement.nativeElement).find("#grid1 tr:last td[aria-describedby='grid1_FirstName']").text())
-                            .toBe("John");                         
+                            .toBe(4);   
+                            expect($(fixture.debugElement.nativeElement).find("#grid1 tr:last td[aria-describedby='grid1_Name']").text())
+                            .toBe("John Snow");                         
                             async.done();
                  }, 10);	
                });
@@ -86,10 +85,10 @@ export function main() {
              	    fixture.detectChanges();
 					
                     //update row
-                    $("#grid1").igGridUpdating("updateRow", 1, {FirstName: "Maria"});
+                    $("#grid1").igGridUpdating("updateRow", 0, {Name: "Maria"});
                     setTimeout(() => {					
                             fixture.detectChanges();
-                            var fName =  fixture.componentInstance.data[0].FirstName;
+                            var fName =  fixture.componentInstance.data[0].Name;
                             expect(fName).toBe("Maria");                            
                             async.done();
                      }, 10);
@@ -104,11 +103,11 @@ export function main() {
                .then((fixture) => {
              	fixture.detectChanges();
                 //delete row
-                $("#grid1").igGridUpdating("deleteRow", 2);                  
+                $("#grid1").igGridUpdating("deleteRow", 0);                  
                 setTimeout(() => {					
                   fixture.detectChanges();                                
-                  expect(fixture.componentInstance.data.length).toBe(8);  
-                  expect(fixture.componentInstance.data[1].EmployeeID).toBe(3);
+                  expect(fixture.componentInstance.data.length).toBe(2);  
+                  expect(fixture.componentInstance.data[0].ID).toBe(1);
                   async.done();
                 },10);
             });
@@ -121,11 +120,11 @@ export function main() {
                .createAsync(TestComponent)
                .then((fixture) => {
              	    fixture.detectChanges();          
-                    $("#grid1").igGridUpdating("addRow", { EmployeeID: 200, LastName: "Snow", FirstName: "John", Title: "Vice President, Sales"});        
+                    $("#grid1").igGridUpdating("addRow", { ID: 200,Name: "Snow"});        
                     setTimeout(() => {					
 						fixture.detectChanges();                                
-						expect(fixture.componentInstance.data.length).toBe(10);  
-						expect(fixture.componentInstance.data[9].EmployeeID).toBe(200);                      
+						expect(fixture.componentInstance.data.length).toBe(4);  
+						expect(fixture.componentInstance.data[3].ID).toBe(200);                      
 						async.done();
 					}, 10);
                });
@@ -144,12 +143,12 @@ export function main() {
                     var row = $("#grid1").igGrid("rowAt", 0);
                     $("#grid1").igHierarchicalGrid("expand", row);
                     //change data child data
-					fixture.componentInstance.data[0].Orders.results.removeAt(0);
+					fixture.componentInstance.data[0].Products.removeAt(0);
                  
 					setTimeout(() => {
 						fixture.detectChanges();
-						expect($(fixture.debugElement.nativeElement).find("#grid1").igHierarchicalGrid("option", "dataSource")[0].Orders.results.length)
-						.toBe(122);  
+						expect($(fixture.debugElement.nativeElement).find("#grid1").igHierarchicalGrid("option", "dataSource")[0].Products.length)
+						.toBe(0);  
                          async.done();						
 					}, 10);
                });
@@ -166,11 +165,11 @@ export function main() {
                     var row = $("#grid1").igGrid("rowAt", 0);
                     $("#grid1").igHierarchicalGrid("expand", row);
                     //change data child data
-					fixture.componentInstance.data[0].Orders.results[0].ShipName = "Custom ShipName";
+					fixture.componentInstance.data[0].Products[0].Name = "Custom Name";
 					setTimeout(() => {
 						fixture.detectChanges();
-						expect($($(fixture.debugElement.nativeElement).find("#grid1_1_Orders_child").igGrid("cellAt", 2, 0)).text())
-						.toBe("Custom ShipName");  
+						expect($($(fixture.debugElement.nativeElement).find("#grid1_0_Products_child").igGrid("cellAt", 1, 0)).text())
+						.toBe("Custom Name");  
                          async.done();						
 					}, 10);
                });
@@ -191,49 +190,64 @@ class TestComponent {
 	@ViewChild(Infragistics.IgHierarchicalGridComponent) public viewChild: Infragistics.IgHierarchicalGridComponent;
 	
 	constructor() {
-        this.data = NorthwindEmployees.getData();
+        this.data = [
+            {
+                "ID": 0,
+                "Name": "Food",              
+                "Products": [
+                    { "ID": 0, "Name": "Bread", "Price": "2.5" }
+                ]
+            },
+            {
+                "ID": 1,
+                "Name": "Beverages",               
+                "Products": [
+                    { "ID": 1, "Name": "Milk", "Price": "3.5" },
+                    { "ID": 2, "Name": "Vint soda", "Price": "20.9" }
+                ]
+            },
+            {
+                "ID": 2,
+                "Name": "Electronics",              
+                "Products": [
+                    { "ID": 7, "Name": "DVD Player", "Price": "35.88" },
+                    { "ID": 8, "Name": "LCD HDTV", "Price": "1088.8" }
+                ]
+            }
+        ];
+ 
 		this.gridID = "grid1";
 		this.opts = {
 			autoCommit:true,
 			dataSource: this.data,
-            primaryKey: "EmployeeID",
+            primaryKey: "ID",
 			width: "100%",
 			height: "400px",
 			autoGenerateColumns: false,
-			autoGenerateColumnLayouts: false,
-            
-			columns: [
-                { key: "EmployeeID", headerText: "EmployeeID", width:"25%", dataType:"number", hidden:true },
-				{ key: "FirstName", headerText: "First Name", width:"25%", dataType:"string" },
-				{ key: "LastName", headerText: "Last Name", width:"25%", dataType:"string" },
-				{ key: "Title", headerText: "Title", width:"25%", dataType:"string" },
-				{ key: "BirthDate", headerText: "Birth Date", width:"25%", dataType:"date" }
-			],
+			autoGenerateColumnLayouts: false,            
+			 columns: [
+                { headerText: "ID", key: "ID", width: "50px", dataType: "number" },
+                { headerText: "Name", key: "Name", width: "130px", dataType: "string" }
+            ],
             features: [
 						{
 							name: "Updating"
 						}
 			],
 			columnLayouts: [
-				{
-					key: "Orders",
-					responseDataKey: "results",
-					primaryKey: "OrderID",
-					autoGenerateColumns: false,
-					width: "100%",
-					columns: [
-						{ key: "OrderID", headerText: "OrderID", width:"25%", dataType:"string" },
-						{ key: "Freight", headerText: "Freight", width:"25%", dataType:"string" },
-						{ key: "ShipName", headerText: "ShipName", width:"25%", dataType:"string" },
-						{ key: "ShipAddress", headerText: "ShipAddress", width:"25%", dataType:"string" }
-					],
-					features: [
-						{
-							name: "Updating"
-						}
-					]
-				}
-			]
+            {
+                key: "Products",
+                responseDataKey: "",
+                childrenDataProperty: "Products",
+                autoGenerateColumns: false,
+                primaryKey: "ID",
+                columns: [
+                    { key: "ID", headerText: "ID", width: "25px" },
+                    { key: "Name", headerText: "Product Name", width: "90px" },
+                    { key: "Price", headerText: "Price", dataType: "number", width: "55px" }
+                ]
+            }
+        ]
 		};
 	}
 }
