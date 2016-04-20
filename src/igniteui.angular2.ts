@@ -135,7 +135,7 @@ export class IgControlBase<Model> implements DoCheck {
 			});
 		}
         
-        if(this.changeDetectionInterval === undefined && this.changeDetectionInterval === null){
+        if(this.changeDetectionInterval === undefined || this.changeDetectionInterval === null){
             this.changeDetectionInterval= 500;            
         }
        

@@ -77,7 +77,7 @@ export function main() {
                });
          }));
          
-          it('should reflect changes when records in the grid are updated/added/deleted',
+          it('should reflect changes when records in the grid are updated',
          inject([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
            var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-hierarchical-grid></div>';
            tcb.overrideTemplate(TestComponent, template)
@@ -91,24 +91,47 @@ export function main() {
                             fixture.detectChanges();
                             var fName =  fixture.componentInstance.data[0].FirstName;
                             expect(fName).toBe("Maria");                            
-                            //delete row
-                               $("#grid1").igGridUpdating("deleteRow", 2);                  
-                              setTimeout(() => {					
-                                fixture.detectChanges();                                
-                                expect(fixture.componentInstance.data.length).toBe(8);  
-                                expect(fixture.componentInstance.data[1].EmployeeID).toBe(3);      
-                                   //add row           
-                                   $("#grid1").igGridUpdating("addRow", { EmployeeID: 200, LastName: "Snow", FirstName: "John", Title: "Vice President, Sales"});        
-                                   setTimeout(() => {					
-                                    fixture.detectChanges();                                
-                                    expect(fixture.componentInstance.data.length).toBe(9);  
-                                    expect(fixture.componentInstance.data[8].EmployeeID).toBe(200);                      
-                                    async.done();
-                                }, 10);
-                            }, 10);
-                        }, 10);
+                            async.done();
+                     }, 10);
                });
          }));
+         
+         it('should reflect changes when records in the grid are deleted',
+         inject([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+           var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-hierarchical-grid></div>';
+           tcb.overrideTemplate(TestComponent, template)
+               .createAsync(TestComponent)
+               .then((fixture) => {
+             	fixture.detectChanges();
+                //delete row
+                $("#grid1").igGridUpdating("deleteRow", 2);                  
+                setTimeout(() => {					
+                  fixture.detectChanges();                                
+                  expect(fixture.componentInstance.data.length).toBe(8);  
+                  expect(fixture.componentInstance.data[1].EmployeeID).toBe(3);
+                  async.done();
+                },10);
+            });
+         }));
+         
+         it('should reflect changes when records in the grid are added',
+         inject([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+           var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-hierarchical-grid></div>';
+           tcb.overrideTemplate(TestComponent, template)
+               .createAsync(TestComponent)
+               .then((fixture) => {
+             	    fixture.detectChanges();          
+                    $("#grid1").igGridUpdating("addRow", { EmployeeID: 200, LastName: "Snow", FirstName: "John", Title: "Vice President, Sales"});        
+                    setTimeout(() => {					
+						fixture.detectChanges();                                
+						expect(fixture.componentInstance.data.length).toBe(10);  
+						expect(fixture.componentInstance.data[9].EmployeeID).toBe(200);                      
+						async.done();
+					}, 10);
+               });
+         }));
+         
+         
          
          it('should reflect changes when child records are changes',
          inject([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
