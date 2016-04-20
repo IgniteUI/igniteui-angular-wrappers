@@ -4,13 +4,14 @@ module.exports = function(config){
 
         frameworks: ["jasmine"],
 
-        files : [
-            
-            "http://code.jquery.com/jquery-1.12.3.js",
-            "http://code.jquery.com/ui/1.10.3/jquery-ui.min.js",
-            "http://cdn-na.infragistics.com/igniteui/latest/js/infragistics.core.js",
-            "http://cdn-na.infragistics.com/igniteui/latest/js/infragistics.lob.js",
-            "https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js",
+		files : [
+			
+			"http://code.jquery.com/jquery-1.12.3.js",
+			"http://code.jquery.com/ui/1.10.3/jquery-ui.min.js",
+			"http://cdn-na.infragistics.com/igniteui/latest/js/infragistics.core.js",
+			"http://cdn-na.infragistics.com/igniteui/latest/js/infragistics.lob.js",
+            "http://cdn-na.infragistics.com/igniteui/latest/js/infragistics.dv.js",
+			"https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js",
             
             // IE required polyfills, in this exact order
             "node_modules/es6-shim/es6-shim.min.js",
@@ -20,8 +21,10 @@ module.exports = function(config){
             "node_modules/systemjs/dist/system.src.js",
             "node_modules/rxjs/bundles/Rx.js",
             "node_modules/angular2/bundles/angular2.dev.js",
+
             "tests/karma-test-shim.js",
-            
+
+            { pattern: 'samples/data/*.js', included: false, watched: false },
             { pattern: "node_modules/angular2/**/*.js", included: false, watched: false },
             { pattern: "node_modules/rxjs/**/*.js", included: false, watched: false },
             

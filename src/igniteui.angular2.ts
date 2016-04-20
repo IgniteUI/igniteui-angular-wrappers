@@ -101,7 +101,7 @@ export class IgControlBase<Model> implements DoCheck {
 	@Input() set options(v: Model) {
 		this._config = v;
 		this._differ = this._differs.find([]).create(null);
-		this._opts = jQuery.extend(true, {}, this._config);
+		this._opts = jQuery.extend(true, {}, this._config);		
 		if (this._opts.dataSource) {
 			delete this._opts.dataSource;
 		}
@@ -135,7 +135,7 @@ export class IgControlBase<Model> implements DoCheck {
 			});
 		}
         
-        if(this.changeDetectionInterval === undefined && this.changeDetectionInterval === null){
+        if(this.changeDetectionInterval === undefined || this.changeDetectionInterval === null){
             this.changeDetectionInterval= 500;            
         }
        
@@ -149,6 +149,7 @@ export class IgControlBase<Model> implements DoCheck {
 
 	ngDoCheck() {
         if(this._allowChangeDetection){
+            this._allowChangeDetection = false;
             this.optionChange();
         }
 	}
@@ -377,16 +378,65 @@ export class IgTreeGridComponent extends IgGridBase<IgTreeGrid> {
 
 	deleteRow(id) {
 		var element = jQuery(this._el),
-			tr = element.find("tr[data-id='" + id + "']");
+			tr = element.find("tr[data-id='" + id + "']"),
+            dataLevel = tr.attr("aria-level");
 		if (tr.length > 0) {
-			tr.remove();
+			
 			element.data(this._widgetName).dataSource.deleteRow(id, true);
 			element.data(this._widgetName).dataSource._removeTransactionsByRecordId(id);
 
-			if (tr.attr("aria-owns")) {
-				jQuery(tr.attr("aria-owns").split(" ")).each(function () {
-					jQuery("#" + this).remove();
-				});
+			var trs = tr.nextUntil("tr[data-level="+dataLevel+"]");
+            if(trs.length === 0){
+                trs = tr.nextAll("tr[data-level]");                
+            }
+            
+            tr.remove();
+            trs.remove();
+		}
+	}
+    ngDoCheck() {		
+		if (this._differ != null && this._allowChangeDetection) {        
+            this.optionChange();
+            this._allowChangeDetection = false;
+			var diff = [],
+			element = jQuery(this._el),
+			grid = element.data(this._widgetName),
+			colIndex, td, i, j, pkKey = this._config.primaryKey, newFormattedVal, record, column;
+            
+			//check for changes in collection
+			this._changes = this._differ.diff(this._config.dataSource);
+			if (this._config.dataSource.length !== this._dataSource.length) {
+				this._dataSource = JSON.parse(JSON.stringify(this._config.dataSource));
+				if (this._changes) {
+					this._changes.forEachAddedItem(r => this.addRow(r.item, r.currentIndex));
+					this._changes.forEachRemovedItem(r => this.deleteRow(r.item[pkKey]))
+				}
+			}
+			//check for changes in values
+			if (!this.equalsDiff(this._config.dataSource, this._dataSource, diff)) {
+				this._dataSource = JSON.parse(JSON.stringify(this._config.dataSource));
+				for (i = 0; i < diff.length; i++) {
+					for (j = 0; j < diff[i].txlog.length; j++) {
+						colIndex = element.data(this._widgetName)._getCellIndexByColumnKey(diff[i].txlog[j].key);
+						record = this._config.dataSource[diff[i].index];
+						td = element.find("tr[data-id='" + record[pkKey] + "']").children().get(colIndex);
+
+						column = element.data(this._widgetName).columnByKey(diff[i].txlog[j].key);
+						if (column) {
+							if (column.template) {
+								newFormattedVal = grid._renderTemplatedCell(diff[i].txlog[j].newVal, column).substring(1);
+							} else {
+								newFormattedVal = grid._renderCell(diff[i].txlog[j].newVal, column, record);
+							}
+							jQuery(td).html(newFormattedVal);
+							grid.dataSource.updateRow(record[pkKey], record);
+							grid.dataSource._commitTransactionsByRowId(record[pkKey]);
+						} else if(diff[i].txlog[j].key === this._config.childDataKey){
+                            //we have an hierarchical data source and one of the nested collections has changed.
+                            grid.dataBind();
+                        }
+					}
+				}
 			}
 		}
 	}
@@ -436,7 +486,9 @@ export class IgHierarchicalGridComponent extends IgGridBase<IgHierarchicalGrid> 
 						var childGrid = element.data(this._widgetName).allChildrenWidgets().filter(function (indx) {
 							var parentRow = jQuery(this.element).closest('tr[data-container]').prev();
 							var parentGridPK = parentRow.closest(".ui-iggrid-table").data("igGrid").options.primaryKey;
-							return this.options.childrenDataProperty === diff[i].txlog[j].key && parentRow.attr("data-id") == data[diff[i].index][parentGridPK];
+							return (this.options.childrenDataProperty === diff[i].txlog[j].key ||
+                            parentRow.next("[data-container]").find("table[role='grid']").attr("id").contains("_" + diff[i].txlog[j].key + "_"))
+                             && parentRow.attr("data-id") == data[diff[i].index][parentGridPK];
 						});
 						if (childGrid.length > 0) {
 							jQuery(childGrid).each(function () {
