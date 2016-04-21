@@ -4,7 +4,7 @@ import {Component, ViewChild, TemplateRef} from 'angular2/core';
 import * as Infragistics from '../../../src/igniteui.angular2';
 
 export function main() {
-    describe('Infragistics Angular2 DataChart', () => {
+    describe('Infragistics Angular2 DataChart and Zoombar', () => {
 		it('should initialize correctly', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
            var template = '<div><ig-data-chart  widgetId="datachart1" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-data-chart></div>';
            tcb.overrideTemplate(TestComponent, template)
@@ -15,13 +15,24 @@ export function main() {
 					async.done();
                });
          }));         
+         
+         it('Zoombar should initialize correctly', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+           var template = '<div><ig-data-chart  widgetId="datachart1" [(options)]="opts"></ig-data-chart><ig-zoombar [(options)]="zoombarOpts" widgetId="zoombar"></ig-zoombar></div>';
+           tcb.overrideTemplate(TestComponent, template)
+               .createAsync(TestComponent)
+               .then((fixture) => {
+					fixture.detectChanges();
+					expect(fixture.debugElement.componentInstance.viewChild2).toBeAnInstanceOf(Infragistics.IgZoombarComponent);
+					async.done();
+               });
+         }));         
     });
 }
 
 @Component({
     selector: 'test-cmp',
     template: '<div></div>', //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
-    directives: [Infragistics.IgDataChartComponent]
+    directives: [Infragistics.IgDataChartComponent,Infragistics.IgZoombarComponent]
 })
 class TestComponent {
 	private opts: any;
@@ -29,7 +40,8 @@ class TestComponent {
 	private data: Array<any>;
 	private cdi: number;
 	@ViewChild(Infragistics.IgDataChartComponent) public viewChild: Infragistics.IgDataChartComponent;
-	
+	@ViewChild(Infragistics.IgZoombarComponent) public viewChild2: Infragistics.IgZoombarComponent;
+    
 	constructor() {
 		this.cdi = 10;
 		this.data = [{
@@ -62,6 +74,9 @@ class TestComponent {
 				yAxis: "PopulationAxis",
 				valueMemberPath: "Pop2015"
 			}]
+		};
+        this.zoombarOpts = {
+			target: "#datachart1"
 		};
 	}
 }

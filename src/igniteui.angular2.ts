@@ -35,7 +35,7 @@ var NODES = {
 	"ig-map": "div",
 	"ig-bullet-graph": "div",
 	"ig-linear-gauge": "div",
-	"ig-qrcode-barcode": "div",
+	"ig-q-r-code-barcode": "div",
 	"ig-validator": "div",
 	"ig-upload": "div",
 	"ig-popover": "div",
@@ -777,7 +777,7 @@ export class IgValidatorComponent extends IgControlBase<IgValidator> {
 		var evtName;
 		this._el = jQuery(document).find("#" + this.widgetId);
 		jQuery(this._el)[this._widgetName](this._config);
-		
+		 this._events = new Map<string, string>();
 		//events binding
 		let that = this;
 		for (var propt in jQuery.ui[this._widgetName].prototype.events) {
@@ -845,6 +845,7 @@ export class IgPopoverComponent extends IgControlBase<IgPopover> {
 		var elem = jQuery(document).find("#" + this.widgetId);
 		if (elem.length === 1) {
 			this._el = elem;
+            this._events = new Map<string, string>();
 			//events binding
 			let that = this;
 			var evtName;
@@ -875,7 +876,7 @@ export class IgNotifierComponent extends IgControlBase<any> {
 		var elem = jQuery(document).find("#" + this.widgetId);
 		if (elem.length === 1) {
 			this._el = elem;
-
+            this._events = new Map<string, string>();
 			//events binding
 			let that = this;
 			var evtName;
