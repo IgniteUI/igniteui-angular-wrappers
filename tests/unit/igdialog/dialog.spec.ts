@@ -5,18 +5,19 @@ import * as Infragistics from '../../../src/igniteui.angular2';
 
 export function main() {
     describe('Infragistics Angular2 Dialog', () => {
-		it('should initialize correctly', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
-           var template = '<div><ig-dialog widgetId="dialog" [(options)]="opts"><div>Test Content</div></ig-dialog></div>';
-           tcb.overrideTemplate(TestComponent, template)
-               .createAsync(TestComponent)
-               .then((fixture) => {
-					fixture.detectChanges();
-					expect(fixture.debugElement.componentInstance.viewChild).toBeAnInstanceOf(Infragistics.IgDialogComponent);                 
-                    //expect($("#dialog").igDialog("content")).toBe("<div>Test Content</div>");
-					async.done();
-               });
-         }));
-         
+        it('should initialize correctly', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+        var template = '<div><ig-dialog widgetId="dialog" [(options)]="opts"><div>Test Content</div></ig-dialog></div>';
+        tcb.overrideTemplate(TestComponent, template)
+            .createAsync(TestComponent)
+            .then((fixture) => {
+                    fixture.detectChanges();
+                    expect(fixture.debugElement.componentInstance.viewChild).toBeAnInstanceOf(Infragistics.IgDialogComponent);
+                    expect($(fixture.debugElement.nativeElement).find("#dialog").igDialog("content")[0].innerHTML)
+                    .toBe("<div>Test Content</div>");
+                    async.done();
+            });
+        }));
+        
     });
 }
 
@@ -26,14 +27,14 @@ export function main() {
     directives: [Infragistics.IgDialogComponent]
 })
 class TestComponent {
-	private opts: any;
+    private opts: any;
     
-	@ViewChild(Infragistics.IgDialogComponent) public viewChild: Infragistics.IgDialogComponent;
-	
-	constructor() {
-		this.opts = {
+    @ViewChild(Infragistics.IgDialogComponent) public viewChild: Infragistics.IgDialogComponent;
+    
+    constructor() {
+        this.opts = {
             headerText : "Header Text",
             height: "500px"
-		};
-	}
+        };
+    }
 }
