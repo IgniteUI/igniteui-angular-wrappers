@@ -155,6 +155,37 @@ export function main() {
 					}, 10);
 				});
 		}));
+
+		it('should detect and apply changes of date columns to model', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts1" [changeDetectionInterval]="cdi"></ig-grid></div>';
+			tcb.overrideTemplate(TestComponent, template)
+				.createAsync(TestComponent)
+				.then((fixture) => {
+					fixture.detectChanges();
+					$(fixture.debugElement.nativeElement).find("#grid1 tr[data-id='2'] td[aria-describedby='grid1_HireDate']").click();
+					$(fixture.debugElement.nativeElement).find("#grid1").igGridUpdating("setCellValue", 2, "HireDate", "11/11/2016");
+					$(fixture.debugElement.nativeElement).find("#grid1_container #grid1_updating_done").click();
+					expect(fixture.debugElement.componentInstance.data[1].HireDate.getTime())
+					.toBe(new Date("11/11/2016").getTime());
+					async.done();
+				});
+		}));
+		
+		it('should detect and apply changes of dates columns from model', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts1" [changeDetectionInterval]="cdi"></ig-grid></div>';
+			tcb.overrideTemplate(TestComponent, template)
+				.createAsync(TestComponent)
+				.then((fixture) => {
+					fixture.detectChanges();
+					fixture.componentInstance.data[0].HireDate = new Date("11/11/2016");
+					setTimeout(() => {
+						fixture.detectChanges();
+						expect($(fixture.debugElement.nativeElement).find("#grid1 tr:first td[aria-describedby='grid1_HireDate']").text())
+						.toBe("11/11/2016");
+						async.done();
+					}, 10);
+				});
+		}));
 	});
 }
 
@@ -199,6 +230,10 @@ class TestComponent {
 				{ key: "Name", headerText: "Name", dataType: "string", width: "100px" },
 				{ key: "Age", headerText: "Age", dataType: "number", width: "100px", template: "Age: ${Age}" },
 				{ key: "HireDate", headerText: "HireDate", dataType: "date", width: "100px" },
+			],
+			autoCommit: true,
+			features: [
+				{ name: "Updating" }
 			]
 		};
 	}
