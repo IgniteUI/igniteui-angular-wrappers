@@ -139,6 +139,53 @@ export function main() {
 					}, 10);
 				});
 		}));
+
+		it('should allow column templates', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts1" [changeDetectionInterval]="cdi"></ig-grid></div>';
+			tcb.overrideTemplate(TestComponent, template)
+				.createAsync(TestComponent)
+				.then((fixture) => {
+					fixture.detectChanges();
+					fixture.componentInstance.data[0].Age = 42;
+					setTimeout(() => {
+						fixture.detectChanges();
+						expect($(fixture.debugElement.nativeElement).find("#grid1 tr[data-id='1'] td[aria-describedby='grid1_Age']").text())
+						.toBe("Age: 42");
+						async.done();
+					}, 10);
+				});
+		}));
+
+		it('should detect and apply changes of date columns to model', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts1" [changeDetectionInterval]="cdi"></ig-grid></div>';
+			tcb.overrideTemplate(TestComponent, template)
+				.createAsync(TestComponent)
+				.then((fixture) => {
+					fixture.detectChanges();
+					$(fixture.debugElement.nativeElement).find("#grid1 tr[data-id='2'] td[aria-describedby='grid1_HireDate']").click();
+					$(fixture.debugElement.nativeElement).find("#grid1").igGridUpdating("setCellValue", 2, "HireDate", "11/11/2016");
+					$(fixture.debugElement.nativeElement).find("#grid1_container #grid1_updating_done").click();
+					expect(fixture.debugElement.componentInstance.data[1].HireDate.getTime())
+					.toBe(new Date("11/11/2016").getTime());
+					async.done();
+				});
+		}));
+		
+		it('should detect and apply changes of dates columns from model', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts1" [changeDetectionInterval]="cdi"></ig-grid></div>';
+			tcb.overrideTemplate(TestComponent, template)
+				.createAsync(TestComponent)
+				.then((fixture) => {
+					fixture.detectChanges();
+					fixture.componentInstance.data[0].HireDate = new Date("11/11/2016");
+					setTimeout(() => {
+						fixture.detectChanges();
+						expect($(fixture.debugElement.nativeElement).find("#grid1 tr:first td[aria-describedby='grid1_HireDate']").text())
+						.toBe("11/11/2016");
+						async.done();
+					}, 10);
+				});
+		}));
 	});
 }
 
@@ -160,9 +207,9 @@ class TestComponent {
 		this.gridID = "grid1";
 		this.cdi = 0;
 		this.data = [
-				{ "Id": 1, "Name": "John Smith", "Age": 45 },
-				{ "Id": 2, "Name": "Mary Johnson", "Age": 32 },
-				{ "Id": 3, "Name": "Bob Ferguson", "Age": 27 }
+				{ "Id": 1, "Name": "John Smith", "Age": 45, "HireDate": "\/Date(704678400000)\/" },
+				{ "Id": 2, "Name": "Mary Johnson", "Age": 32, "HireDate": "\/Date(794678400000)\/" },
+				{ "Id": 3, "Name": "Bob Ferguson", "Age": 27, "HireDate": "\/Date(834678400000)\/" }
 			]
 		this.opts = {
 			primaryKey: "Id",
@@ -175,7 +222,19 @@ class TestComponent {
 		
 		this.opts1 = {
 			dataSource: this.data,
-			height: "300px"
+			height: "300px",
+			autoGenerateColumns: false,
+			primaryKey: "Id",
+			columns: [
+				{ key: "Id", headerText: "Id", dataType: "number", hidden: true },
+				{ key: "Name", headerText: "Name", dataType: "string", width: "100px" },
+				{ key: "Age", headerText: "Age", dataType: "number", width: "100px", template: "Age: ${Age}" },
+				{ key: "HireDate", headerText: "HireDate", dataType: "date", width: "100px" },
+			],
+			autoCommit: true,
+			features: [
+				{ name: "Updating" }
+			]
 		};
 	}
 

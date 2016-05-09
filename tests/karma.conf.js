@@ -29,7 +29,7 @@ module.exports = function(config){
             { pattern: "node_modules/rxjs/**/*.js", included: false, watched: false },
             
             // paths loaded via module imports
-            {pattern: "src/*.js", included: false, watched: true},
+            {pattern: "src/*", included: false, watched: true},
             
             // spec files need to be loaded in the shim file IN CONTEXT of the main module, don't include:            
             { pattern: "tests/unit/**/*.spec.js", included: false, watched: true }
