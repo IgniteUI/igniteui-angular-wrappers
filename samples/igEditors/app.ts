@@ -1,7 +1,7 @@
-import { Component, Inject, ElementRef, EventEmitter, HostListener} from 'angular2/core';
+import { Component, Inject, ElementRef, EventEmitter, HostListener} from '@angular/core';
 import {IgCurrencyEditorComponent, IgDateEditorComponent, IgMaskEditorComponent, IgNumericEditorComponent, 
     IgPercentEditorComponent, IgTextEditorComponent, IgDatePickerComponent} from "../../src/igniteui.angular2.ts";
-import {bootstrap }    from 'angular2/platform/browser'
+import {bootstrap }    from '@angular/platform-browser-dynamic'
 
 declare var jQuery: any;
 @Component({

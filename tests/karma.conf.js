@@ -12,22 +12,32 @@ module.exports = function(config){
 			"http://cdn-na.infragistics.com/igniteui/latest/js/infragistics.lob.js",
             "http://cdn-na.infragistics.com/igniteui/latest/js/infragistics.dv.js",
 			"https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js",
+
+            // System.js for module loading
+            'node_modules/systemjs/dist/system-polyfills.js',
+            'node_modules/systemjs/dist/system.src.js',
+
+            // Polyfills
+            'node_modules/es6-shim/es6-shim.js',
+
+            // Reflect and Zone.js
+            'node_modules/reflect-metadata/Reflect.js',
+            'node_modules/zone.js/dist/zone.js',
+            'node_modules/zone.js/dist/jasmine-patch.js',
+            'node_modules/zone.js/dist/async-test.js',
+            'node_modules/zone.js/dist/fake-async-test.js',
             
-            // IE required polyfills, in this exact order
-            "node_modules/es6-shim/es6-shim.min.js",
-            "node_modules/systemjs/dist/system-polyfills.js",
-            
-            "node_modules/angular2/bundles/angular2-polyfills.js",
-            "node_modules/systemjs/dist/system.src.js",
+            // Angular and RxJS
             "node_modules/rxjs/bundles/Rx.js",
-            "node_modules/angular2/bundles/angular2.dev.js",
 
             "tests/karma-test-shim.js",
 
             { pattern: 'samples/data/*.js', included: false, watched: false },
-            { pattern: "node_modules/angular2/**/*.js", included: false, watched: false },
             { pattern: "node_modules/rxjs/**/*.js", included: false, watched: false },
-            
+            { pattern: "node_modules/rxjs/**/*.js.map", included: false, watched: false },
+
+            { pattern: "node_modules/@angular/**/*.js", included: false, watched: false },
+
             // paths loaded via module imports
             {pattern: "src/*", included: false, watched: true},
             

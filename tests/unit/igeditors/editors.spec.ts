@@ -1,24 +1,24 @@
 // modeled after https://github.com/angular/angular/blob/cee2318110eeea115e5f6fc5bfc814cbaa7d90d8/modules/angular2/test/common/directives/ng_for_spec.ts
-import { it, iit, describe, expect, inject, injectAsync, beforeEachProviders, fakeAsync, tick, TestComponentBuilder, AsyncTestCompleter } from 'angular2/testing_internal';
-import {Component, ViewChild, TemplateRef} from 'angular2/core';
+import { it, iit, describe, expect, inject, beforeEachProviders } from '@angular/core/testing';
+import { TestComponentBuilder } from '@angular/compiler/testing';
+import {Component, ViewChild, TemplateRef} from '@angular/core';
 import * as Infragistics from '../../../src/igniteui.angular2';
 
 export function main() {
 	describe('Infragistics Angular2 TextEditor', () => {
-		it('should initialize correctly', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+		it('should initialize correctly', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 			var template = '<div><ig-text-editor></ig-text-editor></div>';
-			tcb.overrideTemplate(TestIgTextEditorComponent, template)
+			return tcb.overrideTemplate(TestIgTextEditorComponent, template)
 				.createAsync(TestIgTextEditorComponent)
 				.then((fixture) => {
 					fixture.detectChanges();
 					expect(fixture.debugElement.componentInstance.viewChild).toBeAnInstanceOf(Infragistics.IgTextEditorComponent);
-					async.done();
 				});
 		}));
 
-		it('should allow setting value with ngModel', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+		it('should allow setting value with ngModel', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 			var template = '<div><ig-text-editor [(ngModel)]="val" [widgetId]="editorId" [changeDetectionInterval]="cdi"></ig-text-editor></div>';
-			tcb.overrideTemplate(TestIgTextEditorComponent, template)
+			return tcb.overrideTemplate(TestIgTextEditorComponent, template)
 				.createAsync(TestIgTextEditorComponent)
 				.then((fixture) => {
 					fixture.detectChanges();
@@ -29,14 +29,13 @@ export function main() {
 					$(fixture.debugElement.nativeElement).find("#editor1").trigger("focus").val("changed_again_test_value").trigger("paste").trigger("blur");
 					setTimeout(() => {
 						expect(fixture.debugElement.componentInstance.val).toBe("changed_again_test_value");
-						async.done();
 					}, 100);
 				});
 		}));
 
-		it('should allow changing options', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+		it('should allow changing options', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 			var template = '<div><ig-text-editor [(options)]="opts" [(ngModel)]="val" [widgetId]="editorId" [changeDetectionInterval]="cdi"></ig-text-editor></div>';
-			tcb.overrideTemplate(TestIgTextEditorComponent, template)
+			return tcb.overrideTemplate(TestIgTextEditorComponent, template)
 				.createAsync(TestIgTextEditorComponent)
 				.then((fixture) => {
 					fixture.detectChanges();
@@ -45,58 +44,57 @@ export function main() {
 						fixture.detectChanges();
 						expect($(fixture.debugElement.nativeElement).find("#editor1").igTextEditor("option", "disabled")).toBe(false);
 						expect($(fixture.debugElement.nativeElement).find("#editor1")[0].hasAttribute("disabled")).toBe(false);
-						async.done();
 					}, 100);
 				});
 		}));
 	});
 
 	describe('Infragistics Angular2 NumericEditor', () => {
-		it('should initialize correctly', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+		it('should initialize correctly', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 			var template = '<div><ig-numeric-editor></ig-numeric-editor></div>';
-			tcb.overrideTemplate(TestIgNumericEditorComponent, template)
+			return tcb.overrideTemplate(TestIgNumericEditorComponent, template)
 				.createAsync(TestIgNumericEditorComponent)
 				.then((fixture) => {
 					fixture.detectChanges();
 					expect(fixture.debugElement.componentInstance.viewChild).toBeAnInstanceOf(Infragistics.IgNumericEditorComponent);
-					async.done();
 				});
 		}));
 
-		it('should allow setting value with ngModel', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+		it('should allow setting value with ngModel', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 			var template = '<div><ig-numeric-editor [(ngModel)]="val" [widgetId]="editorId" [changeDetectionInterval]="cdi"></ig-numeric-editor></div>';
-			tcb.overrideTemplate(TestIgNumericEditorComponent, template)
-				.createAsync(TestIgNumericEditorComponent)
-				.then((fixture) => {
-					fixture.detectChanges();
-					expect($(fixture.debugElement.nativeElement).find("#editor1").igNumericEditor("displayValue")).toBe("42");
-					fixture.debugElement.componentInstance.val = 1;
-					fixture.detectChanges();
-					expect($(fixture.debugElement.nativeElement).find("#editor1").igNumericEditor("displayValue")).toBe("1");
-					$(fixture.debugElement.nativeElement).find("#editor1").trigger("focus").val(154).trigger("paste").trigger("blur");
-					setTimeout(() => {
-						expect(fixture.debugElement.componentInstance.val).toBe(154);
-						async.done();
-					}, 100);
-				});
+			return new Promise((resolve, reject) => {
+				tcb.overrideTemplate(TestIgNumericEditorComponent, template)
+					.createAsync(TestIgNumericEditorComponent)
+					.then((fixture) => {
+						fixture.detectChanges();
+						expect($(fixture.debugElement.nativeElement).find("#editor1").igNumericEditor("displayValue")).toBe("42");
+						fixture.debugElement.componentInstance.val = 1;
+						fixture.detectChanges();
+						expect($(fixture.debugElement.nativeElement).find("#editor1").igNumericEditor("displayValue")).toBe("1");
+						$(fixture.debugElement.nativeElement).find("#editor1").trigger("focus").val(154).trigger("paste").trigger("blur");
+						setTimeout(() => {
+							expect(fixture.debugElement.componentInstance.val).toBe(154);
+							resolve();
+						}, 100);
+					});
+			});
 		}));
 	});
 
 	describe('Infragistics Angular2 PercentEditor', () => {
-		it('should initialize correctly', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+		it('should initialize correctly', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 			var template = '<div><ig-percent-editor></ig-percent-editor></div>';
-			tcb.overrideTemplate(TestIgPercentEditorComponent, template)
+			return tcb.overrideTemplate(TestIgPercentEditorComponent, template)
 				.createAsync(TestIgPercentEditorComponent)
 				.then((fixture) => {
 					fixture.detectChanges();
 					expect(fixture.debugElement.componentInstance.viewChild).toBeAnInstanceOf(Infragistics.IgPercentEditorComponent);
-					async.done();
 				});
 		}));
 
-		it('should allow setting value with ngModel', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+		it('should allow setting value with ngModel', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 			var template = '<div><ig-percent-editor [(ngModel)]="val" [widgetId]="editorId"></ig-percent-editor></div>';
-			tcb.overrideTemplate(TestIgPercentEditorComponent, template)
+			return tcb.overrideTemplate(TestIgPercentEditorComponent, template)
 				.createAsync(TestIgPercentEditorComponent)
 				.then((fixture) => {
 					fixture.detectChanges();
@@ -107,27 +105,25 @@ export function main() {
 					$(fixture.debugElement.nativeElement).find("#editor1").trigger("focus").val(100).trigger("paste").trigger("blur");
 					setTimeout(() => {
 						expect(fixture.debugElement.componentInstance.val).toBe(1);
-						async.done();
 					}, 100);
 				});
 		}));
 	});
 
 	describe('Infragistics Angular2 MaskEditor', () => {
-		it('should initialize correctly', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+		it('should initialize correctly', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 			var template = '<div><ig-mask-editor></ig-mask-editor></div>';
-			tcb.overrideTemplate(TestIgMaskEditorComponent, template)
+			return tcb.overrideTemplate(TestIgMaskEditorComponent, template)
 				.createAsync(TestIgMaskEditorComponent)
 				.then((fixture) => {
 					fixture.detectChanges();
 					expect(fixture.debugElement.componentInstance.viewChild).toBeAnInstanceOf(Infragistics.IgMaskEditorComponent);
-					async.done();
 				});
 		}));
 
-		it('should allow setting value with ngModel', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+		it('should allow setting value with ngModel', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 			var template = '<div><ig-mask-editor [(ngModel)]="val" [widgetId]="editorId"></ig-mask-editor></div>';
-			tcb.overrideTemplate(TestIgMaskEditorComponent, template)
+			return tcb.overrideTemplate(TestIgMaskEditorComponent, template)
 				.createAsync(TestIgMaskEditorComponent)
 				.then((fixture) => {
 					fixture.detectChanges();
@@ -138,27 +134,25 @@ export function main() {
 					$(fixture.debugElement.nativeElement).find("#editor1").trigger("focus").val("test again").trigger("paste").trigger("blur");
 					setTimeout(() => {
 						expect(fixture.debugElement.componentInstance.val).toBe("test again");
-						async.done();
 					}, 100);
 				});
 		}));
 	});
 
 	describe('Infragistics Angular2 DatePicker', () => {
-		it('should initialize correctly', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+		it('should initialize correctly', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 			var template = '<div><ig-date-picker></ig-date-picker></div>';
-			tcb.overrideTemplate(TestIgDatePickerComponent, template)
+			return tcb.overrideTemplate(TestIgDatePickerComponent, template)
 				.createAsync(TestIgDatePickerComponent)
 				.then((fixture) => {
 					fixture.detectChanges();
 					expect(fixture.debugElement.componentInstance.viewChild).toBeAnInstanceOf(Infragistics.IgDatePickerComponent);
-					async.done();
 				});
 		}));
 
-		it('should allow setting value with ngModel', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+		it('should allow setting value with ngModel', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 			var template = '<div><ig-date-picker [(ngModel)]="val" [widgetId]="editorId"></ig-date-picker></div>';
-			tcb.overrideTemplate(TestIgDatePickerComponent, template)
+			return tcb.overrideTemplate(TestIgDatePickerComponent, template)
 				.createAsync(TestIgDatePickerComponent)
 				.then((fixture) => {
 					fixture.detectChanges();
@@ -169,58 +163,57 @@ export function main() {
 					$(fixture.debugElement.nativeElement).find("#editor1").trigger("focus").val("03/03/2016").trigger("paste").trigger("blur");
 					setTimeout(() => {
 						expect(fixture.debugElement.componentInstance.val.getTime()).toBe(new Date("03/03/2016").getTime());
-						async.done();
 					}, 100);
 				});
 		}));
 	});
 
 	describe('Infragistics Angular2 DateEditor', () => {
-		it('should initialize correctly', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+		it('should initialize correctly', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 			var template = '<div><ig-date-editor></ig-date-editor></div>';
-			tcb.overrideTemplate(TestIgDateEditorComponent, template)
+			return tcb.overrideTemplate(TestIgDateEditorComponent, template)
 				.createAsync(TestIgDateEditorComponent)
 				.then((fixture) => {
 					fixture.detectChanges();
 					expect(fixture.debugElement.componentInstance.viewChild).toBeAnInstanceOf(Infragistics.IgDateEditorComponent);
-					async.done();
 				});
 		}));
 
-		it('should allow setting value with ngModel', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+		it('should allow setting value with ngModel', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 			var template = '<div><ig-date-editor [(ngModel)]="val" [widgetId]="editorId"></ig-date-editor></div>';
-			tcb.overrideTemplate(TestIgDateEditorComponent, template)
-				.createAsync(TestIgDateEditorComponent)
-				.then((fixture) => {
-					fixture.detectChanges();
-					expect($(fixture.debugElement.nativeElement).find("#editor1").igDateEditor("displayValue")).toBe("4/20/2016");
-					fixture.debugElement.componentInstance.val = new Date("3/15/2016");
-					fixture.detectChanges();
-					expect($(fixture.debugElement.nativeElement).find("#editor1").igDateEditor("displayValue")).toBe("3/15/2016");
-					$(fixture.debugElement.nativeElement).find("#editor1").trigger("focus").val("03/03/2016").trigger("paste").trigger("blur");
-					setTimeout(() => {
-						expect(fixture.debugElement.componentInstance.val.getTime()).toBe(new Date("03/03/2016").getTime());
-						async.done();
-					}, 100);
-				});
+			return new Promise((resolve, reject) => {
+				tcb.overrideTemplate(TestIgDateEditorComponent, template)
+					.createAsync(TestIgDateEditorComponent)
+					.then((fixture) => {
+						fixture.detectChanges();
+						expect($(fixture.debugElement.nativeElement).find("#editor1").igDateEditor("displayValue")).toBe("4/20/2016");
+						fixture.debugElement.componentInstance.val = new Date("3/15/2016");
+						fixture.detectChanges();
+						expect($(fixture.debugElement.nativeElement).find("#editor1").igDateEditor("displayValue")).toBe("3/15/2016");
+						$(fixture.debugElement.nativeElement).find("#editor1").trigger("focus").val("03/03/2016").trigger("paste").trigger("blur");
+						setTimeout(() => {
+							expect(fixture.debugElement.componentInstance.val.getTime()).toBe(new Date("03/03/2016").getTime());
+							resolve();
+						}, 100);
+					});
+			});
 		}));
 	});
 
 	describe('Infragistics Angular2 CurrencyEditor', () => {
-		it('should initialize correctly', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+		it('should initialize correctly', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 			var template = '<div><ig-currency-editor></ig-currency-editor></div>';
-			tcb.overrideTemplate(TestIgCurrencyEditorComponent, template)
+			return tcb.overrideTemplate(TestIgCurrencyEditorComponent, template)
 				.createAsync(TestIgCurrencyEditorComponent)
 				.then((fixture) => {
 					fixture.detectChanges();
 					expect(fixture.debugElement.componentInstance.viewChild).toBeAnInstanceOf(Infragistics.IgCurrencyEditorComponent);
-					async.done();
 				});
 		}));
 
-		it('should allow setting value with ngModel', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+		it('should allow setting value with ngModel', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 			var template = '<div><ig-currency-editor [(ngModel)]="val" [widgetId]="editorId"></ig-currency-editor></div>';
-			tcb.overrideTemplate(TestIgCurrencyEditorComponent, template)
+			return tcb.overrideTemplate(TestIgCurrencyEditorComponent, template)
 				.createAsync(TestIgCurrencyEditorComponent)
 				.then((fixture) => {
 					fixture.detectChanges();
@@ -231,27 +224,25 @@ export function main() {
 					$(fixture.debugElement.nativeElement).find("#editor1").trigger("focus").val(154).trigger("paste").trigger("blur");
 					setTimeout(() => {
 						expect(fixture.debugElement.componentInstance.val).toBe(154);
-						async.done();
 					}, 100);
 				});
 		}));
 	});
 
 	describe('Infragistics Angular2 CheckboxEditor', () => {
-		it('should initialize correctly', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+		it('should initialize correctly', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 			var template = '<div><ig-checkbox-editor></ig-checkbox-editor></div>';
-			tcb.overrideTemplate(TestIgCheckboxEditorComponent, template)
+			return tcb.overrideTemplate(TestIgCheckboxEditorComponent, template)
 				.createAsync(TestIgCheckboxEditorComponent)
 				.then((fixture) => {
 					fixture.detectChanges();
 					expect(fixture.debugElement.componentInstance.viewChild).toBeAnInstanceOf(Infragistics.IgCheckboxEditorComponent);
-					async.done();
 				});
 		}));
 
-		it('should allow setting value with ngModel', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+		it('should allow setting value with ngModel', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 			var template = '<div><ig-checkbox-editor [(ngModel)]="val" [widgetId]="editorId"></ig-checkbox-editor></div>';
-			tcb.overrideTemplate(TestIgCheckboxEditorComponent, template)
+			return tcb.overrideTemplate(TestIgCheckboxEditorComponent, template)
 				.createAsync(TestIgCheckboxEditorComponent)
 				.then((fixture) => {
 					fixture.detectChanges();
@@ -262,7 +253,6 @@ export function main() {
 					$(fixture.debugElement.nativeElement).find("#editor1").click();
 					setTimeout(() => {
 						expect(fixture.debugElement.componentInstance.val).toBe(true);
-						async.done();
 					}, 100);
 				});
 		}));

@@ -1,4 +1,4 @@
-import {Component, Inject, ElementRef, EventEmitter, HostListener} from 'angular2/core';
+import {Component, Inject, ElementRef, EventEmitter, HostListener} from '@angular/core';
 import {IgGridComponent} from "../src/igniteui.angular2.ts";
 
 declare var jQuery: any;

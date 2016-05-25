@@ -1,24 +1,24 @@
 // modeled after https://github.com/angular/angular/blob/cee2318110eeea115e5f6fc5bfc814cbaa7d90d8/modules/angular2/test/common/directives/ng_for_spec.ts
-import { it, iit, describe, expect, inject, injectAsync, beforeEachProviders, fakeAsync, tick, TestComponentBuilder, AsyncTestCompleter } from 'angular2/testing_internal';
-import {Component, ViewChild, TemplateRef} from 'angular2/core';
+import { it, iit, describe, expect, inject, beforeEachProviders } from '@angular/core/testing';
+import { TestComponentBuilder } from '@angular/compiler/testing';
+import {Component, ViewChild, TemplateRef} from '@angular/core';
 import * as Infragistics from '../../../src/igniteui.angular2';
 
 export function main() {
 	describe('Infragistics Angular2 Grid', () => {
-		it('should initialize correctly', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+		it('should initialize correctly', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts"></ig-grid></div>';
-			tcb.overrideTemplate(TestComponent, template)
+			return tcb.overrideTemplate(TestComponent, template)
 				.createAsync(TestComponent)
 				.then((fixture) => {
 						fixture.detectChanges();
 						expect(fixture.debugElement.componentInstance.viewChild).toBeAnInstanceOf(Infragistics.IgGridComponent);
-						async.done();
 				});
 		}));
 		
-		it('should detect and apply changes from model', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+		it('should detect and apply changes from model', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-grid></div>';
-			tcb.overrideTemplate(TestComponent, template)
+			return tcb.overrideTemplate(TestComponent, template)
 				.createAsync(TestComponent)
 				.then((fixture) => {
 					fixture.detectChanges();
@@ -27,14 +27,13 @@ export function main() {
 						fixture.detectChanges();
 						expect($(fixture.debugElement.nativeElement).find("#grid1 tr:first td[aria-describedby='grid1_Name']").text())
 						.toBe("Mr. Smith");
-						async.done();
 					}, 10);
 				});
 		}));
 
-		it('should detect and apply deleting records from model', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+		it('should detect and apply deleting records from model', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-grid></div>';
-			tcb.overrideTemplate(TestComponent, template)
+			return tcb.overrideTemplate(TestComponent, template)
 				.createAsync(TestComponent)
 				.then((fixture) => {
 					fixture.detectChanges();
@@ -43,14 +42,13 @@ export function main() {
 						fixture.detectChanges();
 						expect($(fixture.debugElement.nativeElement).find("#grid1 tbody tr").length)
 						.toBe(2);
-						async.done();
 					}, 10);
 				});
 		}));
 
-		it('should detect and apply adding records from model', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+		it('should detect and apply adding records from model', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-grid></div>';
-			tcb.overrideTemplate(TestComponent, template)
+			return tcb.overrideTemplate(TestComponent, template)
 				.createAsync(TestComponent)
 				.then((fixture) => {
 					fixture.detectChanges();
@@ -59,14 +57,13 @@ export function main() {
 						fixture.detectChanges();
 						expect($(fixture.debugElement.nativeElement).find("#grid1 tbody tr").length)
 						.toBe(4);
-						async.done();
 					}, 10);
 				});
 		}));
 
-		it('should detect and apply changes to model', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+		it('should detect and apply changes to model', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts"></ig-grid></div>';
-			tcb.overrideTemplate(TestComponent, template)
+			return tcb.overrideTemplate(TestComponent, template)
 				.createAsync(TestComponent)
 				.then((fixture) => {
 					fixture.detectChanges();
@@ -75,39 +72,36 @@ export function main() {
 					$(fixture.debugElement.nativeElement).find("#grid1_container #grid1_updating_done").click();
 					expect(fixture.debugElement.componentInstance.data[1].Name)
 					.toBe("Mary Jackson");
-					async.done();
 				});
 		}));
 
-		it('should detect and apply deleting records to model', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+		it('should detect and apply deleting records to model', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts"></ig-grid></div>';
-			tcb.overrideTemplate(TestComponent, template)
+			return tcb.overrideTemplate(TestComponent, template)
 				.createAsync(TestComponent)
 				.then((fixture) => {
 					fixture.detectChanges();
 					$(fixture.debugElement.nativeElement).find("#grid1").igGridUpdating("deleteRow", 2);
 					expect(fixture.debugElement.componentInstance.data.length)
 					.toBe(2);
-					async.done();
 				});
 		}));
 
-		it('should detect and apply adding records to model', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+		it('should detect and apply adding records to model', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts"></ig-grid></div>';
-			tcb.overrideTemplate(TestComponent, template)
+			return tcb.overrideTemplate(TestComponent, template)
 				.createAsync(TestComponent)
 				.then((fixture) => {
 					fixture.detectChanges();
 					$(fixture.debugElement.nativeElement).find("#grid1").igGridUpdating("addRow", { "Id": 4, "Name": "Bob Ferguson", "Age": 33 });
 					expect(fixture.debugElement.componentInstance.data.length)
 					.toBe(4);
-					async.done();
 				});
 		}));
 
-		it('should allow defining events', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+		it('should allow defining events', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts" (cellClick)="cellClickHandler($event)"></ig-grid></div>';
-			tcb.overrideTemplate(TestComponent, template)
+			return tcb.overrideTemplate(TestComponent, template)
 				.createAsync(TestComponent)
 				.then((fixture) => {
 					fixture.detectChanges();
@@ -119,14 +113,13 @@ export function main() {
 							.toBe(1);
 						expect(fixture.debugElement.componentInstance.firedEvent.ui.colKey)
 							.toBe("Name");
-						async.done();
 					}, 50);
 				});
 		}));
 
-		it('should allow changing options', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+		it('should allow changing options', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts1" [changeDetectionInterval]="cdi"></ig-grid></div>';
-			tcb.overrideTemplate(TestComponent, template)
+			return tcb.overrideTemplate(TestComponent, template)
 				.createAsync(TestComponent)
 				.then((fixture) => {
 					fixture.detectChanges();
@@ -135,14 +128,13 @@ export function main() {
 						fixture.detectChanges();
 						expect($(fixture.debugElement.nativeElement).find("#grid1_container").outerHeight())
 						.toBe(400);
-						async.done();
 					}, 10);
 				});
 		}));
 
-		it('should allow column templates', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+		it('should allow column templates', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts1" [changeDetectionInterval]="cdi"></ig-grid></div>';
-			tcb.overrideTemplate(TestComponent, template)
+			return tcb.overrideTemplate(TestComponent, template)
 				.createAsync(TestComponent)
 				.then((fixture) => {
 					fixture.detectChanges();
@@ -151,14 +143,13 @@ export function main() {
 						fixture.detectChanges();
 						expect($(fixture.debugElement.nativeElement).find("#grid1 tr[data-id='1'] td[aria-describedby='grid1_Age']").text())
 						.toBe("Age: 42");
-						async.done();
 					}, 10);
 				});
 		}));
 
-		it('should detect and apply changes of date columns to model', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+		it('should detect and apply changes of date columns to model', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts1" [changeDetectionInterval]="cdi"></ig-grid></div>';
-			tcb.overrideTemplate(TestComponent, template)
+			return tcb.overrideTemplate(TestComponent, template)
 				.createAsync(TestComponent)
 				.then((fixture) => {
 					fixture.detectChanges();
@@ -167,24 +158,25 @@ export function main() {
 					$(fixture.debugElement.nativeElement).find("#grid1_container #grid1_updating_done").click();
 					expect(fixture.debugElement.componentInstance.data[1].HireDate.getTime())
 					.toBe(new Date("11/11/2016").getTime());
-					async.done();
 				});
 		}));
 		
-		it('should detect and apply changes of dates columns from model', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+		it('should detect and apply changes of dates columns from model', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts1" [changeDetectionInterval]="cdi"></ig-grid></div>';
-			tcb.overrideTemplate(TestComponent, template)
-				.createAsync(TestComponent)
-				.then((fixture) => {
-					fixture.detectChanges();
-					fixture.componentInstance.data[0].HireDate = new Date("11/11/2016");
-					setTimeout(() => {
+			return new Promise((resolve, reject) => {
+				tcb.overrideTemplate(TestComponent, template)
+					.createAsync(TestComponent)
+					.then((fixture) => {
 						fixture.detectChanges();
-						expect($(fixture.debugElement.nativeElement).find("#grid1 tr:first td[aria-describedby='grid1_HireDate']").text())
-						.toBe("11/11/2016");
-						async.done();
-					}, 10);
-				});
+						fixture.componentInstance.data[0].HireDate = new Date("11/11/2016");
+						setTimeout(() => {
+							fixture.detectChanges();
+							expect($(fixture.debugElement.nativeElement).find("#grid1 tr:first td[aria-describedby='grid1_HireDate']").text())
+							.toBe("11/11/2016");
+							resolve();
+						}, 10);
+					});
+			});
 		}));
 	});
 }
