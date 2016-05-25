@@ -25,7 +25,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr *ngFor="#product of data">
+		<tr *ngFor="let product of data">
 			<td>{{product.ProductID}}</td>
 			<td><input type="text" [(ngModel)]="product.ProductName" class="form-control" /></td>
 			<td>{{product.QuantityPerUnit}}</td>

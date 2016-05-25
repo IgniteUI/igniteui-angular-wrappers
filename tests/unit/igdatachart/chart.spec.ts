@@ -1,56 +1,55 @@
 // modeled after https://github.com/angular/angular/blob/cee2318110eeea115e5f6fc5bfc814cbaa7d90d8/modules/angular2/test/common/directives/ng_for_spec.ts
-import { it, iit, describe, expect, inject, injectAsync, beforeEachProviders, fakeAsync, tick, TestComponentBuilder, AsyncTestCompleter } from 'angular2/testing_internal';
-import {Component, ViewChild, TemplateRef} from 'angular2/core';
+import { it, iit, describe, expect, inject, beforeEachProviders } from '@angular/core/testing';
+import { TestComponentBuilder } from '@angular/compiler/testing';
+import {Component, ViewChild, TemplateRef} from '@angular/core';
 import * as Infragistics from '../../../src/igniteui.angular2';
 
 export function main() {
-    describe('Infragistics Angular2 DataChart and Zoombar', () => {
-		it('should initialize correctly', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
-           var template = '<div><ig-data-chart  widgetId="datachart1" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-data-chart></div>';
-           tcb.overrideTemplate(TestComponent, template)
-               .createAsync(TestComponent)
-               .then((fixture) => {
+	describe('Infragistics Angular2 DataChart and Zoombar', () => {
+		it('should initialize correctly', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+			var template = '<div><ig-data-chart  widgetId="datachart1" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-data-chart></div>';
+			return tcb.overrideTemplate(TestComponent, template)
+				.createAsync(TestComponent)
+				.then((fixture) => {
 					fixture.detectChanges();
 					expect(fixture.debugElement.componentInstance.viewChild).toBeAnInstanceOf(Infragistics.IgDataChartComponent);
-					async.done();
-               });
-         }));         
-         
-         it('Zoombar should initialize correctly', injectAsync([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
-           var template = '<div><ig-data-chart  widgetId="datachart1" [(options)]="opts"></ig-data-chart><ig-zoombar [(options)]="zoombarOpts" widgetId="zoombar"></ig-zoombar></div>';
-           tcb.overrideTemplate(TestComponent, template)
-               .createAsync(TestComponent)
-               .then((fixture) => {
+				});
+		}));
+
+		it('Zoombar should initialize correctly', inject([TestComponentBuilder], (tcb: TestComponentBuilder, async) => {
+			var template = '<div><ig-data-chart  widgetId="datachart1" [(options)]="opts"></ig-data-chart><ig-zoombar [(options)]="zoombarOpts" widgetId="zoombar"></ig-zoombar></div>';
+			return tcb.overrideTemplate(TestComponent, template)
+				.createAsync(TestComponent)
+				.then((fixture) => {
 					fixture.detectChanges();
 					expect(fixture.debugElement.componentInstance.viewChild2).toBeAnInstanceOf(Infragistics.IgZoombarComponent);
-					async.done();
-               });
-         }));         
-    });
+				});
+		}));
+	});
 }
 
 @Component({
-    selector: 'test-cmp',
-    template: '<div></div>', //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
-    directives: [Infragistics.IgDataChartComponent,Infragistics.IgZoombarComponent]
+	selector: 'test-cmp',
+	template: '<div></div>', //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+	directives: [Infragistics.IgDataChartComponent, Infragistics.IgZoombarComponent]
 })
 class TestComponent {
 	private opts: any;
-    private zoombarOpts:any;
+	private zoombarOpts: any;
 	private data: Array<any>;
 	private cdi: number;
 	@ViewChild(Infragistics.IgDataChartComponent) public viewChild: Infragistics.IgDataChartComponent;
 	@ViewChild(Infragistics.IgZoombarComponent) public viewChild2: Infragistics.IgZoombarComponent;
-    
+
 	constructor() {
 		this.cdi = 10;
 		this.data = [{
-            "CountryName": "China",
-            "Pop1995": 1216,
-            "Pop2005": 1297,
-            "Pop2015": 1361,
-            "Pop2025": 1394
-        }];
+			"CountryName": "China",
+			"Pop1995": 1216,
+			"Pop2005": 1297,
+			"Pop2015": 1361,
+			"Pop2025": 1394
+		}];
 		this.opts = {
 			dataSource: this.data,
 			axes: [{
@@ -75,7 +74,7 @@ class TestComponent {
 				valueMemberPath: "Pop2015"
 			}]
 		};
-        this.zoombarOpts = {
+		this.zoombarOpts = {
 			target: "#datachart1"
 		};
 	}
