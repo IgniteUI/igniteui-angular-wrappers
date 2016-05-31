@@ -6,8 +6,8 @@ import {Component, Directive, Inject, ElementRef, EventEmitter, Output, Input, Q
 	SimpleChange, ChangeDetectionStrategy, IterableDiffers, DoCheck, Optional} from '@angular/core';
 import {NgModel, ControlValueAccessor} from '@angular/common';
 
-declare var jQuery:any;
-declare var Reflect:any;
+declare var jQuery: any;
+declare var Reflect: any;
 
 var NODES = {
 	"ig-text-editor": "input",
@@ -67,18 +67,22 @@ export function IgComponent(args: any = {}) {
 
 		args.selector = sel;
 		args.template = "<ng-content></ng-content>";
-		args.inputs = ["options.columns:columns", "options.width:width", "options:height:height", "options:dataSource:dataSource", "options.dataSource[0].Name:dataSource[0].Name"];
 
 		var contrName = sel.replace(/-([a-z])/g, function (group) {
 			return group[1].toUpperCase();
 		});
 
 		var evt = [];
+		var opts = [];
 		if (jQuery.ui[contrName]) {
 			for (var propt in jQuery.ui[contrName].prototype.events) {
 				evt.push(propt);
 			}
 			args.events = evt;
+			for (var propt in jQuery.ui[contrName].prototype.options) {
+				opts.push(propt);
+			}
+			args.inputs = opts;
 		}
 		annotations.push(new Component(args));
 		// redefine with added annotations
@@ -89,35 +93,55 @@ export function IgComponent(args: any = {}) {
 }
 
 export class IgControlBase<Model> implements DoCheck {
-	private _opts: any;
+	private _opts: any = {};
 	private _differs: any;
 	protected _el: any;
 	protected _widgetName: string;
 	protected _differ: any;
 	protected _config: any;
 	protected _events: Map<string, string>;
-    protected _allowChangeDetection = true;
-    
+	protected _allowChangeDetection = true;
+
 	@Input() set options(v: Model) {
-		this._config = v;
+		this._config = jQuery.extend(true, v, this._opts);
 		this._differ = this._differs.find([]).create(null);
-		this._opts = jQuery.extend(true, {}, this._config);		
+		this._opts = jQuery.extend(true, {}, this._config);
 		if (this._opts.dataSource) {
 			delete this._opts.dataSource;
 		}
 	};
 	@Input() widgetId: string;
-    @Input() changeDetectionInterval:number;
+	@Input() changeDetectionInterval: number;
 
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) {
 		this._differs = differs;
 		this._widgetName = this.convertToCamelCase(el.nativeElement.nodeName.toLowerCase());//ig-grid -> igGrid
 		this._el = el.nativeElement.appendChild(document.createElement(NODES[el.nativeElement.nodeName.toLowerCase()]));
 
+		for (var opt in jQuery.ui[this._widgetName].prototype.options) {
+			Object.defineProperty(this, opt, {
+				set: this.createSetter(opt),
+				enumerable: true,
+				configurable: true
+			});
+		}
+
 		for (var propt in jQuery.ui[this._widgetName].prototype.events) {
 			this[propt] = new EventEmitter();
 		}
-        
+	}
+
+	createSetter(name) {
+		return function (value) {
+			this._opts[name] = value;
+			if (jQuery.ui[this._widgetName] &&
+				jQuery.ui[this._widgetName].prototype.options &&
+				jQuery.ui[this._widgetName].prototype.options.hasOwnProperty(name) &&
+				jQuery(this._el).data(this._widgetName)) {
+				this._config[name] = value;
+				jQuery(this._el)[this._widgetName]("option", name, value);
+			}
+		}
 	}
 
 	ngOnInit() {
@@ -134,24 +158,29 @@ export class IgControlBase<Model> implements DoCheck {
 				that[that._events[evt.type]].emit({ event: evt, ui: ui });
 			});
 		}
-        
-        if(this.changeDetectionInterval === undefined || this.changeDetectionInterval === null){
-            this.changeDetectionInterval= 500;            
-        }
-       
-        setInterval(function(){
-          that._allowChangeDetection = true;        
-        },this.changeDetectionInterval); 
+
+		if (this.changeDetectionInterval === undefined || this.changeDetectionInterval === null) {
+			this.changeDetectionInterval = 500;
+		}
+
+		setInterval(function () {
+			that._allowChangeDetection = true;
+		}, this.changeDetectionInterval);
 
 		jQuery(this._el).attr("id", this.widgetId);
+		if (this._config === null || this._config === undefined) {
+			//if there is no config specified in the component template use the defined top-level options for a configuration
+			//by invoking the setter of options property
+			this.options = this._opts;
+		}
 		jQuery(this._el)[this._widgetName](this._config);
 	}
 
 	ngDoCheck() {
-        if(this._allowChangeDetection){
-            this._allowChangeDetection = false;
-            this.optionChange();
-        }
+		if (this._allowChangeDetection) {
+			this._allowChangeDetection = false;
+			this.optionChange();
+		}
 	}
 
 	optionChange() {
@@ -276,9 +305,9 @@ export class IgControlBase<Model> implements DoCheck {
 export class IgGridBase<Model> extends IgControlBase<Model> {
 	protected _dataSource: any;
 	protected _changes: any;
-    
+
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
-    
+
 	ngOnInit() {
 		super.ngOnInit();
 		this._dataSource = JSON.parse(JSON.stringify(this._config.dataSource));
@@ -291,7 +320,7 @@ export class IgGridBase<Model> extends IgControlBase<Model> {
 		if (tr.length > 0) {
 			tr.remove();
 			jQuery(this._el).data(this._widgetName).dataSource.deleteRow(id, true);
-            jQuery(this._el).data(this._widgetName).dataSource._removeTransactionsByRecordId(id);
+			jQuery(this._el).data(this._widgetName).dataSource._removeTransactionsByRecordId(id);
 		}
 	}
 
@@ -322,15 +351,15 @@ export class IgGridBase<Model> extends IgControlBase<Model> {
 		}
 	}
 
-	ngDoCheck() {		
-		if (this._differ != null && this._allowChangeDetection) {        
-            this.optionChange();
-            this._allowChangeDetection = false;
+	ngDoCheck() {
+		if (this._differ != null && this._allowChangeDetection) {
+			this.optionChange();
+			this._allowChangeDetection = false;
 			var diff = [],
-			element = jQuery(this._el),
-			grid = element.data(this._widgetName),
-			colIndex, td, i, j, pkKey = this._config.primaryKey, newFormattedVal, record, column;
-            
+				element = jQuery(this._el),
+				grid = element.data(this._widgetName),
+				colIndex, td, i, j, pkKey = this._config.primaryKey, newFormattedVal, record, column;
+
 			//check for changes in collection
 			this._changes = this._differ.diff(this._config.dataSource);
 			if (this._config.dataSource.length !== this._dataSource.length) {
@@ -379,30 +408,30 @@ export class IgTreeGridComponent extends IgGridBase<IgTreeGrid> {
 	deleteRow(id) {
 		var element = jQuery(this._el),
 			tr = element.find("tr[data-id='" + id + "']"),
-            dataLevel = tr.attr("aria-level");
+			dataLevel = tr.attr("aria-level");
 		if (tr.length > 0) {
-			
+
 			element.data(this._widgetName).dataSource.deleteRow(id, true);
 			element.data(this._widgetName).dataSource._removeTransactionsByRecordId(id);
 
-			var trs = tr.nextUntil("tr[data-level="+dataLevel+"]");
-            if(trs.length === 0){
-                trs = tr.nextAll("tr[data-level]");                
-            }
-            
-            tr.remove();
-            trs.remove();
+			var trs = tr.nextUntil("tr[data-level=" + dataLevel + "]");
+			if (trs.length === 0) {
+				trs = tr.nextAll("tr[data-level]");
+			}
+
+			tr.remove();
+			trs.remove();
 		}
 	}
-    ngDoCheck() {		
-		if (this._differ != null && this._allowChangeDetection) {        
-            this.optionChange();
-            this._allowChangeDetection = false;
+	ngDoCheck() {
+		if (this._differ != null && this._allowChangeDetection) {
+			this.optionChange();
+			this._allowChangeDetection = false;
 			var diff = [],
-			element = jQuery(this._el),
-			grid = element.data(this._widgetName),
-			colIndex, td, i, j, pkKey = this._config.primaryKey, newFormattedVal, record, column;
-            
+				element = jQuery(this._el),
+				grid = element.data(this._widgetName),
+				colIndex, td, i, j, pkKey = this._config.primaryKey, newFormattedVal, record, column;
+
 			//check for changes in collection
 			this._changes = this._differ.diff(this._config.dataSource);
 			if (this._config.dataSource.length !== this._dataSource.length) {
@@ -431,10 +460,10 @@ export class IgTreeGridComponent extends IgGridBase<IgTreeGrid> {
 							jQuery(td).html(newFormattedVal);
 							grid.dataSource.updateRow(record[pkKey], record);
 							grid.dataSource._commitTransactionsByRowId(record[pkKey]);
-						} else if(diff[i].txlog[j].key === this._config.childDataKey){
-                            //we have an hierarchical data source and one of the nested collections has changed.
-                            grid.dataBind();
-                        }
+						} else if (diff[i].txlog[j].key === this._config.childDataKey) {
+							//we have an hierarchical data source and one of the nested collections has changed.
+							grid.dataBind();
+						}
 					}
 				}
 			}
@@ -462,12 +491,12 @@ export class IgHierarchicalGridComponent extends IgGridBase<IgHierarchicalGrid> 
 	ngDoCheck() {
 		this.optionChange();
 		if (this._differ != null && this._allowChangeDetection) {
-            this._allowChangeDetection = false;
+			this._allowChangeDetection = false;
 			var diff = [],
-			element = jQuery(this._el),
-			colIndex, td, i, j, pkKey = this._config.primaryKey, newFormattedVal, record, column,
-			mainGrid = element.data("igGrid"),
-			data = this._config.dataSource;
+				element = jQuery(this._el),
+				colIndex, td, i, j, pkKey = this._config.primaryKey, newFormattedVal, record, column,
+				mainGrid = element.data("igGrid"),
+				data = this._config.dataSource;
 
 			//check for changes in collection
 			this._changes = this._differ.diff(this._config.dataSource);
@@ -477,8 +506,8 @@ export class IgHierarchicalGridComponent extends IgGridBase<IgHierarchicalGrid> 
 					this._changes.forEachAddedItem(r => this.addRow(r.item, r.currentIndex));
 					this._changes.forEachRemovedItem(r => this.deleteRow(r.item[pkKey]))
 				}
-			} 
-            //check for changes in data source values
+			}
+			//check for changes in data source values
 			if (!this.equalsDiff(this._config.dataSource, this._dataSource, diff)) {
 				this._dataSource = JSON.parse(JSON.stringify(this._config.dataSource));
 				for (i = 0; i < diff.length; i++) {
@@ -487,8 +516,8 @@ export class IgHierarchicalGridComponent extends IgGridBase<IgHierarchicalGrid> 
 							var parentRow = jQuery(this.element).closest('tr[data-container]').prev();
 							var parentGridPK = parentRow.closest(".ui-iggrid-table").data("igGrid").options.primaryKey;
 							return (this.options.childrenDataProperty === diff[i].txlog[j].key ||
-                            parentRow.next("[data-container]").find("table[role='grid']").attr("id").contains("_" + diff[i].txlog[j].key + "_"))
-                             && parentRow.attr("data-id") == data[diff[i].index][parentGridPK];
+								parentRow.next("[data-container]").find("table[role='grid']").attr("id").contains("_" + diff[i].txlog[j].key + "_"))
+								&& parentRow.attr("data-id") == data[diff[i].index][parentGridPK];
 						});
 						if (childGrid.length > 0) {
 							jQuery(childGrid).each(function () {
@@ -501,11 +530,11 @@ export class IgHierarchicalGridComponent extends IgGridBase<IgHierarchicalGrid> 
 
 							column = mainGrid.columnByKey(diff[i].txlog[j].key);
 							if (column) {
-							if (column.template) {
-								newFormattedVal = mainGrid._renderTemplatedCell(diff[i].txlog[j].newVal, column);
-							} else {
-								newFormattedVal = mainGrid._renderCell(diff[i].txlog[j].newVal, column, record);
-							}
+								if (column.template) {
+									newFormattedVal = mainGrid._renderTemplatedCell(diff[i].txlog[j].newVal, column);
+								} else {
+									newFormattedVal = mainGrid._renderCell(diff[i].txlog[j].newVal, column, record);
+								}
 								jQuery(td).html(newFormattedVal);
 								mainGrid.dataSource.updateRow(record[pkKey], record);
 								mainGrid.dataSource._commitTransactionsByRowId(record[pkKey]);
@@ -564,10 +593,10 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
 		this.onTouched = fn;
 	}
 
-	ngDoCheck() {		
+	ngDoCheck() {
 		if (this._differ != null && this._allowChangeDetection) {
-            this.optionChange();
-            this._allowChangeDetection = false;
+			this.optionChange();
+			this._allowChangeDetection = false;
 			var diff = [];
 			var element = jQuery(this._el);
 			var i, j, valKey = this._config.valueKey, record, item;
@@ -670,8 +699,8 @@ export class IgTextEditorComponent extends IgEditorBase<IgTextEditor> { construc
 
 @IgComponent()
 export class IgTreeComponent extends IgControlBase<IgTree> {
-	private _dataSource:any;
-	private _changes:any;
+	private _dataSource: any;
+	private _changes: any;
 
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
 
@@ -680,10 +709,10 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
 		this._dataSource = JSON.parse(JSON.stringify(this._config.dataSource));
 	}
 
-	ngDoCheck() {		
+	ngDoCheck() {
 		if (this._differ != null && this._allowChangeDetection) {
-            this.optionChange();
-            this._allowChangeDetection = false;
+			this.optionChange();
+			this._allowChangeDetection = false;
 			var diff = [];
 			var element = jQuery(this._el);
 			var i, j, valKey = this._config.valueKey, record, item;
@@ -708,7 +737,7 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
 
 export class IgContentControlBase<Model> extends IgControlBase<Model> {
 	private childNodes: Array<any>;
-	
+
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) {
 		super(el, renderer, differs);
 		this.childNodes = el.nativeElement.childNodes;
@@ -733,32 +762,33 @@ export class IgLayoutManagerComponent extends IgContentControlBase<IgLayoutManag
 export class IgTileManagerComponent extends IgContentControlBase<IgTileManager> { constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); } }
 
 @IgComponent()
-export class IgHtmlEditorComponent extends IgControlBase<IgHtmlEditor> implements ControlValueAccessor { 
-    protected _model: any;
-    protected _zone: any;
-    constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, @Optional() public model: NgModel, private zone:NgZone ) { super(el, renderer, differs);
-        if (model) {
+export class IgHtmlEditorComponent extends IgControlBase<IgHtmlEditor> implements ControlValueAccessor {
+	protected _model: any;
+	protected _zone: any;
+	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, @Optional() public model: NgModel, private zone: NgZone) {
+		super(el, renderer, differs);
+		if (model) {
 			model.valueAccessor = this;
-            this._zone = zone;
+			this._zone = zone;
 			this._model = model;
-		}    
-     }
-    ngOnInit() {
+		}
+	}
+	ngOnInit() {
 		super.ngOnInit();
-        let that = this;
-        if (this._model) {
-             var iframe=jQuery(this._el).find("iframe")[0].contentWindow.document;
+		let that = this;
+		if (this._model) {
+			var iframe = jQuery(this._el).find("iframe")[0].contentWindow.document;
 			jQuery(iframe).find("body[contenteditable=true]").on("keyup", function (evt, ui) {
-				that._model.viewToModelUpdate(jQuery(evt.target).html());       
-                that._zone.run(() => {
-                        that._model.viewToModelUpdate(jQuery(evt.target).html());
-                    });
+				that._model.viewToModelUpdate(jQuery(evt.target).html());
+				that._zone.run(() => {
+					that._model.viewToModelUpdate(jQuery(evt.target).html());
+				});
 			});
 		}
-		
+
 	}
-    writeValue(value: any) {       
-		if (!!jQuery(this._el).data(this._widgetName) && value !== null && value !== jQuery(this._el)[this._widgetName]("getContent","html")) {
+	writeValue(value: any) {
+		if (!!jQuery(this._el).data(this._widgetName) && value !== null && value !== jQuery(this._el)[this._widgetName]("getContent", "html")) {
 			jQuery(this._el)[this._widgetName]("setContent", value, "html");
 		}
 	}
@@ -775,7 +805,7 @@ export class IgHtmlEditorComponent extends IgControlBase<IgHtmlEditor> implement
 	registerOnTouched(fn: () => {}): void {
 		this.onTouched = fn;
 	}
- }
+}
 
 
 @IgComponent()
@@ -788,7 +818,7 @@ export class IgValidatorComponent extends IgControlBase<IgValidator> {
 		var evtName;
 		this._el = jQuery(document).find("#" + this.widgetId);
 		jQuery(this._el)[this._widgetName](this._config);
-		 this._events = new Map<string, string>();
+		this._events = new Map<string, string>();
 		//events binding
 		let that = this;
 		for (var propt in jQuery.ui[this._widgetName].prototype.events) {
@@ -856,7 +886,7 @@ export class IgPopoverComponent extends IgControlBase<IgPopover> {
 		var elem = jQuery(document).find("#" + this.widgetId);
 		if (elem.length === 1) {
 			this._el = elem;
-            this._events = new Map<string, string>();
+			this._events = new Map<string, string>();
 			//events binding
 			let that = this;
 			var evtName;
@@ -887,7 +917,7 @@ export class IgNotifierComponent extends IgControlBase<any> {
 		var elem = jQuery(document).find("#" + this.widgetId);
 		if (elem.length === 1) {
 			this._el = elem;
-            this._events = new Map<string, string>();
+			this._events = new Map<string, string>();
 			//events binding
 			let that = this;
 			var evtName;

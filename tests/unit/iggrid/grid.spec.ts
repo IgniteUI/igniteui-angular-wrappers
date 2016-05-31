@@ -11,11 +11,48 @@ export function main() {
 			return tcb.overrideTemplate(TestComponent, template)
 				.createAsync(TestComponent)
 				.then((fixture) => {
-						fixture.detectChanges();
-						expect(fixture.debugElement.componentInstance.viewChild).toBeAnInstanceOf(Infragistics.IgGridComponent);
+					fixture.detectChanges();
+					expect(fixture.debugElement.componentInstance.viewChild).toBeAnInstanceOf(Infragistics.IgGridComponent);
 				});
 		}));
-		
+
+		it('should initialize correctly using top level options ', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+			var template = '<div><ig-grid [(widgetId)]="gridID" [dataSource]="data" [primaryKey]="Id"></ig-grid></div>';
+			return tcb.overrideTemplate(TestComponent, template)
+				.createAsync(TestComponent)
+				.then((fixture) => {
+					fixture.detectChanges();
+					expect(fixture.debugElement.componentInstance.viewChild).toBeAnInstanceOf(Infragistics.IgGridComponent);
+				});
+		}));
+
+		it('should initialize correctly with both approaches - top level and default', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+			var template = '<div><ig-grid [(widgetId)]="gridID" [(caption)]="caption" [(options)]="opts"></ig-grid></div>';
+			return tcb.overrideTemplate(TestComponent, template)
+				.createAsync(TestComponent)
+				.then((fixture) => {
+					fixture.detectChanges();
+					expect(fixture.debugElement.componentInstance.viewChild).toBeAnInstanceOf(Infragistics.IgGridComponent);
+					expect($(fixture.debugElement.nativeElement).find("#grid1_caption").text())
+						.toBe("My Caption");
+				});
+		}));
+
+		it('should allow changing top level options', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+			var template = '<div><ig-grid [(widgetId)]="gridID" [(caption)]="caption" [(options)]="opts"></ig-grid></div>';
+			return tcb.overrideTemplate(TestComponent, template)
+				.createAsync(TestComponent)
+				.then((fixture) => {
+					fixture.detectChanges();
+					fixture.componentInstance.caption = "Changed Caption";
+					setTimeout(() => {
+						fixture.detectChanges();
+						expect($(fixture.debugElement.nativeElement).find("#grid1_caption").text())
+							.toBe("Changed Caption");
+					}, 10);
+				});
+		}));
+
 		it('should detect and apply changes from model', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-grid></div>';
 			return tcb.overrideTemplate(TestComponent, template)
@@ -193,11 +230,13 @@ class TestComponent {
 	private data: Array<any>;
 	private cdi: number;
 	private firedEvent: any;
+	private caption: string;
 	@ViewChild(Infragistics.IgGridComponent) public viewChild: Infragistics.IgGridComponent;
 
 	constructor() {
 		this.gridID = "grid1";
 		this.cdi = 0;
+		this.caption = "My Caption";
 		this.data = [
 				{ "Id": 1, "Name": "John Smith", "Age": 45, "HireDate": "\/Date(704678400000)\/" },
 				{ "Id": 2, "Name": "Mary Johnson", "Age": 32, "HireDate": "\/Date(794678400000)\/" },

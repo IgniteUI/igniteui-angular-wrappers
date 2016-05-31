@@ -7,7 +7,7 @@ import * as Infragistics from '../../../src/igniteui.angular2';
 export function main() {
     describe('Infragistics Angular2 PieChart', () => {
         it('should initialize correctly', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-            var template = '<div><ig-pie-chart  widgetId="chart1" [(options)]="opts" ></ig-pie-chart></div>';
+            var template = '<div><ig-pie-chart  [widgetId]="\'piechart1\'" [(options)]="opts" ></ig-pie-chart></div>';
             return tcb.overrideTemplate(TestComponent, template)
                 .createAsync(TestComponent)
                 .then((fixture) => {

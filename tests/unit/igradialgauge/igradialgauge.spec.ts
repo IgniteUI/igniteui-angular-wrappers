@@ -7,7 +7,7 @@ import * as Infragistics from '../../../src/igniteui.angular2';
 export function main() {
     describe('Infragistics Angular2 RadialGauge', () => {
         it('should initialize correctly', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-            var template = '<div><ig-radial-gauge  widgetId="gauge" [(options)]="opts"></ig-radial-gauge></div>';
+            var template = '<div><ig-radial-gauge  [widgetId]="\'gauge\'" [(options)]="opts"></ig-radial-gauge></div>';
             return tcb.overrideTemplate(TestComponent, template)
                 .createAsync(TestComponent)
                 .then((fixture) => {
