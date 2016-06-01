@@ -352,7 +352,7 @@ export class IgGridBase<Model> extends IgControlBase<Model> {
 						column = element.data(this._widgetName).columnByKey(diff[i].txlog[j].key);
 						if (column) {
 							if (column.template) {
-								newFormattedVal = grid._renderTemplatedCell(diff[i].txlog[j].newVal, column).substring(1);
+								newFormattedVal = grid._renderTemplatedCell(diff[i].txlog[j].newVal, column);
 							} else {
 								newFormattedVal = grid._renderCell(diff[i].txlog[j].newVal, column, record);
 							}
@@ -424,7 +424,7 @@ export class IgTreeGridComponent extends IgGridBase<IgTreeGrid> {
 						column = element.data(this._widgetName).columnByKey(diff[i].txlog[j].key);
 						if (column) {
 							if (column.template) {
-								newFormattedVal = grid._renderTemplatedCell(diff[i].txlog[j].newVal, column).substring(1);
+								newFormattedVal = grid._renderTemplatedCell(diff[i].txlog[j].newVal, column);
 							} else {
 								newFormattedVal = grid._renderCell(diff[i].txlog[j].newVal, column, record);
 							}
@@ -502,7 +502,7 @@ export class IgHierarchicalGridComponent extends IgGridBase<IgHierarchicalGrid> 
 							column = mainGrid.columnByKey(diff[i].txlog[j].key);
 							if (column) {
 							if (column.template) {
-								newFormattedVal = mainGrid._renderTemplatedCell(diff[i].txlog[j].newVal, column).substring(1);
+								newFormattedVal = mainGrid._renderTemplatedCell(diff[i].txlog[j].newVal, column);
 							} else {
 								newFormattedVal = mainGrid._renderCell(diff[i].txlog[j].newVal, column, record);
 							}
@@ -703,9 +703,16 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
 }
 
 export class IgContentControlBase<Model> extends IgControlBase<Model> {
+	private childNodes: Array<any>;
+	
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) {
 		super(el, renderer, differs);
-		jQuery(this._el).append(el.nativeElement.childNodes);
+		this.childNodes = el.nativeElement.childNodes;
+	}
+
+	ngOnInit() {
+		jQuery(this._el).append(this.childNodes);
+		super.ngOnInit();
 	}
 }
 
