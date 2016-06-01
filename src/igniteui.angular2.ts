@@ -1,10 +1,10 @@
 /// <reference path="jquery.d.ts" />
 /// <reference path="igniteui.d.ts" />
-/// <reference path="./../typings/main.d.ts"/>
+/// <reference path="./../typings/browser.d.ts"/>
 
 import {Component, Directive, Inject, ElementRef, EventEmitter, Output, Input, Query, QueryList, Renderer, OnChanges, NgZone,
-	SimpleChange, ChangeDetectionStrategy, IterableDiffers, DoCheck, Optional} from 'angular2/core';
-import {NgModel, ControlValueAccessor} from 'angular2/common';
+	SimpleChange, ChangeDetectionStrategy, IterableDiffers, DoCheck, Optional} from '@angular/core';
+import {NgModel, ControlValueAccessor} from '@angular/common';
 
 declare var jQuery:any;
 declare var Reflect:any;
@@ -542,6 +542,8 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
 			}
 		});
 		this._dataSource = JSON.parse(JSON.stringify(this._config.dataSource));
+		//manually call writeValue, because the LifeCycle has been changed and writeValue is executed before ngOnInit
+		this.writeValue(this._model.value);
 	}
 	writeValue(value) {
 		if (!!jQuery(this._el).data(this._widgetName)) {
@@ -616,6 +618,8 @@ export class IgEditorBase<Model> extends IgControlBase<Model> implements Control
 			jQuery(this._el).on(this._widgetName.toLowerCase() + "valuechanged", function (evt, ui) {
 				that._model.viewToModelUpdate(ui.newValue);
 			});
+			//manually call writeValue, because the LifeCycle has been changed and writeValue is executed before ngOnInit
+			this.writeValue(this._model.value);
 		}
 	}
 
