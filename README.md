@@ -86,6 +86,42 @@ There are two mandatory attributes that need to be set to an Ignite UI control c
 
 In this example `options` attribute points to `gridOptions` property on the application compoment class and `widgetId` points to the `id` property.
 
+### Configuring Top Level Control Options
+
+All top level options are allowed to be set as attributes of an Ignite UI control custom tag. In this case `options` attribute is not mandatory,
+but it is allowed. And if both - `options` and top-level attributes are combined, top-level attributes will override `options`,
+when there are overlapping properties. Also changing top-level attribute will apply the change to the widget, only if the option is settable.
+
+#### Example:
+
+    @Component({
+        selector: 'my-app',
+        template: `<ig-grid
+            [widgetId]='id'
+            [width]='w'
+            [autoCommit]='true'
+            [dataSource]='data'
+            [height]='h'
+            [autoGenerateColumns]='true'
+            >
+        </ig-grid>`,
+        directives: [IgGridComponent]
+    })
+    export class AppComponent {
+        private id: string;
+        private data: any;
+        private w: string;
+        private h: string;
+        private pKey: string;
+
+        constructor() {
+            this.data = Northwind.getData();
+            this.id ='grid1';
+            this.w = '100%';
+            this.h = '400px';
+            this.pKey = 'ProductID';
+        }
+    }
 
 ### Handling events
 

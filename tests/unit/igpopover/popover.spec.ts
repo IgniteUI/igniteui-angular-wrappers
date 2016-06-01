@@ -7,7 +7,7 @@ import * as Infragistics from '../../../src/igniteui.angular2';
 export function main() {
     describe('Infragistics Angular2 Popover', () => {
         it('should initialize correctly', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-            var template = '<div><ig-popover widgetId="popover" [(options)]="opts"></ig-popover></div>';
+            var template = '<div><ig-popover [widgetId]="\'popover\'" [(options)]="opts"></ig-popover></div>';
             return tcb.overrideTemplate(TestComponent, template)
                 .createAsync(TestComponent)
                 .then((fixture) => {
@@ -17,7 +17,7 @@ export function main() {
         }));
 
         it('should initialize correctly when having a target element', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-            var template = '<div><ig-popover widgetId="popover" [(options)]="opts"></ig-popover><input id="popover"/></div>';
+            var template = '<div><ig-popover [widgetId]="\'popover\'" [(options)]="opts"></ig-popover><input id="popover"/></div>';
             return tcb.overrideTemplate(TestComponent, template)
                 .createAsync(TestComponent)
                 .then((fixture) => {

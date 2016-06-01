@@ -5,7 +5,7 @@ import {Component, ViewChild, TemplateRef} from '@angular/core';
 import * as Infragistics from '../../../src/igniteui.angular2';
 
 export function main() {
-    describe('Infragistics Angular2 RadialMenu', () => {
+    describe('Infragistics Angular2 Validator', () => {
         it('should initialize correctly', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
             var template = '<div><ig-validator widgetId="validator" [(options)]="opts"></ig-validator><input id="validator"/></div>';
             return tcb.overrideTemplate(TestComponent, template)
