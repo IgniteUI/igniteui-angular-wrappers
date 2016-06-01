@@ -35,7 +35,8 @@ export function main() {
 
 		it('should allow changing options', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 			var template = '<div><ig-text-editor [(options)]="opts" [(ngModel)]="val" [widgetId]="editorId" [changeDetectionInterval]="cdi"></ig-text-editor></div>';
-			return tcb.overrideTemplate(TestIgTextEditorComponent, template)
+			return new Promise((resolve, reject) => {
+				tcb.overrideTemplate(TestIgTextEditorComponent, template)
 				.createAsync(TestIgTextEditorComponent)
 				.then((fixture) => {
 					fixture.detectChanges();
@@ -44,8 +45,10 @@ export function main() {
 						fixture.detectChanges();
 						expect($(fixture.debugElement.nativeElement).find("#editor1").igTextEditor("option", "disabled")).toBe(false);
 						expect($(fixture.debugElement.nativeElement).find("#editor1")[0].hasAttribute("disabled")).toBe(false);
+						resolve();
 					}, 100);
 				});
+			});
 		}));
 	});
 
@@ -213,7 +216,8 @@ export function main() {
 
 		it('should allow setting value with ngModel', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 			var template = '<div><ig-currency-editor [(ngModel)]="val" [widgetId]="editorId"></ig-currency-editor></div>';
-			return tcb.overrideTemplate(TestIgCurrencyEditorComponent, template)
+			return new Promise((resolve, reject) => {
+				tcb.overrideTemplate(TestIgCurrencyEditorComponent, template)
 				.createAsync(TestIgCurrencyEditorComponent)
 				.then((fixture) => {
 					fixture.detectChanges();
@@ -224,8 +228,10 @@ export function main() {
 					$(fixture.debugElement.nativeElement).find("#editor1").trigger("focus").val(154).trigger("paste").trigger("blur");
 					setTimeout(() => {
 						expect(fixture.debugElement.componentInstance.val).toBe(154);
+						resolve();
 					}, 100);
 				});
+			});
 		}));
 	});
 

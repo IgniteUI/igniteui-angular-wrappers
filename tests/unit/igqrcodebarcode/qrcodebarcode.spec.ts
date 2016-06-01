@@ -7,7 +7,7 @@ import * as Infragistics from '../../../src/igniteui.angular2';
 export function main() {
     describe('Infragistics Angular2 QRBarCode', () => {
         it('should initialize correctly', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-            var template = '<div><ig-q-r-code-barcode widgetId="bCode" [(options)]="opts"></ig-q-r-code-barcode></div>';
+            var template = '<div><ig-q-r-code-barcode [widgetId]="\'bCode\'" [(options)]="opts"></ig-q-r-code-barcode></div>';
             return tcb.overrideTemplate(TestComponent, template)
                 .createAsync(TestComponent)
                 .then((fixture) => {

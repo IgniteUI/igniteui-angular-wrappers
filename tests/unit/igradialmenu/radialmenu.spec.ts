@@ -7,7 +7,7 @@ import * as Infragistics from '../../../src/igniteui.angular2';
 export function main() {
     describe('Infragistics Angular2 RadialMenu', () => {
         it('should initialize correctly', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-            var template = '<div><ig-radial-menu widgetId="rmenu" [(options)]="opts"></ig-radial-menu></div>';
+            var template = '<div><ig-radial-menu [widgetId]="\'rmenu\'" [(options)]="opts"></ig-radial-menu></div>';
             return tcb.overrideTemplate(TestComponent, template)
                 .createAsync(TestComponent)
                 .then((fixture) => {
