@@ -1,8 +1,6 @@
 module.exports = function(config){
-    var cfg = {
-        basePath : "../",
-
-        frameworks: ["jasmine"],
+	var cfg = {
+		basePath : '../',
 
 		files : [
 			
@@ -10,82 +8,65 @@ module.exports = function(config){
 			"http://code.jquery.com/ui/1.10.3/jquery-ui.min.js",
 			"http://cdn-na.infragistics.com/igniteui/latest/js/infragistics.core.js",
 			"http://cdn-na.infragistics.com/igniteui/latest/js/infragistics.lob.js",
-            "http://cdn-na.infragistics.com/igniteui/latest/js/infragistics.dv.js",
 			"https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js",
 
-            // System.js for module loading
-            'node_modules/systemjs/dist/system-polyfills.js',
-            'node_modules/systemjs/dist/system.src.js',
+            // IE required polyfills, in this exact order
+            "node_modules/es6-shim/es6-shim.min.js",
+            "node_modules/systemjs/dist/system-polyfills.js",
 
-            // Polyfills
-            'node_modules/es6-shim/es6-shim.js',
-
-            // Reflect and Zone.js
-            'node_modules/reflect-metadata/Reflect.js',
-            'node_modules/zone.js/dist/zone.js',
-            'node_modules/zone.js/dist/jasmine-patch.js',
-            'node_modules/zone.js/dist/async-test.js',
-            'node_modules/zone.js/dist/fake-async-test.js',
-            
-            // Angular and RxJS
+            "node_modules/angular2/bundles/angular2-polyfills.js",
+            "node_modules/systemjs/dist/system.src.js",
             "node_modules/rxjs/bundles/Rx.js",
-
-            "tests/karma-test-shim.js",
-
-            { pattern: 'samples/data/*.js', included: false, watched: false },
-            { pattern: "node_modules/rxjs/**/*.js", included: false, watched: false },
-            { pattern: "node_modules/rxjs/**/*.js.map", included: false, watched: false },
-
-            { pattern: "node_modules/@angular/**/*.js", included: false, watched: false },
-
-            // paths loaded via module imports
-            {pattern: "src/*", included: false, watched: true},
+            "node_modules/angular2/bundles/angular2.dev.js",
+            'tests/karma-test-shim.js',
+            
+            { pattern: 'node_modules/angular2/**/*.js', included: false, watched: false },
+            { pattern: 'node_modules/rxjs/**/*.js', included: false, watched: false },
+            { pattern: 'src/**/*', included: false, watched: false },
             
             // spec files need to be loaded in the shim file IN CONTEXT of the main module, don't include:            
-            { pattern: "tests/unit/**/*.spec.js", included: false, watched: true }
-        ],
-
+            { pattern: 'tests/unit/**/*.js', included: false, watched: true }
+            
+		],
+            
         // list of files to exclude
         exclude: [
-            "node_modules/angular2/**/*spec.js"
+            'node_modules/angular2/**/*spec.js'
         ],
 
-        autoWatch : true,
+		autoWatch : true,
 
-        browsers : ["Chrome"],
+		frameworks: ['jasmine'],
 
-        singleRun: true,
+		browsers : ['Chrome'],
 
-        customLaunchers: {
-                Chrome_travis_ci: {
-                        base: "Chrome",
-                        flags: ["--no-sandbox"]
-                }
-        },
+		singleRun: true,
 
-        plugins : [
-                    "karma-chrome-launcher",
-                    "karma-jasmine",
-                    "karma-junit-reporter",
-                    "karma-coverage"
+		customLaunchers: {
+    			Chrome_travis_ci: {
+	                	base: "Chrome",
+		                flags: ["--no-sandbox"]
+    			}
+		},
+
+		plugins : [
+                    'karma-chrome-launcher',
+                    'karma-jasmine'
+                     ,
+                    'karma-junit-reporter'
                     ],
-                    
-        reporters: ["progress", "coverage"],
+					
+		//reporters: ['junit'],
 
-        preprocessors: {
-            "src/igniteui.angular2.js": ["coverage"]
-        },
-
-        coverageReporter: {
-            reporters:[
-                { type: "lcov", dir:"coverage/karma-tmp/" },
-                { type: "json", dir:"coverage/karma-tmp", file: "coverage.json" }
-            ],
-        }
-    };
-
-    if (process.env.TRAVIS) {
-        cfg.browsers = ["Chrome_travis_ci"];
-    }
-    config.set(cfg);
+		junitReporter : {
+			outputFile: 'test_out/unit.xml',
+			suite: 'unit'
+		}
+	
+	};
+	
+	if (process.env.TRAVIS) {
+		cfg.browsers = ["Chrome_travis_ci"];
+	}
+	config.set(cfg);
 };

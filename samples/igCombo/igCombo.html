@@ -1,26 +1,19 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 	<title>igCombo - Ignite UI integration with Angular 2</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link type="text/css" href="http://cdn-na.infragistics.com/igniteui/latest/css/themes/infragistics/infragistics.theme.css"
-		rel="stylesheet" />
-	<link type="text/css" href="http://cdn-na.infragistics.com/igniteui/latest/css/structure/modules/infragistics.ui.shared.css"
-		rel="stylesheet" />
+	<link type="text/css" href="http://cdn-na.infragistics.com/igniteui/latest/css/themes/infragistics/infragistics.theme.css" rel="stylesheet" />
+	<link type="text/css" href="http://cdn-na.infragistics.com/igniteui/latest/css/structure/modules/infragistics.ui.shared.css" rel="stylesheet" />
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css" />
-	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" type="text/css"
-	/>
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" type="text/css" />
 	<link rel="stylesheet" href="/samples/sample.css" />
-
-	<link type="text/css" href="//cdn-na.infragistics.com/igniteui/latest/css/structure/modules/infragistics.ui.validator.css"
-		rel="stylesheet" />
-	<link type="text/css" href="//cdn-na.infragistics.com/igniteui/latest/css/structure/modules/infragistics.ui.combo.css" rel="stylesheet"
-	/>
+	
+<link type="text/css" href="//cdn-na.infragistics.com/igniteui/latest/css/structure/modules/infragistics.ui.validator.css" rel="stylesheet" />
+<link type="text/css" href="//cdn-na.infragistics.com/igniteui/latest/css/structure/modules/infragistics.ui.combo.css" rel="stylesheet" />
 
 </head>
-
 <body class="container">
 
 	<div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -32,7 +25,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/">Ignite UI Angular 2 Components <span class="badge alert-info">Preview</span></a>
+				<a class="navbar-brand" href="/">Ignite UI Angular 2 Components <span class="badge alert-info">Preview</span></a> 
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
@@ -57,29 +50,31 @@
 	<!-- 1. Load libraries -->
 	<script src="http://code.jquery.com/jquery-1.12.3.js"></script>
 	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
-
-	<!-- Polyfill(s) for older browsers -->
+	<!-- IE required polyfills, in this exact order -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.0/es6-shim.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.20/system-polyfills.js"></script>
-	<script src="https://npmcdn.com/angular2/es6/dev/src/testing/shims_for_IE.js"></script>
+	<script src="https://npmcdn.com/angular2@2.0.0-beta.14/es6/dev/src/testing/shims_for_IE.js"></script>
 
-	<script src="./../../node_modules/zone.js/dist/zone.js?main=browser"></script>
-	<script src="./../../node_modules/typescript/lib/typescript.js"></script>
-	<script src="./../../node_modules/reflect-metadata/Reflect.js"></script>
-	<script src="./../../node_modules/systemjs/dist/system.src.js"></script>
-	<script src="./../../systemjs.config.js"></script>
-
+	<script src="https://code.angularjs.org/2.0.0-beta.14/angular2-polyfills.js"></script>
+	<script src="https://code.angularjs.org/tools/system.js"></script>
+	<script src="https://code.angularjs.org/tools/typescript.js"></script>
+	<script src="https://code.angularjs.org/2.0.0-beta.14/Rx.js"></script>
+	<script src="https://code.angularjs.org/2.0.0-beta.14/angular2.dev.js"></script>
 	<!-- Ignite UI Required Combined JavaScript Files -->
 	<script src="http://cdn-na.infragistics.com/igniteui/latest/js/infragistics.core.js"></script>
 	<script src="http://cdn-na.infragistics.com/igniteui/latest/js/infragistics.lob.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-
+	<!-- 2. Configure SystemJS -->
 	<script>
+		System.config({
+			transpiler: 'typescript',
+			typescriptOptions: { emitDecoratorMetadata: true },
+			packages: { 'app': { defaultExtension: 'ts' } }
+		});
 		System.import('app.ts')
 			.then(null, console.error.bind(console));
 	</script>
 
 </body>
-
 </html>

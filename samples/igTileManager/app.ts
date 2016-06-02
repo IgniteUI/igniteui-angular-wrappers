@@ -1,6 +1,6 @@
-import { Component, Inject, ElementRef, EventEmitter, HostListener} from '@angular/core';
+import { Component, Inject, ElementRef, EventEmitter, HostListener} from 'angular2/core';
 import {IgTileManagerComponent} from "../../src/igniteui.angular2.ts";
-import {bootstrap }    from '@angular/platform-browser-dynamic'
+import {bootstrap }    from 'angular2/platform/browser'
 import {candidates} from "./../data/candidates.ts";
 
 declare var jQuery: any;

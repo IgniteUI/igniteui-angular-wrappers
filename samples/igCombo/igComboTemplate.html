@@ -43,7 +43,7 @@
 	<h2 class="h3">Edit Product Name</h2>
 	<div class="row">
 
-		<div class="col-sm-3" *ngFor="let record of northwind">
+		<div class="col-sm-3" *ngFor="#record of northwind">
 			<input class="form-control" [(ngModel)]="record.ProductName">
 		</div>
 
