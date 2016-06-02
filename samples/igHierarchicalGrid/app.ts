@@ -1,7 +1,7 @@
-import {Component, Inject, ElementRef, EventEmitter, HostListener} from '@angular/core';
+import {Component, Inject, ElementRef, EventEmitter, HostListener} from 'angular2/core';
 import {IgHierarchicalGridComponent} from "../../src/igniteui.angular2.ts";
 import {NorthwindEmployees} from "./../data/northwind-employees.ts";
-import {bootstrap }    from '@angular/platform-browser-dynamic'
+import {bootstrap }    from 'angular2/platform/browser'
 
 declare var jQuery: any;
 @Component({

@@ -1,8 +1,5 @@
 #Ignite UI components for Angular 2
-
-[![NPM version](https://img.shields.io/npm/v/igniteui-angular2.svg?style=flat)](https://www.npmjs.com/package/igniteui-angular2)
 [![Build Status](https://travis-ci.org/IgniteUI/igniteui-angular2.svg?branch=master)](https://travis-ci.org/IgniteUI/igniteui-angular2)
-[![Coverage Status](https://coveralls.io/repos/github/IgniteUI/igniteui-angular2/badge.svg?branch=master)](https://coveralls.io/github/IgniteUI/igniteui-angular2?branch=master)
 
 Use the components found in `src\igniteui.angular2.ts` to use [Ignite UI](http://igniteui.com) controls in [Angular 2](https://angular.io/) applications. [Work with the running samples here](http://igniteui.github.io/igniteui-angular2).
 
@@ -33,24 +30,23 @@ Each control implements a custom tag component where the tag name is formed by s
 **Note**: It is recommended to use closing tags (`</ig-combo>`) over the self-closing tags (`<ig-combo/>`), because the latter are known to make issues on some browsers (depending on the used document mode).
 
 #### Examples:
-
-|  Control Name   |          Tag          |
-|-----------------|-----------------------|
-| igCombo         | `<ig-combo>`          |
-| igGrid          | `<ig-grid>`           |
-| igDataChart     | `<ig-data-chart>`     |
-| igDialog        | `<ig-dialog>`         |
-| igDateEditor    | `<ig-date-editor>`    |
-| igEditor        | `<ig-editor>`         |
-| igMaskEditor    | `<ig-mask-editor>`    |
-| igNumericEditor | `<ig-numeric-editor>` |
-| igPercentEditor | `<ig-percent-editor>` |
-| igTextEditor    | `<ig-text-editor>`    |
-| igDatePicker    | `<ig-date-picker>`    |
-| igTree          | `<ig-tree>`           |
-| igMap           | `<ig-map>`            |
-| igUpload        | `<ig-upload>`         |
-| igVideoPlayer   | `<ig-video-player>`   |
+Control Name 	| Tag
+--- 			| ---
+igCombo			| `<ig-combo>`
+igGrid			| `<ig-grid>`  
+igDataChart		| `<ig-data-chart>`  
+igDialog		| `<ig-dialog>`  
+igDateEditor	| `<ig-date-editor>`  
+igEditor		| `<ig-editor>`  
+igMaskEditor	| `<ig-mask-editor>`  
+igNumericEditor	| `<ig-numeric-editor>`  
+igPercentEditor | `<ig-percent-editor>`  
+igTextEditor	| `<ig-text-editor>`  
+igDatePicker	| `<ig-date-picker>`  
+igTree			| `<ig-tree>`  
+igMap			| `<ig-map>`  
+igUpload		| `<ig-upload>`  
+igVideoPlayer	| `<ig-video-player>`
 
 ### Configuring Control Options
 
@@ -86,42 +82,6 @@ There are two mandatory attributes that need to be set to an Ignite UI control c
 
 In this example `options` attribute points to `gridOptions` property on the application compoment class and `widgetId` points to the `id` property.
 
-### Configuring Top Level Control Options
-
-All top level options are allowed to be set as attributes of an Ignite UI control custom tag. In this case `options` attribute is not mandatory,
-but it is allowed. And if both - `options` and top-level attributes are combined, top-level attributes will override `options`,
-when there are overlapping properties. Also changing top-level attribute will apply the change to the widget, only if the option is settable.
-
-#### Example:
-
-    @Component({
-        selector: 'my-app',
-        template: `<ig-grid
-            [widgetId]='id'
-            [width]='w'
-            [autoCommit]='true'
-            [dataSource]='data'
-            [height]='h'
-            [autoGenerateColumns]='true'
-            >
-        </ig-grid>`,
-        directives: [IgGridComponent]
-    })
-    export class AppComponent {
-        private id: string;
-        private data: any;
-        private w: string;
-        private h: string;
-        private pKey: string;
-
-        constructor() {
-            this.data = Northwind.getData();
-            this.id ='grid1';
-            this.w = '100%';
-            this.h = '400px';
-            this.pKey = 'ProductID';
-        }
-    }
 
 ### Handling events
 
@@ -129,11 +89,11 @@ Binding to control events is achieved by assigning attributes where the name of 
 
 #### Examples:
 
-|            Event            |                     Markup                      |
-|-----------------------------|-------------------------------------------------|
-|igGrid.events.dataBind       | `<ig-grid (dataBind)="dataBindHandler">`        |
-|igCombo.events.textChanged   | `<ig-combo (textChanged)="textChangedHandler">` |
-|igDateEditor.events.keypress | `<ig-date-editor (keypress)="keypressHandler">` |
+Event 	| Markup
+--- 	| --- 
+igGrid.events.dataBind 			| `<ig-grid (dataBind)="dataBindHandler">`  
+igCombo.events.textChanged		| `<ig-combo (textChanged)="textChangedHandler">`  
+igDateEditor.events.keypress 	| `<ig-date-editor (keypress)="keypressHandler">`  
 
 
     @Component({
@@ -214,19 +174,6 @@ The following controls currently support two-way data binding:
 4. igCombo
 5. igEditors
 6. igTree
-
-## Running tests
-
-The command for running the tests is:
-
-    npm test
-
-After that, if all tests successfully passed a code coverage for the `igniteui.angular2.ts` filse will be generated under the `./coverage` folder.
-
-To see the code coverage you can open one of the html files under `./coverage/html-report/src`.
-
-**Note:** The code coverage is actually being generated on the `igniteui.angular2.js` file (comes from compilation of the source .ts file). That coverage is saved under the `coverage/karma-tmp` folder.
-Since we need the code coverage of the `igniteui.angular2.js` file itself, we use the remap-istanbul module to remap the report from the .js file to the .ts file and save it under the `coverage/html-report` and `coverage/lcov.info`.
 
 ---------------------------------------
 

@@ -31,7 +31,7 @@
             
              <table id="treesampletable" class="table table-striped push-down-xs">
                 <tbody>
-                    <tr *ngFor="let pc of data; let i = index">
+                    <tr *ngFor="#pc of data; #i = index">
                         <td>{{pc.ProductCategoryID}}</td>
                         <td class="col-sm-3"><input class="form-control" type="text" [(ngModel)]="pc.Name"></td>
                         <td><input class="btn btn-default btn-info btn-sm" type="button" value="Delete" (click)="deleteProductCategory(i)" /></td>
@@ -54,7 +54,7 @@
                                 </div>
                             </div>
                             <hr />
-                            <div *ngFor="let ps of pc.ProductSubcategories, let j = index">
+                            <div *ngFor="#ps of pc.ProductSubcategories, #j = index">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <input class="form-control" type="text" [(ngModel)]="ps.Name">
