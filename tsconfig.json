@@ -9,9 +9,5 @@
     "removeComments": false,
     "noImplicitAny": false
   },
-  "exclude": [
-    "node_modules",
-	"typings/browser",
-	"typings/browser.d.ts"
-  ]
+  "exclude": ["node_modules", "typings/main", "typings/main.d.ts", "dist/npm/" ]
 }
