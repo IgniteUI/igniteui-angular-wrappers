@@ -199,7 +199,7 @@ export class IgControlBase<Model> implements DoCheck {
 			}
 
 			if (!this.equalsDiff(opts, this._opts, diff)) {
-				this._opts = JSON.parse(JSON.stringify(opts));
+				this._opts = jQuery.extend(true, {}, opts);
 				for (i = 0; i < diff.length; i++) {
 					option = diff[i].key;
 					if (jQuery.ui[this._widgetName] &&
