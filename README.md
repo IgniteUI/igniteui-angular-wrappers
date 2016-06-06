@@ -2,7 +2,7 @@
 
 [![NPM version](https://img.shields.io/npm/v/igniteui-angular2.svg?style=flat)](https://www.npmjs.com/package/igniteui-angular2)
 [![Build Status](https://travis-ci.org/IgniteUI/igniteui-angular2.svg?branch=master)](https://travis-ci.org/IgniteUI/igniteui-angular2)
-[![Issue Stats](http://issuestats.com/github/IgniteUI/igniteui-angular2/badge/pr)](http://issuestats.com/github/IgniteUI/igniteui-angular2)
+[![Issue Stats](http://issuestats.com/github/IgniteUI/igniteui-angular2/badge/pr?style=flat)](http://issuestats.com/github/IgniteUI/igniteui-angular2)
 [![Coverage Status](https://coveralls.io/repos/github/IgniteUI/igniteui-angular2/badge.svg?branch=master)](https://coveralls.io/github/IgniteUI/igniteui-angular2?branch=master)
 
 Use the components found in `src\igniteui.angular2.ts` to use [Ignite UI](http://igniteui.com) controls in [Angular 2](https://angular.io/) applications. [Work with the running samples here](http://igniteui.github.io/igniteui-angular2).
