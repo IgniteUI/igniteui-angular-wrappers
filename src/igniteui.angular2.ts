@@ -3,7 +3,7 @@
 /// <reference path="./../typings/browser.d.ts"/>
 
 import {Component, Directive, Inject, ElementRef, EventEmitter, Output, Input, Query, QueryList, Renderer, OnChanges, NgZone,
-	SimpleChange, ChangeDetectionStrategy, IterableDiffers, DoCheck, Optional} from '@angular/core';
+	SimpleChange, ChangeDetectionStrategy, IterableDiffers, DoCheck, Optional, ContentChildren, AfterContentInit} from '@angular/core';
 import {NgModel, ControlValueAccessor} from '@angular/common';
 
 declare var jQuery: any;
@@ -53,6 +53,14 @@ var NODES = {
 
 const _reflect: any = Reflect;
 
+@Directive({
+	selector: 'column',
+	inputs: ['headerText', 'key', 'formatter', 'format', 'dataType', 'width', 'hidden', 'template', 'unbound', 'group', 'rowspan', 'formula', 'unboundValues', 'unboundValuesUpdateMode', 'headerCssClass', 'columnCssClass']
+})
+export class Column {
+	key:string;
+}
+
 export function IgComponent(args: any = {}) {
 
 	return function (cls) {
@@ -73,7 +81,7 @@ export function IgComponent(args: any = {}) {
 		});
 
 		var evt = [];
-		var opts = [];
+		var opts = ["options", "widgetId", "changeDetectionInterval"];
 		if (jQuery.ui[contrName]) {
 			for (var propt in jQuery.ui[contrName].prototype.events) {
 				evt.push(propt);
@@ -93,8 +101,8 @@ export function IgComponent(args: any = {}) {
 }
 
 export class IgControlBase<Model> implements DoCheck {
-	private _opts: any = {};
 	private _differs: any;
+	protected _opts: any = {};
 	protected _el: any;
 	protected _widgetName: string;
 	protected _differ: any;
@@ -139,11 +147,13 @@ export class IgControlBase<Model> implements DoCheck {
 	createSetter(name) {
 		return function (value) {
 			this._opts[name] = value;
+			if (this._config) {
+				this._config[name] = value;
+			}
 			if (jQuery.ui[this._widgetName] &&
 				jQuery.ui[this._widgetName].prototype.options &&
 				jQuery.ui[this._widgetName].prototype.options.hasOwnProperty(name) &&
 				jQuery(this._el).data(this._widgetName)) {
-				this._config[name] = value;
 				jQuery(this._el)[this._widgetName]("option", name, value);
 			}
 		}
@@ -307,15 +317,24 @@ export class IgControlBase<Model> implements DoCheck {
 	}
 }
 
-export class IgGridBase<Model> extends IgControlBase<Model> {
+export class IgGridBase<Model> extends IgControlBase<Model> implements AfterContentInit {
 	protected _dataSource: any;
 	protected _changes: any;
+	@ContentChildren(Column) _columns: QueryList<Column>;
 
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
 
 	ngOnInit() {
+		this._dataSource = this._opts.dataSource ? 
+			JSON.parse(JSON.stringify(this._opts.dataSource)) :
+			JSON.parse(JSON.stringify(this._config.dataSource));
+	}
+
+	ngAfterContentInit() {
+		if (this._columns.length) {
+			this._opts["columns"] = this._columns.map((c) => c);
+		}
 		super.ngOnInit();
-		this._dataSource = JSON.parse(JSON.stringify(this._config.dataSource));
 	}
 
 	deleteRow(id) {

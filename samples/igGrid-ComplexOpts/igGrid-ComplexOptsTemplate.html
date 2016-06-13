@@ -1,0 +1,10 @@
+<div class="row">
+	<div class="col-md-12">
+		<ig-grid [widgetId]='id' [width]='w' [autoCommit]='true' [dataSource]='data' [height]='h' [autoGenerateColumns]='false'>
+			<column [key]="'ProductID'" [headerText]="'Product ID'" [width]="'65px'" [dataType]="'number'"></column>
+			<column [key]="'ProductName'" [headerText]="'Product Name'" [width]="'250px'" [dataType]="'string'"></column>
+			<column [key]="'QuantityPerUnit'" [headerText]="'Quantity per unit'" [width]="'250px'" [dataType]="'string'"></column>
+			<column [key]="'UnitPrice'" [headerText]="'Unit Price'" [width]="'100px'" [dataType]="'number'"></column>
+		</ig-grid>
+	</div>
+</div>
