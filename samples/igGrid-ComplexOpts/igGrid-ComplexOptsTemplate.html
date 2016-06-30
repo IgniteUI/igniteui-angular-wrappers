@@ -1,10 +1,19 @@
 <div class="row">
 	<div class="col-md-12">
-		<ig-grid [widgetId]='id' [width]='w' [autoCommit]='true' [dataSource]='data' [height]='h' [autoGenerateColumns]='false'>
-			<column [key]="'ProductID'" [headerText]="'Product ID'" [width]="'65px'" [dataType]="'number'"></column>
+		<ig-grid [widgetId]='id' [width]='w' [autoCommit]='true' [dataSource]='data' [height]='h' [autoGenerateColumns]='false' [primaryKey]='"ProductID"'>
+			<column [key]="'ProductID'" [(headerText)]="idHeaderText" [width]="'165px'" [dataType]="'number'"></column>
 			<column [key]="'ProductName'" [headerText]="'Product Name'" [width]="'250px'" [dataType]="'string'"></column>
 			<column [key]="'QuantityPerUnit'" [headerText]="'Quantity per unit'" [width]="'250px'" [dataType]="'string'"></column>
 			<column [key]="'UnitPrice'" [headerText]="'Unit Price'" [width]="'100px'" [dataType]="'number'"></column>
+			<feature [name]="'Updating'" [(columnSettings)]="cs"></feature>
+			<feature [name]="'Paging'" [(currentPageIndex)]="pi" [pageSize]="'2'"></feature>
 		</ig-grid>
+
+		<br>
+		<label for="pageIndex">Current Page Index:</label>
+		<select [(ngModel)]="pi" name="pageIndex">
+			<option *ngFor="let i of pages">{{i}}</option>
+		</select>
 	</div>
+
 </div>

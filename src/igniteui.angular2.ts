@@ -53,12 +53,75 @@ var NODES = {
 
 const _reflect: any = Reflect;
 
+module IgUtil {
+	export function extractAllGridFeatureOptions() {
+		let allWidgets = jQuery.ui;
+		let options = ["name"];
+		let widget: any;
+		for (widget in allWidgets) {
+			if (widget.substring(0, 6) === "igGrid" && widget !== "igGrid") {
+				options = options.concat(Object.keys(jQuery.ui[widget].prototype.options));
+			}
+		}
+		return options;
+	}
+}
+
 @Directive({
 	selector: 'column',
 	inputs: ['headerText', 'key', 'formatter', 'format', 'dataType', 'width', 'hidden', 'template', 'unbound', 'group', 'rowspan', 'formula', 'unboundValues', 'unboundValuesUpdateMode', 'headerCssClass', 'columnCssClass']
 })
-export class Column {
-	key:string;
+export class Column {}
+
+@Directive({
+	selector: 'feature',
+	inputs: IgUtil.extractAllGridFeatureOptions()
+})
+
+export class Feature {
+	private _el: any;
+	private _settings: any = {};
+	@Input() public name: string;
+
+	constructor(el: ElementRef) {
+		this._el = el;
+		var self = this;
+		let featureName = "igGrid" + this.name;
+		for (var setting in jQuery.ui[featureName].prototype.options) {
+			Object.defineProperty(self, setting, {
+				set: self.createFeatureSetter(setting),
+				get: self.createFeatureGetter(setting),
+				enumerable: true,
+				configurable: true
+			});
+		}
+	}
+
+	ngOnInit() {
+		
+	}
+
+	createFeatureSetter(name) {
+		return function (value) {
+			let grid = jQuery(this._el.nativeElement.parentElement).find("table[role='grid']");
+			let featureName = "igGrid" + this.name;
+			this._settings[name] = value;
+
+			if (this.name !== undefined && this.name !== null &&
+				jQuery.ui[featureName] &&
+				jQuery.ui[featureName].prototype.options &&
+				jQuery.ui[featureName].prototype.options.hasOwnProperty(name) &&
+				grid.data(featureName)) {
+				grid[featureName]("option", name, value);
+			}
+		}
+	}
+
+	createFeatureGetter(name) {
+		return function () {
+			return this._settings[name];
+		}
+	}
 }
 
 export function IgComponent(args: any = {}) {
@@ -321,6 +384,7 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
 	protected _dataSource: any;
 	protected _changes: any;
 	@ContentChildren(Column) _columns: QueryList<Column>;
+	@ContentChildren(Feature) _features: QueryList<Feature>;
 
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
 
@@ -333,6 +397,9 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
 	ngAfterContentInit() {
 		if (this._columns.length) {
 			this._opts["columns"] = this._columns.map((c) => c);
+		}
+		if (this._features.length) {
+			this._opts["features"] = this._features.map((c) => c);
 		}
 		super.ngOnInit();
 	}

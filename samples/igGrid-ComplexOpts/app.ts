@@ -1,13 +1,15 @@
-import {Component, Inject, ElementRef, EventEmitter, HostListener} from '@angular/core';
-import {IgGridComponent, Column} from "../../src/igniteui.angular2.ts";
+import {Component, Directive, Inject, ElementRef, EventEmitter, HostListener} from '@angular/core';
+import {IgGridComponent, Column, Feature} from "../../src/igniteui.angular2.ts";
 import {Northwind} from "./../data/northwind.ts";
 import {bootstrap }    from '@angular/platform-browser-dynamic';
+import {FORM_DIRECTIVES} from '@angular/common';
 
 declare var jQuery: any;
+
 @Component({
 	selector: 'my-app',
 	templateUrl: "./igGrid-ComplexOptsTemplate.html",
-	directives: [IgGridComponent, Column]
+	directives: [IgGridComponent, Column, Feature, FORM_DIRECTIVES]
 })
 export class AppComponent {
 	private cols: Array<any>;
@@ -16,6 +18,10 @@ export class AppComponent {
 	private w: string;
 	private h: string;
 	private pKey: string;
+	private isReadOnly: boolean = true;
+	private cs: Array<any> = [{columnKey: "ProductID", readOnly: this.isReadOnly}];
+	private pi: number = 0;
+	private pages: Array<number> = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 	constructor() {
 		this.data = Northwind.getData();
