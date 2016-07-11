@@ -1,5 +1,5 @@
 (function(global) {
-  var ngVer = '@2.0.0-rc.1';
+  var ngVer = '@2.0.0-rc.3';
   // map tells the System loader where to look for things
   var map = {
     'app':                        'app', // 'dist',
