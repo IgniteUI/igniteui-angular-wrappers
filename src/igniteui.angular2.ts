@@ -1,13 +1,11 @@
 /// <reference path="jquery.d.ts" />
 /// <reference path="igniteui.d.ts" />
-/// <reference path="./../typings/browser.d.ts"/>
 
 import {Component, Directive, Inject, ElementRef, EventEmitter, Output, Input, Query, QueryList, Renderer, OnChanges, NgZone,
 	SimpleChange, ChangeDetectionStrategy, IterableDiffers, DoCheck, Optional} from '@angular/core';
 import {NgModel, ControlValueAccessor} from '@angular/common';
 
 declare var jQuery: any;
-declare var Reflect: any;
 
 var NODES = {
 	"ig-text-editor": "input",
@@ -51,13 +49,11 @@ var NODES = {
 	"ig-tile-manager": "div"
 };
 
-const _reflect: any = Reflect;
-
 export function IgComponent(args: any = {}) {
 
 	return function (cls) {
 		// get current annotations
-		let annotations = _reflect.getMetadata('annotations', cls) || [];
+		let annotations = Reflect.getMetadata('annotations', cls) || [];
 
 		var sel = cls.name
 			//transform Uppercase to dash + LowerCase letter
@@ -86,7 +82,7 @@ export function IgComponent(args: any = {}) {
 		}
 		annotations.push(new Component(args));
 		// redefine with added annotations
-		_reflect.defineMetadata('annotations', annotations, cls);
+		Reflect.defineMetadata('annotations', annotations, cls);
 
 		return cls;
 	}
