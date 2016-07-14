@@ -1,11 +1,29 @@
 language: node_js
 node_js:
-  - "5"
+- '5'
 before_install:
-  - export CHROME_BIN=chromium-browser
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-  - sleep 3
+- export CHROME_BIN=chromium-browser
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+- sleep 3
 script:
-  - npm run test
-  - cat ./coverage/lcov.info | coveralls
+- npm run test
+- cat ./coverage/lcov.info | coveralls
+
+before_deploy:
+# package and navigate to dist
+- npm run bundle
+- cd dist/npm
+# update package version
+- npm version "$TRAVIS_TAG" --no-git-tag-version --save
+
+deploy:
+  provider: npm
+  skip_cleanup: true
+  email: igniteui@infragistics.com
+  api_key:
+    secure: Zu/eJ0WMio4dVw5NyF1VE7OjkOYhUW+2m5SDfmlJ226Ra7QoTJaj69DEOH13JR3161z1RKHqguLgkTfaXwT9NCaf1zAOn6Qhk0bf0GR52OvfypTaeaXdHnMvTaL3Y/O7xHNLlcnPfS/iq+6/D0TbDmsDwdXG8tKPRXFcEsouV+YXwGZuXWvkYFM8MJ2o0W5w3Z/T4JZ6adKER0tU0IhbkDeep1GNUXH3c+GLtIovQdb2Brz8y++4C7WTsy206XQDLFP3tFqCIaKOs8sVXdL5/SjOeQdEr1KkrVuVy25edAHryODm6L2BS0AUGXBYO5n+Ozb8ekJ9NtusDQVfuNZoFDoMUbSMupXcTutKHN51+FI/8SecLzRn3aL6/1Zk/gnI04sp/bdPH2Luc7tOhcsm9edsN1ojsTA9Lbbfa0iIlsKkulHLp35rpzfTLSlI2CYoT9a4mvj9idknKxXMCKJiC/ZK6P4PMiMKLaQAk1Mbg+6TLfA1SpFnhH+HNeLAmGMwWPnsCQmOQbKWeh0/8v0R58bFfTlswPrzPFsghnh/+K4fLQCOe1TwOwtwJyc3WK7csGAbNFg7AjlxvSia8MpJQ5p1IDLRDtHHt3qcoxJqwcIpwxSFayPW6L9mjwUCfnUxEl37Qnz4gbelijZtw99+FgUmDJ+xjXnHC9JMqfxMWrQ=
+  on:
+    tags: true
+    repo: IgniteUI/igniteui-angular2
+    branch: master
