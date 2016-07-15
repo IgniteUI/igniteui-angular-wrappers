@@ -1,8 +1,9 @@
 {
   "name": "igniteui-angular2",
-  "version": "1.0.0",
-  "description" : "A packaged version of IgniteUI components for Angular2",
+  "version": "1.0.2",
+  "description" : "A packaged version of Ignite UI components for Angular2",
   "license": "MIT",
+  "typings": "igniteui.angular2.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/IgniteUI/igniteui-angular2.git"
@@ -21,14 +22,9 @@
     "data visualization",
     "data grids"
   ],
-  "dependencies": {
-    "angular2": "2.0.0-beta.14",
-    "systemjs": "0.19.25",
-    "es6-shim": "^0.35.0",
-    "reflect-metadata": "0.1.2",
-    "rxjs": "5.0.0-beta.2",
-    "zone.js": "0.6.6"
-  },
-  "devDependencies": {},
-  "scripts": {}
+  "peerDependencies": {
+    "@angular/common":  "2.0.0-rc.3",
+    "@angular/core":  "2.0.0-rc.3",
+    "reflect-metadata": "^0.1.3"
+  }
 }
