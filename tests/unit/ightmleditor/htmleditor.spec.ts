@@ -1,7 +1,6 @@
 // modeled after https://github.com/angular/angular/blob/cee2318110eeea115e5f6fc5bfc814cbaa7d90d8/modules/angular2/test/common/directives/ng_for_spec.ts
-import { it, iit, describe, expect, inject, beforeEachProviders } from '@angular/core/testing';
-import { TestComponentBuilder } from '@angular/compiler/testing';
-import {Component, ViewChild, TemplateRef} from '@angular/core';
+import { inject, TestComponentBuilder } from '@angular/core/testing';
+import { Component, ViewChild, TemplateRef } from '@angular/core';
 import * as Infragistics from '../../../src/igniteui.angular2';
 
 export function main() {
@@ -12,45 +11,46 @@ export function main() {
                 .createAsync(TestComponent)
                 .then((fixture) => {
                     fixture.detectChanges();
-                    expect(fixture.debugElement.componentInstance.viewChild).toBeAnInstanceOf(Infragistics.IgHtmlEditorComponent);
+                    expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgHtmlEditorComponent)
+                        .toBe(true);
                 });
         }));
 
-        it('should update its content if data model changes', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-            var template = '<div><ig-html-editor widgetId="htmlEditor" [(options)]="opts" [changeDetectionInterval]="cdi" [(ngModel)]="data"></ig-html-editor></div>';
-            return new Promise((resolve, reject) => {
-                tcb.overrideTemplate(TestComponent, template)
+        it('should update its content if data model changes', (done) => {
+            inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+                var template = '<div><ig-html-editor widgetId="htmlEditor" [(options)]="opts" [changeDetectionInterval]="cdi" [(ngModel)]="data"></ig-html-editor></div>';
+                return tcb.overrideTemplate(TestComponent, template)
                     .createAsync(TestComponent)
                     .then((fixture) => {
                         fixture.detectChanges();
                         fixture.componentInstance.data = "<span>Test Update</span>";
+                        fixture.detectChanges();
                         setTimeout(function () {
-                            fixture.detectChanges();
                             expect($("#htmlEditor").igHtmlEditor("getContent", "html")).toBe("<span>Test Update</span>");
-                            resolve();
+                            done();
                         }, 10);
                     });
-            });
-        }));
+            })();
+        });
 
-        it('should update its content if html editor content changes', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-            var template = '<div><ig-html-editor widgetId="htmlEditor" [(options)]="opts" [changeDetectionInterval]="cdi" [(ngModel)]="data"></ig-html-editor></div>';
-            return new Promise((resolve, reject) => {
-                tcb.overrideTemplate(TestComponent, template)
+        it('should update its content if html editor content changes', (done) => {
+            inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+                var template = '<div><ig-html-editor widgetId="htmlEditor" [(options)]="opts" [changeDetectionInterval]="cdi" [(ngModel)]="data"></ig-html-editor></div>';
+                return tcb.overrideTemplate(TestComponent, template)
                     .createAsync(TestComponent)
                     .then((fixture) => {
                         fixture.detectChanges();
                         $("#htmlEditor").igHtmlEditor("setContent", "<h1>Test</h1>", "html");
                         //simulate keyup
                         $($("#htmlEditor").find("iframe")[0]["contentWindow"].document).find("body[contenteditable=true]").trigger("keyup");
+                        fixture.detectChanges();
                         setTimeout(function () {
-                            fixture.detectChanges();
                             expect(fixture.componentInstance.data).toBe("<h1>Test</h1>");
-                            resolve();
+                            done();
                         }, 10);
                     });
-            });
-        }));
+            })();
+        });
 
 
     });

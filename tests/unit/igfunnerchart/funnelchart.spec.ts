@@ -1,7 +1,6 @@
 // modeled after https://github.com/angular/angular/blob/cee2318110eeea115e5f6fc5bfc814cbaa7d90d8/modules/angular2/test/common/directives/ng_for_spec.ts
-import { it, iit, describe, expect, inject, beforeEachProviders } from '@angular/core/testing';
-import { TestComponentBuilder } from '@angular/compiler/testing';
-import {Component, ViewChild, TemplateRef} from '@angular/core';
+import { inject, TestComponentBuilder } from '@angular/core/testing';
+import { Component, ViewChild, TemplateRef } from '@angular/core';
 import * as Infragistics from '../../../src/igniteui.angular2';
 
 export function main() {
@@ -12,7 +11,8 @@ export function main() {
             .createAsync(TestComponent)
             .then((fixture) => {
                     fixture.detectChanges();
-                    expect(fixture.debugElement.componentInstance.viewChild).toBeAnInstanceOf(Infragistics.IgFunnelChartComponent);
+                    expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgFunnelChartComponent)
+                        .toBe(true);
             });
         }));
     });

@@ -1,7 +1,6 @@
 // modeled after https://github.com/angular/angular/blob/cee2318110eeea115e5f6fc5bfc814cbaa7d90d8/modules/angular2/test/common/directives/ng_for_spec.ts
-import { it, iit, describe, expect, inject, beforeEachProviders } from '@angular/core/testing';
-import { TestComponentBuilder } from '@angular/compiler/testing';
-import {Component, ViewChild, TemplateRef} from '@angular/core';
+import { inject, TestComponentBuilder } from '@angular/core/testing';
+import { Component, ViewChild, TemplateRef } from '@angular/core';
 import * as Infragistics from '../../../src/igniteui.angular2';
 
 export function main() {
@@ -13,7 +12,8 @@ export function main() {
                     .createAsync(TestComponent)
                     .then((fixture) => {
                         fixture.detectChanges();
-                        expect(fixture.debugElement.componentInstance.viewChild).toBeAnInstanceOf(Infragistics.IgHierarchicalGridComponent);
+                        expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgHierarchicalGridComponent)
+                            .toBe(true);
                     });
             }));
 
@@ -147,11 +147,10 @@ export function main() {
                     });
             }));
 
-        it('should reflect changes when a value in the child grid changes',
+        it('should reflect changes when a value in the child grid changes', (done) => {
             inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
                 var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-hierarchical-grid></div>';
-                return new Promise((resolve, reject) => {
-                    tcb.overrideTemplate(TestComponent, template)
+                return tcb.overrideTemplate(TestComponent, template)
                         .createAsync(TestComponent)
                         .then((fixture) => {
                             fixture.detectChanges();
@@ -164,11 +163,11 @@ export function main() {
                                 fixture.detectChanges();
                                 expect($($(fixture.debugElement.nativeElement).find("#grid1_0_Products_child").igGrid("cellAt", 1, 0)).text())
                                     .toBe("Custom Name");
-                                    resolve();
+                                    done();
                             }, 10);
                         });
-                });
-            }));
+                })();
+            });
     });
 }
 
