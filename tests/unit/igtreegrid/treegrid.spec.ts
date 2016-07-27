@@ -1,9 +1,8 @@
 // modeled after https://github.com/angular/angular/blob/cee2318110eeea115e5f6fc5bfc814cbaa7d90d8/modules/angular2/test/common/directives/ng_for_spec.ts
-import { it, iit, describe, expect, inject, beforeEachProviders } from '@angular/core/testing';
-import { TestComponentBuilder } from '@angular/compiler/testing';
-import {Component, ViewChild, TemplateRef} from '@angular/core';
+import { inject, TestComponentBuilder } from '@angular/core/testing';
+import { Component, ViewChild, TemplateRef } from '@angular/core';
 import * as Infragistics from '../../../src/igniteui.angular2';
-import {Tasks} from "../../../samples/data/tasks";
+import { Tasks } from "../../../samples/data/tasks";
 
 export function main() {
     describe('Infragistics Angular2 TreeGrid', () => {
@@ -13,11 +12,12 @@ export function main() {
                 .createAsync(TestComponent)
                 .then((fixture) => {
                     fixture.detectChanges();
-                    expect(fixture.debugElement.componentInstance.viewChild).toBeAnInstanceOf(Infragistics.IgTreeGridComponent);
+                    expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgTreeGridComponent)
+                        .toBe(true);
                 });
         }));
 
-        it('should reflect changes when a record in the data changes',
+        it('should reflect changes when a record in the data changes', (done) => {
             inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
                 var template = '<div><ig-tree-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-tree-grid></div>';
                 return tcb.overrideTemplate(TestComponent, template)
@@ -30,11 +30,13 @@ export function main() {
                             fixture.detectChanges();
                             expect($(fixture.debugElement.nativeElement).find("#grid1 tr:first td[aria-describedby='grid1_tasks']").text())
                                 .toBe("Test");
+                            done();
                         }, 10);
                     });
-            }));
+            })()
+        });
 
-        it('should reflect changes when a record is added/removed from the data',
+        it('should reflect changes when a record is added/removed from the data', (done) => {
             inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
                 var template = '<div><ig-tree-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-tree-grid></div>';
                 return tcb.overrideTemplate(TestComponent, template)
@@ -57,12 +59,14 @@ export function main() {
                                     .toBe(12);
                                 expect($(fixture.debugElement.nativeElement).find("#grid1 tr:last td[aria-describedby='grid1_tasks']").text())
                                     .toBe("Test Planning");
+                                done();
                             }, 10);
                         }, 10);
                     });
-            }));
+            })();
+        });
 
-        it('should reflect changes when the root record is removed',
+        it('should reflect changes when the root record is removed', (done) => {
             inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
                 var template = '<div><ig-tree-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-tree-grid></div>';
                 return tcb.overrideTemplate(TestComponent, template)
@@ -76,15 +80,16 @@ export function main() {
                             fixture.detectChanges();
                             expect($(fixture.debugElement.nativeElement).find("#grid1 tr").length)
                                 .toBe(0);
+                            done();
                         }, 10);
                     });
-            }));
+            })();
+        });
 
-        it('should reflect changes when records in the treegrid are updated/added/deleted',
+        it('should reflect changes when records in the treegrid are updated/added/deleted', (done) => {
             inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
                 var template = '<div><ig-tree-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-tree-grid></div>';
-                return new Promise((resolve, reject) => {
-                    tcb.overrideTemplate(TestComponent, template)
+                return tcb.overrideTemplate(TestComponent, template)
                     .createAsync(TestComponent)
                     .then((fixture) => {
                         fixture.detectChanges();
@@ -100,19 +105,19 @@ export function main() {
                             setTimeout(() => {
                                 fixture.detectChanges();
                                 expect(fixture.componentInstance.data[0].products.length).toBe(6);
-                                //add row           
+                                //add row
                                 $("#grid1").igTreeGridUpdating("addRow", { "id": 1000, "tasks": "Project Plan", "start": "6/2/2014", "finish": "8/22/2014", "duration": "60d", "progress": "32%" });
                                 setTimeout(() => {
                                     fixture.detectChanges();
                                     expect(fixture.componentInstance.data.length).toBe(2);
                                     expect(fixture.componentInstance.data[1].id).toBe(1000);
-                                    resolve();
+                                    done();
                                 }, 10);
                             }, 10);
                         }, 10);
                     });
-                });
-            }));
+                })();
+            });
     });
 }
 
