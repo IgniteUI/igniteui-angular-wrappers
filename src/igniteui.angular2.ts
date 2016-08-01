@@ -361,6 +361,9 @@ export class IgGridBase<Model> extends IgControlBase<Model> {
 				grid = element.data(this._widgetName),
 				colIndex, td, i, j, pkKey = this._config.primaryKey, newFormattedVal, record, column;
 
+			if (typeof this._config.dataSource === "string") {
+				return;
+			}
 			//check for changes in collection
 			this._changes = this._differ.diff(this._config.dataSource);
 			if (this._config.dataSource.length !== this._dataSource.length) {
