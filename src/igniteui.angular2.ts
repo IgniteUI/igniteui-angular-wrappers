@@ -1,6 +1,3 @@
-/// <reference path="jquery.d.ts" />
-/// <reference path="igniteui.d.ts" />
-
 import {Component, Directive, Inject, ElementRef, EventEmitter, Output, Input, Query, QueryList, Renderer, OnChanges, NgZone,
 	SimpleChange, ChangeDetectionStrategy, IterableDiffers, DoCheck, Optional} from '@angular/core';
 import {NgModel, ControlValueAccessor} from '@angular/common';
