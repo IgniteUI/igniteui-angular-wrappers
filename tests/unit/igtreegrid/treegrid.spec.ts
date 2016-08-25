@@ -74,7 +74,7 @@ export function main() {
                     .then((fixture) => {
                         fixture.detectChanges();
                         //remove root item
-                        fixture.componentInstance.data.removeAt(0);
+                        fixture.componentInstance.data.splice(0);
 
                         setTimeout(() => {
                             fixture.detectChanges();
@@ -129,7 +129,7 @@ export function main() {
 class TestComponent {
     private opts: any;
     private gridID: string;
-    private data: Array<any>;
+    public data: Array<any>;
     private cdi = 10;
     @ViewChild(Infragistics.IgTreeGridComponent) public viewChild: Infragistics.IgTreeGridComponent;
 

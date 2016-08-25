@@ -1,12 +1,13 @@
 import { Component, Inject, ElementRef, EventEmitter, HostListener} from '@angular/core';
 import { IgTreeComponent} from "../../src/igniteui.angular2.ts";
+import { FORM_DIRECTIVES } from '@angular/common';
 import {bootstrap }    from '@angular/platform-browser-dynamic'
 import {ProductCategories} from "./../data/product-categories.ts";
 declare var jQuery: any;
 @Component({
 	selector: 'my-app',
 	templateUrl:"../igTree/igTreeTemplate.html",
-	directives: [IgTreeComponent]
+	directives: [FORM_DIRECTIVES, IgTreeComponent]
 })
 export class AppComponent {
     protected options: IgTree;
@@ -30,16 +31,16 @@ export class AppComponent {
             bindings: {
                 childDataProperty : "ProductSubcategories",
                 textKey : "Name",
-                valueKey : "ProductCategoryID"                
+                valueKey : "ProductCategoryID"
             }
         };
 	}
     
     addNodeRootLevel(){
-        this.data.push({"Name": "New Node", "ProductCategoryID": this.data.length + 1, "ProductSubcategories":[] });    
+        this.data.push({"Name": "New Node", "ProductCategoryID": this.data.length + 1, "ProductSubcategories":[] });
         this.newProductCategory.ProductCategoryID = this.data.length + 1;
     }
-    addProductCategory(){      
+    addProductCategory(){
        this.data.push(JSON.parse(JSON.stringify(this.newProductCategory)));   
        this.newProductCategory.ProductCategoryID = this.data.length + 1;
         

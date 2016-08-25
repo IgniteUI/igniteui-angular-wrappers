@@ -1,6 +1,7 @@
 // modeled after https://github.com/angular/angular/blob/cee2318110eeea115e5f6fc5bfc814cbaa7d90d8/modules/angular2/test/common/directives/ng_for_spec.ts
 import { inject, TestComponentBuilder } from '@angular/core/testing';
 import { Component, ViewChild, TemplateRef } from '@angular/core';
+import { FORM_DIRECTIVES } from '@angular/common';
 import * as Infragistics from '../../../src/igniteui.angular2';
 
 export function main() {
@@ -59,12 +60,12 @@ export function main() {
 @Component({
     selector: 'test-cmp',
     template: '<div></div>', //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
-    directives: [Infragistics.IgHtmlEditorComponent]
+    directives: [FORM_DIRECTIVES, Infragistics.IgHtmlEditorComponent]
 })
 class TestComponent {
     private opts: any;
     private cdi: number;
-    private data: string;
+    public data: string;
 
     @ViewChild(Infragistics.IgHtmlEditorComponent) public viewChild: Infragistics.IgHtmlEditorComponent;
 
