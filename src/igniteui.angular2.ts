@@ -65,13 +65,54 @@ module IgUtil {
 		}
 		return options;
 	}
+
+	export function extractAllGridColumnProperties() {
+		return ['headerText', 'key', 'formatter', 'format', 'dataType', 'width', 'hidden', 'template', 'unbound', 'group', 'rowspan', 'formula', 'unboundValues', 'unboundValuesUpdateMode', 'headerCssClass', 'columnCssClass'];
+	}
 }
 
 @Directive({
 	selector: 'column',
-	inputs: ['headerText', 'key', 'formatter', 'format', 'dataType', 'width', 'hidden', 'template', 'unbound', 'group', 'rowspan', 'formula', 'unboundValues', 'unboundValuesUpdateMode', 'headerCssClass', 'columnCssClass']
+	inputs: IgUtil.extractAllGridColumnProperties()
 })
-export class Column {}
+export class Column {
+	private _settings: any = {};
+	private _el: any;
+
+	constructor(el: ElementRef) {
+		this._el = el;
+		let self = this;
+		let i, settings = IgUtil.extractAllGridColumnProperties();
+		for(i = 0; i < settings.length; i++) {
+			Object.defineProperty(self, settings[i], {
+				set: self.createColumnsSetter(settings[i]),
+				get: self.createColumnsGetter(settings[i]),
+				enumerable: true,
+				configurable: true
+			});
+		}
+	}
+
+	createColumnsSetter(name) {
+		return function (value) {
+			let grid = jQuery(this._el.nativeElement.parentElement).find("table[role='grid']");
+			this._settings[name] = value;
+
+			if (jQuery.ui["igGrid"] &&
+				jQuery.ui["igGrid"].prototype.options &&
+				jQuery.ui["igGrid"].prototype.options.hasOwnProperty("columns") &&
+				grid.data("igGrid")) {
+				grid["igGrid"]("option", "columns", this._settings);
+			}
+		}
+	}
+
+	createColumnsGetter(name) {
+		return function () {
+			return this._settings[name];
+		}
+	}
+}
 
 @Directive({
 	selector: 'feature',
@@ -81,12 +122,10 @@ export class Column {}
 export class Feature {
 	private _el: any;
 	private _settings: any = {};
-	@Input() public name: string;
-
-	constructor(el: ElementRef) {
-		this._el = el;
+	@Input() set name(name: string) {
+		this._settings["name"] = name;
 		var self = this;
-		let featureName = "igGrid" + this.name;
+		let featureName = "igGrid" + name;
 		for (var setting in jQuery.ui[featureName].prototype.options) {
 			Object.defineProperty(self, setting, {
 				set: self.createFeatureSetter(setting),
@@ -97,8 +136,12 @@ export class Feature {
 		}
 	}
 
-	ngOnInit() {
-		
+	get name():string {
+		return this._settings["name"];
+	}
+
+	constructor(el: ElementRef) {
+		this._el = el;
 	}
 
 	createFeatureSetter(name) {
@@ -396,10 +439,10 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
 
 	ngAfterContentInit() {
 		if (this._columns.length) {
-			this._opts["columns"] = this._columns.map((c) => c);
+			this._opts["columns"] = this._columns.map((c) => c._settings);
 		}
 		if (this._features.length) {
-			this._opts["features"] = this._features.map((c) => c);
+			this._opts["features"] = this._features.map((c) => c._settings);
 		}
 		super.ngOnInit();
 	}

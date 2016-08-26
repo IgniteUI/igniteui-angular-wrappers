@@ -5,7 +5,6 @@
 			<column [key]="'ProductName'" [headerText]="'Product Name'" [width]="'250px'" [dataType]="'string'"></column>
 			<column [key]="'QuantityPerUnit'" [headerText]="'Quantity per unit'" [width]="'250px'" [dataType]="'string'"></column>
 			<column [key]="'UnitPrice'" [headerText]="'Unit Price'" [width]="'100px'" [dataType]="'number'"></column>
-			<feature [name]="'Updating'" [(columnSettings)]="cs"></feature>
 			<feature [name]="'Paging'" [(currentPageIndex)]="pi" [pageSize]="'2'"></feature>
 		</ig-grid>
 
@@ -14,6 +13,8 @@
 		<select [(ngModel)]="pi" name="pageIndex">
 			<option *ngFor="let i of pages">{{i}}</option>
 		</select>
+		<br>
+		<label for="headerText">First column header text:</label><input name="headerText" [(ngModel)]="idHeaderText">{{idHeaderText}}
 	</div>
 
 </div>

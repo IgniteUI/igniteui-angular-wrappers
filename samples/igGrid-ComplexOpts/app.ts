@@ -21,6 +21,7 @@ export class AppComponent {
 	private isReadOnly: boolean = true;
 	private cs: Array<any> = [{columnKey: "ProductID", readOnly: this.isReadOnly}];
 	private pi: number = 0;
+	private idHeaderText: string = "Id";
 	private pages: Array<number> = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 	constructor() {
