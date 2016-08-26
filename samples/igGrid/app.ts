@@ -1,13 +1,15 @@
 import {Component, Inject, ElementRef, EventEmitter, HostListener} from '@angular/core';
 import {IgGridComponent} from "../../src/igniteui.angular2.ts";
+import { FORM_DIRECTIVES } from '@angular/common';
 import {Northwind} from "./../data/northwind.ts";
 import {bootstrap }    from '@angular/platform-browser-dynamic';
+
 
 declare var jQuery: any;
 @Component({
 	selector: 'my-app',
 	templateUrl: "./igGridTemplate.html",
-	directives: [IgGridComponent]
+	directives: [FORM_DIRECTIVES, IgGridComponent]
 })
 export class AppComponent {
 	private gridOptions: IgGrid;

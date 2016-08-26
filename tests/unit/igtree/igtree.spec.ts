@@ -43,7 +43,7 @@ export function main() {
                         .then((fixture) => {
                             fixture.detectChanges();
                             //remove item
-                            fixture.componentInstance.data.removeAt(0);
+                            fixture.componentInstance.data.splice(0, 1);
 
                             setTimeout(() => {
                                 fixture.detectChanges();
@@ -74,7 +74,7 @@ export function main() {
 class TestComponent {
     private opts: any;
     private treeID: string;
-    private data: Array<any>;
+    public data: Array<any>;
     private cdi: number;
     @ViewChild(Infragistics.IgTreeComponent) public viewChild: Infragistics.IgTreeComponent;
 

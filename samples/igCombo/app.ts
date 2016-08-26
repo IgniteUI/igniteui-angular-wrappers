@@ -1,18 +1,19 @@
 import {Component, Inject, ElementRef, EventEmitter, HostListener} from '@angular/core';
 import {IgComboComponent} from "../../src/igniteui.angular2.ts";
 import {Northwind} from "./../data/northwind.ts";
-import {bootstrap }    from '@angular/platform-browser-dynamic'
+import {bootstrap }    from '@angular/platform-browser-dynamic';
+import { FORM_DIRECTIVES } from '@angular/common';
 
 declare var jQuery: any;
 @Component({
 	selector: 'my-app',
 	templateUrl: "./igComboTemplate.html",
-	directives: [IgComboComponent]
+	directives: [FORM_DIRECTIVES, IgComboComponent]
 })
 export class AppComponent {
-	private options: IgCombo;
-	private northwind: any;
-	private combo: any;
+	public options: IgCombo;
+	public northwind: any;
+	public combo: any;
 
 	constructor() {
 		this.northwind = Northwind.getData();

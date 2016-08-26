@@ -1,6 +1,7 @@
 // modeled after https://github.com/angular/angular/blob/cee2318110eeea115e5f6fc5bfc814cbaa7d90d8/modules/angular2/test/common/directives/ng_for_spec.ts
 import { inject, TestComponentBuilder } from '@angular/core/testing';
 import {Component, ViewChild, TemplateRef} from '@angular/core';
+import { FORM_DIRECTIVES } from '@angular/common';
 import * as Infragistics from '../../../src/igniteui.angular2';
 
 export function main() {
@@ -290,7 +291,7 @@ export function main() {
 @Component({
 	selector: 'test-text-editor-cmp',
 	template: '<div></div>', //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
-	directives: [Infragistics.IgTextEditorComponent]
+	directives: [FORM_DIRECTIVES, Infragistics.IgTextEditorComponent]
 })
 class TestIgTextEditorComponent {
 	private opts: IgTextEditor;
@@ -311,7 +312,7 @@ class TestIgTextEditorComponent {
 @Component({
 	selector: 'test-numeric-editor-cmp',
 	template: '<div></div>', //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
-	directives: [Infragistics.IgNumericEditorComponent]
+	directives: [FORM_DIRECTIVES, Infragistics.IgNumericEditorComponent]
 })
 class TestIgNumericEditorComponent {
 	private val:number;
@@ -328,7 +329,7 @@ class TestIgNumericEditorComponent {
 @Component({
 	selector: 'test-percent-editor-cmp',
 	template: '<div></div>', //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
-	directives: [Infragistics.IgPercentEditorComponent]
+	directives: [FORM_DIRECTIVES, Infragistics.IgPercentEditorComponent]
 })
 class TestIgPercentEditorComponent {
 	private val:number;
@@ -344,7 +345,7 @@ class TestIgPercentEditorComponent {
 @Component({
 	selector: 'test-mask-editor-cmp',
 	template: '<div></div>', //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
-	directives: [Infragistics.IgMaskEditorComponent]
+	directives: [FORM_DIRECTIVES, Infragistics.IgMaskEditorComponent]
 })
 class TestIgMaskEditorComponent {
 	private val:string;
@@ -360,7 +361,7 @@ class TestIgMaskEditorComponent {
 @Component({
 	selector: 'test-date-picker-cmp',
 	template: '<div></div>', //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
-	directives: [Infragistics.IgDatePickerComponent]
+	directives: [FORM_DIRECTIVES, Infragistics.IgDatePickerComponent]
 })
 class TestIgDatePickerComponent {
 	private val: Date;
@@ -376,7 +377,7 @@ class TestIgDatePickerComponent {
 @Component({
 	selector: 'test-date-editor-cmp',
 	template: '<div></div>', //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
-	directives: [Infragistics.IgDateEditorComponent]
+	directives: [FORM_DIRECTIVES, Infragistics.IgDateEditorComponent]
 })
 class TestIgDateEditorComponent {
 	private val: Date;
@@ -392,7 +393,7 @@ class TestIgDateEditorComponent {
 @Component({
 	selector: 'test-currency-editor-cmp',
 	template: '<div></div>', //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
-	directives: [Infragistics.IgCurrencyEditorComponent]
+	directives: [FORM_DIRECTIVES, Infragistics.IgCurrencyEditorComponent]
 })
 class TestIgCurrencyEditorComponent {
 	private val: number;
@@ -408,7 +409,7 @@ class TestIgCurrencyEditorComponent {
 @Component({
 	selector: 'test-checkbox-editor-cmp',
 	template: '<div></div>', //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
-	directives: [Infragistics.IgCheckboxEditorComponent]
+	directives: [FORM_DIRECTIVES, Infragistics.IgCheckboxEditorComponent]
 })
 class TestIgCheckboxEditorComponent {
 	private val: boolean;

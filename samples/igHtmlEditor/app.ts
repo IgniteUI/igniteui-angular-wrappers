@@ -1,12 +1,13 @@
 import { Component, Inject, ElementRef, EventEmitter, HostListener} from '@angular/core';
-import {IgHtmlEditorComponent } from "../../src/igniteui.angular2.ts";
-import {bootstrap }    from '@angular/platform-browser-dynamic'
+import { IgHtmlEditorComponent } from "../../src/igniteui.angular2.ts";
+import { bootstrap }    from '@angular/platform-browser-dynamic';
+import { FORM_DIRECTIVES } from '@angular/common';
 
 declare var jQuery: any;
 @Component({
 	selector: 'my-app',
 	templateUrl: `../igHtmlEditor/igHtmlEditorTemplate.html`,
-	directives: [IgHtmlEditorComponent]
+	directives: [FORM_DIRECTIVES, IgHtmlEditorComponent]
 })
 export class AppComponent {
 	private options: any;

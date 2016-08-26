@@ -227,12 +227,12 @@ export function main() {
 })
 class TestComponent {
 	private opts: any;
-	private opts1: any;
+	public opts1: any;
 	private gridID: string;
-	private data: Array<any>;
+	public data: Array<any>;
 	private cdi: number;
 	private firedEvent: any;
-	private caption: string;
+	public caption: string;
 	@ViewChild(Infragistics.IgGridComponent) public viewChild: Infragistics.IgGridComponent;
 
 	constructor() {
