@@ -1,7 +1,6 @@
 // modeled after https://github.com/angular/angular/blob/cee2318110eeea115e5f6fc5bfc814cbaa7d90d8/modules/angular2/test/common/directives/ng_for_spec.ts
-import { it, iit, describe, expect, inject, beforeEachProviders } from '@angular/core/testing';
-import { TestComponentBuilder } from '@angular/compiler/testing';
-import {Component, ViewChild, TemplateRef} from '@angular/core';
+import { inject, TestComponentBuilder } from '@angular/core/testing';
+import { Component, ViewChild, TemplateRef } from '@angular/core';
 import * as Infragistics from '../../../src/igniteui.angular2';
 
 export function main() {
@@ -12,7 +11,8 @@ export function main() {
 				.createAsync(TestComponent)
 				.then((fixture) => {
 					fixture.detectChanges();
-					expect(fixture.debugElement.componentInstance.viewChild).toBeAnInstanceOf(Infragistics.IgGridComponent);
+					expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgGridComponent)
+						.toBe(true);
 				});
 		}));
 
@@ -22,7 +22,8 @@ export function main() {
 				.createAsync(TestComponent)
 				.then((fixture) => {
 					fixture.detectChanges();
-					expect(fixture.debugElement.componentInstance.viewChild).toBeAnInstanceOf(Infragistics.IgGridComponent);
+					expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgGridComponent)
+						.toBe(true);
 				});
 		}));
 
@@ -32,7 +33,8 @@ export function main() {
 				.createAsync(TestComponent)
 				.then((fixture) => {
 					fixture.detectChanges();
-					expect(fixture.debugElement.componentInstance.viewChild).toBeAnInstanceOf(Infragistics.IgGridComponent);
+					expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgGridComponent)
+						.toBe(true);
 					expect($(fixture.debugElement.nativeElement).find("#grid1_caption").text())
 						.toBe("My Caption");
 				});
@@ -198,10 +200,10 @@ export function main() {
 				});
 		}));
 		
-		it('should detect and apply changes of dates columns from model', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+		it('should detect and apply changes of dates columns from model', (done) => {
+			inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts1" [changeDetectionInterval]="cdi"></ig-grid></div>';
-			return new Promise((resolve, reject) => {
-				tcb.overrideTemplate(TestComponent, template)
+			return tcb.overrideTemplate(TestComponent, template)
 					.createAsync(TestComponent)
 					.then((fixture) => {
 						fixture.detectChanges();
@@ -210,11 +212,11 @@ export function main() {
 							fixture.detectChanges();
 							expect($(fixture.debugElement.nativeElement).find("#grid1 tr:first td[aria-describedby='grid1_HireDate']").text())
 							.toBe("11/11/2016");
-							resolve();
+							done();
 						}, 10);
 					});
-			});
-		}));
+			})();
+		});
 	});
 }
 
@@ -225,12 +227,12 @@ export function main() {
 })
 class TestComponent {
 	private opts: any;
-	private opts1: any;
+	public opts1: any;
 	private gridID: string;
-	private data: Array<any>;
+	public data: Array<any>;
 	private cdi: number;
 	private firedEvent: any;
-	private caption: string;
+	public caption: string;
 	@ViewChild(Infragistics.IgGridComponent) public viewChild: Infragistics.IgGridComponent;
 
 	constructor() {

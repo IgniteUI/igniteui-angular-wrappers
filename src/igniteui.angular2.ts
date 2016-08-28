@@ -1,13 +1,8 @@
-/// <reference path="jquery.d.ts" />
-/// <reference path="igniteui.d.ts" />
-/// <reference path="./../typings/browser.d.ts"/>
-
 import {Component, Directive, Inject, ElementRef, EventEmitter, Output, Input, Query, QueryList, Renderer, OnChanges, NgZone,
 	SimpleChange, ChangeDetectionStrategy, IterableDiffers, DoCheck, Optional, ContentChildren, AfterContentInit} from '@angular/core';
 import {NgModel, ControlValueAccessor} from '@angular/common';
 
 declare var jQuery: any;
-declare var Reflect: any;
 
 var NODES = {
 	"ig-text-editor": "input",
@@ -51,12 +46,10 @@ var NODES = {
 	"ig-tile-manager": "div"
 };
 
-const _reflect: any = Reflect;
-
 module IgUtil {
 	export function extractAllGridFeatureOptions() {
 		let allWidgets = jQuery.ui;
-		let options = ["name"];
+		let options = ['name'];
 		let widget: any;
 		for (widget in allWidgets) {
 			if (widget.substring(0, 6) === "igGrid" && widget !== "igGrid") {
@@ -76,7 +69,7 @@ module IgUtil {
 	inputs: IgUtil.extractAllGridColumnProperties()
 })
 export class Column {
-	private _settings: any = {};
+	public _settings: any = {};
 	private _el: any;
 
 	constructor(el: ElementRef) {
@@ -121,11 +114,18 @@ export class Column {
 
 export class Feature {
 	private _el: any;
-	private _settings: any = {};
-	@Input() set name(name: string) {
-		this._settings["name"] = name;
+	public _settings: any = {};
+	public initSettings: {};
+	private name: string;
+
+	constructor(el: ElementRef) {
+		this._el = el;
+	}
+
+	ngOnInit() {
 		var self = this;
-		let featureName = "igGrid" + name;
+		this.initSettings = jQuery.extend(true, {}, this);
+		let featureName = "igGrid" + this.name;
 		for (var setting in jQuery.ui[featureName].prototype.options) {
 			Object.defineProperty(self, setting, {
 				set: self.createFeatureSetter(setting),
@@ -136,22 +136,13 @@ export class Feature {
 		}
 	}
 
-	get name():string {
-		return this._settings["name"];
-	}
-
-	constructor(el: ElementRef) {
-		this._el = el;
-	}
-
 	createFeatureSetter(name) {
 		return function (value) {
 			let grid = jQuery(this._el.nativeElement.parentElement).find("table[role='grid']");
 			let featureName = "igGrid" + this.name;
 			this._settings[name] = value;
 
-			if (this.name !== undefined && this.name !== null &&
-				jQuery.ui[featureName] &&
+			if (jQuery.ui[featureName] &&
 				jQuery.ui[featureName].prototype.options &&
 				jQuery.ui[featureName].prototype.options.hasOwnProperty(name) &&
 				grid.data(featureName)) {
@@ -171,7 +162,7 @@ export function IgComponent(args: any = {}) {
 
 	return function (cls) {
 		// get current annotations
-		let annotations = _reflect.getMetadata('annotations', cls) || [];
+		let annotations = Reflect.getMetadata('annotations', cls) || [];
 
 		var sel = cls.name
 			//transform Uppercase to dash + LowerCase letter
@@ -200,7 +191,7 @@ export function IgComponent(args: any = {}) {
 		}
 		annotations.push(new Component(args));
 		// redefine with added annotations
-		_reflect.defineMetadata('annotations', annotations, cls);
+		Reflect.defineMetadata('annotations', annotations, cls);
 
 		return cls;
 	}
@@ -442,7 +433,7 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
 			this._opts["columns"] = this._columns.map((c) => c._settings);
 		}
 		if (this._features.length) {
-			this._opts["features"] = this._features.map((c) => c._settings);
+			this._opts["features"] = this._features.map((c) => c.initSettings);
 		}
 		super.ngOnInit();
 	}
@@ -494,6 +485,9 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
 				grid = element.data(this._widgetName),
 				colIndex, td, i, j, pkKey = this._config.primaryKey, newFormattedVal, record, column;
 
+			if (typeof this._config.dataSource === "string") {
+				return;
+			}
 			//check for changes in collection
 			this._changes = this._differ.diff(this._config.dataSource);
 			if (this._config.dataSource.length !== this._dataSource.length) {

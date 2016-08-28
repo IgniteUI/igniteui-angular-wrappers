@@ -9,7 +9,7 @@ declare var jQuery: any;
 @Component({
 	selector: 'my-app',
 	templateUrl: "./igGrid-ComplexOptsTemplate.html",
-	directives: [IgGridComponent, Column, Feature, FORM_DIRECTIVES]
+	directives: [FORM_DIRECTIVES, IgGridComponent, Column, Feature ]
 })
 export class AppComponent {
 	private cols: Array<any>;

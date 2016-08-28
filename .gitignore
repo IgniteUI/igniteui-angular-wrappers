@@ -31,3 +31,28 @@ node_modules
 
 # Optional REPL history
 .node_repl_history
+
+# Typings
+typings
+
+# Typescript output
+app/*.d.ts
+app/*.js
+app/*.js.map
+
+samples/**/*.d.ts
+samples/**/*.js
+samples/**/*.js.map
+
+src/igniteui.angular2.d.ts
+src/*.js
+src/*.js.map
+
+tests/unit/**/*.d.ts
+tests/unit/**/*.js
+tests/unit/**/*.js.map
+
+# Build:
+dist/npm
+!dist/npm/README.md
+!dist/npm/package.json

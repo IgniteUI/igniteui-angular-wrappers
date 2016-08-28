@@ -1,9 +1,8 @@
 // modeled after https://github.com/angular/angular/blob/cee2318110eeea115e5f6fc5bfc814cbaa7d90d8/modules/angular2/test/common/directives/ng_for_spec.ts
-import { it, iit, describe, expect, inject, beforeEachProviders } from '@angular/core/testing';
-import { TestComponentBuilder } from '@angular/compiler/testing';
-import {Component, ViewChild, TemplateRef} from '@angular/core';
+import { inject, TestComponentBuilder } from '@angular/core/testing';
+import { Component, ViewChild, TemplateRef } from '@angular/core';
 import * as Infragistics from '../../../src/igniteui.angular2';
-import {ProductCategories} from "../../../samples/data/product-categories";
+import { ProductCategories } from "../../../samples/data/product-categories";
 
 export function main() {
     describe('Infragistics Angular2 Tree', () => {
@@ -13,15 +12,15 @@ export function main() {
                 .createAsync(TestComponent)
                 .then((fixture) => {
                     fixture.detectChanges();
-                    expect(fixture.debugElement.componentInstance.viewChild).toBeAnInstanceOf(Infragistics.IgTreeComponent);
+                    expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgTreeComponent)
+                        .toBe(true);
                 });
         }));
 
-        it('should reflect changes when a record in the data changes',
+        it('should reflect changes when a record in the data changes', (done) => {
             inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
                 var template = '<div><ig-tree [(widgetId)]="treeID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-tree></div>';
-                return new Promise((resolve, reject) => {
-                    tcb.overrideTemplate(TestComponent, template)
+                return tcb.overrideTemplate(TestComponent, template)
                         .createAsync(TestComponent)
                         .then((fixture) => {
                             fixture.detectChanges();
@@ -30,22 +29,21 @@ export function main() {
                                 fixture.detectChanges();
                                 expect($($("#tree1").igTree("nodeByIndex", 0)).children("a").text())
                                     .toBe("Test");
-                                    resolve();
+                                    done();
                             }, 10);
                         });
-                });
-            }));
+                })();
+            });
 
-        it('should reflect changes when a record is added/removed from the data',
+        it('should reflect changes when a record is added/removed from the data', (done) => {
             inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
                 var template = '<div><ig-tree [(widgetId)]="treeID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-tree></div>';
-                return new Promise((resolve, reject) => {
-                    tcb.overrideTemplate(TestComponent, template)
+                return tcb.overrideTemplate(TestComponent, template)
                         .createAsync(TestComponent)
                         .then((fixture) => {
                             fixture.detectChanges();
                             //remove item
-                            fixture.componentInstance.data.removeAt(0);
+                            fixture.componentInstance.data.splice(0, 1);
 
                             setTimeout(() => {
                                 fixture.detectChanges();
@@ -59,12 +57,12 @@ export function main() {
                                         .toBe(4);
                                     expect($(fixture.debugElement.nativeElement).find("#tree1 li.ui-igtree-noderoot").last().children("a").text())
                                         .toBe("Category");
-                                        resolve();
+                                        done();
                                 }, 10);
                             }, 10);
                         });
-                });
-            }));
+                })();
+            });
     });
 }
 
@@ -76,7 +74,7 @@ export function main() {
 class TestComponent {
     private opts: any;
     private treeID: string;
-    private data: Array<any>;
+    public data: Array<any>;
     private cdi: number;
     @ViewChild(Infragistics.IgTreeComponent) public viewChild: Infragistics.IgTreeComponent;
 
