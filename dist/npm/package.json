@@ -23,8 +23,8 @@
     "data grids"
   ],
   "peerDependencies": {
-    "@angular/common":  "2.0.0-rc.3",
-    "@angular/core":  "2.0.0-rc.3",
+    "@angular/common":  "2.0.0-rc.5",
+    "@angular/core":  "2.0.0-rc.5",
     "reflect-metadata": "^0.1.3"
   }
 }
