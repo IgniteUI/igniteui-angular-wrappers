@@ -207,7 +207,7 @@ export class IgControlBase<Model> implements DoCheck {
 	protected _events: Map<string, string>;
 	protected _allowChangeDetection = true;
 
-	@Input() set options(v: Model) {
+	set options(v: Model) {
 		this._config = jQuery.extend(true, v, this._opts);
 		if (this._opts.dataSource) {
 			// _config.dataSource should reference the data if the data is set as a top-level opts
@@ -220,8 +220,8 @@ export class IgControlBase<Model> implements DoCheck {
 			delete this._opts.dataSource;
 		}
 	};
-	@Input() widgetId: string;
-	@Input() changeDetectionInterval: number;
+	public widgetId: string;
+	public changeDetectionInterval: number;
 
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) {
 		this._differs = differs;
