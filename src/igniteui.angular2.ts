@@ -1,5 +1,5 @@
 import {Component, Directive, Inject, ElementRef, EventEmitter, Output, Input, Query, QueryList, Renderer, OnChanges, NgZone,
-	SimpleChange, ChangeDetectionStrategy, IterableDiffers, DoCheck, Optional} from '@angular/core';
+	SimpleChange, ChangeDetectionStrategy, IterableDiffers, DoCheck, Optional, ContentChildren, AfterContentInit} from '@angular/core';
 import {NgModel, ControlValueAccessor} from '@angular/common';
 
 declare var jQuery: any;
@@ -46,6 +46,118 @@ var NODES = {
 	"ig-tile-manager": "div"
 };
 
+module IgUtil {
+	export function extractAllGridFeatureOptions() {
+		let allWidgets = jQuery.ui;
+		let options = ['name'];
+		let widget: any;
+		for (widget in allWidgets) {
+			if (widget.substring(0, 6) === "igGrid" && widget !== "igGrid") {
+				options = options.concat(Object.keys(jQuery.ui[widget].prototype.options));
+			}
+		}
+		return options;
+	}
+
+	export function extractAllGridColumnProperties() {
+		return ['headerText', 'key', 'formatter', 'format', 'dataType', 'width', 'hidden', 'template', 'unbound', 'group', 'rowspan', 'formula', 'unboundValues', 'unboundValuesUpdateMode', 'headerCssClass', 'columnCssClass'];
+	}
+}
+
+@Directive({
+	selector: 'column',
+	inputs: IgUtil.extractAllGridColumnProperties()
+})
+export class Column {
+	public _settings: any = {};
+	private _el: any;
+
+	constructor(el: ElementRef) {
+		this._el = el;
+		let self = this;
+		let i, settings = IgUtil.extractAllGridColumnProperties();
+		for(i = 0; i < settings.length; i++) {
+			Object.defineProperty(self, settings[i], {
+				set: self.createColumnsSetter(settings[i]),
+				get: self.createColumnsGetter(settings[i]),
+				enumerable: true,
+				configurable: true
+			});
+		}
+	}
+
+	createColumnsSetter(name) {
+		return function (value) {
+			let grid = jQuery(this._el.nativeElement.parentElement).find("table[role='grid']");
+			this._settings[name] = value;
+
+			if (jQuery.ui["igGrid"] &&
+				jQuery.ui["igGrid"].prototype.options &&
+				jQuery.ui["igGrid"].prototype.options.hasOwnProperty("columns") &&
+				grid.data("igGrid")) {
+				grid["igGrid"]("option", "columns", this._settings);
+			}
+		}
+	}
+
+	createColumnsGetter(name) {
+		return function () {
+			return this._settings[name];
+		}
+	}
+}
+
+@Directive({
+	selector: 'feature',
+	inputs: IgUtil.extractAllGridFeatureOptions()
+})
+
+export class Feature {
+	private _el: any;
+	public _settings: any = {};
+	public initSettings: {};
+	private name: string;
+
+	constructor(el: ElementRef) {
+		this._el = el;
+	}
+
+	ngOnInit() {
+		var self = this;
+		this.initSettings = jQuery.extend(true, {}, this);
+		let featureName = "igGrid" + this.name;
+		for (var setting in jQuery.ui[featureName].prototype.options) {
+			Object.defineProperty(self, setting, {
+				set: self.createFeatureSetter(setting),
+				get: self.createFeatureGetter(setting),
+				enumerable: true,
+				configurable: true
+			});
+		}
+	}
+
+	createFeatureSetter(name) {
+		return function (value) {
+			let grid = jQuery(this._el.nativeElement.parentElement).find("table[role='grid']");
+			let featureName = "igGrid" + this.name;
+			this._settings[name] = value;
+
+			if (jQuery.ui[featureName] &&
+				jQuery.ui[featureName].prototype.options &&
+				jQuery.ui[featureName].prototype.options.hasOwnProperty(name) &&
+				grid.data(featureName)) {
+				grid[featureName]("option", name, value);
+			}
+		}
+	}
+
+	createFeatureGetter(name) {
+		return function () {
+			return this._settings[name];
+		}
+	}
+}
+
 export function IgComponent(args: any = {}) {
 
 	return function (cls) {
@@ -66,7 +178,7 @@ export function IgComponent(args: any = {}) {
 		});
 
 		var evt = [];
-		var opts = [];
+		var opts = ["options", "widgetId", "changeDetectionInterval"];
 		if (jQuery.ui[contrName]) {
 			for (var propt in jQuery.ui[contrName].prototype.events) {
 				evt.push(propt);
@@ -86,8 +198,8 @@ export function IgComponent(args: any = {}) {
 }
 
 export class IgControlBase<Model> implements DoCheck {
-	private _opts: any = {};
 	private _differs: any;
+	protected _opts: any = {};
 	protected _el: any;
 	protected _widgetName: string;
 	protected _differ: any;
@@ -95,7 +207,7 @@ export class IgControlBase<Model> implements DoCheck {
 	protected _events: Map<string, string>;
 	protected _allowChangeDetection = true;
 
-	@Input() set options(v: Model) {
+	set options(v: Model) {
 		this._config = jQuery.extend(true, v, this._opts);
 		if (this._opts.dataSource) {
 			// _config.dataSource should reference the data if the data is set as a top-level opts
@@ -108,8 +220,8 @@ export class IgControlBase<Model> implements DoCheck {
 			delete this._opts.dataSource;
 		}
 	};
-	@Input() widgetId: string;
-	@Input() changeDetectionInterval: number;
+	public widgetId: string;
+	public changeDetectionInterval: number;
 
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) {
 		this._differs = differs;
@@ -132,11 +244,13 @@ export class IgControlBase<Model> implements DoCheck {
 	createSetter(name) {
 		return function (value) {
 			this._opts[name] = value;
+			if (this._config) {
+				this._config[name] = value;
+			}
 			if (jQuery.ui[this._widgetName] &&
 				jQuery.ui[this._widgetName].prototype.options &&
 				jQuery.ui[this._widgetName].prototype.options.hasOwnProperty(name) &&
 				jQuery(this._el).data(this._widgetName)) {
-				this._config[name] = value;
 				jQuery(this._el)[this._widgetName]("option", name, value);
 			}
 		}
@@ -300,15 +414,28 @@ export class IgControlBase<Model> implements DoCheck {
 	}
 }
 
-export class IgGridBase<Model> extends IgControlBase<Model> {
+export class IgGridBase<Model> extends IgControlBase<Model> implements AfterContentInit {
 	protected _dataSource: any;
 	protected _changes: any;
+	@ContentChildren(Column) _columns: QueryList<Column>;
+	@ContentChildren(Feature) _features: QueryList<Feature>;
 
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
 
 	ngOnInit() {
+		this._dataSource = this._opts.dataSource ? 
+			JSON.parse(JSON.stringify(this._opts.dataSource)) :
+			JSON.parse(JSON.stringify(this._config.dataSource));
+	}
+
+	ngAfterContentInit() {
+		if (this._columns.length) {
+			this._opts["columns"] = this._columns.map((c) => c._settings);
+		}
+		if (this._features.length) {
+			this._opts["features"] = this._features.map((c) => c.initSettings);
+		}
 		super.ngOnInit();
-		this._dataSource = JSON.parse(JSON.stringify(this._config.dataSource));
 	}
 
 	deleteRow(id) {
