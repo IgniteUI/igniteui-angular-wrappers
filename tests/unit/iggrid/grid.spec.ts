@@ -217,13 +217,44 @@ export function main() {
 					});
 			})();
 		});
+
+		it('should initialize column and feature nested directives', (done) => {
+			inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+			var template = "<ig-grid [widgetId]='gridID' [width]='w' [autoCommit]='true' [dataSource]='data' [height]='h' [autoGenerateColumns]='false' [primaryKey]='\"Id\"'>" +
+				"<column [key]=\"'Id'\" [(headerText)]=\"idHeaderText\" [width]=\"'165px'\" [dataType]=\"'number'\"></column>" +
+				"<column [key]=\"'Name'\" [headerText]=\"'Name'\" [width]=\"'250px'\" [dataType]=\"'string'\"></column>" +
+				"<column [key]=\"'HireDate'\" [headerText]=\"'Quantity per unit'\" [width]=\"'250px'\" [dataType]=\"'date'\"></column>" +
+				"<feature [name]=\"'Paging'\" [(currentPageIndex)]=\"pi\" [pageSize]=\"'2'\"></feature>" +
+			"</ig-grid>";
+			return tcb.overrideTemplate(TestComponent, template)
+					.createAsync(TestComponent)
+					.then((fixture) => {
+						fixture.detectChanges();
+						expect($(fixture.debugElement.nativeElement).find("#grid1 thead th#grid1_Id").text())
+							.toBe("Product Id");
+						expect($(fixture.debugElement.nativeElement).find("#grid1_pager li.ui-state-active").text())
+							.toBe("2");
+						fixture.componentInstance.pi = 0;
+						fixture.componentInstance.idHeaderText = "Changed ID";
+						setTimeout(() => {
+							fixture.detectChanges();
+							//this assert should wait the next Service Release of IgniteUI
+							//expect($(fixture.debugElement.nativeElement).find("#grid1 thead th#grid1_Id").text())
+							//	.toBe("Changed ID");
+							expect($(fixture.debugElement.nativeElement).find("#grid1_pager li.ui-state-active").text())
+								.toBe("1");
+							done();
+						}, 10);
+					});
+			})();
+		});
 	});
 }
 
 @Component({
 	selector: 'test-cmp',
 	template: '<div></div>', //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
-	directives: [Infragistics.IgGridComponent]
+	directives: [Infragistics.Column, Infragistics.Feature, Infragistics.IgGridComponent]
 })
 class TestComponent {
 	private opts: any;
@@ -231,14 +262,18 @@ class TestComponent {
 	private gridID: string;
 	public data: Array<any>;
 	private cdi: number;
+	public pi: number;
 	private firedEvent: any;
 	public caption: string;
+	public idHeaderText: string;
 	@ViewChild(Infragistics.IgGridComponent) public viewChild: Infragistics.IgGridComponent;
 
 	constructor() {
 		this.gridID = "grid1";
 		this.cdi = 0;
 		this.caption = "My Caption";
+		this.idHeaderText = "Product Id";
+		this.pi = 1;
 		this.data = [
 				{ "Id": 1, "Name": "John Smith", "Age": 45, "HireDate": "\/Date(704678400000)\/" },
 				{ "Id": 2, "Name": "Mary Johnson", "Age": 32, "HireDate": "\/Date(794678400000)\/" },
