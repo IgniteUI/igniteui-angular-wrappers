@@ -19,7 +19,7 @@ export function main() {
 
 		it('should allow setting value with ngModel', (done) => {
 			inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-				var template = '<div><ig-text-editor [(ngModel)]="val" [widgetId]="editorId" [changeDetectionInterval]="cdi"></ig-text-editor></div>';
+				var template = '<div><ig-text-editor [(ngModel)]="val" [widgetId]="editorId" [changeDetectionInterval]="cdi"></ig-text-editor></div>', field, event;
 				return tcb.overrideTemplate(TestIgTextEditorComponent, template)
 					.createAsync(TestIgTextEditorComponent)
 					.then((fixture) => {
@@ -28,7 +28,14 @@ export function main() {
 						fixture.debugElement.componentInstance.val = "changed_test_value";
 						fixture.detectChanges();
 						expect($(fixture.debugElement.nativeElement).find("#editor1").igTextEditor("displayValue")).toBe("changed_test_value");
-						$(fixture.debugElement.nativeElement).find("#editor1").trigger("focus").val("changed_again_test_value").trigger("paste").trigger("blur");
+						// on key change:
+						field = $(fixture.debugElement.nativeElement).find("#editor1");
+						field.trigger("focus");
+						window.typeInInput("2", field);
+						expect(fixture.debugElement.componentInstance.val).toBe("changed_test_value2");
+						window.typeInInput("2", field);
+						expect(fixture.debugElement.componentInstance.val).toBe("changed_test_value22");
+						field.val("changed_again_test_value").trigger("paste").trigger("blur");
 						setTimeout(() => {
 							expect(fixture.debugElement.componentInstance.val).toBe("changed_again_test_value");
 							done();
@@ -421,3 +428,27 @@ class TestIgCheckboxEditorComponent {
 		this.editorId = "editor1";
 	}
 }
+
+interface MyWindow extends Window {
+    typeInInput(characters: String, element: JQuery): void;
+}
+declare var window: MyWindow;
+
+window.typeInInput = function(characters: String, element: JQuery) {
+		var keyDown = jQuery.Event("keydown"),
+			keyPress = jQuery.Event("keypress"),
+			keyUp = jQuery.Event("keyup"),
+			value: string = element.val(), selectionStart;
+
+		characters.split('').forEach(function (ch) {
+			selectionStart = (element[0] as HTMLInputElement).selectionStart;
+			keyDown.keyCode = keyUp.keyCode = keyPress.keyCode = ch.charCodeAt(0);
+			keyDown.charCode = keyUp.charCode = keyPress.charCode = ch.charCodeAt(0);
+			element.trigger(keyDown);
+			element.trigger(keyPress);
+			value = value.substring(0, selectionStart) + ch + value.substring(selectionStart + 1);
+			element.val(value);
+			(element[0] as HTMLInputElement).selectionStart++;
+			element.trigger(keyUp);
+		});
+	};
