@@ -1,15 +1,23 @@
-import { Component, Inject, ElementRef, EventEmitter, HostListener} from '@angular/core';
-import { IgMapComponent} from "../../src/igniteui.angular2.ts";
-import {bootstrap }    from '@angular/platform-browser-dynamic'
+import { Component, NgModule } from '@angular/core';
+import { IgMapComponent } from "../../src/igniteui.angular2.js";
+import { BrowserModule } from '@angular/platform-browser';
+import { platformBrowserDynamic }	from '@angular/platform-browser-dynamic';
 
 declare var jQuery: any;
 @Component({
 	selector: 'my-app',
-	templateUrl: "../igMap/igMapTemplate.html",
-	directives: [IgMapComponent]
+	templateUrl: "../igMap/igMapTemplate.html"
 })
 export class AppComponent {
 	constructor() {
 	}
 }
-bootstrap(AppComponent);
+
+@NgModule({
+	imports:	  [ BrowserModule ],
+	declarations: [ AppComponent, IgMapComponent ],
+	bootstrap:	[ AppComponent ]
+})
+export class AppModule {}
+
+platformBrowserDynamic().bootstrapModule(AppModule);

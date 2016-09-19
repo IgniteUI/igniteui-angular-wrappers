@@ -1,28 +1,39 @@
 // modeled after https://github.com/angular/angular/blob/cee2318110eeea115e5f6fc5bfc814cbaa7d90d8/modules/angular2/test/common/directives/ng_for_spec.ts
-import { inject, TestComponentBuilder } from '@angular/core/testing';
-import { Component, ViewChild, TemplateRef } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
+import { Component, ViewChild } from '@angular/core';
 import * as Infragistics from '../../../src/igniteui.angular2';
 
 export function main() {
     describe('Infragistics Angular2 PivotDataSelector', () => {
-        it('should initialize correctly', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+
+        beforeEach(() => {
+            TestBed.configureTestingModule({
+                declarations: [Infragistics.IgPivotDataSelectorComponent, TestComponent]
+            });
+        });
+
+        it('should initialize correctly', (done) => {
             var template = '<div><ig-pivot-data-selector [(widgetId)]="selId" [options]="optsGrid"></ig-pivot-data-selector></div>';
-            return tcb.overrideTemplate(TestComponent, template)
-                .createAsync(TestComponent)
-                .then((fixture) => {
-                    fixture.detectChanges();
-                    expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgPivotDataSelectorComponent)
-                        .toBe(true);
-                });
-        }));
+            TestBed.overrideComponent(TestComponent, {
+                set: {
+                    template: template
+                }
+            });
+            TestBed.compileComponents().then(() => {
+                let fixture = TestBed.createComponent(TestComponent);
+                fixture.detectChanges();
+                expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgPivotDataSelectorComponent)
+                    .toBe(true);
+                done();
+            });
+        });
 
     });
 }
 
 @Component({
     selector: 'test-cmp',
-    template: '<div></div>', //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
-    directives: [Infragistics.IgPivotDataSelectorComponent]
+    template: '<div></div>' //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
 })
 class TestComponent {
     private optsGrid: IgPivotGrid;

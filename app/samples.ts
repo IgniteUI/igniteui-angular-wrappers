@@ -1,13 +1,11 @@
 import {Component, Inject, ElementRef, EventEmitter, HostListener} from '@angular/core';
-import {IgGridComponent} from "../src/igniteui.angular2.ts";
 
 declare var jQuery: any;
 @Component({
 	selector: 'my-app',
 	template: `
 		<ig-grid [(options)]="gridOptions" [(widgetId)]='id' (cellClick)="cellClickHandler($event)" (rendering)='renderedEventHandler($event)' ></ig-grid>
-		`,
-	directives: [IgGridComponent]
+		`
 })
 export class AppComponent {
 	private gridOptions: IgGrid;
