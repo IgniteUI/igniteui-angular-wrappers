@@ -1,12 +1,12 @@
-import {Component, Inject, ElementRef, EventEmitter, HostListener} from '@angular/core';
-import {IgPivotDataSelectorComponent, IgPivotGridComponent} from "../../src/igniteui.angular2.ts";
-import {bootstrap }    from '@angular/platform-browser-dynamic'
+import { Component, NgModule } from '@angular/core';
+import { IgPivotDataSelectorComponent, IgPivotGridComponent } from "../../src/igniteui.angular2.js";
+import { BrowserModule } from '@angular/platform-browser';
+import { platformBrowserDynamic }	from '@angular/platform-browser-dynamic';
 
 declare var jQuery: any;
 @Component({
 	selector: 'my-app',
-	templateUrl: "./igPivotGrid-FlatDataSourceTemplate.html",
-	directives: [IgPivotDataSelectorComponent, IgPivotGridComponent]
+	templateUrl: "./igPivotGrid-FlatDataSourceTemplate.html"
 })
 export class AppComponent {
 	private optsGrid: IgPivotGrid;
@@ -88,4 +88,11 @@ export class AppComponent {
 	}
 }
 
-bootstrap(AppComponent);
+@NgModule({
+	imports:	  [ BrowserModule ],
+	declarations: [ AppComponent, IgPivotDataSelectorComponent, IgPivotGridComponent ],
+	bootstrap:	[ AppComponent ]
+})
+export class AppModule {}
+
+platformBrowserDynamic().bootstrapModule(AppModule);

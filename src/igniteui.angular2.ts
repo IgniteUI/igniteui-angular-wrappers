@@ -1,6 +1,6 @@
-import {Component, Directive, Inject, ElementRef, EventEmitter, Output, Input, Query, QueryList, Renderer, OnChanges, NgZone,
+import {Component, Directive, Inject, ElementRef, EventEmitter, Output, Input, QueryList, Renderer, OnChanges, NgZone,
 	SimpleChange, ChangeDetectionStrategy, IterableDiffers, DoCheck, Optional, ContentChildren, AfterContentInit} from '@angular/core';
-import {NgModel, ControlValueAccessor} from '@angular/common';
+import {NgModel, ControlValueAccessor} from '@angular/forms';
 
 declare var jQuery: any;
 
@@ -183,7 +183,7 @@ export function IgComponent(args: any = {}) {
 			for (var propt in jQuery.ui[contrName].prototype.events) {
 				evt.push(propt);
 			}
-			args.events = evt;
+			args.outputs = evt;
 			for (var propt in jQuery.ui[contrName].prototype.options) {
 				opts.push(propt);
 			}

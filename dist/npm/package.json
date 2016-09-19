@@ -1,6 +1,6 @@
 {
   "name": "igniteui-angular2",
-  "version": "1.0.2",
+  "version": "1.0.8",
   "description" : "A packaged version of Ignite UI components for Angular2",
   "license": "MIT",
   "typings": "igniteui.angular2.d.ts",
@@ -23,8 +23,8 @@
     "data grids"
   ],
   "peerDependencies": {
-    "@angular/common":  "2.0.0-rc.5",
-    "@angular/core":  "2.0.0-rc.5",
+    "@angular/common":  "2.0.0",
+    "@angular/core":  "2.0.0",
     "reflect-metadata": "^0.1.3"
   }
 }

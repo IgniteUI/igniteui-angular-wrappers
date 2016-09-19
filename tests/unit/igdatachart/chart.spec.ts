@@ -1,38 +1,54 @@
 // modeled after https://github.com/angular/angular/blob/cee2318110eeea115e5f6fc5bfc814cbaa7d90d8/modules/angular2/test/common/directives/ng_for_spec.ts
-import { inject, TestComponentBuilder } from '@angular/core/testing';
-import { Component, ViewChild, TemplateRef } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
+import { Component, ViewChild } from '@angular/core';
 import * as Infragistics from '../../../src/igniteui.angular2';
 
 export function main() {
 	describe('Infragistics Angular2 DataChart and Zoombar', () => {
-		it('should initialize correctly', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-			var template = '<div><ig-data-chart  widgetId="datachart1" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-data-chart></div>';
-			return tcb.overrideTemplate(TestComponent, template)
-				.createAsync(TestComponent)
-				.then((fixture) => {
-					fixture.detectChanges();
-					expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgDataChartComponent)
-						.toBe(true);
-				});
-		}));
 
-		it('Zoombar should initialize correctly', inject([TestComponentBuilder], (tcb: TestComponentBuilder, async) => {
+		beforeEach(() => {
+			TestBed.configureTestingModule({
+				declarations: [Infragistics.IgDataChartComponent, Infragistics.IgZoombarComponent, TestComponent]
+			});
+		});
+		
+		it('should initialize correctly', (done) => {
+			var template = '<div><ig-data-chart  widgetId="datachart1" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-data-chart></div>';
+			TestBed.overrideComponent(TestComponent, {
+				set: {
+					template: template
+				}
+			});
+			TestBed.compileComponents().then(() => {
+				let fixture = TestBed.createComponent(TestComponent);
+				fixture.detectChanges();
+				expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgDataChartComponent)
+					.toBe(true);
+				done();
+			});
+		});
+
+		it('Zoombar should initialize correctly', (done) => {
 			var template = '<div><ig-data-chart  widgetId="datachart1" [(options)]="opts"></ig-data-chart><ig-zoombar [(options)]="zoombarOpts" widgetId="zoombar"></ig-zoombar></div>';
-			return tcb.overrideTemplate(TestComponent, template)
-				.createAsync(TestComponent)
-				.then((fixture) => {
-					fixture.detectChanges();
-					expect(fixture.debugElement.componentInstance.viewChild2 instanceof Infragistics.IgZoombarComponent)
-						.toBe(true);
-				});
-		}));
+			TestBed.overrideComponent(TestComponent, {
+				set: {
+					template: template
+				}
+			});
+			TestBed.compileComponents().then(() => {
+				let fixture = TestBed.createComponent(TestComponent);
+				fixture.detectChanges();
+				expect(fixture.debugElement.componentInstance.viewChild2 instanceof Infragistics.IgZoombarComponent)
+					.toBe(true);
+				done();
+			});
+		});
 	});
 }
 
 @Component({
 	selector: 'test-cmp',
-	template: '<div></div>', //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
-	directives: [Infragistics.IgDataChartComponent, Infragistics.IgZoombarComponent]
+	template: '<div></div>' //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
 })
 class TestComponent {
 	private opts: any;

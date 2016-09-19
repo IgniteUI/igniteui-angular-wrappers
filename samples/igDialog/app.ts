@@ -1,21 +1,29 @@
-import { Component, Inject, ElementRef, EventEmitter, HostListener} from '@angular/core';
-import {IgDialogComponent } from "../../src/igniteui.angular2.ts";
-import {bootstrap }    from '@angular/platform-browser-dynamic'
+import { Component, NgModule } from '@angular/core';
+import { IgDialogComponent } from "../../src/igniteui.angular2.js";
+import { BrowserModule } from '@angular/platform-browser';
+import { platformBrowserDynamic }    from '@angular/platform-browser-dynamic';
 
 declare var jQuery: any;
 @Component({
 	selector: 'my-app',
-	templateUrl: `../igDialog/igDialogTemplate.html`,
-	directives: [IgDialogComponent]
+	templateUrl: `../igDialog/igDialogTemplate.html`
 })
 export class AppComponent {
 	private options: any;
 
 	constructor() {
 		this.options = {
-            headerText : "Foo",
-            height: "325px"
+			headerText : "Foo",
+			height: "325px"
 		};
 	}
 }
-bootstrap(AppComponent);
+
+@NgModule({
+	imports:      [ BrowserModule ],
+	declarations: [ AppComponent, IgDialogComponent ],
+	bootstrap:    [ AppComponent ]
+})
+export class AppModule {}
+
+platformBrowserDynamic().bootstrapModule(AppModule);
