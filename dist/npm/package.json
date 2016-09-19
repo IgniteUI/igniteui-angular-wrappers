@@ -1,6 +1,6 @@
 {
   "name": "igniteui-angular2",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description" : "A packaged version of Ignite UI components for Angular2",
   "license": "MIT",
   "typings": "igniteui.angular2.d.ts",
