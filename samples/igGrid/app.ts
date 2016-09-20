@@ -1,13 +1,15 @@
-import {Component, Inject, ElementRef, EventEmitter, HostListener} from '@angular/core';
-import {IgGridComponent} from "../../src/igniteui.angular2.ts";
-import {Northwind} from "./../data/northwind.ts";
-import {bootstrap }    from '@angular/platform-browser-dynamic';
+import { Component, NgModule } from '@angular/core';
+import { IgGridComponent } from "../../src/igniteui.angular2.js";
+import { FormsModule } from '@angular/forms';
+import { Northwind } from "./../data/northwind.js";
+import { BrowserModule } from '@angular/platform-browser';
+import { platformBrowserDynamic }	from '@angular/platform-browser-dynamic';
+
 
 declare var jQuery: any;
 @Component({
 	selector: 'my-app',
-	templateUrl: "./igGridTemplate.html",
-	directives: [IgGridComponent]
+	templateUrl: "./igGridTemplate.html"
 })
 export class AppComponent {
 	private gridOptions: IgGrid;
@@ -81,4 +83,11 @@ export class AppComponent {
 	};
 }
 
-bootstrap(AppComponent);
+@NgModule({
+	imports:	  [ BrowserModule, FormsModule ],
+	declarations: [ AppComponent, IgGridComponent ],
+	bootstrap:	[ AppComponent ]
+})
+export class AppModule {}
+
+platformBrowserDynamic().bootstrapModule(AppModule);

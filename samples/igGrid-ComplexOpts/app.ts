@@ -1,13 +1,15 @@
 import { Component, NgModule } from '@angular/core';
-import { IgGridComponent } from "../../src/igniteui.angular2.js";
+import { IgGridComponent, Column, Feature } from "../../src/igniteui.angular2.js";
+import { FormsModule } from '@angular/forms';
 import { Northwind } from "./../data/northwind.js";
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic }	from '@angular/platform-browser-dynamic';
 
 declare var jQuery: any;
+
 @Component({
 	selector: 'my-app',
-	templateUrl: "./igGrid-TopLevelOptsTemplate.html"
+	templateUrl: "./igGrid-ComplexOptsTemplate.html"
 })
 export class AppComponent {
 	private cols: Array<any>;
@@ -16,6 +18,11 @@ export class AppComponent {
 	private w: string;
 	private h: string;
 	private pKey: string;
+	private isReadOnly: boolean = true;
+	private cs: Array<any> = [{columnKey: "ProductID", readOnly: this.isReadOnly}];
+	private pi: number = 0;
+	private idHeaderText: string = "Id";
+	private pages: Array<number> = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 	constructor() {
 		this.data = Northwind.getData();
@@ -35,8 +42,8 @@ export class AppComponent {
 }
 
 @NgModule({
-	imports:	  [ BrowserModule ],
-	declarations: [ AppComponent, IgGridComponent ],
+	imports:	  [ BrowserModule, FormsModule ],
+	declarations: [ AppComponent, IgGridComponent, Column, Feature ],
 	bootstrap:	[ AppComponent ]
 })
 export class AppModule {}

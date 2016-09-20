@@ -1,56 +1,74 @@
 // modeled after https://github.com/angular/angular/blob/cee2318110eeea115e5f6fc5bfc814cbaa7d90d8/modules/angular2/test/common/directives/ng_for_spec.ts
-import { it, iit, describe, expect, inject, beforeEachProviders } from '@angular/core/testing';
-import { TestComponentBuilder } from '@angular/compiler/testing';
-import {Component, ViewChild, TemplateRef} from '@angular/core';
+import { TestBed } from '@angular/core/testing';
+import { Component, ViewChild } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import * as Infragistics from '../../../src/igniteui.angular2';
 
 export function main() {
     describe('Infragistics Angular2 HtmlEditor', () => {
-        it('should initialize correctly', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-            var template = '<div><ig-html-editor widgetId="htmlEditor" [(options)]="opts" [changeDetectionInterval]="cdi" [(ngModel)]="data"></ig-html-editor></div>';
-            return tcb.overrideTemplate(TestComponent, template)
-                .createAsync(TestComponent)
-                .then((fixture) => {
-                    fixture.detectChanges();
-                    expect(fixture.debugElement.componentInstance.viewChild).toBeAnInstanceOf(Infragistics.IgHtmlEditorComponent);
-                });
-        }));
 
-        it('should update its content if data model changes', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-            var template = '<div><ig-html-editor widgetId="htmlEditor" [(options)]="opts" [changeDetectionInterval]="cdi" [(ngModel)]="data"></ig-html-editor></div>';
-            return new Promise((resolve, reject) => {
-                tcb.overrideTemplate(TestComponent, template)
-                    .createAsync(TestComponent)
-                    .then((fixture) => {
-                        fixture.detectChanges();
-                        fixture.componentInstance.data = "<span>Test Update</span>";
-                        setTimeout(function () {
-                            fixture.detectChanges();
-                            expect($("#htmlEditor").igHtmlEditor("getContent", "html")).toBe("<span>Test Update</span>");
-                            resolve();
-                        }, 10);
-                    });
+        beforeEach(() => {
+            TestBed.configureTestingModule({
+                imports: [FormsModule],
+                declarations: [Infragistics.IgHtmlEditorComponent, TestComponent]
             });
-        }));
+        });
 
-        it('should update its content if html editor content changes', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+        it('should initialize correctly', (done) => {
             var template = '<div><ig-html-editor widgetId="htmlEditor" [(options)]="opts" [changeDetectionInterval]="cdi" [(ngModel)]="data"></ig-html-editor></div>';
-            return new Promise((resolve, reject) => {
-                tcb.overrideTemplate(TestComponent, template)
-                    .createAsync(TestComponent)
-                    .then((fixture) => {
-                        fixture.detectChanges();
-                        $("#htmlEditor").igHtmlEditor("setContent", "<h1>Test</h1>", "html");
-                        //simulate keyup
-                        $($("#htmlEditor").find("iframe")[0]["contentWindow"].document).find("body[contenteditable=true]").trigger("keyup");
-                        setTimeout(function () {
-                            fixture.detectChanges();
-                            expect(fixture.componentInstance.data).toBe("<h1>Test</h1>");
-                            resolve();
-                        }, 10);
-                    });
+            TestBed.overrideComponent(TestComponent, {
+                set: {
+                    template: template
+                }
             });
-        }));
+            TestBed.compileComponents().then(() => {
+                let fixture = TestBed.createComponent(TestComponent);
+                fixture.detectChanges();
+                expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgHtmlEditorComponent)
+                    .toBe(true);
+                done();
+            });
+        });
+
+        it('should update its content if data model changes', (done) => {
+                var template = '<div><ig-html-editor widgetId="htmlEditor" [(options)]="opts" [changeDetectionInterval]="cdi" [(ngModel)]="data"></ig-html-editor></div>';
+                TestBed.overrideComponent(TestComponent, {
+                set: {
+                    template: template
+                }
+            });
+            TestBed.compileComponents().then(() => {
+                let fixture = TestBed.createComponent(TestComponent);
+                fixture.detectChanges();
+                fixture.componentInstance.data = "<span>Test Update</span>";
+                fixture.detectChanges();
+                setTimeout(function () {
+                    expect($("#htmlEditor").igHtmlEditor("getContent", "html")).toBe("<span>Test Update</span>");
+                    done();
+                }, 10);
+            });
+        });
+
+        it('should update its content if html editor content changes', (done) => {
+                var template = '<div><ig-html-editor widgetId="htmlEditor" [(options)]="opts" [changeDetectionInterval]="cdi" [(ngModel)]="data"></ig-html-editor></div>';
+                TestBed.overrideComponent(TestComponent, {
+                set: {
+                    template: template
+                }
+            });
+            TestBed.compileComponents().then(() => {
+                let fixture = TestBed.createComponent(TestComponent);
+                fixture.detectChanges();
+                $("#htmlEditor").igHtmlEditor("setContent", "<h1>Test</h1>", "html");
+                //simulate keyup
+                $($("#htmlEditor").find("iframe")[0]["contentWindow"].document).find("body[contenteditable=true]").trigger("keyup");
+                fixture.detectChanges();
+                setTimeout(function () {
+                    expect(fixture.componentInstance.data).toBe("<h1>Test</h1>");
+                    done();
+                }, 10);
+            });
+        });
 
 
     });
@@ -58,13 +76,12 @@ export function main() {
 
 @Component({
     selector: 'test-cmp',
-    template: '<div></div>', //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
-    directives: [Infragistics.IgHtmlEditorComponent]
+    template: '<div></div>' //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
 })
 class TestComponent {
     private opts: any;
     private cdi: number;
-    private data: string;
+    public data: string;
 
     @ViewChild(Infragistics.IgHtmlEditorComponent) public viewChild: Infragistics.IgHtmlEditorComponent;
 
