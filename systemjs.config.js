@@ -36,6 +36,9 @@
       '../../src/': {
         defaultExtension: 'ts'
       },
+      '../src/': {
+        defaultExtension: 'ts'
+      },
       './../data': {
         defaultExtension: 'ts'
       }
