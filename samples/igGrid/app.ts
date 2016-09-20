@@ -1,7 +1,7 @@
 import { Component, NgModule } from '@angular/core';
-import { IgGridComponent } from "../../src/igniteui.angular2.js";
+import { IgGridComponent } from "../../src/igniteui.angular2";
 import { FormsModule } from '@angular/forms';
-import { Northwind } from "./../data/northwind.js";
+import { Northwind } from "./../data/northwind";
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic }	from '@angular/platform-browser-dynamic';
 
