@@ -1,9 +1,9 @@
 import { Component, NgModule } from '@angular/core';
-import { IgTreeComponent } from "../../src/igniteui.angular2.js";
+import { IgTreeComponent } from "../../src/igniteui.angular2";
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic }	from '@angular/platform-browser-dynamic';
-import { ProductCategories } from "./../data/product-categories.js";
+import { ProductCategories } from "./../data/product-categories";
 
 declare var jQuery: any;
 @Component({

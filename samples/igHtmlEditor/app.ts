@@ -1,5 +1,5 @@
 import { Component, NgModule } from '@angular/core';
-import { IgHtmlEditorComponent } from "../../src/igniteui.angular2.js";
+import { IgHtmlEditorComponent } from "../../src/igniteui.angular2";
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic }	from '@angular/platform-browser-dynamic';
