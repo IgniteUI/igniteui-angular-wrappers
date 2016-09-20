@@ -1,8 +1,8 @@
 import { Component, NgModule } from '@angular/core';
-import { IgTileManagerComponent } from "../../src/igniteui.angular2.js";
+import { IgTileManagerComponent } from "../../src/igniteui.angular2";
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic }	from '@angular/platform-browser-dynamic';
-import { candidates } from "./../data/candidates.js";
+import { candidates } from "./../data/candidates";
 
 declare var jQuery: any;
 @Component({

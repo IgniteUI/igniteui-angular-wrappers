@@ -32,6 +32,12 @@
       'angular2-in-memory-web-api': {
         main: './index.js',
         defaultExtension: 'js'
+      },
+      '../../src/': {
+        defaultExtension: 'ts'
+      },
+      './../data': {
+        defaultExtension: 'ts'
       }
     },
     transpiler: 'typescript',
