@@ -75,11 +75,6 @@ System.config({
     'rxjs': {
       defaultExtension: 'js'
     }
-  },
-  meta: {
-    'src/*': {
-    format: 'register'
-    }
   }
 });
 
