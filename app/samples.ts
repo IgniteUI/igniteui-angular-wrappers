@@ -1,4 +1,4 @@
-import {Component, Inject, ElementRef, EventEmitter, HostListener} from '@angular/core';
+import { Component } from '@angular/core';
 
 declare var jQuery: any;
 @Component({
