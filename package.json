@@ -52,7 +52,7 @@
     "watch": "node node_modules/typescript/bin/tsc -w",
     "build": "node node_modules/typescript/bin/tsc",
     "bundle": "node node_modules/typescript/bin/tsc -d && npm run prepare-dist",
-    "prepare-dist": "cp src/igniteui.angular2.js dist/npm/  && cp src/igniteui.angular2.d.ts dist/npm/ && cp src/igniteui.d.ts dist/npm/ && cp src/jquery.d.ts dist/npm/",
+    "prepare-dist": "cp src/igniteui.angular2.js dist/npm/  && cp src/igniteui.angular2.d.ts dist/npm/ && cp src/igniteui.angular2.ts dist/npm/ && cp src/igniteui.d.ts dist/npm/ && cp src/jquery.d.ts dist/npm/",
 
     "pretest": "npm run build",
     "test": "karma start tests/karma.conf.js && npm run remap-istanbul",
