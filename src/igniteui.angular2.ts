@@ -430,10 +430,18 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
 
 	ngAfterContentInit() {
 		if (this._columns.length) {
-			this._opts["columns"] = this._columns.map((c) => c._settings);
+			if (this._config) {
+				this._config["columns"] = this._columns.map((c) => c._settings);
+			} else {
+				this._opts["columns"] = this._columns.map((c) => c._settings);
+			}
 		}
 		if (this._features.length) {
-			this._opts["features"] = this._features.map((c) => c.initSettings);
+			if (this._config) {
+				this._config["features"] = this._features.map((c) => c.initSettings);
+			} else {
+				this._opts["features"] = this._features.map((c) => c.initSettings);
+			}
 		}
 		super.ngOnInit();
 	}

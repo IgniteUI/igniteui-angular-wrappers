@@ -329,6 +329,39 @@ export function main() {
 				}, 10);
 			});
 		});
+
+		it('should initialize column and feature nested directives with options', (done) => {
+			var template = "<ig-grid [widgetId]='gridID' [(options)]='opts1'>" +
+				"<column [key]=\"'Id'\" [(headerText)]=\"idHeaderText\" [width]=\"'165px'\" [dataType]=\"'number'\"></column>" +
+				"<column [key]=\"'Name'\" [headerText]=\"'Name'\" [width]=\"'250px'\" [dataType]=\"'string'\"></column>" +
+				"<column [key]=\"'HireDate'\" [headerText]=\"'Quantity per unit'\" [width]=\"'250px'\" [dataType]=\"'date'\"></column>" +
+				"<feature [name]=\"'Paging'\" [(currentPageIndex)]=\"pi\" [pageSize]=\"'2'\"></feature>" +
+			"</ig-grid>";
+			TestBed.overrideComponent(TestComponent, {
+					set: {
+						template: template
+					}
+				});
+			TestBed.compileComponents().then(() => {
+				let fixture = TestBed.createComponent(TestComponent);
+				fixture.detectChanges();
+				expect($(fixture.debugElement.nativeElement).find("#grid1_container thead th#grid1_Id").text())
+					.toBe("Product Id");
+				expect($(fixture.debugElement.nativeElement).find("#grid1_pager li.ui-state-active").text())
+					.toBe("2");
+				fixture.componentInstance.pi = 0;
+				fixture.componentInstance.idHeaderText = "Changed ID";
+				setTimeout(() => {
+					fixture.detectChanges();
+					//this assert should wait the next Service Release of IgniteUI
+					//expect($(fixture.debugElement.nativeElement).find("#grid1 thead th#grid1_Id").text())
+					//	.toBe("Changed ID");
+					expect($(fixture.debugElement.nativeElement).find("#grid1_pager li.ui-state-active").text())
+						.toBe("1");
+					done();
+				}, 10);
+			});
+		});
 	});
 }
 
