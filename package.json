@@ -16,7 +16,7 @@
     "@angular/platform-browser-dynamic":  "~2.0.2",
     "@angular/router":  "~3.0.2",
     "@angular/upgrade":  "~2.0.2",
-    "angular-in-memory-web-api": "~0.1.5",
+    "angular-in-memory-web-api": "0.1.9",
 
     "systemjs": "0.19.27",
     "es6-shim": "^0.35.0",
