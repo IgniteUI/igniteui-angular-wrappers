@@ -423,9 +423,9 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
 
 	ngOnInit() {
-		this._dataSource = this._opts.dataSource ? 
-			JSON.parse(JSON.stringify(this._opts.dataSource)) :
-			JSON.parse(JSON.stringify(this._config.dataSource));
+      this._dataSource = this._opts.dataSource ? 
+	    jQuery.extend(true, [], this._opts.dataSource) :
+        jQuery.extend(true, [], this._config.dataSource);
 	}
 
 	ngAfterContentInit() {
@@ -499,7 +499,7 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
 			//check for changes in collection
 			this._changes = this._differ.diff(this._config.dataSource);
 			if (this._config.dataSource.length !== this._dataSource.length) {
-				this._dataSource = JSON.parse(JSON.stringify(this._config.dataSource));
+				this._dataSource = jQuery.extend(true, [], this._config.dataSource);
 				if (this._changes) {
 					this._changes.forEachAddedItem(r => this.addRow(r.item, r.currentIndex));
 					this._changes.forEachRemovedItem(r => this.deleteRow(r.item[pkKey]))
@@ -507,7 +507,7 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
 			}
 			//check for changes in values
 			if (!this.equalsDiff(this._config.dataSource, this._dataSource, diff)) {
-				this._dataSource = JSON.parse(JSON.stringify(this._config.dataSource));
+				this._dataSource = jQuery.extend(true, [], this._config.dataSource);
 				for (i = 0; i < diff.length; i++) {
 					for (j = 0; j < diff[i].txlog.length; j++) {
 						colIndex = element.data(this._widgetName)._getCellIndexByColumnKey(diff[i].txlog[j].key);
@@ -571,7 +571,7 @@ export class IgTreeGridComponent extends IgGridBase<IgTreeGrid> {
 			//check for changes in collection
 			this._changes = this._differ.diff(this._config.dataSource);
 			if (this._config.dataSource.length !== this._dataSource.length) {
-				this._dataSource = JSON.parse(JSON.stringify(this._config.dataSource));
+				this._dataSource = jQuery.extend(true, [], this._config.dataSource);
 				if (this._changes) {
 					this._changes.forEachAddedItem(r => this.addRow(r.item, r.currentIndex));
 					this._changes.forEachRemovedItem(r => this.deleteRow(r.item[pkKey]))
@@ -579,7 +579,7 @@ export class IgTreeGridComponent extends IgGridBase<IgTreeGrid> {
 			}
 			//check for changes in values
 			if (!this.equalsDiff(this._config.dataSource, this._dataSource, diff)) {
-				this._dataSource = JSON.parse(JSON.stringify(this._config.dataSource));
+				this._dataSource = jQuery.extend(true, [], this._config.dataSource);
 				for (i = 0; i < diff.length; i++) {
 					for (j = 0; j < diff[i].txlog.length; j++) {
 						colIndex = element.data(this._widgetName)._getCellIndexByColumnKey(diff[i].txlog[j].key);
@@ -637,7 +637,7 @@ export class IgHierarchicalGridComponent extends IgGridBase<IgHierarchicalGrid> 
 			//check for changes in collection
 			this._changes = this._differ.diff(this._config.dataSource);
 			if (this._config.dataSource.length !== this._dataSource.length) {
-				this._dataSource = JSON.parse(JSON.stringify(this._config.dataSource));
+				this._dataSource = jQuery.extend(true, [], this._config.dataSource);
 				if (this._changes) {
 					this._changes.forEachAddedItem(r => this.addRow(r.item, r.currentIndex));
 					this._changes.forEachRemovedItem(r => this.deleteRow(r.item[pkKey]))
@@ -645,7 +645,7 @@ export class IgHierarchicalGridComponent extends IgGridBase<IgHierarchicalGrid> 
 			}
 			//check for changes in data source values
 			if (!this.equalsDiff(this._config.dataSource, this._dataSource, diff)) {
-				this._dataSource = JSON.parse(JSON.stringify(this._config.dataSource));
+				this._dataSource = jQuery.extend(true, [], this._config.dataSource);
 				for (i = 0; i < diff.length; i++) {
 					for (j = 0; j < diff[i].txlog.length; j++) {
 						var childGrid = element.data(this._widgetName).allChildrenWidgets().filter(function (indx) {
@@ -706,7 +706,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
 				that._model.viewToModelUpdate(items[0].data[that._config.valueKey]);
 			}
 		});
-		this._dataSource = JSON.parse(JSON.stringify(this._config.dataSource));
+		this._dataSource = jQuery.extend(true, [], this._config.dataSource);
 		//manually call writeValue, because the LifeCycle has been changed and writeValue is executed before ngOnInit
 		this.writeValue(this._model.value);
 	}
@@ -740,7 +740,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
 			//check for changes in collection
 			this._changes = this._differ.diff(this._config.dataSource);
 			if (this._config.dataSource.length !== this._dataSource.length) {
-				this._dataSource = JSON.parse(JSON.stringify(this._config.dataSource));
+				this._dataSource = jQuery.extend(true, [], this._config.dataSource);
 				if (this._changes) {
 					this._changes.forEachAddedItem(r => element.data("igCombo").dataBind());
 					this._changes.forEachRemovedItem(r => element.data("igCombo").dataBind())
@@ -748,7 +748,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
 			}
 
 			if (!this.equalsDiff(this._config.dataSource, this._dataSource, diff)) {
-				this._dataSource = JSON.parse(JSON.stringify(this._config.dataSource));
+				this._dataSource = jQuery.extend(true, [], this._config.dataSource);
 				for (i = 0; i < diff.length; i++) {
 					for (j = 0; j < diff[i].txlog.length; j++) {
 						record = this._config.dataSource[diff[i].index];
@@ -847,7 +847,7 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
 
 	ngOnInit() {
 		super.ngOnInit();
-		this._dataSource = JSON.parse(JSON.stringify(this._config.dataSource));
+		this._dataSource = jQuery.extend(true, [], this._config.dataSource);
 	}
 
 	ngDoCheck() {
@@ -861,7 +861,7 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
 			//check for changes in collection
 			this._changes = this._differ.diff(this._config.dataSource);
 			if (this._config.dataSource.length !== this._dataSource.length) {
-				this._dataSource = JSON.parse(JSON.stringify(this._config.dataSource));
+				this._dataSource = jQuery.extend(true, [], this._config.dataSource);
 				if (this._changes) {
 					this._changes.forEachAddedItem(r => element.igTree("dataBind"));
 					this._changes.forEachRemovedItem(r => element.igTree("dataBind"));
@@ -869,7 +869,7 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
 			}
 
 			if (!this.equalsDiff(this._config.dataSource, this._dataSource, diff)) {
-				this._dataSource = JSON.parse(JSON.stringify(this._config.dataSource));
+				this._dataSource = jQuery.extend(true, [], this._config.dataSource);
 				element.igTree("dataBind");
 			}
 		}
