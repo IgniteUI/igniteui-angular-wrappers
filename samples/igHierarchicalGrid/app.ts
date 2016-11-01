@@ -1,13 +1,13 @@
-import {Component, Inject, ElementRef, EventEmitter, HostListener} from '@angular/core';
-import {IgHierarchicalGridComponent} from "../../src/igniteui.angular2.ts";
-import {NorthwindEmployees} from "./../data/northwind-employees.ts";
-import {bootstrap }    from '@angular/platform-browser-dynamic'
+import { Component, NgModule} from '@angular/core';
+import { IgHierarchicalGridComponent} from "../../src/igniteui.angular2";
+import { NorthwindEmployees} from "./../data/northwind-employees";
+import { BrowserModule } from '@angular/platform-browser';
+import { platformBrowserDynamic }	from '@angular/platform-browser-dynamic';
 
 declare var jQuery: any;
 @Component({
 	selector: 'my-app',
-	templateUrl: "./igHierarchicalGridTemplate.html",
-	directives: [IgHierarchicalGridComponent]
+	templateUrl: "./igHierarchicalGridTemplate.html"
 })
 export class AppComponent {
 	private hgridOptions: IgHierarchicalGrid;
@@ -58,4 +58,11 @@ export class AppComponent {
 	}
 }
 
-bootstrap(AppComponent);
+@NgModule({
+	imports:	  [ BrowserModule ],
+	declarations: [ AppComponent, IgHierarchicalGridComponent ],
+	bootstrap:	[ AppComponent ]
+})
+export class AppModule {}
+
+platformBrowserDynamic().bootstrapModule(AppModule);

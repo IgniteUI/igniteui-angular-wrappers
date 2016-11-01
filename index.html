@@ -14,12 +14,12 @@
 	<!-- IE required polyfills, in this exact order -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.0/es6-shim.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.20/system-polyfills.js"></script>
-	<script src="https://npmcdn.com/angular2/es6/dev/src/testing/shims_for_IE.js"></script>
+	<script src="https://unpkg.com/angular2/es6/dev/src/testing/shims_for_IE.js"></script>
 
-	<script src="https://npmcdn.com/zone.js@0.6.12?main=browser"></script>
-	<script src="https://npmcdn.com/typescript@1.8.10/lib/typescript.js"></script>
-	<script src="https://npmcdn.com/reflect-metadata@0.1.3"></script>
-	<script src="https://npmcdn.com/systemjs@0.19.27/dist/system.src.js"></script>
+	<script src="https://unpkg.com/zone.js@0.6.23?main=browser"></script>
+	<script src="https://unpkg.com/typescript@2.0.2/lib/typescript.js"></script>
+	<script src="https://unpkg.com/reflect-metadata@0.1.3"></script>
+	<script src="https://unpkg.com/systemjs@0.19.27/dist/system.src.js"></script>
 	<script src="./systemjs.config.js"></script>
 
 	<!-- Ignite UI Required Combined JavaScript Files -->
@@ -112,7 +112,7 @@
 			<div class="row">
 				<div class="col-sm-12 col-lg-5">
 				<h1>Ignite UI</h1>
-				<h2>Angular 2 Directives</h2>
+				<h2>Angular 2 Components</h2>
 				</div>
 				<div class="col-sm-12 header-fg col-lg-7"></div>
 			</div>
@@ -130,21 +130,19 @@
 			<h2>Code...</h2>
 			<div style="height: 511px; overflow-y: scroll;">
 			<pre>
-import {Component, Inject, ElementRef, EventEmitter, HostListener} from '@angular/core';
-import {IgGridComponent} from "../src/igniteui.angular2.ts";
+import { Component } from '@angular/core';
 
 declare var jQuery: any;
 @Component({
-	selector: 'my-app',
+	selector: "my-app",
 	template: `
 		&lt;ig-grid 
 			[(options)]=&quot;gridOptions&quot; 
-			[(widgetId)]='id' 
+			[(widgetId)]="id" 
 			(cellClick)=&quot;cellClickHandler($event)&quot; 
-			(rendering)='renderedEventHandler($event)' 
+			(rendering)="renderedEventHandler($event)" 
 		&gt;&lt;/ig-grid&gt;
-		`,
-	directives: [IgGridComponent]
+		`
 })
 export class AppComponent {
 	private gridOptions: IgGrid;
@@ -208,6 +206,8 @@ export class AppComponent {
 				<ul class="dropdown-menu" role="menu">
 					<li><a href="samples/igGrid/igGrid.html">Default</a></li>
 					<li><a href="samples/igGrid-TopLevelOpts/igGrid-TopLevelOpts.html">Top-level template options</a></li>
+					<li><a href="samples/igGrid-ComplexOpts/igGrid-ComplexOpts.html">Complex template options</a></li>
+					<li><a href="samples/igGrid-HTTPClient/igGrid-HTTPClient.html">Grid with HTTP client</a></li>
 				</ul>
 			</div>
 			<a class="btn btn-default" href="samples/igHierarchicalGrid/igHierarchicalGrid.html">igHierarchicalGrid</a>

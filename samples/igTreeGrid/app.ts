@@ -1,13 +1,14 @@
-import {Component, Inject, ElementRef, EventEmitter, HostListener} from '@angular/core';
-import {IgTreeGridComponent} from "../../src/igniteui.angular2.ts";
-import {Tasks} from "./../data/tasks.ts";
-import {bootstrap }    from '@angular/platform-browser-dynamic'
+import { Component, NgModule } from '@angular/core';
+import { IgTreeGridComponent } from "../../src/igniteui.angular2";
+import { Tasks } from "./../data/tasks";
+import { BrowserModule } from '@angular/platform-browser';
+import { platformBrowserDynamic }	from '@angular/platform-browser-dynamic';
+import { ProductCategories } from "./../data/product-categories";
 
 declare var jQuery: any;
 @Component({
 	selector: 'my-app',
-	templateUrl: "./igTreeGridTemplate.html",
-	directives: [IgTreeGridComponent]
+	templateUrl: "./igTreeGridTemplate.html"
 })
 export class AppComponent {
 	private tgridOptions: IgTreeGrid;
@@ -42,4 +43,11 @@ export class AppComponent {
 	}
 }
 
-bootstrap(AppComponent);
+@NgModule({
+	imports:	  [ BrowserModule ],
+	declarations: [ AppComponent, IgTreeGridComponent ],
+	bootstrap:	[ AppComponent ]
+})
+export class AppModule {}
+
+platformBrowserDynamic().bootstrapModule(AppModule);

@@ -1,12 +1,12 @@
-import { Component, Inject, ElementRef, EventEmitter, HostListener} from '@angular/core';
-import { IgDataChartComponent, IgZoombarComponent } from "../../src/igniteui.angular2.ts";
-import {bootstrap }    from '@angular/platform-browser-dynamic'
+import { Component, NgModule } from '@angular/core';
+import { IgDataChartComponent, IgZoombarComponent } from "../../src/igniteui.angular2";
+import { BrowserModule } from '@angular/platform-browser';
+import { platformBrowserDynamic }    from '@angular/platform-browser-dynamic';
 
 declare var jQuery: any;
 @Component({
 	selector: 'my-app',
-	templateUrl: `../igDataChart/igDataChartTemplate.html`,
-	directives: [IgDataChartComponent, IgZoombarComponent]
+	templateUrl: `../igDataChart/igDataChartTemplate.html`
 })
 export class AppComponent {
 	private data: any;
@@ -46,4 +46,12 @@ export class AppComponent {
 		};
 	}
 }
-bootstrap(AppComponent);
+
+@NgModule({
+	imports:      [ BrowserModule ],
+	declarations: [ AppComponent, IgDataChartComponent, IgZoombarComponent ],
+	bootstrap:    [ AppComponent ]
+})
+export class AppModule {}
+
+platformBrowserDynamic().bootstrapModule(AppModule);
