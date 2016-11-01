@@ -1,6 +1,7 @@
 import {Component, Directive, Inject, ElementRef, EventEmitter, Output, Input, QueryList, Renderer, OnChanges, NgZone,
 	SimpleChange, ChangeDetectionStrategy, IterableDiffers, DoCheck, Optional, ContentChildren, AfterContentInit} from '@angular/core';
 import {NgModel, ControlValueAccessor} from '@angular/forms';
+import './igniteui';
 
 declare var jQuery: any;
 
