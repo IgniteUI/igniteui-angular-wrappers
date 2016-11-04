@@ -782,13 +782,16 @@ export class IgEditorBase<Model> extends IgControlBase<Model> implements Control
 		super.ngOnInit();
 		if (this._model) {
 			jQuery(this._el).on(this._widgetName.toLowerCase() + "valuechanged", function (evt, ui) {
-				that._model.viewToModelUpdate(ui.newValue);
+				that.onChange(ui.newValue);
 			});
 			if (this._widgetName === "igTextEditor") {
 				jQuery(this._el).on(this._widgetName.toLowerCase() + "textchanged", function (evt, ui) {
-					that._model.viewToModelUpdate(ui.text);
+					that.onChange(ui.text);
 				});
 			}
+			jQuery(this._el).on(this._widgetName.toLowerCase() + "blur", function (evt, ui) {
+				that.onTouched();
+			});
 			//manually call writeValue, because the LifeCycle has been changed and writeValue is executed before ngOnInit
 			this.writeValue(this._model.value);
 		}
