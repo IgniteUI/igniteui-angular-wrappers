@@ -94,6 +94,29 @@ export function main() {
                 }, 10);
             });
         });
+
+        it('should apply the model if there is a new data assigned', (done) => {
+            var template = '<div><ig-combo [(widgetId)]="comboID" [valueKey]="\'ProductID\'" [textKey]="\'ProductName\'" [changeDetectionInterval]="cdi" [(dataSource)]="data" [(ngModel)]="combo.value1"></ig-combo></div>';
+            TestBed.overrideComponent(TestComponent, {
+                set: {
+                    template: template
+                }
+            });
+            TestBed.compileComponents().then(() => {
+                let fixture = TestBed.createComponent(TestComponent);
+                fixture.detectChanges();
+                fixture.componentInstance.data = fixture.componentInstance.northwind;
+
+                setTimeout(function () {
+                    fixture.detectChanges();
+
+                    expect($("#combo1").igCombo("value")).toBe(fixture.componentInstance.combo.value1);
+                    expect($("#combo1").val())
+                    .toBe(fixture.componentInstance.northwind[fixture.componentInstance.combo.value1 - 1].ProductName);
+                    done();
+                }, 10);
+            });
+        });
     });
 }
 
@@ -107,6 +130,7 @@ class TestComponent {
     public combo: any;
     private comboID: string
     private cdi = 10;
+    public data: Array<any> = [];
     @ViewChild(Infragistics.IgComboComponent) public viewChild: Infragistics.IgComboComponent;
 
     constructor() {
