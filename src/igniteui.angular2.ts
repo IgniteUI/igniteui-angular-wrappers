@@ -703,13 +703,15 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
 		super.ngOnInit();
 		jQuery(this._el).on(this._widgetName.toLowerCase() + "selectionchanged", function (evt, ui) {
 			var items = ui.items;
-			if (items.length > 0) {
+			if (items.length > 0 && that._model) {
 				that._model.viewToModelUpdate(items[0].data[that._config.valueKey]);
 			}
 		});
 		this._dataSource = jQuery.extend(true, [], this._config.dataSource);
 		//manually call writeValue, because the LifeCycle has been changed and writeValue is executed before ngOnInit
-		this.writeValue(this._model.value);
+		if (this._model) {
+			this.writeValue(this._model.value);
+		}
 	}
 	writeValue(value) {
 		if (!!jQuery(this._el).data(this._widgetName)) {
@@ -740,7 +742,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
 
 			//check for changes in collection
 			this._changes = this._differ.diff(this._config.dataSource);
-			if (this._config.dataSource.length !== this._dataSource.length) {
+			if (this._config.dataSource && this._config.dataSource.length !== this._dataSource.length) {
 				this._dataSource = jQuery.extend(true, [], this._config.dataSource);
 				if (this._changes) {
 					this._changes.forEachAddedItem(r => element.data("igCombo").dataBind());
