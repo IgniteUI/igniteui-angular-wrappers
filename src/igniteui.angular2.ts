@@ -253,6 +253,9 @@ export class IgControlBase<Model> implements DoCheck {
 				jQuery.ui[this._widgetName].prototype.options.hasOwnProperty(name) &&
 				jQuery(this._el).data(this._widgetName)) {
 				jQuery(this._el)[this._widgetName]("option", name, value);
+				if(name === "dataSource" && this instanceof IgGridBase) {
+					this._dataSource = jQuery.extend(true, [], value);
+				}
 			}
 		}
 	}
@@ -430,14 +433,14 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
 	}
 
 	ngAfterContentInit() {
-		if (this._columns.length) {
+		if (this._columns && this._columns.length) {
 			if (this._config) {
 				this._config["columns"] = this._columns.map((c) => c._settings);
 			} else {
 				this._opts["columns"] = this._columns.map((c) => c._settings);
 			}
 		}
-		if (this._features.length) {
+		if (this._features && this._features.length) {
 			if (this._config) {
 				this._config["features"] = this._features.map((c) => c.initSettings);
 			} else {
