@@ -362,6 +362,33 @@ export function main() {
 				}, 10);
 			});
 		});
+
+		it('should allow filtering after new data is applied', (done) => {
+			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts2" [(dataSource)]="data1"></ig-grid></div>';
+			TestBed.overrideComponent(TestComponent, {
+					set: {
+						template: template
+					}
+				});
+			TestBed.compileComponents().then(() => {
+				let fixture = TestBed.createComponent(TestComponent);
+				fixture.detectChanges();
+				expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgGridComponent)
+					.toBe(true);
+				fixture.componentInstance.data1 = [
+					{"Id":"4", "Date":"\/Date(1235088000000)\/"},
+					{"Id":"5", "Date":"\/Date(1250809200000)\/"},
+					{"Id":"6", "Date":"\/Date(1335394800000)\/"}
+				];
+				setTimeout(() => {
+					fixture.detectChanges();
+					$(fixture.debugElement.nativeElement).find("#grid1").igGridFiltering("filter", ([{fieldName: "Date", expr: "\/Date(704678400000)\/", cond: "notOn"}]));
+					expect($(fixture.debugElement.nativeElement).find("#grid1_container .ui-iggrid-results").text())
+						.toBe("3 matching records");
+					done();
+				}, 500);
+			});
+		});
 	});
 }
 
@@ -372,8 +399,10 @@ export function main() {
 class TestComponent {
 	private opts: any;
 	public opts1: any;
+	public opts2: any;
 	private gridID: string;
 	public data: Array<any>;
+	public data1: Array<any>;
 	private cdi: number;
 	public pi: number;
 	private firedEvent: any;
@@ -391,8 +420,13 @@ class TestComponent {
 				{ "Id": 1, "Name": "John Smith", "Age": 45, "HireDate": "\/Date(704678400000)\/" },
 				{ "Id": 2, "Name": "Mary Johnson", "Age": 32, "HireDate": "\/Date(794678400000)\/" },
 				{ "Id": 3, "Name": "Bob Ferguson", "Age": 27, "HireDate": "\/Date(834678400000)\/" }
-			]
-		this.opts = {
+			];
+		this.data1 = [
+			{"Id":"1", "Date":"\/Date(1250809200000)\/"},
+			{"Id":"2", "Date":"\/Date(1335394800000)\/"},
+			{"Id":"3", "Date":"\/Date(1235088000000)\/"}
+		];
+		this.opts = { 
 			primaryKey: "Id",
 			dataSource: this.data,
 			autoCommit: true,
@@ -400,7 +434,7 @@ class TestComponent {
 				{ name: "Updating" }
 			]
 		};
-		
+
 		this.opts1 = {
 			dataSource: this.data,
 			height: "300px",
@@ -417,6 +451,26 @@ class TestComponent {
 				{ name: "Updating" }
 			]
 		};
+
+		this.opts2 = {
+            width: "100%",
+            height: "400px",
+            autoCommit: true,
+            autoGenerateColumns: false,
+            columns: [
+                { key: "Id", headerText: "ID", width: "20%", dataType: "string" },
+                { key: "Date", headerText: "Date", dataType: "date", width: "80%", format: "dd/MM/yyyy" },
+            ],
+            primaryKey: "Id",
+            features: [
+                {
+                    name: "Filtering",
+                    type: "local",
+                    mode: "simple",
+                    filterDialogContainment: "window"
+                }
+            ]
+        };
 	}
 
 	public cellClickHandler(evt) {
