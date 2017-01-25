@@ -1,5 +1,5 @@
 import {Component, Directive, Inject, ElementRef, EventEmitter, Output, Input, QueryList, Renderer, OnChanges, NgZone,
-	SimpleChange, ChangeDetectionStrategy, IterableDiffers, DoCheck, Optional, ContentChildren, AfterContentInit} from '@angular/core';
+	SimpleChange, ChangeDetectionStrategy, IterableDiffers, DoCheck, Optional,ContentChild, ContentChildren, AfterContentInit} from '@angular/core';
 import {NgModel, ControlValueAccessor} from '@angular/forms';
 import './igniteui';
 
@@ -48,20 +48,36 @@ var NODES = {
 };
 
 module IgUtil {
-	export function extractAllGridFeatureOptions() {
-		let allWidgets = jQuery.ui;
+	export function extractGridFeatureOptions(name) {
+		let featureName = "igGrid" + name;
 		let options = ['name'];
-		let widget: any;
-		for (widget in allWidgets) {
-			if (widget.substring(0, 6) === "igGrid" && widget !== "igGrid") {
-				options = options.concat(Object.keys(jQuery.ui[widget].prototype.options));
-			}
+
+		if (jQuery.ui[featureName]) {
+			options = options.concat(Object.keys(jQuery.ui[featureName].prototype.options));
 		}
 		return options;
 	}
+	export function extractGridFeatureEvents(name) {
+		let featureName = "igGrid" + name;
+		let evts = [];
+		if (jQuery.ui[featureName]) {
+			evts = evts.concat(Object.keys(jQuery.ui[featureName].prototype.events));
+		}
+		return evts;
+	}
+	
 
 	export function extractAllGridColumnProperties() {
 		return ['headerText', 'key', 'formatter', 'format', 'dataType', 'width', 'hidden', 'template', 'unbound', 'group', 'rowspan', 'formula', 'unboundValues', 'unboundValuesUpdateMode', 'headerCssClass', 'columnCssClass'];
+	}
+
+
+
+	 export function convertToCamelCase(str) {
+		//convert hyphen to camelCase
+		return str.replace(/-([a-z])/g, function (group) {
+			return group[1].toUpperCase();
+		});
 	}
 }
 
@@ -108,25 +124,39 @@ export class Column {
 	}
 }
 
-@Directive({
-	selector: 'feature',
-	inputs: IgUtil.extractAllGridFeatureOptions()
-})
+export class Feature<Model> {
+	public _el: any;
+	public _settings: Model;
+	public initSettings: Model;
+	public name: string;
+	private _events:any;
 
-export class Feature {
-	private _el: any;
-	public _settings: any = {};
-	public initSettings: {};
-	private name: string;
 
 	constructor(el: ElementRef) {
 		this._el = el;
+		let nodeName = IgUtil.convertToCamelCase(el.nativeElement.nodeName.toLowerCase());
+		this.name  = nodeName.charAt(0).toUpperCase() + nodeName.slice(1);;
+		for (var propt in jQuery.ui["igGrid" + this.name].prototype.events) {
+			this[propt] = new EventEmitter();
+		}
 	}
 
 	ngOnInit() {
-		var self = this;
+		let self = this;
 		this.initSettings = jQuery.extend(true, {}, this);
 		let featureName = "igGrid" + this.name;
+		let evtName;
+		this._events = new Map<string, string>();
+		let grid = jQuery(this._el.nativeElement).closest("ig-grid").find("table");
+
+		//event binding for features
+		for (var propt in jQuery.ui[featureName].prototype.events) {
+			evtName = featureName.toLowerCase() + propt.toLowerCase();
+			this._events[evtName] = propt;
+			jQuery(grid).on(evtName, function (evt, ui) {
+				self[self._events[evt.type]].emit({ event: evt, ui: ui });
+			});
+		}
 		for (var setting in jQuery.ui[featureName].prototype.options) {
 			Object.defineProperty(self, setting, {
 				set: self.createFeatureSetter(setting),
@@ -135,11 +165,20 @@ export class Feature {
 				configurable: true
 			});
 		}
+		var propNames = Object.getOwnPropertyNames(jQuery.ui[featureName].prototype);
+		for(var i = 0; i < propNames.length; i++) {
+			var name = propNames[i];
+			if(name.indexOf("_") !== 0 && typeof jQuery.ui[featureName].prototype[name] === "function"){
+				Object.defineProperty(self, name, {
+					get: self.createMethodGetter(name)
+				});
+			}
+		}
 	}
 
 	createFeatureSetter(name) {
 		return function (value) {
-			let grid = jQuery(this._el.nativeElement.parentElement).find("table[role='grid']");
+			let grid = jQuery(this._el.nativeElement).closest("ig-grid").find("table[role='grid']");
 			let featureName = "igGrid" + this.name;
 			this._settings[name] = value;
 
@@ -157,6 +196,221 @@ export class Feature {
 			return this._settings[name];
 		}
 	}
+	createMethodGetter(name) {
+		return function () {
+			let grid = jQuery(this._el.nativeElement).closest("ig-grid").find("table[role='grid']");
+			let featureName = "igGrid" + this.name;
+			var args = [];
+			var feature = grid.data(featureName);
+			return jQuery.proxy(feature[name], feature);
+		}
+	}
+}
+
+@Directive({
+	selector: 'sorting',
+	inputs:  IgUtil.extractGridFeatureOptions('Sorting')
+})
+export class IgGridSortingFeature extends Feature<IgGridSorting> {	
+	constructor(el: ElementRef) {
+		super(el);
+	}
+}
+
+@Directive({
+	selector: 'filtering',
+	inputs:  IgUtil.extractGridFeatureOptions('Filtering')
+})
+export class IgGridFilteringFeature extends Feature<IgGridFiltering> {
+		constructor(el: ElementRef) {
+		super(el);
+	}
+}
+
+
+@Directive({
+	selector: 'paging',
+	inputs:  IgUtil.extractGridFeatureOptions('Paging'),
+	outputs: IgUtil.extractGridFeatureEvents('Paging')
+})
+export class IgGridPagingFeature extends Feature<IgGridPaging> {	
+	constructor(el: ElementRef) {
+		super(el);
+	}
+}
+
+@Directive({
+	selector: 'updating',
+	inputs:  IgUtil.extractGridFeatureOptions('Updating'),
+	outputs: IgUtil.extractGridFeatureEvents('Updating')
+})
+export class IgGridUpdatingFeature extends Feature<IgGridUpdating> {	
+	constructor(el: ElementRef) {
+		super(el);
+	}
+}
+
+@Directive({
+	selector: 'groupBy',
+	inputs:  IgUtil.extractGridFeatureOptions('GroupBy'),
+	outputs: IgUtil.extractGridFeatureEvents('GroupBy')
+})
+export class IgGridGroupByFeature extends Feature<IgGridGroupBy> {	
+	constructor(el: ElementRef) {
+		super(el);
+	}
+}
+
+@Directive({
+	selector: 'columnMoving',
+	inputs:  IgUtil.extractGridFeatureOptions('ColumnMoving'),
+	outputs: IgUtil.extractGridFeatureEvents('ColumnMoving')
+})
+export class IgGridColumnMovingFeature extends Feature<IgGridColumnMoving> {	
+	constructor(el: ElementRef) {
+		super(el);
+	}
+}
+
+@Directive({
+	selector: 'hiding',
+	inputs:  IgUtil.extractGridFeatureOptions('ColumnMoving'),
+	outputs: IgUtil.extractGridFeatureEvents('ColumnMoving')
+})
+export class IgGridHidingFeature extends Feature<IgGridHiding> {	
+	constructor(el: ElementRef) {
+		super(el);
+	}
+}
+
+@Directive({
+	selector: 'cell-merging',
+	inputs:  IgUtil.extractGridFeatureOptions('CellMerging'),
+	outputs: IgUtil.extractGridFeatureEvents('CellMerging')
+})
+export class IgGridCellMergingFeature extends Feature<IgGridCellMerging> {	
+	constructor(el: ElementRef) {
+		super(el);
+	}
+}
+
+@Directive({
+	selector: 'responsive',
+	inputs:  IgUtil.extractGridFeatureOptions('Responsive'),
+	outputs: IgUtil.extractGridFeatureEvents('Responsive')
+})
+export class IgGridResponsiveFeature extends Feature<IgGridResponsive> {	
+	constructor(el: ElementRef) {
+		super(el);
+	}
+}
+
+@Directive({
+	selector: 'resizing',
+	inputs:  IgUtil.extractGridFeatureOptions('Resizing'),
+	outputs: IgUtil.extractGridFeatureEvents('Resizing')
+})
+export class IgGridResizingFeature extends Feature<IgGridResizing> {	
+	constructor(el: ElementRef) {
+		super(el);
+	}
+}
+
+@Directive({
+	selector: 'selection',
+	inputs:  IgUtil.extractGridFeatureOptions('Selection'),
+	outputs: IgUtil.extractGridFeatureEvents('Selection')
+})
+export class IgGridSelectionFeature extends Feature<IgGridSelection> {	
+	constructor(el: ElementRef) {
+		super(el);
+	}
+}
+
+@Directive({
+	selector: 'row-selectors',
+	inputs:  IgUtil.extractGridFeatureOptions('RowSelectors'),
+	outputs: IgUtil.extractGridFeatureEvents('RowSelectors')
+})
+export class IgGridRowSelectorsFeature extends Feature<IgGridRowSelectors> {	
+	constructor(el: ElementRef) {
+		super(el);
+	}
+}
+
+@Directive({
+	selector: 'summaries',
+	inputs:  IgUtil.extractGridFeatureOptions('Summaries'),
+	outputs: IgUtil.extractGridFeatureEvents('Summaries')
+})
+export class IgGridSummariesFeature extends Feature<IgGridSummaries> {	
+	constructor(el: ElementRef) {
+		super(el);
+	}
+}
+
+@Directive({
+	selector: 'column-fixing',
+	inputs:  IgUtil.extractGridFeatureOptions('ColumnFixing'),
+	outputs: IgUtil.extractGridFeatureEvents('ColumnFixing')
+})
+export class IgGridColumnFixingFeature extends Feature<IgGridColumnFixing> {	
+	constructor(el: ElementRef) {
+		super(el);
+	}
+}
+
+@Directive({
+	selector: 'tooltips',
+	inputs:  IgUtil.extractGridFeatureOptions('Tooltips'),
+	outputs: IgUtil.extractGridFeatureEvents('Tooltips')
+})
+export class IgGridTooltipsFeature extends Feature<IgGridTooltips> {	
+	constructor(el: ElementRef) {
+		super(el);
+	}
+}
+
+@Directive({
+	selector: 'features'
+})
+export class Features implements AfterContentInit {
+	public allFeatures:Array<any> = new Array<any>()
+	@ContentChild(IgGridSortingFeature) sorting: IgGridSortingFeature;
+	@ContentChild(IgGridFilteringFeature) filtering: IgGridFilteringFeature;
+	@ContentChild(IgGridPagingFeature) paging: IgGridPagingFeature;
+	@ContentChild(IgGridUpdatingFeature) updating: IgGridUpdatingFeature;
+	@ContentChild(IgGridGroupByFeature) groupBy: IgGridGroupByFeature;
+	@ContentChild(IgGridColumnMovingFeature) moving: IgGridColumnMovingFeature;
+	@ContentChild(IgGridHidingFeature) hiding: IgGridHidingFeature;
+	@ContentChild(IgGridCellMergingFeature) cellMerging: IgGridCellMergingFeature;
+	@ContentChild(IgGridResponsiveFeature) responsive: IgGridResponsiveFeature;
+	@ContentChild(IgGridResizingFeature) resizing: IgGridResizingFeature;
+	@ContentChild(IgGridSelectionFeature) selection: IgGridSelectionFeature;
+	@ContentChild(IgGridRowSelectorsFeature) rowSelectors: IgGridRowSelectorsFeature;
+	@ContentChild(IgGridSummariesFeature) summaries: IgGridSummariesFeature;
+	@ContentChild(IgGridColumnFixingFeature) columnFixing: IgGridColumnFixingFeature;
+	@ContentChild(IgGridTooltipsFeature) tooltips: IgGridTooltipsFeature;
+
+   	ngAfterContentInit() {
+		  		this.filtering ? this.allFeatures.push(this.filtering): null;
+			   	this.sorting ? this.allFeatures.push(this.sorting): null;
+				this.paging ? this.allFeatures.push(this.paging): null;
+				this.updating ? this.allFeatures.push(this.updating): null;
+				this.groupBy ? this.allFeatures.push(this.groupBy): null;
+				this.moving ? this.allFeatures.push(this.moving): null;
+				this.hiding ? this.allFeatures.push(this.hiding): null;
+				this.responsive ? this.allFeatures.push(this.responsive): null;
+				this.responsive ? this.allFeatures.push(this.responsive): null;
+				this.resizing ? this.allFeatures.push(this.resizing): null;
+				this.selection ? this.allFeatures.push(this.selection): null;
+				this.rowSelectors ? this.allFeatures.push(this.rowSelectors): null;
+				this.summaries ? this.allFeatures.push(this.summaries): null;
+				this.columnFixing ? this.allFeatures.push(this.columnFixing): null;
+				this.tooltips ? this.allFeatures.push(this.tooltips): null;
+   }
+
+
 }
 
 export function IgComponent(args: any = {}) {
@@ -274,6 +528,17 @@ export class IgControlBase<Model> implements DoCheck {
 				that[that._events[evt.type]].emit({ event: evt, ui: ui });
 			});
 		}
+		var propNames = Object.getOwnPropertyNames(jQuery.ui[this._widgetName].prototype);
+		for(var i = 0; i < propNames.length; i++) {
+			var name = propNames[i];
+			if(name.indexOf("_") !== 0 && typeof jQuery.ui[this._widgetName].prototype[name] === "function"){
+				Object.defineProperty(that, name, {
+					get: that.createMethodGetter(name)
+				});
+			}
+		}
+
+		
 
 		if (this.changeDetectionInterval === undefined || this.changeDetectionInterval === null) {
 			this.changeDetectionInterval = 500;
@@ -290,6 +555,12 @@ export class IgControlBase<Model> implements DoCheck {
 			this.options = this._opts;
 		}
 		jQuery(this._el)[this._widgetName](this._config);
+	}
+	createMethodGetter(name) {
+		return function () {
+			var widget = jQuery(this._el).data(this._widgetName);
+			return jQuery.proxy(widget[name], widget);
+		}
 	}
 
 	ngDoCheck() {
@@ -422,7 +693,7 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
 	protected _dataSource: any;
 	protected _changes: any;
 	@ContentChildren(Column) _columns: QueryList<Column>;
-	@ContentChildren(Feature) _features: QueryList<Feature>;
+	@ContentChild(Features) featuresList: Features;
 
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
 
@@ -440,11 +711,11 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
 				this._opts["columns"] = this._columns.map((c) => c._settings);
 			}
 		}
-		if (this._features && this._features.length) {
+		if (this.featuresList){
 			if (this._config) {
-				this._config["features"] = this._features.map((c) => c.initSettings);
-			} else {
-				this._opts["features"] = this._features.map((c) => c.initSettings);
+				this._config["features"] = this.featuresList.allFeatures.map((c) => { return c.initSettings;} );	
+			} else{
+				this._opts["features"] = this.featuresList.allFeatures.map((c) => { return c.initSettings;});
 			}
 		}
 		super.ngOnInit();
@@ -534,6 +805,7 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
 			}
 		}
 	}
+	allRows(){	};
 }
 
 @IgComponent()
@@ -1100,3 +1372,5 @@ export class IgRadialMenuComponent extends IgControlBase<IgRadialMenu> { constru
 
 @IgComponent()
 export class IgSplitButtonComponent extends IgControlBase<IgSplitButton> { constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); } }
+
+
