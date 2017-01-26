@@ -302,7 +302,9 @@ export function main() {
 				"<column [key]=\"'Id'\" [(headerText)]=\"idHeaderText\" [width]=\"'165px'\" [dataType]=\"'number'\"></column>" +
 				"<column [key]=\"'Name'\" [headerText]=\"'Name'\" [width]=\"'250px'\" [dataType]=\"'string'\"></column>" +
 				"<column [key]=\"'HireDate'\" [headerText]=\"'Quantity per unit'\" [width]=\"'250px'\" [dataType]=\"'date'\"></column>" +
-				"<feature [name]=\"'Paging'\" [(currentPageIndex)]=\"pi\" [pageSize]=\"'2'\"></feature>" +
+				"<features>" +
+				"<paging [(currentPageIndex)]=\"pi\" [pageSize]=\"'2'\"> </paging>" + 
+				"</features>" + 
 			"</ig-grid>";
 			TestBed.overrideComponent(TestComponent, {
 					set: {
@@ -336,7 +338,7 @@ export function main() {
 				"<column [key]=\"'Name'\" [headerText]=\"'Name'\" [width]=\"'250px'\" [dataType]=\"'string'\"></column>" +
 				"<column [key]=\"'HireDate'\" [headerText]=\"'Quantity per unit'\" [width]=\"'250px'\" [dataType]=\"'date'\"></column>" +
 				"<features>" + 
-				"<paging [name]=\"'Paging'\" [(currentPageIndex)]=\"pi\" [pageSize]=\"'2'\"></paging>" +
+				"<paging [(currentPageIndex)]=\"pi\" [pageSize]=\"'2'\"></paging>" +
 				"</features>" +
 			"</ig-grid>";
 			TestBed.overrideComponent(TestComponent, {
