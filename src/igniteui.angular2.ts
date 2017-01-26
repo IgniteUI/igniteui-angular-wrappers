@@ -126,7 +126,7 @@ export class Column {
 
 export class Feature<Model> {
 	public _el: any;
-	public _settings: Model;
+	public _settings: any = {};
 	public initSettings: Model;
 	public name: string;
 	private _events:any;

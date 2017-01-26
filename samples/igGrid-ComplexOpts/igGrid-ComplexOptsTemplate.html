@@ -5,7 +5,9 @@
 			<column [key]="'ProductName'" [headerText]="'Product Name'" [width]="'250px'" [dataType]="'string'"></column>
 			<column [key]="'QuantityPerUnit'" [headerText]="'Quantity per unit'" [width]="'250px'" [dataType]="'string'"></column>
 			<column [key]="'UnitPrice'" [headerText]="'Unit Price'" [width]="'100px'" [dataType]="'number'"></column>
-			<feature [name]="'Paging'" [(currentPageIndex)]="pi" [pageSize]="'2'"></feature>
+			<features>
+				<paging [(currentPageIndex)]="pi" [pageSize]="'2'"></paging>
+			</features>
 		</ig-grid>
 
 		<br>
