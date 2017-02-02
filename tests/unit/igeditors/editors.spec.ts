@@ -49,7 +49,7 @@ export function main() {
 					setTimeout(() => {
 						expect($(fixture.debugElement.nativeElement).find("#editor1").igTextEditor("displayValue")).toBe("changed_test_value");
 						// on key change:
-						field = $(fixture.debugElement.nativeElement).find("#editor1");
+						field = $(fixture.debugElement.nativeElement).find("#editor1 input.ui-igedit-input");
 						field.trigger("focus");
 						window.typeInInput("2", field);
 						expect(fixture.debugElement.componentInstance.val).toBe("changed_test_value2");
@@ -83,9 +83,47 @@ export function main() {
 					fixture.detectChanges();
 					setTimeout(() => {
 						expect($(fixture.debugElement.nativeElement).find("#editor1").igTextEditor("option", "disabled")).toBe(false);
-						expect($(fixture.debugElement.nativeElement).find("#editor1")[0].hasAttribute("disabled")).toBe(false);
+						expect($(fixture.debugElement.nativeElement).find("#editor1 input.ui-igedit-input")[0].hasAttribute("disabled")).toBe(false);
 						done();
 					}, 1);
+				}, 1);
+			});
+		});
+
+		it('should allow creating text editor in multiline mode', (done) => {
+			var template = '<div><ig-text-editor [textMode]="\'multiline\'" [(ngModel)]="val" [widgetId]="editorId" [changeDetectionInterval]="cdi"></ig-text-editor></div>';
+			TestBed.overrideComponent(TestIgTextEditorComponent, {
+				set: {
+					template: template
+				}
+			});
+			TestBed.compileComponents().then(() => {
+				let fixture = TestBed.createComponent(TestIgTextEditorComponent);
+				fixture.detectChanges();
+				setTimeout(() => {
+					expect($(fixture.debugElement.nativeElement).find("#editor1").igTextEditor("option", "textMode")).toBe("multiline");
+					expect($(fixture.debugElement.nativeElement).find("#editor1 textarea.ui-igedit-input").length).toBe(1);
+					expect($(fixture.debugElement.nativeElement).find("#editor1 textarea.ui-igedit-input").val()).toBe("test_value");
+					done();
+				}, 1);
+			});
+		});
+
+		it('should allow creating text editor in normal mode', (done) => {
+			var template = '<div><ig-text-editor [textMode]="\'text\'" [(ngModel)]="val" [widgetId]="editorId" [changeDetectionInterval]="cdi"></ig-text-editor></div>';
+			TestBed.overrideComponent(TestIgTextEditorComponent, {
+				set: {
+					template: template
+				}
+			});
+			TestBed.compileComponents().then(() => {
+				let fixture = TestBed.createComponent(TestIgTextEditorComponent);
+				fixture.detectChanges();
+				setTimeout(() => {
+					expect($(fixture.debugElement.nativeElement).find("#editor1").igTextEditor("option", "textMode")).toBe("text");
+					expect($(fixture.debugElement.nativeElement).find("#editor1 input.ui-igedit-input").length).toBe(1);
+					expect($(fixture.debugElement.nativeElement).find("#editor1 input.ui-igedit-input").val()).toBe("test_value");
+					done();
 				}, 1);
 			});
 		});
