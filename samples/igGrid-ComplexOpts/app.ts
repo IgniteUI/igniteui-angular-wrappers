@@ -1,5 +1,5 @@
 import { Component, NgModule } from '@angular/core';
-import { IgGridComponent, Column, Feature } from "../../src/igniteui.angular2";
+import { IgGridComponent, Column, Features, IgGridPagingFeature } from "../../src/igniteui.angular2";
 import { FormsModule } from '@angular/forms';
 import { Northwind } from "./../data/northwind";
 import { BrowserModule } from '@angular/platform-browser';
@@ -43,7 +43,7 @@ export class AppComponent {
 
 @NgModule({
 	imports:	  [ BrowserModule, FormsModule ],
-	declarations: [ AppComponent, IgGridComponent, Column, Feature ],
+	declarations: [ AppComponent, IgGridComponent, Column, Features, IgGridPagingFeature ],
 	bootstrap:	[ AppComponent ]
 })
 export class AppModule {}
