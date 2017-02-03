@@ -406,7 +406,7 @@ export function main() {
 				rows = fixture.componentInstance.viewChild.allRows();
 				expect(rows.length).toBe(1);
 				var cell =  fixture.componentInstance.viewChild.cellAt(1, 0, false);
-				expect(cell.nodeValue).toBe("Mary Johnson");
+				expect(cell.innerHTML).toBe("Mary Johnson");
 
 				done();
 
