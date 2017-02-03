@@ -6,7 +6,7 @@ import './igniteui';
 declare var jQuery: any;
 
 var NODES = {
-	"ig-text-editor": "input",
+	"ig-text-editor": "div",
 	"ig-numeric-editor": "input",
 	"ig-percent-editor": "input",
 	"ig-mask-editor": "input",
