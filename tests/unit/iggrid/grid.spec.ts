@@ -367,6 +367,54 @@ export function main() {
 			});
 		});
 
+		it('should allow calling component and feature methods', (done) => {
+			var template = "<ig-grid [widgetId]='gridID' [(options)]='opts1'>" +
+				"<column [key]=\"'Id'\" [(headerText)]=\"idHeaderText\" [width]=\"'165px'\" [dataType]=\"'number'\"></column>" +
+				"<column [key]=\"'Name'\" [headerText]=\"'Name'\" [width]=\"'250px'\" [dataType]=\"'string'\"></column>" +
+				"<column [key]=\"'HireDate'\" [headerText]=\"'Quantity per unit'\" [width]=\"'250px'\" [dataType]=\"'date'\"></column>" +
+				"<features>" + 
+				"<paging [pageSize]=\"'2'\"></paging>" +
+				"</features>" +
+			"</ig-grid>";
+			TestBed.overrideComponent(TestComponent, {
+					set: {
+						template: template
+					}
+				});
+			TestBed.compileComponents().then(() => {
+				let fixture = TestBed.createComponent(TestComponent);
+				fixture.detectChanges();
+
+				//check if grid method calls return correct values
+				var rows = fixture.componentInstance.viewChild.allRows();
+				expect(rows.length).toBe(2);
+				var cellVal =  fixture.componentInstance.viewChild.getCellValue(1, "Name");
+				expect(cellVal).toBe("John Smith");
+
+				//call paging feature's api methods
+				var paging =  fixture.componentInstance.viewChild.featuresList.paging;
+
+				paging.pageSize(1);
+
+				rows = fixture.componentInstance.viewChild.allRows();
+				expect(rows.length).toBe(1);
+				cellVal =  fixture.componentInstance.viewChild.getCellValue(1, "Name");
+				expect(cellVal).toBe("John Smith");
+
+				paging.pageIndex(1);
+
+				rows = fixture.componentInstance.viewChild.allRows();
+				expect(rows.length).toBe(1);
+				cellVal =  fixture.componentInstance.viewChild.getCellValue(1, "Name");
+				expect(cellVal).toBe("Mary Johnson");
+
+				done();
+
+			});
+
+
+		 })
+
 		it('should allow filtering after new data is applied', (done) => {
 			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts2" [(dataSource)]="data1"></ig-grid></div>';
 			TestBed.overrideComponent(TestComponent, {
