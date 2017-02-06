@@ -101,7 +101,7 @@ export class AppComponent {
 
 		if(!this.condCombo.selectedItems() ){
 			var fElem = this.condCombo.itemsFromIndex(0);
-			this.condCombo.select(fElem.element);
+			this.condCombo.select(fElem["element"]);
 		}
 		var condition = this.condCombo.value();
 
@@ -132,7 +132,7 @@ export class AppComponent {
 
 	reCalcPageIndexes(){
 		var indexes = [];
-		for(var i = 0; i < Math.ceil(this.grid.widget().data("igGrid").dataSource._filteredData.length/this.currPageSize) ; i++){
+		for(var i = 0; i < Math.ceil(this.grid.widget()["data"]("igGrid").dataSource._filteredData.length/this.currPageSize) ; i++){
 				indexes.push({value: i+1});
 		}
 		this.pageIndexes = indexes;
