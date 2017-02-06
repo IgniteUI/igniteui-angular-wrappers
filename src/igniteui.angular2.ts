@@ -1156,6 +1156,7 @@ export class IgControlBase<Model> implements DoCheck {
 	protected _config: any;
 	protected _events: Map<string, string>;
 	protected _allowChangeDetection = true;
+	private _evtEmmiters : any = {};
 
 	set options(v: Model) {
 		this._config = jQuery.extend(true, v, this._opts);
@@ -1188,6 +1189,8 @@ export class IgControlBase<Model> implements DoCheck {
 
 		for (var propt in jQuery.ui[this._widgetName].prototype.events) {
 			this[propt] = new EventEmitter();
+			//cahcing the event emmitters for cases when the event name is the same as a method name.
+			this._evtEmmiters[propt] = this[propt];
 		}
 	}
 
@@ -1220,7 +1223,8 @@ export class IgControlBase<Model> implements DoCheck {
 			evtName = this._widgetName.toLowerCase() + propt.toLowerCase();
 			this._events[evtName] = propt;
 			jQuery(this._el).on(evtName, function (evt, ui) {
-				that[that._events[evt.type]].emit({ event: evt, ui: ui });
+				var emmiter = that._evtEmmiters[that._events[evt.type]];
+				emmiter.emit({ event: evt, ui: ui });
 			});
 		}
 		var propNames = Object.getOwnPropertyNames(jQuery.ui[this._widgetName].prototype);
@@ -1850,6 +1854,13 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
 	 * 				This functionality is completely delegated to the data source control.
 	 */
 	public totalRecordsCount(): number { return; } ;
+
+	/**
+ 	 * Causes the grid to data bind to the data source (local or remote) , and re-render all of the data as well
+	 *
+	 * @param internal    
+	 */
+	dataBind(internal: Object): void { return; };
 
 	/**
  	 * Moves a visible column at a specified place, in front or behind a target column or at a target index
