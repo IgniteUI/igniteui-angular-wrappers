@@ -45,6 +45,36 @@ export class AppComponent {
 			target: "#datachart1"
 		};
 	}
+
+	changeZB() {
+		let opts = {};
+
+		opts = {
+			target: "#datachart1",
+			clone: {
+				dataSource: this.data,
+				gridMode: "none",
+				axes: [{
+					name: "NameAxis",
+					type: "categoryX",
+					labelVisibility: "collapsed"
+				},
+				{
+					name: "PopulationAxis",
+					type: "numericY",
+					labelVisibility: "collapsed"
+				}],
+				series: [{
+					name: "2015Population",
+					type: "line",
+					xAxis: "NameAxis",
+					yAxis: "PopulationAxis",
+					valueMemberPath: "Pop2015"
+				}]
+			}
+		};
+		this.zoombarOptions = opts;
+	}
 }
 
 @NgModule({

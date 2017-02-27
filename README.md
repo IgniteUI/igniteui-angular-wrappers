@@ -123,6 +123,51 @@ when there are overlapping properties. Also changing top-level attribute will ap
         }
     }
 
+### Aply new set of Control Options
+
+In order to change the more options at once (or recreate the component with another set of options), the new configuration can be applied to the `options` property.
+
+#### Example:
+
+    @Component({
+        selector: 'my-app',
+        template: `<ig-grid 
+            [(options)]="gridOptions" 
+            [(widgetId)]='id'></ig-grid>`,
+        directives: [IgGridComponent]
+    })
+    export class AppComponent {
+        private gridOptions: IgGrid;
+        private id: string;
+        private data: any;
+
+        constructor() {
+            this.data = Northwind.getData();
+            this.id ='grid1';
+            this.gridOptions = {
+                dataSource: this.data,
+                width: "100%",
+                height: "400px",
+                autoGenerateColumns: true
+            };
+        }
+
+        recreateGrid() {
+            this.gridOptions = {
+                dataSource: Northwind.getAnotherData(),
+                width: "700px",
+                autoGenerateColumns: true,
+                features: [
+                    { name: "Paging" }
+                ]
+            };
+        }
+    }
+
+In this example `options` attribute points to `gridOptions` and changing in reference will destroy the grid, combine the old options with new ones and create the grid with the combined options.
+Also note that the new grid will have height of 400px, even though it's not defined into the new options, because of the combination with new options.
+If disabling an option is required set it to `null`, `undefined`, `[]` or `{}`.
+
 ### Handling events
 
 Binding to control events is achieved by assigning attributes where the name of the attribute is the name of the control's event name surrounded by parenthesis and the value is the name of the event handler.

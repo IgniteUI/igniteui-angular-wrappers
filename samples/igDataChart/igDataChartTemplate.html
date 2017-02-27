@@ -1,2 +1,4 @@
-<ig-data-chart [(options)]="options" widgetId='datachart1'></ig-data-chart>
-<ig-zoombar [(options)]="zoombarOptions" widgetId='zoombar'></ig-zoombar>
+<ig-data-chart [(options)]="options" [widgetId]='"datachart1"'></ig-data-chart>
+<ig-zoombar [(options)]="zoombarOptions" [widgetId]='"zoombar"'></ig-zoombar>
+<br/>
+<button type="button" class="btn btn-default" (click)="changeZB()">Change Zoombar Type</button>

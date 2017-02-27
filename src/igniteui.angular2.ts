@@ -6,7 +6,7 @@ import './igniteui';
 declare var jQuery: any;
 
 var NODES = {
-	"ig-text-editor": "input",
+	"ig-text-editor": "div",
 	"ig-numeric-editor": "input",
 	"ig-percent-editor": "input",
 	"ig-mask-editor": "input",
@@ -1159,13 +1159,20 @@ export class IgControlBase<Model> implements DoCheck {
 	private _evtEmmiters : any = {};
 
 	set options(v: Model) {
-		this._config = jQuery.extend(true, v, this._opts);
-		if (this._opts.dataSource) {
-			// _config.dataSource should reference the data if the data is set as a top-level opts
-			// to allow two-way data binding
-			this._config.dataSource = this._opts.dataSource;
+		if (this._config !== undefined && this._config !== null) {
+			//if the options are alrealy set recreate the component
+			jQuery(this._el)[this._widgetName]("destroy");
+			this._config = jQuery.extend(false, this._config, v);
+			jQuery(this._el)[this._widgetName](this._config);
+		} else {
+			this._config = jQuery.extend(true, v, this._opts);
+			if (this._opts.dataSource) {
+				// _config.dataSource should reference the data if the data is set as a top-level opts
+				// to allow two-way data binding
+				this._config.dataSource = this._opts.dataSource;
+			}
+			this._differ = this._differs.find([]).create(null);
 		}
-		this._differ = this._differs.find([]).create(null);
 		this._opts = jQuery.extend(true, {}, this._config);
 		if (this._opts.dataSource) {
 			delete this._opts.dataSource;

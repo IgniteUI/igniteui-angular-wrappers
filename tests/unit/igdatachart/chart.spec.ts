@@ -28,6 +28,24 @@ export function main() {
 			});
 		});
 
+		it('should recreate correctly', (done) => {
+			var template = '<div><ig-data-chart  [widgetId]="\'datachart1\'" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-data-chart></div>';
+			TestBed.overrideComponent(TestComponent, {
+				set: {
+					template: template
+				}
+			});
+			TestBed.compileComponents().then(() => {
+				let fixture = TestBed.createComponent(TestComponent);
+				fixture.detectChanges();
+				fixture.componentInstance.opts = fixture.componentInstance.opts1;
+				fixture.detectChanges();
+				expect($(fixture.debugElement.nativeElement).find("#datachart1").igDataChart("option", "series")[0].type)
+					.toBe("line");
+				done();
+			});
+		});
+
 		it('Zoombar should initialize correctly', (done) => {
 			var template = '<div><ig-data-chart  widgetId="datachart1" [(options)]="opts"></ig-data-chart><ig-zoombar [(options)]="zoombarOpts" widgetId="zoombar"></ig-zoombar></div>';
 			TestBed.overrideComponent(TestComponent, {
@@ -51,7 +69,8 @@ export function main() {
 	template: '<div></div>' //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
 })
 class TestComponent {
-	private opts: any;
+	public opts: any;
+	public opts1: any;
 	private zoombarOpts: any;
 	private data: Array<any>;
 	private cdi: number;
@@ -84,6 +103,31 @@ class TestComponent {
 			series: [{
 				name: "2015Population",
 				type: "column",
+				isHighlightingEnabled: true,
+				isTransitionInEnabled: true,
+				xAxis: "NameAxis",
+				yAxis: "PopulationAxis",
+				valueMemberPath: "Pop2015"
+			}]
+		};
+
+		this.opts1 = {
+			dataSource: this.data,
+			axes: [{
+				name: "NameAxis",
+				type: "categoryX",
+				title: "Country",
+				label: "CountryName"
+			},
+				{
+					name: "PopulationAxis",
+					type: "numericY",
+					minimumvalue: 0,
+					title: "Milions of People"
+				}],
+			series: [{
+				name: "2015Population",
+				type: "line",
 				isHighlightingEnabled: true,
 				isTransitionInEnabled: true,
 				xAxis: "NameAxis",
