@@ -522,7 +522,7 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
 				for (i = 0; i < diff.length; i++) {
 					for (j = 0; j < diff[i].txlog.length; j++) {
 						record = this._config.dataSource[diff[i].index];
-						td = element.data(this._widgetName)._getCellsByColKey(element.find("tr[data-id='" + record[pkKey] + "']"), diff[i].txlog[j].key);
+						td = grid._getCellsByColKey(element.find("tr[data-id='" + record[pkKey] + "']"), diff[i].txlog[j].key);
 
 						column = element.data(this._widgetName).columnByKey(diff[i].txlog[j].key);
 						if (column) {
