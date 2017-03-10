@@ -36,7 +36,7 @@
     "karma-jasmine": "^0.2.2",
     "karma-junit-reporter": "^0.4.2",
     "karma-coverage": "",
-    "karma-remap-istanbul": "",
+    "karma-remap-istanbul": "0.5.0",
     "lite-server": "^2.2.0",
     "typescript": "^2.0.2",
     "coveralls": "^2.11.9",

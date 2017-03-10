@@ -528,7 +528,7 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
 						column = element.data(this._widgetName).columnByKey(diff[i].txlog[j].key);
 						if (column) {
 							if (column.template) {
-								newFormattedVal = grid._renderTemplatedCell(diff[i].txlog[j].newVal, column);
+								newFormattedVal = grid._renderTemplatedCell(record, column);
 							} else {
 								newFormattedVal = grid._renderCell(diff[i].txlog[j].newVal, column, record);
 							}
@@ -600,7 +600,7 @@ export class IgTreeGridComponent extends IgGridBase<IgTreeGrid> {
 						column = element.data(this._widgetName).columnByKey(diff[i].txlog[j].key);
 						if (column) {
 							if (column.template) {
-								newFormattedVal = grid._renderTemplatedCell(diff[i].txlog[j].newVal, column);
+								newFormattedVal = grid._renderTemplatedCell(record, column);
 							} else {
 								newFormattedVal = grid._renderCell(diff[i].txlog[j].newVal, column, record);
 							}
@@ -678,7 +678,7 @@ export class IgHierarchicalGridComponent extends IgGridBase<IgHierarchicalGrid> 
 							column = mainGrid.columnByKey(diff[i].txlog[j].key);
 							if (column) {
 								if (column.template) {
-									newFormattedVal = mainGrid._renderTemplatedCell(diff[i].txlog[j].newVal, column);
+									newFormattedVal = mainGrid._renderTemplatedCell(record, column);
 								} else {
 									newFormattedVal = mainGrid._renderCell(diff[i].txlog[j].newVal, column, record);
 								}
