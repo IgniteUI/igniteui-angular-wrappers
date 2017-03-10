@@ -524,7 +524,7 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
 						record = this._config.dataSource[diff[i].index];
 						td = grid._getCellsByColKey(element.find("tr[data-id='" + record[pkKey] + "']"), diff[i].txlog[j].key);
 
-						column = element.data(this._widgetName).columnByKey(diff[i].txlog[j].key);
+						column = grid.columnByKey(diff[i].txlog[j].key);
 						if (column) {
 							if (column.template) {
 								newFormattedVal = grid._renderTemplatedCell(diff[i].txlog[j].newVal, column);
