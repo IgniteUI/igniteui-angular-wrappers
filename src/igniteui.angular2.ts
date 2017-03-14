@@ -1470,7 +1470,7 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
 			var diff = [],
 				element = jQuery(this._el),
 				grid = element.data(this._widgetName),
-				colIndex, td, i, j, pkKey = this._config.primaryKey, newFormattedVal, record, column;
+				td, i, j, pkKey = this._config.primaryKey, newFormattedVal, record, column;
 
 			if (typeof this._config.dataSource === "string") {
 				return;
@@ -1489,14 +1489,13 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
 				this._dataSource = jQuery.extend(true, [], this._config.dataSource);
 				for (i = 0; i < diff.length; i++) {
 					for (j = 0; j < diff[i].txlog.length; j++) {
-						colIndex = element.data(this._widgetName)._getCellIndexByColumnKey(diff[i].txlog[j].key);
 						record = this._config.dataSource[diff[i].index];
-						td = element.find("tr[data-id='" + record[pkKey] + "']").children().get(colIndex);
+						td = grid._getCellsByColKey(element.find("tr[data-id='" + record[pkKey] + "']"), diff[i].txlog[j].key);
 
-						column = element.data(this._widgetName).columnByKey(diff[i].txlog[j].key);
+						column = grid.columnByKey(diff[i].txlog[j].key);
 						if (column) {
 							if (column.template) {
-								newFormattedVal = grid._renderTemplatedCell(diff[i].txlog[j].newVal, column);
+								newFormattedVal = grid._renderTemplatedCell(record, column);
 							} else {
 								newFormattedVal = grid._renderCell(diff[i].txlog[j].newVal, column, record);
 							}
@@ -2040,7 +2039,7 @@ export class IgTreeGridComponent extends IgGridBase<IgTreeGrid> {
 						column = element.data(this._widgetName).columnByKey(diff[i].txlog[j].key);
 						if (column) {
 							if (column.template) {
-								newFormattedVal = grid._renderTemplatedCell(diff[i].txlog[j].newVal, column);
+								newFormattedVal = grid._renderTemplatedCell(record, column);
 							} else {
 								newFormattedVal = grid._renderCell(diff[i].txlog[j].newVal, column, record);
 							}
@@ -2168,7 +2167,7 @@ export class IgHierarchicalGridComponent extends IgGridBase<IgHierarchicalGrid> 
 							column = mainGrid.columnByKey(diff[i].txlog[j].key);
 							if (column) {
 								if (column.template) {
-									newFormattedVal = mainGrid._renderTemplatedCell(diff[i].txlog[j].newVal, column);
+									newFormattedVal = mainGrid._renderTemplatedCell(record, column);
 								} else {
 									newFormattedVal = mainGrid._renderCell(diff[i].txlog[j].newVal, column, record);
 								}
@@ -5413,5 +5412,3 @@ export class IgSplitButtonComponent extends IgControlBase<IgSplitButton> {
 	public destroy(): void { return; } ;
 	public widget(): void { return; } ;
 }
-
-
