@@ -130,12 +130,13 @@ export class Feature<Model> {
 	public initSettings: Model;
 	public name: string;
 	private _events:any;
-
+	private featureName: string;
 
 	constructor(el: ElementRef) {
 		this._el = el;
 		let nodeName = IgUtil.convertToCamelCase(el.nativeElement.nodeName.toLowerCase());
-		this.name  = nodeName.charAt(0).toUpperCase() + nodeName.slice(1);;
+		this.name  = nodeName.charAt(0).toUpperCase() + nodeName.slice(1);		
+		this.featureName = "igGrid" + this.name;
 		for (var propt in jQuery.ui["igGrid" + this.name].prototype.events) {
 			this[propt] = new EventEmitter();
 		}
@@ -144,20 +145,19 @@ export class Feature<Model> {
 	ngOnInit() {
 		let self = this;
 		this.initSettings = jQuery.extend(true, {}, this);
-		let featureName = "igGrid" + this.name;
 		let evtName;
 		this._events = new Map<string, string>();
 		let grid = jQuery(this._el.nativeElement).closest("ig-grid").find("table");
 
 		//event binding for features
-		for (var propt in jQuery.ui[featureName].prototype.events) {
-			evtName = featureName.toLowerCase() + propt.toLowerCase();
+		for (var propt in jQuery.ui[this.featureName].prototype.events) {
+			evtName = this.featureName.toLowerCase() + propt.toLowerCase();
 			this._events[evtName] = propt;
 			jQuery(grid).on(evtName, function (evt, ui) {
 				self[self._events[evt.type]].emit({ event: evt, ui: ui });
 			});
 		}
-		for (var setting in jQuery.ui[featureName].prototype.options) {
+		for (var setting in jQuery.ui[this.featureName].prototype.options) {
 			Object.defineProperty(self, setting, {
 				set: self.createFeatureSetter(setting),
 				get: self.createFeatureGetter(setting),
@@ -165,10 +165,10 @@ export class Feature<Model> {
 				configurable: true
 			});
 		}
-		var propNames = Object.getOwnPropertyNames(jQuery.ui[featureName].prototype);
+		var propNames = Object.getOwnPropertyNames(jQuery.ui[this.featureName].prototype);
 		for(var i = 0; i < propNames.length; i++) {
 			var name = propNames[i];
-			if(name.indexOf("_") !== 0 && typeof jQuery.ui[featureName].prototype[name] === "function"){
+			if(name.indexOf("_") !== 0 && typeof jQuery.ui[this.featureName].prototype[name] === "function"){
 				Object.defineProperty(self, name, {
 					get: self.createMethodGetter(name)
 				});
@@ -179,14 +179,13 @@ export class Feature<Model> {
 	createFeatureSetter(name) {
 		return function (value) {
 			let grid = jQuery(this._el.nativeElement).closest("ig-grid").find("table[role='grid']");
-			let featureName = "igGrid" + this.name;
 			this._settings[name] = value;
 
-			if (jQuery.ui[featureName] &&
-				jQuery.ui[featureName].prototype.options &&
-				jQuery.ui[featureName].prototype.options.hasOwnProperty(name) &&
-				grid.data(featureName)) {
-				grid[featureName]("option", name, value);
+			if (jQuery.ui[this.featureName] &&
+				jQuery.ui[this.featureName].prototype.options &&
+				jQuery.ui[this.featureName].prototype.options.hasOwnProperty(name) &&
+				grid.data(this.featureName)) {
+				grid[this.featureName]("option", name, value);
 			}
 		}
 	}
@@ -199,9 +198,8 @@ export class Feature<Model> {
 	createMethodGetter(name) {
 		return function () {
 			let grid = jQuery(this._el.nativeElement).closest("ig-grid").find("table[role='grid']");
-			let featureName = "igGrid" + this.name;
 			var args = [];
-			var feature = grid.data(featureName);
+			var feature = grid.data(this.featureName);
 			return jQuery.proxy(feature[name], feature);
 		}
 	}
