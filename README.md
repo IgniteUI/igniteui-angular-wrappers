@@ -250,6 +250,34 @@ Binding to igGrid* feature events is done in the control's configuration code.
 
 In this example igGridFiltering `dataFiltered` event is handled in the application component class.
 
+## Calling Component methods
+
+Component methods can be called by accessing the component from the view. For example:
+
+    @Component({
+        selector: 'my-app',
+        template: '<ig-grid #grid1
+            [(options)]="gridOptions">
+            <features>
+				<paging [pageSize]="'2'"></paging>
+			</features>
+        </ig-grid>',
+        directives: [IgGridComponent]
+    })
+	export class AppComponent {
+    	private gridOptions: IgGrid;
+    	@ViewChild("grid1") myGrid: IgGridComponent;
+        private id: string;
+        constructor() { ... }
+         
+    	ngAfterViewInit() {
+        	//call grid method
+        	var cell = this.myGrid.cellById(1, "Name");
+            //call grid paging method
+            this.myGrid.featuresList.paging.pageIndex(2);
+        }
+    }
+
 ## Two-way Data Binding
 The following controls currently support two-way data binding:
 
