@@ -1499,6 +1499,10 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
 							} else {
 								newFormattedVal = grid._renderCell(diff[i].txlog[j].newVal, column, record);
 							}
+							//if current cell is still in edit mode, exit it.
+							if (jQuery(td).find("input.ui-igedit-input").length > 0){
+								element.data("igGridUpdating").endEdit();
+							}
 							jQuery(td).html(newFormattedVal);
 							grid.dataSource.updateRow(record[pkKey], record);
 							grid.dataSource._commitTransactionsByRowId(record[pkKey]);
