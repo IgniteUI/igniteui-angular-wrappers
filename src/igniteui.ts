@@ -17235,7 +17235,7 @@ interface JQuery {
 	igCombo(methodName: "deselectByIndex", index: Object, options?: Object, event?: Object): Object;
 	igCombo(methodName: "deselectAll", options?: Object, event?: Object): Object;
 	igCombo(methodName: "activeIndex", index?: number): void;
-	igCombo(methodName: "text", text?: string): void;
+	igCombo(methodName: "text", text?: string): string|Object;
 	igCombo(methodName: "listScrollTop", value?: number): void;
 	igCombo(methodName: "listItems"): Object;
 	igCombo(methodName: "comboWrapper"): Object;
