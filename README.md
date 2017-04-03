@@ -2,7 +2,6 @@
 
 [![NPM version](https://img.shields.io/npm/v/igniteui-angular2.svg?style=flat)](https://www.npmjs.com/package/igniteui-angular2)
 [![Build Status](https://travis-ci.org/IgniteUI/igniteui-angular2.svg?branch=master)](https://travis-ci.org/IgniteUI/igniteui-angular2)
-[![Issue Stats](http://issuestats.com/github/IgniteUI/igniteui-angular2/badge/pr?style=flat)](http://issuestats.com/github/IgniteUI/igniteui-angular2)
 [![Coverage Status](https://coveralls.io/repos/github/IgniteUI/igniteui-angular2/badge.svg?branch=master)](https://coveralls.io/github/IgniteUI/igniteui-angular2?branch=master)
 
 Use the components found in `src\igniteui.angular2.ts` to use [Ignite UI](http://igniteui.com) controls in [Angular 2](https://angular.io/) applications. [Work with the running samples here](http://igniteui.github.io/igniteui-angular2).
@@ -124,6 +123,51 @@ when there are overlapping properties. Also changing top-level attribute will ap
         }
     }
 
+### Aply new set of Control Options
+
+In order to change the more options at once (or recreate the component with another set of options), the new configuration can be applied to the `options` property.
+
+#### Example:
+
+    @Component({
+        selector: 'my-app',
+        template: `<ig-grid 
+            [(options)]="gridOptions" 
+            [(widgetId)]='id'></ig-grid>`,
+        directives: [IgGridComponent]
+    })
+    export class AppComponent {
+        private gridOptions: IgGrid;
+        private id: string;
+        private data: any;
+
+        constructor() {
+            this.data = Northwind.getData();
+            this.id ='grid1';
+            this.gridOptions = {
+                dataSource: this.data,
+                width: "100%",
+                height: "400px",
+                autoGenerateColumns: true
+            };
+        }
+
+        recreateGrid() {
+            this.gridOptions = {
+                dataSource: Northwind.getAnotherData(),
+                width: "700px",
+                autoGenerateColumns: true,
+                features: [
+                    { name: "Paging" }
+                ]
+            };
+        }
+    }
+
+In this example `options` attribute points to `gridOptions` and changing in reference will destroy the grid, combine the old options with new ones and create the grid with the combined options.
+Also note that the new grid will have height of 400px, even though it's not defined into the new options, because of the combination with new options.
+If disabling an option is required set it to `null`, `undefined`, `[]` or `{}`.
+
 ### Handling events
 
 Binding to control events is achieved by assigning attributes where the name of the attribute is the name of the control's event name surrounded by parenthesis and the value is the name of the event handler.
@@ -205,6 +249,34 @@ Binding to igGrid* feature events is done in the control's configuration code.
     }
 
 In this example igGridFiltering `dataFiltered` event is handled in the application component class.
+
+## Calling Component methods
+
+Component methods can be called by accessing the component from the view. For example:
+
+    @Component({
+        selector: 'my-app',
+        template: '<ig-grid #grid1
+            [(options)]="gridOptions">
+            <features>
+				<paging [pageSize]="'2'"></paging>
+			</features>
+        </ig-grid>',
+        directives: [IgGridComponent]
+    })
+	export class AppComponent {
+    	private gridOptions: IgGrid;
+    	@ViewChild("grid1") myGrid: IgGridComponent;
+        private id: string;
+        constructor() { ... }
+         
+    	ngAfterViewInit() {
+        	//call grid method
+        	var cell = this.myGrid.cellById(1, "Name");
+            //call grid paging method
+            this.myGrid.featuresList.paging.pageIndex(2);
+        }
+    }
 
 ## Two-way Data Binding
 The following controls currently support two-way data binding:
