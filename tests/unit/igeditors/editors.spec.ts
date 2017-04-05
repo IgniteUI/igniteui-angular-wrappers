@@ -4,7 +4,6 @@ import {Component, ViewChild, TemplateRef} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import * as Infragistics from '../../../src/igniteui.angular2';
 
-import {dispatchEvent} from '@angular/platform-browser/testing/browser_util';
 
 export function main() {
 	describe('Infragistics Angular2 TextEditor', () => {
@@ -56,7 +55,7 @@ export function main() {
 						window.typeInInput("2", field);
 						expect(fixture.debugElement.componentInstance.val).toBe("changed_test_value22");
 						field.val("changed_again_test_value").trigger("paste").trigger("blur");
-						dispatchEvent($(fixture.debugElement.nativeElement).find("#editor1")[0], "blur");
+						$(fixture.debugElement.nativeElement).find("#editor1")[0].dispatchEvent(new Event("blur"));
 						fixture.detectChanges();
 						setTimeout(() => {
 							expect(fixture.debugElement.componentInstance.val).toBe("changed_again_test_value");
@@ -171,7 +170,7 @@ export function main() {
 					setTimeout(() => {
 						expect($(fixture.debugElement.nativeElement).find("#editor1").igNumericEditor("displayValue")).toBe("1");
 						$(fixture.debugElement.nativeElement).find("#editor1").trigger("focus").val(154).trigger("paste").trigger("blur");
-						dispatchEvent($(fixture.debugElement.nativeElement).find("#editor1")[0], "blur");
+						$(fixture.debugElement.nativeElement).find("#editor1")[0].dispatchEvent(new Event("blur"));
 						fixture.detectChanges();
 						setTimeout(() => {
 							expect(fixture.debugElement.componentInstance.val).toBe(154);
