@@ -18,9 +18,6 @@
     "node_modules/*",
     "dist/*"
   ],
-  "files": [
-    "src/igniteui.angular2.ts"
-  ],
   "angularCompilerOptions": {
     "skipTemplateCodegen": true
   }
