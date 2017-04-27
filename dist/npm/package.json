@@ -1,7 +1,7 @@
 {
   "name": "igniteui-angular2",
   "version": "1.0.9",
-  "description" : "A packaged version of Ignite UI components for Angular2",
+  "description" : "A packaged version of Ignite UI components for Angular",
   "license": "MIT",
   "typings": "igniteui.angular2.d.ts",
   "repository": {
@@ -16,16 +16,13 @@
     "ignite ui",
     "igniteui",
     "angular2",
+    "angular",
     "infragistics",
     "jquery widgets",
     "jquery controls",
     "data visualization",
     "data grids"
   ],
-  "peerDependencies": {
-    "@angular/common":  "2.0.0",
-    "@angular/core":  "2.0.0"
-  },
   "dependencies": {
     "@types/reflect-metadata": "^0.0.5"
   }

@@ -1,19 +1,19 @@
-#Ignite UI components for Angular 2
+# Ignite UI components for Angular
 
 [![NPM version](https://img.shields.io/npm/v/igniteui-angular2.svg?style=flat)](https://www.npmjs.com/package/igniteui-angular2)
 [![Build Status](https://travis-ci.org/IgniteUI/igniteui-angular2.svg?branch=master)](https://travis-ci.org/IgniteUI/igniteui-angular2)
 [![Coverage Status](https://coveralls.io/repos/github/IgniteUI/igniteui-angular2/badge.svg?branch=master)](https://coveralls.io/github/IgniteUI/igniteui-angular2?branch=master)
 
-Use the components found in `src\igniteui.angular2.ts` to use [Ignite UI](http://igniteui.com) controls in [Angular 2](https://angular.io/) applications. [Work with the running samples here](http://igniteui.github.io/igniteui-angular2).
+Use the components found in `src\igniteui.angular2.ts` to use [Ignite UI](http://igniteui.com) controls in [Angular](https://angular.io/) applications. [Work with the running samples here](http://igniteui.github.io/igniteui-angular2).
 
-#Requirements
+# Requirements
 
 - [jQuery](http://www.jquery.com) v1.9.1 and later
 - [jQuery UI](http://www.jqueryui.com) v1.9.0 and later
-- [AngularJS 2](https://angular.io/) v2.0 beta and later
+- [Angular](https://angular.io/) v2.0 beta and later
 - [Ignite UI](http://www.igniteui.com) 15.2 and later
 
-#Running the samples
+# Running the samples
 To run the samples, you need [Node.js](http://nodejs.org/) installed on your machine.
 Afterwards, from your terminal run the following commands:
 
@@ -22,10 +22,10 @@ Afterwards, from your terminal run the following commands:
 3. `npm install`
 4. `npm start`
 
-#Getting Started
+# Getting Started
 
 ## Initializing controls
-In an Angular 2 application, Ignite UI controls support markup initialization which is done by using custom tags.
+In an Angular application, Ignite UI controls support markup initialization which is done by using custom tags.
 
 ### Custom tags
 Each control implements a custom tag component where the tag name is formed by splitting each capital letter in the control name with the `-` symbol.
@@ -303,7 +303,7 @@ Since we need the code coverage of the `igniteui.angular2.js` file itself, we us
 
 ---------------------------------------
 
-##What is Ignite UI?
+## What is Ignite UI?
 [![Ignite UI Logo](http://infragistics-blogs.github.io/github-assets/logos/igniteui.png)](http://www.igniteui.com)
 
 [Ignite UI](http://igniteui.com/) is an advanced HTML5+ toolset that helps you create stunning, modern Web apps. Building on jQuery and jQuery UI, it primarily consists of feature rich, high-performing UI controls/widgets such as all kinds of charts, data visualization maps, (hierarchical, editable) data grids, pivot grids, enhanced editors (combo box, masked editors, HTML editor, date picker, to name a few), flexible data source connectors, and a whole lot more.  Too many to list here - check out [the site](http://igniteui.com/) for more info and to [download](https://igniteui.com/download) a trial.

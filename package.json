@@ -7,15 +7,15 @@
     "url": "https://github.com/IgniteUI/igniteui-angular2.git"
   },
   "dependencies": {
-    "@angular/common":  "~4.0.0",
-    "@angular/compiler":  "~4.0.0",
-    "@angular/core":  "~4.0.0",
-    "@angular/http":  "~4.0.0",
-    "@angular/forms":  "~4.0.0",
-    "@angular/platform-browser":  "~4.0.0",
-    "@angular/platform-browser-dynamic":  "~4.0.0",
-    "@angular/router":  "~4.0.0",
-    "@angular/upgrade":  "~4.0.0",
+    "@angular/common": "~4.0.0",
+    "@angular/compiler": "~4.0.0",
+    "@angular/core": "~4.0.0",
+    "@angular/http": "~4.0.0",
+    "@angular/forms": "~4.0.0",
+    "@angular/platform-browser": "~4.0.0",
+    "@angular/platform-browser-dynamic": "~4.0.0",
+    "@angular/router": "~4.0.0",
+    "@angular/upgrade": "~4.0.0",
     "angular-in-memory-web-api": "~0.3.0",
 
     "core-js": "^2.4.1",
@@ -28,6 +28,7 @@
     "bootstrap": "^3.3.6"
   },
   "devDependencies": {
+    "@angular/compiler-cli": "~4.0.0",
     "concurrently": "^3.2.0",
     "gulp-watch": "^4.3.5",
     "jasmine-core": "^2.4.1",
@@ -53,10 +54,11 @@
 
     "watch": "node node_modules/typescript/bin/tsc -w",
     "build": "node node_modules/typescript/bin/tsc",
-    "bundle": "node node_modules/typescript/bin/tsc -d && npm run prepare-dist",
-    "prepare-dist": "cp src/igniteui.angular2.js dist/npm/index.js  && cp src/igniteui.angular2.d.ts dist/npm/index.d.ts && cp src/igniteui.angular2.ts dist/npm/igniteui.angular2.ts && cp src/igniteui.ts dist/npm/ && cp src/igniteui.js dist/npm/ && cp src/igniteui.js.map dist/npm/ && cp src/jquery.d.ts dist/npm/",
+    "build-aot": "ngc -p tsconfig-aot.json",
+    "bundle": "npm run build-aot && npm run prepare-dist",
+    "prepare-dist": "cp src/igniteui.angular2.js dist/npm/index.js  && cp src/igniteui.angular2.d.ts dist/npm/index.d.ts && cp src/igniteui.angular2.metadata.json dist/npm/index.metadata.json && cp src/igniteui.angular2.ts dist/npm/igniteui.angular2.ts && cp src/igniteui.ts dist/npm/ && cp src/igniteui.js dist/npm/ && cp src/igniteui.js.map dist/npm/ && cp src/jquery.d.ts dist/npm/",
 
-    "pretest": "npm run build",
+    "pretest": "npm run build-aot",
     "test": "karma start tests/karma.conf.js && npm run remap-istanbul",
 
     "remap-istanbul": "npm run copy-coverage-report && npm run remap-istanbul-html && npm run remap-istanbul-lcov",
