@@ -42,6 +42,15 @@
       },
       './../data': {
         defaultExtension: 'ts'
+      },
+      '/samples/igGrid-AoT': {
+        defaultExtension: 'ts'
+      },
+      '../../samples/igGrid-AoT': {
+        defaultExtension: 'ts'
+      },
+      '../aot': {
+        defaultExtension: 'ts'
       }
     },
     transpiler: 'typescript',

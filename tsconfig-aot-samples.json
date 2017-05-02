@@ -19,9 +19,10 @@
     "dist/*"
   ],
   "files": [
-    "src/igniteui.angular2.ts"
+    "samples/igGrid-AoT/app.module.ts"
   ],
   "angularCompilerOptions": {
-    "skipTemplateCodegen": true
+    "genDir": "samples/aot",
+    "skipMetadataEmit" : true
   }
 }

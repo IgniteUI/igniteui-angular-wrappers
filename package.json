@@ -55,6 +55,7 @@
     "watch": "node node_modules/typescript/bin/tsc -w",
     "build": "node node_modules/typescript/bin/tsc",
     "build-aot": "ngc -p tsconfig-aot.json",
+    "build-aot-samples": "ngc -p tsconfig-aot-samples.json",
     "bundle": "npm run build-aot && npm run prepare-dist",
     "prepare-dist": "cp src/igniteui.angular2.js dist/npm/index.js  && cp src/igniteui.angular2.d.ts dist/npm/index.d.ts && cp src/igniteui.angular2.metadata.json dist/npm/index.metadata.json && cp src/igniteui.angular2.ts dist/npm/igniteui.angular2.ts && cp src/igniteui.ts dist/npm/ && cp src/igniteui.js dist/npm/ && cp src/igniteui.js.map dist/npm/ && cp src/jquery.d.ts dist/npm/",
 
