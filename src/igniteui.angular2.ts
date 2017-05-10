@@ -1,4 +1,4 @@
-import {Component, Directive, Inject, ElementRef, EventEmitter, Output, Input, QueryList, Renderer, OnChanges, NgZone,
+import {NgModule, Component, Directive, Inject, ElementRef, EventEmitter, Output, Input, QueryList, Renderer, OnChanges, NgZone,
 	SimpleChange, ChangeDetectionStrategy, IterableDiffers, DoCheck, Optional,ContentChild, ContentChildren, AfterContentInit} from '@angular/core';
 import {NgModel, ControlValueAccessor} from '@angular/forms';
 import './igniteui';
@@ -47,43 +47,9 @@ var NODES = {
 	"ig-tile-manager": "div"
 };
 
-module IgUtil {
-	export function extractGridFeatureOptions(name) {
-		let featureName = "igGrid" + name;
-		let options = ['name'];
-
-		if (jQuery.ui[featureName]) {
-			options = options.concat(Object.keys(jQuery.ui[featureName].prototype.options));
-		}
-		return options;
-	}
-	export function extractGridFeatureEvents(name) {
-		let featureName = "igGrid" + name;
-		let evts = [];
-		if (jQuery.ui[featureName]) {
-			evts = evts.concat(Object.keys(jQuery.ui[featureName].prototype.events));
-		}
-		return evts;
-	}
-	
-
-	export function extractAllGridColumnProperties() {
-		return ['headerText', 'key', 'formatter', 'format', 'dataType', 'width', 'hidden', 'template', 'unbound', 'group', 'rowspan', 'formula', 'unboundValues', 'unboundValuesUpdateMode', 'headerCssClass', 'columnCssClass'];
-	}
-
-
-
-	 export function convertToCamelCase(str) {
-		//convert hyphen to camelCase
-		return str.replace(/-([a-z])/g, function (group) {
-			return group[1].toUpperCase();
-		});
-	}
-}
-
 @Directive({
 	selector: 'column',
-	inputs: IgUtil.extractAllGridColumnProperties()
+	inputs: ['headerText', 'key', 'formatter', 'format', 'dataType', 'width', 'hidden', 'template', 'unbound', 'group', 'rowspan', 'formula', 'unboundValues', 'unboundValuesUpdateMode', 'headerCssClass', 'columnCssClass']
 })
 export class Column {
 	public _settings: any = {};
@@ -92,7 +58,7 @@ export class Column {
 	constructor(el: ElementRef) {
 		this._el = el;
 		let self = this;
-		let i, settings = IgUtil.extractAllGridColumnProperties();
+		let i, settings = ['headerText', 'key', 'formatter', 'format', 'dataType', 'width', 'hidden', 'template', 'unbound', 'group', 'rowspan', 'formula', 'unboundValues', 'unboundValuesUpdateMode', 'headerCssClass', 'columnCssClass'];
 		for(i = 0; i < settings.length; i++) {
 			Object.defineProperty(self, settings[i], {
 				set: self.createColumnsSetter(settings[i]),
@@ -134,8 +100,8 @@ export class Feature<Model> {
 
 	constructor(el: ElementRef) {
 		this._el = el;
-		let nodeName = IgUtil.convertToCamelCase(el.nativeElement.nodeName.toLowerCase());
-		this.name  = nodeName.charAt(0).toUpperCase() + nodeName.slice(1);		
+		let nodeName = el.nativeElement.nodeName.toLowerCase();
+		this.name  = nodeName.charAt(0).toUpperCase() + nodeName.slice(1);
 		this.featureName = "igGrid" + this.name;
 		for (var propt in jQuery.ui["igGrid" + this.name].prototype.events) {
 			this[propt] = new EventEmitter();
@@ -207,7 +173,8 @@ export class Feature<Model> {
 
 @Directive({
 	selector: 'sorting',
-	inputs:  IgUtil.extractGridFeatureOptions('Sorting')
+	inputs: ["disabled","create","type","caseSensitive","applySortedColumnCss","sortUrlKey","sortUrlKeyAscValue","sortUrlKeyDescValue","mode","customSortFunction","firstSortDirection","sortedColumnTooltip","modalDialogSortOnClick","modalDialogSortByButtonText","modalDialogResetButtonLabel","modalDialogCaptionButtonDesc","modalDialogCaptionButtonAsc","modalDialogCaptionButtonUnsort","modalDialogWidth","modalDialogHeight","modalDialogAnimationDuration","featureChooserText","unsortedColumnTooltip","columnSettings","modalDialogCaptionText","modalDialogButtonApplyText","modalDialogButtonCancelText","featureChooserSortAsc","featureChooserSortDesc","persist","sortingDialogContainment","dialogWidget","inherit"],
+	outputs: ["columnSorting","columnSorted","modalDialogOpening","modalDialogOpened","modalDialogMoving","modalDialogClosing","modalDialogClosed","modalDialogContentsRendering","modalDialogContentsRendered","modalDialogSortingChanged","modalDialogButtonUnsortClick","modalDialogSortClick","modalDialogButtonApplyClick","modalDialogButtonResetClick"]
 })
 export class IgGridSortingFeature extends Feature<IgGridSorting> {	
 	constructor(el: ElementRef) {
@@ -215,7 +182,7 @@ export class IgGridSortingFeature extends Feature<IgGridSorting> {
 	}
 
 	/**
- 	 * Sorts the data in a grid column  and updates the UI.
+	 * Sorts the data in a grid column  and updates the UI.
 	 *
 	 * @param index     Column key (string) or index (number) - for multi-row grid only column key can be used. Specifies the column which we want to sort. If the mode is multiple, previous sorting states are not cleared.
 	 * @param direction     Specifies sorting direction (ascending or descending)
@@ -224,17 +191,17 @@ export class IgGridSortingFeature extends Feature<IgGridSorting> {
 	public sortColumn(index: Object, direction: Object, header: Object): void { return; } ;
 
 	/**
- 	 * Sorts the data in grid columns and updates the UI.\
+	 * Sorts the data in grid columns and updates the UI.\
 	 */
 	public sortMultiple(): void { return; } ;
 
 	/**
- 	 * Removes current sorting(for all sorted columns) and updates the UI.
+	 * Removes current sorting(for all sorted columns) and updates the UI.
 	 */
 	public clearSorting(): void { return; } ;
 
 	/**
- 	 * Removes sorting for the grid column with the specified columnKey/columnIndex and updates the UI.
+	 * Removes sorting for the grid column with the specified columnKey/columnIndex and updates the UI.
 	 *
 	 * @param index     Column key (string) or index (number) - for multi-row grid only column key can be used. Specifies the column for which we want to remove sorting. If the mode is multiple, previous sorting states are not cleared.
 	 * @param header     - if specified client events should be fired
@@ -242,36 +209,37 @@ export class IgGridSortingFeature extends Feature<IgGridSorting> {
 	public unsortColumn(index: Object, header: Object): void { return; } ;
 
 	/**
- 	 * Destroys the sorting feature. Unbinds events, removes added sorting elements, etc.
+	 * Destroys the sorting feature. Unbinds events, removes added sorting elements, etc.
 	 */
 	public destroy(): void { return; } ;
 
 	/**
- 	 * Opens the multiple sorting dialog.
+	 * Opens the multiple sorting dialog.
 	 */
 	public openMultipleSortingDialog(): void { return; } ;
 
 	/**
- 	 * Closes the multiple sorting dialog.
+	 * Closes the multiple sorting dialog.
 	 */
 	public closeMultipleSortingDialog(): void { return; } ;
 
 	/**
- 	 * Renders content of multiple sorting dialog - sorted and unsorted columns.
+	 * Renders content of multiple sorting dialog - sorted and unsorted columns.
 	 *
 	 * @param isToCallEvents 
 	 */
 	public renderMultipleSortingDialogContent(isToCallEvents: Object): void { return; } ;
 
 	/**
- 	 * Remove clear button for multiple sorting dialog
+	 * Remove clear button for multiple sorting dialog
 	 */
 	public removeDialogClearButton(): void { return; } ;
 }
 
 @Directive({
 	selector: 'filtering',
-	inputs:  IgUtil.extractGridFeatureOptions('Filtering')
+	inputs: ["disabled","create","caseSensitive","filterSummaryAlwaysVisible","renderFC","filterSummaryTemplate","filterDropDownAnimations","filterDropDownAnimationDuration","filterDropDownWidth","filterDropDownHeight","filterExprUrlKey","filterDropDownItemIcons","columnSettings","type","filterDelay","mode","advancedModeEditorsVisible","advancedModeHeaderButtonLocation","filterDialogWidth","filterDialogHeight","filterDialogFilterDropDownDefaultWidth","filterDialogExprInputDefaultWidth","filterDialogColumnDropDownDefaultWidth","renderFilterButton","filterButtonLocation","nullTexts","labels","tooltipTemplate","filterDialogAddConditionTemplate","filterDialogAddConditionDropDownTemplate","filterDialogFilterTemplate","filterDialogFilterConditionTemplate","filterDialogAddButtonWidth","filterDialogOkCancelButtonWidth","filterDialogMaxFilterCount","filterDialogContainment","showEmptyConditions","showNullConditions","featureChooserText","featureChooserTextHide","featureChooserTextAdvancedFilter","dialogWidget","persist","inherit"],
+	outputs: ["dataFiltering","dataFiltered","dropDownOpening","dropDownOpened","dropDownClosing","dropDownClosed","filterDialogOpening","filterDialogOpened","filterDialogMoving","filterDialogFilterAdding","filterDialogFilterAdded","filterDialogClosing","filterDialogClosed","filterDialogContentsRendering","filterDialogContentsRendered","filterDialogFiltering"]
 })
 export class IgGridFilteringFeature extends Feature<IgGridFiltering> {
 		constructor(el: ElementRef) {
@@ -279,24 +247,24 @@ export class IgGridFilteringFeature extends Feature<IgGridFiltering> {
 	}
 
 	/**
- 	 * Destroys the filtering widget - remove fitler row, unbinds events, returns the grid to its previous state.
+	 * Destroys the filtering widget - remove fitler row, unbinds events, returns the grid to its previous state.
 	 */
 	public destroy(): void { return; } ;
 
 	/**
- 	 * Returns the count of data records that match filtering conditions
+	 * Returns the count of data records that match filtering conditions
 	 */
 	public getFilteringMatchesCount(): number { return; } ;
 
 	/**
- 	 * Toggle filter row when mode is simple or [advancedModeEditorsVisible](ui.iggridfiltering#options:advancedModeEditorsVisible) is true. Otherwise show/hide advanced dialog.
+	 * Toggle filter row when mode is simple or [advancedModeEditorsVisible](ui.iggridfiltering#options:advancedModeEditorsVisible) is true. Otherwise show/hide advanced dialog.
 	 *
 	 * @param event     Column key
 	 */
 	public toggleFilterRowByFeatureChooser(event: string): void { return; } ;
 
 	/**
- 	 * Applies filtering programmatically and updates the UI by default.
+	 * Applies filtering programmatically and updates the UI by default.
 	 *
 	 * @param expressions     An array of filtering expressions, each one having the format {fieldName: , expr: , cond: , logic: } where  fieldName is the key of the column, expr is the actual expression string with which we would like to filter, logic is 'AND' or 'OR', and cond is one of the following strings: "equals", "doesNotEqual", "contains", "doesNotContain", "greaterThan", "lessThan", "greaterThanOrEqualTo", "lessThanOrEqualTo", "true", "false", "null", "notNull", "empty", "notEmpty", "startsWith", "endsWith", "today", "yesterday", "on", "notOn", "thisMonth", "lastMonth", "nextMonth", "before", "after", "thisYear", "lastYear", "nextYear". The difference between the empty and null filtering conditions is that empty includes null, NaN, and undefined, as well as the empty string.
 	 * @param updateUI     specifies whether the filter row should be also updated once the grid is filtered
@@ -305,7 +273,7 @@ export class IgGridFilteringFeature extends Feature<IgGridFiltering> {
 	public filter(expressions: any[], updateUI?: boolean, addedFromAdvanced?: boolean): void { return; } ;
 
 	/**
- 	 * Check whether filterCondition requires or not filtering expression - e.g. if filterCondition is "lastMonth", "thisMonth", "null", "notNull", "true", "false", etc. then filtering expression is NOT required
+	 * Check whether filterCondition requires or not filtering expression - e.g. if filterCondition is "lastMonth", "thisMonth", "null", "notNull", "true", "false", etc. then filtering expression is NOT required
 	 *
 	 * @param filterCondition    filtering condition - e.g. "true", "false",  "yesterday", "empty", "null", etc.
 	 */
@@ -315,8 +283,8 @@ export class IgGridFilteringFeature extends Feature<IgGridFiltering> {
 
 @Directive({
 	selector: 'paging',
-	inputs:  IgUtil.extractGridFeatureOptions('Paging'),
-	outputs: IgUtil.extractGridFeatureEvents('Paging')
+	inputs: ["disabled","create","pageSize","recordCountKey","pageSizeUrlKey","pageIndexUrlKey","currentPageIndex","type","showPageSizeDropDown","pageSizeDropDownLabel","pageSizeDropDownTrailingLabel","pageSizeDropDownLocation","showPagerRecordsLabel","pagerRecordsLabelTemplate","nextPageLabelText","prevPageLabelText","firstPageLabelText","lastPageLabelText","showFirstLastPages","showPrevNextPages","currentPageDropDownLeadingLabel","currentPageDropDownTrailingLabel","currentPageDropDownTooltip","pageSizeDropDownTooltip","pagerRecordsLabelTooltip","prevPageTooltip","nextPageTooltip","firstPageTooltip","lastPageTooltip","pageTooltipFormat","pageSizeList","pageCountLimit","visiblePageCount","defaultDropDownWidth","delayOnPageChanged","persist","inherit"],
+	outputs: ["pageIndexChanging","pageIndexChanged","pageSizeChanging","pageSizeChanged","pagerRendering","pagerRendered"]
 })
 export class IgGridPagingFeature extends Feature<IgGridPaging> {	
 	constructor(el: ElementRef) {
@@ -324,29 +292,29 @@ export class IgGridPagingFeature extends Feature<IgGridPaging> {
 	}
 
 	/**
- 	 * Gets/Sets the current page index, delegates data binding and paging to [$.ig.DataSource](ig.datasource).
+	 * Gets/Sets the current page index, delegates data binding and paging to [$.ig.DataSource](ig.datasource).
 	 *
 	 * @param index     The page index to go to.
 	 */
 	public pageIndex(index?: number): number { return; } ;
 
 	/**
- 	 * Gets/Sets the page size. If no parameter is specified, just returns the current page size.
+	 * Gets/Sets the page size. If no parameter is specified, just returns the current page size.
 	 *
 	 * @param size     The new page size.
 	 */
 	public pageSize(size?: number): number { return; } ;
 
 	/**
- 	 * Destroys the igGridPaging feature by removing all elements in the pager area, unbinding events, and resetting data to discard data filtering on paging.
+	 * Destroys the igGridPaging feature by removing all elements in the pager area, unbinding events, and resetting data to discard data filtering on paging.
 	 */
 	public destroy(): void { return; } ;
 }
 
 @Directive({
 	selector: 'updating',
-	inputs:  IgUtil.extractGridFeatureOptions('Updating'),
-	outputs: IgUtil.extractGridFeatureEvents('Updating')
+	inputs: ["disabled","create","columnSettings","editMode","enableDeleteRow","enableAddRow","validation","doneLabel","doneTooltip","cancelLabel","cancelTooltip","addRowLabel","addRowTooltip","deleteRowLabel","deleteRowTooltip","showDoneCancelButtons","enableDataDirtyException","startEditTriggers","horizontalMoveOnEnter","excelNavigationMode","saveChangesSuccessHandler","saveChangesErrorHandler","swipeDistance","wrapAround","rowEditDialogOptions","dialogWidget","inherit"],
+	outputs: ["editRowStarting","editRowStarted","editRowEnding","editRowEnded","editCellStarting","editCellStarted","editCellEnding","editCellEnded","rowAdding","rowAdded","rowDeleting","rowDeleted","dataDirty","generatePrimaryKeyValue","rowEditDialogBeforeOpen","rowEditDialogAfterOpen","rowEditDialogBeforeClose","rowEditDialogAfterClose","rowEditDialogContentsRendered"]
 })
 export class IgGridUpdatingFeature extends Feature<IgGridUpdating> {	
 	constructor(el: ElementRef) {
@@ -354,7 +322,7 @@ export class IgGridUpdatingFeature extends Feature<IgGridUpdating> {
 	}
 
 	/**
- 	 * Sets a cell value for the specified cell. It also creates a transaction and updates the UI.
+	 * Sets a cell value for the specified cell. It also creates a transaction and updates the UI.
 	 * 			If the specified cell is currently in edit mode, the function will set the desired value in the cell's editor instead.
 	 *
 	 * @param rowId    The primary key of the row the cell is a child of.
@@ -364,7 +332,7 @@ export class IgGridUpdatingFeature extends Feature<IgGridUpdating> {
 	public setCellValue(rowId: Object, colKey: string, value: Object): void { return; } ;
 
 	/**
- 	 * Sets values for specified cells in a row. It also creates a transaction and updates the UI.
+	 * Sets values for specified cells in a row. It also creates a transaction and updates the UI.
 	 * 			If the specified row is currently in edit mode, the function will set the desired values in the row's editors instead.
 	 *
 	 * @param rowId    The primary key of the row to update.
@@ -373,21 +341,21 @@ export class IgGridUpdatingFeature extends Feature<IgGridUpdating> {
 	public updateRow(rowId: Object, values: Object): void { return; } ;
 
 	/**
- 	 * Adds a new row to the grid. It also creates a transaction and updates the UI.
+	 * Adds a new row to the grid. It also creates a transaction and updates the UI.
 	 *
 	 * @param values    Pairs of values in the format { column1Key: value1, column2Key: value2, ... } .
 	 */
 	public addRow(values: Object): void { return; } ;
 
 	/**
- 	 * Deletes a row from the grid. It also creates a transaction and updates the UI.
+	 * Deletes a row from the grid. It also creates a transaction and updates the UI.
 	 *
 	 * @param rowId    The primary key of the row to delete.
 	 */
 	public deleteRow(rowId: Object): void { return; } ;
 
 	/**
- 	 * Starts editing for the row or cell specified (depending on the [editMode](ui.iggridupdating#options:editMode)).
+	 * Starts editing for the row or cell specified (depending on the [editMode](ui.iggridupdating#options:editMode)).
 	 *
 	 * @param rowId    The row id.
 	 * @param column    The column key or index.
@@ -396,14 +364,14 @@ export class IgGridUpdatingFeature extends Feature<IgGridUpdating> {
 	public startEdit(rowId: Object, column: Object, raiseEvents?: boolean): boolean { return; } ;
 
 	/**
- 	 * Starts editing for adding a new row.
+	 * Starts editing for adding a new row.
 	 *
 	 * @param raiseEvents    Specifies whether or not updating events should be raised for this operation.
 	 */
 	public startAddRowEdit(raiseEvents?: boolean): boolean { return; } ;
 
 	/**
- 	 * Ends the currently active edit mode.
+	 * Ends the currently active edit mode.
 	 *
 	 * @param update    Specifies if the edit process should accept the current changes. Default is 'false'.
 	 * @param raiseEvents    Specifies whether or not updating events should be raised for this operation.
@@ -411,24 +379,24 @@ export class IgGridUpdatingFeature extends Feature<IgGridUpdating> {
 	public endEdit(update?: boolean, raiseEvents?: boolean): boolean { return; } ;
 
 	/**
- 	 * Finds and returns the key of the first column the editor for which has invalid value.
+	 * Finds and returns the key of the first column the editor for which has invalid value.
 	 */
 	public findInvalid(): string { return; } ;
 
 	/**
- 	 * Checks if the grid is in edit mode.
+	 * Checks if the grid is in edit mode.
 	 */
 	public isEditing(): boolean { return; } ;
 
 	/**
- 	 * Gets the editor for a column by the column key. That method can be used only after the editor has been created.
+	 * Gets the editor for a column by the column key. That method can be used only after the editor has been created.
 	 *
 	 * @param key    The key of the column.
 	 */
 	public editorForKey(key: string): Object { return; } ;
 
 	/**
- 	 * Gets the editor for a column by the cell it resides in. If allowed the function can create the editor if it has not been created yet.
+	 * Gets the editor for a column by the cell it resides in. If allowed the function can create the editor if it has not been created yet.
 	 *
 	 * @param cell    Reference to the jQuery-wrapped TD object of the grid that the editor belongs to.
 	 * @param create    Requests to create the editor if it has not been created yet.
@@ -436,27 +404,27 @@ export class IgGridUpdatingFeature extends Feature<IgGridUpdating> {
 	public editorForCell(cell: string, create?: boolean): Object { return; } ;
 
 	/**
- 	 * Destroys igGridUpdating.
+	 * Destroys igGridUpdating.
 	 */
 	public destroy(): Object { return; } ;
 
 	/**
- 	 * Shows the delete button for specific row.
+	 * Shows the delete button for specific row.
 	 *
 	 * @param row    A jQuery object of the targeted row.
 	 */
 	public showDeleteButtonFor(row: Object): void { return; } ;
 
 	/**
- 	 * Hides the delete button.
+	 * Hides the delete button.
 	 */
 	public hideDeleteButton(): void { return; } ;
 }
 
 @Directive({
 	selector: 'groupBy',
-	inputs:  IgUtil.extractGridFeatureOptions('GroupBy'),
-	outputs: IgUtil.extractGridFeatureEvents('GroupBy')
+	inputs: ["disabled","create","groupByAreaVisibility","initialExpand","emptyGroupByAreaContent","emptyGroupByAreaContentSelectColumns","expansionIndicatorVisibility","groupByLabelWidth","labelDragHelperOpacity","indentation","defaultSortingDirection","groupedColumns","resultResponseKey","groupedRowTextTemplate","type","groupByUrlKey","groupByUrlKeyAscValue","groupByUrlKeyDescValue","summarySettings","columnSettings","expandTooltip","collapseTooltip","removeButtonTooltip","modalDialogGroupByOnClick","modalDialogGroupByButtonText","modalDialogCaptionButtonDesc","modalDialogCaptionButtonAsc","modalDialogCaptionButtonUngroup","modalDialogCaptionText","modalDialogDropDownLabel","modalDialogRootLevelHierarchicalGrid","modalDialogDropDownButtonCaption","modalDialogClearAllButtonLabel","emptyGroupByAreaContentSelectColumnsCaption","modalDialogDropDownWidth","modalDialogDropDownAreaWidth","modalDialogAnimationDuration","modalDialogWidth","modalDialogHeight","modalDialogButtonApplyText","modalDialogButtonCancelText","useGridColumnFormatter","persist","groupByDialogContainment","dialogWidget","inherit"],
+	outputs: ["groupedColumnsChanging","groupedColumnsChanged","modalDialogMoving","modalDialogClosing","modalDialogClosed","modalDialogOpening","modalDialogOpened","modalDialogContentsRendering","modalDialogContentsRendered","modalDialogButtonApplyClick","modalDialogButtonResetClick","modalDialogGroupingColumn","modalDialogGroupColumn","modalDialogUngroupingColumn","modalDialogUngroupColumn","modalDialogSortGroupedColumn"]
 })
 export class IgGridGroupByFeature extends Feature<IgGridGroupBy> {	
 	constructor(el: ElementRef) {
@@ -464,32 +432,32 @@ export class IgGridGroupByFeature extends Feature<IgGridGroupBy> {
 	}
 
 	/**
- 	 * Open groupby modal dialog
+	 * Open groupby modal dialog
 	 */
 	public openGroupByDialog(): void { return; } ;
 
 	/**
- 	 * Close groupby modal dialog
+	 * Close groupby modal dialog
 	 */
 	public closeGroupByDialog(): void { return; } ;
 
 	/**
- 	 * Render groupby modal dialog and its content
+	 * Render groupby modal dialog and its content
 	 */
 	public renderGroupByModalDialog(): void { return; } ;
 
 	/**
- 	 * Open layouts dropdown
+	 * Open layouts dropdown
 	 */
 	public openDropDown(): void { return; } ;
 
 	/**
- 	 * Close layouts dropdown
+	 * Close layouts dropdown
 	 */
 	public closeDropDown(): void { return; } ;
 
 	/**
- 	 * Check whether column with specified key and layout is grouped
+	 * Check whether column with specified key and layout is grouped
 	 *
 	 * @param key    key of the column
 	 * @param layout    layout name
@@ -497,7 +465,7 @@ export class IgGridGroupByFeature extends Feature<IgGridGroupBy> {
 	public checkColumnIsGrouped(key: string, layout: string): void { return; } ;
 
 	/**
- 	 * Get grouped data by value for the specific column. NOTE: Before calling this function the data(that is passed as an argument) should be sorted by colKey.
+	 * Get grouped data by value for the specific column. NOTE: Before calling this function the data(that is passed as an argument) should be sorted by colKey.
 	 *
 	 * @param data    data (sorted by colKey) that is used to get the records from.
 	 * @param colKey    key of the column for which grouping will be applied.
@@ -506,12 +474,12 @@ export class IgGridGroupByFeature extends Feature<IgGridGroupBy> {
 	public getGroupedData(data: any[], colKey: string, idval?: string): any[] { return; } ;
 
 	/**
- 	 * Adds a column to the group by columns list, executes the group by operation and updates the view.
+	 * Adds a column to the group by columns list, executes the group by operation and updates the view.
 	 */
 	public groupByColumns(): Object { return; } ;
 
 	/**
- 	 * Groups by a column
+	 * Groups by a column
 	 *
 	 * @param key    Column Key - group by the column with the specified key
 	 * @param layout    layout is an optional parameter. if set it means the grouped column is not in the root level but is a child layout column
@@ -520,7 +488,7 @@ export class IgGridGroupByFeature extends Feature<IgGridGroupBy> {
 	public groupByColumn(key: string, layout?: string, sortingDirection?: Object): void { return; } ;
 
 	/**
- 	 * Removes the specified column from the group by columns list, executes the group by operation and updates the view.
+	 * Removes the specified column from the group by columns list, executes the group by operation and updates the view.
 	 *
 	 * @param key    Column Key - ungroup by the column with the specified key
 	 * @param layout    Layout is an optional parameter. If set it means the grouped column is not in the root level but is a child layout column.
@@ -528,34 +496,34 @@ export class IgGridGroupByFeature extends Feature<IgGridGroupBy> {
 	public ungroupByColumn(key: string, layout?: string): void { return; } ;
 
 	/**
- 	 * Expand group row with specified id
+	 * Expand group row with specified id
 	 *
 	 * @param rowId    data-id attribute of the group row in the DOM
 	 */
 	public expand(rowId: string): void { return; } ;
 
 	/**
- 	 * Expand group row with specified id
+	 * Expand group row with specified id
 	 *
 	 * @param rowId    data-id attribute of the group row in the DOM
 	 */
 	public collapse(rowId: string): void { return; } ;
 
 	/**
- 	 * Clears the group by columns list and updates the view.
+	 * Clears the group by columns list and updates the view.
 	 */
 	public ungroupAll(): void { return; } ;
 
 	/**
- 	 * Destroys the group by feature object.
+	 * Destroys the group by feature object.
 	 */
 	public destroy(): void { return; } ;
 }
 
 @Directive({
 	selector: 'columnMoving',
-	inputs:  IgUtil.extractGridFeatureOptions('ColumnMoving'),
-	outputs: IgUtil.extractGridFeatureEvents('ColumnMoving')
+	inputs: ["disabled","create","columnSettings","mode","moveType","addMovingDropdown","movingDialogWidth","movingDialogHeight","movingDialogAnimationDuration","movingAcceptanceTolerance","movingScrollTolerance","scrollSpeedMultiplier","scrollDelta","hideHeaderContentsDuringDrag","dragHelperOpacity","movingDialogCaptionButtonDesc","movingDialogCaptionButtonAsc","movingDialogCaptionText","movingDialogDisplayText","movingDialogDropTooltipText","movingDialogDropTooltipMarkup","dropDownMoveLeftText","dropDownMoveRightText","dropDownMoveFirstText","dropDownMoveLastText","movingToolTipMove","featureChooserSubmenuText","columnMovingDialogContainment","dialogWidget","inherit"],
+	outputs: ["columnDragStart","columnDragEnd","columnDragCanceled","columnMoving","columnMoved","movingDialogOpening","movingDialogOpened","movingDialogDragged","movingDialogClosing","movingDialogClosed","movingDialogContentsRendering","movingDialogContentsRendered","movingDialogMoveUpButtonPressed","movingDialogMoveDownButtonPressed","movingDialogDragColumnMoving","movingDialogDragColumnMoved"]
 })
 export class IgGridColumnMovingFeature extends Feature<IgGridColumnMoving> {	
 	constructor(el: ElementRef) {
@@ -563,12 +531,12 @@ export class IgGridColumnMovingFeature extends Feature<IgGridColumnMoving> {
 	}
 
 	/**
- 	 * Restoring overwritten functions
+	 * Restoring overwritten functions
 	 */
 	public destroy(): void { return; } ;
 
 	/**
- 	 * Moves a visible column at a specified place, in front or behind a target column or at a target index
+	 * Moves a visible column at a specified place, in front or behind a target column or at a target index
 	 * 			Note: This method is asynchronous which means that it returns immediately and any subsequent code will execute in parallel. This may lead to runtime errors. To avoid them put the subsequent code in the callback parameter provided by the method.
 	 *
 	 * @param column    An identifier of the column to be moved. It can be a key, a Multi-Column Header identificator, or an index in a number format. The latter is not supported when the grid contains multi-column headers.
@@ -582,8 +550,8 @@ export class IgGridColumnMovingFeature extends Feature<IgGridColumnMoving> {
 
 @Directive({
 	selector: 'hiding',
-	inputs:  IgUtil.extractGridFeatureOptions('ColumnMoving'),
-	outputs: IgUtil.extractGridFeatureEvents('ColumnMoving')
+	inputs: ["disabled","create","columnSettings","hiddenColumnIndicatorHeaderWidth","columnChooserContainment","columnChooserWidth","columnChooserHeight","dropDownAnimationDuration","columnChooserCaptionText","columnChooserDisplayText","hiddenColumnIndicatorTooltipText","columnHideText","columnChooserShowText","columnChooserHideText","columnChooserHideOnClick","columnChooserResetButtonLabel","columnChooserAnimationDuration","columnChooserButtonApplyText","columnChooserButtonCancelText","dialogWidget","inherit"],
+	outputs: ["columnHiding","columnHidingRefused","columnShowingRefused","multiColumnHiding","columnHidden","columnShowing","columnShown","columnChooserOpening","columnChooserOpened","columnChooserMoving","columnChooserClosing","columnChooserClosed","columnChooserContentsRendering","columnChooserContentsRendered","columnChooserButtonApplyClick","columnChooserButtonResetClick"]
 })
 export class IgGridHidingFeature extends Feature<IgGridHiding> {	
 	constructor(el: ElementRef) {
@@ -591,22 +559,22 @@ export class IgGridHidingFeature extends Feature<IgGridHiding> {
 	}
 
 	/**
- 	 * Destroys the hiding widget
+	 * Destroys the hiding widget
 	 */
 	public destroy(): void { return; } ;
 
 	/**
- 	 * Shows the Column Chooser dialog. If it is visible the method does nothing.
+	 * Shows the Column Chooser dialog. If it is visible the method does nothing.
 	 */
 	public showColumnChooser(): void { return; } ;
 
 	/**
- 	 * Hides the Column Chooser dialog. If it is not visible the method does nothing.
+	 * Hides the Column Chooser dialog. If it is not visible the method does nothing.
 	 */
 	public hideColumnChooser(): void { return; } ;
 
 	/**
- 	 * Shows a hidden column. If the column is not hidden the method does nothing.
+	 * Shows a hidden column. If the column is not hidden the method does nothing.
 	 * 			Note: This method is asynchronous which means that it returns immediately and any subsequent code will execute in parallel. This may lead to runtime errors. To avoid them put the subsequent code in the callback parameter provided by the method.
 	 *
 	 * @param column    An identifier for the column. If a number is provided it will be used as a column index else if a strings is provided it will be used as a column key.
@@ -616,7 +584,7 @@ export class IgGridHidingFeature extends Feature<IgGridHiding> {
 	public showColumn(column: Object, isMultiColumnHeader?: boolean, callback?: Function): void { return; } ;
 
 	/**
- 	 * Hides a visible column. If the column is hidden the method does nothing.
+	 * Hides a visible column. If the column is hidden the method does nothing.
 	 * 			Note: This method is asynchronous which means that it returns immediately and any subsequent code will execute in parallel. This may lead to runtime errors. To avoid them put the subsequent code in the callback parameter provided by the method.
 	 *
 	 * @param column    An identifier for the column. If a number is provided it will be used as a column index else if a strings is provided it will be used as a column key.
@@ -626,7 +594,7 @@ export class IgGridHidingFeature extends Feature<IgGridHiding> {
 	public hideColumn(column: Object, isMultiColumnHeader?: boolean, callback?: Function): void { return; } ;
 
 	/**
- 	 * Hides visible columns specified by the array. If the column is hidden the method does nothing.
+	 * Hides visible columns specified by the array. If the column is hidden the method does nothing.
 	 * 			Note: This method is asynchronous which means that it returns immediately and any subsequent code will execute in parallel. This may lead to runtime errors. To avoid them put the subsequent code in the callback parameter provided by the method.
 	 *
 	 * @param columns    An array of identifiers for the columns. If a number is provided it will be used as a column index else if a strings is provided it will be used as a column key.
@@ -635,7 +603,7 @@ export class IgGridHidingFeature extends Feature<IgGridHiding> {
 	public hideMultiColumns(columns: any[], callback?: Function): void { return; } ;
 
 	/**
- 	 * Show visible columns specified by the array. If the column is shown the method does nothing.
+	 * Show visible columns specified by the array. If the column is shown the method does nothing.
 	 * 			Note: This method is asynchronous which means that it returns immediately and any subsequent code will execute in parallel. This may lead to runtime errors. To avoid them put the subsequent code in the callback parameter provided by the method.
 	 *
 	 * @param columns    An array of identifiers for the columns. If a number is provided it will be used as a column index else if a strings is provided it will be used as a column key.
@@ -644,30 +612,30 @@ export class IgGridHidingFeature extends Feature<IgGridHiding> {
 	public showMultiColumns(columns: any[], callback?: Function): void { return; } ;
 
 	/**
- 	 * Gets whether the reset button in the column chooser dialog is to be rendered or not.
+	 * Gets whether the reset button in the column chooser dialog is to be rendered or not.
 	 */
 	public isToRenderButtonReset(): void { return; } ;
 
 	/**
- 	 * Reset hidden/shown column to initial state of dialog(when it is opened)
+	 * Reset hidden/shown column to initial state of dialog(when it is opened)
 	 */
 	public resetHidingColumnChooser(): void { return; } ;
 
 	/**
- 	 * Renders the Reset button in the Column Chooser dialog.
+	 * Renders the Reset button in the Column Chooser dialog.
 	 */
 	public renderColumnChooserResetButton(): void { return; } ;
 
 	/**
- 	 * Remove Reset button in column chooser modal dialog
+	 * Remove Reset button in column chooser modal dialog
 	 */
 	public removeColumnChooserResetButton(): void { return; } ;
 }
 
 @Directive({
 	selector: 'cell-merging',
-	inputs:  IgUtil.extractGridFeatureOptions('CellMerging'),
-	outputs: IgUtil.extractGridFeatureEvents('CellMerging')
+	inputs: ["disabled","create","initialState","inherit"],
+	outputs: ["cellsMerging","cellsMerged"]
 })
 export class IgGridCellMergingFeature extends Feature<IgGridCellMerging> {	
 	constructor(el: ElementRef) {
@@ -678,8 +646,8 @@ export class IgGridCellMergingFeature extends Feature<IgGridCellMerging> {
 
 @Directive({
 	selector: 'responsive',
-	inputs:  IgUtil.extractGridFeatureOptions('Responsive'),
-	outputs: IgUtil.extractGridFeatureEvents('Responsive')
+	inputs: ["disabled","create","columnSettings","reactOnContainerWidthChanges","forceResponsiveGridWidth","responsiveSensitivity","responsiveModes","enableVerticalRendering","windowWidthToRenderVertically","propertiesColumnWidth","valuesColumnWidth","allowedColumnWidthPerType","singleColumnTemplate","inherit"],
+	outputs: ["responsiveColumnHiding","responsiveColumnHidden","responsiveColumnShowing","responsiveColumnShown","responsiveModeChanged"]
 })
 export class IgGridResponsiveFeature extends Feature<IgGridResponsive> {	
 	constructor(el: ElementRef) {
@@ -687,20 +655,20 @@ export class IgGridResponsiveFeature extends Feature<IgGridResponsive> {
 	}
 
 	/**
- 	 * Destroys the responsive widget.
+	 * Destroys the responsive widget.
 	 */
 	public destroy(): void { return; } ;
 
 	/**
- 	 * Returns the currently active responsive mode.
+	 * Returns the currently active responsive mode.
 	 */
 	public getCurrentResponsiveMode(): void { return; } ;
 }
 
 @Directive({
 	selector: 'resizing',
-	inputs:  IgUtil.extractGridFeatureOptions('Resizing'),
-	outputs: IgUtil.extractGridFeatureEvents('Resizing')
+	inputs: ["disabled","create","allowDoubleClickToResize","deferredResizing","columnSettings","handleThreshold","inherit"],
+	outputs: ["columnResizing","columnResizingRefused","columnResized"]
 })
 export class IgGridResizingFeature extends Feature<IgGridResizing> {	
 	constructor(el: ElementRef) {
@@ -708,12 +676,12 @@ export class IgGridResizingFeature extends Feature<IgGridResizing> {
 	}
 
 	/**
- 	 * Destroys the resizing widget
+	 * Destroys the resizing widget
 	 */
 	public destroy(): void { return; } ;
 
 	/**
- 	 * Resizes a column to a specified width in pixels, percents or auto if no width is specified.
+	 * Resizes a column to a specified width in pixels, percents or auto if no width is specified.
 	 *
 	 * @param column    An identifier for the column. If a number is provided it will be used as a columnIndex else if a strings is provided it will be used as a columnKey.
 	 * @param width    Width of the column in pixels or percents. If no width or "*" is specified the column will be auto-sized to the width of the data in it (including header and footer cells).
@@ -723,8 +691,8 @@ export class IgGridResizingFeature extends Feature<IgGridResizing> {
 
 @Directive({
 	selector: 'selection',
-	inputs:  IgUtil.extractGridFeatureOptions('Selection'),
-	outputs: IgUtil.extractGridFeatureEvents('Selection')
+	inputs: ["disabled","create","multipleSelection","mouseDragSelect","mode","activation","wrapAround","skipChildren","multipleCellSelectOnClick","touchDragSelect","persist","allowMultipleRangeSelection"],
+	outputs: ["rowSelectionChanging","rowSelectionChanged","cellSelectionChanging","cellSelectionChanged","activeCellChanging","activeCellChanged","activeRowChanging","activeRowChanged"]
 })
 export class IgGridSelectionFeature extends Feature<IgGridSelection> {	
 	constructor(el: ElementRef) {
@@ -732,17 +700,17 @@ export class IgGridSelectionFeature extends Feature<IgGridSelection> {
 	}
 
 	/**
- 	 * Destroys the selection widget.
+	 * Destroys the selection widget.
 	 */
 	public destroy(): void { return; } ;
 
 	/**
- 	 * Clears all selected cells, selected rows, active cell and active row. Also updates the UI accordingly
+	 * Clears all selected cells, selected rows, active cell and active row. Also updates the UI accordingly
 	 */
 	public clearSelection(): void { return; } ;
 
 	/**
- 	 * Selects a cell by row/col
+	 * Selects a cell by row/col
 	 *
 	 * @param row     Row index
 	 * @param col     Column index
@@ -751,7 +719,7 @@ export class IgGridSelectionFeature extends Feature<IgGridSelection> {
 	public selectCell(row: number, col: number, isFixed?: boolean): void { return; } ;
 
 	/**
- 	 * Selects a cell by row id/column key
+	 * Selects a cell by row id/column key
 	 *
 	 * @param id     Row Id
 	 * @param colKey     Column key
@@ -759,7 +727,7 @@ export class IgGridSelectionFeature extends Feature<IgGridSelection> {
 	public selectCellById(id: Object, colKey: string): void { return; } ;
 
 	/**
- 	 * Deselects a cell by row/col
+	 * Deselects a cell by row/col
 	 *
 	 * @param row     Row index
 	 * @param col     Column index
@@ -768,7 +736,7 @@ export class IgGridSelectionFeature extends Feature<IgGridSelection> {
 	public deselectCell(row: number, col: number, isFixed?: boolean): void { return; } ;
 
 	/**
- 	 * Deselects a cell by row id/column key
+	 * Deselects a cell by row id/column key
 	 *
 	 * @param id     Row Id
 	 * @param colKey     Column key
@@ -776,76 +744,76 @@ export class IgGridSelectionFeature extends Feature<IgGridSelection> {
 	public deselectCellById(id: Object, colKey: string): void { return; } ;
 
 	/**
- 	 * Selects a row by index
+	 * Selects a row by index
 	 *
 	 * @param index     Row index
 	 */
 	public selectRow(index: number): void { return; } ;
 
 	/**
- 	 * Selects a row by row id
+	 * Selects a row by row id
 	 *
 	 * @param id     Row Id
 	 */
 	public selectRowById(id: Object): void { return; } ;
 
 	/**
- 	 * Deselects a row by index
+	 * Deselects a row by index
 	 *
 	 * @param index     Row index
 	 */
 	public deselectRow(index: number): void { return; } ;
 
 	/**
- 	 * Deselects a row by row id
+	 * Deselects a row by row id
 	 *
 	 * @param id     Row Id
 	 */
 	public deselectRowById(id: Object): void { return; } ;
 
 	/**
- 	 * Returns an array of selected cells in arbitrary order where every objects has the format { element: , row: , index: , rowIndex: , columnKey: } .
+	 * Returns an array of selected cells in arbitrary order where every objects has the format { element: , row: , index: , rowIndex: , columnKey: } .
 	 * 			
 	 * 				If multiple selection is disabled the function will return null.
 	 */
 	public selectedCells(): any[] { return; } ;
 
 	/**
- 	 * Returns an array of selected rows in arbitrary order where every object has the format { element: , index: } .
+	 * Returns an array of selected rows in arbitrary order where every object has the format { element: , index: } .
 	 * 			
 	 * 				If multiple selection is disabled the function will return null.
 	 */
 	public selectedRows(): any[] { return; } ;
 
 	/**
- 	 * Returns the currently selected cell that has the format { element: , row: , index: , rowIndex: , columnKey: }, if any.
+	 * Returns the currently selected cell that has the format { element: , row: , index: , rowIndex: , columnKey: }, if any.
 	 * 			
 	 * 				If multiple selection is enabled the function will return null.
 	 */
 	public selectedCell(): Object { return; } ;
 
 	/**
- 	 * Returns the currently selected row that has the format { element: , index: }, if any.
+	 * Returns the currently selected row that has the format { element: , index: }, if any.
 	 * 			
 	 * 				If multiple selection is enabled the function will return null.
 	 */
 	public selectedRow(): Object { return; } ;
 
 	/**
- 	 * Returns the currently active (focused) cell that has the format { element: , row: , index: , rowIndex: , columnKey: }, if any.
+	 * Returns the currently active (focused) cell that has the format { element: , row: , index: , rowIndex: , columnKey: }, if any.
 	 */
 	public activeCell(): Object { return; } ;
 
 	/**
- 	 * Returns the currently active (focused) row that has the format { element: , index: }, if any.
+	 * Returns the currently active (focused) row that has the format { element: , index: }, if any.
 	 */
 	public activeRow(): Object { return; } ;
 }
 
 @Directive({
 	selector: 'row-selectors',
-	inputs:  IgUtil.extractGridFeatureOptions('RowSelectors'),
-	outputs: IgUtil.extractGridFeatureEvents('RowSelectors')
+	inputs: ["disabled","create","enableRowNumbering","enableCheckBoxes","rowNumberingSeed","rowSelectorColumnWidth","requireSelection","showCheckBoxesOnFocus","inherit","enableSelectAllForPaging","selectAllForPagingTemplate","deselectAllForPagingTemplate"],
+	outputs: ["rowSelectorClicked","checkBoxStateChanging","checkBoxStateChanged"]
 })
 export class IgGridRowSelectorsFeature extends Feature<IgGridRowSelectors> {	
 	constructor(el: ElementRef) {
@@ -856,8 +824,8 @@ export class IgGridRowSelectorsFeature extends Feature<IgGridRowSelectors> {
 
 @Directive({
 	selector: 'summaries',
-	inputs:  IgUtil.extractGridFeatureOptions('Summaries'),
-	outputs: IgUtil.extractGridFeatureEvents('Summaries')
+	inputs: ["disabled","create","type","dialogButtonOKText","dialogButtonCancelText","calculateRenderMode","featureChooserText","featureChooserTextHide","compactRenderingMode","defaultDecimalDisplay","showSummariesButton","summariesResponseKey","summaryExprUrlKey","callee","dropDownHeight","dropDownWidth","showDropDownButton","summaryExecution","dropDownDialogAnimationDuration","emptyCellText","summariesHeaderButtonTooltip","resultTemplate","isGridFormatter","renderSummaryCellFunc","columnSettings","inherit"],
+	outputs: ["dropDownOpening","dropDownOpened","dropDownClosing","dropDownClosed","summariesCalculating","summariesCalculated","summariesMethodSelectionChanged","summariesToggling","summariesToggled","dropDownOKClicked","dropDownCancelClicked"]
 })
 export class IgGridSummariesFeature extends Feature<IgGridSummaries> {	
 	constructor(el: ElementRef) {
@@ -866,22 +834,22 @@ export class IgGridSummariesFeature extends Feature<IgGridSummaries> {
 	public destroy(): void { return; } ;
 
 	/**
- 	 * Returns whether summaries rows are hidden
+	 * Returns whether summaries rows are hidden
 	 */
 	public isSummariesRowsHidden(): void { return; } ;
 
 	/**
- 	 * Calculate summaries
+	 * Calculate summaries
 	 */
 	public calculateSummaries(): void { return; } ;
 
 	/**
- 	 * Remove all summaries dropdown buttons.
+	 * Remove all summaries dropdown buttons.
 	 */
 	public clearAllFooterIcons(): void { return; } ;
 
 	/**
- 	 * Toggle drop down
+	 * Toggle drop down
 	 *
 	 * @param columnKey    toggle drop down for the column with the specified key
 	 * @param event    event object. Its data should contain current columnKey, isAnimating, buttonId
@@ -889,14 +857,14 @@ export class IgGridSummariesFeature extends Feature<IgGridSummaries> {
 	public toggleDropDown(columnKey: string, event: Object): void { return; } ;
 
 	/**
- 	 * Show/Hide dialog
+	 * Show/Hide dialog
 	 *
 	 * @param $dialog     jQuery object representation of dropdown div element
 	 */
 	public showHideDialog($dialog: Object): void { return; } ;
 
 	/**
- 	 * Toggle summaries rows
+	 * Toggle summaries rows
 	 *
 	 * @param isToShow    Specifies whether to show or not summaries
 	 * @param isInternalCall    Optional parameter.Specifies whether this function is called internally by the widget.
@@ -904,14 +872,14 @@ export class IgGridSummariesFeature extends Feature<IgGridSummaries> {
 	public toggleSummariesRows(isToShow: boolean, isInternalCall: boolean): void { return; } ;
 
 	/**
- 	 * Toggles the checkstate of a checkbox if checkboxMode is not set to off, otherwise does nothing.
+	 * Toggles the checkstate of a checkbox if checkboxMode is not set to off, otherwise does nothing.
 	 *
 	 * @param $checkbox     Specifies the jQuery object of the checkbox.
 	 */
 	public toggleCheckstate($checkbox: Object): void { return; } ;
 
 	/**
- 	 * Select/Unselect specified checkbox
+	 * Select/Unselect specified checkbox
 	 *
 	 * @param $checkbox     Specifies the jQuery object for checkbox
 	 * @param isToSelect     Specify whether to select or not checkbox
@@ -919,23 +887,23 @@ export class IgGridSummariesFeature extends Feature<IgGridSummaries> {
 	public selectCheckBox($checkbox: Object, isToSelect: boolean): void { return; } ;
 
 	/**
- 	 * Summary calculate the whole data for the specified column key, columnMethods and dataType (used when datasource is remote and dataType is date)
+	 * Summary calculate the whole data for the specified column key, columnMethods and dataType (used when datasource is remote and dataType is date)
 	 *
 	 * @param ck    ColumnKey
 	 * @param columnMethods    Array of column methods objects
 	 * @param data    Object which represents result
-   represents dataType for the current column
+  represents dataType for the current column
 	 * @param dataType 
 	 */
 	public calculateSummaryColumn(ck: string, columnMethods: any[], data: Object, dataType: Object): void { return; } ;
 
 	/**
- 	 * Return a JQUERY object which holds all summaries for all columns
+	 * Return a JQUERY object which holds all summaries for all columns
 	 */
 	public summaryCollection(): void { return; } ;
 
 	/**
- 	 * Return a JQUERY object which holds all summaries for column with the specified column key
+	 * Return a JQUERY object which holds all summaries for column with the specified column key
 	 *
 	 * @param columnKey 
 	 */
@@ -944,8 +912,8 @@ export class IgGridSummariesFeature extends Feature<IgGridSummaries> {
 
 @Directive({
 	selector: 'column-fixing',
-	inputs:  IgUtil.extractGridFeatureOptions('ColumnFixing'),
-	outputs: IgUtil.extractGridFeatureEvents('ColumnFixing')
+	inputs: ["disabled","create","headerFixButtonText","headerUnfixButtonText","showFixButtons","syncRowHeights","scrollDelta","fixingDirection","columnSettings","featureChooserTextFixedColumn","featureChooserTextUnfixedColumn","minimalVisibleAreaWidth","fixNondataColumns","populateDataRowsAttributes"],
+	outputs: ["columnFixing","columnFixed","columnUnfixing","columnUnfixed","columnFixingRefused","columnUnfixingRefused"]
 })
 export class IgGridColumnFixingFeature extends Feature<IgGridColumnFixing> {	
 	constructor(el: ElementRef) {
@@ -953,7 +921,7 @@ export class IgGridColumnFixingFeature extends Feature<IgGridColumnFixing> {
 	}
 
 	/**
- 	 * Unfixes a column by specified column identifier - column key or column index.
+	 * Unfixes a column by specified column identifier - column key or column index.
 	 *
 	 * @param colIdentifier    An identifier of the column to be unfixed - column index or column key.
 	 * @param target    Key of the column where the unfixed column should move to.
@@ -962,12 +930,12 @@ export class IgGridColumnFixingFeature extends Feature<IgGridColumnFixing> {
 	public unfixColumn(colIdentifier: Object, target?: string, after?: boolean): Object { return; } ;
 
 	/**
- 	 * Checks whether the heights of fixed and unfixed tables are equal - if not sync them. Similar check is made for heights of table rows.
+	 * Checks whether the heights of fixed and unfixed tables are equal - if not sync them. Similar check is made for heights of table rows.
 	 */
 	public checkAndSyncHeights(): void { return; } ;
 
 	/**
- 	 * If the 'check' argument is set to true, checks whether the heights of fixed and unfixed tables are equal, if not sync them. Similar check is made for heights of table rows. If the clearRowsHeights argument is set to true, clears rows heights before syncing them.
+	 * If the 'check' argument is set to true, checks whether the heights of fixed and unfixed tables are equal, if not sync them. Similar check is made for heights of table rows. If the clearRowsHeights argument is set to true, clears rows heights before syncing them.
 	 *
 	 * @param check    If set to true, checks whether the heights of fixed and unfixed tables are equal, if not sync them. If this argument is set to false sync is performed regardless of the current heights.
 	 * @param clearRowsHeights    Clears row heigths for all visible rows.
@@ -975,53 +943,53 @@ export class IgGridColumnFixingFeature extends Feature<IgGridColumnFixing> {
 	public syncHeights(check?: boolean, clearRowsHeights?: boolean): void { return; } ;
 
 	/**
- 	 * Returns whether the column with the specified key is a column group header, when the [multi-column headers](http://www.igniteui.com/help/iggrid-multicolumnheaders-landingpage) feature is used.
+	 * Returns whether the column with the specified key is a column group header, when the [multi-column headers](http://www.igniteui.com/help/iggrid-multicolumnheaders-landingpage) feature is used.
 	 *
 	 * @param colKey    The key of the column to perform the check for.
 	 */
 	public isGroupHeader(colKey: string): boolean { return; } ;
 
 	/**
- 	 * Checks whether column fixing is allowed for the specified columns. It should not be allowed if there is only one visible column in the unfixed area.
+	 * Checks whether column fixing is allowed for the specified columns. It should not be allowed if there is only one visible column in the unfixed area.
 	 *
 	 * @param columns    Array of columns and/or column identifiers - could be column indexes, column keys, column object or mixed.
 	 */
 	public checkFixingAllowed(columns: any[]): boolean { return; } ;
 
 	/**
- 	 * Checks whether unfixing is allowed for the specified columns. It should not be allowed if there is only one visible column in the fixed area.
+	 * Checks whether unfixing is allowed for the specified columns. It should not be allowed if there is only one visible column in the fixed area.
 	 *
 	 * @param columns    Array of columns and/or column identifiers - could be column indexes, column keys, column object or mixed.
 	 */
 	public checkUnfixingAllowed(columns: any[]): boolean { return; } ;
 
 	/**
- 	 * Fixes non-data columns (such as the row numbering column of row selectors) if any and if [fixingDirection](ui.iggridcolumnfixing#options:fixingDirection) is left. Does nothing if the non-data columns are already fixed.
+	 * Fixes non-data columns (such as the row numbering column of row selectors) if any and if [fixingDirection](ui.iggridcolumnfixing#options:fixingDirection) is left. Does nothing if the non-data columns are already fixed.
 	 */
 	public fixNonDataColumns(): void { return; } ;
 
 	/**
- 	 * This function is deprecated - use function fixNonDataColumns.
+	 * This function is deprecated - use function fixNonDataColumns.
 	 */
 	public fixDataSkippedColumns(): void { return; } ;
 
 	/**
- 	 * Unfixes non-data columns (such as the row numbering column of row selectors) if any and if [fixingDirection](ui.iggridcolumnfixing#options:fixingDirection) is left. Does nothing if the non-data columns are already fixed.
+	 * Unfixes non-data columns (such as the row numbering column of row selectors) if any and if [fixingDirection](ui.iggridcolumnfixing#options:fixingDirection) is left. Does nothing if the non-data columns are already fixed.
 	 */
 	public unfixNonDataColumns(): void { return; } ;
 
 	/**
- 	 * This function is deprecated - use function unfixNonDataColumns.
+	 * This function is deprecated - use function unfixNonDataColumns.
 	 */
 	public unfixDataSkippedColumns(): void { return; } ;
 
 	/**
- 	 * Unfixes all fixed columns.
+	 * Unfixes all fixed columns.
 	 */
 	public unfixAllColumns(): void { return; } ;
 
 	/**
- 	 * Syncs rows heights between two collections of rows.
+	 * Syncs rows heights between two collections of rows.
 	 *
 	 * @param $trs    An array of rows of the first(fixed/unfixed) container.
 	 * @param $anotherRows    An array of rows of the second(fixed/unfixed) container.
@@ -1029,7 +997,7 @@ export class IgGridColumnFixingFeature extends Feature<IgGridColumnFixing> {
 	public syncRowsHeights($trs: any[], $anotherRows: any[]): void { return; } ;
 
 	/**
- 	 * Calculates widths of the fixed columns.
+	 * Calculates widths of the fixed columns.
 	 *
 	 * @param fCols    Array of grid columns. If not set then the total width of the fixed columns are returned.
 	 * @param excludeNonDataColumns    If set to true do not calculate the width of non-data fixed columns (like the row selector row numbering column).
@@ -1038,15 +1006,15 @@ export class IgGridColumnFixingFeature extends Feature<IgGridColumnFixing> {
 	public getWidthOfFixedColumns(fCols?: any[], excludeNonDataColumns?: boolean, includeHidden?: boolean): number { return; } ;
 
 	/**
- 	 * Destroys the column fixing widget
+	 * Destroys the column fixing widget
 	 */
 	public destroy(): void { return; } ;
 }
 
 @Directive({
 	selector: 'tooltips',
-	inputs:  IgUtil.extractGridFeatureOptions('Tooltips'),
-	outputs: IgUtil.extractGridFeatureEvents('Tooltips')
+	inputs: ["disabled","create","visibility","style","showDelay","hideDelay","columnSettings","fadeTimespan","cursorLeftOffset","cursorTopOffset","inherit"],
+	outputs: ["tooltipShowing","tooltipShown","tooltipHiding","tooltipHidden"]
 })
 export class IgGridTooltipsFeature extends Feature<IgGridTooltips> {	
 	constructor(el: ElementRef) {
@@ -1054,12 +1022,12 @@ export class IgGridTooltipsFeature extends Feature<IgGridTooltips> {
 	}
 
 	/**
- 	 * Destroys the tooltip widget.
+	 * Destroys the tooltip widget.
 	 */
 	public destroy(): void { return; } ;
 
 	/**
- 	 * Returns the ID of the parent div element bounding the ruler and the tooltip container
+	 * Returns the ID of the parent div element bounding the ruler and the tooltip container
 	 */
 	public id(): string { return; } ;
 }
@@ -1085,7 +1053,7 @@ export class Features implements AfterContentInit {
 	@ContentChild(IgGridColumnFixingFeature) columnFixing: IgGridColumnFixingFeature;
 	@ContentChild(IgGridTooltipsFeature) tooltips: IgGridTooltipsFeature;
 
-   	ngAfterContentInit() {
+  	ngAfterContentInit() {
 		  		this.filtering ? this.allFeatures.push(this.filtering): null;
 			   	this.sorting ? this.allFeatures.push(this.sorting): null;
 				this.paging ? this.allFeatures.push(this.paging): null;
@@ -1101,48 +1069,9 @@ export class Features implements AfterContentInit {
 				this.summaries ? this.allFeatures.push(this.summaries): null;
 				this.columnFixing ? this.allFeatures.push(this.columnFixing): null;
 				this.tooltips ? this.allFeatures.push(this.tooltips): null;
-   }
+  }
 
 
-}
-
-export function IgComponent(args: any = {}) {
-
-	return function (cls) {
-		// get current annotations
-		let annotations = Reflect.getMetadata('annotations', cls) || [];
-
-		var sel = cls.name
-			//transform Uppercase to dash + LowerCase letter
-			.replace(/([A-Z])/g, (group) => { return "-" + group[0].toLowerCase(); })
-			//remove first dash and "-component"
-			.slice(1).replace("-component", "");
-
-		args.selector = sel;
-		args.template = "<ng-content></ng-content>";
-
-		var contrName = sel.replace(/-([a-z])/g, function (group) {
-			return group[1].toUpperCase();
-		});
-
-		var evt = [];
-		var opts = ["options", "widgetId", "changeDetectionInterval"];
-		if (jQuery.ui[contrName]) {
-			for (var propt in jQuery.ui[contrName].prototype.events) {
-				evt.push(propt);
-			}
-			args.outputs = evt;
-			for (var propt in jQuery.ui[contrName].prototype.options) {
-				opts.push(propt);
-			}
-			args.inputs = opts;
-		}
-		annotations.push(new Component(args));
-		// redefine with added annotations
-		Reflect.defineMetadata('annotations', annotations, cls);
-
-		return cls;
-	}
 }
 
 export class IgControlBase<Model> implements DoCheck {
@@ -1515,7 +1444,12 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
 	allRows(){	};
 }
 
-@IgComponent()
+@Component({
+	"selector": "ig-grid",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","width","height","autoAdjustHeight","avgRowHeight","avgColumnWidth","defaultColumnWidth","autoGenerateColumns","virtualization","virtualizationMode","requiresDataBinding","rowVirtualization","columnVirtualization","virtualizationMouseWheelStep","adjustVirtualHeights","templatingEngine","columns","dataSource","dataSourceUrl","dataSourceType","responseDataKey","responseTotalRecCountKey","requestType","responseContentType","showHeader","showFooter","fixedHeaders","fixedFooters","caption","features","tabIndex","localSchemaTransform","primaryKey","serializeTransactionLog","autoCommit","aggregateTransactions","autoFormat","renderCheckboxes","updateUrl","restSettings","alternateRowStyles","autofitLastColumn","enableHoverStyles","enableUTCDates","mergeUnboundColumns","jsonpRequest","enableResizeContainerCheck","featureChooserIconDisplay","scrollSettings"],
+	outputs: ["cellClick","cellRightClick","dataBinding","dataBound","rendering","rendered","dataRendering","dataRendered","headerRendering","headerRendered","footerRendering","footerRendered","headerCellRendered","rowsRendering","rowsRendered","schemaGenerated","columnsCollectionModified","requestError","created","destroyed"]
+})
 export class IgGridComponent extends IgGridBase<IgGrid> {
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
 
@@ -1991,7 +1925,12 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
 	public destroy(notToCallDestroy: Object): void { return; } ;
 }
 
-@IgComponent()
+@Component({
+	selector: "ig-tree-grid",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","width","height","autoAdjustHeight","avgRowHeight","avgColumnWidth","defaultColumnWidth","autoGenerateColumns","virtualization","virtualizationMode","requiresDataBinding","rowVirtualization","columnVirtualization","virtualizationMouseWheelStep","adjustVirtualHeights","templatingEngine","columns","dataSource","dataSourceUrl","dataSourceType","responseDataKey","responseTotalRecCountKey","requestType","responseContentType","showHeader","showFooter","fixedHeaders","fixedFooters","caption","features","tabIndex","localSchemaTransform","primaryKey","serializeTransactionLog","autoCommit","aggregateTransactions","autoFormat","renderCheckboxes","updateUrl","restSettings","alternateRowStyles","autofitLastColumn","enableHoverStyles","enableUTCDates","mergeUnboundColumns","jsonpRequest","enableResizeContainerCheck","featureChooserIconDisplay","scrollSettings","indentation","initialIndentationLevel","showExpansionIndicator","expandTooltipText","collapseTooltipText","foreignKey","initialExpandDepth","foreignKeyRootValue","renderExpansionIndicatorColumn","renderFirstDataCellFunction","childDataKey","renderExpansionCellFunction","enableRemoteLoadOnDemand","dataSourceSettings"],
+	outputs: ["cellClick","cellRightClick","dataBinding","dataBound","rendering","rendered","dataRendering","dataRendered","headerRendering","headerRendered","footerRendering","footerRendered","headerCellRendered","rowsRendering","rowsRendered","schemaGenerated","columnsCollectionModified","requestError","created","destroyed","rowExpanding","rowExpanded","rowCollapsing","rowCollapsed"]
+})
 export class IgTreeGridComponent extends IgGridBase<IgTreeGrid> {
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
 
@@ -2111,7 +2050,12 @@ export class IgTreeGridComponent extends IgGridBase<IgTreeGrid> {
 	public destroy(): Object { return; } ;
 }
 
-@IgComponent()
+@Component({
+	selector: "ig-hierarchical-grid",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","initialDataBindDepth","initialExpandDepth","odata","rest","maxDataBindDepth","defaultChildrenDataProperty","autoGenerateLayouts","expandCollapseAnimations","expandColWidth","pathSeparator","animationDuration","expandTooltip","collapseTooltip","columns","columnLayouts"],
+	outputs: ["rowExpanding","rowExpanded","rowCollapsing","rowCollapsed","childrenPopulating","childrenPopulated","childGridRendered","childGridCreating","childGridCreated"]
+})
 export class IgHierarchicalGridComponent extends IgGridBase<IgHierarchicalGrid> {
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
 
@@ -2273,7 +2217,12 @@ export class IgHierarchicalGridComponent extends IgGridBase<IgHierarchicalGrid> 
 	public destroy(): void { return; } ;
 }
 
-@IgComponent()
+@Component({
+	selector: "ig-combo",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","width","height","dropDownWidth","dataSource","dataSourceType","dataSourceUrl","responseTotalRecCountKey","responseDataKey","responseDataType","responseContentType","requestType","valueKey","textKey","itemTemplate","headerTemplate","footerTemplate","inputName","animationShowDuration","animationHideDuration","dropDownAttachedToBody","filteringType","filterExprUrlKey","filteringCondition","filteringLogic","noMatchFoundText","loadOnDemandSettings","visibleItemsCount","placeHolder","mode","virtualization","multiSelection","grouping","validatorOptions","highlightMatchesMode","caseSensitive","autoSelectFirstMatch","autoComplete","allowCustomValue","closeDropDownOnBlur","delayInputChangeProcessing","tabIndex","dropDownOnFocus","closeDropDownOnSelect","selectItemBySpaceKey","initialSelectedItems","preventSubmitOnEnter","format","suppressKeyboard","enableClearButton","dropDownButtonTitle","clearButtonTitle","dropDownOrientation"],
+	outputs: ["rendered","dataBinding","dataBound","filtering","filtered","itemsRendering","itemsRendered","dropDownOpening","dropDownOpened","dropDownClosing","dropDownClosed","selectionChanging","selectionChanged"]
+})
 export class IgComboComponent extends IgControlBase<IgCombo> implements ControlValueAccessor {
 	protected _model: any;
 	private _dataSource: any;
@@ -2720,7 +2669,12 @@ export class IgEditorBase<Model> extends IgControlBase<Model> implements Control
 }
 
 //Editors
-@IgComponent()
+@Component({
+	selector: "ig-checkbox-editor",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","width","height","value","tabIndex","allowNullValue","nullValue","inputName","readOnly","validatorOptions","checked","size","iconClass"],
+	outputs: ["rendering","rendered","mousedown","mouseup","mousemove","mouseover","mouseout","blur","focus","keydown","keypress","keyup","valueChanging","valueChanged"]
+})
 export class IgCheckboxEditorComponent extends IgEditorBase<IgCheckboxEditor> {
 	 constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, @Optional() public model: NgModel) { super(el, renderer, differs, model); }
 
@@ -2746,7 +2700,12 @@ export class IgCheckboxEditorComponent extends IgEditorBase<IgCheckboxEditor> {
 	public toggle(): void { return; } ;
 }
 
-@IgComponent()
+@Component({
+	selector: "ig-currency-editor",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","width","height","value","tabIndex","allowNullValue","nullValue","inputName","readOnly","validatorOptions","buttonType","listItems","listWidth","listItemHoverDuration","dropDownAttachedToBody","dropDownAnimationDuration","visibleItemsCount","includeKeys","excludeKeys","textAlign","placeHolder","selectionOnFocus","textMode","spinWrapAround","isLimitedToListValues","revertIfNotValid","preventSubmitOnEnter","dropDownOrientation","maxLength","dropDownOnReadOnly","toUpper","toLower","locale","suppressNotifications","regional","negativeSign","negativePattern","decimalSeparator","groupSeparator","groups","maxDecimals","minDecimals","dataMode","minValue","maxValue","spinDelta","scientificFormat","positivePattern","currencySymbol"],
+	outputs: ["rendering","rendered","mousedown","mouseup","mousemove","mouseover","mouseout","blur","focus","keydown","keypress","keyup","valueChanging","valueChanged","dropDownListOpening","dropDownListOpened","dropDownListClosing","dropDownListClosed","dropDownItemSelecting","dropDownItemSelected","textChanged"]
+})
 export class IgCurrencyEditorComponent extends IgEditorBase<IgCurrencyEditor> {
 	 constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, @Optional() public model: NgModel) { super(el, renderer, differs, model); }
 
@@ -2758,7 +2717,12 @@ export class IgCurrencyEditorComponent extends IgEditorBase<IgCurrencyEditor> {
 	public currencySymbol(symbol?: Object): string { return; } ;
 }
 
-@IgComponent()
+@Component({
+	selector: "ig-date-editor",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","width","height","value","tabIndex","allowNullValue","nullValue","inputName","readOnly","validatorOptions","buttonType","listItems","listWidth","listItemHoverDuration","dropDownAttachedToBody","dropDownAnimationDuration","visibleItemsCount","includeKeys","excludeKeys","textAlign","placeHolder","selectionOnFocus","textMode","spinWrapAround","isLimitedToListValues","revertIfNotValid","preventSubmitOnEnter","dropDownOrientation","maxLength","dropDownOnReadOnly","toUpper","toLower","locale","suppressNotifications","regional","inputMask","dataMode","unfilledCharsPrompt","padChar","emptyChar","minValue","maxValue","dateDisplayFormat","dateInputFormat","spinDelta","limitSpinToCurrentField","enableUTCDates","centuryThreshold","yearShift"],
+	outputs: ["rendering","rendered","mousedown","mouseup","mousemove","mouseover","mouseout","blur","focus","keydown","keypress","keyup","valueChanging","valueChanged","dropDownListOpening","dropDownListOpened","dropDownListClosing","dropDownListClosed","dropDownItemSelecting","dropDownItemSelected","textChanged"]
+})
 export class IgDateEditorComponent extends IgEditorBase<IgDateEditor> {
 	 constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, @Optional() public model: NgModel) { super(el, renderer, differs, model); } 
 
@@ -2821,7 +2785,12 @@ export class IgDateEditorComponent extends IgEditorBase<IgDateEditor> {
 	public selectedListIndex(): void { return; } ;
 }
 
-@IgComponent()
+@Component({
+	selector: "ig-date-picker",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","width","height","value","tabIndex","allowNullValue","nullValue","inputName","readOnly","validatorOptions","buttonType","listItems","listWidth","listItemHoverDuration","dropDownAttachedToBody","dropDownAnimationDuration","visibleItemsCount","includeKeys","excludeKeys","textAlign","placeHolder","selectionOnFocus","textMode","spinWrapAround","isLimitedToListValues","revertIfNotValid","preventSubmitOnEnter","dropDownOrientation","maxLength","dropDownOnReadOnly","toUpper","toLower","locale","suppressNotifications","regional","inputMask","dataMode","unfilledCharsPrompt","padChar","emptyChar","minValue","maxValue","dateDisplayFormat","dateInputFormat","spinDelta","limitSpinToCurrentField","enableUTCDates","centuryThreshold","yearShift","datepickerOptions"],
+	outputs: ["rendering","rendered","mousedown","mouseup","mousemove","mouseover","mouseout","blur","focus","keydown","keypress","keyup","valueChanging","valueChanged","dropDownListOpening","dropDownListOpened","dropDownListClosing","dropDownListClosed","dropDownItemSelecting","dropDownItemSelected","textChanged","itemSelected"]
+})
 export class IgDatePickerComponent extends IgEditorBase<IgDatePicker> { 
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, @Optional() public model: NgModel) { super(el, renderer, differs, model); }
 
@@ -2860,7 +2829,12 @@ export class IgDatePickerComponent extends IgEditorBase<IgDatePicker> {
 	public destroy(): void { return; } ;
 }
 
-@IgComponent()
+@Component({
+	selector: "ig-mask-editor",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","width","height","value","tabIndex","allowNullValue","nullValue","inputName","readOnly","validatorOptions","buttonType","listItems","listWidth","listItemHoverDuration","dropDownAttachedToBody","dropDownAnimationDuration","visibleItemsCount","includeKeys","excludeKeys","textAlign","placeHolder","selectionOnFocus","textMode","spinWrapAround","isLimitedToListValues","revertIfNotValid","preventSubmitOnEnter","dropDownOrientation","maxLength","dropDownOnReadOnly","toUpper","toLower","locale","suppressNotifications","regional","inputMask","dataMode","unfilledCharsPrompt","padChar","emptyChar"],
+	outputs: ["rendering","rendered","mousedown","mouseup","mousemove","mouseover","mouseout","blur","focus","keydown","keypress","keyup","valueChanging","valueChanged","dropDownListOpening","dropDownListOpened","dropDownListClosing","dropDownListClosed","dropDownItemSelecting","dropDownItemSelected","textChanged"]
+})
 export class IgMaskEditorComponent extends IgEditorBase<IgMaskEditor> { 
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, @Optional() public model: NgModel) { super(el, renderer, differs, model); }
 
@@ -2889,7 +2863,12 @@ export class IgMaskEditorComponent extends IgEditorBase<IgMaskEditor> {
 	public isValid(): boolean { return; } ;
 }
 
-@IgComponent()
+@Component({
+	selector: "ig-numeric-editor",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","width","height","value","tabIndex","allowNullValue","nullValue","inputName","readOnly","validatorOptions","buttonType","listItems","listWidth","listItemHoverDuration","dropDownAttachedToBody","dropDownAnimationDuration","visibleItemsCount","includeKeys","excludeKeys","textAlign","placeHolder","selectionOnFocus","textMode","spinWrapAround","isLimitedToListValues","revertIfNotValid","preventSubmitOnEnter","dropDownOrientation","maxLength","dropDownOnReadOnly","toUpper","toLower","locale","suppressNotifications","regional","negativeSign","negativePattern","decimalSeparator","groupSeparator","groups","maxDecimals","minDecimals","dataMode","minValue","maxValue","spinDelta","scientificFormat"],
+	outputs: ["rendering","rendered","mousedown","mouseup","mousemove","mouseover","mouseout","blur","focus","keydown","keypress","keyup","valueChanging","valueChanged","dropDownListOpening","dropDownListOpened","dropDownListClosing","dropDownListClosed","dropDownItemSelecting","dropDownItemSelected","textChanged"]
+})
 export class IgNumericEditorComponent extends IgEditorBase<IgNumericEditor> {
 	 constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, @Optional() public model: NgModel) { super(el, renderer, differs, model); }
 
@@ -2940,7 +2919,12 @@ export class IgNumericEditorComponent extends IgEditorBase<IgNumericEditor> {
 	public getRegionalOption(): string { return; } ;
 }
 
-@IgComponent()
+@Component({
+	selector: "ig-percent-editor",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","width","height","value","tabIndex","allowNullValue","nullValue","inputName","readOnly","validatorOptions","buttonType","listItems","listWidth","listItemHoverDuration","dropDownAttachedToBody","dropDownAnimationDuration","visibleItemsCount","includeKeys","excludeKeys","textAlign","placeHolder","selectionOnFocus","textMode","spinWrapAround","isLimitedToListValues","revertIfNotValid","preventSubmitOnEnter","dropDownOrientation","maxLength","dropDownOnReadOnly","toUpper","toLower","locale","suppressNotifications","regional","negativeSign","negativePattern","decimalSeparator","groupSeparator","groups","maxDecimals","minDecimals","dataMode","minValue","maxValue","spinDelta","scientificFormat","positivePattern","percentSymbol","displayFactor"],
+	outputs: ["rendering","rendered","mousedown","mouseup","mousemove","mouseover","mouseout","blur","focus","keydown","keypress","keyup","valueChanging","valueChanged","dropDownListOpening","dropDownListOpened","dropDownListClosing","dropDownListClosed","dropDownItemSelecting","dropDownItemSelected","textChanged"]
+})
 export class IgPercentEditorComponent extends IgEditorBase<IgPercentEditor> {
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, @Optional() public model: NgModel) { super(el, renderer, differs, model); }
 
@@ -2960,7 +2944,12 @@ export class IgPercentEditorComponent extends IgEditorBase<IgPercentEditor> {
 	public percentSymbol(symbol?: Object): string { return; } ;
 }
 
-@IgComponent()
+@Component({
+	selector: "ig-text-editor",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","width","height","value","tabIndex","allowNullValue","nullValue","inputName","readOnly","validatorOptions","buttonType","listItems","listWidth","listItemHoverDuration","dropDownAttachedToBody","dropDownAnimationDuration","visibleItemsCount","includeKeys","excludeKeys","textAlign","placeHolder","selectionOnFocus","textMode","spinWrapAround","isLimitedToListValues","revertIfNotValid","preventSubmitOnEnter","dropDownOrientation","maxLength","dropDownOnReadOnly","toUpper","toLower","locale","suppressNotifications"],
+	outputs: ["rendering","rendered","mousedown","mouseup","mousemove","mouseover","mouseout","blur","focus","keydown","keypress","keyup","valueChanging","valueChanged","dropDownListOpening","dropDownListOpened","dropDownListClosing","dropDownListClosed","dropDownItemSelecting","dropDownItemSelected","textChanged"]
+})
 export class IgTextEditorComponent extends IgEditorBase<IgTextEditor> {
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, @Optional() public model: NgModel) { super(el, renderer, differs, model); }
 
@@ -3071,7 +3060,12 @@ export class IgTextEditorComponent extends IgEditorBase<IgTextEditor> {
 	public spinDownButton(): string { return; } ;
 }
 
-@IgComponent()
+@Component({
+	selector: "ig-tree",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","width","height","checkboxMode","singleBranchExpand","hotTracking","parentNodeImageUrl","parentNodeImageClass","parentNodeImageTooltip","leafNodeImageUrl","leafNodeImageClass","leafNodeImageTooltip","animationDuration","pathSeparator","dataSource","dataSourceUrl","dataSourceType","responseDataKey","responseDataType","requestType","responseContentType","initialExpandDepth","loadOnDemand","bindings","defaultNodeTarget","dragAndDrop","updateUrl","dragAndDropSettings"],
+	outputs: ["dataBinding","dataBound","rendering","rendered","selectionChanging","selectionChanged","nodeCheckstateChanging","nodeCheckstateChanged","nodePopulating","nodePopulated","nodeCollapsing","nodeCollapsed","nodeExpanding","nodeExpanded","nodeClick","nodeDoubleClick","dragStart","drag","dragStop","nodeDropping","nodeDropped"]
+})
 export class IgTreeComponent extends IgControlBase<IgTree> {
 	private _dataSource: any;
 	private _changes: any;
@@ -3348,7 +3342,12 @@ export class IgContentControlBase<Model> extends IgControlBase<Model> {
 	}
 }
 
-@IgComponent()
+@Component({
+	selector: "ig-dialog",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","mainElement","state","pinned","closeOnEscape","showCloseButton","showMaximizeButton","showMinimizeButton","showPinButton","pinOnMinimized","imageClass","headerText","showHeader","showFooter","footerText","dialogClass","container","height","width","minHeight","minWidth","maxHeight","maxWidth","draggable","position","resizable","tabIndex","openAnimation","closeAnimation","zIndex","modal","trackFocus","closeButtonTitle","minimizeButtonTitle","maximizeButtonTitle","pinButtonTitle","unpinButtonTitle","restoreButtonTitle","temporaryUrl","enableHeaderFocus","enableDblclick"],
+	outputs: ["stateChanging","stateChanged","animationEnded","focus","blur"]
+})
 export class IgDialogComponent extends IgContentControlBase<IgDialog> {
 	 constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
 
@@ -3447,7 +3446,12 @@ export class IgDialogComponent extends IgContentControlBase<IgDialog> {
 	public content(newContent?: string): Object { return; } ;
 }
 
-@IgComponent()
+@Component({
+	selector: "ig-splitter",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","width","height","orientation","panels","dragDelta","resizeOtherSplitters"],
+	outputs: ["collapsed","expanded","resizeStarted","resizing","resizeEnded","layoutRefreshing","layoutRefreshed"]
+})
 export class IgSplitterComponent extends IgContentControlBase<IgSplitter> {
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
 
@@ -3513,7 +3517,12 @@ export class IgSplitterComponent extends IgContentControlBase<IgSplitter> {
 	public destroy(): void { return; } ;
 }
 
-@IgComponent()
+@Component({
+	selector: "ig-layout-manager",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","borderLayout","gridLayout","height","itemCount","items","layoutMode","width"],
+	outputs: ["internalResized","internalResizing","itemRendered","itemRendering","rendered"]
+})
 export class IgLayoutManagerComponent extends IgContentControlBase<IgLayoutManager> {
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
 
@@ -3537,7 +3546,12 @@ export class IgLayoutManagerComponent extends IgContentControlBase<IgLayoutManag
 	public destroy(): void { return; } ;
 }
 
-@IgComponent()
+@Component({
+	selector: "ig-tile-manager",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","width","height","columnWidth","columnHeight","cols","rows","marginLeft","marginTop","rearrangeItems","items","dataSource","minimizedState","maximizedState","maximizedTileIndex","rightPanelCols","rightPanelTilesWidth","rightPanelTilesHeight","showRightPanelScroll","splitterOptions","preventMaximizingSelector","animationDuration","dataSourceUrl","responseDataKey","responseDataType","dataSourceType","requestType","responseContentType"],
+	outputs: ["dataBinding","dataBound","rendering","rendered","tileRendering","tileRendered","tileMaximizing","tileMaximized","tileMinimizing","tileMinimized"]
+})
 export class IgTileManagerComponent extends IgContentControlBase<IgTileManager> {
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
 
@@ -3607,7 +3621,12 @@ export class IgTileManagerComponent extends IgContentControlBase<IgTileManager> 
 	public destroy(): Object { return; } ;
 }
 
-@IgComponent()
+@Component({
+	selector: "ig-html-editor",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","showFormattingToolbar","showTextToolbar","showInsertObjectToolbar","showCopyPasteToolbar","width","height","toolbarSettings","customToolbars","inputName","value"],
+	outputs: ["rendered","rendering","actionExecuting","actionExecuted","toolbarCollapsing","toolbarCollapsed","toolbarExpanding","toolbarExpanded","cut","copy","paste","undo","redo","workspaceResized"]
+})
 export class IgHtmlEditorComponent extends IgControlBase<IgHtmlEditor> implements ControlValueAccessor {
 	protected _model: any;
 	protected _zone: any;
@@ -3729,7 +3748,12 @@ export class IgHtmlEditorComponent extends IgControlBase<IgHtmlEditor> implement
 }
 
 
-@IgComponent()
+@Component({
+	selector: "ig-validator",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","onchange","onblur","onsubmit","required","number","date","email","lengthRange","valueRange","creditCard","pattern","messageTarget","errorMessage","successMessage","threshold","equalTo","custom","fields","notificationOptions","requiredIndication","optionalIndication"],
+	outputs: ["validating","validated","success","error","errorShowing","errorHiding","errorShown","errorHidden","successShowing","successHiding","successShown","successHidden","formValidating","formValidated","formError","formSuccess"]
+})
 export class IgValidatorComponent extends IgControlBase<IgValidator> {
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) {
 		super(el, renderer, differs);
@@ -3825,7 +3849,12 @@ export class IgValidatorComponent extends IgControlBase<IgValidator> {
 }
 
 //Pivot Grids
-@IgComponent()
+@Component({
+	selector: "ig-pivot-data-selector",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","width","height","dataSource","dataSourceOptions","deferUpdate","dragAndDropSettings","dropDownParent","disableRowsDropArea","disableColumnsDropArea","disableMeasuresDropArea","disableFiltersDropArea","customMoveValidation"],
+	outputs: ["dataSelectorRendered","dataSourceInitialized","dataSourceUpdated","deferUpdateChanged","dragStart","drag","dragStop","metadataDropping","metadataDropped","metadataRemoving","metadataRemoved","filterDropDownOpening","filterDropDownOpened","filterMembersLoaded","filterDropDownOk","filterDropDownClosing","filterDropDownClosed"]
+})
 export class IgPivotDataSelectorComponent extends IgControlBase<IgPivotDataSelector> { 
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); } 
 
@@ -3843,7 +3872,12 @@ export class IgPivotDataSelectorComponent extends IgControlBase<IgPivotDataSelec
 	public destroy(): void { return; } ;
 }
 
-@IgComponent()
+@Component({
+	selector: "ig-pivot-grid",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","width","height","dataSource","dataSourceOptions","deferUpdate","isParentInFrontForColumns","isParentInFrontForRows","compactColumnHeaders","compactRowHeaders","rowHeadersLayout","compactColumnHeaderIndentation","compactRowHeaderIndentation","rowHeaderLinkGroupIndentation","treeRowHeaderIndentation","defaultRowHeaderWidth","allowSorting","firstSortDirection","allowHeaderRowsSorting","allowHeaderColumnsSorting","levelSortDirections","defaultLevelSortBehavior","firstLevelSortDirection","gridOptions","dragAndDropSettings","dropDownParent","disableRowsDropArea","disableColumnsDropArea","disableMeasuresDropArea","disableFiltersDropArea","hideRowsDropArea","hideColumnsDropArea","hideMeasuresDropArea","hideFiltersDropArea","customMoveValidation"],
+	outputs: ["dataSourceInitialized","dataSourceUpdated","pivotGridHeadersRendered","pivotGridRendered","tupleMemberExpanding","tupleMemberExpanded","tupleMemberCollapsing","tupleMemberCollapsed","sorting","sorted","headersSorting","headersSorted","dragStart","drag","dragStop","metadataDropping","metadataDropped","metadataRemoving","metadataRemoved","filterDropDownOpening","filterDropDownOpened","filterMembersLoaded","filterDropDownOk","filterDropDownClosing","filterDropDownClosed"]
+})
 export class IgPivotGridComponent extends IgControlBase<IgPivotGrid> { 
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
 
@@ -3902,7 +3936,12 @@ export class IgPivotGridComponent extends IgControlBase<IgPivotGrid> {
  }
 
 //Charts
-@IgComponent()
+@Component({
+	selector: "ig-data-chart",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","isPagePanningAllowed","syncChannel","synchronizeVertically","synchronizeHorizontally","crosshairPoint","windowRect","horizontalZoomable","verticalZoomable","windowResponse","windowRectMinWidth","overviewPlusDetailPaneVisibility","crosshairVisibility","plotAreaBackground","defaultInteraction","dragModifier","panModifier","previewRect","windowPositionHorizontal","windowPositionVertical","windowScaleHorizontal","windowScaleVertical","circleMarkerTemplate","triangleMarkerTemplate","pyramidMarkerTemplate","squareMarkerTemplate","diamondMarkerTemplate","pentagonMarkerTemplate","hexagonMarkerTemplate","tetragramMarkerTemplate","pentagramMarkerTemplate","hexagramMarkerTemplate","topMargin","leftMargin","rightMargin","bottomMargin","autoMarginWidth","autoMarginHeight","isSquare","gridMode","brushes","markerBrushes","outlines","markerOutlines","width","height","size","dataSource","dataSourceUrl","dataSourceType","responseDataKey","isSurfaceInteractionDisabled","animateSeriesWhenAxisRangeChanges","title","subtitle","titleTextStyle","titleTopMargin","titleLeftMargin","titleRightMargin","titleBottomMargin","subtitleTextStyle","subtitleTopMargin","subtitleLeftMargin","subtitleRightMargin","subtitleBottomMargin","titleTextColor","subtitleTextColor","titleHorizontalAlignment","subtitleHorizontalAlignment","highlightingTransitionDuration","useTiledZooming","preferHigherResolutionTiles","pixelScalingRatio","zoomTileCacheSize","contentHitTestMode","legend","axes","series","theme"],
+	outputs: ["tooltipShowing","tooltipShown","tooltipHiding","tooltipHidden","browserNotSupported","seriesCursorMouseMove","seriesMouseLeftButtonDown","seriesMouseLeftButtonUp","seriesMouseMove","seriesMouseEnter","seriesMouseLeave","windowRectChanged","gridAreaRectChanged","refreshCompleted","axisRangeChanged","typicalBasedOn","progressiveLoadStatusChanged","assigningCategoryStyle","assigningCategoryMarkerStyle"]
+})
 export class IgDataChartComponent extends IgControlBase<IgDataChart> { 
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
 	public option(): void { return; } ;
@@ -4340,7 +4379,12 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
 	public clearTileZoomCache(): void { return; } ;
  }
 
-@IgComponent()
+@Component({
+	selector: "ig-pie-chart",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","width","height","dataSource","dataSourceUrl","dataSourceType","responseDataKey","valueMemberPath","labelMemberPath","dataValue","dataLabel","labelsPosition","labelOuterColor","labelInnerColor","selectionMode","selectedItem","selectedItems","leaderLineVisibility","leaderLineType","leaderLineMargin","othersCategoryThreshold","formatLabel","othersCategoryStyle","othersCategoryType","othersCategoryText","explodedRadius","radiusFactor","allowSliceSelection","allowSliceExplosion","explodedSlices","selectedSlices","showTooltip","tooltipTemplate","legend","labelExtent","startAngle","sweepDirection","selectedStyle","brushes","outlines","legendItemTemplate","legendItemBadgeTemplate","textStyle","theme"],
+	outputs: ["tooltipShowing","tooltipShown","tooltipHiding","tooltipHidden","browserNotSupported","sliceClick","labelClick","selectedItemChanging","selectedItemChanged","selectedItemsChanging","selectedItemsChanged"]
+})
 export class IgPieChartComponent extends IgControlBase<IgPieChart> {
 	 constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); } 
 	public option(): void { return; } ;
@@ -4409,7 +4453,12 @@ export class IgPieChartComponent extends IgControlBase<IgPieChart> {
 	public exportVisualData(): void { return; } ;
 }
 
-@IgComponent()
+@Component({
+	selector: "ig-doughnut-chart",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","width","height","tooltipTemplate","maxRecCount","dataSource","dataSourceType","dataSourceUrl","responseTotalRecCountKey","responseDataKey","series","allowSliceSelection","isSurfaceInteractionDisabled","allowSliceExplosion","innerExtent","selectedStyle"],
+	outputs: ["dataBinding","dataBound","updateTooltip","hideTooltip","tooltipShowing","tooltipShown","tooltipHiding","tooltipHidden","browserNotSupported","sliceClick","holeDimensionsChanged"]
+})
 export class IgDoughnutChartComponent extends IgControlBase<IgDoughnutChart> {
 	 constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
 
@@ -4460,7 +4509,12 @@ export class IgDoughnutChartComponent extends IgControlBase<IgDoughnutChart> {
 	public destroy(): void { return; } ;
 }
 
-@IgComponent()
+@Component({
+	selector: "ig-funnel-chart",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","width","height","tooltipTemplate","maxRecCount","dataSource","dataSourceType","dataSourceUrl","responseTotalRecCountKey","responseDataKey","bezierPoints","legend","valueMemberPath","brushes","outlines","bottomEdgeWidth","innerLabelMemberPath","outerLabelMemberPath","innerLabelVisibility","outerLabelVisibility","outerLabelAlignment","funnelSliceDisplay","formatInnerLabel","formatOuterLabel","transitionDuration","isInverted","useBezierCurve","allowSliceSelection","useUnselectedStyle","selectedSliceStyle","unselectedSliceStyle","legendItemBadgeTemplate","useOuterLabelsForLegend","textStyle","outerLabelTextStyle","outlineThickness","pixelScalingRatio","outerLabelTextColor","textColor"],
+	outputs: ["dataBinding","dataBound","updateTooltip","hideTooltip","sliceClicked"]
+})
 export class IgFunnelChartComponent extends IgControlBase<IgFunnelChart> {
 	 constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
 
@@ -4501,7 +4555,12 @@ export class IgFunnelChartComponent extends IgControlBase<IgFunnelChart> {
 	public destroy(): void { return; } ;
 }
 
-@IgComponent()
+@Component({
+	selector: "ig-radial-gauge",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","width","height","ranges","rangeBrushes","rangeOutlines","minimumValue","maximumValue","interval","centerX","centerY","value","scaleStartAngle","scaleEndAngle","scaleSweepDirection","transitionDuration","transitionEasingFunction","needleBrush","needleOutline","needleStartExtent","needleEndExtent","needleShape","needleStartWidthRatio","needleEndWidthRatio","needleBaseFeatureWidthRatio","needleBaseFeatureExtent","needlePointFeatureWidthRatio","needlePointFeatureExtent","needlePivotWidthRatio","needlePivotInnerWidthRatio","needlePivotShape","scaleStartExtent","needlePivotBrush","needlePivotOutline","needleStrokeThickness","needlePivotStrokeThickness","scaleEndExtent","labelExtent","labelInterval","tickStartExtent","tickEndExtent","tickStrokeThickness","tickBrush","fontBrush","minorTickStartExtent","minorTickEndExtent","minorTickStrokeThickness","minorTickBrush","minorTickCount","scaleBrush","backingBrush","backingOutline","backingStrokeThickness","backingOuterExtent","backingOversweep","scaleOversweep","scaleOversweepShape","backingCornerRadius","backingInnerExtent","backingShape","radiusMultiplier","duplicateLabelOmissionStrategy","isNeedleDraggingEnabled","isNeedleDraggingConstrained","font","transitionProgress","pixelScalingRatio"],
+	outputs: ["formatLabel","alignLabel","valueChanged"]
+})
 export class IgRadialGaugeComponent extends IgControlBase<IgRadialGauge> {
 	 constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
 
@@ -4595,7 +4654,12 @@ export class IgRadialGaugeComponent extends IgControlBase<IgRadialGauge> {
 	public styleUpdated(): void { return; } ;
 }
 
-@IgComponent()
+@Component({
+	selector: "ig-zoombar",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","target","clone","width","height","zoomAction","zoomWindowMoveDistance","defaultZoomWindow","zoomWindowMinWidth","hoverStyleAnimationDuration","windowPanDuration","tabIndex"],
+	outputs: ["zoomChanging","zoomChanged","providerCreated","windowDragStarting","windowDragStarted","windowDragging","windowDragEnding","windowDragEnded","windowResizing","windowResized"]
+})
 export class IgZoombarComponent extends IgControlBase<IgZoombar> { 
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
 
@@ -4633,7 +4697,12 @@ export class IgZoombarComponent extends IgControlBase<IgZoombar> {
 	public zoom(left?: number, width?: number): Object { return; } ;
 }
 
-@IgComponent()
+@Component({
+	selector: "ig-map",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","width","height","dataSource","dataSourceUrl","dataSourceType","responseDataKey","autoMarginWidth","autoMarginHeight","crosshairVisibility","crosshairPoint","plotAreaBackground","defaultInteraction","dragModifier","panModifier","previewRect","windowRect","zoomable","windowScale","windowResponse","windowRectMinWidth","windowPositionHorizontal","windowPositionVertical","circleMarkerTemplate","triangleMarkerTemplate","pyramidMarkerTemplate","squareMarkerTemplate","diamondMarkerTemplate","pentagonMarkerTemplate","hexagonMarkerTemplate","tetragramMarkerTemplate","pentagramMarkerTemplate","hexagramMarkerTemplate","overviewPlusDetailPaneBackgroundImageUri","useTiledZooming","preferHigherResolutionTiles","zoomTileCacheSize","backgroundContent","series","theme"],
+	outputs: ["tooltipShowing","tooltipShown","tooltipHiding","tooltipHidden","browserNotSupported","seriesCursorMouseMove","seriesMouseLeftButtonDown","seriesMouseLeftButtonUp","seriesMouseMove","seriesMouseEnter","seriesMouseLeave","windowRectChanged","gridAreaRectChanged","refreshCompleted","triangulationStatusChanged"]
+})
 export class IgMapComponent extends IgControlBase<IgMap> { 
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
 	public option(): void { return; } ;
@@ -4843,13 +4912,23 @@ export class IgMapComponent extends IgControlBase<IgMap> {
 	public renderSeries(targetName: string, animate: boolean): void { return; } ;
 }
 
-@IgComponent()
+@Component({
+	selector: "ig-sparkline",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","width","height","tooltipTemplate","maxRecCount","dataSource","dataSourceType","dataSourceUrl","responseTotalRecCountKey","responseDataKey","brush","negativeBrush","markerBrush","negativeMarkerBrush","firstMarkerBrush","lastMarkerBrush","highMarkerBrush","lowMarkerBrush","trendLineBrush","horizontalAxisBrush","verticalAxisBrush","normalRangeFill","horizontalAxisVisibility","verticalAxisVisibility","markerVisibility","negativeMarkerVisibility","firstMarkerVisibility","lastMarkerVisibility","lowMarkerVisibility","highMarkerVisibility","normalRangeVisibility","displayNormalRangeInFront","markerSize","firstMarkerSize","lastMarkerSize","highMarkerSize","lowMarkerSize","negativeMarkerSize","lineThickness","valueMemberPath","labelMemberPath","trendLineType","trendLinePeriod","trendLineThickness","normalRangeMinimum","normalRangeMaximum","displayType","unknownValuePlotting","verticalAxisLabel","horizontalAxisLabel","formatLabel","pixelScalingRatio"],
+	outputs: ["dataBinding","dataBound","updateTooltip","hideTooltip"]
+})
 export class IgSparklineComponent extends IgControlBase<IgSparkline> { 
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
 	public destroy(): void { return; } ;
 }
 
-@IgComponent()
+@Component({
+	selector: "ig-bullet-graph",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","width","height","ranges","rangeToolTipTemplate","valueToolTipTemplate","targetValueToolTipTemplate","orientation","rangeBrushes","rangeOutlines","minimumValue","maximumValue","targetValue","targetValueName","value","valueName","rangeInnerExtent","rangeOuterExtent","valueInnerExtent","valueOuterExtent","interval","ticksPostInitial","ticksPreTerminal","labelInterval","labelExtent","labelsPostInitial","labelsPreTerminal","minorTickCount","tickStartExtent","tickEndExtent","tickStrokeThickness","tickBrush","fontBrush","valueBrush","valueOutline","valueStrokeThickness","minorTickStartExtent","minorTickEndExtent","minorTickStrokeThickness","minorTickBrush","isScaleInverted","backingBrush","backingOutline","backingStrokeThickness","backingInnerExtent","backingOuterExtent","scaleStartExtent","scaleEndExtent","targetValueBrush","targetValueBreadth","targetValueInnerExtent","targetValueOuterExtent","targetValueOutline","targetValueStrokeThickness","transitionDuration","showToolTipTimeout","showToolTip","font","pixelScalingRatio"],
+	outputs: ["formatLabel","alignLabel"]
+})
 export class IgBulletGraphComponent extends IgControlBase<IgBulletGraph> {
 	 constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); } 
 
@@ -4900,7 +4979,12 @@ export class IgBulletGraphComponent extends IgControlBase<IgBulletGraph> {
 	public styleUpdated(): void { return; } ;
 }
 
-@IgComponent()
+@Component({
+	selector: "ig-linear-gauge",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","width","height","ranges","rangeToolTipTemplate","needleToolTipTemplate","orientation","rangeBrushes","rangeOutlines","minimumValue","maximumValue","value","needleShape","needleName","rangeInnerExtent","scaleInnerExtent","rangeOuterExtent","scaleOuterExtent","needleInnerExtent","needleOuterExtent","needleInnerBaseWidth","needleOuterBaseWidth","needleInnerPointWidth","needleOuterPointWidth","needleInnerPointExtent","needleOuterPointExtent","interval","ticksPostInitial","ticksPreTerminal","labelInterval","labelExtent","labelsPostInitial","labelsPreTerminal","minorTickCount","tickStartExtent","tickEndExtent","tickStrokeThickness","tickBrush","fontBrush","needleBreadth","needleBrush","needleOutline","needleStrokeThickness","minorTickStartExtent","minorTickEndExtent","minorTickStrokeThickness","minorTickBrush","isScaleInverted","backingBrush","backingOutline","backingStrokeThickness","backingInnerExtent","backingOuterExtent","scaleStartExtent","scaleEndExtent","scaleBrush","scaleOutline","scaleStrokeThickness","isNeedleDraggingEnabled","transitionDuration","showToolTipTimeout","showToolTip","font","pixelScalingRatio"],
+	outputs: ["formatLabel","alignLabel","valueChanged"]
+})
 export class IgLinearGaugeComponent extends IgControlBase<IgLinearGauge> { 
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
 
@@ -4967,7 +5051,12 @@ export class IgLinearGaugeComponent extends IgControlBase<IgLinearGauge> {
 	public styleUpdated(): void { return; } ;
 }
 
-@IgComponent()
+@Component({
+	selector: "ig-q-r-code-barcode",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","width","height","backingBrush","backingOutline","backingStrokeThickness","barBrush","fontBrush","font","data","errorMessageText","stretch","barsFillMode","widthToHeightRatio","xDimension","errorCorrectionLevel","sizeVersion","encodingMode","eciNumber","eciHeaderDisplayMode","fnc1Mode","applicationIndicator"],
+	outputs: ["errorMessageDisplaying","dataChanged"]
+})
 export class IgQRCodeBarcodeComponent extends IgControlBase<IgQRCodeBarcode> {
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
 
@@ -4993,7 +5082,12 @@ export class IgQRCodeBarcodeComponent extends IgControlBase<IgQRCodeBarcode> {
 }
 
 //Others
-@IgComponent()
+@Component({
+	selector: "ig-upload",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","width","height","autostartupload","labelUploadButton","labelAddButton","labelClearAllButton","labelSummaryTemplate","labelSummaryProgressBarTemplate","labelShowDetails","labelHideDetails","labelSummaryProgressButtonCancel","labelSummaryProgressButtonContinue","labelSummaryProgressButtonDone","labelProgressBarFileNameContinue","errorMessageMaxFileSizeExceeded","errorMessageGetFileStatus","errorMessageCancelUpload","errorMessageNoSuchFile","errorMessageOther","errorMessageValidatingFileExtension","errorMessageAJAXRequestFileSize","errorMessageTryToRemoveNonExistingFile","errorMessageTryToStartNonExistingFile","errorMessageMaxUploadedFiles","errorMessageMaxSimultaneousFiles","errorMessageDropMultipleFilesWhenSingleModel","uploadUrl","progressUrl","allowedExtensions","showFileExtensionIcon","css","fileExtensionIcons","mode","multipleFiles","maxUploadedFiles","maxSimultaneousFilesUploads","fileSizeMetric","controlId","fileSizeDecimalDisplay","maxFileSize"],
+	outputs: ["fileSelecting","fileSelected","fileUploading","fileUploaded","fileUploadAborted","cancelAllClicked","onError","fileExtensionsValidating","onXHRLoad","onFormDataSubmit"]
+})
 export class IgUploadComponent extends IgControlBase<IgUpload> {
 	 constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
 
@@ -5066,7 +5160,12 @@ export class IgUploadComponent extends IgControlBase<IgUpload> {
 	public getFileInfo(fileIndex: number): Object { return; } ;
 }
 
-@IgComponent()
+@Component({
+	selector: "ig-popover",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","closeOnBlur","direction","position","width","height","minWidth","maxWidth","maxHeight","animationDuration","contentTemplate","selectors","headerTemplate","showOn","containment","appendTo"],
+	outputs: ["showing","shown","hiding","hidden"]
+})
 export class IgPopoverComponent extends IgControlBase<IgPopover> {
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) {
 		super(el, renderer, differs);
@@ -5153,7 +5252,12 @@ export class IgPopoverComponent extends IgControlBase<IgPopover> {
 	public setCoordinates(pos: Object): void { return; } ;
 }
 
-@IgComponent()
+@Component({
+	selector: "ig-notifier",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","closeOnBlur","direction","position","width","height","minWidth","maxWidth","maxHeight","animationDuration","contentTemplate","selectors","headerTemplate","showOn","containment","appendTo","state","notifyLevel","mode","allowCSSOnTarget","messages","showIcon","animationSlideDistance"],
+	outputs: ["showing","shown","hiding","hidden"]
+})
 //TODO: change the model from any to IgNotifier when added to igniteui typescript definitions
 export class IgNotifierComponent extends IgControlBase<any> {
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) {
@@ -5201,7 +5305,12 @@ export class IgNotifierComponent extends IgControlBase<any> {
 	public destroy(): void { return; } ;
 }
 
-@IgComponent()
+@Component({
+	selector: "ig-rating",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","vertical","value","valueHover","voteCount","voteWidth","voteHeight","swapDirection","valueAsPercent","focusable","precision","precisionZeroVote","roundedDecimalPlaces","theme","validatorOptions","cssVotes"],
+	outputs: ["hoverChange","valueChange"]
+})
 export class IgRatingComponent extends IgControlBase<IgRating> { 
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
 
@@ -5249,7 +5358,12 @@ export class IgRatingComponent extends IgControlBase<IgRating> {
 	public destroy(): Object { return; } ;
 }
 
-@IgComponent()
+@Component({
+	selector: "ig-video-player",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","sources","width","height","posterUrl","preload","autoplay","autohide","volumeAutohideDelay","centerButtonHideDelay","loop","browserControls","fullscreen","volume","muted","title","showSeekTime","progressLabelFormat","bookmarks","relatedVideos","banners","commercials"],
+	outputs: ["ended","playing","paused","buffering","progress","waiting","bookmarkHit","bookmarkClick","enterFullScreen","exitFullScreen","relatedVideoClick","bannerVisible","bannerHidden","bannerClick","browserNotSupported"]
+})
 export class IgVideoPlayerComponent extends IgControlBase<IgVideoPlayer> {
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
 
@@ -5364,7 +5478,12 @@ export class IgVideoPlayerComponent extends IgControlBase<IgVideoPlayer> {
 	public destroy(): void { return; } ;
  }
 
-@IgComponent()
+@Component({
+	selector: "ig-radial-menu",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","items","currentOpenMenuItemName","centerButtonContentWidth","centerButtonContentHeight","centerButtonClosedFill","centerButtonClosedStroke","centerButtonFill","centerButtonHotTrackFill","centerButtonHotTrackStroke","centerButtonStroke","centerButtonStrokeThickness","font","isOpen","menuBackground","menuItemOpenCloseAnimationDuration","menuItemOpenCloseAnimationEasingFunction","menuOpenCloseAnimationDuration","menuOpenCloseAnimationEasingFunction","minWedgeCount","outerRingFill","outerRingThickness","outerRingStroke","outerRingStrokeThickness","rotationInDegrees","rotationAsPercentageOfWedge","wedgePaddingInDegrees","pixelScalingRatio"],
+	outputs: ["formatLabel","alignLabel","valueChanged"]
+})
 export class IgRadialMenuComponent extends IgControlBase<IgRadialMenu> {
 	 constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
 	public itemOption(itemKey: Object, key: Object, value: Object): void { return; } ;
@@ -5374,7 +5493,12 @@ export class IgRadialMenuComponent extends IgControlBase<IgRadialMenu> {
 	public styleUpdated(): void { return; } ;
 }
 
-@IgComponent()
+@Component({
+	selector: "ig-split-button",
+	template: "<ng-content></ng-content>",
+	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","items","defaultItemName","swapDefaultEnabled"],
+	outputs: ["click","expanded","expanding","collapsed","collapsing"]
+})
 export class IgSplitButtonComponent extends IgControlBase<IgSplitButton> { 
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
 
@@ -5416,3 +5540,9 @@ export class IgSplitButtonComponent extends IgControlBase<IgSplitButton> {
 	public destroy(): void { return; } ;
 	public widget(): void { return; } ;
 }
+
+@NgModule({
+	declarations: [Column,IgGridSortingFeature,IgGridFilteringFeature,IgGridPagingFeature,IgGridUpdatingFeature,IgGridGroupByFeature,IgGridColumnMovingFeature,IgGridHidingFeature,IgGridCellMergingFeature,IgGridResponsiveFeature,IgGridResizingFeature,IgGridSelectionFeature,IgGridRowSelectorsFeature,IgGridSummariesFeature,IgGridColumnFixingFeature,IgGridTooltipsFeature,Features,IgGridComponent,IgTreeGridComponent,IgHierarchicalGridComponent,IgComboComponent,IgCheckboxEditorComponent,IgCurrencyEditorComponent,IgDateEditorComponent,IgDatePickerComponent,IgMaskEditorComponent,IgNumericEditorComponent,IgPercentEditorComponent,IgTextEditorComponent,IgTreeComponent,IgDialogComponent,IgSplitterComponent,IgLayoutManagerComponent,IgTileManagerComponent,IgHtmlEditorComponent,IgValidatorComponent,IgPivotDataSelectorComponent,IgPivotGridComponent,IgDataChartComponent,IgPieChartComponent,IgDoughnutChartComponent,IgFunnelChartComponent,IgRadialGaugeComponent,IgZoombarComponent,IgMapComponent,IgSparklineComponent,IgBulletGraphComponent,IgLinearGaugeComponent,IgQRCodeBarcodeComponent,IgUploadComponent,IgPopoverComponent,IgNotifierComponent,IgRatingComponent,IgVideoPlayerComponent,IgRadialMenuComponent,IgSplitButtonComponent],
+	exports: [Column,IgGridSortingFeature,IgGridFilteringFeature,IgGridPagingFeature,IgGridUpdatingFeature,IgGridGroupByFeature,IgGridColumnMovingFeature,IgGridHidingFeature,IgGridCellMergingFeature,IgGridResponsiveFeature,IgGridResizingFeature,IgGridSelectionFeature,IgGridRowSelectorsFeature,IgGridSummariesFeature,IgGridColumnFixingFeature,IgGridTooltipsFeature,Features,IgGridComponent,IgTreeGridComponent,IgHierarchicalGridComponent,IgComboComponent,IgCheckboxEditorComponent,IgCurrencyEditorComponent,IgDateEditorComponent,IgDatePickerComponent,IgMaskEditorComponent,IgNumericEditorComponent,IgPercentEditorComponent,IgTextEditorComponent,IgTreeComponent,IgDialogComponent,IgSplitterComponent,IgLayoutManagerComponent,IgTileManagerComponent,IgHtmlEditorComponent,IgValidatorComponent,IgPivotDataSelectorComponent,IgPivotGridComponent,IgDataChartComponent,IgPieChartComponent,IgDoughnutChartComponent,IgFunnelChartComponent,IgRadialGaugeComponent,IgZoombarComponent,IgMapComponent,IgSparklineComponent,IgBulletGraphComponent,IgLinearGaugeComponent,IgQRCodeBarcodeComponent,IgUploadComponent,IgPopoverComponent,IgNotifierComponent,IgRatingComponent,IgVideoPlayerComponent,IgRadialMenuComponent,IgSplitButtonComponent]
+})
+export class IgniteUIModule {}
