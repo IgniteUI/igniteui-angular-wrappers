@@ -44,7 +44,9 @@ var NODES = {
 	"ig-dialog": "div",
 	"ig-splitter": "div",
 	"ig-layout-manager": "div",
-	"ig-tile-manager": "div"
+	"ig-tile-manager": "div",
+	"ig-spreadsheet": "div",
+	"ig-scheduler": "div"
 };
 
 @Directive({
@@ -5259,7 +5261,7 @@ export class IgPopoverComponent extends IgControlBase<IgPopover> {
 	outputs: ["showing","shown","hiding","hidden"]
 })
 //TODO: change the model from any to IgNotifier when added to igniteui typescript definitions
-export class IgNotifierComponent extends IgControlBase<any> {
+export class IgNotifierComponent extends IgControlBase<IgNotifier> {
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) {
 		super(el, renderer, differs);
 	}
@@ -5541,8 +5543,139 @@ export class IgSplitButtonComponent extends IgControlBase<IgSplitButton> {
 	public widget(): void { return; } ;
 }
 
+@Component({
+	selector: "ig-scheduler",
+	template: "<ng-content></ng-content>",
+	inputs:["widgetId","options","changeDetectionInterval","disabled","create","views","viewMode","selectedDate","enableTodayButton","width","height","agendaViewSettings","monthViewSettings","appointmentDialogSuppress"],
+	outputs:["agendaRangeChanging","agendaRangeChanged","daySelected","monthChanging","monthChanged","rendering","rendered","viewChanging","viewChanged","appointmentDialogOpening","appointmentDialogOpened","appointmentDialogClosing","appointmentDialogClosed","appointmentCreating","appointmentCreated","appointmentDeleting","appointmentDeleted","appointmentEditing","appointmentEdited"]
+})
+export class IgSchedulerComponent extends IgControlBase<IgScheduler> {
+	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
+
+	/**
+	 * Gets reference to appointment by id
+	 *
+	 * @param id 
+	 */
+	public getAppointmentById(id: Object): Object { return; };
+
+	/**
+	  * Creates a new appointment and renders it to the scheduler
+	 *
+	 * @param appointment 
+	 */
+	public createAppointment(appointment: Object): Object { return; };
+
+	/**
+	  * Deletes appointment from the appointment collection
+	 *
+	 * @param appointment	appointment
+	 */
+	public deleteAppointment(appointment: Object): Object { return; };
+
+	/**
+	  * Deletes appointment from the appointment collection
+	 *
+	 * @param appointment	appointment
+	 * @param updateAppoinment	updateAppoinment
+	 */
+	public editAppointment(appointment: Object, updateAppoinment: Object): Object { return; };
+
+	/**
+	  * Destroys the widget
+	 */
+	public destroy(): void { return; };
+
+	/**
+	  * Gets reference to the today UI button.
+	 */
+	public todayButton(): string { return; };
+
+	/**
+	  * Gets reference to the previous UI button.
+	 */
+	public previousButton(): string { return; };
+
+	/**
+	  * Gets reference to the date range UI button.
+	 */
+	public dateRangeButton(): string { return; };
+
+	/**
+	  * Gets reference to the next UI button.
+	 */
+	public nextButton(): string { return; };
+
+	/**
+	  * Gets reference to the jQuery calendar UI control.
+	 */
+	public getCalendar(): string { return; };
+}
+
+@Component({
+	selector: "ig-spreadsheet",
+	template: "<ng-content></ng-content>",
+	inputs:["widgetId","options","changeDetectionInterval","disabled","create","width","height","activeCell","isScrollLocked","activeWorksheet","allowAddWorksheet","allowDeleteWorksheet","areGridlinesVisible","areHeadersVisible","enterKeyNavigationDirection","isEnterKeyNavigationEnabled","isFormulaBarVisible","isInEndMode","isUndoEnabled","nameBoxWidth","selectionMode","selectedWorksheets","validationInputMessagePosition","workbook","zoomLevel"],
+	outputs:["actionExecuted","actionExecuting","activeCellChanged","activePaneChanged","activeWorksheetChanged","editRangePasswordNeeded","hyperlinkExecuting","selectionChanged","userPromptDisplaying","workbookDirtied"]
+})
+export class IgSpreadsheetComponent extends IgControlBase<IgSpreadsheet> {
+	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
+	/**
+	 * Returns an object that represents the pane with the focus.
+	 */
+	public getActivePane(): Object { return; } ;
+
+	/**
+	 * Returns an object that represents the current selection of the active pane.
+	 */
+	public getActiveSelection(): Object { return; } ;
+
+	/**
+	 * Returns an object used to get the formatting of the activeCell and where modifications are applied to the entire active selection.
+	 *				Any changes made to this object will affect all the objects in the selection. So for example, the 
+	 *				Font.Name may return "Arial" because the active cell has that as its resolved font name even though the other 
+	 *				cells are using a different font but if you set the Font.Name of this object to "Arial" then all the objects 
+	 *				affected by the selection will have their Font.Name updated to that value.
+	 */
+	public getActiveSelectionCellRangeFormat(): Object { return; } ;
+
+	/**
+	 * Returns a boolean indicating if the user is currently editing the name of the active worksheet.
+	 */
+	public getIsRenamingWorksheet(): boolean { return; } ;
+
+	/**
+	 * Returns an array of the panes for the activeWorksheet.
+	 *			 
+	 *				 returnType="ig.spreadsheet.SpreadsheetPane[]"
+	 */
+	public getPanes(): void { return; } ;
+
+	/**
+	 * Executes the action associated with the specified id.
+	 *
+	 * @param action An [enumeration](ig.spreadsheet.SpreadsheetAction) or string that identifies the action to execute.
+	 */
+	public executeAction(action: Object): boolean { return; } ;
+
+	/**
+	 * Forces any pending deferred work to render on the spreadsheet before continuing
+	 */
+	public flush(): void { return; } ;
+
+	/**
+	 * Destroys the widget.
+	 */
+	public destroy(): void { return; } ;
+
+	/**
+	 * Notify the spreadsheet that style information used for rendering the spreadsheet may have been updated.
+	 */
+	public styleUpdated(): void { return; } ;
+}
+
 @NgModule({
-	declarations: [Column,IgGridSortingFeature,IgGridFilteringFeature,IgGridPagingFeature,IgGridUpdatingFeature,IgGridGroupByFeature,IgGridColumnMovingFeature,IgGridHidingFeature,IgGridCellMergingFeature,IgGridResponsiveFeature,IgGridResizingFeature,IgGridSelectionFeature,IgGridRowSelectorsFeature,IgGridSummariesFeature,IgGridColumnFixingFeature,IgGridTooltipsFeature,Features,IgGridComponent,IgTreeGridComponent,IgHierarchicalGridComponent,IgComboComponent,IgCheckboxEditorComponent,IgCurrencyEditorComponent,IgDateEditorComponent,IgDatePickerComponent,IgMaskEditorComponent,IgNumericEditorComponent,IgPercentEditorComponent,IgTextEditorComponent,IgTreeComponent,IgDialogComponent,IgSplitterComponent,IgLayoutManagerComponent,IgTileManagerComponent,IgHtmlEditorComponent,IgValidatorComponent,IgPivotDataSelectorComponent,IgPivotGridComponent,IgDataChartComponent,IgPieChartComponent,IgDoughnutChartComponent,IgFunnelChartComponent,IgRadialGaugeComponent,IgZoombarComponent,IgMapComponent,IgSparklineComponent,IgBulletGraphComponent,IgLinearGaugeComponent,IgQRCodeBarcodeComponent,IgUploadComponent,IgPopoverComponent,IgNotifierComponent,IgRatingComponent,IgVideoPlayerComponent,IgRadialMenuComponent,IgSplitButtonComponent],
-	exports: [Column,IgGridSortingFeature,IgGridFilteringFeature,IgGridPagingFeature,IgGridUpdatingFeature,IgGridGroupByFeature,IgGridColumnMovingFeature,IgGridHidingFeature,IgGridCellMergingFeature,IgGridResponsiveFeature,IgGridResizingFeature,IgGridSelectionFeature,IgGridRowSelectorsFeature,IgGridSummariesFeature,IgGridColumnFixingFeature,IgGridTooltipsFeature,Features,IgGridComponent,IgTreeGridComponent,IgHierarchicalGridComponent,IgComboComponent,IgCheckboxEditorComponent,IgCurrencyEditorComponent,IgDateEditorComponent,IgDatePickerComponent,IgMaskEditorComponent,IgNumericEditorComponent,IgPercentEditorComponent,IgTextEditorComponent,IgTreeComponent,IgDialogComponent,IgSplitterComponent,IgLayoutManagerComponent,IgTileManagerComponent,IgHtmlEditorComponent,IgValidatorComponent,IgPivotDataSelectorComponent,IgPivotGridComponent,IgDataChartComponent,IgPieChartComponent,IgDoughnutChartComponent,IgFunnelChartComponent,IgRadialGaugeComponent,IgZoombarComponent,IgMapComponent,IgSparklineComponent,IgBulletGraphComponent,IgLinearGaugeComponent,IgQRCodeBarcodeComponent,IgUploadComponent,IgPopoverComponent,IgNotifierComponent,IgRatingComponent,IgVideoPlayerComponent,IgRadialMenuComponent,IgSplitButtonComponent]
+	declarations: [Column,IgGridSortingFeature,IgGridFilteringFeature,IgGridPagingFeature,IgGridUpdatingFeature,IgGridGroupByFeature,IgGridColumnMovingFeature,IgGridHidingFeature,IgGridCellMergingFeature,IgGridResponsiveFeature,IgGridResizingFeature,IgGridSelectionFeature,IgGridRowSelectorsFeature,IgGridSummariesFeature,IgGridColumnFixingFeature,IgGridTooltipsFeature,Features,IgGridComponent,IgTreeGridComponent,IgHierarchicalGridComponent,IgComboComponent,IgCheckboxEditorComponent,IgCurrencyEditorComponent,IgDateEditorComponent,IgDatePickerComponent,IgMaskEditorComponent,IgNumericEditorComponent,IgPercentEditorComponent,IgTextEditorComponent,IgTreeComponent,IgDialogComponent,IgSplitterComponent,IgLayoutManagerComponent,IgTileManagerComponent,IgHtmlEditorComponent,IgValidatorComponent,IgPivotDataSelectorComponent,IgPivotGridComponent,IgDataChartComponent,IgPieChartComponent,IgDoughnutChartComponent,IgFunnelChartComponent,IgRadialGaugeComponent,IgZoombarComponent,IgMapComponent,IgSparklineComponent,IgBulletGraphComponent,IgLinearGaugeComponent,IgQRCodeBarcodeComponent,IgUploadComponent,IgPopoverComponent,IgNotifierComponent,IgRatingComponent,IgVideoPlayerComponent,IgRadialMenuComponent,IgSplitButtonComponent, IgSpreadsheetComponent, IgSchedulerComponent],
+	exports: [Column,IgGridSortingFeature,IgGridFilteringFeature,IgGridPagingFeature,IgGridUpdatingFeature,IgGridGroupByFeature,IgGridColumnMovingFeature,IgGridHidingFeature,IgGridCellMergingFeature,IgGridResponsiveFeature,IgGridResizingFeature,IgGridSelectionFeature,IgGridRowSelectorsFeature,IgGridSummariesFeature,IgGridColumnFixingFeature,IgGridTooltipsFeature,Features,IgGridComponent,IgTreeGridComponent,IgHierarchicalGridComponent,IgComboComponent,IgCheckboxEditorComponent,IgCurrencyEditorComponent,IgDateEditorComponent,IgDatePickerComponent,IgMaskEditorComponent,IgNumericEditorComponent,IgPercentEditorComponent,IgTextEditorComponent,IgTreeComponent,IgDialogComponent,IgSplitterComponent,IgLayoutManagerComponent,IgTileManagerComponent,IgHtmlEditorComponent,IgValidatorComponent,IgPivotDataSelectorComponent,IgPivotGridComponent,IgDataChartComponent,IgPieChartComponent,IgDoughnutChartComponent,IgFunnelChartComponent,IgRadialGaugeComponent,IgZoombarComponent,IgMapComponent,IgSparklineComponent,IgBulletGraphComponent,IgLinearGaugeComponent,IgQRCodeBarcodeComponent,IgUploadComponent,IgPopoverComponent,IgNotifierComponent,IgRatingComponent,IgVideoPlayerComponent,IgRadialMenuComponent,IgSplitButtonComponent, IgSpreadsheetComponent, IgSchedulerComponent]
 })
 export class IgniteUIModule {}
