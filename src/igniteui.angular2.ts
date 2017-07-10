@@ -1205,12 +1205,12 @@ export class IgControlBase<Model> implements DoCheck {
 		}
 	}
 
-	optionChange() {
+	optionChange(options?) {
 		if (this._differ != null) {
 			var diff = [];
 			var element = jQuery(this._el);
 			var i, j, valKey = this._config.valueKey, option;
-			var opts = jQuery.extend(true, {}, this._config);
+			var opts = options || jQuery.extend(true, {}, this._config);
 			if (opts.dataSource) {
 				delete opts.dataSource;
 			}
@@ -1443,7 +1443,16 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
 			}
 		}
 	}
-	allRows(){	};
+	allRows() { };
+
+	optionChange(options?) {
+		var opts = options || jQuery.extend(true, {}, this._config);
+		// Columns are modified internally by the grid. Excluding them from the change detection
+		if (opts.columns) {
+			delete opts.columns;
+		}
+		super.optionChange(opts);
+	}
 }
 
 @Component({
