@@ -102,8 +102,7 @@ export class Feature<Model> {
 
 	constructor(el: ElementRef) {
 		this._el = el;
-		let nodeName = el.nativeElement.nodeName.toLowerCase();
-		this.name  = nodeName.charAt(0).toUpperCase() + nodeName.slice(1);
+		this.name  = this.normalizeName(el.nativeElement.nodeName.toLowerCase());
 		this.featureName = "igGrid" + this.name;
 		for (var propt in jQuery.ui["igGrid" + this.name].prototype.events) {
 			this[propt] = new EventEmitter();
@@ -170,6 +169,14 @@ export class Feature<Model> {
 			var feature = grid.data(this.featureName);
 			return jQuery.proxy(feature[name], feature);
 		}
+	}
+
+	normalizeName(str) {
+		//convert hyphen to camelCase
+		let name = str.replace(/-([a-z])/g, function (group) {
+			return group[1].toUpperCase();
+		})
+		return name.charAt(0).toUpperCase() + name.slice(1);
 	}
 }
 
@@ -424,7 +431,7 @@ export class IgGridUpdatingFeature extends Feature<IgGridUpdating> {
 }
 
 @Directive({
-	selector: 'groupBy',
+	selector: 'group-by',
 	inputs: ["disabled","create","groupByAreaVisibility","initialExpand","emptyGroupByAreaContent","emptyGroupByAreaContentSelectColumns","expansionIndicatorVisibility","groupByLabelWidth","labelDragHelperOpacity","indentation","defaultSortingDirection","groupedColumns","resultResponseKey","groupedRowTextTemplate","type","groupByUrlKey","groupByUrlKeyAscValue","groupByUrlKeyDescValue","summarySettings","columnSettings","expandTooltip","collapseTooltip","removeButtonTooltip","modalDialogGroupByOnClick","modalDialogGroupByButtonText","modalDialogCaptionButtonDesc","modalDialogCaptionButtonAsc","modalDialogCaptionButtonUngroup","modalDialogCaptionText","modalDialogDropDownLabel","modalDialogRootLevelHierarchicalGrid","modalDialogDropDownButtonCaption","modalDialogClearAllButtonLabel","emptyGroupByAreaContentSelectColumnsCaption","modalDialogDropDownWidth","modalDialogDropDownAreaWidth","modalDialogAnimationDuration","modalDialogWidth","modalDialogHeight","modalDialogButtonApplyText","modalDialogButtonCancelText","useGridColumnFormatter","persist","groupByDialogContainment","dialogWidget","inherit"],
 	outputs: ["groupedColumnsChanging","groupedColumnsChanged","modalDialogMoving","modalDialogClosing","modalDialogClosed","modalDialogOpening","modalDialogOpened","modalDialogContentsRendering","modalDialogContentsRendered","modalDialogButtonApplyClick","modalDialogButtonResetClick","modalDialogGroupingColumn","modalDialogGroupColumn","modalDialogUngroupingColumn","modalDialogUngroupColumn","modalDialogSortGroupedColumn"]
 })
@@ -523,7 +530,7 @@ export class IgGridGroupByFeature extends Feature<IgGridGroupBy> {
 }
 
 @Directive({
-	selector: 'columnMoving',
+	selector: 'column-moving',
 	inputs: ["disabled","create","columnSettings","mode","moveType","addMovingDropdown","movingDialogWidth","movingDialogHeight","movingDialogAnimationDuration","movingAcceptanceTolerance","movingScrollTolerance","scrollSpeedMultiplier","scrollDelta","hideHeaderContentsDuringDrag","dragHelperOpacity","movingDialogCaptionButtonDesc","movingDialogCaptionButtonAsc","movingDialogCaptionText","movingDialogDisplayText","movingDialogDropTooltipText","movingDialogDropTooltipMarkup","dropDownMoveLeftText","dropDownMoveRightText","dropDownMoveFirstText","dropDownMoveLastText","movingToolTipMove","featureChooserSubmenuText","columnMovingDialogContainment","dialogWidget","inherit"],
 	outputs: ["columnDragStart","columnDragEnd","columnDragCanceled","columnMoving","columnMoved","movingDialogOpening","movingDialogOpened","movingDialogDragged","movingDialogClosing","movingDialogClosed","movingDialogContentsRendering","movingDialogContentsRendered","movingDialogMoveUpButtonPressed","movingDialogMoveDownButtonPressed","movingDialogDragColumnMoving","movingDialogDragColumnMoved"]
 })
