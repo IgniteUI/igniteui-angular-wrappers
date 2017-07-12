@@ -518,13 +518,13 @@ export function main() {
 				expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgGridComponent)
 					.toBe(true);
 				fixture.componentInstance.data1 = [
-					{ "Id": "4", "Date": "\/Date(1235088000000)\/" },
-					{ "Id": "5", "Date": "\/Date(1250809200000)\/" },
-					{ "Id": "6", "Date": "\/Date(1335394800000)\/" }
+					{ "Id": "4", "Date": "2017-06-06" },
+					{ "Id": "5", "Date": "2017-06-07" },
+					{ "Id": "6", "Date": "2017-06-08" }
 				];
 				setTimeout(() => {
 					fixture.detectChanges();
-					$(fixture.debugElement.nativeElement).find("#grid1").igGridFiltering("filter", ([{ fieldName: "Date", expr: "\/Date(704678400000)\/", cond: "notOn" }]));
+					$(fixture.debugElement.nativeElement).find("#grid1").igGridFiltering("filter", ([{ fieldName: "Date", expr: "2017-06-09", cond: "notOn" }]));
 					expect($(fixture.debugElement.nativeElement).find("#grid1_container .ui-iggrid-results").text())
 						.toBe("3 matching records");
 					done();
@@ -560,14 +560,14 @@ class TestComponent {
 		this.idHeaderText = "Product Id";
 		this.pi = 1;
 		this.data = [
-			{ "Id": 1, "Name": "John Smith", "Age": 45, "HireDate": "\/Date(704678400000)\/" },
-			{ "Id": 2, "Name": "Mary Johnson", "Age": 32, "HireDate": "\/Date(794678400000)\/" },
-			{ "Id": 3, "Name": "Bob Ferguson", "Age": 27, "HireDate": "\/Date(834678400000)\/" }
+			{ "Id": 1, "Name": "John Smith", "Age": 45, "HireDate": "2002-05-09" },
+			{ "Id": 2, "Name": "Mary Johnson", "Age": 32, "HireDate": "2004-01-18" },
+			{ "Id": 3, "Name": "Bob Ferguson", "Age": 27, "HireDate": "2003-03-03" }
 		];
 		this.data1 = [
-			{ "Id": "1", "Date": "\/Date(1250809200000)\/" },
-			{ "Id": "2", "Date": "\/Date(1335394800000)\/" },
-			{ "Id": "3", "Date": "\/Date(1235088000000)\/" }
+			{ "Id": "1", "Date": "2013-08-07" },
+			{ "Id": "2", "Date": "2013-08-08" },
+			{ "Id": "3", "Date": "2013-08-09" }
 		];
 		this.opts = {
 			primaryKey: "Id",
