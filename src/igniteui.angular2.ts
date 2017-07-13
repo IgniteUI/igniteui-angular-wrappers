@@ -1042,6 +1042,63 @@ export class IgGridTooltipsFeature extends Feature<IgGridTooltips> {
 }
 
 @Directive({
+	selector: 'append-rows-on-demand',
+	inputs: ["type","chunkSize","recordCountKey","chunkSizeUrlKey","chunkIndexUrlKey","defaultChunkIndex","currentChunkIndex","loadTrigger","loadMoreDataButtonText"],
+	outputs: ["rowsRequesting","rowsRequested"]
+})
+export class IgGridAppendRowsOnDemandFeature extends Feature<IgGridAppendRowsOnDemand> {	
+	constructor(el: ElementRef) {
+		super(el);
+	}
+
+    /**
+      * Destroys the append rows on demand widget
+     */
+    public destroy(): void { return; } ;
+
+    /**
+      * Loads the next chunk of data.
+     */
+    public nextChunk(): void { return; } ;
+}
+
+@Directive({
+	selector: 'multi-column-headers',
+	inputs: ["inherit"],
+	outputs: ["groupCollapsing","groupCollapsed","groupExpanding","groupExpanded"]
+})
+export class IgGridMultiColumnHeadersFeature extends Feature<IgGridMultiColumnHeaders> {	
+	constructor(el: ElementRef) {
+		super(el);
+	}
+
+    /**
+      * Destroys the widget
+     */
+    public destroy(): void { return; } ;
+
+    /**
+      * Collapses an expanded group. If the group is collapsed, the method does nothing.
+	  * Note: This method is asynchronous which means that it returns immediately and any subsequent code will execute in parallel. This may lead to runtime errors. To avoid them put the subsequent code in the callback parameter provided by the method.
+     */
+	public collapseGroup(groupKey: string, callback?: Function): void { return; } ;
+    /**
+	  * Expands a collapsed group. If the group is expanded, the method does nothing.
+	  * Note: This method is asynchronous which means that it returns immediately and any subsequent code will execute in parallel. This may lead to runtime errors. To avoid them put the subsequent code in the callback parameter provided by the method.
+     */
+	public expandGroup(groupKey: string, callback?: Function): void { return; } ;
+    /**
+      * Returns multicolumn headers array. if there aren"t multicolumn headers returns undefined.
+     */
+	public getMultiColumnHeaders(): Array<Column> { return; } ;
+    /**
+      * Toggles a collapsible group.
+	  * Note: This method is asynchronous which means that it returns immediately and any subsequent code will execute in parallel. This may lead to runtime errors. To avoid them put the subsequent code in the callback parameter provided by the method.
+     */
+	public toggleGroup(groupKey: string, callback?: Function): void { return; } ;
+}
+
+@Directive({
 	selector: 'features'
 })
 export class Features implements AfterContentInit {
@@ -1061,6 +1118,8 @@ export class Features implements AfterContentInit {
 	@ContentChild(IgGridSummariesFeature) summaries: IgGridSummariesFeature;
 	@ContentChild(IgGridColumnFixingFeature) columnFixing: IgGridColumnFixingFeature;
 	@ContentChild(IgGridTooltipsFeature) tooltips: IgGridTooltipsFeature;
+	@ContentChild(IgGridAppendRowsOnDemandFeature) appendRowsOnDemand: IgGridAppendRowsOnDemand;
+	@ContentChild(IgGridMultiColumnHeadersFeature) multiColumnHeaders: IgGridMultiColumnHeaders;
 
   	ngAfterContentInit() {
 		  		this.filtering ? this.allFeatures.push(this.filtering): null;
@@ -1071,16 +1130,16 @@ export class Features implements AfterContentInit {
 				this.moving ? this.allFeatures.push(this.moving): null;
 				this.hiding ? this.allFeatures.push(this.hiding): null;
 				this.responsive ? this.allFeatures.push(this.responsive): null;
-				this.responsive ? this.allFeatures.push(this.responsive): null;
+				this.cellMerging ? this.allFeatures.push(this.cellMerging): null;
 				this.resizing ? this.allFeatures.push(this.resizing): null;
 				this.selection ? this.allFeatures.push(this.selection): null;
 				this.rowSelectors ? this.allFeatures.push(this.rowSelectors): null;
 				this.summaries ? this.allFeatures.push(this.summaries): null;
 				this.columnFixing ? this.allFeatures.push(this.columnFixing): null;
 				this.tooltips ? this.allFeatures.push(this.tooltips): null;
+				this.appendRowsOnDemand ? this.allFeatures.push(this.appendRowsOnDemand): null;
+				this.multiColumnHeaders ? this.allFeatures.push(this.multiColumnHeaders): null;
   }
-
-
 }
 
 export class IgControlBase<Model> implements DoCheck {
@@ -5691,7 +5750,7 @@ export class IgSpreadsheetComponent extends IgControlBase<IgSpreadsheet> {
 }
 
 @NgModule({
-	declarations: [Column,IgGridSortingFeature,IgGridFilteringFeature,IgGridPagingFeature,IgGridUpdatingFeature,IgGridGroupByFeature,IgGridColumnMovingFeature,IgGridHidingFeature,IgGridCellMergingFeature,IgGridResponsiveFeature,IgGridResizingFeature,IgGridSelectionFeature,IgGridRowSelectorsFeature,IgGridSummariesFeature,IgGridColumnFixingFeature,IgGridTooltipsFeature,Features,IgGridComponent,IgTreeGridComponent,IgHierarchicalGridComponent,IgComboComponent,IgCheckboxEditorComponent,IgCurrencyEditorComponent,IgDateEditorComponent,IgDatePickerComponent,IgMaskEditorComponent,IgNumericEditorComponent,IgPercentEditorComponent,IgTextEditorComponent,IgTreeComponent,IgDialogComponent,IgSplitterComponent,IgLayoutManagerComponent,IgTileManagerComponent,IgHtmlEditorComponent,IgValidatorComponent,IgPivotDataSelectorComponent,IgPivotGridComponent,IgDataChartComponent,IgPieChartComponent,IgDoughnutChartComponent,IgFunnelChartComponent,IgRadialGaugeComponent,IgZoombarComponent,IgMapComponent,IgSparklineComponent,IgBulletGraphComponent,IgLinearGaugeComponent,IgQRCodeBarcodeComponent,IgUploadComponent,IgPopoverComponent,IgNotifierComponent,IgRatingComponent,IgVideoPlayerComponent,IgRadialMenuComponent,IgSplitButtonComponent, IgSpreadsheetComponent, IgSchedulerComponent],
-	exports: [Column,IgGridSortingFeature,IgGridFilteringFeature,IgGridPagingFeature,IgGridUpdatingFeature,IgGridGroupByFeature,IgGridColumnMovingFeature,IgGridHidingFeature,IgGridCellMergingFeature,IgGridResponsiveFeature,IgGridResizingFeature,IgGridSelectionFeature,IgGridRowSelectorsFeature,IgGridSummariesFeature,IgGridColumnFixingFeature,IgGridTooltipsFeature,Features,IgGridComponent,IgTreeGridComponent,IgHierarchicalGridComponent,IgComboComponent,IgCheckboxEditorComponent,IgCurrencyEditorComponent,IgDateEditorComponent,IgDatePickerComponent,IgMaskEditorComponent,IgNumericEditorComponent,IgPercentEditorComponent,IgTextEditorComponent,IgTreeComponent,IgDialogComponent,IgSplitterComponent,IgLayoutManagerComponent,IgTileManagerComponent,IgHtmlEditorComponent,IgValidatorComponent,IgPivotDataSelectorComponent,IgPivotGridComponent,IgDataChartComponent,IgPieChartComponent,IgDoughnutChartComponent,IgFunnelChartComponent,IgRadialGaugeComponent,IgZoombarComponent,IgMapComponent,IgSparklineComponent,IgBulletGraphComponent,IgLinearGaugeComponent,IgQRCodeBarcodeComponent,IgUploadComponent,IgPopoverComponent,IgNotifierComponent,IgRatingComponent,IgVideoPlayerComponent,IgRadialMenuComponent,IgSplitButtonComponent, IgSpreadsheetComponent, IgSchedulerComponent]
+	declarations: [Column,IgGridSortingFeature,IgGridFilteringFeature,IgGridPagingFeature,IgGridUpdatingFeature,IgGridGroupByFeature,IgGridColumnMovingFeature,IgGridHidingFeature,IgGridCellMergingFeature,IgGridResponsiveFeature,IgGridResizingFeature,IgGridSelectionFeature,IgGridRowSelectorsFeature,IgGridSummariesFeature,IgGridColumnFixingFeature,IgGridTooltipsFeature,IgGridAppendRowsOnDemandFeature,Features,IgGridComponent,IgTreeGridComponent,IgHierarchicalGridComponent,IgComboComponent,IgCheckboxEditorComponent,IgCurrencyEditorComponent,IgDateEditorComponent,IgDatePickerComponent,IgMaskEditorComponent,IgNumericEditorComponent,IgPercentEditorComponent,IgTextEditorComponent,IgTreeComponent,IgDialogComponent,IgSplitterComponent,IgLayoutManagerComponent,IgTileManagerComponent,IgHtmlEditorComponent,IgValidatorComponent,IgPivotDataSelectorComponent,IgPivotGridComponent,IgDataChartComponent,IgPieChartComponent,IgDoughnutChartComponent,IgFunnelChartComponent,IgRadialGaugeComponent,IgZoombarComponent,IgMapComponent,IgSparklineComponent,IgBulletGraphComponent,IgLinearGaugeComponent,IgQRCodeBarcodeComponent,IgUploadComponent,IgPopoverComponent,IgNotifierComponent,IgRatingComponent,IgVideoPlayerComponent,IgRadialMenuComponent,IgSplitButtonComponent, IgSpreadsheetComponent, IgSchedulerComponent],
+	exports: [Column,IgGridSortingFeature,IgGridFilteringFeature,IgGridPagingFeature,IgGridUpdatingFeature,IgGridGroupByFeature,IgGridColumnMovingFeature,IgGridHidingFeature,IgGridCellMergingFeature,IgGridResponsiveFeature,IgGridResizingFeature,IgGridSelectionFeature,IgGridRowSelectorsFeature,IgGridSummariesFeature,IgGridColumnFixingFeature,IgGridTooltipsFeature,IgGridAppendRowsOnDemandFeature,Features,IgGridComponent,IgTreeGridComponent,IgHierarchicalGridComponent,IgComboComponent,IgCheckboxEditorComponent,IgCurrencyEditorComponent,IgDateEditorComponent,IgDatePickerComponent,IgMaskEditorComponent,IgNumericEditorComponent,IgPercentEditorComponent,IgTextEditorComponent,IgTreeComponent,IgDialogComponent,IgSplitterComponent,IgLayoutManagerComponent,IgTileManagerComponent,IgHtmlEditorComponent,IgValidatorComponent,IgPivotDataSelectorComponent,IgPivotGridComponent,IgDataChartComponent,IgPieChartComponent,IgDoughnutChartComponent,IgFunnelChartComponent,IgRadialGaugeComponent,IgZoombarComponent,IgMapComponent,IgSparklineComponent,IgBulletGraphComponent,IgLinearGaugeComponent,IgQRCodeBarcodeComponent,IgUploadComponent,IgPopoverComponent,IgNotifierComponent,IgRatingComponent,IgVideoPlayerComponent,IgRadialMenuComponent,IgSplitButtonComponent, IgSpreadsheetComponent, IgSchedulerComponent]
 })
 export class IgniteUIModule {}
