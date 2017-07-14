@@ -8,7 +8,13 @@ export function main() {
 
 		beforeEach(() => {
 			TestBed.configureTestingModule({
-				declarations: [Infragistics.Column, Infragistics.Features, Infragistics.IgGridPagingFeature, Infragistics.IgGridComponent, TestComponent]
+				declarations: [Infragistics.Column, Infragistics.Features, Infragistics.IgGridPagingFeature, Infragistics.IgGridComponent, 
+					Infragistics.IgGridCellMergingFeature, Infragistics.IgGridAppendRowsOnDemandFeature, Infragistics.IgGridColumnFixingFeature,
+					Infragistics.IgGridColumnMovingFeature, Infragistics.IgGridFilteringFeature, Infragistics.IgGridGroupByFeature,
+					Infragistics.IgGridHidingFeature, Infragistics.IgGridHidingFeature, Infragistics.IgGridMultiColumnHeadersFeature,
+					Infragistics.IgGridResizingFeature, Infragistics.IgGridResponsiveFeature, Infragistics.IgGridRowSelectorsFeature, 
+					Infragistics.IgGridSelectionFeature, Infragistics.IgGridSortingFeature, Infragistics.IgGridSummariesFeature,
+					Infragistics.IgGridTooltipsFeature, Infragistics.IgGridUpdatingFeature, TestComponent]
 			});
 		});
 
@@ -354,6 +360,93 @@ export function main() {
 			});
 		});
 
+		it('should initialize grid features', (done) => {
+			var template = "<ig-grid [widgetId]='gridID' [width]='w' [autoCommit]='true' [dataSource]='data' [height]='h' [autoGenerateColumns]='false' [primaryKey]='\"Id\"'>" +
+				"<column [key]=\"'Id'\" [(headerText)]=\"idHeaderText\" [width]=\"'165px'\" [dataType]=\"'number'\"></column>" +
+				"<column [key]=\"'Name'\" [headerText]=\"'Name'\" [width]=\"'250px'\" [dataType]=\"'string'\"></column>" +
+				"<column [key]=\"'HireDate'\" [headerText]=\"'Quantity per unit'\" [width]=\"'250px'\" [dataType]=\"'date'\"></column>" +
+				"<features>" +
+				"<paging [(currentPageIndex)]=\"pi\" [pageSize]=\"'2'\"> </paging>" + 
+				"<sorting></sorting><filtering></filtering><hiding></hiding><group-by></group-by>" + 
+				"<column-moving></column-moving><cell-merging></cell-merging><multi-column-headers></multi-column-headers>" + 
+				"<summaries></summaries>" + 
+				"</features>" + 
+			"</ig-grid>";
+			TestBed.overrideComponent(TestComponent, {
+				set: {
+					template: template
+				}
+			});
+			TestBed.compileComponents().then(() => {
+				let fixture = TestBed.createComponent(TestComponent), $grid;
+				fixture.detectChanges();
+				$grid = $("#grid1"); 
+				expect($grid.data("igGridPaging") !== undefined).toBeTruthy("Paging feature not initialized");
+				expect($grid.data("igGridSorting") !== undefined).toBeTruthy("Sorting feature not initialized");
+				expect($grid.data("igGridFiltering") !== undefined).toBeTruthy("Filtering feature not initialized");
+				expect($grid.data("igGridHiding") !== undefined).toBeTruthy("Hiding feature not initialized");
+				expect($grid.data("igGridGroupBy") !== undefined).toBeTruthy("GroupBy feature not initialized");
+				expect($grid.data("igGridColumnMoving") !== undefined).toBeTruthy("Column Moving feature not initialized");
+				expect($grid.data("igGridCellMerging") !== undefined).toBeTruthy("Cell Merging feature not initialized");
+				expect($grid.data("igGridMultiColumnHeaders") !== undefined).toBeTruthy("Multi Column Headers feature not initialized");
+				expect($grid.data("igGridSummaries") !== undefined).toBeTruthy("Summaries feature not initialized");
+				done();
+			});
+		});
+
+		it('should initialize grid features 2', (done) => {
+			var template = "<ig-grid [widgetId]='gridID' [width]='gridWidth' [autoCommit]='true' [dataSource]='data' [height]='h' [autoGenerateColumns]='false' [primaryKey]='\"Id\"'>" +
+				"<column [key]=\"'Id'\" [(headerText)]=\"idHeaderText\" [width]=\"'165px'\" [dataType]=\"'number'\"></column>" +
+				"<column [key]=\"'Name'\" [headerText]=\"'Name'\" [width]=\"'250px'\" [dataType]=\"'string'\"></column>" +
+				"<column [key]=\"'HireDate'\" [headerText]=\"'Quantity per unit'\" [width]=\"'250px'\" [dataType]=\"'date'\"></column>" +
+				"<features>" +
+				"<column-fixing></column-fixing><selection></selection><row-selectors></row-selectors><updating></updating><tooltips></tooltips>" + 
+				"</features>" + 
+			"</ig-grid>";
+			TestBed.overrideComponent(TestComponent, {
+				set: {
+					template: template
+				}
+			});
+			TestBed.compileComponents().then(() => {
+				let fixture = TestBed.createComponent(TestComponent), $grid;
+				fixture.detectChanges();
+				fixture.componentInstance.gridWidth = "400px";
+				$grid = $("#grid1");
+				expect($grid.data("igGridColumnFixing") !== undefined).toBeTruthy("Column Fixing feature not initialized");
+				expect($grid.data("igGridSelection") !== undefined).toBeTruthy("Selection feature not initialized");
+				expect($grid.data("igGridRowSelectors") !== undefined).toBeTruthy("Row Selectors feature not initialized");
+				expect($grid.data("igGridUpdating") !== undefined).toBeTruthy("Updating feature not initialized");
+				expect($grid.data("igGridTooltips") !== undefined).toBeTruthy("Tooltips feature not initialized");
+				done();
+			});
+		});
+
+		it('should initialize grid features 3', (done) => {
+			var template = "<ig-grid [widgetId]='gridID' [width]='gridWidth' [autoCommit]='true' [dataSource]='data' [height]='400' [autoGenerateColumns]='false' [primaryKey]='\"Id\"'>" +
+				"<column [key]=\"'Id'\" [(headerText)]=\"idHeaderText\" [width]=\"'165px'\" [dataType]=\"'number'\"></column>" +
+				"<column [key]=\"'Name'\" [headerText]=\"'Name'\" [width]=\"'250px'\" [dataType]=\"'string'\"></column>" +
+				"<column [key]=\"'HireDate'\" [headerText]=\"'Quantity per unit'\" [width]=\"'250px'\" [dataType]=\"'date'\"></column>" +
+				"<features>" +
+				"<append-rows-on-demand></append-rows-on-demand><responsive></responsive>" + 
+				"</features>" + 
+			"</ig-grid>";
+			TestBed.overrideComponent(TestComponent, {
+				set: {
+					template: template
+				}
+			});
+			TestBed.compileComponents().then(() => {
+				let fixture = TestBed.createComponent(TestComponent), $grid;
+				fixture.detectChanges();
+				fixture.componentInstance.gridWidth = "400px";
+				$grid = $("#grid1");
+				expect($grid.data("igGridAppendRowsOnDemand") !== undefined).toBeTruthy("Append Rows On Demand feature not initialized");
+				expect($grid.data("igGridResponsive") !== undefined).toBeTruthy("Responsive feature not initialized");
+				done();
+			});
+		});
+
 		it('should initialize column and feature nested directives', (done) => {
 			var template = "<ig-grid [widgetId]='gridID' [width]='w' [autoCommit]='true' [dataSource]='data' [height]='h' [autoGenerateColumns]='false' [primaryKey]='\"Id\"'>" +
 				"<column [key]=\"'Id'\" [(headerText)]=\"idHeaderText\" [width]=\"'165px'\" [dataType]=\"'number'\"></column>" +
@@ -551,6 +644,7 @@ class TestComponent {
 	private firedEvent: any;
 	public caption: string;
 	public idHeaderText: string;
+	public gridWidth: string;
 	@ViewChild(Infragistics.IgGridComponent) public viewChild: Infragistics.IgGridComponent;
 
 	constructor() {
@@ -559,6 +653,7 @@ class TestComponent {
 		this.caption = "My Caption";
 		this.idHeaderText = "Product Id";
 		this.pi = 1;
+		this.gridWidth = "800px";
 		this.data = [
 			{ "Id": 1, "Name": "John Smith", "Age": 45, "HireDate": "2002-05-09" },
 			{ "Id": 2, "Name": "Mary Johnson", "Age": 32, "HireDate": "2004-01-18" },

@@ -123,7 +123,51 @@ when there are overlapping properties. Also changing top-level attribute will ap
         }
     }
 
-### Aply new set of Control Options
+### Other custom tags
+
+There are two custom tags `<column>` and `<features>` that are used in igGrid/igTreeGrid/igHierarchicalGrid to configure the `columns` and `features` options accordingly.
+
+#### Example:
+
+		<ig-grid [widgetId]='id'>
+			<column [key]="'ProductID'" [headerText]="'Product ID'" [width]="'165px'" [dataType]="'number'"></column>
+			<column [key]="'ProductName'" [headerText]="'Product Name'" [width]="'250px'" [dataType]="'string'"></column>
+			<column [key]="'QuantityPerUnit'" [headerText]="'Quantity per unit'" [width]="'250px'" [dataType]="'string'"></column>
+			<column [key]="'UnitPrice'" [headerText]="'Unit Price'" [width]="'100px'" [dataType]="'number'"></column>
+			<features>
+				<paging [pageSize]="currPageSize"></paging>
+				<filtering></filtering>
+                <selection></selection>
+                <group-by></group-by>
+			</features>
+		</ig-grid>
+
+Each of the grids features is also represented by a custom tag.
+
+#### Examples:
+
+|  Feature Name      |          Tag              |
+|--------------------|---------------------------|
+| ColumnMoving       | `<column-moving>`         |
+| Filtering          | `<filtering>`             |
+| GroupBy            | `<group-by>`              |
+| Hiding             | `<hiding>`                |
+| CellMerging        | `<cell-merging>`          |
+| AppendRowsOnDemand | `<append-rows-on-demand>` |
+| MultiColumnHeaders | `<multi-column-headers>`  |
+| Paging             | `<paging>`                |
+| Responsive         | `<responsive>`            |
+| Resizing           | `<resizing>`              |
+| RowSelectors       | `<row-selectors>`         |
+| Selection          | `<selection>`             |
+| Sorting            | `<sorting>`               |
+| Summaries          | `<summaries>`             |
+| ColumnFixing       | `<column-fixing>`         |
+| Tooltips           | `<tooltips>`              |
+| Updating           | `<updating>`              |
+
+
+### Apply new set of Control Options
 
 In order to change the more options at once (or recreate the component with another set of options), the new configuration can be applied to the `options` property.
 
