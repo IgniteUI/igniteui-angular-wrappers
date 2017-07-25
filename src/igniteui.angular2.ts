@@ -2319,7 +2319,9 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
 		jQuery(this._el).on(this._widgetName.toLowerCase() + "selectionchanged", function (evt, ui) {
 			var items = ui.items;
 			if (items.length > 0 && that._model) {
-				that._model.viewToModelUpdate(items[0].data[that._config.valueKey]);
+				that._model.viewToModelUpdate(items.map(function(item) {
+					return item.data[that._config.valueKey];
+				}));
 			}
 		});
 		this._dataSource = jQuery.extend(true, [], this._config.dataSource);
