@@ -2318,10 +2318,17 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
 		super.ngOnInit();
 		jQuery(this._el).on(this._widgetName.toLowerCase() + "selectionchanged", function (evt, ui) {
 			var items = ui.items;
-			if (items.length > 0 && that._model) {
+			
+			if (items.length <= 0 || !that._model) {
+				return;
+			}
+			
+			if (ui.owner.options.multiSelection.enabled) {
 				that._model.viewToModelUpdate(items.map(function(item) {
 					return item.data[that._config.valueKey];
 				}));
+			} else {
+				that._model.viewToModelUpdate(items[0].data[that._config.valueKey]);
 			}
 		});
 		this._dataSource = jQuery.extend(true, [], this._config.dataSource);

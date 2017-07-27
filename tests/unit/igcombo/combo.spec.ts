@@ -82,7 +82,7 @@ export function main() {
                 $("#combo1").igCombo("select", elem, {}, true);
                 fixture.detectChanges();
                 setTimeout(function () {
-                    expect(fixture.componentInstance.combo.value1).toEqual([1]);
+                    expect(fixture.componentInstance.combo.value1).toEqual(1);
                     done();
                 }, 10);
             });
