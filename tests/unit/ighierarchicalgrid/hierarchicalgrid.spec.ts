@@ -171,16 +171,17 @@ export function main() {
                 fixture.detectChanges();
                 //expand first record 
                 var row = $("#grid1").igGrid("rowAt", 0);
-                $("#grid1").igHierarchicalGrid("expand", row);
-                //change data child data
-                fixture.componentInstance.data[0].Products.removeAt(0);
+                $("#grid1").igHierarchicalGrid("expand", row, () => {
+					//change data child data
+					fixture.componentInstance.data[0].Products.removeAt(0);
 
-                setTimeout(() => {
-                    fixture.detectChanges();
-                    expect($(fixture.debugElement.nativeElement).find("#grid1").igHierarchicalGrid("option", "dataSource")[0].Products.length)
-                        .toBe(0);
-                    done();
-                }, 10);
+					setTimeout(() => {
+						fixture.detectChanges();
+						expect($(fixture.debugElement.nativeElement).find("#grid1").igHierarchicalGrid("option", "dataSource")[0].Products.length)
+							.toBe(0);
+						done();
+					}, 10);
+				});
             });
         });
 
@@ -196,15 +197,16 @@ export function main() {
                 fixture.detectChanges();
                 //expand first record 
                 var row = $("#grid1").igGrid("rowAt", 0);
-                $("#grid1").igHierarchicalGrid("expand", row);
-                //change data child data
-                fixture.componentInstance.data[0].Products[0].Name = "Custom Name";
-                setTimeout(() => {
-                    fixture.detectChanges();
-                    expect($($(fixture.debugElement.nativeElement).find("#grid1_0_Products_child").igGrid("cellAt", 1, 0)).text())
-                        .toBe("Custom Name");
-                        done();
-                }, 10);
+                $("#grid1").igHierarchicalGrid("expand", row, () => {
+					//change data child data
+					fixture.componentInstance.data[0].Products[0].Name = "Custom Name";
+					setTimeout(() => {
+						fixture.detectChanges();
+						expect($($(fixture.debugElement.nativeElement).find("#grid1_0_Products_child").igGrid("cellAt", 1, 0)).text())
+							.toBe("Custom Name");
+							done();
+					}, 10);
+				});
             });
         });
     });
