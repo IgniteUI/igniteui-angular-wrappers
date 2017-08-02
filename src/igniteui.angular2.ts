@@ -1152,6 +1152,8 @@ export class IgControlBase<Model> implements DoCheck {
 	protected _events: Map<string, string>;
 	protected _allowChangeDetection = true;
 	private _evtEmmiters : any = {};
+	private _changeDetectionInterval: any;
+	private _nativeElement:any;
 
 	set options(v: Model) {
 		if (this._config !== undefined && this._config !== null) {
@@ -1178,6 +1180,7 @@ export class IgControlBase<Model> implements DoCheck {
 
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) {
 		this._differs = differs;
+		this._nativeElement = el.nativeElement;
 		this._widgetName = this.convertToCamelCase(el.nativeElement.nodeName.toLowerCase());//ig-grid -> igGrid
 		this._el = el.nativeElement.appendChild(document.createElement(NODES[el.nativeElement.nodeName.toLowerCase()]));
 
@@ -1245,7 +1248,7 @@ export class IgControlBase<Model> implements DoCheck {
 			this.changeDetectionInterval = 500;
 		}
 
-		setInterval(function () {
+		this._changeDetectionInterval = setInterval(function () {
 			that._allowChangeDetection = true;
 		}, this.changeDetectionInterval);
 
@@ -1387,6 +1390,13 @@ export class IgControlBase<Model> implements DoCheck {
 		return str.replace(/-([a-z])/g, function (group) {
 			return group[1].toUpperCase();
 		});
+	}
+
+	ngOnDestroy() {
+		clearInterval(this._changeDetectionInterval);
+		jQuery(this._el)[this._widgetName]("destroy");
+		jQuery(this._el).remove();
+		jQuery(this._nativeElement).remove();
 	}
 }
 
