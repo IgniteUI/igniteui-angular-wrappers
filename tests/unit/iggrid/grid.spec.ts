@@ -472,9 +472,8 @@ export function main() {
 				fixture.componentInstance.idHeaderText = "Changed ID";
 				setTimeout(() => {
 					fixture.detectChanges();
-					//this assert should wait the next Service Release of IgniteUI
-					//expect($(fixture.debugElement.nativeElement).find("#grid1 thead th#grid1_Id").text())
-					//	.toBe("Changed ID");
+					expect($(fixture.debugElement.nativeElement).find("#grid1 thead th#grid1_Id").text())
+						.toBe("Changed ID");
 					expect($(fixture.debugElement.nativeElement).find("#grid1_pager li.ui-state-active").text())
 						.toBe("1");
 					done();
@@ -507,9 +506,10 @@ export function main() {
 				fixture.componentInstance.idHeaderText = "Changed ID";
 				setTimeout(() => {
 					fixture.detectChanges();
-					//this assert should wait the next Service Release of IgniteUI
-					//expect($(fixture.debugElement.nativeElement).find("#grid1 thead th#grid1_Id").text())
-					//	.toBe("Changed ID");
+					expect($(fixture.debugElement.nativeElement).find("#grid1_container thead th#grid1_Id").text())
+						.toBe("Changed ID");
+					expect($(fixture.debugElement.nativeElement).find("#grid1_container thead th").length)
+						.toBe(3);
 					expect($(fixture.debugElement.nativeElement).find("#grid1_pager li.ui-state-active").text())
 						.toBe("1");
 					done();
