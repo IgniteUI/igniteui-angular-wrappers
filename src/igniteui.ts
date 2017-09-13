@@ -23769,11 +23769,11 @@ interface AnimationEndedEventUIParam {
     action?: any;
 }
 
-interface FocusEvent {
-    (event: Event, ui: FocusEventUIParam): void;
+interface IgFocusEvent {
+    (event: Event, ui: IgFocusEventUIParam): void;
 }
 
-interface FocusEventUIParam {
+interface IgFocusEventUIParam {
 
     /**
       * Used to obtain a reference to the igDialog.
@@ -24128,7 +24128,7 @@ interface IgDialog {
      * Use evt to obtain the browser event.
      * Use ui.owner to obtain a reference to the igDialog.
      */
-    focus?: FocusEvent;
+    focus?: IgFocusEvent;
 
     /**
       * Event which is raised when the dialog or its content loses focus.
@@ -24993,7 +24993,7 @@ interface JQuery {
      * Use evt to obtain the browser event.
      * Use ui.owner to obtain a reference to the igDialog.
      */
-    igDialog(optionLiteral: 'option', optionName: "focus"): FocusEvent;
+    igDialog(optionLiteral: 'option', optionName: "focus"): IgFocusEvent;
 
     /**
      * Event which is raised when the dialog or its content gets focus.
@@ -25004,7 +25004,7 @@ interface JQuery {
      *
      * @optionValue Define event handler function.
      */
-    igDialog(optionLiteral: 'option', optionName: "focus", optionValue: FocusEvent): void;
+    igDialog(optionLiteral: 'option', optionName: "focus", optionValue: IgFocusEvent): void;
 
     /**
      * Event which is raised when the dialog or its content loses focus.
@@ -26361,7 +26361,7 @@ interface IgBaseEditor {
      * Use ui.element to obtain a reference to the event target.
      * Use ui.editorInput to get a reference to the editor field.
      */
-    focus?: FocusEvent;
+    focus?: IgFocusEvent;
 
     /**
       * Event which is raised on keydown event.
@@ -27052,7 +27052,7 @@ interface IgTextEditor {
      * Use ui.element to obtain a reference to the event target.
      * Use ui.editorInput to get a reference to the editor field.
      */
-    focus?: FocusEvent;
+    focus?: IgFocusEvent;
 
     /**
       * Event which is raised on keydown event.
@@ -30449,7 +30449,7 @@ interface IgCheckboxEditor {
      * Use ui.element to obtain a reference to the event target.
      * Use ui.editorInput to get a reference to the editor field.
      */
-    focus?: FocusEvent;
+    focus?: IgFocusEvent;
 
     /**
       * Event which is raised on keydown event.
@@ -30889,7 +30889,7 @@ interface JQuery {
      * Use ui.element to obtain a reference to the event target.
      * Use ui.editorInput to get a reference to the editor field.
      */
-    igBaseEditor(optionLiteral: 'option', optionName: "focus"): FocusEvent;
+    igBaseEditor(optionLiteral: 'option', optionName: "focus"): IgFocusEvent;
 
     /**
      * Event which is raised when input field of editor gets focus.
@@ -30900,7 +30900,7 @@ interface JQuery {
      *
      * @optionValue Define event handler function.
      */
-    igBaseEditor(optionLiteral: 'option', optionName: "focus", optionValue: FocusEvent): void;
+    igBaseEditor(optionLiteral: 'option', optionName: "focus", optionValue: IgFocusEvent): void;
 
     /**
      * Event which is raised on keydown event.
@@ -31881,7 +31881,7 @@ interface JQuery {
      * Use ui.element to obtain a reference to the event target.
      * Use ui.editorInput to get a reference to the editor field.
      */
-    igTextEditor(optionLiteral: 'option', optionName: "focus"): FocusEvent;
+    igTextEditor(optionLiteral: 'option', optionName: "focus"): IgFocusEvent;
 
     /**
      * Event which is raised when input field of editor gets focus.
@@ -31892,7 +31892,7 @@ interface JQuery {
      *
      * @optionValue Define event handler function.
      */
-    igTextEditor(optionLiteral: 'option', optionName: "focus", optionValue: FocusEvent): void;
+    igTextEditor(optionLiteral: 'option', optionName: "focus", optionValue: IgFocusEvent): void;
 
     /**
      * Event which is raised on keydown event.
@@ -37620,7 +37620,7 @@ interface JQuery {
      * Use ui.element to obtain a reference to the event target.
      * Use ui.editorInput to get a reference to the editor field.
      */
-    igCheckboxEditor(optionLiteral: 'option', optionName: "focus"): FocusEvent;
+    igCheckboxEditor(optionLiteral: 'option', optionName: "focus"): IgFocusEvent;
 
     /**
      * Event which is raised when input field of editor gets focus.
@@ -37631,7 +37631,7 @@ interface JQuery {
      *
      * @optionValue Define event handler function.
      */
-    igCheckboxEditor(optionLiteral: 'option', optionName: "focus", optionValue: FocusEvent): void;
+    igCheckboxEditor(optionLiteral: 'option', optionName: "focus", optionValue: IgFocusEvent): void;
 
     /**
      * Event which is raised on keydown event.
