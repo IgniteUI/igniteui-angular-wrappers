@@ -74,13 +74,15 @@ export class Column {
 	createColumnsSetter(name) {
 		return function (value) {
 			let grid = jQuery(this._el.nativeElement.parentElement).find("table[role='grid']");
+			let columns = grid["igGrid"]("option", "columns");
 			this._settings[name] = value;
 
 			if (jQuery.ui["igGrid"] &&
 				jQuery.ui["igGrid"].prototype.options &&
 				jQuery.ui["igGrid"].prototype.options.hasOwnProperty("columns") &&
 				grid.data("igGrid")) {
-				grid["igGrid"]("option", "columns", this._settings);
+				//reapply all column settings when a column setting is changed
+				grid["igGrid"]("option", "columns", columns);
 			}
 		}
 	}
