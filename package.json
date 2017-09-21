@@ -44,7 +44,9 @@
     "traceur": "^0.0.111",
     "@types/node": "^6.0.46",
     "@types/jasmine": "^2.5.36",
-    "@types/reflect-metadata": "^0.0.5"
+	"@types/reflect-metadata": "^0.0.5",
+	"@types/ignite-ui": "^0.0.4",
+	"@types/jquery": "2.0.47"
   },
   "scripts": {
     "postinstall": "npm prune",
