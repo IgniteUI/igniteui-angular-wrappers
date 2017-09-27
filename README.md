@@ -64,8 +64,7 @@ There are two mandatory attributes that need to be set to an Ignite UI control c
         selector: 'my-app',
         template: `<ig-grid 
             [(options)]="gridOptions" 
-            [(widgetId)]='id'></ig-grid>`,
-        directives: [IgGridComponent]
+            [(widgetId)]='id'></ig-grid>`
     })
     export class AppComponent {
         private gridOptions: IgGrid;
@@ -104,8 +103,7 @@ when there are overlapping properties. Also changing top-level attribute will ap
             [height]='h'
             [autoGenerateColumns]='true'
             >
-        </ig-grid>`,
-        directives: [IgGridComponent]
+        </ig-grid>`
     })
     export class AppComponent {
         private id: string;
@@ -177,8 +175,7 @@ In order to change the more options at once (or recreate the component with anot
         selector: 'my-app',
         template: `<ig-grid 
             [(options)]="gridOptions" 
-            [(widgetId)]='id'></ig-grid>`,
-        directives: [IgGridComponent]
+            [(widgetId)]='id'></ig-grid>`
     })
     export class AppComponent {
         private gridOptions: IgGrid;
@@ -230,8 +227,7 @@ Binding to control events is achieved by assigning attributes where the name of 
         template: `<ig-grid 
             [(options)]="gridOptions" 
             [(widgetId)]='id' 
-            (dataBind)="dataBindHandler($event)"></ig-grid>`,
-        directives: [IgGridComponent]
+            (dataBind)="dataBindHandler($event)"></ig-grid>`
     })
     export class AppComponent {
         private gridOptions: IgGrid;
@@ -263,8 +259,7 @@ Binding to igGrid* feature events is done in the control's configuration code.
         selector: 'my-app',
         template: `<ig-grid 
             [(options)]="gridOptions" 
-            [(widgetId)]='id'></ig-grid>`,
-        directives: [IgGridComponent]
+            [(widgetId)]='id'></ig-grid>`
     })
     export class AppComponent {
         private gridOptions: IgGrid;
@@ -305,8 +300,7 @@ Component methods can be called by accessing the component from the view. For ex
             <features>
                 <paging [pageSize]="'2'"></paging>
             </features>
-        </ig-grid>',
-        directives: [IgGridComponent]
+        </ig-grid>'
     })
     export class AppComponent {
         private gridOptions: IgGrid;
