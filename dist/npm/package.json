@@ -20,10 +20,16 @@
     "infragistics",
     "jquery widgets",
     "jquery controls",
-    "data visualization",
+	"data visualization",
+	"ui components",
     "data grids"
   ],
   "dependencies": {
+	/* 
+	Follow this topic to setup the Ignite UI private registry access
+	https://www.igniteui.com/help/using-ignite-ui-npm-packages
+	"@infragistics/ignite-ui-full": "latest",
+	*/
 	"@types/reflect-metadata": "^0.0.5",
 	"@types/ignite-ui": "^0.0.4",
 	"@types/jquery": "2.0.47"
