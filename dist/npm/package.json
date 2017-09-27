@@ -24,6 +24,8 @@
     "data grids"
   ],
   "dependencies": {
-    "@types/reflect-metadata": "^0.0.5"
+	"@types/reflect-metadata": "^0.0.5",
+	"@types/ignite-ui": "^0.0.4",
+	"@types/jquery": "2.0.47"
   }
 }
