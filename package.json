@@ -18,12 +18,6 @@
     "@angular/upgrade": "~4.0.0",
     "angular-in-memory-web-api": "~0.3.0",
 
-	/* 
-	Follow this topic to setup the Ignite UI private registry access
-	https://www.igniteui.com/help/using-ignite-ui-npm-packages
-	"@infragistics/ignite-ui-full": "latest",
-	*/
-
     "core-js": "^2.4.1",
     "systemjs": "0.19.40",
     "es6-shim": "^0.35.0",
