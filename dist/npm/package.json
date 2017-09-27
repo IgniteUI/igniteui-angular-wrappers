@@ -20,7 +20,8 @@
     "infragistics",
     "jquery widgets",
     "jquery controls",
-    "data visualization",
+	"data visualization",
+	"ui components",
     "data grids"
   ],
   "dependencies": {

@@ -22,6 +22,14 @@ Afterwards, from your terminal run the following commands:
 3. `npm install`
 4. `npm start`
 
+`igniteui-angular2` depends on the `ignite-ui-full` licensed package. Follow [this guide](https://www.igniteui.com/help/using-ignite-ui-npm-packages) on setting up access to the Ignite UI private npm feed and add the dependency to the `package.json`.
+
+```
+"dependencies": {
+	"@infragistics/ignite-ui-full": "latest"
+}
+```
+
 # Getting Started
 
 ## Initializing controls
