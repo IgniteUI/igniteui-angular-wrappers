@@ -419,6 +419,18 @@ The following controls currently support two-way data binding:
 5. igEditors
 6. igTree
 
+## Use igDataSource inside Angular app
+
+Thanks to the @types/ignite-ui, it is possible to create an instace of the all of the Ignite UI data sources.
+
+    let source = new Infragistics.DataSource(settings);
+
+This data source instance is granted with intellisense about igDataSource methods.
+
+    source.dataBind();
+
+Review the following [demo](http://igniteui.github.io/igniteui-angular2/samples/igDataSource/igDataSource.html) for more information.
+
 ## Running tests
 
 The command for running the tests is:
