@@ -2,7 +2,7 @@
 import { TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import * as Infragistics from '../../../dist/npm/index';
+import * as Infragistics from '../../../dist/npm/igniteui.angular2';
 
 export function main() {
     describe('Infragistics Angular2 HtmlEditor', () => {
