@@ -59,9 +59,9 @@
     "build-aot": "ngc -p tsconfig-aot.json",
     "build-aot-samples": "ngc -p tsconfig-aot-samples.json",
     "bundle": "npm run build-aot && npm run prepare-dist",
-    "prepare-dist": "cp src/igniteui.angular2.js dist/npm/index.js  && cp src/igniteui.angular2.d.ts dist/npm/index.d.ts && cp src/igniteui.angular2.metadata.json dist/npm/index.metadata.json && cp src/igniteui.angular2.ts dist/npm/igniteui.angular2.ts",
+    "prepare-dist": "cp src/igniteui.angular2.js dist/npm/index.js  && cp src/igniteui.angular2.d.ts dist/npm/index.d.ts && cp src/igniteui.angular2.metadata.json dist/npm/index.metadata.json && cp src/igniteui.angular2.ts dist/npm/igniteui.angular2.ts && cp -R src/** dist/npm/",
 
-    "pretest": "npm run build",
+    "pretest": "npm run bundle && npm run build",
     "test": "karma start tests/karma.conf.js && npm run remap-istanbul",
 
     "remap-istanbul": "npm run copy-coverage-report && npm run remap-istanbul-html && npm run remap-istanbul-lcov",

@@ -44,9 +44,10 @@ samples/**/*.d.ts
 samples/**/*.js
 samples/**/*.js.map
 
-src/igniteui.angular2.d.ts
-src/*.js
-src/*.js.map
+src/**/*.d.ts
+src/**/*.js
+src/**/*.js.map
+src/**/*.metadata.json
 
 tests/unit/**/*.d.ts
 tests/unit/**/*.js
