@@ -79,8 +79,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
 			if (this._config.dataSource && this._config.dataSource.length !== this._dataSource.length) {
 				this._dataSource = jQuery.extend(true, [], this._config.dataSource);
 				if (this._changes) {
-					this._changes.forEachAddedItem(r => element.data("igCombo").dataBind());
-					this._changes.forEachRemovedItem(r => element.data("igCombo").dataBind());
+					 element.data("igCombo").dataBind();
 					if (this.model && this.model.value) {
 						this.writeValue(this.model.value);
 					}
