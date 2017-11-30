@@ -2,7 +2,7 @@
 import { TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import * as Infragistics from '../../../src/igniteui.angular2';
+import * as Infragistics from '../../../dist/npm/igniteui.angular2';
 import { Northwind } from "../../../samples/data/northwind";
 
 export function main() {
@@ -82,7 +82,29 @@ export function main() {
                 $("#combo1").igCombo("select", elem, {}, true);
                 fixture.detectChanges();
                 setTimeout(function () {
-                    expect(fixture.componentInstance.combo.value1).toBe(1);
+                    expect(fixture.componentInstance.combo.value1).toEqual(1);
+                    done();
+                }, 10);
+            });
+        });
+
+        it('the ngModel should be updated correctly if the combo selection is updated and multiple items are selected', (done) => {
+            var template = '<div><ig-combo [(widgetId)]="comboID" [(options)]="optionsMultipleSelection" [changeDetectionInterval]="cdi" [(ngModel)]="combo.value1"></ig-combo></div>';
+            TestBed.overrideComponent(TestComponent, {
+                set: {
+                    template: template
+                }
+            });
+            TestBed.compileComponents().then(() => {
+                let fixture = TestBed.createComponent(TestComponent);
+                fixture.detectChanges();
+                var $firstThreeItems = $(".ui-igcombo-listitem:lt(3)");
+
+                $("#combo1").igCombo("select", $firstThreeItems, {}, true);
+
+                fixture.detectChanges();
+                setTimeout(function () {
+                    expect(fixture.componentInstance.combo.value1).toEqual([1, 2, 3]);
                     done();
                 }, 10);
             });
@@ -142,6 +164,7 @@ export function main() {
 })
 class TestComponent {
     private options: IgCombo;
+    private optionsMultipleSelection: IgCombo;
     public northwind: any;
     public combo: any;
     private comboID: string
@@ -158,6 +181,16 @@ class TestComponent {
             dataSource: this.northwind,
             width: "100%"
         };
+
+        this.optionsMultipleSelection = $.extend({
+            multiSelection: {
+                enabled: true,
+                addWithKeyModifier: false,
+                showCheckboxes: true,
+                itemSeparator: ', '
+            }
+        }, this.options);
+
         this.combo = {
             value1: 20
         }
