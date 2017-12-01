@@ -38,7 +38,11 @@ export class IgTreeGridComponent extends IgGridBase<IgTreeGrid> {
 				colIndex, td, i, j, pkKey = this._config.primaryKey, newFormattedVal, record, column;
 
 			//check for changes in collection
-			this._changes = this._differ.diff(this._config.dataSource);
+			if (typeof this._config.dataSource === "string" || this._config.dataSource instanceof Array) {
+				return;
+			} else {
+				this._changes = this._differ.diff(this._config.dataSource);
+			}
 			if (this._config.dataSource.length !== this._dataSource.length) {
 				this._dataSource = jQuery.extend(true, [], this._config.dataSource);
 				if (this._changes) {
