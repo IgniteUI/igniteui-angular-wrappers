@@ -114,6 +114,9 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
 								element.data("igGridUpdating").endEdit();
 							}
 							jQuery(td).html(newFormattedVal);
+							if (grid.options.localSchemaTransform) {
+								record = grid.dataSource.schema().transform([record])[0];
+							}
 							grid.dataSource.updateRow(record[pkKey], record);
 							grid.dataSource._commitTransactionsByRowId(record[pkKey]);
 						}
