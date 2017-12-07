@@ -1,4 +1,4 @@
-import { Directive, AfterContentInit, ContentChild } from "@angular/core";
+import { Directive, AfterContentInit, ContentChild, ElementRef } from "@angular/core";
 import { IgGridSortingFeature } from "./iggridfeatures/iggridsorting.directive";
 import { IgGridFilteringFeature } from "./iggridfeatures/iggridfiltering.directive";
 import { IgGridPagingFeature } from "./iggridfeatures/iggridpaging.directive";
@@ -22,6 +22,7 @@ import { IgGridMultiColumnHeadersFeature } from "./iggridfeatures/iggridmulticol
 })
 export class Features implements AfterContentInit {
 	public allFeatures:Array<any> = new Array<any>()
+
 	@ContentChild(IgGridSortingFeature) sorting: IgGridSortingFeature;
 	@ContentChild(IgGridFilteringFeature) filtering: IgGridFilteringFeature;
 	@ContentChild(IgGridPagingFeature) paging: IgGridPagingFeature;
@@ -40,6 +41,35 @@ export class Features implements AfterContentInit {
 	@ContentChild(IgGridAppendRowsOnDemandFeature) appendRowsOnDemand: IgGridAppendRowsOnDemandFeature;
 	@ContentChild(IgGridMultiColumnHeadersFeature) multiColumnHeaders: IgGridMultiColumnHeadersFeature;
 
+	addFeature(name, parent){
+		var nodeName = name.replace(/([A-Z])/g, function (g) { return '-' + g[0].toLowerCase() });
+		var el = document.createElement(nodeName);
+		el = parent.appendChild(el);
+		var child = new ElementRef(el);	
+		
+		switch(nodeName) {
+			case "filtering": this.filtering = new IgGridFilteringFeature(child);break;
+			case "sorting":	this.sorting = new IgGridSortingFeature(child); break;
+			case "paging": this.paging = new IgGridPagingFeature(child); break;
+			case "updating": this.updating = new IgGridUpdatingFeature(child); break;
+			case "group-by": this.groupBy = new IgGridGroupByFeature(child); break;
+			case "moving": this.moving = new IgGridColumnMovingFeature(child); break;
+			case "hiding": this.hiding = new IgGridHidingFeature(child); break;
+			case "responsive": this.responsive = new IgGridResponsiveFeature(child); break;
+			case "cell-merging": this.cellMerging = new IgGridCellMergingFeature(child); break;
+			case "resizing": this.resizing = new IgGridResizingFeature(child); break;
+			case "selection": this.selection = new IgGridSelectionFeature(child); break;
+			case "row-selectors": this.rowSelectors = new IgGridRowSelectorsFeature(child); break;
+			case "summaries": this.summaries = new IgGridSummariesFeature(child); break;
+			case "column-fixing": this.columnFixing = new IgGridColumnFixingFeature(child); break;
+			case "tooltips": this.tooltips = new IgGridTooltipsFeature(child); break;
+			case "append-rows-on-demand": this.appendRowsOnDemand = new IgGridAppendRowsOnDemandFeature(child); break;
+			case "multi-column-headers": this.multiColumnHeaders = new IgGridMultiColumnHeadersFeature(child); break;
+		}
+		this[name].ngOnInit();
+		this.allFeatures.push(this[name]);
+
+	}
   	ngAfterContentInit() {
 		  		this.filtering ? this.allFeatures.push(this.filtering): null;
 			   	this.sorting ? this.allFeatures.push(this.sorting): null;
