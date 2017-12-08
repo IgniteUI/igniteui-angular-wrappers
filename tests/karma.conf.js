@@ -12,6 +12,7 @@ module.exports = function(config){
             'http://cdn-na.infragistics.com/igniteui/latest/js/infragistics.lob.js',
             'http://cdn-na.infragistics.com/igniteui/latest/js/infragistics.dv.js',
             'https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js',
+			'bower_components/jquery-mockjax/dist/jquery.mockjax.js',
 
 
             { pattern: 'node_modules/traceur/bin/traceur.js', included: true, watched: false },
@@ -58,7 +59,7 @@ module.exports = function(config){
             { pattern: 'tests/unit/**/*.js', included: false, watched: false },
             { pattern: 'tests/unit/**/*.js.map', included: false, watched: false }
         ],
-
+		
         // list of files to exclude
         exclude: [
             'node_modules/**/*spec.js'

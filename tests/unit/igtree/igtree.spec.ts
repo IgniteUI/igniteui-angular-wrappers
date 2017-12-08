@@ -79,6 +79,28 @@ export function main() {
                 }, 10);
             });
         });
+
+        it('should initialize correctly when datasource is remote', (done) => {
+            $.mockjax({
+				url: "myURL/ProductCategories",
+				contentType: 'application/json',
+				dataType: 'json',
+				responseText: '[{"Name": "Bikes", "ProductCategoryID": 1, "ProductSubcategories": [{ "Name": "Mountain Bikes","ProductSubcategoryID": 1,"Products": null }]}]'
+			});
+            var template = '<div><ig-tree [(widgetId)]="treeID" [(options)]="opts2" [changeDetectionInterval]="cdi"></ig-tree></div>';
+            TestBed.overrideComponent(TestComponent, {
+                set: {
+                    template: template
+                }
+            });
+            TestBed.compileComponents().then(() => {
+                let fixture = TestBed.createComponent(TestComponent);
+                fixture.detectChanges();
+                expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgTreeComponent)
+                    .toBe(true);
+                done();
+            });
+        });
     });
 }
 
@@ -88,6 +110,7 @@ export function main() {
 })
 class TestComponent {
     private opts: any;
+    private opts2: any;
     private treeID: string;
     public data: Array<any>;
     private cdi: number;
@@ -106,5 +129,9 @@ class TestComponent {
                 valueKey: "ProductCategoryID"
             }
         };
+
+        this.opts2 = {
+            datasource: "myURL/ProductCategories"
+        }
     }
 }
