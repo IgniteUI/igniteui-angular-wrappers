@@ -39,12 +39,10 @@ export class IgTreeGridComponent extends IgGridBase<IgTreeGrid> {
 
 			//check for changes in collection
 			this._changes = this._differ.diff(this._config.dataSource);
-			if (this._config.dataSource.length !== this._dataSource.length) {
-				this._dataSource = jQuery.extend(true, [], this._config.dataSource);
-				if (this._changes) {
-					this._changes.forEachAddedItem(r => this.addRow(r.item, r.currentIndex));
-					this._changes.forEachRemovedItem(r => this.deleteRow(r.item[pkKey]))
-				}
+			if (this._changes) {
+				this._dataSource = jQuery.extend(true, [], this._config.dataSource);				
+				this._changes.forEachAddedItem(r => this.addRow(r.item, r.currentIndex));
+				this._changes.forEachRemovedItem(r => this.deleteRow(r.item[pkKey]));
 			}
 			//check for changes in values
 			if (!this.equalsDiff(this._config.dataSource, this._dataSource, diff)) {
