@@ -30,6 +30,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
 			var items = ui.items;
 			
 			if (items.length <= 0 || !that._model) {
+				that._model.viewToModelUpdate(ui.owner.value());
 				return;
 			}
 			
