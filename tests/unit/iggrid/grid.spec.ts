@@ -624,6 +624,23 @@ export function main() {
 				}, 500);
 			});
 		});
+		it('should populate featuerList when features are defined via grid options.', (done) => {
+			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts1" [(dataSource)]="data1"></ig-grid></div>';
+			TestBed.overrideComponent(TestComponent, {
+				set: {
+					template: template
+				}
+			});
+			TestBed.compileComponents().then(() => {
+				let fixture = TestBed.createComponent(TestComponent);
+				fixture.detectChanges();		
+				var list = fixture.componentInstance.viewChild.featuresList;
+				expect(list.allFeatures.length).toBe(1);
+				expect(list.updating !== undefined).toBeTruthy("Feature should be populated.");
+				done();
+			});
+
+		});
 	});
 }
 
