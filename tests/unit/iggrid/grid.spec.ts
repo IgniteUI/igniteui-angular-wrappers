@@ -643,6 +643,69 @@ export function main() {
 				}, 500);
 			});
 		});
+		it('should populate featuerList when features are defined via grid options.', (done) => {
+			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="optsAllFeatures" [(dataSource)]="data1"></ig-grid></div>';
+			TestBed.overrideComponent(TestComponent, {
+				set: {
+					template: template
+				}
+			});
+			TestBed.compileComponents().then(() => {
+				let fixture = TestBed.createComponent(TestComponent);
+				fixture.detectChanges();		
+				var list = fixture.componentInstance.viewChild.featuresList;
+				expect(list.allFeatures.length).toBe(14);
+				expect(list.updating !== undefined).toBeTruthy("Feature should be populated.");
+				expect(list.filtering !== undefined).toBeTruthy("Feature should be populated.");
+				expect(list.paging !== undefined).toBeTruthy("Feature should be populated.");
+				expect(list.columnFixing !== undefined).toBeTruthy("Feature should be populated.");
+				expect(list.columnMoving !== undefined).toBeTruthy("Feature should be populated.");
+				expect(list.sorting !== undefined).toBeTruthy("Feature should be populated.");
+				expect(list.tooltips !== undefined).toBeTruthy("Feature should be populated.");
+				expect(list.cellMerging !== undefined).toBeTruthy("Feature should be populated.");
+				expect(list.selection !== undefined).toBeTruthy("Feature should be populated.");
+				expect(list.rowSelectors !== undefined).toBeTruthy("Feature should be populated.");
+				expect(list.resizing !== undefined).toBeTruthy("Feature should be populated.");
+				expect(list.multiColumnHeaders !== undefined).toBeTruthy("Feature should be populated.");
+				expect(list.columnFixing !== undefined).toBeTruthy("Feature should be populated.");
+				expect(list.summaries !== undefined).toBeTruthy("Feature should be populated.");
+				done();
+			});
+		});
+
+		it('should populate featuerList when features are defined via grid options - part 2.', (done) => {
+			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="optsAllFeatures2" [(dataSource)]="data1"></ig-grid></div>';
+			TestBed.overrideComponent(TestComponent, {
+				set: {
+					template: template
+				}
+			});
+			TestBed.compileComponents().then(() => {
+				let fixture = TestBed.createComponent(TestComponent);
+				fixture.detectChanges();		
+				var list = fixture.componentInstance.viewChild.featuresList;
+				expect(list.allFeatures.length).toBe(2);
+				expect(list.appendRowsOnDemand !== undefined).toBeTruthy("Feature should be populated.");
+				expect(list.responsive !== undefined).toBeTruthy("Feature should be populated.");
+				done();
+			});
+		});
+		it('should populate featuerList when features are defined via grid options - part 3.', (done) => {
+			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="optsAllFeatures3" [(dataSource)]="data1"></ig-grid></div>';
+			TestBed.overrideComponent(TestComponent, {
+				set: {
+					template: template
+				}
+			});
+			TestBed.compileComponents().then(() => {
+				let fixture = TestBed.createComponent(TestComponent);
+				fixture.detectChanges();		
+				var list = fixture.componentInstance.viewChild.featuresList;
+				expect(list.allFeatures.length).toBe(1);
+				expect(list.groupBy !== undefined).toBeTruthy("Feature should be populated.");
+				done();
+			});
+		});
 	});
 }
 
@@ -667,6 +730,9 @@ class TestComponent {
 	public caption: string;
 	public idHeaderText: string;
 	public gridWidth: string;
+	public optsAllFeatures:any;
+	public optsAllFeatures2:any;
+	public optsAllFeatures3:any;
 	@ViewChild(Infragistics.IgGridComponent) public viewChild: Infragistics.IgGridComponent;
 
 	constructor() {
@@ -741,6 +807,108 @@ class TestComponent {
 				}
 			]
 		};
+		this.optsAllFeatures = {
+			width: "700px",
+			height: "400px",
+			autoCommit: true,
+			autoGenerateColumns: false,
+			columns: [
+				{ key: "Id", headerText: "ID", width: "100px", dataType: "string" },
+				{ key: "Date", headerText: "Date", dataType: "date", width: "100px", format: "dd/MM/yyyy" },
+			],
+			primaryKey: "Id",
+			features: [
+				{
+					name: "Filtering"
+				},
+				{
+					name: "Updating"
+				},
+				{
+					name: "Paging"
+				},
+				{
+					name: "ColumnFixing"
+				},
+				{
+					name: "Sorting"
+				},
+				{
+					name: "Summaries"
+				},
+				{
+					name: "Hiding"
+				},
+				{
+                	name: "ColumnMoving"
+                },
+				{
+                	name: "Tooltips"
+                },
+				{
+					name: "CellMerging"
+				},
+				{
+					name: "Selection"
+				},
+				{
+					name: "RowSelectors"
+				},
+				//{
+				//name: "AppendRowsOnDemand"
+				//},
+				//{
+				//name: "GroupBy"
+				//},
+				{
+					name: "Resizing"
+				},
+				{
+					name: "MultiColumnHeaders"
+				},
+				//{
+				//	name: "Responsive"
+				//}
+			]
+		};
+		this.optsAllFeatures2 = {
+			width: "700px",
+			height: "400px",
+			autoCommit: true,
+			autoGenerateColumns: false,
+			columns: [
+				{ key: "Id", headerText: "ID", width: "100px", dataType: "string" },
+				{ key: "Date", headerText: "Date", dataType: "date", width: "100px", format: "dd/MM/yyyy" },
+			],
+			primaryKey: "Id",
+			features: [
+				{
+				name: "AppendRowsOnDemand"
+				},
+				{
+				name: "Responsive"
+				}
+			]
+		};
+
+		this.optsAllFeatures3 = {
+			width: "700px",
+			height: "400px",
+			autoCommit: true,
+			autoGenerateColumns: false,
+			columns: [
+				{ key: "Id", headerText: "ID", width: "100px", dataType: "string" },
+				{ key: "Date", headerText: "Date", dataType: "date", width: "100px", format: "dd/MM/yyyy" },
+			],
+			primaryKey: "Id",
+			features: [
+				{
+					name:"GroupBy"
+				}
+			]
+		};
+		
+	
 		this.optsNew = {
 			dataSource: this.singleRecData,
 			height: "300px",
@@ -752,7 +920,7 @@ class TestComponent {
 				{ key: "Age", headerText: "Age", dataType: "number", width: "100px", template: "Age: ${Age}" },
 				{ key: "HireDate", headerText: "HireDate", dataType: "date", width: "100px" },
 		]};
-	}
+	};
 
 	public cellClickHandler(evt) {
 		this.firedEvent = evt;
