@@ -28,7 +28,7 @@ export class Features implements AfterContentInit {
 	@ContentChild(IgGridPagingFeature) paging: IgGridPagingFeature;
 	@ContentChild(IgGridUpdatingFeature) updating: IgGridUpdatingFeature;
 	@ContentChild(IgGridGroupByFeature) groupBy: IgGridGroupByFeature;
-	@ContentChild(IgGridColumnMovingFeature) moving: IgGridColumnMovingFeature;
+	@ContentChild(IgGridColumnMovingFeature) columnMoving: IgGridColumnMovingFeature;
 	@ContentChild(IgGridHidingFeature) hiding: IgGridHidingFeature;
 	@ContentChild(IgGridCellMergingFeature) cellMerging: IgGridCellMergingFeature;
 	@ContentChild(IgGridResponsiveFeature) responsive: IgGridResponsiveFeature;
@@ -53,7 +53,7 @@ export class Features implements AfterContentInit {
 			case "paging": this.paging = new IgGridPagingFeature(child); break;
 			case "updating": this.updating = new IgGridUpdatingFeature(child); break;
 			case "group-by": this.groupBy = new IgGridGroupByFeature(child); break;
-			case "moving": this.moving = new IgGridColumnMovingFeature(child); break;
+			case "column-moving": this.columnMoving = new IgGridColumnMovingFeature(child); break;
 			case "hiding": this.hiding = new IgGridHidingFeature(child); break;
 			case "responsive": this.responsive = new IgGridResponsiveFeature(child); break;
 			case "cell-merging": this.cellMerging = new IgGridCellMergingFeature(child); break;
@@ -76,7 +76,7 @@ export class Features implements AfterContentInit {
 				this.paging ? this.allFeatures.push(this.paging): null;
 				this.updating ? this.allFeatures.push(this.updating): null;
 				this.groupBy ? this.allFeatures.push(this.groupBy): null;
-				this.moving ? this.allFeatures.push(this.moving): null;
+				this.columnMoving ? this.allFeatures.push(this.columnMoving): null;
 				this.hiding ? this.allFeatures.push(this.hiding): null;
 				this.responsive ? this.allFeatures.push(this.responsive): null;
 				this.cellMerging ? this.allFeatures.push(this.cellMerging): null;
