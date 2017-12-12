@@ -394,6 +394,25 @@ export function main() {
 			});
 		});
 
+		it("should detect changes when original data source is changed but the data source length is the same.", (done) => {
+			var template = "<ig-grid [widgetId]='gridID' [(options)]='optsNew'></ig-grid>";		
+			TestBed.overrideComponent(TestComponent, {
+				set: {
+					template: template
+				}
+			});
+			TestBed.compileComponents().then(() => {
+				var	fixture = TestBed.createComponent(TestComponent);
+				fixture.componentInstance.singleRecData.length = 0;
+				Array.prototype.push.apply( fixture.componentInstance.singleRecData, fixture.componentInstance.singleRecData2);
+				fixture.detectChanges();						
+				let $grid = $("#grid1");
+				expect($grid.data("igGrid").allRows().length === 1).toBeTruthy("There should be one record in grid.");
+				expect($($grid.data("igGrid").cellById(1, "Name")).text() === "Test").toBeTruthy("Change in text should be reflected in grid.");
+				done();		
+			});
+		});
+
 		it('should initialize grid features 2', (done) => {
 			var template = "<ig-grid [widgetId]='gridID' [width]='gridWidth' [autoCommit]='true' [dataSource]='data' [height]='h' [autoGenerateColumns]='false' [primaryKey]='\"Id\"'>" +
 				"<column [key]=\"'Id'\" [(headerText)]=\"idHeaderText\" [width]=\"'165px'\" [dataType]=\"'number'\"></column>" +
@@ -653,9 +672,12 @@ class TestComponent {
 	public opts1: any;
 	public opts2: any;
 	public opts3: any;
+	public optsNew:any;
 	private gridID: string;
 	public data: Array<any>;
 	public data1: Array<any>;
+	public singleRecData: Array<any>;
+	public singleRecData2: Array<any>;
 	private cdi: number;
 	public pi: number;
 	private firedEvent: any;
@@ -665,6 +687,8 @@ class TestComponent {
 	@ViewChild(Infragistics.IgGridComponent) public viewChild: Infragistics.IgGridComponent;
 
 	constructor() {
+		this.singleRecData = [{ "Id": 1, "Name": "John Smith", "Age": 45, "HireDate": "2002-05-09" }];
+		this.singleRecData2 = [{ "Id": 1, "Name": "Test", "Age": 45, "HireDate": "2002-05-09" }];
 		this.gridID = "grid1";
 		this.cdi = 0;
 		this.caption = "My Caption";
@@ -734,6 +758,17 @@ class TestComponent {
 				}
 			]
 		};
+		this.optsNew = {
+			dataSource: this.singleRecData,
+			height: "300px",
+			autoGenerateColumns: false,
+			primaryKey: "Id",
+			columns: [
+				{ key: "Id", headerText: "Id", dataType: "number", hidden: true },
+				{ key: "Name", headerText: "Name", dataType: "string", width: "100px" },
+				{ key: "Age", headerText: "Age", dataType: "number", width: "100px", template: "Age: ${Age}" },
+				{ key: "HireDate", headerText: "HireDate", dataType: "date", width: "100px" },
+		]};
 	}
 
 	public cellClickHandler(evt) {

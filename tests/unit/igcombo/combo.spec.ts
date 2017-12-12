@@ -67,6 +67,30 @@ export function main() {
             });
         });
 
+         it('should be updated correctly if the ngModel value is cleared.', (done) => {
+                var template = '<div><ig-combo [(widgetId)]="comboID" [(options)]="options" [changeDetectionInterval]="cdi" [(ngModel)]="combo.value1"></ig-combo></div>';
+                TestBed.overrideComponent(TestComponent, {
+                    set: {
+                        template: template
+                    }
+                });
+            TestBed.compileComponents().then(() => {
+                let fixture = TestBed.createComponent(TestComponent);
+                fixture.detectChanges();
+				fixture.componentInstance.combo.value1 = 1;
+				fixture.detectChanges();
+                setTimeout(function () {
+					//clear
+					$("#combo1").parents("ig-combo").find(".ui-igcombo-clearicon").click();
+					fixture.detectChanges();
+					setTimeout(function(){
+						expect(fixture.componentInstance.combo.value1 instanceof Array && fixture.componentInstance.combo.value1.length === 0).toBeTruthy();
+						 done();
+					}, 10);
+                }, 10);
+            });
+          });
+
         it('the ngModel should be updated correctly if the combo selection is updated', (done) => {
             var template = '<div><ig-combo [(widgetId)]="comboID" [(options)]="options" [changeDetectionInterval]="cdi" [(ngModel)]="combo.value1"></ig-combo></div>';
             TestBed.overrideComponent(TestComponent, {
