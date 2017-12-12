@@ -908,7 +908,7 @@ class TestComponent {
 			]
 		};
 		
-	};
+	
 		this.optsNew = {
 			dataSource: this.singleRecData,
 			height: "300px",
@@ -920,7 +920,7 @@ class TestComponent {
 				{ key: "Age", headerText: "Age", dataType: "number", width: "100px", template: "Age: ${Age}" },
 				{ key: "HireDate", headerText: "HireDate", dataType: "date", width: "100px" },
 		]};
-	}
+	};
 
 	public cellClickHandler(evt) {
 		this.firedEvent = evt;
