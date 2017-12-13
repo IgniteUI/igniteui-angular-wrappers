@@ -16,7 +16,6 @@
   "exclude": [
 	"samples/aot/*",
 	"samples/igGrid-AoT/*",
-    "node_modules/*",
-	"dist/*"
+    "node_modules/*"
   ]
 }

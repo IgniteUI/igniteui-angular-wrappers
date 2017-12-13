@@ -3,7 +3,8 @@
   "version": "1.0.9",
   "description" : "A packaged version of Ignite UI components for Angular",
   "license": "MIT",
-  "typings": "igniteui.angular2.d.ts",
+  "types": "igniteui.angular2.d.ts",
+  "main": "bundles/igniteui.angular2.umd.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/IgniteUI/igniteui-angular2.git"
