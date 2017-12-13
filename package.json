@@ -25,7 +25,8 @@
     "zone.js": "^0.8.4",
     "bootstrap": "^3.3.6"
   },
-  "devDependencies": {
+  "devDependencies": {  
+    "bower": "1.4.1",
     "@angular/compiler-cli": "^5.0.1",
     "concurrently": "^3.2.0",
     "gulp-watch": "^4.3.5",
