@@ -3,7 +3,7 @@ import {AfterContentInit, QueryList, ContentChild, ContentChildren, ElementRef, 
 import { Column } from './column.directive';
 import { Features } from './features.directive';
 
-export class IgGridBase<Model> extends IgControlBase<Model> implements AfterContentInit {
+export class IgGridBase<Model> extends IgControlBase<Model> implements AfterContentInit  {
 	protected _dataSource: any;
 	protected _changes: any;
 	@ContentChildren(Column) _columns: QueryList<Column>;
@@ -16,7 +16,6 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
 	    jQuery.extend(true, [], this._opts.dataSource) :
         jQuery.extend(true, [], this._config.dataSource);
 	}
-
 	ngAfterContentInit() {
 		if (this._columns && this._columns.length) {
 			if (this._config) {
@@ -30,6 +29,14 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
 				this._config["features"] = this.featuresList.allFeatures.map((c) => { return c.initSettings;} );	
 			} else{
 				this._opts["features"] = this.featuresList.allFeatures.map((c) => { return c.initSettings;});
+			}
+		}
+		if(this._config && this._config["features"] && !this.featuresList){
+			this.featuresList = new Features();
+			//populate featuresList
+			for(var i=0; i < this._config["features"].length; i++){				
+				var featureName = this._config["features"][i].name.charAt(0).toLowerCase() + this._config["features"][i].name.slice(1);				
+				this.featuresList.addFeature(featureName, this._el);
 			}
 		}
 		super.ngOnInit();
@@ -87,12 +94,10 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
 				return;
 			}
 			this._changes = this._differ.diff(this._config.dataSource);
-			if (this._config.dataSource.length !== this._dataSource.length) {
+			if (this._changes && grid) {
 				this._dataSource = jQuery.extend(true, [], this._config.dataSource);
-				if (this._changes) {
-					this._changes.forEachAddedItem(r => this.addRow(r.item, r.currentIndex));
-					this._changes.forEachRemovedItem(r => this.deleteRow(r.item[pkKey]))
-				}
+				this._changes.forEachAddedItem(r => this.addRow(r.item, r.currentIndex));
+				this._changes.forEachRemovedItem(r => this.deleteRow(r.item[pkKey]));
 			}
 			//check for changes in values
 			if (!this.equalsDiff(this._config.dataSource, this._dataSource, diff)) {

@@ -1,7 +1,7 @@
 // modeled after https://github.com/angular/angular/blob/cee2318110eeea115e5f6fc5bfc814cbaa7d90d8/modules/angular2/test/common/directives/ng_for_spec.ts
 import { TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
-import * as Infragistics from '../../../dist/npm/igniteui.angular2';
+import * as Infragistics from '../../../src/igniteui.angular2';
 
 export function main() {
 	describe('Infragistics Angular2 Grid', () => {
@@ -394,6 +394,25 @@ export function main() {
 			});
 		});
 
+		it("should detect changes when original data source is changed but the data source length is the same.", (done) => {
+			var template = "<ig-grid [widgetId]='gridID' [(options)]='optsNew'></ig-grid>";		
+			TestBed.overrideComponent(TestComponent, {
+				set: {
+					template: template
+				}
+			});
+			TestBed.compileComponents().then(() => {
+				var	fixture = TestBed.createComponent(TestComponent);
+				fixture.componentInstance.singleRecData.length = 0;
+				Array.prototype.push.apply( fixture.componentInstance.singleRecData, fixture.componentInstance.singleRecData2);
+				fixture.detectChanges();						
+				let $grid = $("#grid1");
+				expect($grid.data("igGrid").allRows().length === 1).toBeTruthy("There should be one record in grid.");
+				expect($($grid.data("igGrid").cellById(1, "Name")).text() === "Test").toBeTruthy("Change in text should be reflected in grid.");
+				done();		
+			});
+		});
+
 		it('should initialize grid features 2', (done) => {
 			var template = "<ig-grid [widgetId]='gridID' [width]='gridWidth' [autoCommit]='true' [dataSource]='data' [height]='h' [autoGenerateColumns]='false' [primaryKey]='\"Id\"'>" +
 				"<column [key]=\"'Id'\" [(headerText)]=\"idHeaderText\" [width]=\"'165px'\" [dataType]=\"'number'\"></column>" +
@@ -624,6 +643,72 @@ export function main() {
 				}, 500);
 			});
 		});
+		it('should populate featuerList when features are defined via grid options.', (done) => {
+			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="optsAllFeatures" [(dataSource)]="data1"></ig-grid></div>';
+			TestBed.overrideComponent(TestComponent, {
+				set: {
+					template: template
+				}
+			});
+			TestBed.compileComponents().then(() => {
+				let fixture = TestBed.createComponent(TestComponent);
+				fixture.detectChanges();		
+				var list = fixture.componentInstance.viewChild.featuresList;
+				expect(list.allFeatures.length).toBe(14);
+				expect(list.updating !== undefined).toBeTruthy("Feature should be populated.");
+				expect(list.filtering !== undefined).toBeTruthy("Feature should be populated.");
+				expect(list.paging !== undefined).toBeTruthy("Feature should be populated.");
+				expect(list.columnFixing !== undefined).toBeTruthy("Feature should be populated.");
+				expect(list.columnMoving !== undefined).toBeTruthy("Feature should be populated.");
+				expect(list.sorting !== undefined).toBeTruthy("Feature should be populated.");
+				expect(list.tooltips !== undefined).toBeTruthy("Feature should be populated.");
+				expect(list.cellMerging !== undefined).toBeTruthy("Feature should be populated.");
+				expect(list.selection !== undefined).toBeTruthy("Feature should be populated.");
+				expect(list.rowSelectors !== undefined).toBeTruthy("Feature should be populated.");
+				expect(list.resizing !== undefined).toBeTruthy("Feature should be populated.");
+				expect(list.multiColumnHeaders !== undefined).toBeTruthy("Feature should be populated.");
+				expect(list.columnFixing !== undefined).toBeTruthy("Feature should be populated.");
+				expect(list.summaries !== undefined).toBeTruthy("Feature should be populated.");
+				done();
+			});
+		});
+
+		it('should populate featuerList when features are defined via grid options - part 2.', (done) => {
+			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="optsAllFeatures2" [(dataSource)]="data1"></ig-grid></div>';
+			TestBed.overrideComponent(TestComponent, {
+				set: {
+					template: template
+				}
+			});
+			TestBed.compileComponents().then(() => {
+				let fixture = TestBed.createComponent(TestComponent);
+				fixture.detectChanges();		
+				var list = fixture.componentInstance.viewChild.featuresList;
+				expect(list.allFeatures.length).toBe(2);
+				expect(list.appendRowsOnDemand !== undefined).toBeTruthy("Feature should be populated.");
+				expect(list.responsive !== undefined).toBeTruthy("Feature should be populated.");
+				done();
+			});
+		});
+		it('should populate featuerList when features are defined via grid options - part 3.', (done) => {
+			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="optsAllFeatures3" [(dataSource)]="data1"></ig-grid></div>';
+			TestBed.overrideComponent(TestComponent, {
+				set: {
+					template: template
+				}
+			});
+			TestBed.compileComponents().then(() => {
+				let fixture = TestBed.createComponent(TestComponent);
+				fixture.detectChanges();		
+				var list = fixture.componentInstance.viewChild.featuresList;
+				expect(list.allFeatures.length).toBe(1);
+				expect(list.groupBy !== undefined).toBeTruthy("Feature should be populated.");
+				done();
+			});
+		});
+	});
+}
+		});
 		it('should initialize correctly when datasource is remote', (done) => {
 			$.mockjax({
 				url: "myURL/employees",
@@ -659,19 +744,27 @@ class TestComponent {
 	public opts1: any;
 	public opts2: any;
 	public opts3: any;
+	public optsNew:any;
 	public opts4: any;
 	private gridID: string;
 	public data: Array<any>;
 	public data1: Array<any>;
+	public singleRecData: Array<any>;
+	public singleRecData2: Array<any>;
 	private cdi: number;
 	public pi: number;
 	private firedEvent: any;
 	public caption: string;
 	public idHeaderText: string;
 	public gridWidth: string;
+	public optsAllFeatures:any;
+	public optsAllFeatures2:any;
+	public optsAllFeatures3:any;
 	@ViewChild(Infragistics.IgGridComponent) public viewChild: Infragistics.IgGridComponent;
 
 	constructor() {
+		this.singleRecData = [{ "Id": 1, "Name": "John Smith", "Age": 45, "HireDate": "2002-05-09" }];
+		this.singleRecData2 = [{ "Id": 1, "Name": "Test", "Age": 45, "HireDate": "2002-05-09" }];
 		this.gridID = "grid1";
 		this.cdi = 0;
 		this.caption = "My Caption";
@@ -741,10 +834,120 @@ class TestComponent {
 				}
 			]
 		};
-		this.opts4 = {
-			dataSource: "myURL/employees"
+		this.optsAllFeatures = {
+			width: "700px",
+			height: "400px",
+			autoCommit: true,
+			autoGenerateColumns: false,
+			columns: [
+				{ key: "Id", headerText: "ID", width: "100px", dataType: "string" },
+				{ key: "Date", headerText: "Date", dataType: "date", width: "100px", format: "dd/MM/yyyy" },
+			],
+			primaryKey: "Id",
+			features: [
+				{
+					name: "Filtering"
+				},
+				{
+					name: "Updating"
+				},
+				{
+					name: "Paging"
+				},
+				{
+					name: "ColumnFixing"
+				},
+				{
+					name: "Sorting"
+				},
+				{
+					name: "Summaries"
+				},
+				{
+					name: "Hiding"
+				},
+				{
+                	name: "ColumnMoving"
+                },
+				{
+                	name: "Tooltips"
+                },
+				{
+					name: "CellMerging"
+				},
+				{
+					name: "Selection"
+				},
+				{
+					name: "RowSelectors"
+				},
+				//{
+				//name: "AppendRowsOnDemand"
+				//},
+				//{
+				//name: "GroupBy"
+				//},
+				{
+					name: "Resizing"
+				},
+				{
+					name: "MultiColumnHeaders"
+				},
+				//{
+				//	name: "Responsive"
+				//}
+			]
 		};
-	}
+		this.optsAllFeatures2 = {
+			width: "700px",
+			height: "400px",
+			autoCommit: true,
+			autoGenerateColumns: false,
+			columns: [
+				{ key: "Id", headerText: "ID", width: "100px", dataType: "string" },
+				{ key: "Date", headerText: "Date", dataType: "date", width: "100px", format: "dd/MM/yyyy" },
+			],
+			primaryKey: "Id",
+			features: [
+				{
+				name: "AppendRowsOnDemand"
+				},
+				{
+				name: "Responsive"
+				}
+			]
+		};
+
+		this.optsAllFeatures3 = {
+			width: "700px",
+			height: "400px",
+			autoCommit: true,
+			autoGenerateColumns: false,
+			columns: [
+				{ key: "Id", headerText: "ID", width: "100px", dataType: "string" },
+				{ key: "Date", headerText: "Date", dataType: "date", width: "100px", format: "dd/MM/yyyy" },
+			],
+			primaryKey: "Id",
+			features: [
+				{
+					name:"GroupBy"
+				}
+			]
+		};
+		
+	
+		this.optsNew = {
+			dataSource: this.singleRecData,
+			height: "300px",
+			autoGenerateColumns: false,
+			primaryKey: "Id",
+			columns: [
+				{ key: "Id", headerText: "Id", dataType: "number", hidden: true },
+				{ key: "Name", headerText: "Name", dataType: "string", width: "100px" },
+				{ key: "Age", headerText: "Age", dataType: "number", width: "100px", template: "Age: ${Age}" },
+				{ key: "HireDate", headerText: "HireDate", dataType: "date", width: "100px" },
+		]};
+	};
 
 	public cellClickHandler(evt) {
 		this.firedEvent = evt;

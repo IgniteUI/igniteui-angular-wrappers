@@ -1,7 +1,7 @@
 // modeled after https://github.com/angular/angular/blob/cee2318110eeea115e5f6fc5bfc814cbaa7d90d8/modules/angular2/test/common/directives/ng_for_spec.ts
 import { TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
-import * as Infragistics from '../../../dist/npm/igniteui.angular2';
+import * as Infragistics from '../../../src/igniteui.angular2';
 import { Tasks } from "../../../samples/data/tasks";
 
 export function main() {
@@ -161,6 +161,26 @@ export function main() {
             });
         });
     });
+
+        it("should detect changes when original data source is changed but the data source length is the same.", (done) => {
+			var template = '<ig-tree-grid [(widgetId)]="gridID" [(options)]="optsNew"></ig-tree-grid>';		
+			TestBed.overrideComponent(TestComponent, {
+				set: {
+					template: template
+				}
+			});
+			TestBed.compileComponents().then(() => {
+				var	fixture = TestBed.createComponent(TestComponent);
+				fixture.componentInstance.singleRecData.length = 0;
+				Array.prototype.push.apply( fixture.componentInstance.singleRecData, fixture.componentInstance.singleRecData2);
+				fixture.detectChanges();						
+				let $grid = $("#grid1");
+				expect($grid.data("igTreeGrid").allRows().length === 1).toBeTruthy("There should be one record in grid.");
+				expect($($grid.data("igTreeGrid").cellById(1, "tasks")).text() === "Test").toBeTruthy("Change in text should be reflected in grid.");
+				done();		
+			});
+		});
+    });
 }
 
 @Component({
@@ -170,9 +190,13 @@ export function main() {
 class TestComponent {
     private opts: any;
     private opts2: any;
+    private optsNew: any;
     private gridID: string;
     public data: Array<any>;
     private cdi = 10;
+    public singleRecData: Array<any>;
+	public singleRecData2: Array<any>;
+
     @ViewChild(Infragistics.IgTreeGridComponent) public viewChild: Infragistics.IgTreeGridComponent;
 
     constructor() {
@@ -180,6 +204,8 @@ class TestComponent {
         //this.cdi = 0;
         this.data = Tasks.getData();
 
+		this.singleRecData = [{ "id": 1, "tasks": "John Smith" }];
+		this.singleRecData2 = [{ "id": 1, "tasks": "Test" }];
         this.opts = {
             autoCommit: true,
             dataSource: this.data,
@@ -202,8 +228,27 @@ class TestComponent {
                 name: "Updating"
             }]
         };
-        this.opts2 = {
-            dataSource: "myURL/Categories"
-        }
+        this.optsNew = {
+            autoCommit: true,
+            dataSource: this.singleRecData,
+            width: "100%",
+            height: "400px",
+            autoGenerateColumns: false,
+            autoGenerateColumnLayouts: false,
+            primaryKey: "id",
+            childDataKey: "products",
+            renderExpansionIndicatorColumn: true,
+            columns: [
+                { key: "id", headerText: "ID", width: "100px", dataType: "number" },
+                { key: "tasks", headerText: "Task", width: "250px", dataType: "string" },
+                { key: "start", headerText: "Start", width: "100px", dataType: "date" },
+                { key: "finish", headerText: "Finish", width: "100px", dataType: "date" },
+                { key: "duration", headerText: "Duration", width: "100px", dataType: "date" },
+                { key: "progress", headerText: "Progress", width: "100px", dataType: "date" }
+            ],
+            features: [{
+                name: "Updating"
+            }]
+        };
     }
 }

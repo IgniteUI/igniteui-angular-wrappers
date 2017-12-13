@@ -1,7 +1,7 @@
 // modeled after https://github.com/angular/angular/blob/cee2318110eeea115e5f6fc5bfc814cbaa7d90d8/modules/angular2/test/common/directives/ng_for_spec.ts
 import { TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
-import * as Infragistics from '../../../dist/npm/igniteui.angular2';
+import * as Infragistics from '../../../src/igniteui.angular2';
 
 export function main() {
     describe('Infragistics Angular2 HierarchicalGrid', function () {
@@ -234,6 +234,28 @@ export function main() {
             });
         });
     });
+            });
+        });
+
+        it("should detect changes when original data source is changed but the data source length is the same.", (done) => {
+			var template = '<ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="optsNew"></ig-hierarchical-grid>';		
+			TestBed.overrideComponent(TestComponent, {
+				set: {
+					template: template
+				}
+			});
+			TestBed.compileComponents().then(() => {
+				var	fixture = TestBed.createComponent(TestComponent);
+				fixture.componentInstance.singleRecData.length = 0;
+				Array.prototype.push.apply( fixture.componentInstance.singleRecData, fixture.componentInstance.singleRecData2);
+				fixture.detectChanges();						
+				let $grid = $("#grid1");
+				expect($grid.data("igGrid").allRows().length === 1).toBeTruthy("There should be one record in grid.");
+				expect($($grid.data("igGrid").cellById(1, "Name")).text() === "Test").toBeTruthy("Change in text should be reflected in grid.");
+				done();		
+			});
+		});
+    });
 }
 
 @Component({
@@ -243,10 +265,14 @@ export function main() {
 class TestComponent {
     private opts: any;
     private opts2: any;
+    private optsNew: any;
     private gridID: string;
     private gridID2: string;
     public data: any;
     protected cdi = 0;
+    public singleRecData: Array<any>;
+	public singleRecData2: Array<any>;
+
     @ViewChild(Infragistics.IgHierarchicalGridComponent) public viewChild: Infragistics.IgHierarchicalGridComponent;
 
     constructor() {
@@ -275,6 +301,21 @@ class TestComponent {
                 ]
             }
         ];
+        this.singleRecData = [ {
+                "ID": 0,
+                "Name": "Food",
+                "Products": [
+                    { "ID": 0, "Name": "Bread", "Price": "2.5" }
+                ]
+            }];
+       this.singleRecData2 = [ {
+                "ID": 1,
+                "Name": "Test",
+                "Products": [
+                    { "ID": 1, "Name": "Milk", "Price": "3.5" },
+                    { "ID": 2, "Name": "Vint soda", "Price": "20.9" }
+                ]
+            }];
         this.gridID = "grid1";
         this.gridID2 = "hgrid";
         this.opts = {
@@ -293,6 +334,33 @@ class TestComponent {
                 {
                     name: "Updating"
                 }
+            ],
+            columnLayouts: [
+                {
+                    key: "Products",
+                    responseDataKey: "",
+                    childrenDataProperty: "Products",
+                    autoGenerateColumns: false,
+                    primaryKey: "ID",
+                    columns: [
+                        { key: "ID", headerText: "ID", width: "25px" },
+                        { key: "Name", headerText: "Product Name", width: "90px" },
+                        { key: "Price", headerText: "Price", dataType: "number", width: "55px" }
+                    ]
+                }
+            ]
+        };
+        this.optsNew = {
+            autoCommit: true,
+            dataSource: this.singleRecData,
+            primaryKey: "ID",
+            width: "100%",
+            height: "400px",
+            autoGenerateColumns: false,
+            autoGenerateColumnLayouts: false,
+            columns: [
+                { headerText: "ID", key: "ID", width: "50px", dataType: "number" },
+                { headerText: "Name", key: "Name", width: "130px", dataType: "string" }
             ],
             columnLayouts: [
                 {
