@@ -706,11 +706,8 @@ export function main() {
 				done();
 			});
 		});
-	});
-}
-		});
 		it('should initialize correctly when datasource is remote', (done) => {
-			$.mockjax({
+			$['mockjax']({
 				url: "myURL/employees",
 				contentType: 'application/json',
 				dataType: 'json',

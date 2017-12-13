@@ -181,7 +181,7 @@ export function main() {
         });
 
         it('should initialize correctly when datasource is remote', (done) => {
-            $.mockjax({
+            $['mockjax']({
 				url: "myURL/Northwind",
 				contentType: 'application/json',
 				dataType: 'json',

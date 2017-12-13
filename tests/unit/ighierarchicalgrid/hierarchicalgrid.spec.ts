@@ -211,7 +211,7 @@ export function main() {
        });
 
         it('should initialize correctly when datasource is remote', (done) => {
-            $.mockjax({
+            $['mockjax']({
 				url: "myURL/Categories",
 				contentType: 'application/json',
 				dataType: 'json',
@@ -233,10 +233,6 @@ export function main() {
                 }, 500);
             });
         });
-    });
-            });
-        });
-
         it("should detect changes when original data source is changed but the data source length is the same.", (done) => {
 			var template = '<ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="optsNew"></ig-hierarchical-grid>';		
 			TestBed.overrideComponent(TestComponent, {
