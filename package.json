@@ -46,7 +46,12 @@
     "@types/jasmine": "^2.5.36",
 	"@types/reflect-metadata": "^0.0.5",
 	"@types/ignite-ui": "^0.0.4",
-	"@types/jquery": "2.0.47"
+	"@types/jquery": "2.0.47",
+	"rollup": "^0.52.1",
+	"rollup-plugin-node-resolve": "^3.0.0",
+	"rollup-plugin-commonjs": "^8.2.6",
+	"rollup-plugin-angular": "^0.5.3",
+    "rollup-plugin-typescript": "^0.8.1"
   },
   "scripts": {
     "postinstall": "npm prune",
@@ -59,7 +64,7 @@
     "build-aot": "ngc -p tsconfig-aot.json",
     "build-aot-samples": "ngc -p tsconfig-aot-samples.json",
     "bundle": "npm run build-aot && npm run prepare-dist",
-    "prepare-dist": "cp src/igniteui.angular2.js dist/npm/index.js  && cp src/igniteui.angular2.d.ts dist/npm/index.d.ts && cp src/igniteui.angular2.metadata.json dist/npm/index.metadata.json && cp src/igniteui.angular2.ts dist/npm/igniteui.angular2.ts && cp -R src/** dist/npm/",
+	"prepare-dist": "rollup -c rollup.config.umd.js",
 
     "pretest": "npm run bundle && npm run build",
     "test": "karma start tests/karma.conf.js && npm run remap-istanbul",
