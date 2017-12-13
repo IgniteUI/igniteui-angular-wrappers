@@ -32,7 +32,7 @@ Afterwards, from your terminal run the following commands:
 
 # Getting Started
 
-#### Ignite UI CLI
+## Ignite UI CLI
 To get started with the Ignite UI CLI and the Ignite UI Angular wrappers:
 
 ```
