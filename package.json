@@ -25,8 +25,8 @@
     "zone.js": "^0.8.4",
     "bootstrap": "^3.3.6"
   },
-  "devDependencies": {  
-    "bower": "1.4.1",
+  "devDependencies": {
+    "jquery-mockjax": "2.2.2",
     "@angular/compiler-cli": "^5.0.1",
     "concurrently": "^3.2.0",
     "gulp-watch": "^4.3.5",
@@ -62,7 +62,7 @@
     "build-aot-samples": "ngc -p tsconfig-aot-samples.json",
     "bundle": "npm run build-aot && npm run prepare-dist",
     "prepare-dist": "rollup -c rollup.config.umd.js",
-    "pretest": "npm run bundle && npm run build && bower install jquery-mockjax ",
+    "pretest": "npm run bundle && npm run build",
     "test": "karma start tests/karma.conf.js && npm run remap-istanbul",
     "remap-istanbul": "npm run copy-coverage-report && npm run remap-istanbul-html && npm run remap-istanbul-lcov",
     "remap-istanbul-html": "remap-istanbul -i coverage/karma-tmp/coverage.json -o coverage/html-report -t html",
