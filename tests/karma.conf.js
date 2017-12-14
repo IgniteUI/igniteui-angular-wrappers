@@ -12,7 +12,7 @@ module.exports = function(config){
             'http://cdn-na.infragistics.com/igniteui/latest/js/infragistics.lob.js',
             'http://cdn-na.infragistics.com/igniteui/latest/js/infragistics.dv.js',
             'https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js',
-			'bower_components/jquery-mockjax/dist/jquery.mockjax.js',
+            'node_modules/jquery-mockjax/dist/jquery.mockjax.js',
 
 
             { pattern: 'node_modules/traceur/bin/traceur.js', included: true, watched: false },
