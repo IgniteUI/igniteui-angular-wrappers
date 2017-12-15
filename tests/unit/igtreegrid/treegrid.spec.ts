@@ -249,5 +249,9 @@ class TestComponent {
                 name: "Updating"
             }]
         };
+
+        this.opts2 = {
+            dataSource: "myURL/Categories"
+        };
     }
 }
