@@ -741,8 +741,8 @@ class TestComponent {
 	public opts1: any;
 	public opts2: any;
 	public opts3: any;
-	public optsNew:any;
 	public opts4: any;
+	public optsNew:any;
 	private gridID: string;
 	public data: Array<any>;
 	public data1: Array<any>;
@@ -810,6 +810,10 @@ class TestComponent {
 			autoCommit: true,
 			autoGenerateColumns: false,
 			primaryKey: "Id"
+		};
+
+		this.opts4 = {
+			dataSource: "myURL/employees"
 		};
 
 		this.opts2 = {
