@@ -32,6 +32,17 @@ Afterwards, from your terminal run the following commands:
 
 # Getting Started
 
+## Ignite UI CLI
+To get started with the Ignite UI CLI and the Ignite UI Angular wrappers:
+
+```
+npm i -g igniteui-cli
+ig new <project name> --framework=angular --type=ig-ts
+cd <project name>
+ig add combo <component name>
+ig start
+```
+
 ## Initializing controls
 In an Angular application, Ignite UI controls support markup initialization which is done by using custom tags.
 
