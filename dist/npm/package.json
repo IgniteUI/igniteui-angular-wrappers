@@ -4,7 +4,7 @@
   "description" : "A packaged version of Ignite UI components for Angular",
   "license": "MIT",
   "types": "igniteui.angular2.d.ts",
-  "main": "bundles/igniteui.angular2.umd.js",
+  "main": "bundles/igniteui-angular2.umd.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/IgniteUI/igniteui-angular2.git"
@@ -27,7 +27,7 @@
   ],
   "dependencies": {
 	"@types/reflect-metadata": "^0.0.5",
-	"@types/ignite-ui": "^0.0.4",
+	"@types/ignite-ui": "^17.2.2",
 	"@types/jquery": "2.0.47"
   }
 }
