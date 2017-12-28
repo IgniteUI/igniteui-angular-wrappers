@@ -179,6 +179,28 @@ export function main() {
                 }, 10);
             });
         });
+
+        it('should initialize correctly when datasource is remote', (done) => {
+            $['mockjax']({
+				url: "myURL/Northwind",
+				contentType: 'application/json',
+				dataType: 'json',
+				responseText: '[{"ProductID": 1, "ProductName": "Chai"}]'
+			});
+            var template = '<div><ig-combo [(widgetId)]="comboID" [(options)]="options2" [changeDetectionInterval]="cdi" [(ngModel)]="combo.value1"></ig-combo></div>';
+            TestBed.overrideComponent(TestComponent, {
+                set: {
+                    template: template
+                }
+            });
+            TestBed.compileComponents().then(() => {
+                let fixture = TestBed.createComponent(TestComponent);
+                fixture.detectChanges();
+                expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgComboComponent)
+                    .toBe(true);
+                done();
+            });
+        });
     });
 }
 
@@ -188,6 +210,7 @@ export function main() {
 })
 class TestComponent {
     private options: IgCombo;
+    private options2: IgCombo;
     private optionsMultipleSelection: IgCombo;
     public northwind: any;
     public combo: any;
@@ -206,6 +229,12 @@ class TestComponent {
             width: "100%"
         };
 
+        this.options2 = {
+            valueKey: "ProductID",
+            textKey: "ProductName",
+            dataSource: "myURL/Northwind",
+            width: "100%"
+        }
         this.optionsMultipleSelection = $.extend({
             multiSelection: {
                 enabled: true,

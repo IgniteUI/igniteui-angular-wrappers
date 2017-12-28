@@ -8,13 +8,13 @@ export function main() {
 
 		beforeEach(() => {
 			TestBed.configureTestingModule({
-				declarations: [Infragistics.Column, Infragistics.Features, Infragistics.IgGridPagingFeature, Infragistics.IgGridComponent, 
-					Infragistics.IgGridCellMergingFeature, Infragistics.IgGridAppendRowsOnDemandFeature, Infragistics.IgGridColumnFixingFeature,
-					Infragistics.IgGridColumnMovingFeature, Infragistics.IgGridFilteringFeature, Infragistics.IgGridGroupByFeature,
-					Infragistics.IgGridHidingFeature, Infragistics.IgGridHidingFeature, Infragistics.IgGridMultiColumnHeadersFeature,
-					Infragistics.IgGridResizingFeature, Infragistics.IgGridResponsiveFeature, Infragistics.IgGridRowSelectorsFeature, 
-					Infragistics.IgGridSelectionFeature, Infragistics.IgGridSortingFeature, Infragistics.IgGridSummariesFeature,
-					Infragistics.IgGridTooltipsFeature, Infragistics.IgGridUpdatingFeature, TestComponent]
+				declarations: [Infragistics.Column, Infragistics.Features, Infragistics.IgGridPagingFeature, Infragistics.IgGridComponent,
+				Infragistics.IgGridCellMergingFeature, Infragistics.IgGridAppendRowsOnDemandFeature, Infragistics.IgGridColumnFixingFeature,
+				Infragistics.IgGridColumnMovingFeature, Infragistics.IgGridFilteringFeature, Infragistics.IgGridGroupByFeature,
+				Infragistics.IgGridHidingFeature, Infragistics.IgGridHidingFeature, Infragistics.IgGridMultiColumnHeadersFeature,
+				Infragistics.IgGridResizingFeature, Infragistics.IgGridResponsiveFeature, Infragistics.IgGridRowSelectorsFeature,
+				Infragistics.IgGridSelectionFeature, Infragistics.IgGridSortingFeature, Infragistics.IgGridSummariesFeature,
+				Infragistics.IgGridTooltipsFeature, Infragistics.IgGridUpdatingFeature, TestComponent]
 			});
 		});
 
@@ -366,12 +366,12 @@ export function main() {
 				"<column [key]=\"'Name'\" [headerText]=\"'Name'\" [width]=\"'250px'\" [dataType]=\"'string'\"></column>" +
 				"<column [key]=\"'HireDate'\" [headerText]=\"'Quantity per unit'\" [width]=\"'250px'\" [dataType]=\"'date'\"></column>" +
 				"<features>" +
-				"<paging [(currentPageIndex)]=\"pi\" [pageSize]=\"'2'\"> </paging>" + 
-				"<sorting></sorting><filtering></filtering><hiding></hiding><group-by></group-by>" + 
-				"<column-moving></column-moving><cell-merging></cell-merging><multi-column-headers></multi-column-headers>" + 
-				"<summaries></summaries>" + 
-				"</features>" + 
-			"</ig-grid>";
+				"<paging [(currentPageIndex)]=\"pi\" [pageSize]=\"'2'\"> </paging>" +
+				"<sorting></sorting><filtering></filtering><hiding></hiding><group-by></group-by>" +
+				"<column-moving></column-moving><cell-merging></cell-merging><multi-column-headers></multi-column-headers>" +
+				"<summaries></summaries>" +
+				"</features>" +
+				"</ig-grid>";
 			TestBed.overrideComponent(TestComponent, {
 				set: {
 					template: template
@@ -380,7 +380,7 @@ export function main() {
 			TestBed.compileComponents().then(() => {
 				let fixture = TestBed.createComponent(TestComponent), $grid;
 				fixture.detectChanges();
-				$grid = $("#grid1"); 
+				$grid = $("#grid1");
 				expect($grid.data("igGridPaging") !== undefined).toBeTruthy("Paging feature not initialized");
 				expect($grid.data("igGridSorting") !== undefined).toBeTruthy("Sorting feature not initialized");
 				expect($grid.data("igGridFiltering") !== undefined).toBeTruthy("Filtering feature not initialized");
@@ -419,9 +419,9 @@ export function main() {
 				"<column [key]=\"'Name'\" [headerText]=\"'Name'\" [width]=\"'250px'\" [dataType]=\"'string'\"></column>" +
 				"<column [key]=\"'HireDate'\" [headerText]=\"'Quantity per unit'\" [width]=\"'250px'\" [dataType]=\"'date'\"></column>" +
 				"<features>" +
-				"<column-fixing></column-fixing><selection></selection><row-selectors></row-selectors><updating></updating><tooltips></tooltips>" + 
-				"</features>" + 
-			"</ig-grid>";
+				"<column-fixing></column-fixing><selection></selection><row-selectors></row-selectors><updating></updating><tooltips></tooltips>" +
+				"</features>" +
+				"</ig-grid>";
 			TestBed.overrideComponent(TestComponent, {
 				set: {
 					template: template
@@ -447,9 +447,9 @@ export function main() {
 				"<column [key]=\"'Name'\" [headerText]=\"'Name'\" [width]=\"'250px'\" [dataType]=\"'string'\"></column>" +
 				"<column [key]=\"'HireDate'\" [headerText]=\"'Quantity per unit'\" [width]=\"'250px'\" [dataType]=\"'date'\"></column>" +
 				"<features>" +
-				"<append-rows-on-demand></append-rows-on-demand><responsive></responsive>" + 
-				"</features>" + 
-			"</ig-grid>";
+				"<append-rows-on-demand></append-rows-on-demand><responsive></responsive>" +
+				"</features>" +
+				"</ig-grid>";
 			TestBed.overrideComponent(TestComponent, {
 				set: {
 					template: template
@@ -472,9 +472,9 @@ export function main() {
 				"<column [key]=\"'Name'\" [headerText]=\"'Name'\" [width]=\"'250px'\" [dataType]=\"'string'\"></column>" +
 				"<column [key]=\"'HireDate'\" [headerText]=\"'Quantity per unit'\" [width]=\"'250px'\" [dataType]=\"'date'\"></column>" +
 				"<features>" +
-				"<paging [(currentPageIndex)]=\"pi\" [pageSize]=\"'2'\"> </paging>" + 
-				"</features>" + 
-			"</ig-grid>";
+				"<paging [(currentPageIndex)]=\"pi\" [pageSize]=\"'2'\"> </paging>" +
+				"</features>" +
+				"</ig-grid>";
 			TestBed.overrideComponent(TestComponent, {
 				set: {
 					template: template
@@ -505,10 +505,10 @@ export function main() {
 				"<column [key]=\"'Id'\" [(headerText)]=\"idHeaderText\" [width]=\"'165px'\" [dataType]=\"'number'\"></column>" +
 				"<column [key]=\"'Name'\" [headerText]=\"'Name'\" [width]=\"'250px'\" [dataType]=\"'string'\"></column>" +
 				"<column [key]=\"'HireDate'\" [headerText]=\"'Quantity per unit'\" [width]=\"'250px'\" [dataType]=\"'date'\"></column>" +
-				"<features>" + 
+				"<features>" +
 				"<paging [(currentPageIndex)]=\"pi\" [pageSize]=\"'2'\"></paging>" +
 				"</features>" +
-			"</ig-grid>";
+				"</ig-grid>";
 			TestBed.overrideComponent(TestComponent, {
 				set: {
 					template: template
@@ -542,15 +542,15 @@ export function main() {
 				"<column [key]=\"'Id'\" [(headerText)]=\"idHeaderText\" [width]=\"'165px'\" [dataType]=\"'number'\"></column>" +
 				"<column [key]=\"'Name'\" [headerText]=\"'Name'\" [width]=\"'250px'\" [dataType]=\"'string'\"></column>" +
 				"<column [key]=\"'HireDate'\" [headerText]=\"'Quantity per unit'\" [width]=\"'250px'\" [dataType]=\"'date'\"></column>" +
-				"<features>" + 
+				"<features>" +
 				"<paging [pageSize]=\"'2'\"></paging>" +
 				"</features>" +
-			"</ig-grid>";
+				"</ig-grid>";
 			TestBed.overrideComponent(TestComponent, {
-					set: {
-						template: template
-					}
-				});
+				set: {
+					template: template
+				}
+			});
 			TestBed.compileComponents().then(() => {
 				let fixture = TestBed.createComponent(TestComponent);
 				fixture.detectChanges();
@@ -558,24 +558,24 @@ export function main() {
 				//check if grid method calls return correct values
 				var rows = fixture.componentInstance.viewChild.allRows();
 				expect(rows.length).toBe(2);
-				var cellVal =  fixture.componentInstance.viewChild.getCellValue(1, "Name");
+				var cellVal = fixture.componentInstance.viewChild.getCellValue(1, "Name");
 				expect(cellVal).toBe("John Smith");
 
 				//call paging feature's api methods
-				var paging =  fixture.componentInstance.viewChild.featuresList.paging;
+				var paging = fixture.componentInstance.viewChild.featuresList.paging;
 
 				paging.pageSize(1);
 
 				rows = fixture.componentInstance.viewChild.allRows();
 				expect(rows.length).toBe(1);
-				cellVal =  fixture.componentInstance.viewChild.getCellValue(1, "Name");
+				cellVal = fixture.componentInstance.viewChild.getCellValue(1, "Name");
 				expect(cellVal).toBe("John Smith");
 
 				paging.pageIndex(1);
 
 				rows = fixture.componentInstance.viewChild.allRows();
 				expect(rows.length).toBe(1);
-				var cell =  fixture.componentInstance.viewChild.cellAt(1, 0, false);
+				var cell = fixture.componentInstance.viewChild.cellAt(1, 0, false);
 				expect(cell.innerHTML).toBe("Mary Johnson");
 
 				done();
@@ -583,14 +583,14 @@ export function main() {
 			});
 
 
-		 })
+		})
 
 		it('should recreate the grid when there are nested directives with options(No change)', (done) => {
 			var template = "<ig-grid [widgetId]='gridID' [(options)]='opts1'>" +
 				"<column [key]=\"'Id'\" [(headerText)]=\"idHeaderText\" [width]=\"'165px'\" [dataType]=\"'number'\"></column>" +
 				"<column [key]=\"'Name'\" [headerText]=\"'Name'\" [width]=\"'250px'\" [dataType]=\"'string'\"></column>" +
 				"<column [key]=\"'HireDate'\" [headerText]=\"'Quantity per unit'\" [width]=\"'250px'\" [dataType]=\"'date'\"></column>" +
-				"<features>" + 
+				"<features>" +
 				"<paging [pageSize]=\"'2'\" [(currentPageIndex)]=\"pi\"></paging>" +
 				"</features>" +
 				"</ig-grid>";
@@ -706,6 +706,29 @@ export function main() {
 				done();
 			});
 		});
+		it('should initialize correctly when datasource is remote', (done) => {
+			$['mockjax']({
+				url: "myURL/employees",
+				contentType: 'application/json',
+				dataType: 'json',
+				responseText: '[{ "ID": 1, "Name": "Nancy Davolio", }]'
+			});
+			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts4"></ig-grid></div>';
+			TestBed.overrideComponent(TestComponent, {
+				set: {
+					template: template
+				}
+			});
+			TestBed.compileComponents().then(() => {
+				let fixture = TestBed.createComponent(TestComponent);
+				fixture.detectChanges();
+				setTimeout(() => {
+					expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgGridComponent)
+						.toBe(true);
+					done();
+				}, 10);
+			});
+		});
 	});
 }
 
@@ -718,6 +741,7 @@ class TestComponent {
 	public opts1: any;
 	public opts2: any;
 	public opts3: any;
+	public opts4: any;
 	public optsNew:any;
 	private gridID: string;
 	public data: Array<any>;
@@ -786,6 +810,10 @@ class TestComponent {
 			autoCommit: true,
 			autoGenerateColumns: false,
 			primaryKey: "Id"
+		};
+
+		this.opts4 = {
+			dataSource: "myURL/employees"
 		};
 
 		this.opts2 = {

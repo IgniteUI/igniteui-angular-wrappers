@@ -139,6 +139,29 @@ export function main() {
             });
         });
 
+        it('should initialize correctly when datasource is remote', (done) => {
+            $['mockjax']({
+				url: "myURL/Categories",
+				contentType: 'application/json',
+				dataType: 'json',
+				responseText: '[{"ID": 0, "Name": "Food", "Products":[{"ID":0,"Name":"Bread","Description":"Whole grain bread","ReleaseDate":"1992-01-01T00:00:00","DiscontinuedDate":null,"Rating":4,"Price":2.5}]}]'
+			});
+            var template = '<div><ig-tree-grid [(widgetId)]="gridID" [(options)]="opts2" [changeDetectionInterval]="cdi"></ig-tree-grid></div>';
+            TestBed.overrideComponent(TestComponent, {
+                set: {
+                    template: template
+                }
+            });
+            TestBed.compileComponents().then(() => {
+                let fixture = TestBed.createComponent(TestComponent);
+                fixture.detectChanges();
+                expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgTreeGridComponent)
+                    .toBe(true);
+                done();
+            });
+        });
+
+
         it("should detect changes when original data source is changed but the data source length is the same.", (done) => {
 			var template = '<ig-tree-grid [(widgetId)]="gridID" [(options)]="optsNew"></ig-tree-grid>';		
 			TestBed.overrideComponent(TestComponent, {
@@ -159,13 +182,13 @@ export function main() {
 		});
     });
 }
-
 @Component({
     selector: 'test-cmp',
     template: '<div></div>' //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
 })
 class TestComponent {
     private opts: any;
+    private opts2: any;
     private optsNew: any;
     private gridID: string;
     public data: Array<any>;
@@ -225,6 +248,10 @@ class TestComponent {
             features: [{
                 name: "Updating"
             }]
+        };
+
+        this.opts2 = {
+            dataSource: "myURL/Categories"
         };
     }
 }

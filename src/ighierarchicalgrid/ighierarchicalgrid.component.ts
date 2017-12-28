@@ -36,6 +36,9 @@ export class IgHierarchicalGridComponent extends IgGridBase<IgHierarchicalGrid> 
 				data = this._config.dataSource;
 
 			//check for changes in collection
+			if (!(this._config.dataSource instanceof Array)) {
+				return;
+			}
 			this._changes = this._differ.diff(this._config.dataSource);
 			if (this._changes && mainGrid) {
 				this._dataSource = jQuery.extend(true, [], this._config.dataSource);

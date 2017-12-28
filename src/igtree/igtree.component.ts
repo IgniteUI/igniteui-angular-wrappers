@@ -27,6 +27,9 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
 			var i, j, valKey = this._config.valueKey, record, item;
 
 			//check for changes in collection
+			if (!(this._config.dataSource instanceof Array)) {
+				return;
+			}
 			this._changes = this._differ.diff(this._config.dataSource);
 			if (this._config.dataSource.length !== this._dataSource.length) {
 				this._dataSource = jQuery.extend(true, [], this._config.dataSource);
