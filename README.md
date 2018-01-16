@@ -1,6 +1,6 @@
 # Ignite UI components for Angular
 
-[![Build Status](https://travis-ci.org/IgniteUI/igniteui-angular2.svg?branch=master)](https://travis-ci.org/IgniteUI/igniteui-angular2)
+[![Build Status](https://travis-ci.org/IgniteUI/igniteui-angular-wrappers.svg?branch=master)](https://travis-ci.org/IgniteUI/igniteui-angular-wrappers)
 [![Coverage Status](https://coveralls.io/repos/github/IgniteUI/igniteui-angular2/badge.svg?branch=master)](https://coveralls.io/github/IgniteUI/igniteui-angular2?branch=master)  
 [![npm version](https://badge.fury.io/js/igniteui-angular2.svg)](https://badge.fury.io/js/igniteui-angular2)
 
