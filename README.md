@@ -432,7 +432,7 @@ The following controls currently support two-way data binding:
 
 ## Use igDataSource inside Angular app
 
-Thanks to the @types/ignite-ui, it is possible to create an instace of the all of the Ignite UI data sources.
+Thanks to the @types/ignite-ui, it is possible to create an instance of the all of the Ignite UI data sources.
 
     let source = new Infragistics.DataSource(settings);
 
