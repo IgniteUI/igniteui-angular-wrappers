@@ -6,6 +6,8 @@
 
 Use the components found in `src\igniteui.angular2.ts` to use [Ignite UI](http://igniteui.com) controls in [Angular](https://angular.io/) applications. [Work with the running samples here](http://igniteui.github.io/igniteui-angular-wrappers).
 
+**IMPORTANT** The repository has been renamed from `igniteui-angular2` to `igniteui-angular-wrappers`. Read more on our new [naming convention](https://www.infragistics.com/community/blogs/b/infragistics/posts/ignite-ui-github-repo-name-changes). 
+
 # Requirements
 
 - [jQuery](http://www.jquery.com) v1.9.1 and later
