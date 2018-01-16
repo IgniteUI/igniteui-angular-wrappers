@@ -1,5 +1,4 @@
 import { ElementRef, EventEmitter, Renderer, IterableDiffers, DoCheck } from '@angular/core';
-import { IgGridBase } from '../iggrid/iggridbase';
 
 declare var jQuery: any;
 
@@ -115,8 +114,8 @@ export class IgControlBase<Model> implements DoCheck {
 				jQuery.ui[this._widgetName].prototype.options.hasOwnProperty(name) &&
 				jQuery(this._el).data(this._widgetName)) {
 				jQuery(this._el)[this._widgetName]("option", name, value);
-				if(name === "dataSource" && this instanceof IgGridBase) {
-					this._dataSource = jQuery.extend(true, [], value);
+				if(name === "dataSource" && typeof this.createDataSource === 'function') {
+          this._dataSource = this.createDataSource(value);
 				}
 			}
 		}
