@@ -1,4 +1,4 @@
-# Ignite UI components for Angular
+# Ignite UI wrappers for Angular
 
 [![Build Status](https://travis-ci.org/IgniteUI/igniteui-angular-wrappers.svg?branch=master)](https://travis-ci.org/IgniteUI/igniteui-angular-wrappers)
 [![Coverage Status](https://coveralls.io/repos/github/IgniteUI/igniteui-angular-wrappers/badge.svg?branch=master)](https://coveralls.io/github/IgniteUI/igniteui-angular-wrappers?branch=master)  
@@ -337,7 +337,7 @@ Component methods can be called by accessing the component from the view. For ex
         }
     }
 
-## Using Ignite UI Angular Components inside AOT app
+## Using Ignite UI Wrappers for Angular inside AOT app
 As a starting point, you can review the [Angular documentation on the subject](https://angular.io/docs/ts/latest/cookbook/aot-compiler.html), which provides a guide how to compile an app with AOT. Follow their instructions to AOT compile the quickstart app.
 
 Once you have a running application compiled with AOT, the next step is to add the Ignite UI Components into this app. In this demo IgComboComponent is being added to the app, igCombo is an OSS widget and it is part of the ignite-ui npm package.
