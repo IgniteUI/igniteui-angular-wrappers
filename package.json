@@ -1,10 +1,10 @@
 {
-  "name": "igniteui-angular2",
+  "name": "igniteui-angular-wrappers",
   "version": "1.0.0",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/IgniteUI/igniteui-angular2.git"
+    "url": "https://github.com/IgniteUI/igniteui-angular-wrappers.git"
   },
   "dependencies": {
     "@angular/common": "^5.0.1",
