@@ -1,10 +1,12 @@
-# Ignite UI components for Angular
+# Ignite UI wrappers for Angular
 
-[![Build Status](https://travis-ci.org/IgniteUI/igniteui-angular2.svg?branch=master)](https://travis-ci.org/IgniteUI/igniteui-angular2)
-[![Coverage Status](https://coveralls.io/repos/github/IgniteUI/igniteui-angular2/badge.svg?branch=master)](https://coveralls.io/github/IgniteUI/igniteui-angular2?branch=master)  
-[![npm version](https://badge.fury.io/js/igniteui-angular2.svg)](https://badge.fury.io/js/igniteui-angular2)
+[![Build Status](https://travis-ci.org/IgniteUI/igniteui-angular-wrappers.svg?branch=master)](https://travis-ci.org/IgniteUI/igniteui-angular-wrappers)
+[![Coverage Status](https://coveralls.io/repos/github/IgniteUI/igniteui-angular-wrappers/badge.svg?branch=master)](https://coveralls.io/github/IgniteUI/igniteui-angular-wrappers?branch=master)  
+[![npm version](https://badge.fury.io/js/igniteui-angular-wrappers.svg)](https://badge.fury.io/js/igniteui-angular-wrappers)
 
-Use the components found in `src\igniteui.angular2.ts` to use [Ignite UI](http://igniteui.com) controls in [Angular](https://angular.io/) applications. [Work with the running samples here](http://igniteui.github.io/igniteui-angular2).
+Use the components found in `src\igniteui.angular2.ts` to use [Ignite UI](http://igniteui.com) controls in [Angular](https://angular.io/) applications. [Work with the running samples here](http://igniteui.github.io/igniteui-angular-wrappers).
+
+**IMPORTANT** The repository has been renamed from `igniteui-angular2` to `igniteui-angular-wrappers`. Read more on our new [naming convention](https://www.infragistics.com/community/blogs/b/infragistics/posts/ignite-ui-github-repo-name-changes). 
 
 # Requirements
 
@@ -17,12 +19,12 @@ Use the components found in `src\igniteui.angular2.ts` to use [Ignite UI](http:/
 To run the samples, you need [Node.js](http://nodejs.org/) installed on your machine.
 Afterwards, from your terminal run the following commands:
 
-1. `git clone https://github.com/IgniteUI/igniteui-angular2`
-2. `cd igniteui-angular2` 
+1. `git clone https://github.com/IgniteUI/igniteui-angular-wrappers`
+2. `cd igniteui-angular-wrappers` 
 3. `npm install`
 4. `npm start`
 
-`igniteui-angular2` depends on the `ignite-ui-full` licensed package. Follow [this guide](https://www.igniteui.com/help/using-ignite-ui-npm-packages) on setting up access to the Ignite UI private npm feed and add the dependency to the `package.json`.
+`igniteui-angular-wrappers` depends on the `ignite-ui-full` licensed package. Follow [this guide](https://www.igniteui.com/help/using-ignite-ui-npm-packages) on setting up access to the Ignite UI private npm feed and add the dependency to the `package.json`.
 
 ```
 "dependencies": {
@@ -335,13 +337,13 @@ Component methods can be called by accessing the component from the view. For ex
         }
     }
 
-## Using Ignite UI Angular Components inside AOT app
+## Using Ignite UI Wrappers for Angular inside AOT app
 As a starting point, you can review the [Angular documentation on the subject](https://angular.io/docs/ts/latest/cookbook/aot-compiler.html), which provides a guide how to compile an app with AOT. Follow their instructions to AOT compile the quickstart app.
 
 Once you have a running application compiled with AOT, the next step is to add the Ignite UI Components into this app. In this demo IgComboComponent is being added to the app, igCombo is an OSS widget and it is part of the ignite-ui npm package.
 First we need to install the required packages:
 - `npm install ignite-ui`
-- `npm install igniteui-angular2`
+- `npm install igniteui-angular-wrappers`
 - `npm install jquery-ui-bundle`
 
 **Note**: You have to download the full Ignite UI product if you would like to use widgets which are not part of the OSS widgets. This is a [list](https://github.com/IgniteUI/ignite-ui#available-features-in-ignite-ui-open-source-version) of the controls available in the Open-source version
@@ -357,7 +359,7 @@ Then go to the app module and import the combo - `import 'ignite-ui/js/modules/i
 
 In addition, at the end import the IgniteUIModule:
 
-    import { IgniteUIModule } from 'igniteui-angular2';
+    import { IgniteUIModule } from 'igniteui-angular-wrappers';
     @NgModule({
     imports: [ BrowserModule, IgniteUIModule ],
     …
@@ -365,11 +367,11 @@ In addition, at the end import the IgniteUIModule:
     export class AppModule {}
 
 In order to take advantage of the [Tree shaking](https://angular.io/docs/ts/latest/cookbook/aot-compiler.html#!#tree-shaking) the Rollup has to be set up.
-Open rollup-config.js, include igniteui-angular2 to `commonjs` plugin and add `namedExport` for jquery:
+Open rollup-config.js, include igniteui-angular-wrappers to `commonjs` plugin and add `namedExport` for jquery:
 
     commonjs({
         include: ['node_modules/rxjs/**',
-            'node_modules/igniteui-angular2/**',
+            'node_modules/igniteui-angular-wrappers/**',
         ],
         namedExports: {
             'node_modules/jquery/dist/jquery.min.js': [ 'jquery' ]
@@ -413,7 +415,7 @@ Open rollup-config.js file and import postcss:
       }),
 
 
-[Download](https://github.com/IgniteUI/igniteui-angular2/files/975676/quickstart-igniteui-angular2-aot.zip) the modified app which uses the specified product. To run it with AOT:
+[Download](https://github.com/IgniteUI/igniteui-angular-wrappers/files/975676/quickstart-igniteui-angular-wrappers-aot.zip) the modified app which uses the specified product. To run it with AOT:
 1. npm install
 2. npm run build:aot
 3. npm run serve
@@ -440,7 +442,7 @@ This data source instance is granted with intellisense about igDataSource method
 
     source.dataBind();
 
-Review the following [demo](http://igniteui.github.io/igniteui-angular2/samples/igDataSource/igDataSource.html) for more information.
+Review the following [demo](http://igniteui.github.io/igniteui-angular-wrappers/samples/igDataSource/igDataSource.html) for more information.
 
 ## Running tests
 

@@ -5,12 +5,12 @@ import typescript from 'rollup-plugin-typescript';
 export default {
     entry: 'src/igniteui.angular2.ts',
     format: 'umd',
-    moduleName: 'igniteui-angular2',
+    moduleName: 'igniteui-angular-wrappers',
     sourceMap:true,
     external: [
         '@angular/core',
     ],
-    dest: "dist/npm/bundles/igniteui-angular2.umd.js",
+    dest: "dist/npm/bundles/igniteui-angular-wrappers.umd.js",
     plugins: [
     angular(
         {

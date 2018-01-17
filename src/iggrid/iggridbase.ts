@@ -42,6 +42,10 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
 		super.ngOnInit();
 	}
 
+	createDataSource(value: any) {
+    return jQuery.extend(true, [], value);
+	}
+
 	deleteRow(id) {
 		var element = jQuery(this._el),
 			tr = element.find("tr[data-id='" + id + "']");
