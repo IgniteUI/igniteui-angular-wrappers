@@ -230,9 +230,13 @@ export class IgControlBase<Model> implements DoCheck {
 		if (o1 === o2) { return true; }
 		if (o1 === null || o2 === null) { return false; }
 		if (o1 !== o1 && o2 !== o2) { return true; }// NaN === NaN
-		if (o1.nodeName) {
-            return;
-        }
+		var isDOMnode = typeof Node === "object" ? o1 instanceof Node : 
+				o1 && typeof o1 === "object" && typeof o1.nodeType === "number" && typeof o1.nodeName==="string",
+		isDOMelement = typeof HTMLElement === "object" ? o1 instanceof HTMLElement : 
+				o1 && typeof o1 === "object" && o1 !== null && o1.nodeType === 1 && typeof o1.nodeName==="string"
+		if (isDOMnode || isDOMelement) {
+			return;
+		}
 		var t1 = typeof o1, t2 = typeof o2, length, key, keySet, dirty, skipDiff = false, changedVals = [];
 		if (t1 === t2) {
 			if (t1 === "object") {
