@@ -729,6 +729,22 @@ export function main() {
 				}, 10);
 			});
 		});
+		//issue #242 (bug #247937)
+		it('should detect changes properly when grid column with validation is updated and then an option(s) change has been performed', (done) => {
+			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="0"></ig-grid></div>';
+			TestBed.overrideComponent(TestComponent, {
+				set: {
+					template: template
+				}
+			});
+			TestBed.compileComponents().then(() => {
+				debugger;
+				let fixture = TestBed.createComponent(TestComponent);				
+				var res = fixture.componentInstance.viewChild.equalsDiff( $("<div id='1'></div>"),  $("<div id='2'></div>"));
+				expect(res).toBe(false);
+				done();	
+			});
+		});
 	});
 }
 
