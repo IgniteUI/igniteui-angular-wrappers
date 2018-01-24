@@ -760,7 +760,12 @@ export function main() {
 			});
 		});
 		it('test if grid option is Node element', (done) => {
-			
+			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts"></ig-grid></div>';
+			TestBed.overrideComponent(TestComponent, {
+				set: {
+					template: template
+				}
+			});
 			TestBed.compileComponents().then(() => {
 				let fixture = TestBed.createComponent(TestComponent);
 				let para = document.createElement("p");
