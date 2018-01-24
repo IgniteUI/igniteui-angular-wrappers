@@ -47,6 +47,29 @@ export function main() {
             });
         });
 
+        it('should select correctly without ngModel', (done) => {
+            const template = '<div><ig-combo [(widgetId)]="comboID" [(options)]="options"></ig-combo></div>';
+            TestBed.overrideComponent(TestComponent, {
+                set: {
+                    template: template
+                }
+            });
+            TestBed.compileComponents().then(() => {
+                const fixture = TestBed.createComponent(TestComponent);
+                fixture.detectChanges();
+                const elem = $("#combo1").igCombo("itemsFromIndex", 0)["element"];
+                const select = () => {
+                    $("#combo1").igCombo("select", elem, {}, true);
+                }
+
+                // #244 fails with 'Cannot read property 'viewToModelUpdate' of undefined'
+                expect(select).not.toThrow();
+                expect(fixture.componentInstance.viewChild.value()).toEqual(1);
+                done();
+            });
+        });
+
+
         it('should be updated correctly if the ngModel value is updated', (done) => {
             var template = '<div><ig-combo [(widgetId)]="comboID" [(options)]="options" [changeDetectionInterval]="cdi" [(ngModel)]="combo.value1"></ig-combo></div>';
             TestBed.overrideComponent(TestComponent, {
