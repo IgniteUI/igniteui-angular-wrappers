@@ -225,16 +225,22 @@ export class IgControlBase<Model> implements DoCheck {
 	isArray(value) {
 		return Object.prototype.toString.call(value) === "[object Array]";
 	}
+	
+	isNode(o) {
+		return typeof Node === "object" ? o instanceof Node : 
+		o && typeof o === "object" && typeof o.nodeType === "number" && typeof o.nodeName==="string";
+	}
+
+	isDOM(o) {
+		return typeof HTMLElement === "object" ? o instanceof HTMLElement : 
+		o && typeof o === "object" && o !== null && o.nodeType === 1 && typeof o.nodeName==="string"
+	}
 
 	equalsDiff(o1, o2, diff?) {
 		if (o1 === o2) { return true; }
 		if (o1 === null || o2 === null) { return false; }
 		if (o1 !== o1 && o2 !== o2) { return true; }// NaN === NaN
-		var isDOMnode = typeof Node === "object" ? o1 instanceof Node : 
-				o1 && typeof o1 === "object" && typeof o1.nodeType === "number" && typeof o1.nodeName==="string",
-		isDOMelement = typeof HTMLElement === "object" ? o1 instanceof HTMLElement : 
-				o1 && typeof o1 === "object" && o1 !== null && o1.nodeType === 1 && typeof o1.nodeName==="string"
-		if (isDOMnode || isDOMelement) {
+		if (this.isDOM(o1) || this.isNode(o1)) {
 			return;
 		}
 		var t1 = typeof o1, t2 = typeof o2, length, key, keySet, dirty, skipDiff = false, changedVals = [];
