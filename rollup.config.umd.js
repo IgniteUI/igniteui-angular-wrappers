@@ -9,6 +9,7 @@ export default {
     sourceMap:true,
     external: [
         '@angular/core',
+        '@angular/forms'
     ],
     dest: "dist/npm/bundles/igniteui-angular-wrappers.umd.js",
     plugins: [
