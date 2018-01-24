@@ -26,25 +26,27 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
 	ngOnInit() {
 		let that = this;
 		super.ngOnInit();
-		jQuery(this._el).on(this._widgetName.toLowerCase() + "selectionchanged", function (evt, ui) {
-			var items = ui.items;
-			
-			if (items.length <= 0 || !that._model) {
-				that._model.viewToModelUpdate(ui.owner.value());
-				return;
-			}
-			
-			if (ui.owner.options.multiSelection.enabled) {
-				that._model.viewToModelUpdate(items.map(function(item) {
-					return item.data[that._config.valueKey];
-				}));
-			} else {
-				that._model.viewToModelUpdate(items[0].data[that._config.valueKey]);
-			}
-		});
 		this._dataSource = jQuery.extend(true, [], this._config.dataSource);
-		//manually call writeValue, because the LifeCycle has been changed and writeValue is executed before ngOnInit
+
 		if (this._model) {
+			// D.P. #244 only attach selectionchanged handler if there's a model to update
+			jQuery(this._el).on(this._widgetName.toLowerCase() + "selectionchanged", function (evt, ui) {
+				var items = ui.items;
+				
+				if (items.length <= 0) {
+					that._model.viewToModelUpdate(ui.owner.value());
+					return;
+				}
+				
+				if (ui.owner.options.multiSelection.enabled) {
+					that._model.viewToModelUpdate(items.map(function(item) {
+						return item.data[that._config.valueKey];
+					}));
+				} else {
+					that._model.viewToModelUpdate(items[0].data[that._config.valueKey]);
+				}
+			});
+			//manually call writeValue, because the LifeCycle has been changed and writeValue is executed before ngOnInit
 			this.writeValue(this._model.value);
 		}
 	}
