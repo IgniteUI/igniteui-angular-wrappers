@@ -1,4 +1,4 @@
-import { ElementRef, EventEmitter, Renderer, IterableDiffers, DoCheck } from '@angular/core';
+import { ElementRef, EventEmitter, Renderer, IterableDiffers, DoCheck, SimpleChanges, Input, ChangeDetectorRef, KeyValueDiffers } from '@angular/core';
 
 declare var jQuery: any;
 
@@ -47,65 +47,53 @@ var NODES = {
 };
 
 export class IgControlBase<Model> implements DoCheck {
-	private _differs: any;
-	protected _opts: any = {};
+	@Input()
+	public options:any = {};
+
+	protected _differs: any;
 	protected _el: any;
 	protected _widgetName: string;
 	protected _differ: any;
-	protected _config: any;
+	protected _optsDiffer: any;
 	protected _events: Map<string, string>;
 	protected _allowChangeDetection = true;
 	private _evtEmmiters : any = {};
 	private _changeDetectionInterval: any;
 	private _nativeElement:any;
 
-	set options(v: Model) {
-		if (this._config !== undefined && this._config !== null) {
-			//if the options are alrealy set recreate the component
-			jQuery(this._el)[this._widgetName]("destroy");
-			this._config = jQuery.extend(false, this._config, v);
-			jQuery(this._el)[this._widgetName](this._config);
-		} else {
-			this._config = jQuery.extend(true, v, this._opts);
-			if (this._opts.dataSource) {
-				// _config.dataSource should reference the data if the data is set as a top-level opts
-				// to allow two-way data binding
-				this._config.dataSource = this._opts.dataSource;
-			}
-			this._differ = this._differs.find([]).create(null);
-		}
-		this._opts = jQuery.extend(true, {}, this._config);
-		if (this._opts.dataSource) {
-			delete this._opts.dataSource;
-		}
-	};
+	// set options(v: Model) {
+	// 	if (this._config !== undefined && this._config !== null) {
+	// 		//if the options are alrealy set recreate the component
+	// 		jQuery(this._el)[this._widgetName]("destroy");
+	// 		this._config = jQuery.extend(false, this._config, v);
+	// 		jQuery(this._el)[this._widgetName](this._config);
+	// 	} else {
+	// 		this._config = jQuery.extend(true, v, this._opts);
+	// 		if (this._opts.dataSource) {
+	// 			// _config.dataSource should reference the data if the data is set as a top-level opts
+	// 			// to allow two-way data binding
+	// 			this._config.dataSource = this._opts.dataSource;
+	// 		}
+	// 		this._differ = this._differs.find([]).create(null);
+	// 	}
+	// 	this._opts = jQuery.extend(true, {}, this._config);
+	// 	if (this._opts.dataSource) {
+	// 		delete this._opts.dataSource;
+	// 	}
+	// };
 	public widgetId: string;
 	public changeDetectionInterval: number;
 
-	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) {
+	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, public kvalDiffers: KeyValueDiffers, public cdr: ChangeDetectorRef) {
 		this._differs = differs;
 		this._nativeElement = el.nativeElement;
 		this._widgetName = this.convertToCamelCase(el.nativeElement.nodeName.toLowerCase());//ig-grid -> igGrid
 		this._el = el.nativeElement.appendChild(document.createElement(NODES[el.nativeElement.nodeName.toLowerCase()]));
-
-		for (var opt in jQuery.ui[this._widgetName].prototype.options) {
-			Object.defineProperty(this, opt, {
-				set: this.createSetter(opt),
-				enumerable: true,
-				configurable: true
-			});
-		}
-
-		for (var propt in jQuery.ui[this._widgetName].prototype.events) {
-			this[propt] = new EventEmitter();
-			//cahcing the event emmitters for cases when the event name is the same as a method name.
-			this._evtEmmiters[propt] = this[propt];
-		}
 	}
 
 	createSetter(name) {
 		return function (value) {
-			this._opts[name] = value;
+			this.options[name] = value;
 			if (this._config) {
 				this._config[name] = value;
 			}
@@ -114,9 +102,9 @@ export class IgControlBase<Model> implements DoCheck {
 				jQuery.ui[this._widgetName].prototype.options.hasOwnProperty(name) &&
 				jQuery(this._el).data(this._widgetName)) {
 				jQuery(this._el)[this._widgetName]("option", name, value);
-				if(name === "dataSource" && typeof this.createDataSource === 'function') {
-          this._dataSource = this.createDataSource(value);
-				}
+		// 		if(name === "dataSource" && typeof this.createDataSource === 'function') {
+        //   this._dataSource = this.createDataSource(value);
+		// 		}
 			}
 		}
 	}
@@ -127,6 +115,26 @@ export class IgControlBase<Model> implements DoCheck {
 
 		//events binding
 		let that = this;
+		
+		for (var opt in jQuery.ui[this._widgetName].prototype.options) {
+			//copy root level options into this.options
+			if(this[opt]){
+				this.options[opt] = this[opt];
+			}
+			if(opt !== "dataSource") {			
+				Object.defineProperty(this, opt, {
+					set: this.createSetter(opt),
+					enumerable: true,
+					configurable: true
+				});
+			}
+		}
+
+		for (var propt in jQuery.ui[this._widgetName].prototype.events) {
+			this[propt] = new EventEmitter();
+			//cahcing the event emmitters for cases when the event name is the same as a method name.
+			this._evtEmmiters[propt] = this[propt];
+		}
 
 		for (var propt in jQuery.ui[this._widgetName].prototype.events) {
 			evtName = this._widgetName.toLowerCase() + propt.toLowerCase();
@@ -157,12 +165,12 @@ export class IgControlBase<Model> implements DoCheck {
 		}, this.changeDetectionInterval);
 
 		jQuery(this._el).attr("id", this.widgetId);
-		if (this._config === null || this._config === undefined) {
-			//if there is no config specified in the component template use the defined top-level options for a configuration
-			//by invoking the setter of options property
-			this.options = this._opts;
-		}
-		jQuery(this._el)[this._widgetName](this._config);
+		// if (this._config === null || this._config === undefined) {
+		// 	//if there is no config specified in the component template use the defined top-level options for a configuration
+		// 	//by invoking the setter of options property
+		// 	this.options = this._opts;
+		// }
+		jQuery(this._el)[this._widgetName](this.options);
 	}
 	createMethodGetter(name) {
 		return function () {
@@ -172,35 +180,58 @@ export class IgControlBase<Model> implements DoCheck {
 	}
 
 	ngDoCheck() {
-		if (this._allowChangeDetection) {
-			this._allowChangeDetection = false;
-			this.optionChange();
+		if (this._differ) {
+            const changes = this._differ.diff(this.options);
+            if (changes) {
+                this.optionChange(changes);
+            }
+        }
+		// if (this._allowChangeDetection) {
+		// 	this._allowChangeDetection = false;
+		// 	this.optionChange();
+		// }
+	}
+	public ngOnChanges(changes: SimpleChanges): void {
+		const opts = "options";
+        if (opts in changes) {
+			const value = changes[opts].currentValue;
+			 if (!this.kvalDiffers && value) {
+				 try {
+                    this._differ = this.kvalDiffers.find({}).create();
+                } catch (e) {
+					throw new Error("Only binding to object is supported.");
+				}
+			 }
 		}
 	}
 
 	optionChange(options?) {
-		if (this._differ != null) {
-			var diff = [];
-			var element = jQuery(this._el);
-			var i, j, valKey = this._config.valueKey, option;
-			var opts = options || jQuery.extend(true, {}, this._config);
-			if (opts.dataSource) {
-				delete opts.dataSource;
-			}
+		debugger;
+		// if (this._differ != null) {
+		// 	var diff = [];
+		// 	var element = jQuery(this._el);
+		// 	var i, j, valKey = this._config.valueKey, option;
+		// 	var opts = options || jQuery.extend(true, {}, this._config);
+		// 	if (opts.dataSource) {
+		// 		delete opts.dataSource;
+		// 	}
 
-			if (!this.equalsDiff(opts, this._opts, diff)) {
-				this._opts = jQuery.extend(true, {}, opts);
-				for (i = 0; i < diff.length; i++) {
-					option = diff[i].key;
-					if (jQuery.ui[this._widgetName] &&
-						jQuery.ui[this._widgetName].prototype.options &&
-						jQuery.ui[this._widgetName].prototype.options.hasOwnProperty(option) &&
-						jQuery(this._el).data(this._widgetName)) {
-						jQuery(this._el)[this._widgetName]("option", option, diff[i].newVal);
-					}
-				}
-			}
-		}
+		// 	if (!this.equalsDiff(opts, this._opts, diff)) {
+		// 		this._opts = jQuery.extend(true, {}, opts);
+		// 		for (i = 0; i < diff.length; i++) {
+		// 			option = diff[i].key;
+		// 			if (jQuery.ui[this._widgetName] &&
+		// 				jQuery.ui[this._widgetName].prototype.options &&
+		// 				jQuery.ui[this._widgetName].prototype.options.hasOwnProperty(option) &&
+		// 				jQuery(this._el).data(this._widgetName)) {
+		// 				jQuery(this._el)[this._widgetName]("option", option, diff[i].newVal);
+		// 			}
+		// 		}
+		// 	}
+		// }
+	}
+	public markForCheck(){
+		this.cdr.detectChanges();
 	}
 
 	// Interrogation functions

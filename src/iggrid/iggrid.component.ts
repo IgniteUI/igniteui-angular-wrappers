@@ -1,14 +1,15 @@
-import { Component, ElementRef, Renderer, IterableDiffers } from '@angular/core';
+import { Component, ElementRef, Renderer, KeyValueDiffers, IterableDiffers, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { IgGridBase } from './iggridbase';
 
 @Component({
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	"selector": "ig-grid",
 	template: "<ng-content></ng-content>",
 	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","width","height","autoAdjustHeight","avgRowHeight","avgColumnWidth","defaultColumnWidth","autoGenerateColumns","virtualization","virtualizationMode","requiresDataBinding","rowVirtualization","columnVirtualization","virtualizationMouseWheelStep","adjustVirtualHeights","templatingEngine","columns","dataSource","dataSourceUrl","dataSourceType","responseDataKey","responseTotalRecCountKey","requestType","responseContentType","showHeader","showFooter","fixedHeaders","fixedFooters","caption","features","tabIndex","localSchemaTransform","primaryKey","serializeTransactionLog","autoCommit","aggregateTransactions","autoFormat","renderCheckboxes","updateUrl","restSettings","alternateRowStyles","autofitLastColumn","enableHoverStyles","enableUTCDates","mergeUnboundColumns","jsonpRequest","enableResizeContainerCheck","featureChooserIconDisplay","scrollSettings"],
 	outputs: ["cellClick","cellRightClick","dataBinding","dataBound","rendering","rendered","dataRendering","dataRendered","headerRendering","headerRendered","footerRendering","footerRendered","headerCellRendered","rowsRendering","rowsRendered","schemaGenerated","columnsCollectionModified","requestError","created","destroyed"]
 })
 export class IgGridComponent extends IgGridBase<IgGrid> {
-	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
+	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiff: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiff, cdr); }
 
 	/**
  	 * Returns the element holding the data records

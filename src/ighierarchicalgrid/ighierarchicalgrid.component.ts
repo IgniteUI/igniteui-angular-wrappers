@@ -1,9 +1,10 @@
-import { Component, Renderer, IterableDiffers, ElementRef } from "@angular/core";
+import { Component, Renderer, IterableDiffers, ElementRef, ChangeDetectionStrategy } from "@angular/core";
 import { IgGridBase } from "../iggrid/iggridbase";
 
 declare var jQuery:any;
 
-@Component({
+@Component({	
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	selector: "ig-hierarchical-grid",
 	template: "<ng-content></ng-content>",
 	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","initialDataBindDepth","initialExpandDepth","odata","rest","maxDataBindDepth","defaultChildrenDataProperty","autoGenerateLayouts","expandCollapseAnimations","expandColWidth","pathSeparator","animationDuration","expandTooltip","collapseTooltip","columnLayouts","width","height","autoAdjustHeight","avgRowHeight","avgColumnWidth","defaultColumnWidth","autoGenerateColumns","virtualization","virtualizationMode","requiresDataBinding","rowVirtualization","columnVirtualization","virtualizationMouseWheelStep","adjustVirtualHeights","templatingEngine","columns","dataSource","dataSourceUrl","dataSourceType","responseDataKey","responseTotalRecCountKey","requestType","responseContentType","showHeader","showFooter","fixedHeaders","fixedFooters","caption","features","tabIndex","localSchemaTransform","primaryKey","serializeTransactionLog","autoCommit","aggregateTransactions","autoFormat","renderCheckboxes","updateUrl","restSettings","alternateRowStyles","autofitLastColumn","enableHoverStyles","enableUTCDates","mergeUnboundColumns","jsonpRequest","enableResizeContainerCheck","featureChooserIconDisplay","scrollSettings"],
