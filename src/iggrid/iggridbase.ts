@@ -10,7 +10,7 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
 	@ContentChildren(Column) _columns: QueryList<Column>;
 	@ContentChild(Features) featuresList: Features;
 
-	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, public kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }
+	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }
 
 	ngOnInit() {
 		if(this.dataSource === null || this.dataSource === undefined){
@@ -113,10 +113,9 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
 
 	public ngOnChanges(changes: SimpleChanges): void {
 		const ds = "dataSource";
-		const options = "options";
         if (ds in changes) {
 			const value = changes[ds].currentValue;
-			 if (!this._differ && value) {
+			 if (value) {
                 try {
                     this._differ = this._differs.find(value).create();
 					this._changes = [];
@@ -129,12 +128,7 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
 				}
 			 }
 		}
-		if(options in changes) {
-			const value = changes[options].currentValue;
-			if(!this._optsDiffer && value){
-				this._optsDiffer = this.kvalDiffers.find({}).create();
-			}
-		}
+		super.ngOnChanges(changes);
 	}
 	ngDoCheck() {
 		if (this._differ) {
@@ -158,15 +152,7 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
 				}
 			}
         }
-		if(this._optsDiffer){
-			 const grid = jQuery(this._el).data(this._widgetName);
-			 const changes = this._optsDiffer.diff(this.options);
-			 if(changes && grid){
-				changes.forEachChangedItem((change: any) => {
-					this[change.key] = change.currentValue;
-				});
-			 }
-		}
+		super.ngDoCheck();
 	}
 	public dataSourceApplyChanges(changes) {
 		const pkKey =  this["primaryKey"] || this.options["primaryKey"];

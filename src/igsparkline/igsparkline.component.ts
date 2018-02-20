@@ -1,4 +1,4 @@
-import { Component, ElementRef, Renderer, IterableDiffers } from "@angular/core";
+import { Component, ElementRef, Renderer, IterableDiffers, KeyValueDiffers, ChangeDetectorRef } from "@angular/core";
 import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 
 @Component({
@@ -8,6 +8,8 @@ import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 	outputs: ["dataBinding","dataBound","updateTooltip","hideTooltip"]
 })
 export class IgSparklineComponent extends IgControlBase<IgSparkline> { 
-	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
+	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { 
+		super(el, renderer, differs, kvalDiffers, cdr);
+	}
 	public destroy(): void { return; } ;
 }

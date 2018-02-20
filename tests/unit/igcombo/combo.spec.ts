@@ -48,7 +48,7 @@ export function main() {
         });
 
         it('should select correctly without ngModel', (done) => {
-            const template = '<div><ig-combo [(widgetId)]="comboID" [(options)]="options"></ig-combo></div>';
+            const template = '<div><ig-combo [(widgetId)]="comboID" [(options)]="options" [dataSource]="northwind"></ig-combo></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -71,7 +71,7 @@ export function main() {
 
 
         it('should be updated correctly if the ngModel value is updated', (done) => {
-            var template = '<div><ig-combo [(widgetId)]="comboID" [(options)]="options" [changeDetectionInterval]="cdi" [(ngModel)]="combo.value1"></ig-combo></div>';
+            var template = '<div><ig-combo [(widgetId)]="comboID" [(options)]="options" [changeDetectionInterval]="cdi" [(ngModel)]="combo.value1" [dataSource]="northwind"></ig-combo></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -91,7 +91,7 @@ export function main() {
         });
 
          it('should be updated correctly if the ngModel value is cleared.', (done) => {
-                var template = '<div><ig-combo [(widgetId)]="comboID" [(options)]="options" [changeDetectionInterval]="cdi" [(ngModel)]="combo.value1"></ig-combo></div>';
+                var template = '<div><ig-combo [(widgetId)]="comboID" [(options)]="options" [changeDetectionInterval]="cdi" [(ngModel)]="combo.value1" [dataSource]="northwind"></ig-combo></div>';
                 TestBed.overrideComponent(TestComponent, {
                     set: {
                         template: template
@@ -115,7 +115,7 @@ export function main() {
           });
 
         it('the ngModel should be updated correctly if the combo selection is updated', (done) => {
-            var template = '<div><ig-combo [(widgetId)]="comboID" [(options)]="options" [changeDetectionInterval]="cdi" [(ngModel)]="combo.value1"></ig-combo></div>';
+            var template = '<div><ig-combo [(widgetId)]="comboID" [(options)]="options" [changeDetectionInterval]="cdi" [(ngModel)]="combo.value1" [dataSource]="northwind"></ig-combo></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -124,19 +124,20 @@ export function main() {
             TestBed.compileComponents().then(() => {
                 let fixture = TestBed.createComponent(TestComponent);
                 fixture.detectChanges();
-                var elem = $("#combo1").igCombo("itemsFromIndex", 0)["element"];
-
-                $("#combo1").igCombo("select", elem, {}, true);
-                fixture.detectChanges();
                 setTimeout(function () {
-                    expect(fixture.componentInstance.combo.value1).toEqual(1);
-                    done();
-                }, 10);
+                    var elem = $("#combo1").igCombo("itemsFromIndex", 0)["element"];
+                    $("#combo1").igCombo("select", elem, {}, true);
+                    fixture.detectChanges();
+                    setTimeout(function () {
+                        expect(fixture.componentInstance.combo.value1).toEqual(1);
+                        done();
+                    }, 10);
+                }, 100);
             });
         });
 
         it('the ngModel should be updated correctly if the combo selection is updated and multiple items are selected', (done) => {
-            var template = '<div><ig-combo [(widgetId)]="comboID" [(options)]="optionsMultipleSelection" [changeDetectionInterval]="cdi" [(ngModel)]="combo.value1"></ig-combo></div>';
+            var template = '<div><ig-combo [(widgetId)]="comboID" [dataSource]="northwind" [(options)]="optionsMultipleSelection" [changeDetectionInterval]="cdi" [(ngModel)]="combo.value1"></ig-combo></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -158,7 +159,7 @@ export function main() {
         });
 
         it('should reflect changes when a record in the data changes', (done) => {
-            var template = '<div><ig-combo [(widgetId)]="comboID" [(options)]="options" [changeDetectionInterval]="cdi" [(ngModel)]="combo.value1"></ig-combo></div>';
+            var template = '<div><ig-combo [(widgetId)]="comboID" [dataSource]="northwind" [(options)]="options" [changeDetectionInterval]="cdi" [(ngModel)]="combo.value1"></ig-combo></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -181,7 +182,7 @@ export function main() {
         });
 
         it('should apply the model if there is a new data assigned', (done) => {
-            var template = '<div><ig-combo [(widgetId)]="comboID" [valueKey]="\'ProductID\'" [textKey]="\'ProductName\'" [changeDetectionInterval]="cdi" [(dataSource)]="data" [(ngModel)]="combo.value1"></ig-combo></div>';
+            var template = '<div><ig-combo [(widgetId)]="comboID" [valueKey]="\'ProductID\'" [textKey]="\'ProductName\'" [changeDetectionInterval]="cdi" [dataSource]="data" [(ngModel)]="combo.value1"></ig-combo></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -189,12 +190,9 @@ export function main() {
             });
             TestBed.compileComponents().then(() => {
                 let fixture = TestBed.createComponent(TestComponent);
-                fixture.detectChanges();
                 fixture.componentInstance.data = fixture.componentInstance.northwind;
-
                 setTimeout(function () {
                     fixture.detectChanges();
-
                     expect($("#combo1").igCombo("value")).toBe(fixture.componentInstance.combo.value1);
                     expect($("#combo1").val())
                     .toBe(fixture.componentInstance.northwind[fixture.componentInstance.combo.value1 - 1].ProductName);
@@ -248,7 +246,7 @@ class TestComponent {
         this.options = {
             valueKey: "ProductID",
             textKey: "ProductName",
-            dataSource: this.northwind,
+            //dataSource: this.northwind,
             width: "100%"
         };
 

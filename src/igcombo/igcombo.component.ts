@@ -1,4 +1,4 @@
-import { Component, Optional, ElementRef, Renderer, IterableDiffers } from "@angular/core";
+import { Component, Optional, ElementRef, Renderer, IterableDiffers, KeyValueDiffers, ChangeDetectorRef, SimpleChanges, Input } from "@angular/core";
 import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 import { ControlValueAccessor, NgModel } from "@angular/forms";
 
@@ -11,12 +11,15 @@ declare var jQuery: any;
 	outputs: ["rendered","dataBinding","dataBound","filtering","filtered","itemsRendering","itemsRendered","dropDownOpening","dropDownOpened","dropDownClosing","dropDownClosed","selectionChanging","selectionChanged"]
 })
 export class IgComboComponent extends IgControlBase<IgCombo> implements ControlValueAccessor {
+
+	@Input() 
+	public dataSource;
+	
 	protected _model: any;
-	private _dataSource: any;
 	private _changes: any;
 
-	constructor( @Optional() public model: NgModel, el: ElementRef, renderer: Renderer, differs: IterableDiffers) {
-		super(el, renderer, differs);
+	constructor( @Optional() public model: NgModel, el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {
+		super(el, renderer, differs, kvalDiffers, cdr);
 		if (model) {
 			model.valueAccessor = this;
 			this._model = model;
@@ -25,8 +28,14 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
 
 	ngOnInit() {
 		let that = this;
+		const valueKey = this["valueKey"] || this.options.valueKey;
+		if (this.dataSource === null || this.dataSource === undefined) {
+			this.dataSource = this.options["dataSource"];
+		}
+		if (!this.options["dataSource"] && this.dataSource) {
+			this.options["dataSource"] = this.dataSource;
+		}
 		super.ngOnInit();
-		this._dataSource = jQuery.extend(true, [], this._config.dataSource);
 
 		if (this._model) {
 			// D.P. #244 only attach selectionchanged handler if there's a model to update
@@ -40,10 +49,10 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
 				
 				if (ui.owner.options.multiSelection.enabled) {
 					that._model.viewToModelUpdate(items.map(function(item) {
-						return item.data[that._config.valueKey];
+						return item.data[valueKey];
 					}));
 				} else {
-					that._model.viewToModelUpdate(items[0].data[that._config.valueKey]);
+					that._model.viewToModelUpdate(items[0].data[valueKey]);
 				}
 			});
 			//manually call writeValue, because the LifeCycle has been changed and writeValue is executed before ngOnInit
@@ -69,44 +78,64 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
 		this.onTouched = fn;
 	}
 
-	ngDoCheck() {
-		if (this._differ != null && this._allowChangeDetection) {
-			this.optionChange();
-			this._allowChangeDetection = false;
-			var diff = [];
-			var element = jQuery(this._el);
-			var i, j, valKey = this._config.valueKey, record, item;
-
-			//check for changes in collection
-			if (!(this._config.dataSource instanceof Array)) {
-				return;
-			}
-			this._changes = this._differ.diff(this._config.dataSource);
-			if (this._config.dataSource && this._config.dataSource.length !== this._dataSource.length) {
-				this._dataSource = jQuery.extend(true, [], this._config.dataSource);
-				if (this._changes) {
-					 element.data("igCombo").dataBind();
-					if (this.model && this.model.value) {
-						this.writeValue(this.model.value);
-					}
-				}
-			}
-
-			if (!this.equalsDiff(this._config.dataSource, this._dataSource, diff)) {
-				this._dataSource = jQuery.extend(true, [], this._config.dataSource);
-				for (i = 0; i < diff.length; i++) {
-					for (j = 0; j < diff[i].txlog.length; j++) {
-						record = this._config.dataSource[diff[i].index];
-						item = element.data("igCombo").itemsFromIndex(diff[i].index);
-						element.data("igCombo")._updateItem(item.element, record);
-						if (element.data("igCombo").isSelected(item.element)) {
-							//should update the input
-							element.data("igCombo")._updateInputValues(false);
-						}
-					}
-				}
-			}
+	dataSourceApplyChanges(changes) {
+		const element = jQuery(this._el);
+		element.data("igCombo").dataBind();
+		if (this.model && this.model.value) {
+			this.writeValue(this.model.value);
 		}
+	}
+	updateComboItem(rec, val, key, index){
+		const element = jQuery(this._el);
+		const comboItem = element.data("igCombo").itemsFromIndex(index);
+		element.data("igCombo")._updateItem(comboItem.element, rec);
+		if (element.data("igCombo").isSelected(comboItem.element)) {
+			//should update the input
+			element.data("igCombo")._updateInputValues(false);
+		}
+
+	}
+	public ngOnChanges(changes: SimpleChanges): void {
+		const ds = "dataSource";
+        if (ds in changes) {
+			const value = changes[ds].currentValue;
+			 if (value) {
+                try {
+                    this._differ = this._differs.find(value).create();
+					this._changes = [];
+					for(var i=0; i < this.dataSource.length; i++){
+						this._changes.push(this.kvalDiffers.find({}).create());	
+					}					
+                }
+				catch(e){
+					throw new Error("Only binding to arrays is supported.");
+				}
+			 }
+		}
+		super.ngOnChanges(changes);
+	}
+	ngDoCheck() {
+		if (this._differ) {
+            const changes = this._differ.diff(this.dataSource);
+			//check if grid is initialized
+			const combo = jQuery(this._el).data(this._widgetName);
+            if (changes && combo) {
+                this.dataSourceApplyChanges(changes);
+            }
+			if(this._changes && combo){
+				//check recs
+				for(var i = 0; i < this.dataSource.length; i++){
+					var item = this.dataSource[i];
+					var recChanges = this._changes[i].diff(item);
+					if(recChanges){
+						recChanges.forEachChangedItem((change: any) => {
+							this.updateComboItem(item, change.currentValue, change.key, i);
+						});
+					}
+				}
+			}
+        }
+		super.ngDoCheck();
 	}
 
 	/**

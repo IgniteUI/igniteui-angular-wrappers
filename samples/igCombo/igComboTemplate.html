@@ -25,14 +25,15 @@
 
 			<ig-combo id="'combo1'"
 					[(options)]="options"
-					[(ngModel)]="combo.value1">
+					[(ngModel)]="combo.value1"
+					[dataSource]='northwind'>
 			</ig-combo>
 
 		</div>
 		<div class="col-sm-3 col-md-2">
 
 			<ig-combo [widgetId]="'combo2'"
-					[(options)]="options"
+					[(options)]="options" [dataSource]='northwind'
 					[(ngModel)]="combo.value1">
 			</ig-combo>
 

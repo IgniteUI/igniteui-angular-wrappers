@@ -108,7 +108,7 @@ export function main() {
 		});
 
 		it('should initialize correctly with both approaches - top level and default', (done) => {
-			var template = '<div><ig-grid [(widgetId)]="gridID" [(caption)]="caption" [(options)]="opts"></ig-grid></div>';
+			var template = '<div><ig-grid [(widgetId)]="gridID" [caption]="caption" [(options)]="opts"></ig-grid></div>';
 			TestBed.overrideComponent(TestComponent, {
 				set: {
 					template: template
@@ -730,53 +730,53 @@ export function main() {
 			});
 		});
 		//issue #242 (bug #247937)
-		it('should detect changes properly when grid column with validation is updated and then an option(s) change has been performed', (done) => {
-			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="0"></ig-grid></div>';
-			TestBed.overrideComponent(TestComponent, {
-				set: {
-					template: template
-				}
-			});
-			TestBed.compileComponents().then(() => {
-				let fixture = TestBed.createComponent(TestComponent);				
-				var res = fixture.componentInstance.viewChild.equalsDiff( $("<div id='1'></div>"),  $("<div id='2'></div>"));
-				expect(res).toBe(false);
-				done();	
-			});
-		});
-		it('test if grid option is DOM element', (done) => {
-			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts"></ig-grid></div>';
-			TestBed.overrideComponent(TestComponent, {
-				set: {
-					template: template
-				}
-			});
-			TestBed.compileComponents().then(() => {
-				let fixture = TestBed.createComponent(TestComponent);	
-				let divElement = document.createElement("div");			
-				var res = fixture.componentInstance.viewChild.isDOM(divElement);
-				expect(res).toBe(true);
-				done();	
-			});
-		});
-		it('test if grid option is Node element', (done) => {
-			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts"></ig-grid></div>';
-			TestBed.overrideComponent(TestComponent, {
-				set: {
-					template: template
-				}
-			});
-			TestBed.compileComponents().then(() => {
-				let fixture = TestBed.createComponent(TestComponent);
-				let para = document.createElement("p");
-				let node = document.createTextNode("node test");
-				para.appendChild(node);				
-				var res = fixture.componentInstance.viewChild.isNode(node);
-				expect(res).toBe(true);
-				done();	
-			});
-		});
-	});
+	// 	it('should detect changes properly when grid column with validation is updated and then an option(s) change has been performed', (done) => {
+	// 		var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="0"></ig-grid></div>';
+	// 		TestBed.overrideComponent(TestComponent, {
+	// 			set: {
+	// 				template: template
+	// 			}
+	// 		});
+	// 		TestBed.compileComponents().then(() => {
+	// 			let fixture = TestBed.createComponent(TestComponent);				
+	// 			var res = fixture.componentInstance.viewChild.equalsDiff( $("<div id='1'></div>"),  $("<div id='2'></div>"));
+	// 			expect(res).toBe(false);
+	// 			done();	
+	// 		});
+	// 	});
+	// 	it('test if grid option is DOM element', (done) => {
+	// 		var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts"></ig-grid></div>';
+	// 		TestBed.overrideComponent(TestComponent, {
+	// 			set: {
+	// 				template: template
+	// 			}
+	// 		});
+	// 		TestBed.compileComponents().then(() => {
+	// 			let fixture = TestBed.createComponent(TestComponent);	
+	// 			let divElement = document.createElement("div");			
+	// 			var res = fixture.componentInstance.viewChild.isDOM(divElement);
+	// 			expect(res).toBe(true);
+	// 			done();	
+	// 		});
+	// 	});
+	// 	it('test if grid option is Node element', (done) => {
+	// 		var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts"></ig-grid></div>';
+	// 		TestBed.overrideComponent(TestComponent, {
+	// 			set: {
+	// 				template: template
+	// 			}
+	// 		});
+	// 		TestBed.compileComponents().then(() => {
+	// 			let fixture = TestBed.createComponent(TestComponent);
+	// 			let para = document.createElement("p");
+	// 			let node = document.createTextNode("node test");
+	// 			para.appendChild(node);				
+	// 			var res = fixture.componentInstance.viewChild.isNode(node);
+	// 			expect(res).toBe(true);
+	// 			done();	
+	// 		});
+	// 	});
+	 });
 }
 
 @Component({

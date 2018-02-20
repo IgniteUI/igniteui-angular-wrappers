@@ -20,7 +20,6 @@ export class AppComponent {
 		this.options = {
 			valueKey: "ProductID",
 			textKey: "ProductName",
-			dataSource: this.northwind,
 			width: "100%"
 		};
 		this.combo = {

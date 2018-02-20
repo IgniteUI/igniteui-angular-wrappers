@@ -64,6 +64,7 @@
     "prepare-dist": "rollup -c rollup.config.umd.js",
     "pretest": "npm run bundle && npm run build",
     "test": "karma start tests/karma.conf.js && npm run remap-istanbul",
+    "test:watch": "karma start tests/karma.conf.js --no-single-run",
     "remap-istanbul": "npm run copy-coverage-report && npm run remap-istanbul-html && npm run remap-istanbul-lcov",
     "remap-istanbul-html": "remap-istanbul -i coverage/karma-tmp/coverage.json -o coverage/html-report -t html",
     "remap-istanbul-lcov": "remap-istanbul -i coverage/karma-tmp/coverage.json -o coverage/lcov.info -t lcovonly",

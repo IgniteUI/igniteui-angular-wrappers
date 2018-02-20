@@ -27,7 +27,6 @@ export class AppComponent {
 
 		this.gridOptions = {
 			autoCommit:true,
-			//dataSource: this.data,
 			width: "100%",
 			height: "400px",
 			autoGenerateColumns: false,
@@ -70,7 +69,6 @@ export class AppComponent {
 	addRecord() {
 		this.data.push(this.newProduct);
 		this.newProduct = this.createNewProduct();
-		this.grid.markForCheck();
 	};
 	
 	deleteRecord(val) {
@@ -82,12 +80,7 @@ export class AppComponent {
 			return item["ProductID"] === val;
 		});
 		this.data.splice(ind, 1);
-		this.grid.markForCheck();
 	};
-	clickHandler(){
-		this.gridOptions.width="80%";
-		this.grid.markForCheck();
-	}
 }
 
 @NgModule({

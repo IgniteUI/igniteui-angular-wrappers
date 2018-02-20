@@ -1,4 +1,4 @@
-import { Component, ElementRef, Renderer, IterableDiffers } from "@angular/core";
+import { Component, ElementRef, Renderer, IterableDiffers, KeyValueDiffers, ChangeDetectorRef } from "@angular/core";
 import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 
 @Component({
@@ -8,7 +8,7 @@ import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 	outputs: ["formatLabel","alignLabel","valueChanged"]
 })
 export class IgRadialGaugeComponent extends IgControlBase<IgRadialGauge> {
-	 constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
+	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }	
 
 	/**
  	 * Returns a string containing the names of all the ranges delimited with a \n symbol.

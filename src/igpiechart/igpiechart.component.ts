@@ -1,5 +1,5 @@
 import { IgControlBase } from "../igcontrolbase/igcontrolbase";
-import { ElementRef, Renderer, IterableDiffers, Component } from "@angular/core";
+import { ElementRef, Renderer, IterableDiffers, Component, KeyValueDiffers, ChangeDetectorRef  } from "@angular/core";
 
 @Component({
 	selector: "ig-pie-chart",
@@ -8,8 +8,8 @@ import { ElementRef, Renderer, IterableDiffers, Component } from "@angular/core"
 	outputs: ["tooltipShowing","tooltipShown","tooltipHiding","tooltipHidden","browserNotSupported","sliceClick","labelClick","selectedItemChanging","selectedItemChanged","selectedItemsChanging","selectedItemsChanged"]
 })
 export class IgPieChartComponent extends IgControlBase<IgPieChart> {
-	 constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); } 
-	public option(): void { return; } ;
+	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }	public option(): void { return; } ;
+	//public option(): void { return; } ;
 
 	/**
  	 * Adds a new item to the data source and notifies the chart.
