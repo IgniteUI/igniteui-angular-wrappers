@@ -57,12 +57,9 @@ export class IgControlBase<Model> implements DoCheck {
 	protected _optsDiffer: any;
 	protected _kvalDiffers:any;
 	protected _events: Map<string, string>;
-	protected _allowChangeDetection = true;
 	private _evtEmmiters : any = {};
-	private _changeDetectionInterval: any;
 	private _nativeElement:any;
 	public widgetId: string;
-	public changeDetectionInterval: number;
 
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, public kvalDiffers: KeyValueDiffers, public cdr: ChangeDetectorRef) {
 		this._differs = differs;
@@ -134,14 +131,6 @@ export class IgControlBase<Model> implements DoCheck {
 			});
 		}
 
-		if (this.changeDetectionInterval === undefined || this.changeDetectionInterval === null) {
-			this.changeDetectionInterval = 500;
-		}
-
-		this._changeDetectionInterval = setInterval(function () {
-			that._allowChangeDetection = true;
-		}, this.changeDetectionInterval);
-
 		jQuery(this._el).attr("id", this.widgetId);
 		jQuery(this._el)[this._widgetName](this.options);
 	}
@@ -190,7 +179,6 @@ export class IgControlBase<Model> implements DoCheck {
 	}
 
 	ngOnDestroy() {
-		clearInterval(this._changeDetectionInterval);
 		jQuery(this._el)[this._widgetName]("destroy");
 		jQuery(this._el).remove();
 		jQuery(this._nativeElement).remove();
