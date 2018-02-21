@@ -40,7 +40,15 @@ export class IgTreeGridComponent extends IgGridBase<IgTreeGrid> {
 		} else {
 			super.updateRow(rec, currValue, key);
 		}
-	}	
+	}
+
+	public markForCheck(){
+		super.markForCheck();
+		const childDataKey = this["childDataKey"] || this.options.childDataKey;
+		if (childDataKey) {
+			this.dataBind();
+		}
+	}
 
 	/**
  	 * Clears the transaction log (delegates to igDataSource). Note that this does not update the UI. In case the UI must be updated, set the second parameter "updateUI" to true, which will trigger a call to dataBind() to re-render the contents.

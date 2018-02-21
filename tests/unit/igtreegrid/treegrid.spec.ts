@@ -14,7 +14,7 @@ export function main() {
         });
 
         it('should initialize correctly', (done) => {
-            var template = '<div><ig-tree-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-tree-grid></div>';
+            var template = '<div><ig-tree-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data"></ig-tree-grid></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -30,7 +30,7 @@ export function main() {
         });
 
         it('should reflect changes when a record in the data changes', (done) => {
-            var template = '<div><ig-tree-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-tree-grid></div>';
+            var template = '<div><ig-tree-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data"></ig-tree-grid></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -38,6 +38,8 @@ export function main() {
             });
             TestBed.compileComponents().then(() => {
                 let fixture = TestBed.createComponent(TestComponent);
+                fixture.detectChanges();
+                fixture.componentInstance.data[0].tasks = "";
                 fixture.detectChanges();
                 fixture.componentInstance.data[0].tasks = "Test";
                 fixture.detectChanges();
@@ -51,7 +53,7 @@ export function main() {
         });
 
         it('should reflect changes when a record is added/removed from the data', (done) => {
-            var template = '<div><ig-tree-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-tree-grid></div>';
+            var template = '<div><ig-tree-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data"></ig-tree-grid></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -62,6 +64,8 @@ export function main() {
                 fixture.detectChanges();
                 //remove item
                 fixture.componentInstance.data[0].products.removeAt(4);
+                
+                fixture.componentInstance.viewChild.markForCheck();
 
                 setTimeout(() => {
                     fixture.detectChanges();
@@ -83,7 +87,7 @@ export function main() {
         });
 
         it('should reflect changes when the root record is removed', (done) => {
-            var template = '<div><ig-tree-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-tree-grid></div>';
+            var template = '<div><ig-tree-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data"></ig-tree-grid></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -105,7 +109,7 @@ export function main() {
         });
 
         it('should reflect changes when records in the treegrid are updated/added/deleted', (done) => {
-            var template = '<div><ig-tree-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-tree-grid></div>';
+            var template = '<div><ig-tree-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data"></ig-tree-grid></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -114,7 +118,6 @@ export function main() {
             TestBed.compileComponents().then(() => {
                 let fixture = TestBed.createComponent(TestComponent);
                 fixture.detectChanges();
-
                 //update row
                 $("#grid1").igTreeGridUpdating("updateRow", 0, { tasks: "Updated Plan" });
                 setTimeout(() => {
@@ -163,7 +166,7 @@ export function main() {
 
 
         it("should detect changes when original data source is changed but the data source length is the same.", (done) => {
-			var template = '<ig-tree-grid [(widgetId)]="gridID" [(options)]="optsNew"></ig-tree-grid>';		
+			var template = '<ig-tree-grid [(widgetId)]="gridID" [(options)]="optsNew" [dataSource]="singleRecData"></ig-tree-grid>';		
 			TestBed.overrideComponent(TestComponent, {
 				set: {
 					template: template
@@ -207,7 +210,7 @@ class TestComponent {
 		this.singleRecData2 = [{ "id": 1, "tasks": "Test" }];
         this.opts = {
             autoCommit: true,
-            dataSource: this.data,
+            //dataSource: this.data,
             width: "100%",
             height: "400px",
             autoGenerateColumns: false,

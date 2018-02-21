@@ -14,7 +14,7 @@ export function main() {
         });
 
         it('should initialize correctly', (done) => {
-            var template = '<div><ig-tree [(widgetId)]="treeID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-tree></div>';
+            var template = '<div><ig-tree [(widgetId)]="treeID" [(options)]="opts" [dataSource]="data"></ig-tree></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -30,7 +30,7 @@ export function main() {
         });
 
         it('should reflect changes when a record in the data changes', (done) => {
-                var template = '<div><ig-tree [(widgetId)]="treeID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-tree></div>';
+                var template = '<div><ig-tree [(widgetId)]="treeID" [(options)]="opts" [dataSource]="data"></ig-tree></div>';
                 TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -50,7 +50,7 @@ export function main() {
         });
 
         it('should reflect changes when a record is added/removed from the data', (done) => {
-            var template = '<div><ig-tree [(widgetId)]="treeID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-tree></div>';
+            var template = '<div><ig-tree [(widgetId)]="treeID" [(options)]="opts" [dataSource]="data"></ig-tree></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -122,7 +122,7 @@ class TestComponent {
         this.data = ProductCategories.getData();
 
         this.opts = {
-            dataSource: this.data,
+            //dataSource: this.data,
             bindings: {
                 childDataProperty: "ProductSubcategories",
                 textKey: "Name",
