@@ -54,8 +54,7 @@ export function main() {
 						expect(fixture.debugElement.componentInstance.val).toBe("changed_test_value2");
 						window.typeInInput("2", field);
 						expect(fixture.debugElement.componentInstance.val).toBe("changed_test_value22");
-						field.val("changed_again_test_value").trigger("paste").trigger("blur");
-						$(fixture.debugElement.nativeElement).find("#editor1")[0].dispatchEvent(new Event("blur"));
+						field.focus().trigger("focus").val("changed_again_test_value").blur().trigger("blur");
 						fixture.detectChanges();
 						setTimeout(() => {
 							expect(fixture.debugElement.componentInstance.val).toBe("changed_again_test_value");
@@ -169,8 +168,7 @@ export function main() {
 					fixture.detectChanges();
 					setTimeout(() => {
 						expect($(fixture.debugElement.nativeElement).find("#editor1").igNumericEditor("displayValue")).toBe("1");
-						$(fixture.debugElement.nativeElement).find("#editor1").trigger("focus").val(154).trigger("paste").trigger("blur");
-						$(fixture.debugElement.nativeElement).find("#editor1")[0].dispatchEvent(new Event("blur"));
+						$(fixture.debugElement.nativeElement).find("#editor1").focus().trigger("focus").val(154).blur().trigger("blur");
 						fixture.detectChanges();
 						setTimeout(() => {
 							expect(fixture.debugElement.componentInstance.val).toBe(154);
@@ -224,7 +222,7 @@ export function main() {
 					fixture.detectChanges();
 					setTimeout(() => {
 						expect($(fixture.debugElement.nativeElement).find("#editor1").igPercentEditor("displayValue")).toBe("10.00%");
-						$(fixture.debugElement.nativeElement).find("#editor1").trigger("focus").val(100).trigger("paste").trigger("blur");
+						$(fixture.debugElement.nativeElement).find("#editor1").focus().trigger("focus").val(100).blur().trigger("blur");
 						setTimeout(() => {
 							expect(fixture.debugElement.componentInstance.val).toBe(1);
 							done();
@@ -276,7 +274,7 @@ export function main() {
 					fixture.detectChanges();
 					setTimeout(() => {
 						expect($(fixture.debugElement.nativeElement).find("#editor1").igMaskEditor("displayValue")).toBe("changed");
-						$(fixture.debugElement.nativeElement).find("#editor1").trigger("focus").val("test again").trigger("paste").trigger("blur");
+						$(fixture.debugElement.nativeElement).find("#editor1").focus().trigger("focus").val("test again").blur().trigger("blur");
 						setTimeout(() => {
 							expect(fixture.debugElement.componentInstance.val).toBe("test again");
 							done();
@@ -328,7 +326,7 @@ export function main() {
 					fixture.detectChanges();
 					setTimeout(() => {
 						expect($(fixture.debugElement.nativeElement).find("#editor1").igDatePicker("displayValue")).toBe("3/15/2016");
-						$(fixture.debugElement.nativeElement).find("#editor1").trigger("focus").val("03/03/2016").trigger("paste").trigger("blur");
+						$(fixture.debugElement.nativeElement).find("#editor1").focus().trigger("focus").val("03/03/2016").blur().trigger("blur");
 						setTimeout(() => {
 							expect(fixture.debugElement.componentInstance.val.getTime()).toBe(new Date("03/03/2016").getTime());
 							done();
@@ -380,7 +378,7 @@ export function main() {
 					fixture.detectChanges();
 					setTimeout(() => {
 						expect($(fixture.debugElement.nativeElement).find("#editor1").igDateEditor("displayValue")).toBe("3/15/2016");
-						$(fixture.debugElement.nativeElement).find("#editor1").trigger("focus").val("03/03/2016").trigger("paste").trigger("blur");
+						$(fixture.debugElement.nativeElement).find("#editor1").focus().trigger("focus").val("03/03/2016").blur().trigger("blur");
 						setTimeout(() => {
 							expect(fixture.debugElement.componentInstance.val.getTime()).toBe(new Date("03/03/2016").getTime());
 							done();
@@ -432,7 +430,7 @@ export function main() {
 					fixture.detectChanges();
 					setTimeout(() => {
 						expect($(fixture.debugElement.nativeElement).find("#editor1").igCurrencyEditor("displayValue")).toBe("$1.00");
-						$(fixture.debugElement.nativeElement).find("#editor1").trigger("focus").val(154).trigger("paste").trigger("blur");
+						$(fixture.debugElement.nativeElement).find("#editor1").focus().trigger("focus").val(154).blur().trigger("blur");
 						setTimeout(() => {
 							expect(fixture.debugElement.componentInstance.val).toBe(154);
 							done();
