@@ -44,6 +44,15 @@ export class IgHierarchicalGridComponent extends IgGridBase<IgHierarchicalGrid> 
 			super.updateRow(rec, currValue, key);
 		}
 	}
+	public markForCheck(){
+		super.markForCheck();
+		const element = jQuery(this._el);
+		const childrenDataProperty = this["childrenDataProperty"] || this.options.childrenDataProperty;
+		var childGrids= element.data(this._widgetName).allChildrenWidgets();
+		for (var i = 0; i < childGrids.length; i++) {
+			childGrids[i].dataBind();
+		}
+	}
 	/**
  	 * Data binds the hierarchical grid. No child grids will be created or rendered by default, unless there is initialExpandDepth >= 0 set.
 	 */

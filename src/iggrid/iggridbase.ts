@@ -84,8 +84,12 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
 	}
 	updateRow(rec, currValue, key) {
 		const pkKey =  this["primaryKey"] || this.options["primaryKey"];
+		let widgetName = this._widgetName;
+		if (this._widgetName === "igHierarchicalGrid") {
+			widgetName = "igGrid";
+		}
 		const element = jQuery(this._el);
-		const grid = element.data(this._widgetName);
+		const grid = element.data(widgetName);
 		const tr = element.find("tr[data-id='" + rec[pkKey] + "']");
 		const column = grid.columnByKey(key);
 		let newFormattedVal;

@@ -29,28 +29,28 @@ export function main() {
        });
 
        it('should reflect changes when a record in the data changes', (done) => {
-           var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-hierarchical-grid></div>';
+           var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [options]="opts" [dataSource]="data"></ig-hierarchical-grid></div>';
            TestBed.overrideComponent(TestComponent, {
                set: {
                    template: template
                }
            });
            TestBed.compileComponents().then(() => {
-               let fixture = TestBed.createComponent(TestComponent);
+               let fixture = TestBed.createComponent(TestComponent);               
                fixture.detectChanges();
-               fixture.componentInstance.data[0].Name = "Test";
-               fixture.detectChanges();
-               setTimeout(() => {
-                   fixture.detectChanges();
-                   expect($(fixture.debugElement.nativeElement).find("#grid1 tr:first td[aria-describedby='grid1_Name']").text())
-                       .toBe("Test");
-                   done();
-               }, 10);
+               fixture.componentInstance.data[0].Name = "";
+                fixture.detectChanges();
+                fixture.componentInstance.data[0].Name = "Test";
+                fixture.detectChanges();
+                expect($(fixture.debugElement.nativeElement).find("#grid1 tr:first td[aria-describedby='grid1_Name']").text())
+                .toBe("Test");
+                done();
+
            });
        });
 
        it('should reflect changes when a record is removed from the data', (done) => {
-           var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-hierarchical-grid></div>';
+           var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data" [changeDetectionInterval]="cdi"></ig-hierarchical-grid></div>';
            TestBed.overrideComponent(TestComponent, {
                set: {
                    template: template
@@ -74,7 +74,7 @@ export function main() {
        });
 
        it('should reflect changes when a record is added from the data', (done) => {
-           var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-hierarchical-grid></div>';
+           var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data" [changeDetectionInterval]="cdi"></ig-hierarchical-grid></div>';
            TestBed.overrideComponent(TestComponent, {
                set: {
                    template: template
@@ -97,7 +97,7 @@ export function main() {
        });
 
        it('should reflect changes when records in the grid are updated', (done) => {
-           var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-hierarchical-grid></div>';
+           var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data" [changeDetectionInterval]="cdi"></ig-hierarchical-grid></div>';
            TestBed.overrideComponent(TestComponent, {
                set: {
                    template: template
@@ -119,7 +119,7 @@ export function main() {
        });
 
        it('should reflect changes when records in the grid are deleted', (done) => {
-           var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-hierarchical-grid></div>';
+           var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data" [changeDetectionInterval]="cdi"></ig-hierarchical-grid></div>';
            TestBed.overrideComponent(TestComponent, {
                set: {
                    template: template
@@ -140,7 +140,7 @@ export function main() {
        });
 
        it('should reflect changes when records in the grid are added', (done) => {
-           var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-hierarchical-grid></div>';
+           var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data" [changeDetectionInterval]="cdi"></ig-hierarchical-grid></div>';
            TestBed.overrideComponent(TestComponent, {
                set: {
                    template: template
@@ -160,7 +160,7 @@ export function main() {
        });
 
        it('should reflect changes when child records are changed', (done) => {
-           var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-hierarchical-grid></div>';
+           var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data" [changeDetectionInterval]="cdi"></ig-hierarchical-grid></div>';
            TestBed.overrideComponent(TestComponent, {
                set: {
                    template: template
@@ -186,7 +186,7 @@ export function main() {
        });
 
        it('should reflect changes when a value in the child grid changes', (done) => {
-           var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-hierarchical-grid></div>';
+           var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data" #hgrid></ig-hierarchical-grid></div>';
            TestBed.overrideComponent(TestComponent, {
                set: {
                    template: template
@@ -200,6 +200,8 @@ export function main() {
                $("#grid1").igHierarchicalGrid("expand", row, () => {
 					//change data child data
 					fixture.componentInstance.data[0].Products[0].Name = "Custom Name";
+                    fixture.componentInstance.viewChild.markForCheck();
+
 					setTimeout(() => {
 						fixture.detectChanges();
 						expect($($(fixture.debugElement.nativeElement).find("#grid1_0_Products_child").igGrid("cellAt", 1, 0)).text())
@@ -234,7 +236,7 @@ export function main() {
             });
         });
         it("should detect changes when original data source is changed but the data source length is the same.", (done) => {
-			var template = '<ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="optsNew"></ig-hierarchical-grid>';		
+			var template = '<ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="optsNew" [dataSource]="singleRecData"></ig-hierarchical-grid>';		
 			TestBed.overrideComponent(TestComponent, {
 				set: {
 					template: template
@@ -316,7 +318,8 @@ class TestComponent {
         this.gridID2 = "hgrid";
         this.opts = {
             autoCommit: true,
-            dataSource: this.data,
+            localSchemaTransform: false,
+            //dataSource: this.data,
             primaryKey: "ID",
             width: "100%",
             height: "400px",
@@ -348,7 +351,7 @@ class TestComponent {
         };
         this.optsNew = {
             autoCommit: true,
-            dataSource: this.singleRecData,
+            //dataSource: this.singleRecData,
             primaryKey: "ID",
             width: "100%",
             height: "400px",
