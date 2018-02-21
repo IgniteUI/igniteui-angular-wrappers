@@ -190,6 +190,7 @@ export function main() {
             });
             TestBed.compileComponents().then(() => {
                 let fixture = TestBed.createComponent(TestComponent);
+                fixture.detectChanges();
                 fixture.componentInstance.data = fixture.componentInstance.northwind;
                 setTimeout(function () {
                     fixture.detectChanges();

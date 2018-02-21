@@ -94,24 +94,37 @@ export class IgControlBase<Model> implements DoCheck {
 
 	ngOnInit() {
 		var evtName;
+		let that = this;
 		this._events = new Map<string, string>();
 		
 		for (var opt in jQuery.ui[this._widgetName].prototype.options) {
 			//copy root level options into this.options
-			if(this[opt]){
+			if(this[opt] && typeof this[opt] !== "function"){
 				this.options[opt] = this[opt];
 			}
-			if(opt !== "dataSource") {			
-				Object.defineProperty(this, opt, {
-					set: this.createSetter(opt),
-					enumerable: true,
-					configurable: true
-				});
-			}
 		}
-		//events binding
-		let that = this;
 
+		for (var opt in jQuery.ui[this._widgetName].prototype.options) {
+		 	if(opt !== "dataSource") {			
+		  		Object.defineProperty(this, opt, {
+		  			set: this.createSetter(opt),
+		  			enumerable: true,
+		  			configurable: true
+		  		});
+		  	}
+		}
+
+		var propNames = Object.getOwnPropertyNames(jQuery.ui[this._widgetName].prototype);
+		for(var i = 0; i < propNames.length; i++) {
+		var name = propNames[i];
+		 	if(name.indexOf("_") !== 0 && typeof jQuery.ui[this._widgetName].prototype[name] === "function"
+		 	&& name !== "dataSource"){
+		 		Object.defineProperty(that, name, {
+		 			get: that.createMethodGetter(name)
+		 		});
+		 	}
+		 }
+		//events binding
 		for (var propt in jQuery.ui[this._widgetName].prototype.events) {
 			evtName = this._widgetName.toLowerCase() + propt.toLowerCase();
 			this._events[evtName] = propt;
@@ -120,16 +133,6 @@ export class IgControlBase<Model> implements DoCheck {
 				emmiter.emit({ event: evt, ui: ui });
 			});
 		}
-		var propNames = Object.getOwnPropertyNames(jQuery.ui[this._widgetName].prototype);
-		for(var i = 0; i < propNames.length; i++) {
-			var name = propNames[i];
-			if(name.indexOf("_") !== 0 && typeof jQuery.ui[this._widgetName].prototype[name] === "function"
-			&& name !== "dataSource"){
-				Object.defineProperty(that, name, {
-					get: that.createMethodGetter(name)
-				});
-			}
-		}		
 
 		if (this.changeDetectionInterval === undefined || this.changeDetectionInterval === null) {
 			this.changeDetectionInterval = 500;

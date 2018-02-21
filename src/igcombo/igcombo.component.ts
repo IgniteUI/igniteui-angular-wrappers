@@ -79,8 +79,11 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
 	}
 
 	dataSourceApplyChanges(changes) {
+		//dataSource has changed.
 		const element = jQuery(this._el);
-		element.data("igCombo").dataBind();
+		if (element[this._widgetName]) {
+			element[this._widgetName]("option", "dataSource", this.dataSource);
+		}
 		if (this.model && this.model.value) {
 			this.writeValue(this.model.value);
 		}
@@ -103,9 +106,9 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
                 try {
                     this._differ = this._differs.find(value).create();
 					this._changes = [];
-					for(var i=0; i < this.dataSource.length; i++){
+					for (var i=0; i < this.dataSource.length; i++) {
 						this._changes.push(this.kvalDiffers.find({}).create());	
-					}					
+					}
                 }
 				catch(e){
 					throw new Error("Only binding to arrays is supported.");
