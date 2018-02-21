@@ -125,7 +125,7 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
 					this._changes = [];
 					for(var i=0; i < this.dataSource.length; i++){
 						this._changes.push(this.kvalDiffers.find({}).create());	
-					}					
+					}
                 }
 				catch(e){
 					throw new Error("Only binding to arrays is supported.");
@@ -142,6 +142,10 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
             if (changes && grid) {
                 this.dataSourceApplyChanges(changes);
             }
+			if(changes && changes.isDirty && grid) {
+				//data source has been changed post initialization.
+				jQuery(this._el)[this._widgetName]("option", "dataSource", this.dataSource);
+			}
 			if(this._changes && grid){
 				const pkKey =  this["primaryKey"] || this.options["primaryKey"];
 				//check recs
