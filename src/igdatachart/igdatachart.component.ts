@@ -1,4 +1,4 @@
-import { Component, ElementRef, Renderer, IterableDiffers } from "@angular/core";
+import { Component, ElementRef, Renderer, IterableDiffers, KeyValueDiffers, ChangeDetectorRef } from "@angular/core";
 import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 
 @Component({
@@ -8,7 +8,7 @@ import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 	outputs: ["tooltipShowing","tooltipShown","tooltipHiding","tooltipHidden","browserNotSupported","seriesCursorMouseMove","seriesMouseLeftButtonDown","seriesMouseLeftButtonUp","seriesMouseMove","seriesMouseEnter","seriesMouseLeave","windowRectChanged","gridAreaRectChanged","refreshCompleted","axisRangeChanged","typicalBasedOn","progressiveLoadStatusChanged","assigningCategoryStyle","assigningCategoryMarkerStyle"]
 })
 export class IgDataChartComponent extends IgControlBase<IgDataChart> { 
-	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
+	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }
 	public option(): void { return; } ;
 
 	/**

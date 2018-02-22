@@ -1,4 +1,4 @@
-import { ElementRef, Renderer, IterableDiffers, Component } from "@angular/core";
+import { ElementRef, Renderer, IterableDiffers, Component, KeyValueDiffers, ChangeDetectorRef } from "@angular/core";
 import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 
 @Component({
@@ -8,7 +8,7 @@ import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 	outputs: ["click","expanded","expanding","collapsed","collapsing"]
 })
 export class IgSplitButtonComponent extends IgControlBase<IgSplitButton> { 
-	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
+	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }	
 
 
 	/**

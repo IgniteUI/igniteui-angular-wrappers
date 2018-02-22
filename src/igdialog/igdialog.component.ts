@@ -1,4 +1,4 @@
-import { Component, ElementRef, Renderer, IterableDiffers } from "@angular/core";
+import { Component, ElementRef, Renderer, IterableDiffers, KeyValueDiffers, ChangeDetectorRef } from "@angular/core";
 import { IgContentControlBase } from "../igcontrolbase/igcontentcontrolbase";
 
 @Component({
@@ -8,7 +8,7 @@ import { IgContentControlBase } from "../igcontrolbase/igcontentcontrolbase";
 	outputs: ["stateChanging","stateChanged","animationEnded","focus","blur"]
 })
 export class IgDialogComponent extends IgContentControlBase<IgDialog> {
-	 constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
+	 constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }
 
 	/**
  	 * Destroys the igDialog and moves the target element to its original parent.

@@ -85,7 +85,9 @@ There are two mandatory attributes that need to be set to an Ignite UI control c
         selector: 'my-app',
         template: `<ig-grid 
             [(options)]="gridOptions" 
-            [(widgetId)]='id'></ig-grid>`
+            [(widgetId)]='id' 
+            [dataSource]='data'
+            ></ig-grid>`
     })
     export class AppComponent {
         private gridOptions: IgGrid;
@@ -96,7 +98,6 @@ There are two mandatory attributes that need to be set to an Ignite UI control c
             this.data = Northwind.getData();
             this.id ='grid1';
             this.gridOptions = {
-                dataSource: this.data,
                 width: "100%",
                 height: "400px",
                 autoGenerateColumns: true
@@ -196,7 +197,9 @@ In order to change the more options at once (or recreate the component with anot
         selector: 'my-app',
         template: `<ig-grid 
             [(options)]="gridOptions" 
-            [(widgetId)]='id'></ig-grid>`
+            [(widgetId)]='id' 
+            [dataSource]="data" 
+            ></ig-grid>`
     })
     export class AppComponent {
         private gridOptions: IgGrid;
@@ -207,7 +210,6 @@ In order to change the more options at once (or recreate the component with anot
             this.data = Northwind.getData();
             this.id ='grid1';
             this.gridOptions = {
-                dataSource: this.data,
                 width: "100%",
                 height: "400px",
                 autoGenerateColumns: true
@@ -248,6 +250,7 @@ Binding to control events is achieved by assigning attributes where the name of 
         template: `<ig-grid 
             [(options)]="gridOptions" 
             [(widgetId)]='id' 
+            [dataSource]="data" 
             (dataBind)="dataBindHandler($event)"></ig-grid>`
     })
     export class AppComponent {
@@ -260,7 +263,6 @@ Binding to control events is achieved by assigning attributes where the name of 
             this.data = Northwind.getData();
             this.id ='grid1';
             this.gridOptions = {
-                dataSource: this.data,
                 width: "100%",
                 height: "400px",
                 autoGenerateColumns: true
@@ -280,6 +282,7 @@ Binding to igGrid* feature events is done in the control's configuration code.
         selector: 'my-app',
         template: `<ig-grid 
             [(options)]="gridOptions" 
+            [dataSource]="data" 
             [(widgetId)]='id'></ig-grid>`
     })
     export class AppComponent {
@@ -291,7 +294,6 @@ Binding to igGrid* feature events is done in the control's configuration code.
             this.data = Northwind.getData();
             this.id ='grid1';
             this.gridOptions = {
-                dataSource: this.data,
                 width: "100%",
                 height: "400px",
                 autoGenerateColumns: true,
@@ -431,6 +433,19 @@ The following controls currently support two-way data binding:
 4. igCombo
 5. igEditors
 6. igTree
+
+For the two-way data binding to work you need to assign the data source as a property in the template.
+Example:
+
+    <ig-combo [widgetId]="'combo2'"
+            [(options)]="options" 
+            [dataSource]='northwind'
+            [(ngModel)]="combo.value1">
+    </ig-combo>
+
+**Note:** Two-way data binding won't work if you use `options.dataSource` in the .ts file as a configuration.
+
+To manually trigger change detection use the `markForCheck` API.
 
 ## Use igDataSource inside Angular app
 

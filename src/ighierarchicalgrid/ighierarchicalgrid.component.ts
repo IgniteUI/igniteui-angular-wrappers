@@ -1,16 +1,17 @@
-import { Component, Renderer, IterableDiffers, ElementRef } from "@angular/core";
+import { Component, Renderer, IterableDiffers, KeyValueDiffers, ChangeDetectorRef, ElementRef, ChangeDetectionStrategy } from "@angular/core";
 import { IgGridBase } from "../iggrid/iggridbase";
 
 declare var jQuery:any;
 
-@Component({
+@Component({	
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	selector: "ig-hierarchical-grid",
 	template: "<ng-content></ng-content>",
 	inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","initialDataBindDepth","initialExpandDepth","odata","rest","maxDataBindDepth","defaultChildrenDataProperty","autoGenerateLayouts","expandCollapseAnimations","expandColWidth","pathSeparator","animationDuration","expandTooltip","collapseTooltip","columnLayouts","width","height","autoAdjustHeight","avgRowHeight","avgColumnWidth","defaultColumnWidth","autoGenerateColumns","virtualization","virtualizationMode","requiresDataBinding","rowVirtualization","columnVirtualization","virtualizationMouseWheelStep","adjustVirtualHeights","templatingEngine","columns","dataSource","dataSourceUrl","dataSourceType","responseDataKey","responseTotalRecCountKey","requestType","responseContentType","showHeader","showFooter","fixedHeaders","fixedFooters","caption","features","tabIndex","localSchemaTransform","primaryKey","serializeTransactionLog","autoCommit","aggregateTransactions","autoFormat","renderCheckboxes","updateUrl","restSettings","alternateRowStyles","autofitLastColumn","enableHoverStyles","enableUTCDates","mergeUnboundColumns","jsonpRequest","enableResizeContainerCheck","featureChooserIconDisplay","scrollSettings"],
 	outputs: ["rowExpanding","rowExpanded","rowCollapsing","rowCollapsed","childrenPopulating","childrenPopulated","childGridRendered","childGridCreating","childGridCreated","cellClick","cellRightClick","dataBinding","dataBound","rendering","rendered","dataRendering","dataRendered","headerRendering","headerRendered","footerRendering","footerRendered","headerCellRendered","rowsRendering","rowsRendered","schemaGenerated","columnsCollectionModified","requestError","created","destroyed"]
 })
 export class IgHierarchicalGridComponent extends IgGridBase<IgHierarchicalGrid> {
-	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
+	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }
 
 	deleteRow(id) {
 		var element = jQuery(this._el),
@@ -24,66 +25,34 @@ export class IgHierarchicalGridComponent extends IgGridBase<IgHierarchicalGrid> 
 			element.data("igGrid").dataSource._removeTransactionsByRecordId(id);
 		}
 	}
+	updateRow(rec, currValue, key) {
+		const element = jQuery(this._el);
+		const childrenDataProperty = this["childrenDataProperty"] || this.options.childrenDataProperty;
 
-	ngDoCheck() {
-		this.optionChange();
-		if (this._differ != null && this._allowChangeDetection) {
-			this._allowChangeDetection = false;
-			var diff = [],
-				element = jQuery(this._el),
-				colIndex, td, i, j, pkKey = this._config.primaryKey, newFormattedVal, record, column,
-				mainGrid = element.data("igGrid"),
-				data = this._config.dataSource;
-
-			//check for changes in collection
-			if (!(this._config.dataSource instanceof Array)) {
-				return;
-			}
-			this._changes = this._differ.diff(this._config.dataSource);
-			if (this._changes && mainGrid) {
-				this._dataSource = jQuery.extend(true, [], this._config.dataSource);
-				this._changes.forEachAddedItem(r => this.addRow(r.item, r.currentIndex));
-				this._changes.forEachRemovedItem(r => this.deleteRow(r.item[pkKey]));
-			}
-			//check for changes in data source values
-			if (!this.equalsDiff(this._config.dataSource, this._dataSource, diff)) {
-				this._dataSource = jQuery.extend(true, [], this._config.dataSource);
-				for (i = 0; i < diff.length; i++) {
-					for (j = 0; j < diff[i].txlog.length; j++) {
-						var childGrid = element.data(this._widgetName).allChildrenWidgets().filter(function (indx) {
-							var parentRow = jQuery(this.element).closest('tr[data-container]').prev();
-							var parentGridPK = parentRow.closest(".ui-iggrid-table").data("igGrid").options.primaryKey;
-							return (this.options.childrenDataProperty === diff[i].txlog[j].key ||
-								parentRow.next("[data-container]").find("table[role='grid']").attr("id").contains("_" + diff[i].txlog[j].key + "_"))
-								&& parentRow.attr("data-id") == data[diff[i].index][parentGridPK];
-						});
-						if (childGrid.length > 0) {
-							jQuery(childGrid).each(function () {
-								this.dataBind();
-							});
-						} else {
-							colIndex = mainGrid._getCellIndexByColumnKey(diff[i].txlog[j].key);
-							record = this._config.dataSource[diff[i].index];
-							td = element.find("tr[data-id='" + record[pkKey] + "']").children().get(colIndex);
-
-							column = mainGrid.columnByKey(diff[i].txlog[j].key);
-							if (column) {
-								if (column.template) {
-									newFormattedVal = mainGrid._renderTemplatedCell(record, column);
-								} else {
-									newFormattedVal = mainGrid._renderCell(diff[i].txlog[j].newVal, column, record);
-								}
-								jQuery(td).html(newFormattedVal);
-								mainGrid.dataSource.updateRow(record[pkKey], record);
-								mainGrid.dataSource._commitTransactionsByRowId(record[pkKey]);
-							}
-						}
-					}
-				}
-			}
+		var childGrid = element.data(this._widgetName).allChildrenWidgets().filter(function (indx) {
+			var parentRow = jQuery(this.element).closest('tr[data-container]').prev();
+			var parentGridPK = parentRow.closest(".ui-iggrid-table").data("igGrid").options.primaryKey;
+			return (childrenDataProperty === key ||
+				parentRow.next("[data-container]").find("table[role='grid']").attr("id").contains("_" + key + "_"))
+				&& parentRow.attr("data-id") == rec[parentGridPK];
+		});
+		if (childGrid.length > 0) {
+			jQuery(childGrid).each(function () {
+				this.dataBind();
+			});
+		} else {
+			super.updateRow(rec, currValue, key);
 		}
 	}
-
+	public markForCheck(){
+		super.markForCheck();
+		const element = jQuery(this._el);
+		const childrenDataProperty = this["childrenDataProperty"] || this.options.childrenDataProperty;
+		var childGrids= element.data(this._widgetName).allChildrenWidgets();
+		for (var i = 0; i < childGrids.length; i++) {
+			childGrids[i].dataBind();
+		}
+	}
 	/**
  	 * Data binds the hierarchical grid. No child grids will be created or rendered by default, unless there is initialExpandDepth >= 0 set.
 	 */

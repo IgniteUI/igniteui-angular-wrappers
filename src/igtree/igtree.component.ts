@@ -1,4 +1,4 @@
-import { Component, Renderer, ElementRef, IterableDiffers } from "@angular/core";
+import { Component, Renderer, ElementRef, IterableDiffers, KeyValueDiffers, ChangeDetectorRef, SimpleChanges, Input } from "@angular/core";
 import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 
 @Component({
@@ -10,50 +10,96 @@ import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 export class IgTreeComponent extends IgControlBase<IgTree> {
 	private _dataSource: any;
 	private _changes: any;
+	@Input()
+	public dataSource;
 
-	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
+	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { 
+		super(el, renderer, differs, kvalDiffers, cdr);
+	}
 
 	ngOnInit() {
+		if (!this.options["dataSource"] && this.dataSource) {
+			this.options["dataSource"] = this.dataSource;
+		}
 		super.ngOnInit();
-		this._dataSource = jQuery.extend(true, [], this._config.dataSource);
 	}
-
+	public ngOnChanges(changes: SimpleChanges): void {
+		const ds = "dataSource";
+		//const options = "options";
+        if (ds in changes) {
+			const value = changes[ds].currentValue;
+			 if (!this._differ && value) {
+                try {
+                    this._differ = this._differs.find(value).create();
+					this._changes = [];
+					for(var i=0; i < this.dataSource.length; i++){
+						this._changes.push(this.kvalDiffers.find({}).create());	
+					}					
+                }
+				catch(e){
+					throw new Error("Only binding to arrays is supported.");
+				}
+			 }
+		}
+		super.ngOnChanges(changes);
+	}
 	ngDoCheck() {
-		if (this._differ != null && this._allowChangeDetection) {
-			this.optionChange();
-			this._allowChangeDetection = false;
-			var diff = [];
-			var element = jQuery(this._el);
-			var i, j, valKey = this._config.valueKey, record, item;
-
-			//check for changes in collection
-			if (!(this._config.dataSource instanceof Array)) {
-				return;
-			}
-			this._changes = this._differ.diff(this._config.dataSource);
-			if (this._config.dataSource.length !== this._dataSource.length) {
-				this._dataSource = jQuery.extend(true, [], this._config.dataSource);
-				if (this._changes) {
-					this._changes.forEachAddedItem(r => element.igTree("dataBind"));
-					this._changes.forEachRemovedItem(r => element.igTree("dataBind"));
+		if (this._differ) {
+            const changes = this._differ.diff(this.dataSource);
+			//check if grid is initialized
+			const elem = jQuery(this._el).data(this._widgetName);
+            if (changes && elem) {
+                this.dataSourceApplyChanges(changes);
+            }
+			if(this._changes && elem){
+				//check recs
+				for(var i = 0; i < this.dataSource.length; i++){
+					var item = this.dataSource[i];
+					var rowChanges = this._changes[i].diff(item);
+					if(rowChanges){
+						rowChanges.forEachChangedItem((change: any) => {
+							this.updateItem(item, change.currentValue, change.key);
+						});						
+					}
 				}
 			}
+        }
+		super.ngDoCheck();
+	}
+	
+	addItem(item, index){
+		this.dataBind();
+		this._changes.push(this.kvalDiffers.find({}).create());
 
-			if (!this.equalsDiff(this._config.dataSource, this._dataSource, diff)) {
-				this._dataSource = jQuery.extend(true, [], this._config.dataSource);
-				element.igTree("dataBind");
-			}
+	}
+	deleteItem(item, index){
+		this.dataBind();
+		this._changes.splice(index, 1);
+	}
+	dataSourceApplyChanges(changes){
+		changes.forEachAddedItem(r => this.addItem(r.item, r.currentIndex));
+		changes.forEachRemovedItem(r => {this.deleteItem(r.item, r.previousIndex);});
+
+	}
+	updateItem(item, value, key){
+		this.dataBind();
+	}
+	
+	public markForCheck(){
+		super.markForCheck();
+		const bindings = this["bindings"] || this.options.bindings;
+		if (bindings && bindings.childDataProperty) {
+			this.dataBind();
 		}
 	}
-
-	optionChange(options?) {
-		var opts = options || jQuery.extend(true, {}, this._config);
-		// Bindings are modified internally by the tree. Excluding them from the change detection
-		if (opts.bindings) {
-			delete opts.bindings;
-		}
-		super.optionChange(opts);
-	}
+	// optionChange(options?) {
+	// 	var opts = options || jQuery.extend(true, {}, this._config);
+	// 	// Bindings are modified internally by the tree. Excluding them from the change detection
+	// 	if (opts.bindings) {
+	// 		delete opts.bindings;
+	// 	}
+	// 	super.optionChange(opts);
+	// }
 
 	/**
  	 * Performs databinding on the igTree.

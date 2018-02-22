@@ -1,4 +1,4 @@
-import { Component, Renderer, IterableDiffers, ElementRef } from "@angular/core";
+import { Component, Renderer, IterableDiffers, ElementRef, KeyValueDiffers, ChangeDetectorRef } from "@angular/core";
 import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 
 
@@ -9,7 +9,7 @@ import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 	outputs: ["formatLabel","alignLabel"]
 })
 export class IgBulletGraphComponent extends IgControlBase<IgBulletGraph> {
-	 constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); } 
+	 constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); } 
 
 	/**
  	 * Returns a string containing the names of all the ranges delimited with a \n symbol.

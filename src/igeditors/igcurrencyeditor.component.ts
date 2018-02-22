@@ -1,4 +1,4 @@
-import { Component, Renderer, ElementRef, IterableDiffers, Optional } from "@angular/core";
+import { Component, Renderer, ElementRef, IterableDiffers, Optional, KeyValueDiffers, ChangeDetectorRef } from "@angular/core";
 import { IgEditorBase } from "./igeditorbase";
 import { NgModel } from "@angular/forms";
 
@@ -9,7 +9,7 @@ import { NgModel } from "@angular/forms";
 	outputs: ["rendering","rendered","mousedown","mouseup","mousemove","mouseover","mouseout","blur","focus","keydown","keypress","keyup","valueChanging","valueChanged","dropDownListOpening","dropDownListOpened","dropDownListClosing","dropDownListClosed","dropDownItemSelecting","dropDownItemSelected","textChanged"]
 })
 export class IgCurrencyEditorComponent extends IgEditorBase<IgCurrencyEditor> {
-	 constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, @Optional() public model: NgModel) { super(el, renderer, differs, model); }
+	 constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef, @Optional() public model: NgModel) { super(el, renderer, differs, kvalDiffers, cdr, model); }
 
 	/**
  	 * Gets/sets a string that is used as the currency symbol shown with the number in the input. The value provided as a param is propagated to the currencySymbol option and thus has the same priority as the option.

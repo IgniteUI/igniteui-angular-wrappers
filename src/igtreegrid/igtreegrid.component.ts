@@ -1,4 +1,4 @@
-import { Component, Renderer, ElementRef, IterableDiffers } from "@angular/core";
+import { Component, Renderer, ElementRef, IterableDiffers, KeyValueDiffers, ChangeDetectorRef } from "@angular/core";
 import { IgGridBase } from "../iggrid/iggridbase";
 
 @Component({
@@ -8,7 +8,7 @@ import { IgGridBase } from "../iggrid/iggridbase";
 	outputs: ["cellClick","cellRightClick","dataBinding","dataBound","rendering","rendered","dataRendering","dataRendered","headerRendering","headerRendered","footerRendering","footerRendered","headerCellRendered","rowsRendering","rowsRendered","schemaGenerated","columnsCollectionModified","requestError","created","destroyed","rowExpanding","rowExpanded","rowCollapsing","rowCollapsed"]
 })
 export class IgTreeGridComponent extends IgGridBase<IgTreeGrid> {
-	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
+	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }
 
 	deleteRow(id) {
 		var element = jQuery(this._el),
@@ -28,51 +28,25 @@ export class IgTreeGridComponent extends IgGridBase<IgTreeGrid> {
 			trs.remove();
 		}
 	}
-	ngDoCheck() {
-		if (this._differ != null && this._allowChangeDetection) {
-			this.optionChange();
-			this._allowChangeDetection = false;
-			var diff = [],
-				element = jQuery(this._el),
-				grid = element.data(this._widgetName),
-				colIndex, td, i, j, pkKey = this._config.primaryKey, newFormattedVal, record, column;
 
-			//check for changes in collection
-			if (!(this._config.dataSource instanceof Array)) {
-				return;
-			}
-			this._changes = this._differ.diff(this._config.dataSource);
-			if (this._changes && grid) {
-				this._dataSource = jQuery.extend(true, [], this._config.dataSource);				
-				this._changes.forEachAddedItem(r => this.addRow(r.item, r.currentIndex));
-				this._changes.forEachRemovedItem(r => this.deleteRow(r.item[pkKey]));
-			}
-			//check for changes in values
-			if (!this.equalsDiff(this._config.dataSource, this._dataSource, diff)) {
-				this._dataSource = jQuery.extend(true, [], this._config.dataSource);
-				for (i = 0; i < diff.length; i++) {
-					for (j = 0; j < diff[i].txlog.length; j++) {
-						colIndex = element.data(this._widgetName)._getCellIndexByColumnKey(diff[i].txlog[j].key);
-						record = this._config.dataSource[diff[i].index];
-						td = element.find("tr[data-id='" + record[pkKey] + "']").children().get(colIndex);
+	updateRow(rec, currValue, key) {
+		const element = jQuery(this._el);
+		const grid = element.data(this._widgetName);
+		const childDataKey = this["childDataKey"] || this.options.childDataKey;
+		const column = element.data(this._widgetName).columnByKey(key);
+		if(!column && key === childDataKey) {
+			//we have an hierarchical data source and one of the nested collections has changed.
+			grid.dataBind();
+		} else {
+			super.updateRow(rec, currValue, key);
+		}
+	}
 
-						column = element.data(this._widgetName).columnByKey(diff[i].txlog[j].key);
-						if (column) {
-							if (column.template) {
-								newFormattedVal = grid._renderTemplatedCell(record, column);
-							} else {
-								newFormattedVal = grid._renderCell(diff[i].txlog[j].newVal, column, record);
-							}
-							jQuery(td).html(newFormattedVal);
-							grid.dataSource.updateRow(record[pkKey], record);
-							grid.dataSource._commitTransactionsByRowId(record[pkKey]);
-						} else if (diff[i].txlog[j].key === this._config.childDataKey) {
-							//we have an hierarchical data source and one of the nested collections has changed.
-							grid.dataBind();
-						}
-					}
-				}
-			}
+	public markForCheck(){
+		super.markForCheck();
+		const childDataKey = this["childDataKey"] || this.options.childDataKey;
+		if (childDataKey) {
+			this.dataBind();
 		}
 	}
 

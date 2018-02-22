@@ -1,4 +1,4 @@
-import { Component, NgModule } from '@angular/core';
+import { Component, NgModule, ViewChild } from '@angular/core';
 import { IgTreeComponent } from "../../src/igniteui.angular2";
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -15,7 +15,8 @@ export class AppComponent {
 	protected data: any;
 	protected newProductCategory: any;
 	protected newProductSubcategory: any;
-	
+	 @ViewChild("tree") tree: IgTreeComponent;
+
 	constructor() {
 		this.data = ProductCategories.getData();
 		this.newProductCategory= {  "Name": "",
@@ -28,7 +29,7 @@ export class AppComponent {
 			"ProductSubcategoryID": 0
 		};
 		this.options = {
-			dataSource: this.data,
+			//dataSource: this.data,
 			bindings: {
 				childDataProperty : "ProductSubcategories",
 				textKey : "Name",
@@ -49,14 +50,19 @@ export class AppComponent {
 	addProductSubcategory (index){  
 	this.data[index].ProductSubcategories.push(JSON.parse(JSON.stringify(this.newProductSubcategory)));	
 	this.newProductSubcategory.ProductSubcategoryID = this.data[index].ProductSubcategories.length + 1;
+	this.tree.markForCheck();
 		
 	}
 	deleteProductCategory(index){
 		this.data.removeAt(index);
 	}
+	updateProductSubcategory(){
+		this.tree.markForCheck();
+	}
 	
 	deleteProductSubcategory(index, subIndex){
 		this.data[index].ProductSubcategories.removeAt(subIndex);
+		this.tree.markForCheck();
 	}
 	
 	removeSelectedNode(){

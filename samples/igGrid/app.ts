@@ -1,4 +1,4 @@
-import { Component, NgModule } from '@angular/core';
+import { Component, NgModule,ViewChild } from '@angular/core';
 import { IgGridComponent } from "../../src/igniteui.angular2";
 import { FormsModule } from '@angular/forms';
 import { Northwind } from "./../data/northwind";
@@ -16,6 +16,7 @@ export class AppComponent {
 	private id: string;
 	private data: any;
 	private newProduct:any;
+	@ViewChild("grid1") grid: IgGridComponent;
 	//private deleteRecord: any;
 
 	constructor() {
@@ -26,7 +27,6 @@ export class AppComponent {
 
 		this.gridOptions = {
 			autoCommit:true,
-			dataSource: this.data,
 			width: "100%",
 			height: "400px",
 			autoGenerateColumns: false,

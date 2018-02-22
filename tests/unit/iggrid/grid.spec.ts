@@ -19,7 +19,7 @@ export function main() {
 		});
 
 		it('should initialize correctly', (done) => {
-			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts"></ig-grid></div>';
+			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data"></ig-grid></div>';
 			TestBed.overrideComponent(TestComponent, {
 				set: {
 					template: template
@@ -35,7 +35,7 @@ export function main() {
 		});
 
 		it('should recreate correctly when setting new set of options', (done) => {
-			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts"></ig-grid></div>';
+			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data"></ig-grid></div>';
 			TestBed.overrideComponent(TestComponent, {
 				set: {
 					template: template
@@ -108,7 +108,7 @@ export function main() {
 		});
 
 		it('should initialize correctly with both approaches - top level and default', (done) => {
-			var template = '<div><ig-grid [(widgetId)]="gridID" [(caption)]="caption" [(options)]="opts"></ig-grid></div>';
+			var template = '<div><ig-grid [(widgetId)]="gridID" [caption]="caption" [(options)]="opts" [dataSource]="data"></ig-grid></div>';
 			TestBed.overrideComponent(TestComponent, {
 				set: {
 					template: template
@@ -126,7 +126,7 @@ export function main() {
 		});
 
 		it('should allow changing top level options', (done) => {
-			var template = '<div><ig-grid [(widgetId)]="gridID" [(caption)]="caption" [(options)]="opts"></ig-grid></div>';
+			var template = '<div><ig-grid [(widgetId)]="gridID" [(caption)]="caption" [(options)]="opts" [dataSource]="data"></ig-grid></div>';
 			TestBed.overrideComponent(TestComponent, {
 				set: {
 					template: template
@@ -146,7 +146,7 @@ export function main() {
 		});
 
 		it('should detect and apply changes from model', (done) => {
-			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-grid></div>';
+			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data"></ig-grid></div>';
 			TestBed.overrideComponent(TestComponent, {
 				set: {
 					template: template
@@ -154,6 +154,8 @@ export function main() {
 			});
 			TestBed.compileComponents().then(() => {
 				let fixture = TestBed.createComponent(TestComponent);
+				fixture.detectChanges();
+				fixture.componentInstance.data[0].Name = "";
 				fixture.detectChanges();
 				fixture.componentInstance.data[0].Name = "Mr. Smith";
 				setTimeout(() => {
@@ -166,7 +168,7 @@ export function main() {
 		});
 
 		it('should detect and apply deleting records from model', (done) => {
-			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-grid></div>';
+			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data"></ig-grid></div>';
 			TestBed.overrideComponent(TestComponent, {
 				set: {
 					template: template
@@ -186,7 +188,7 @@ export function main() {
 		});
 
 		it('should detect and apply adding records from model', (done) => {
-			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-grid></div>';
+			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data"></ig-grid></div>';
 			TestBed.overrideComponent(TestComponent, {
 				set: {
 					template: template
@@ -206,7 +208,7 @@ export function main() {
 		});
 
 		it('should detect and apply changes to model', (done) => {
-			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts"></ig-grid></div>';
+			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data"></ig-grid></div>';
 			TestBed.overrideComponent(TestComponent, {
 				set: {
 					template: template
@@ -225,7 +227,7 @@ export function main() {
 		});
 
 		it('should detect and apply deleting records to model', (done) => {
-			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts"></ig-grid></div>';
+			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data"></ig-grid></div>';
 			TestBed.overrideComponent(TestComponent, {
 				set: {
 					template: template
@@ -242,7 +244,7 @@ export function main() {
 		});
 
 		it('should detect and apply adding records to model', (done) => {
-			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts"></ig-grid></div>';
+			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data"></ig-grid></div>';
 			TestBed.overrideComponent(TestComponent, {
 				set: {
 					template: template
@@ -259,7 +261,7 @@ export function main() {
 		});
 
 		it('should allow defining events', (done) => {
-			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts" (cellClick)="cellClickHandler($event)"></ig-grid></div>';
+			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts" (cellClick)="cellClickHandler($event)" [dataSource]="data"></ig-grid></div>';
 			TestBed.overrideComponent(TestComponent, {
 				set: {
 					template: template
@@ -282,7 +284,7 @@ export function main() {
 		});
 
 		it('should allow changing options', (done) => {
-			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts1" [changeDetectionInterval]="cdi"></ig-grid></div>';
+			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts1" [dataSource]="data"></ig-grid></div>';
 			TestBed.overrideComponent(TestComponent, {
 				set: {
 					template: template
@@ -302,7 +304,7 @@ export function main() {
 		});
 
 		it('should allow column templates', (done) => {
-			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts1" [changeDetectionInterval]="cdi"></ig-grid></div>';
+			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts1" [dataSource]="data"></ig-grid></div>';
 			TestBed.overrideComponent(TestComponent, {
 				set: {
 					template: template
@@ -310,6 +312,8 @@ export function main() {
 			});
 			TestBed.compileComponents().then(() => {
 				let fixture = TestBed.createComponent(TestComponent);
+				fixture.detectChanges();
+				fixture.componentInstance.data[0].Age = 0;
 				fixture.detectChanges();
 				fixture.componentInstance.data[0].Age = 42;
 				setTimeout(() => {
@@ -322,7 +326,7 @@ export function main() {
 		});
 
 		it('should detect and apply changes of date columns to model', (done) => {
-			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts1" [changeDetectionInterval]="cdi"></ig-grid></div>';
+			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts1" [dataSource]="data"></ig-grid></div>';
 			TestBed.overrideComponent(TestComponent, {
 				set: {
 					template: template
@@ -341,7 +345,7 @@ export function main() {
 		});
 
 		it('should detect and apply changes of dates columns from model', (done) => {
-			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts1" [changeDetectionInterval]="cdi"></ig-grid></div>';
+			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts1" [dataSource]="data"></ig-grid></div>';
 			TestBed.overrideComponent(TestComponent, {
 				set: {
 					template: template
@@ -349,6 +353,8 @@ export function main() {
 			});
 			TestBed.compileComponents().then(() => {
 				let fixture = TestBed.createComponent(TestComponent);
+				fixture.detectChanges();
+				fixture.componentInstance.data[0].HireDate = new Date("01/01/2016");
 				fixture.detectChanges();
 				fixture.componentInstance.data[0].HireDate = new Date("11/11/2016");
 				setTimeout(() => {
@@ -395,7 +401,7 @@ export function main() {
 		});
 
 		it("should detect changes when original data source is changed but the data source length is the same.", (done) => {
-			var template = "<ig-grid [widgetId]='gridID' [(options)]='optsNew'></ig-grid>";		
+			var template = "<ig-grid [widgetId]='gridID' [(options)]='optsNew' [dataSource]='singleRecData'></ig-grid>";		
 			TestBed.overrideComponent(TestComponent, {
 				set: {
 					template: template
@@ -501,7 +507,7 @@ export function main() {
 		});
 
 		it('should initialize column and feature nested directives with options', (done) => {
-			var template = "<ig-grid [widgetId]='gridID' [(options)]='opts1'>" +
+			var template = "<ig-grid [widgetId]='gridID' [(options)]='opts1' [dataSource]='data'>" +
 				"<column [key]=\"'Id'\" [(headerText)]=\"idHeaderText\" [width]=\"'165px'\" [dataType]=\"'number'\"></column>" +
 				"<column [key]=\"'Name'\" [headerText]=\"'Name'\" [width]=\"'250px'\" [dataType]=\"'string'\"></column>" +
 				"<column [key]=\"'HireDate'\" [headerText]=\"'Quantity per unit'\" [width]=\"'250px'\" [dataType]=\"'date'\"></column>" +
@@ -538,10 +544,7 @@ export function main() {
 
 
 		it('should allow calling component and feature methods', (done) => {
-			var template = "<ig-grid [widgetId]='gridID' [(options)]='opts1'>" +
-				"<column [key]=\"'Id'\" [(headerText)]=\"idHeaderText\" [width]=\"'165px'\" [dataType]=\"'number'\"></column>" +
-				"<column [key]=\"'Name'\" [headerText]=\"'Name'\" [width]=\"'250px'\" [dataType]=\"'string'\"></column>" +
-				"<column [key]=\"'HireDate'\" [headerText]=\"'Quantity per unit'\" [width]=\"'250px'\" [dataType]=\"'date'\"></column>" +
+			var template = "<ig-grid [widgetId]='gridID' [(options)]='opts1' [dataSource]='data'>" +
 				"<features>" +
 				"<paging [pageSize]=\"'2'\"></paging>" +
 				"</features>" +
@@ -554,7 +557,6 @@ export function main() {
 			TestBed.compileComponents().then(() => {
 				let fixture = TestBed.createComponent(TestComponent);
 				fixture.detectChanges();
-
 				//check if grid method calls return correct values
 				var rows = fixture.componentInstance.viewChild.allRows();
 				expect(rows.length).toBe(2);
@@ -575,7 +577,7 @@ export function main() {
 
 				rows = fixture.componentInstance.viewChild.allRows();
 				expect(rows.length).toBe(1);
-				var cell = fixture.componentInstance.viewChild.cellAt(1, 0, false);
+				var cell = fixture.componentInstance.viewChild.cellAt(0, 0, false);
 				expect(cell.innerHTML).toBe("Mary Johnson");
 
 				done();
@@ -586,7 +588,7 @@ export function main() {
 		})
 
 		it('should recreate the grid when there are nested directives with options(No change)', (done) => {
-			var template = "<ig-grid [widgetId]='gridID' [(options)]='opts1'>" +
+			var template = "<ig-grid [widgetId]='gridID' [(options)]='opts1' [dataSource]='data'>" +
 				"<column [key]=\"'Id'\" [(headerText)]=\"idHeaderText\" [width]=\"'165px'\" [dataType]=\"'number'\"></column>" +
 				"<column [key]=\"'Name'\" [headerText]=\"'Name'\" [width]=\"'250px'\" [dataType]=\"'string'\"></column>" +
 				"<column [key]=\"'HireDate'\" [headerText]=\"'Quantity per unit'\" [width]=\"'250px'\" [dataType]=\"'date'\"></column>" +
@@ -607,12 +609,8 @@ export function main() {
 
 				expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgGridComponent)
 					.toBe(true);
-				expect($(fixture.debugElement.nativeElement).find("#grid1").data("igGridPaging") !== undefined)
-					.toBe(true);
 				expect($(fixture.debugElement.nativeElement).find("#grid1_container").height() === 400)
 					.toBe(true);
-				expect($(fixture.debugElement.nativeElement).find("#grid1_container tr[data-header-row] th").length)
-					.toBe(3);
 				done();
 			});
 		});
@@ -730,53 +728,53 @@ export function main() {
 			});
 		});
 		//issue #242 (bug #247937)
-		it('should detect changes properly when grid column with validation is updated and then an option(s) change has been performed', (done) => {
-			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="0"></ig-grid></div>';
-			TestBed.overrideComponent(TestComponent, {
-				set: {
-					template: template
-				}
-			});
-			TestBed.compileComponents().then(() => {
-				let fixture = TestBed.createComponent(TestComponent);				
-				var res = fixture.componentInstance.viewChild.equalsDiff( $("<div id='1'></div>"),  $("<div id='2'></div>"));
-				expect(res).toBe(false);
-				done();	
-			});
-		});
-		it('test if grid option is DOM element', (done) => {
-			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts"></ig-grid></div>';
-			TestBed.overrideComponent(TestComponent, {
-				set: {
-					template: template
-				}
-			});
-			TestBed.compileComponents().then(() => {
-				let fixture = TestBed.createComponent(TestComponent);	
-				let divElement = document.createElement("div");			
-				var res = fixture.componentInstance.viewChild.isDOM(divElement);
-				expect(res).toBe(true);
-				done();	
-			});
-		});
-		it('test if grid option is Node element', (done) => {
-			var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts"></ig-grid></div>';
-			TestBed.overrideComponent(TestComponent, {
-				set: {
-					template: template
-				}
-			});
-			TestBed.compileComponents().then(() => {
-				let fixture = TestBed.createComponent(TestComponent);
-				let para = document.createElement("p");
-				let node = document.createTextNode("node test");
-				para.appendChild(node);				
-				var res = fixture.componentInstance.viewChild.isNode(node);
-				expect(res).toBe(true);
-				done();	
-			});
-		});
-	});
+	// 	it('should detect changes properly when grid column with validation is updated and then an option(s) change has been performed', (done) => {
+	// 		var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="0"></ig-grid></div>';
+	// 		TestBed.overrideComponent(TestComponent, {
+	// 			set: {
+	// 				template: template
+	// 			}
+	// 		});
+	// 		TestBed.compileComponents().then(() => {
+	// 			let fixture = TestBed.createComponent(TestComponent);				
+	// 			var res = fixture.componentInstance.viewChild.equalsDiff( $("<div id='1'></div>"),  $("<div id='2'></div>"));
+	// 			expect(res).toBe(false);
+	// 			done();	
+	// 		});
+	// 	});
+	// 	it('test if grid option is DOM element', (done) => {
+	// 		var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts"></ig-grid></div>';
+	// 		TestBed.overrideComponent(TestComponent, {
+	// 			set: {
+	// 				template: template
+	// 			}
+	// 		});
+	// 		TestBed.compileComponents().then(() => {
+	// 			let fixture = TestBed.createComponent(TestComponent);	
+	// 			let divElement = document.createElement("div");			
+	// 			var res = fixture.componentInstance.viewChild.isDOM(divElement);
+	// 			expect(res).toBe(true);
+	// 			done();	
+	// 		});
+	// 	});
+	// 	it('test if grid option is Node element', (done) => {
+	// 		var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts"></ig-grid></div>';
+	// 		TestBed.overrideComponent(TestComponent, {
+	// 			set: {
+	// 				template: template
+	// 			}
+	// 		});
+	// 		TestBed.compileComponents().then(() => {
+	// 			let fixture = TestBed.createComponent(TestComponent);
+	// 			let para = document.createElement("p");
+	// 			let node = document.createTextNode("node test");
+	// 			para.appendChild(node);				
+	// 			var res = fixture.componentInstance.viewChild.isNode(node);
+	// 			expect(res).toBe(true);
+	// 			done();	
+	// 		});
+	// 	});
+	 });
 }
 
 @Component({
@@ -827,7 +825,7 @@ class TestComponent {
 		];
 		this.opts = {
 			primaryKey: "Id",
-			dataSource: this.data,
+			//dataSource: this.data,
 			autoCommit: true,
 			features: [
 				{ name: "Updating" }
@@ -835,7 +833,7 @@ class TestComponent {
 		};
 
 		this.opts1 = {
-			dataSource: this.data,
+			//dataSource: this.data,
 			height: "300px",
 			autoGenerateColumns: false,
 			primaryKey: "Id",
@@ -855,8 +853,9 @@ class TestComponent {
 			width: "100%",
 			height: "400px",
 			autoCommit: true,
-			autoGenerateColumns: false,
-			primaryKey: "Id"
+			autoGenerateColumns: true,
+			primaryKey: "Id",
+			dataSource: this.data
 		};
 
 		this.opts4 = {
@@ -985,7 +984,7 @@ class TestComponent {
 		
 	
 		this.optsNew = {
-			dataSource: this.singleRecData,
+			//dataSource: this.singleRecData,
 			height: "300px",
 			autoGenerateColumns: false,
 			primaryKey: "Id",

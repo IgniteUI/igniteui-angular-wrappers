@@ -1,4 +1,4 @@
-import { Component, Renderer, IterableDiffers, ElementRef } from "@angular/core";
+import { Component, Renderer, IterableDiffers, ElementRef, KeyValueDiffers, ChangeDetectorRef } from "@angular/core";
 import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 
 declare var jQuery: any;
@@ -10,14 +10,14 @@ declare var jQuery: any;
 	outputs: ["validating","validated","success","error","errorShowing","errorHiding","errorShown","errorHidden","successShowing","successHiding","successShown","successHidden","formValidating","formValidated","formError","formSuccess"]
 })
 export class IgValidatorComponent extends IgControlBase<IgValidator> {
-	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) {
-		super(el, renderer, differs);
+	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { 
+		super(el, renderer, differs, kvalDiffers, cdr);
 	}
 
 	ngOnInit() {
 		var evtName;
 		this._el = jQuery(document).find("#" + this.widgetId);
-		jQuery(this._el)[this._widgetName](this._config);
+		jQuery(this._el)[this._widgetName](this.options);
 		this._events = new Map<string, string>();
 		//events binding
 		let that = this;
