@@ -16,7 +16,7 @@ export function main() {
         });
 
         it('should initialize correctly', (done) => {
-            var template = '<div><ig-combo [(widgetId)]="comboID" [(options)]="options" [changeDetectionInterval]="cdi" [(ngModel)]="combo.value1"></ig-combo></div>';
+            var template = '<div><ig-combo [(widgetId)]="comboID" [(options)]="options" [(ngModel)]="combo.value1"></ig-combo></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -32,7 +32,7 @@ export function main() {
         });
 
         it('should initialize ig-combo without ngModel', (done) => {
-            var template = '<div><ig-combo [(widgetId)]="comboID" [(options)]="options" [changeDetectionInterval]="cdi"></ig-combo></div>';
+            var template = '<div><ig-combo [(widgetId)]="comboID" [(options)]="options"></ig-combo></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -71,7 +71,7 @@ export function main() {
 
 
         it('should be updated correctly if the ngModel value is updated', (done) => {
-            var template = '<div><ig-combo [(widgetId)]="comboID" [(options)]="options" [changeDetectionInterval]="cdi" [(ngModel)]="combo.value1" [dataSource]="northwind"></ig-combo></div>';
+            var template = '<div><ig-combo [(widgetId)]="comboID" [(options)]="options" [(ngModel)]="combo.value1" [dataSource]="northwind"></ig-combo></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -91,7 +91,7 @@ export function main() {
         });
 
          it('should be updated correctly if the ngModel value is cleared.', (done) => {
-                var template = '<div><ig-combo [(widgetId)]="comboID" [(options)]="options" [changeDetectionInterval]="cdi" [(ngModel)]="combo.value1" [dataSource]="northwind"></ig-combo></div>';
+                var template = '<div><ig-combo [(widgetId)]="comboID" [(options)]="options" [(ngModel)]="combo.value1" [dataSource]="northwind"></ig-combo></div>';
                 TestBed.overrideComponent(TestComponent, {
                     set: {
                         template: template
@@ -107,15 +107,39 @@ export function main() {
 					$("#combo1").parents("ig-combo").find(".ui-igcombo-clearicon").click();
 					fixture.detectChanges();
 					setTimeout(function(){
-						expect(fixture.componentInstance.combo.value1 instanceof Array && fixture.componentInstance.combo.value1.length === 0).toBeTruthy();
+						expect(fixture.componentInstance.combo.value1).toBeNull();
 						 done();
 					}, 10);
                 }, 10);
             });
           });
 
+        it('should be updated correctly if the ngModel value is cleared when multiple selection.', (done) => {
+            var template = '<div><ig-combo [(widgetId)]="comboID" [(options)]="optionsMultipleSelection" [(ngModel)]="combo.value1" [dataSource]="northwind"></ig-combo></div>';
+            TestBed.overrideComponent(TestComponent, {
+                set: {
+                    template: template
+                }
+            });
+            TestBed.compileComponents().then(() => {
+            let fixture = TestBed.createComponent(TestComponent);
+            fixture.detectChanges();
+            fixture.componentInstance.combo.value1 = 1;
+            fixture.detectChanges();
+            setTimeout(function () {
+                //clear
+                $("#combo1").parents("ig-combo").find(".ui-igcombo-clearicon").click();
+                fixture.detectChanges();
+                setTimeout(function(){
+                    expect(fixture.componentInstance.combo.value1 instanceof Array && fixture.componentInstance.combo.value1.length === 0).toBeTruthy();
+                     done();
+                }, 10);
+            }, 10);
+        });
+      });
+
         it('the ngModel should be updated correctly if the combo selection is updated', (done) => {
-            var template = '<div><ig-combo [(widgetId)]="comboID" [(options)]="options" [changeDetectionInterval]="cdi" [(ngModel)]="combo.value1" [dataSource]="northwind"></ig-combo></div>';
+            var template = '<div><ig-combo [(widgetId)]="comboID" [(options)]="options" [(ngModel)]="combo.value1" [dataSource]="northwind"></ig-combo></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -137,7 +161,7 @@ export function main() {
         });
 
         it('the ngModel should be updated correctly if the combo selection is updated and multiple items are selected', (done) => {
-            var template = '<div><ig-combo [(widgetId)]="comboID" [dataSource]="northwind" [(options)]="optionsMultipleSelection" [changeDetectionInterval]="cdi" [(ngModel)]="combo.value1"></ig-combo></div>';
+            var template = '<div><ig-combo [(widgetId)]="comboID" [dataSource]="northwind" [(options)]="optionsMultipleSelection" [(ngModel)]="combo.value1"></ig-combo></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -159,7 +183,7 @@ export function main() {
         });
 
         it('should reflect changes when a record in the data changes', (done) => {
-            var template = '<div><ig-combo [(widgetId)]="comboID" [dataSource]="northwind" [(options)]="options" [changeDetectionInterval]="cdi" [(ngModel)]="combo.value1"></ig-combo></div>';
+            var template = '<div><ig-combo [(widgetId)]="comboID" [dataSource]="northwind" [(options)]="options" [(ngModel)]="combo.value1"></ig-combo></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -182,7 +206,7 @@ export function main() {
         });
 
         it('should apply the model if there is a new data assigned', (done) => {
-            var template = '<div><ig-combo [(widgetId)]="comboID" [valueKey]="\'ProductID\'" [textKey]="\'ProductName\'" [changeDetectionInterval]="cdi" [dataSource]="data" [(ngModel)]="combo.value1"></ig-combo></div>';
+            var template = '<div><ig-combo [(widgetId)]="comboID" [valueKey]="\'ProductID\'" [textKey]="\'ProductName\'" [dataSource]="data" [(ngModel)]="combo.value1"></ig-combo></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -209,7 +233,7 @@ export function main() {
 				dataType: 'json',
 				responseText: '[{"ProductID": 1, "ProductName": "Chai"}]'
 			});
-            var template = '<div><ig-combo [(widgetId)]="comboID" [(options)]="options2" [changeDetectionInterval]="cdi" [(ngModel)]="combo.value1"></ig-combo></div>';
+            var template = '<div><ig-combo [(widgetId)]="comboID" [(options)]="options2" [(ngModel)]="combo.value1"></ig-combo></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -237,7 +261,6 @@ class TestComponent {
     public northwind: any;
     public combo: any;
     private comboID: string
-    private cdi = 10;
     public data: Array<any> = [];
     @ViewChild(Infragistics.IgComboComponent) public viewChild: Infragistics.IgComboComponent;
 
