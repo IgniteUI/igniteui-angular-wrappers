@@ -10,6 +10,16 @@ import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 export class IgDoughnutChartComponent extends IgControlBase<IgDoughnutChart> {
 	 constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }
 
+
+    ngOnInit() {
+        Object.defineProperty(this, "dataSource", {
+            set: this.createSetter("dataSource"),
+            enumerable: true,
+            configurable: true
+        });
+        super.ngOnInit();
+    }
+
 	/**
  	 * Adds a new series to the doughnut chart.
 	 *

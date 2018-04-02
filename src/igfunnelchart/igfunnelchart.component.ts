@@ -10,6 +10,15 @@ import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 export class IgFunnelChartComponent extends IgControlBase<IgFunnelChart> {
 	 constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }
 
+     ngOnInit() {
+        Object.defineProperty(this, "dataSource", {
+            set: this.createSetter("dataSource"),
+            enumerable: true,
+            configurable: true
+        });
+        super.ngOnInit();
+    }
+
 	/**
  	 * Gets array of selected slice items.
 	 *

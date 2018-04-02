@@ -10,6 +10,15 @@ import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 export class IgPivotDataSelectorComponent extends IgControlBase<IgPivotDataSelector> { 
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }	public option(): void { return; } ;
 
+    ngOnInit() {
+        Object.defineProperty(this, "dataSource", {
+            set: this.createSetter("dataSource"),
+            enumerable: true,
+            configurable: true
+        });
+        super.ngOnInit();
+    }
+
 	/**
  	 * Updates the data source.
 	 */
