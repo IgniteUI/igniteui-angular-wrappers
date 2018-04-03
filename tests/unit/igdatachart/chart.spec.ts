@@ -13,7 +13,7 @@ export function main() {
         });
 
         it('should initialize correctly', (done) => {
-            var template = '<div><ig-data-chart  widgetId="datachart1" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-data-chart></div>';
+            var template = '<div><ig-data-chart  widgetId="datachart1" [(options)]="opts"></ig-data-chart></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -29,7 +29,7 @@ export function main() {
         });
 
         it('should recreate correctly', (done) => {
-            var template = '<div><ig-data-chart  [widgetId]="\'datachart1\'" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-data-chart></div>';
+            var template = '<div><ig-data-chart  [widgetId]="\'datachart1\'" [(options)]="opts"></ig-data-chart></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -47,7 +47,7 @@ export function main() {
         });
 
         it('should allow setting new data source', (done) => {
-            var template = '<div><ig-data-chart  [widgetId]="\'datachart1\'" [(options)]="opts" [(dataSource)]="data" [changeDetectionInterval]="cdi"></ig-data-chart></div>';
+            var template = '<div><ig-data-chart  [widgetId]="\'datachart1\'" [(options)]="opts" [(dataSource)]="data"></ig-data-chart></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -93,12 +93,10 @@ class TestComponent {
     public opts1: any;
     private zoombarOpts: any;
     public data: Array<any>;
-    private cdi: number;
     @ViewChild(Infragistics.IgDataChartComponent) public viewChild: Infragistics.IgDataChartComponent;
     @ViewChild(Infragistics.IgZoombarComponent) public viewChild2: Infragistics.IgZoombarComponent;
 
     constructor() {
-        this.cdi = 10;
         this.data = [{
             "CountryName": "China",
             "Pop1995": 1216,
