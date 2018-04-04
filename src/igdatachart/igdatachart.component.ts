@@ -9,7 +9,17 @@ import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 })
 export class IgDataChartComponent extends IgControlBase<IgDataChart> { 
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }
-	public option(): void { return; } ;
+
+    ngOnInit() {
+        Object.defineProperty(this, "dataSource", {
+            set: this.createSetter("dataSource"),
+            enumerable: true,
+            configurable: true
+        });
+        super.ngOnInit();
+    }
+
+    public option(): void { return; } ;
 
 	/**
  	 * Returns the element holding the chart.

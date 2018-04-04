@@ -9,7 +9,16 @@ import { ElementRef, Renderer, IterableDiffers, Component, KeyValueDiffers, Chan
 })
 export class IgPieChartComponent extends IgControlBase<IgPieChart> {
 	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }	public option(): void { return; } ;
-	//public option(): void { return; } ;
+    //public option(): void { return; } ;
+
+    ngOnInit() {
+        Object.defineProperty(this, "dataSource", {
+            set: this.createSetter("dataSource"),
+            enumerable: true,
+            configurable: true
+        });
+        super.ngOnInit();
+    }
 
 	/**
  	 * Adds a new item to the data source and notifies the chart.

@@ -33,7 +33,7 @@
     "jasmine-core": "^2.4.1",
     "karma": "^0.13.19",
     "karma-chrome-launcher": "^0.2.2",
-    "karma-jasmine": "^0.2.2",
+    "karma-jasmine": "^1.0.2",
     "karma-junit-reporter": "^0.4.2",
     "karma-coverage": "",
     "karma-remap-istanbul": "0.5.0",
