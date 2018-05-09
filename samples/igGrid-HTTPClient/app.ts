@@ -21,18 +21,12 @@ export class ProductService {
         return people$;
     }
 
-    addProduct(ProductID, ProductName, DealerName, CategoryName, InStock): Observable<Product> {
-        let newProduct: Product =  { ProductID, ProductName, DealerName, CategoryName, InStock } as Product;
+    addProduct(id, ProductName, DealerName, CategoryName, InStock): Observable<Product> {
+        let newProduct: Product =  { id, ProductName, DealerName, CategoryName, InStock } as Product;
         let headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'my-auth-token' });
         return this.http.post<Product>("app/products", newProduct, {"headers": headers});
     }
 
-    private handleError (error: any) {
-        let errMsg = (error.message) ? error.message :
-        error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-        console.error(errMsg); // log to console instead
-        return Observable.throw(errMsg);
-    }
 }
 
 @Component({
@@ -63,9 +57,9 @@ export class AppComponent {
             width: "100%",
             height: "400px",
             autoGenerateColumns: false,
-            primaryKey: "ProductID",
+            primaryKey: "id",
             columns: [
-                { key: "ProductID", headerText: "Product ID", width: "15%", dataType: "number" },
+                { key: "id", headerText: "Product ID", width: "15%", dataType: "number" },
                 { key: "ProductName", headerText: "Name", width: "35%", dataType: "string" },
                 { key: "DealerName", headerText: "Dealer Name", width: "15%", dataType: "string" },
                 { key: "CategoryName", headerText: "CategoryName", width: "25%", dataType: "string" },
@@ -85,7 +79,7 @@ export class AppComponent {
     addProduct(newProductName, newDealerName, newCategoryName, newInStock) {
         this.newId++;
         this.productService.addProduct(this.newId, newProductName, newDealerName, newCategoryName, newInStock)
-            .subscribe(product => this.products = []);
+            .subscribe(product => this.products.push(product));
     }
 }
 
