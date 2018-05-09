@@ -50,7 +50,7 @@ export function main() {
         });
 
         it('should reflect changes when a record is removed from the data', (done) => {
-            var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data" [changeDetectionInterval]="cdi"></ig-hierarchical-grid></div>';
+            var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data"></ig-hierarchical-grid></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -74,7 +74,7 @@ export function main() {
         });
 
         it('should reflect changes when a record is added from the data', (done) => {
-            var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data" [changeDetectionInterval]="cdi"></ig-hierarchical-grid></div>';
+            var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data"></ig-hierarchical-grid></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -97,7 +97,7 @@ export function main() {
         });
 
         it('should reflect changes when records in the grid are updated', (done) => {
-            var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data" [changeDetectionInterval]="cdi"></ig-hierarchical-grid></div>';
+            var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data"></ig-hierarchical-grid></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -119,7 +119,7 @@ export function main() {
         });
 
         it('should reflect changes when records in the grid are deleted', (done) => {
-            var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data" [changeDetectionInterval]="cdi"></ig-hierarchical-grid></div>';
+            var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data"></ig-hierarchical-grid></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -140,7 +140,7 @@ export function main() {
         });
 
         it('should reflect changes when records in the grid are added', (done) => {
-            var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data" [changeDetectionInterval]="cdi"></ig-hierarchical-grid></div>';
+            var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data"></ig-hierarchical-grid></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -160,7 +160,7 @@ export function main() {
         });
 
         it('should reflect changes when child records are changed', (done) => {
-            var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data" [changeDetectionInterval]="cdi"></ig-hierarchical-grid></div>';
+            var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data"></ig-hierarchical-grid></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -219,7 +219,7 @@ export function main() {
                 dataType: 'json',
                 responseText: '[{"ID": 0, "Name": "Food", "Products":[{"ID":0,"Name":"Bread","Description":"Whole grain bread","ReleaseDate":"1992-01-01T00:00:00","DiscontinuedDate":null,"Rating":4,"Price":2.5}]}]'
             });
-            var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID2" [(options)]="opts2" [changeDetectionInterval]="cdi"></ig-hierarchical-grid></div>';
+            var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID2" [(options)]="opts2"></ig-hierarchical-grid></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -255,7 +255,7 @@ export function main() {
         });
 
         it('should fill the featuresList and allow accessing their methods', (done) => {
-            var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data" [changeDetectionInterval]="cdi"></ig-hierarchical-grid></div>';
+            var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [dataSource]="data"></ig-hierarchical-grid></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -270,6 +270,24 @@ export function main() {
                     expect(fixture.componentInstance.data.length).toBe(2);
                     done();
                 }, 10);
+            });
+        });
+
+        it('should allow setting empty array for data source', (done) => {
+            var template = '<div><ig-hierarchical-grid [(widgetId)]="gridID" [(options)]="opts" [(dataSource)]="data"></ig-hierarchical-grid></div>';
+            TestBed.overrideComponent(TestComponent, {
+                set: {
+                    template: template
+                }
+            });
+            TestBed.compileComponents().then(() => {
+                let fixture = TestBed.createComponent(TestComponent);
+                fixture.detectChanges();
+                fixture.componentInstance.data = [];
+                fixture.detectChanges();
+                expect($(fixture.debugElement.nativeElement).find("#grid1_container tbody tr").length)
+                    .toBe(0);
+                done();
             });
         });
 
