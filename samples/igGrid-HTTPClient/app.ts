@@ -1,40 +1,30 @@
 import { Component, Injectable, NgModule } from '@angular/core';
 import { IgGridComponent } from "../../src/igniteui.angular2";
-import { Http, Response, HttpModule } from '@angular/http';
-import { Headers, RequestOptions } from '@angular/http';
+import { HttpClient, HttpResponse, HttpClientModule, HttpHeaders,  } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import 'rxjs/add/operator/map';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { ProductData } from '../data/product-data';
+import { Product } from './product';
 
 declare var jQuery: any;
 
 
 @Injectable()
 export class ProductService {
-    constructor(private http: Http) { }
+    constructor(private http: HttpClient) { }
 
-    getAll() {
+    getAll(): Observable<Product[]> {
         let people$ = this.http
-            .get("app/products").map((res: Response) => res.json());
+            .get<Product[]>("app/products");
         return people$;
     }
 
-    addProduct(ProductID, ProductName, DealerName, CategoryName, InStock): Observable<any> {
-        let body = JSON.stringify({ ProductID, ProductName, DealerName, CategoryName, InStock });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
-
-        return this.http.post("app/products", body, options)
-            .map(this.extractData);
-    }
-
-
-    private extractData(res: Response) {
-        let body = res.json();
-        return body.data || { };
+    addProduct(ProductID, ProductName, DealerName, CategoryName, InStock): Observable<Product> {
+        let newProduct: Product =  { ProductID, ProductName, DealerName, CategoryName, InStock } as Product;
+        let headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'my-auth-token' });
+        return this.http.post<Product>("app/products", newProduct, {"headers": headers});
     }
 
     private handleError (error: any) {
@@ -53,14 +43,14 @@ export class ProductService {
 export class AppComponent {
     private gridOptions: IgGrid;
     private id: string;
-    private products: any = [];
+    private products: Product[] = [];
     errorMessage: string;
     private newId: number;
 
     constructor(private productService: ProductService) {
         this.productService.getAll().subscribe(
             res => {
-                this.products = res.data;
+                this.products = res;
                 this.newId = this.products.length;
             },
             error =>  this.errorMessage = <any>error
@@ -95,15 +85,12 @@ export class AppComponent {
     addProduct(newProductName, newDealerName, newCategoryName, newInStock) {
         this.newId++;
         this.productService.addProduct(this.newId, newProductName, newDealerName, newCategoryName, newInStock)
-            .subscribe(
-                product => this.products.push(product),
-                error =>  this.errorMessage = <any>error
-            );
+            .subscribe(product => this.products = []);
     }
 }
 
 @NgModule({
-  imports:      [ BrowserModule, HttpModule, InMemoryWebApiModule.forRoot(ProductData) ],
+  imports:      [ BrowserModule, HttpClientModule, InMemoryWebApiModule.forRoot(ProductData) ],
   declarations: [ AppComponent, IgGridComponent ],
   bootstrap:    [ AppComponent ]
 })
