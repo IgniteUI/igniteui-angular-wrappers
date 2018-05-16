@@ -1,6 +1,6 @@
 import { Component, NgModule } from '@angular/core';
 import { IgCurrencyEditorComponent, IgDateEditorComponent, IgMaskEditorComponent, IgNumericEditorComponent, 
-	IgPercentEditorComponent, IgTextEditorComponent, IgDatePickerComponent } from "../../src/igniteui.angular2";
+	IgPercentEditorComponent, IgTextEditorComponent, IgDatePickerComponent, IgTimePickerComponent } from "../../src/igniteui.angular2";
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic }	from '@angular/platform-browser-dynamic';
@@ -22,14 +22,14 @@ export class AppComponent {
 			numeric: 123,
 			percent: 0.12,
 			text: 'Ignite UI'
-		};
+        };
 	}
 }
 
 @NgModule({
 	imports:	  [ BrowserModule, FormsModule ],
 	declarations: [ AppComponent, IgCurrencyEditorComponent, IgDateEditorComponent, IgMaskEditorComponent, IgNumericEditorComponent, 
-	IgPercentEditorComponent, IgTextEditorComponent, IgDatePickerComponent ],
+	IgPercentEditorComponent, IgTextEditorComponent, IgDatePickerComponent, IgTimePickerComponent ],
 	bootstrap:	[ AppComponent ]
 })
 export class AppModule {}

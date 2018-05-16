@@ -8,6 +8,7 @@ var NODES = {
 	"ig-percent-editor": "input",
 	"ig-mask-editor": "input",
 	"ig-date-picker": "input",
+	"ig-time-picker": "input",
 	"ig-date-editor": "input",
 	"ig-currency-editor": "input",
 	"ig-checkbox-editor": "input",

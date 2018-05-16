@@ -491,7 +491,59 @@ export function main() {
 				}, 1);
 			});
 		});
-	});
+    });
+
+    describe('Infragistics Angular2 TimePicker', () => {
+		beforeEach(() => {
+			TestBed.configureTestingModule({
+				imports: [FormsModule],
+				declarations: [Infragistics.IgTimePickerComponent, TestIgTimePickerComponent]
+			});
+		});
+
+		it('should initialize correctly', (done) => {
+			var template = '<div><ig-time-picker></ig-time-picker></div>';
+			TestBed.overrideComponent(TestIgTimePickerComponent, {
+				set: {
+					template: template
+				}
+			});
+			TestBed.compileComponents().then(() => {
+				let fixture = TestBed.createComponent(TestIgTimePickerComponent);
+				fixture.detectChanges();
+				expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgTimePickerComponent)
+					.toBe(true);
+				done();
+			});
+		});
+
+		it('should allow setting value with ngModel', (done) => {
+			var template = '<div><ig-time-picker [(ngModel)]="val" [widgetId]="editorId" [options]="{isLimitedToListValues:false}"></ig-time-picker></div>';
+			TestBed.overrideComponent(TestIgTimePickerComponent, {
+				set: {
+					template: template
+				}
+			});
+			TestBed.compileComponents().then(() => {
+				let fixture = TestBed.createComponent(TestIgTimePickerComponent);
+				fixture.detectChanges();
+				setTimeout(() => {
+					expect($(fixture.debugElement.nativeElement).find("#editor1").igTimePicker("displayValue")).toBe("12:36 AM");
+					fixture.debugElement.componentInstance.val = "05:50 AM";
+					fixture.detectChanges();
+					setTimeout(() => {
+						expect($(fixture.debugElement.nativeElement).find("#editor1").igTimePicker("displayValue")).toBe("5:50 AM");
+						$(fixture.debugElement.nativeElement).find("#editor1").focus().trigger("focus").val("06:00 PM").blur().trigger("blur");
+						setTimeout(() => {
+							expect(fixture.debugElement.componentInstance.val.getHours()).toBe(6);
+							expect(fixture.debugElement.componentInstance.val.getMinutes()).toBe(0);
+							done();
+						}, 100);
+					}, 1);
+				}, 1);
+			});
+		});
+    });
 }
 
 @Component({
@@ -571,6 +623,21 @@ class TestIgDatePickerComponent {
 
 	constructor() {
 		this.val = new Date("4/20/2016");
+		this.editorId = "editor1";
+	}
+}
+
+@Component({
+	selector: 'test-time-picker-cmp',
+	template: '<div></div>' //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+})
+class TestIgTimePickerComponent {
+	private val: string;
+	private editorId:string;
+	@ViewChild(Infragistics.IgTimePickerComponent) public viewChild: Infragistics.IgTimePickerComponent;
+
+	constructor() {
+		this.val = "12:36 AM";
 		this.editorId = "editor1";
 	}
 }
