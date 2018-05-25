@@ -57,7 +57,7 @@
         defaultExtension: 'ts'
       },
       '../aot': {
-        defaultExtension: 'ts'
+        defaultExtension: 'js'
       }
     },
     transpiler: 'typescript',
