@@ -3,7 +3,7 @@ export class ProductData implements InMemoryDbService {
   createDb() {
     let products = [
   {
-    "ProductID": 1,
+    "id": 1,
     "ProductName": "Chai",
     "DealerName": "A",
     "CategoryName": "Beverages",
@@ -12,7 +12,7 @@ export class ProductData implements InMemoryDbService {
     "Inventory": "" 
   },
   {
-    "ProductID": 2,
+    "id": 2,
     "ProductName": "Chang",
     "DealerName": "B",
     "CategoryName": "Beverages",
@@ -22,7 +22,7 @@ export class ProductData implements InMemoryDbService {
   },
   {
   
-    "ProductID": 3,
+    "id": 3,
     "ProductName": "Aniseed Syrup",
     "DealerName": "C",
     "CategoryName": "Condiments",
@@ -31,7 +31,7 @@ export class ProductData implements InMemoryDbService {
     "Inventory": ""
   },
   {
-    "ProductID": 4,
+    "id": 4,
     "ProductName": "Chef Anton\u0027s Cajun Seasoning",
     "DealerName": "D",
     "CategoryName": "Condiments",
@@ -41,7 +41,7 @@ export class ProductData implements InMemoryDbService {
   },
   {
   
-    "ProductID": 5,
+    "id": 5,
     "ProductName": "Chef Anton\u0027s Gumbo Mix",
     "DealerName": "E",
     "CategoryName": "Condiments",
@@ -51,7 +51,7 @@ export class ProductData implements InMemoryDbService {
   },
   {
   
-    "ProductID": 6,
+    "id": 6,
     "ProductName": "Grandma\u0027s Boysenberry Spread",
     "DealerName": "F",
     "CategoryName": "Condiments",
@@ -61,7 +61,7 @@ export class ProductData implements InMemoryDbService {
   },
   {
   
-    "ProductID": 7,
+    "id": 7,
     "ProductName": "Uncle Bob\u0027s Organic Dried Pears",
     "DealerName": "G",
     "CategoryName": "Produce",
@@ -71,7 +71,7 @@ export class ProductData implements InMemoryDbService {
   },
   {
   
-    "ProductID": 8,
+    "id": 8,
     "ProductName": "Northwoods Cranberry Sauce",
     "DealerName": "H",
     "CategoryName": "Condiments",
@@ -81,7 +81,7 @@ export class ProductData implements InMemoryDbService {
   },
   {
   
-    "ProductID": 9,
+    "id": 9,
     "ProductName": "Mishi Kobe Niku",
     "DealerName": "I",
     "CategoryName": "Meat/Poultry",
@@ -91,7 +91,7 @@ export class ProductData implements InMemoryDbService {
   },
   {
     
-    "ProductID": 10,
+    "id": 10,
     "ProductName": "Ikura",
     "DealerName": "J",
     "CategoryName": "Seafood",
@@ -101,7 +101,7 @@ export class ProductData implements InMemoryDbService {
   },
   {
   
-    "ProductID": 11,
+    "id": 11,
     "ProductName": "Queso Cabrales",
     "DealerName": "K",
     "CategoryName": "Dairy Products",
@@ -111,7 +111,7 @@ export class ProductData implements InMemoryDbService {
   },
   {
     
-    "ProductID": 12,
+    "id": 12,
     "ProductName": "Queso Manchego La Pastora",
     "DealerName": "J",
     "CategoryName": "Dairy Products",
@@ -121,7 +121,7 @@ export class ProductData implements InMemoryDbService {
   },
   {
     
-    "ProductID": 13,
+    "id": 13,
     "ProductName": "Konbu",
     "DealerName": "K",
     "CategoryName": "Seafood",
@@ -131,7 +131,7 @@ export class ProductData implements InMemoryDbService {
   },
   {
     
-    "ProductID": 14,
+    "id": 14,
     "ProductName": "Tofu",
     "DealerName": "L",
     "CategoryName": "Produce",
@@ -141,7 +141,7 @@ export class ProductData implements InMemoryDbService {
   },
   {
     
-    "ProductID": 15,
+    "id": 15,
     "ProductName": "Genen Shouyu",
     "DealerName": "M",
     "CategoryName": "Condiments",
