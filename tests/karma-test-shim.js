@@ -27,6 +27,7 @@ System.config({
 System.config({
   defaultJSExtensions: true,
   map: {
+    'rxjs/operators': 'node_modules/rxjs/operators',
     'rxjs': 'node_modules/rxjs',
     '@angular': 'node_modules/@angular',
     '@angular/core': 'node_modules/@angular/core/bundles/core.umd.js',
@@ -48,9 +49,14 @@ System.config({
     '@angular/forms/testing': 'node_modules/@angular/forms/bundles/forms-testing.umd.js',
   },
   packages: {
-    'rxjs': {
-      defaultExtension: 'js'
-    }
+    'rxjs/operators': {
+        main: './index.js',
+        defaultExtension: 'js'
+      },
+      rxjs: {
+        main: './index.js',
+        defaultExtension: 'js'
+      },
   }
 });
 
