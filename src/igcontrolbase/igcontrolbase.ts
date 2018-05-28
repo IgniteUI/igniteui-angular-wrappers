@@ -112,15 +112,14 @@ export class IgControlBase<Model> implements DoCheck {
 		  	}
 		}
 
-		var propNames = Object.getOwnPropertyNames(jQuery.ui[this._widgetName].prototype);
-		for(var i = 0; i < propNames.length; i++) {
-		var name = propNames[i];
-		 	if(name.indexOf("_") !== 0 && typeof jQuery.ui[this._widgetName].prototype[name] === "function"
-		 	&& name !== "dataSource"){
-		 		Object.defineProperty(that, name, {
-		 			get: that.createMethodGetter(name)
-		 		});
-		 	}
+		var propNames = jQuery.ui[this._widgetName].prototype;
+		for(var name in propNames ) {
+            if(name.indexOf("_") !== 0 && typeof jQuery.ui[this._widgetName].prototype[name] === "function"
+            && name !== "dataSource"){
+                Object.defineProperty(that, name, {
+                    get: that.createMethodGetter(name)
+                });
+            }
 		 }
 		//events binding
 		for (var propt in jQuery.ui[this._widgetName].prototype.events) {

@@ -4,6 +4,7 @@ import {Component, ViewChild, TemplateRef} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import * as Infragistics from '../../../src/igniteui.angular2';
 
+declare const $: any;
 
 export function main() {
 	describe('Infragistics Angular2 TextEditor', () => {
@@ -29,7 +30,23 @@ export function main() {
 					.toBe(true);
 				done();
 			});
-		});
+        });
+
+        it('should allow invoking validator() API method for the IgTextEditorComponent', (done) => {
+            var template = '<div><ig-text-editor [validatorOptions]="validatorOpts" [(ngModel)]="val" [widgetId]="editorId"></ig-text-editor></div>';
+            TestBed.overrideComponent(TestIgTextEditorComponent, {
+                set: {
+                    template: template
+                }
+            });
+            TestBed.compileComponents().then(() => {
+                let fixture = TestBed.createComponent(TestIgTextEditorComponent);
+                fixture.detectChanges();
+                let validator = fixture.componentInstance.viewChild.validator();
+                expect(validator instanceof $.ui.igValidator).toBe(true);
+                done();
+            });
+        });
 
 		it('should allow setting value with ngModel', (done) => {
 			var template = '<div><ig-text-editor [(ngModel)]="val" [widgetId]="editorId" [changeDetectionInterval]="cdi"></ig-text-editor></div>', field, event;
@@ -124,7 +141,7 @@ export function main() {
 					done();
 				}, 1);
 			});
-		});
+        });
 	});
 
 	describe('Infragistics Angular2 NumericEditor', () => {
@@ -554,7 +571,8 @@ class TestIgTextEditorComponent {
 	private opts: IgTextEditor;
 	private val:string;
 	private editorId:string;
-	private cdi: number = 0;
+    private cdi: number = 0;
+    private validatorOpts: IgValidator;
 	@ViewChild(Infragistics.IgTextEditorComponent) public viewChild: Infragistics.IgTextEditorComponent;
 
 	constructor() {
@@ -562,7 +580,14 @@ class TestIgTextEditorComponent {
 		this.editorId = "editor1";
 		this.opts = {
 			disabled: true
-		};
+        };
+
+        this.validatorOpts = {
+            successMessage: "Success",
+            required: true,
+            onchange: true,
+            notificationOptions: { mode: "popover" }
+        };
 	}
 }
 
@@ -678,12 +703,12 @@ class TestIgCurrencyEditorComponent {
 })
 class TestIgCheckboxEditorComponent {
 	private val: boolean;
-	private editorId:string;
+    private editorId:string;
 	@ViewChild(Infragistics.IgCheckboxEditorComponent) public viewChild: Infragistics.IgCheckboxEditorComponent;
 
 	constructor() {
 		this.val = true;
-		this.editorId = "editor1";
+        this.editorId = "editor1";
 	}
 }
 
