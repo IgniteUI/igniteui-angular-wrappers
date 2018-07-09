@@ -1,4 +1,4 @@
-import { Component, Renderer, IterableDiffers, ElementRef } from "@angular/core";
+import { Component, Renderer, IterableDiffers, ElementRef, KeyValueDiffers, ChangeDetectorRef } from "@angular/core";
 import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 
 @Component({
@@ -8,8 +8,16 @@ import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 	outputs: ["tooltipShowing","tooltipShown","tooltipHiding","tooltipHidden","browserNotSupported","seriesCursorMouseMove","seriesMouseLeftButtonDown","seriesMouseLeftButtonUp","seriesMouseMove","seriesMouseEnter","seriesMouseLeave","windowRectChanged","gridAreaRectChanged","refreshCompleted","triangulationStatusChanged"]
 })
 export class IgMapComponent extends IgControlBase<IgMap> { 
-	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
-	public option(): void { return; } ;
+	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }	public option(): void { return; } ;
+
+    ngOnInit() {
+        Object.defineProperty(this, "dataSource", {
+            set: this.createSetter("dataSource"),
+            enumerable: true,
+            configurable: true
+        });
+        super.ngOnInit();
+    }
 
 	/**
  	 * Destroys the widget.

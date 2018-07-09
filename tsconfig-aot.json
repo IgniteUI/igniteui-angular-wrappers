@@ -9,7 +9,8 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "removeComments": false,
-    "noImplicitAny": false
+	"noImplicitAny": false,
+	"outDir": "dist/npm"
   },
   "typeRoots": [
     "./node_modules/@types/"
@@ -22,6 +23,6 @@
     "src/igniteui.angular2.ts"
   ],
   "angularCompilerOptions": {
-    "skipTemplateCodegen": true
+	"skipTemplateCodegen": true
   }
 }

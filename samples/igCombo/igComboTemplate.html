@@ -12,7 +12,7 @@
 		</div>
 		<div class="col-md-4">
 			<p class="lead">This sample demonstrates how to use Angular2 Components to create igCombos.</p>
-			<p><a href="https://github.com/IgniteUI/igniteui-angular2/blob/master/samples/igCombo/igCombo.html" class="btn btn-default btn-lg btn-primary" target="_blank"><i class="fa fa-code fa-lg"></i> Explore the Code</a></p>
+			<p><a href="https://github.com/IgniteUI/igniteui-angular-wrappers/blob/master/samples/igCombo/igCombo.html" class="btn btn-default btn-lg btn-primary" target="_blank"><i class="fa fa-code fa-lg"></i> Explore the Code</a></p>
 		</div>
 	</div>
 
@@ -25,14 +25,15 @@
 
 			<ig-combo id="'combo1'"
 					[(options)]="options"
-					[(ngModel)]="combo.value1">
+					[(ngModel)]="combo.value1"
+					[dataSource]='northwind'>
 			</ig-combo>
 
 		</div>
 		<div class="col-sm-3 col-md-2">
 
 			<ig-combo [widgetId]="'combo2'"
-					[(options)]="options"
+					[(options)]="options" [dataSource]='northwind'
 					[(ngModel)]="combo.value1">
 			</ig-combo>
 

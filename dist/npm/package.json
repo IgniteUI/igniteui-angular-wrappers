@@ -1,32 +1,33 @@
 {
-  "name": "igniteui-angular2",
-  "version": "1.0.9",
-  "description" : "A packaged version of Ignite UI components for Angular",
+  "name": "igniteui-angular-wrappers",
+  "version": "5.0.3",
+  "description" : "A packaged version of Ignite UI wrappers for Angular",
   "license": "MIT",
-  "typings": "igniteui.angular2.d.ts",
+  "types": "igniteui.angular2.d.ts",
+  "main": "bundles/igniteui-angular-wrappers.umd.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/IgniteUI/igniteui-angular2.git"
+    "url": "https://github.com/IgniteUI/igniteui-angular-wrappers.git"
   },
   "bugs": {
-    "url": "https://github.com/IgniteUI/igniteui-angular2/issues"
+    "url": "https://github.com/IgniteUI/igniteui-angular-wrappers/issues"
   },
-  "homepage": "https://github.com/IgniteUI/igniteui-angular2",
+  "homepage": "https://github.com/IgniteUI/igniteui-angular-wrappers",
   "keywords": [
     "ignite ui",
     "igniteui",
-    "angular2",
     "angular",
     "infragistics",
     "jquery widgets",
     "jquery controls",
-	"data visualization",
-	"ui components",
-    "data grids"
+    "data visualization",
+    "ui components",
+    "data grids",
+    "wrappers"
   ],
   "dependencies": {
 	"@types/reflect-metadata": "^0.0.5",
-	"@types/ignite-ui": "^0.0.4",
+	"@types/ignite-ui": "^17.2.2",
 	"@types/jquery": "2.0.47"
   }
 }

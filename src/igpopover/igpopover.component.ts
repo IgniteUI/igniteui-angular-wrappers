@@ -1,4 +1,4 @@
-import { Component, ElementRef, Renderer, IterableDiffers } from "@angular/core";
+import { Component, ElementRef, Renderer, IterableDiffers, KeyValueDiffers, ChangeDetectorRef } from "@angular/core";
 import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 
 declare var jQuery: any;
@@ -10,9 +10,8 @@ declare var jQuery: any;
 	outputs: ["showing","shown","hiding","hidden"]
 })
 export class IgPopoverComponent extends IgControlBase<IgPopover> {
-	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) {
-		super(el, renderer, differs);
-	}
+	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }	public option(): void { return; } ;
+
 
 	ngOnInit() {
 		var elem = jQuery(document).find("#" + this.widgetId);
@@ -30,7 +29,7 @@ export class IgPopoverComponent extends IgControlBase<IgPopover> {
 				});
 			}
 
-			jQuery(this._el)[this._widgetName](this._config);
+			jQuery(this._el)[this._widgetName](this.options);
 		} else {
 			super.ngOnInit();
 		}

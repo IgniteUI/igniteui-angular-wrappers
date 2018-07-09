@@ -1,5 +1,5 @@
 	<div class="col-md-3">
-            <ig-tree widgetId="tree1" [(options)]="options">             
+            <ig-tree widgetId="tree1" [(options)]="options" [dataSource]="data" #tree>             
             </ig-tree>
         </div>
         <div class="col-md-9">
@@ -57,7 +57,7 @@
                             <div *ngFor="let ps of pc.ProductSubcategories, let j = index">
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <input class="form-control" type="text" [(ngModel)]="ps.Name">
+                                        <input class="form-control" type="text" [(ngModel)]="ps.Name" (ngModelChange)="updateProductSubcategory()">
                                     </div>
                                     <div class="col-sm-1">
                                         <input 

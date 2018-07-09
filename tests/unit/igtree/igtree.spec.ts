@@ -1,7 +1,7 @@
 // modeled after https://github.com/angular/angular/blob/cee2318110eeea115e5f6fc5bfc814cbaa7d90d8/modules/angular2/test/common/directives/ng_for_spec.ts
 import { TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
-import * as Infragistics from '../../../dist/npm/igniteui.angular2';
+import * as Infragistics from '../../../src/igniteui.angular2';
 import { ProductCategories } from "../../../samples/data/product-categories";
 
 export function main() {
@@ -14,7 +14,7 @@ export function main() {
         });
 
         it('should initialize correctly', (done) => {
-            var template = '<div><ig-tree [(widgetId)]="treeID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-tree></div>';
+            var template = '<div><ig-tree [(widgetId)]="treeID" [(options)]="opts" [dataSource]="data"></ig-tree></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -30,7 +30,7 @@ export function main() {
         });
 
         it('should reflect changes when a record in the data changes', (done) => {
-                var template = '<div><ig-tree [(widgetId)]="treeID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-tree></div>';
+                var template = '<div><ig-tree [(widgetId)]="treeID" [(options)]="opts" [dataSource]="data"></ig-tree></div>';
                 TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -50,7 +50,7 @@ export function main() {
         });
 
         it('should reflect changes when a record is added/removed from the data', (done) => {
-            var template = '<div><ig-tree [(widgetId)]="treeID" [(options)]="opts" [changeDetectionInterval]="cdi"></ig-tree></div>';
+            var template = '<div><ig-tree [(widgetId)]="treeID" [(options)]="opts" [dataSource]="data"></ig-tree></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
                     template: template
@@ -79,6 +79,28 @@ export function main() {
                 }, 10);
             });
         });
+
+        it('should initialize correctly when datasource is remote', (done) => {
+            $['mockjax']({
+				url: "myURL/ProductCategories",
+				contentType: 'application/json',
+				dataType: 'json',
+				responseText: '[{"Name": "Bikes", "ProductCategoryID": 1, "ProductSubcategories": [{ "Name": "Mountain Bikes","ProductSubcategoryID": 1,"Products": null }]}]'
+			});
+            var template = '<div><ig-tree [(widgetId)]="treeID" [(options)]="opts2" [changeDetectionInterval]="cdi"></ig-tree></div>';
+            TestBed.overrideComponent(TestComponent, {
+                set: {
+                    template: template
+                }
+            });
+            TestBed.compileComponents().then(() => {
+                let fixture = TestBed.createComponent(TestComponent);
+                fixture.detectChanges();
+                expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgTreeComponent)
+                    .toBe(true);
+                done();
+            });
+        });
     });
 }
 
@@ -88,6 +110,7 @@ export function main() {
 })
 class TestComponent {
     private opts: any;
+    private opts2: any;
     private treeID: string;
     public data: Array<any>;
     private cdi: number;
@@ -99,12 +122,16 @@ class TestComponent {
         this.data = ProductCategories.getData();
 
         this.opts = {
-            dataSource: this.data,
+            //dataSource: this.data,
             bindings: {
                 childDataProperty: "ProductSubcategories",
                 textKey: "Name",
                 valueKey: "ProductCategoryID"
             }
         };
+
+        this.opts2 = {
+            datasource: "myURL/ProductCategories"
+        }
     }
 }

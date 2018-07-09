@@ -1,4 +1,4 @@
-import { Component, ElementRef, Renderer, IterableDiffers } from "@angular/core";
+import { Component, ElementRef, Renderer, IterableDiffers, KeyValueDiffers, ChangeDetectorRef } from "@angular/core";
 import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 
 
@@ -9,7 +9,9 @@ import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 	outputs: ["fileSelecting","fileSelected","fileUploading","fileUploaded","fileUploadAborted","cancelAllClicked","onError","fileExtensionsValidating","onXHRLoad","onFormDataSubmit"]
 })
 export class IgUploadComponent extends IgControlBase<IgUpload> {
-	 constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
+	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { 
+		super(el, renderer, differs, kvalDiffers, cdr);
+	}
 
 	/**
  	 * Return jquery object of fileupload container - html DOM element

@@ -1,4 +1,4 @@
-import { Component, Renderer, ElementRef, IterableDiffers } from "@angular/core";
+import { Component, Renderer, ElementRef, IterableDiffers, KeyValueDiffers, ChangeDetectorRef } from "@angular/core";
 import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 
 @Component({
@@ -8,7 +8,9 @@ import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 	outputs: ["ended","playing","paused","buffering","progress","waiting","bookmarkHit","bookmarkClick","enterFullScreen","exitFullScreen","relatedVideoClick","bannerVisible","bannerHidden","bannerClick","browserNotSupported"]
 })
 export class IgVideoPlayerComponent extends IgControlBase<IgVideoPlayer> {
-	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
+	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { 
+		super(el, renderer, differs, kvalDiffers, cdr);
+	}
 
 	/**
  	 * Returns the element on which the widget was instantiated

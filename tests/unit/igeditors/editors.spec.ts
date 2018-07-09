@@ -2,8 +2,9 @@
 import { TestBed } from '@angular/core/testing';
 import {Component, ViewChild, TemplateRef} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import * as Infragistics from '../../../dist/npm/igniteui.angular2';
+import * as Infragistics from '../../../src/igniteui.angular2';
 
+declare const $: any;
 
 export function main() {
 	describe('Infragistics Angular2 TextEditor', () => {
@@ -29,7 +30,23 @@ export function main() {
 					.toBe(true);
 				done();
 			});
-		});
+        });
+
+        it('should allow invoking validator() API method for the IgTextEditorComponent', (done) => {
+            var template = '<div><ig-text-editor [validatorOptions]="validatorOpts" [(ngModel)]="val" [widgetId]="editorId"></ig-text-editor></div>';
+            TestBed.overrideComponent(TestIgTextEditorComponent, {
+                set: {
+                    template: template
+                }
+            });
+            TestBed.compileComponents().then(() => {
+                let fixture = TestBed.createComponent(TestIgTextEditorComponent);
+                fixture.detectChanges();
+                let validator = fixture.componentInstance.viewChild.validator();
+                expect(validator instanceof $.ui.igValidator).toBe(true);
+                done();
+            });
+        });
 
 		it('should allow setting value with ngModel', (done) => {
 			var template = '<div><ig-text-editor [(ngModel)]="val" [widgetId]="editorId" [changeDetectionInterval]="cdi"></ig-text-editor></div>', field, event;
@@ -54,8 +71,7 @@ export function main() {
 						expect(fixture.debugElement.componentInstance.val).toBe("changed_test_value2");
 						window.typeInInput("2", field);
 						expect(fixture.debugElement.componentInstance.val).toBe("changed_test_value22");
-						field.val("changed_again_test_value").trigger("paste").trigger("blur");
-						$(fixture.debugElement.nativeElement).find("#editor1")[0].dispatchEvent(new Event("blur"));
+						field.focus().trigger("focus").val("changed_again_test_value").blur().trigger("blur");
 						fixture.detectChanges();
 						setTimeout(() => {
 							expect(fixture.debugElement.componentInstance.val).toBe("changed_again_test_value");
@@ -125,7 +141,7 @@ export function main() {
 					done();
 				}, 1);
 			});
-		});
+        });
 	});
 
 	describe('Infragistics Angular2 NumericEditor', () => {
@@ -169,8 +185,7 @@ export function main() {
 					fixture.detectChanges();
 					setTimeout(() => {
 						expect($(fixture.debugElement.nativeElement).find("#editor1").igNumericEditor("displayValue")).toBe("1");
-						$(fixture.debugElement.nativeElement).find("#editor1").trigger("focus").val(154).trigger("paste").trigger("blur");
-						$(fixture.debugElement.nativeElement).find("#editor1")[0].dispatchEvent(new Event("blur"));
+						$(fixture.debugElement.nativeElement).find("#editor1").focus().trigger("focus").val(154).blur().trigger("blur");
 						fixture.detectChanges();
 						setTimeout(() => {
 							expect(fixture.debugElement.componentInstance.val).toBe(154);
@@ -224,7 +239,7 @@ export function main() {
 					fixture.detectChanges();
 					setTimeout(() => {
 						expect($(fixture.debugElement.nativeElement).find("#editor1").igPercentEditor("displayValue")).toBe("10.00%");
-						$(fixture.debugElement.nativeElement).find("#editor1").trigger("focus").val(100).trigger("paste").trigger("blur");
+						$(fixture.debugElement.nativeElement).find("#editor1").focus().trigger("focus").val(100).blur().trigger("blur");
 						setTimeout(() => {
 							expect(fixture.debugElement.componentInstance.val).toBe(1);
 							done();
@@ -276,7 +291,7 @@ export function main() {
 					fixture.detectChanges();
 					setTimeout(() => {
 						expect($(fixture.debugElement.nativeElement).find("#editor1").igMaskEditor("displayValue")).toBe("changed");
-						$(fixture.debugElement.nativeElement).find("#editor1").trigger("focus").val("test again").trigger("paste").trigger("blur");
+						$(fixture.debugElement.nativeElement).find("#editor1").focus().trigger("focus").val("test again").blur().trigger("blur");
 						setTimeout(() => {
 							expect(fixture.debugElement.componentInstance.val).toBe("test again");
 							done();
@@ -328,7 +343,7 @@ export function main() {
 					fixture.detectChanges();
 					setTimeout(() => {
 						expect($(fixture.debugElement.nativeElement).find("#editor1").igDatePicker("displayValue")).toBe("3/15/2016");
-						$(fixture.debugElement.nativeElement).find("#editor1").trigger("focus").val("03/03/2016").trigger("paste").trigger("blur");
+						$(fixture.debugElement.nativeElement).find("#editor1").focus().trigger("focus").val("03/03/2016").blur().trigger("blur");
 						setTimeout(() => {
 							expect(fixture.debugElement.componentInstance.val.getTime()).toBe(new Date("03/03/2016").getTime());
 							done();
@@ -380,7 +395,7 @@ export function main() {
 					fixture.detectChanges();
 					setTimeout(() => {
 						expect($(fixture.debugElement.nativeElement).find("#editor1").igDateEditor("displayValue")).toBe("3/15/2016");
-						$(fixture.debugElement.nativeElement).find("#editor1").trigger("focus").val("03/03/2016").trigger("paste").trigger("blur");
+						$(fixture.debugElement.nativeElement).find("#editor1").focus().trigger("focus").val("03/03/2016").blur().trigger("blur");
 						setTimeout(() => {
 							expect(fixture.debugElement.componentInstance.val.getTime()).toBe(new Date("03/03/2016").getTime());
 							done();
@@ -432,7 +447,7 @@ export function main() {
 					fixture.detectChanges();
 					setTimeout(() => {
 						expect($(fixture.debugElement.nativeElement).find("#editor1").igCurrencyEditor("displayValue")).toBe("$1.00");
-						$(fixture.debugElement.nativeElement).find("#editor1").trigger("focus").val(154).trigger("paste").trigger("blur");
+						$(fixture.debugElement.nativeElement).find("#editor1").focus().trigger("focus").val(154).blur().trigger("blur");
 						setTimeout(() => {
 							expect(fixture.debugElement.componentInstance.val).toBe(154);
 							done();
@@ -493,7 +508,59 @@ export function main() {
 				}, 1);
 			});
 		});
-	});
+    });
+
+    describe('Infragistics Angular2 TimePicker', () => {
+		beforeEach(() => {
+			TestBed.configureTestingModule({
+				imports: [FormsModule],
+				declarations: [Infragistics.IgTimePickerComponent, TestIgTimePickerComponent]
+			});
+		});
+
+		it('should initialize correctly', (done) => {
+			var template = '<div><ig-time-picker></ig-time-picker></div>';
+			TestBed.overrideComponent(TestIgTimePickerComponent, {
+				set: {
+					template: template
+				}
+			});
+			TestBed.compileComponents().then(() => {
+				let fixture = TestBed.createComponent(TestIgTimePickerComponent);
+				fixture.detectChanges();
+				expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgTimePickerComponent)
+					.toBe(true);
+				done();
+			});
+		});
+
+		it('should allow setting value with ngModel', (done) => {
+			var template = '<div><ig-time-picker [(ngModel)]="val" [widgetId]="editorId" [options]="{isLimitedToListValues:false}"></ig-time-picker></div>';
+			TestBed.overrideComponent(TestIgTimePickerComponent, {
+				set: {
+					template: template
+				}
+			});
+			TestBed.compileComponents().then(() => {
+				let fixture = TestBed.createComponent(TestIgTimePickerComponent);
+				fixture.detectChanges();
+				setTimeout(() => {
+					expect($(fixture.debugElement.nativeElement).find("#editor1").igTimePicker("displayValue")).toBe("12:36 AM");
+					fixture.debugElement.componentInstance.val = "05:50 AM";
+					fixture.detectChanges();
+					setTimeout(() => {
+						expect($(fixture.debugElement.nativeElement).find("#editor1").igTimePicker("displayValue")).toBe("5:50 AM");
+						$(fixture.debugElement.nativeElement).find("#editor1").focus().trigger("focus").val("06:00 PM").blur().trigger("blur");
+						setTimeout(() => {
+							expect(fixture.debugElement.componentInstance.val.getHours()).toBe(6);
+							expect(fixture.debugElement.componentInstance.val.getMinutes()).toBe(0);
+							done();
+						}, 100);
+					}, 1);
+				}, 1);
+			});
+		});
+    });
 }
 
 @Component({
@@ -504,7 +571,8 @@ class TestIgTextEditorComponent {
 	private opts: IgTextEditor;
 	private val:string;
 	private editorId:string;
-	private cdi: number = 0;
+    private cdi: number = 0;
+    private validatorOpts: IgValidator;
 	@ViewChild(Infragistics.IgTextEditorComponent) public viewChild: Infragistics.IgTextEditorComponent;
 
 	constructor() {
@@ -512,7 +580,14 @@ class TestIgTextEditorComponent {
 		this.editorId = "editor1";
 		this.opts = {
 			disabled: true
-		};
+        };
+
+        this.validatorOpts = {
+            successMessage: "Success",
+            required: true,
+            onchange: true,
+            notificationOptions: { mode: "popover" }
+        };
 	}
 }
 
@@ -578,6 +653,21 @@ class TestIgDatePickerComponent {
 }
 
 @Component({
+	selector: 'test-time-picker-cmp',
+	template: '<div></div>' //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+})
+class TestIgTimePickerComponent {
+	private val: string;
+	private editorId:string;
+	@ViewChild(Infragistics.IgTimePickerComponent) public viewChild: Infragistics.IgTimePickerComponent;
+
+	constructor() {
+		this.val = "12:36 AM";
+		this.editorId = "editor1";
+	}
+}
+
+@Component({
 	selector: 'test-date-editor-cmp',
 	template: '<div></div>' //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
 })
@@ -613,12 +703,12 @@ class TestIgCurrencyEditorComponent {
 })
 class TestIgCheckboxEditorComponent {
 	private val: boolean;
-	private editorId:string;
+    private editorId:string;
 	@ViewChild(Infragistics.IgCheckboxEditorComponent) public viewChild: Infragistics.IgCheckboxEditorComponent;
 
 	constructor() {
 		this.val = true;
-		this.editorId = "editor1";
+        this.editorId = "editor1";
 	}
 }
 

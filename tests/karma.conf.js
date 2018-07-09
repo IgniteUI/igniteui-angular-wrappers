@@ -12,6 +12,7 @@ module.exports = function(config){
             'http://cdn-na.infragistics.com/igniteui/latest/js/infragistics.lob.js',
             'http://cdn-na.infragistics.com/igniteui/latest/js/infragistics.dv.js',
             'https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js',
+            'node_modules/jquery-mockjax/dist/jquery.mockjax.js',
 
 
             { pattern: 'node_modules/traceur/bin/traceur.js', included: true, watched: false },
@@ -52,13 +53,13 @@ module.exports = function(config){
             { pattern: 'node_modules/@angular/**/*.js.map', included: false, watched: false },
 
             // paths loaded via module imports
-            { pattern: 'dist/npm/**/*.*', included: false, watched: true },
-            
+            { pattern: 'src/**/*.*', included: false, watched: true },
+
             // spec files need to be loaded in the shim file IN CONTEXT of the main module, don't include:            
             { pattern: 'tests/unit/**/*.js', included: false, watched: false },
             { pattern: 'tests/unit/**/*.js.map', included: false, watched: false }
         ],
-
+		
         // list of files to exclude
         exclude: [
             'node_modules/**/*spec.js'
@@ -87,7 +88,7 @@ module.exports = function(config){
         reporters: ['progress', 'coverage'],
 
         preprocessors: {
-            'dist/npm/**/*.js': ['coverage']
+            'src/**/*.js': ['coverage']
         },
 
         coverageReporter: {

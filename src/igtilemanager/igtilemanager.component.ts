@@ -1,4 +1,4 @@
-import { ElementRef, Renderer, IterableDiffers, Component } from "@angular/core";
+import { ElementRef, Renderer, IterableDiffers, Component, KeyValueDiffers, ChangeDetectorRef } from "@angular/core";
 import { IgContentControlBase } from "../igcontrolbase/igcontentcontrolbase";
 
 @Component({
@@ -8,7 +8,18 @@ import { IgContentControlBase } from "../igcontrolbase/igcontentcontrolbase";
 	outputs: ["dataBinding","dataBound","rendering","rendered","tileRendering","tileRendered","tileMaximizing","tileMaximized","tileMinimizing","tileMinimized"]
 })
 export class IgTileManagerComponent extends IgContentControlBase<IgTileManager> {
-	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers) { super(el, renderer, differs); }
+	constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { 
+		super(el, renderer, differs, kvalDiffers, cdr);
+    }
+
+    ngOnInit() {
+        Object.defineProperty(this, "dataSource", {
+            set: this.createSetter("dataSource"),
+            enumerable: true,
+            configurable: true
+        });
+        super.ngOnInit();
+    }
 
 	/**
  	 * Maximizes a given tile.
