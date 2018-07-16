@@ -27,6 +27,22 @@ export function main() {
                 done();
             });
         });
+
+        it('should allow initializing data source as a top level option', (done) => {
+            var template = '<div><ig-map  [widgetId]="\'map1\'" [(dataSource)]="data"></ig-map></div>';
+            TestBed.overrideComponent(TestComponent, {
+                set: {
+                    template: template
+                }
+            });
+            TestBed.compileComponents().then(() => {
+                let fixture = TestBed.createComponent(TestComponent);
+                fixture.detectChanges();
+                expect($(fixture.debugElement.nativeElement).find("#map1").igMap("option", "dataSource")[0].Latitude)
+                    .toBe(52.21);
+                done();
+            });
+        });
     });
 }
 
@@ -37,6 +53,9 @@ export function main() {
 class TestComponent {
     @ViewChild(Infragistics.IgMapComponent) public viewChild: Infragistics.IgMapComponent;
 
+    data: any[];
+
     constructor() {
+        this.data = [{ Name: "Warsaw", Country: "Poland", Latitude: 52.21, Longitude: 21 }];
     }
 }
