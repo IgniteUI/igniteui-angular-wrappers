@@ -32,7 +32,6 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
 
     ngOnInit() {
         let that = this;
-        const valueKey = this["valueKey"] || this.options.valueKey;
         if (this._dataSource === null || this._dataSource === undefined) {
             this._dataSource = this.options["dataSource"];
         }
@@ -45,6 +44,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
             // D.P. #244 only attach selectionchanged handler if there's a model to update
             jQuery(this._el).on(this._widgetName.toLowerCase() + "selectionchanged", function (evt, ui) {
                 var items = ui.items;
+                const valueKey = ui.owner.options.valueKey;
 
                 if (items.length <= 0 && !ui.owner.options.multiSelection.enabled) {
                     that._model.viewToModelUpdate(null);
