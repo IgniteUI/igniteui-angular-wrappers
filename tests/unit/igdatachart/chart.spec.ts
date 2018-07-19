@@ -81,6 +81,24 @@ export function main() {
                 done();
             });
         });
+
+        it('Zoombar should destroy correctly', (done) => {
+            var template = '<div><div *ngIf="isChartAreaVisible"><ig-data-chart  widgetId="datachart1" [(options)]="opts"></ig-data-chart><ig-zoombar [(options)]="zoombarOpts" widgetId="zoombar"></ig-zoombar></div></div>';
+            TestBed.overrideComponent(TestComponent, {
+                set: {
+                    template: template
+                }
+            });
+            TestBed.compileComponents().then(() => {
+                let fixture = TestBed.createComponent(TestComponent);
+                fixture.detectChanges();
+                fixture.componentInstance.isChartAreaVisible = false;
+                fixture.detectChanges();
+                expect($(fixture.debugElement.nativeElement).find("#datachart1").data("igDataChart")).toBeUndefined();
+                expect($(fixture.debugElement.nativeElement).find("#zoombar").data("igZoombar")).toBeUndefined();
+                done();
+            });
+        });
     });
 }
 
@@ -93,6 +111,7 @@ class TestComponent {
     public opts1: any;
     private zoombarOpts: any;
     public data: Array<any>;
+    public isChartAreaVisible: boolean = true;
     @ViewChild(Infragistics.IgDataChartComponent) public viewChild: Infragistics.IgDataChartComponent;
     @ViewChild(Infragistics.IgZoombarComponent) public viewChild2: Infragistics.IgZoombarComponent;
 
