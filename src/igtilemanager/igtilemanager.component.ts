@@ -1,4 +1,4 @@
-import { ElementRef, Renderer, IterableDiffers, Component, KeyValueDiffers, ChangeDetectorRef } from "@angular/core";
+import { ElementRef, Renderer, IterableDiffers, Component, KeyValueDiffers, ChangeDetectorRef, Input } from "@angular/core";
 import { IgContentControlBase } from "../igcontrolbase/igcontentcontrolbase";
 
 @Component({
@@ -12,12 +12,24 @@ export class IgTileManagerComponent extends IgContentControlBase<IgTileManager> 
 		super(el, renderer, differs, kvalDiffers, cdr);
     }
 
+    @Input()
+    public set dataSource(value: any) {
+        this._dataSource = value;
+        const widget = jQuery(this._el).data(this._widgetName);
+        if (widget) {
+            jQuery(this._el)[this._widgetName]("option", "dataSource", this._dataSource);
+        }
+    };
+
+    private _dataSource: any;
+
     ngOnInit() {
-        Object.defineProperty(this, "dataSource", {
-            set: this.createSetter("dataSource"),
-            enumerable: true,
-            configurable: true
-        });
+        if (this._dataSource === null || this._dataSource === undefined) {
+            this._dataSource = this.options["dataSource"];
+        }
+        if (!this.options["dataSource"] && this._dataSource) {
+            this.options["dataSource"] = this._dataSource;
+        }
         super.ngOnInit();
     }
 

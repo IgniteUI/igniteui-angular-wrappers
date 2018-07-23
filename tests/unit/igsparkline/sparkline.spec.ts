@@ -29,6 +29,21 @@ export function main() {
             });
         });
 
+        it('should allow initializing data source as a top level option', (done) => {
+            var template = '<div><ig-sparkline [widgetId]="\'sparkLine\'" [(dataSource)]="data"></ig-sparkline></div>';
+            TestBed.overrideComponent(TestComponent, {
+                set: {
+                    template: template
+                }
+            });
+            TestBed.compileComponents().then(() => {
+                let fixture = TestBed.createComponent(TestComponent);
+                fixture.detectChanges();
+                expect($(fixture.debugElement.nativeElement).find("#sparkLine").igSparkline("option", "dataSource")[0].ExtendedPrice)
+                    .toBe(168.0000);
+                done();
+            });
+        });
     });
 }
 
@@ -38,10 +53,13 @@ export function main() {
 })
 class TestComponent {
     private opts: any;
+    private data: any[];
 
     @ViewChild(Infragistics.IgSparklineComponent) public viewChild: Infragistics.IgSparklineComponent;
 
     constructor() {
+        this.data = [{ "OrderDate": "\/Date(836452800000)\/", "ExtendedPrice": 168.0000, "Freight": 32.3800 }];
+
         this.opts = {
             dataSource: [
                 { "OrderDate": "\/Date(836452800000)\/", "ExtendedPrice": 168.0000, "Freight": 32.3800 },

@@ -28,6 +28,22 @@ export function main() {
             });
         });
 
+        it('should allow initializing data source as a top level option', (done) => {
+            var template = '<div><ig-pivot-data-selector  [widgetId]="\'pds\'" [(dataSource)]="data"></ig-pivot-data-selector></div>';
+            TestBed.overrideComponent(TestComponent, {
+                set: {
+                    template: template
+                }
+            });
+            TestBed.compileComponents().then(() => {
+                let fixture = TestBed.createComponent(TestComponent);
+                fixture.detectChanges();
+                expect($(fixture.debugElement.nativeElement).find("#pds").igPivotDataSelector("option", "dataSource")[0].UnitPrice)
+                    .toBe(12.81);
+                done();
+            });
+        });
+
     });
 }
 

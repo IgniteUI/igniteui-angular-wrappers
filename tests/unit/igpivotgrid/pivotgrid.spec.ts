@@ -27,6 +27,21 @@ export function main() {
                 done();
             });
         });
+        it('should allow initializing data source as a top level option', (done) => {
+            var template = '<div><ig-pivot-grid  [widgetId]="\'pivot1\'" [(dataSource)]="data"></ig-pivot-grid></div>';
+            TestBed.overrideComponent(TestComponent, {
+                set: {
+                    template: template
+                }
+            });
+            TestBed.compileComponents().then(() => {
+                let fixture = TestBed.createComponent(TestComponent);
+                fixture.detectChanges();
+                expect($(fixture.debugElement.nativeElement).find("#pivot1").igPivotGrid("option", "dataSource")[0].UnitPrice)
+                    .toBe(12.81);
+                done();
+            });
+        });
     });
 }
 
