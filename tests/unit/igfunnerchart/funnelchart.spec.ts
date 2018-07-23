@@ -26,6 +26,22 @@ export function main() {
                 done();
             });
         });
+
+        it('should allow initializing data source as a top level option', (done) => {
+            var template = '<div><ig-funnel-chart  [widgetId]="\'chart1\'" [(dataSource)]="data"></ig-funnel-chart></div>';
+            TestBed.overrideComponent(TestComponent, {
+                set: {
+                    template: template
+                }
+            });
+            TestBed.compileComponents().then(() => {
+                let fixture = TestBed.createComponent(TestComponent);
+                fixture.detectChanges();
+                expect($(fixture.debugElement.nativeElement).find("#chart1").igFunnelChart("option", "dataSource")[0].Budget)
+                    .toBe(30);
+                done();
+            });
+        });
     });
 }
 
