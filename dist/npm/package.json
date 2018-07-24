@@ -3,7 +3,6 @@
   "version": "5.0.3",
   "description" : "A packaged version of Ignite UI wrappers for Angular",
   "license": "MIT",
-  "types": "main.d.ts",
   "main": "bundles/igniteui-angular-wrappers.umd.js",
   "repository": {
     "type": "git",
