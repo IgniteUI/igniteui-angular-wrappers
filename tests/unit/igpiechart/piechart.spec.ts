@@ -27,6 +27,22 @@ export function main() {
                 done();
             });
         });
+
+        it('should allow initializing data source as a top level option', (done) => {
+            var template = '<div><ig-pie-chart  [widgetId]="\'chart1\'" [(dataSource)]="data"></ig-pie-chart></div>';
+            TestBed.overrideComponent(TestComponent, {
+                set: {
+                    template: template
+                }
+            });
+            TestBed.compileComponents().then(() => {
+                let fixture = TestBed.createComponent(TestComponent);
+                fixture.detectChanges();
+                expect($(fixture.debugElement.nativeElement).find("#chart1").igPieChart("option", "dataSource")[0].Budget)
+                    .toBe(60);
+                done();
+            });
+        });
     });
 }
 

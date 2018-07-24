@@ -82,6 +82,22 @@ export function main() {
             });
         });
 
+        it('should allow initializing data source as a top level option', (done) => {
+            var template = '<div><ig-data-chart  [widgetId]="\'datachart1\'" [(options)]="opts2" [(dataSource)]="data"></ig-data-chart></div>';
+            TestBed.overrideComponent(TestComponent, {
+                set: {
+                    template: template
+                }
+            });
+            TestBed.compileComponents().then(() => {
+                let fixture = TestBed.createComponent(TestComponent);
+                fixture.detectChanges();
+                expect($(fixture.debugElement.nativeElement).find("#datachart1").igDataChart("option", "dataSource")[0].Pop1995)
+                    .toBe(1216);
+                done();
+            });
+        });
+
         it('Zoombar should destroy correctly', (done) => {
             var template = '<div><div *ngIf="isChartAreaVisible"><ig-data-chart  widgetId="datachart1" [(options)]="opts"></ig-data-chart><ig-zoombar [(options)]="zoombarOpts" widgetId="zoombar"></ig-zoombar></div></div>';
             TestBed.overrideComponent(TestComponent, {
@@ -109,6 +125,7 @@ export function main() {
 class TestComponent {
     public opts: any;
     public opts1: any;
+    public opts2: any;
     private zoombarOpts: any;
     public data: Array<any>;
     public isChartAreaVisible: boolean = true;
@@ -165,6 +182,29 @@ class TestComponent {
             series: [{
                 name: "2015Population",
                 type: "line",
+                isHighlightingEnabled: true,
+                isTransitionInEnabled: true,
+                xAxis: "NameAxis",
+                yAxis: "PopulationAxis",
+                valueMemberPath: "Pop2015"
+            }]
+        };
+        this.opts2 = {
+            axes: [{
+                name: "NameAxis",
+                type: "categoryX",
+                title: "Country",
+                label: "CountryName"
+            },
+            {
+                name: "PopulationAxis",
+                type: "numericY",
+                minimumvalue: 0,
+                title: "Milions of People"
+            }],
+            series: [{
+                name: "2015Population",
+                type: "column",
                 isHighlightingEnabled: true,
                 isTransitionInEnabled: true,
                 xAxis: "NameAxis",
