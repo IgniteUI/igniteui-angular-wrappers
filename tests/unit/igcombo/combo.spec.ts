@@ -2,7 +2,7 @@
 import { TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import * as Infragistics from '../../../src/igniteui.angular2';
+import * as Infragistics from '../../../src/main';
 import { Northwind } from "../../../samples/data/northwind";
 
 export function main() {

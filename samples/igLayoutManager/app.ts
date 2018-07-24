@@ -1,5 +1,5 @@
 import { Component, NgModule } from '@angular/core';
-import { IgLayoutManagerComponent } from "../../src/igniteui.angular2";
+import { IgLayoutManagerComponent } from "../../src/main";
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic }	from '@angular/platform-browser-dynamic';
 
