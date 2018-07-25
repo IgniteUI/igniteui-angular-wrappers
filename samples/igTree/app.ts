@@ -1,5 +1,5 @@
 import { Component, NgModule, ViewChild } from '@angular/core';
-import { IgTreeComponent } from "../../src/igniteui.angular2";
+import { IgTreeComponent } from "../../src/main";
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic }	from '@angular/platform-browser-dynamic';

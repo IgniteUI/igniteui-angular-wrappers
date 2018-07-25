@@ -1,5 +1,5 @@
 import { Component, NgModule } from '@angular/core';
-import { IgTreeGridComponent } from "../../src/igniteui.angular2";
+import { IgTreeGridComponent } from "../../src/main";
 import { Tasks } from "./../data/tasks";
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic }	from '@angular/platform-browser-dynamic';

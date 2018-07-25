@@ -1,5 +1,5 @@
 import { Component, NgModule } from '@angular/core';
-import { IgniteUIModule } from "../../src/igniteui.angular2";
+import { IgniteUIModule } from "../../src/main";
 import { FormsModule } from '@angular/forms';
 import { Northwind } from "./../data/northwind";
 import { BrowserModule } from '@angular/platform-browser';

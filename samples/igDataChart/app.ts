@@ -1,5 +1,5 @@
 import { Component, NgModule } from '@angular/core';
-import { IgDataChartComponent, IgZoombarComponent } from "../../src/igniteui.angular2";
+import { IgDataChartComponent, IgZoombarComponent } from "../../src/main";
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic }    from '@angular/platform-browser-dynamic';
 

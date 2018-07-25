@@ -1,5 +1,5 @@
 import { Component, NgModule } from '@angular/core';
-import { IgTileManagerComponent } from "../../src/igniteui.angular2";
+import { IgTileManagerComponent } from "../../src/main";
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic }	from '@angular/platform-browser-dynamic';
 import { candidates } from "./../data/candidates";

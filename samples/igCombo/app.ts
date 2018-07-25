@@ -1,5 +1,5 @@
 import { Component, NgModule } from '@angular/core';
-import { IgComboComponent } from "../../src/igniteui.angular2";
+import { IgComboComponent } from "../../src/main";
 import { Northwind } from "./../data/northwind";
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic }    from '@angular/platform-browser-dynamic';

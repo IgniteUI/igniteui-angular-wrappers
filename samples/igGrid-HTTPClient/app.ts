@@ -1,5 +1,5 @@
 import { Component, Injectable, NgModule } from '@angular/core';
-import { IgGridComponent } from "../../src/igniteui.angular2";
+import { IgGridComponent } from "../../src/main";
 import { HttpClient, HttpResponse, HttpClientModule, HttpHeaders,  } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';

@@ -1,5 +1,5 @@
 import { Component, NgModule} from '@angular/core';
-import { IgHierarchicalGridComponent} from "../../src/igniteui.angular2";
+import { IgHierarchicalGridComponent} from "../../src/main";
 import { NorthwindEmployees} from "./../data/northwind-employees";
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic }	from '@angular/platform-browser-dynamic';
