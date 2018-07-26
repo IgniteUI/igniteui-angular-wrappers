@@ -1,5 +1,5 @@
 import { Component, NgModule } from '@angular/core';
-import { IgGridComponent, Column, Features, IgGridPagingFeature } from "../../src/igniteui.angular2";
+import { IgGridComponent, Column, Features, IgGridPagingFeature } from "../../src/main";
 import { FormsModule } from '@angular/forms';
 import { Northwind } from "./../data/northwind";
 import { BrowserModule } from '@angular/platform-browser';

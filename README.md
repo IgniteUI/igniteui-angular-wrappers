@@ -4,7 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/IgniteUI/igniteui-angular-wrappers/badge.svg?branch=master)](https://coveralls.io/github/IgniteUI/igniteui-angular-wrappers?branch=master)  
 [![npm version](https://badge.fury.io/js/igniteui-angular-wrappers.svg)](https://badge.fury.io/js/igniteui-angular-wrappers)
 
-Use the components found in `src\igniteui.angular2.ts` to use [Ignite UI](http://igniteui.com) controls in [Angular](https://angular.io/) applications. [Work with the running samples here](http://igniteui.github.io/igniteui-angular-wrappers).
+Use the components found in `src\main.ts` to use [Ignite UI](http://igniteui.com) controls in [Angular](https://angular.io/) applications. [Work with the running samples here](http://igniteui.github.io/igniteui-angular-wrappers).
 
 **IMPORTANT** The repository has been renamed from `igniteui-angular2` to `igniteui-angular-wrappers`. Read more on our new [naming convention](https://www.infragistics.com/community/blogs/b/infragistics/posts/ignite-ui-github-repo-name-changes). 
 
@@ -465,12 +465,12 @@ The command for running the tests is:
 
     npm test
 
-After that, if all tests successfully passed a code coverage for the `igniteui.angular2.ts` filse will be generated under the `./coverage` folder.
+After that, if all tests successfully passed a code coverage for the `main.ts` filse will be generated under the `./coverage` folder.
 
 To see the code coverage you can open one of the html files under `./coverage/html-report/src`.
 
-**Note:** The code coverage is actually being generated on the `igniteui.angular2.js` file (comes from compilation of the source .ts file). That coverage is saved under the `coverage/karma-tmp` folder.
-Since we need the code coverage of the `igniteui.angular2.js` file itself, we use the remap-istanbul module to remap the report from the .js file to the .ts file and save it under the `coverage/html-report` and `coverage/lcov.info`.
+**Note:** The code coverage is actually being generated on the `main.js` file (comes from compilation of the source .ts file). That coverage is saved under the `coverage/karma-tmp` folder.
+Since we need the code coverage of the `main.js` file itself, we use the remap-istanbul module to remap the report from the .js file to the .ts file and save it under the `coverage/html-report` and `coverage/lcov.info`.
 
 ---------------------------------------
 

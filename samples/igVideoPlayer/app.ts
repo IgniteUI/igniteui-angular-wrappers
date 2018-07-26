@@ -1,5 +1,5 @@
 import { Component, NgModule } from '@angular/core';
-import { IgVideoPlayerComponent } from "../../src/igniteui.angular2";
+import { IgVideoPlayerComponent } from "../../src/main";
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic }	from '@angular/platform-browser-dynamic';
 
