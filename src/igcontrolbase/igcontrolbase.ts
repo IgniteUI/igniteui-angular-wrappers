@@ -179,8 +179,11 @@ export class IgControlBase<Model> implements DoCheck {
     }
 
     ngOnDestroy() {
-        jQuery(this._el)[this._widgetName]("destroy");
-        jQuery(this._el).remove();
-        jQuery(this._nativeElement).remove();
+        // igZoombar should be attached to body when being destroyed
+        if (this._widgetName !== "igZoombar" || document.body.contains(this._el)) {
+            jQuery(this._el)[this._widgetName]("destroy");
+            jQuery(this._el).remove();
+            jQuery(this._nativeElement).remove();
+        }
     }
 }
