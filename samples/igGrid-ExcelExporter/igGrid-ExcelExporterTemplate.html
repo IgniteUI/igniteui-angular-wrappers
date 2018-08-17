@@ -1,0 +1,7 @@
+<div class="row">
+    <div class="col-md-12">
+        <ig-grid [(options)]="gridOptions" [(widgetId)]='id' #grid1 [dataSource]='data'></ig-grid>
+        <br>
+        <button type="button" class="btn btn-default" (click)="exportExcelGrid()">Export</button>
+    </div>
+</div>
