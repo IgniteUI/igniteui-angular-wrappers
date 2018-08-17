@@ -9,11 +9,11 @@
  - Each igGrid feature now has a separate Directive definition that needs to be imported and added to the module definition if the related feature is to be used in the grid.
 	In previous versions all fetaures were imported as a single Directive definition. Example:
 	
-		import { Feature } from "../../src/igniteui.angular2";
+		import { Feature } from "../../src/main";
 
 	Now each feature has its own specific directive. For example for Paging feature:
 	
-		import { Features, IgGridPagingFeature } from "../../src/igniteui.angular2";
+		import { Features, IgGridPagingFeature } from "../../src/main";
 
   
 	Also the syntax for specifying the features has been changed.

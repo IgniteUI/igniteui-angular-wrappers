@@ -1,6 +1,6 @@
 import { Component, NgModule, ViewChild } from '@angular/core';
 import { IgGridComponent, Column, Features, IgGridPagingFeature, IgGridSelectionFeature, IgGridFilteringFeature, IgComboComponent,
-	 IgTextEditorComponent, IgNumericEditorComponent, IgDateEditorComponent } from "../../src/igniteui.angular2";
+	 IgTextEditorComponent, IgNumericEditorComponent, IgDateEditorComponent } from "../../src/main";
 import { FormsModule } from '@angular/forms';
 import { Northwind } from "./../data/northwind";
 import { BrowserModule } from '@angular/platform-browser';

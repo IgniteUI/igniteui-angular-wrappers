@@ -3,7 +3,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import angular from 'rollup-plugin-angular';
 import typescript from 'rollup-plugin-typescript';
 export default {
-    entry: 'src/igniteui.angular2.ts',
+    entry: 'src/main.ts',
     format: 'umd',
     moduleName: 'igniteui-angular-wrappers',
     sourceMap:true,

@@ -1,7 +1,7 @@
 // modeled after https://github.com/angular/angular/blob/cee2318110eeea115e5f6fc5bfc814cbaa7d90d8/modules/angular2/test/common/directives/ng_for_spec.ts
 import { TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
-import * as Infragistics from '../../../src/igniteui.angular2';
+import * as Infragistics from '../../../src/main';
 import { candidates } from "../../../samples/data/candidates";
 
 export function main() {
@@ -28,6 +28,22 @@ export function main() {
                 done();
             });
         });
+
+        it('should allow initializing data source as a top level option', (done) => {
+            var template = '<div><ig-tile-manager [widgetId]="\'tm1\'" [(options)]="opts" [(dataSource)]="data"></ig-tile-manager></div>';
+            TestBed.overrideComponent(TestComponent, {
+                set: {
+                    template: template
+                }
+            });
+            TestBed.compileComponents().then(() => {
+                let fixture = TestBed.createComponent(TestComponent);
+                fixture.detectChanges();
+                expect($(fixture.debugElement.nativeElement).find("#tm1").igTileManager("option", "dataSource").data()[0].name)
+                    .toBe("foo");
+                done();
+            });
+        });
     });
 }
 
@@ -38,10 +54,13 @@ export function main() {
 class TestComponent {
     private opts: any;
     private cdi = 10;
+    data: any[];
 
     @ViewChild(Infragistics.IgTileManagerComponent) public viewChild: Infragistics.IgTileManagerComponent;
 
     constructor() {
+        this.data = [{name:"foo"}];
+
         this.opts = {
             //dataSource: candidates.getData(),
             marginLeft: 10,

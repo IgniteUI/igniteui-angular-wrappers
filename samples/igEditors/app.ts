@@ -1,6 +1,6 @@
 import { Component, NgModule } from '@angular/core';
 import { IgCurrencyEditorComponent, IgDateEditorComponent, IgMaskEditorComponent, IgNumericEditorComponent, 
-	IgPercentEditorComponent, IgTextEditorComponent, IgDatePickerComponent, IgTimePickerComponent } from "../../src/igniteui.angular2";
+	IgPercentEditorComponent, IgTextEditorComponent, IgDatePickerComponent, IgTimePickerComponent } from "../../src/main";
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic }	from '@angular/platform-browser-dynamic';
