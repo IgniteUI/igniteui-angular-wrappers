@@ -1,4 +1,4 @@
-import { Component, NgModule, ViewChild, ElementRef } from "@angular/core";
+import { Component, NgModule } from "@angular/core";
 import { IgGridComponent } from "../../src/main";
 import { FormsModule } from "@angular/forms";
 import { Northwind } from "./../data/northwind";
@@ -14,18 +14,12 @@ export class AppComponent {
   private gridOptions: IgGrid;
   private id: string;
   private data: any;
-  private newProduct: any;
-  @ViewChild("grid1")
-  grid: IgGridComponent;
-  //private deleteRecord: any;
-
-  @ViewChild("btn")
-  exportBtn: ElementRef;
 
   constructor() {
     this.data = Northwind.getData();
 
     this.id = "grid1";
+
     this.gridOptions = {
       autoCommit: true,
       width: "100%",
@@ -79,17 +73,6 @@ export class AppComponent {
         sorting: $("#sorting").igCheckboxEditor("value") ? "applied" : "none"
       }
     });
-  }
-
-  deleteRecord(val) {
-    var ind = 0;
-    this.data.filter(function(item, index) {
-      if (item["ProductID"] === val) {
-        ind = index;
-      }
-      return item["ProductID"] === val;
-    });
-    this.data.splice(ind, 1);
   }
 }
 
