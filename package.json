@@ -23,7 +23,7 @@
     "reflect-metadata": "^0.1.3",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26",
-    "bootstrap": "^3.3.6"
+    "bootstrap": "^4.1.3"
   },
   "devDependencies": {
     "jquery-mockjax": "2.2.2",
