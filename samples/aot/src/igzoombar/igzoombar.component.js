@@ -1,14 +1,26 @@
 "use strict";
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var igcontrolbase_1 = require("../igcontrolbase/igcontrolbase");
@@ -20,57 +32,27 @@ var IgZoombarComponent = /** @class */ (function (_super) {
     /**
      * Destroys the Zoombar widget
      */
-    /**
-         * Destroys the Zoombar widget
-         */
-    IgZoombarComponent.prototype.destroy = /**
-         * Destroys the Zoombar widget
-         */
-    function () { return; };
+    IgZoombarComponent.prototype.destroy = function () { return; };
     ;
     /**
      * Returns the main zoombar element
      */
-    /**
-         * Returns the main zoombar element
-         */
-    IgZoombarComponent.prototype.widget = /**
-         * Returns the main zoombar element
-         */
-    function () { return; };
+    IgZoombarComponent.prototype.widget = function () { return; };
     ;
     /**
      * Returns the ID of the element the zoombar is initialized on
      */
-    /**
-         * Returns the ID of the element the zoombar is initialized on
-         */
-    IgZoombarComponent.prototype.id = /**
-         * Returns the ID of the element the zoombar is initialized on
-         */
-    function () { return; };
+    IgZoombarComponent.prototype.id = function () { return; };
     ;
     /**
      * Returns the DIV that is the topmost container of the zoombar widget
      */
-    /**
-         * Returns the DIV that is the topmost container of the zoombar widget
-         */
-    IgZoombarComponent.prototype.container = /**
-         * Returns the DIV that is the topmost container of the zoombar widget
-         */
-    function () { return; };
+    IgZoombarComponent.prototype.container = function () { return; };
     ;
     /**
      * Returns the element the clone widget is initialized on
      */
-    /**
-         * Returns the element the clone widget is initialized on
-         */
-    IgZoombarComponent.prototype.clone = /**
-         * Returns the element the clone widget is initialized on
-         */
-    function () { return; };
+    IgZoombarComponent.prototype.clone = function () { return; };
     ;
     /**
      * Gets or sets the current zoom window
@@ -78,36 +60,17 @@ var IgZoombarComponent = /** @class */ (function (_super) {
      * @param left     The left parameter of the new zoom window in percentages
      * @param width     The width parameter of the new zoom window in percentages
      */
-    /**
-         * Gets or sets the current zoom window
-         *
-         * @param left     The left parameter of the new zoom window in percentages
-         * @param width     The width parameter of the new zoom window in percentages
-         */
-    IgZoombarComponent.prototype.zoom = /**
-         * Gets or sets the current zoom window
-         *
-         * @param left     The left parameter of the new zoom window in percentages
-         * @param width     The width parameter of the new zoom window in percentages
-         */
-    function (left, width) { return; };
+    IgZoombarComponent.prototype.zoom = function (left, width) { return; };
     ;
-    IgZoombarComponent.decorators = [
-        { type: core_1.Component, args: [{
-                    selector: "ig-zoombar",
-                    template: "<ng-content></ng-content>",
-                    inputs: ["widgetId", "options", "changeDetectionInterval", "disabled", "create", "target", "clone", "width", "height", "zoomAction", "zoomWindowMoveDistance", "defaultZoomWindow", "zoomWindowMinWidth", "hoverStyleAnimationDuration", "windowPanDuration", "tabIndex"],
-                    outputs: ["zoomChanging", "zoomChanged", "providerCreated", "windowDragStarting", "windowDragStarted", "windowDragging", "windowDragEnding", "windowDragEnded", "windowResizing", "windowResized"]
-                },] },
-    ];
-    /** @nocollapse */
-    IgZoombarComponent.ctorParameters = function () { return [
-        { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
-        { type: core_1.IterableDiffers, },
-        { type: core_1.KeyValueDiffers, },
-        { type: core_1.ChangeDetectorRef, },
-    ]; };
+    IgZoombarComponent = __decorate([
+        core_1.Component({
+            selector: "ig-zoombar",
+            template: "<ng-content></ng-content>",
+            inputs: ["widgetId", "options", "changeDetectionInterval", "disabled", "create", "target", "clone", "width", "height", "zoomAction", "zoomWindowMoveDistance", "defaultZoomWindow", "zoomWindowMinWidth", "hoverStyleAnimationDuration", "windowPanDuration", "tabIndex"],
+            outputs: ["zoomChanging", "zoomChanged", "providerCreated", "windowDragStarting", "windowDragStarted", "windowDragging", "windowDragEnding", "windowDragEnded", "windowResizing", "windowResized"]
+        }),
+        __metadata("design:paramtypes", [core_1.ElementRef, core_1.Renderer, core_1.IterableDiffers, core_1.KeyValueDiffers, core_1.ChangeDetectorRef])
+    ], IgZoombarComponent);
     return IgZoombarComponent;
 }(igcontrolbase_1.IgControlBase));
 exports.IgZoombarComponent = IgZoombarComponent;

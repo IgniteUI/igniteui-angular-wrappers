@@ -1,7 +1,16 @@
 "use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var igniteui_angular2_1 = require("../../src/igniteui.angular2.ngfactory");
+var main_1 = require("../../src/igniteui.angular2.ngfactory");
 var forms_1 = require("@angular/forms");
 var northwind_1 = require("./../../../data/northwind");
 var platform_browser_1 = require("@angular/platform-browser");
@@ -68,27 +77,26 @@ var AppComponent = /** @class */ (function () {
         this.data.splice(ind, 1);
     };
     ;
-    AppComponent.decorators = [
-        { type: core_1.Component, args: [{
-                    selector: 'my-app',
-                    templateUrl: "./igGridTemplate-AoT.html"
-                },] },
-    ];
-    /** @nocollapse */
-    AppComponent.ctorParameters = function () { return []; };
+    AppComponent = __decorate([
+        core_1.Component({
+            selector: 'my-app',
+            templateUrl: "./igGridTemplate-AoT.html"
+        }),
+        __metadata("design:paramtypes", [])
+    ], AppComponent);
     return AppComponent;
 }());
 exports.AppComponent = AppComponent;
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
-    AppModule.decorators = [
-        { type: core_1.NgModule, args: [{
-                    imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, igniteui_angular2_1.IgniteUIModule],
-                    declarations: [AppComponent],
-                    bootstrap: [AppComponent]
-                },] },
-    ];
+    AppModule = __decorate([
+        core_1.NgModule({
+            imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, main_1.IgniteUIModule],
+            declarations: [AppComponent],
+            bootstrap: [AppComponent]
+        })
+    ], AppModule);
     return AppModule;
 }());
 exports.AppModule = AppModule;
