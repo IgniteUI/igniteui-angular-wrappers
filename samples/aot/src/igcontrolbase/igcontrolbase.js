@@ -1,4 +1,13 @@
 "use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var NODES = {
@@ -7,6 +16,7 @@ var NODES = {
     "ig-percent-editor": "input",
     "ig-mask-editor": "input",
     "ig-date-picker": "input",
+    "ig-time-picker": "input",
     "ig-date-editor": "input",
     "ig-currency-editor": "input",
     "ig-checkbox-editor": "input",
@@ -93,9 +103,8 @@ var IgControlBase = /** @class */ (function () {
                 });
             }
         }
-        var propNames = Object.getOwnPropertyNames(jQuery.ui[this._widgetName].prototype);
-        for (var i = 0; i < propNames.length; i++) {
-            var name = propNames[i];
+        var propNames = jQuery.ui[this._widgetName].prototype;
+        for (var name in propNames) {
             if (name.indexOf("_") !== 0 && typeof jQuery.ui[this._widgetName].prototype[name] === "function"
                 && name !== "dataSource") {
                 Object.defineProperty(that, name, {
@@ -159,13 +168,17 @@ var IgControlBase = /** @class */ (function () {
         });
     };
     IgControlBase.prototype.ngOnDestroy = function () {
-        jQuery(this._el)[this._widgetName]("destroy");
-        jQuery(this._el).remove();
-        jQuery(this._nativeElement).remove();
+        // igZoombar should be attached to body when being destroyed
+        if (this._widgetName !== "igZoombar" || document.body.contains(this._el)) {
+            jQuery(this._el)[this._widgetName]("destroy");
+            jQuery(this._el).remove();
+            jQuery(this._nativeElement).remove();
+        }
     };
-    IgControlBase.propDecorators = {
-        "options": [{ type: core_1.Input },],
-    };
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object)
+    ], IgControlBase.prototype, "options", void 0);
     return IgControlBase;
 }());
 exports.IgControlBase = IgControlBase;
