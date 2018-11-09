@@ -1,14 +1,26 @@
 "use strict";
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var igcontrolbase_1 = require("../igcontrolbase/igcontrolbase");
 var core_1 = require("@angular/core");
@@ -83,7 +95,7 @@ var IgGridBase = /** @class */ (function (_super) {
         }
         existingRow = grid.dataSource.findRecordByKey(rowData[pkKey]);
         if (!existingRow) {
-            // add the row without affecting the original DS (scope source)
+            // add the row without affecting the original DS (scope source) 
             // TODO: trigger rowAdded event?
             grid.dataSource._addRow(rowData, index);
             //add transaction
@@ -181,11 +193,19 @@ var IgGridBase = /** @class */ (function (_super) {
     };
     IgGridBase.prototype.allRows = function () { };
     ;
-    IgGridBase.propDecorators = {
-        "dataSource": [{ type: core_1.Input },],
-        "_columns": [{ type: core_1.ContentChildren, args: [column_directive_1.Column,] },],
-        "featuresList": [{ type: core_1.ContentChild, args: [features_directive_1.Features,] },],
-    };
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], IgGridBase.prototype, "dataSource", null);
+    __decorate([
+        core_1.ContentChildren(column_directive_1.Column),
+        __metadata("design:type", core_1.QueryList)
+    ], IgGridBase.prototype, "_columns", void 0);
+    __decorate([
+        core_1.ContentChild(features_directive_1.Features),
+        __metadata("design:type", features_directive_1.Features)
+    ], IgGridBase.prototype, "featuresList", void 0);
     return IgGridBase;
 }(igcontrolbase_1.IgControlBase));
 exports.IgGridBase = IgGridBase;
