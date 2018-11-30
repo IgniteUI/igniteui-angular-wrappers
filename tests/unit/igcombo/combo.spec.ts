@@ -179,6 +179,29 @@ export function main() {
             });
         });
 
+        it('the ngModel should be updated correctly if the combo is allowing custom values', (done) => {
+            var template = '<div><ig-combo [(widgetId)]="comboID" [(options)]="options" [(ngModel)]="combo.value1" [dataSource]="northwind" [allowCustomValue]="true"></ig-combo></div>';
+            TestBed.overrideComponent(TestComponent, {
+                set: {
+                    template: template
+                }
+            });
+            TestBed.compileComponents().then(() => {
+                let fixture = TestBed.createComponent(TestComponent);
+                fixture.detectChanges();
+                setTimeout(function () {
+                    //var elem = $("#combo1").igCombo("itemsFromIndex", 0)["element"];
+                    //$("#combo1").igCombo("select", elem, {}, true);
+                    $(fixture.debugElement.nativeElement).find("#combo1").val("foo").trigger("input");
+                    fixture.detectChanges();
+                    setTimeout(function () {
+                        expect(fixture.componentInstance.combo.value1).toEqual("foo");
+                        done();
+                    }, 10);
+                }, 100);
+            });
+        });
+
         it('the ngModel should be updated correctly if the combo selection is updated and multiple items are selected', (done) => {
             var template = '<div><ig-combo [(widgetId)]="comboID" [dataSource]="northwind" [(options)]="optionsMultipleSelection" [(ngModel)]="combo.value1"></ig-combo></div>';
             TestBed.overrideComponent(TestComponent, {
