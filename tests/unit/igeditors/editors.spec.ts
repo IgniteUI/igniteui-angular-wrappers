@@ -550,7 +550,7 @@ export function main() {
 					fixture.detectChanges();
 					setTimeout(() => {
 						expect($(fixture.debugElement.nativeElement).find("#editor1").igTimePicker("displayValue")).toBe("5:50 AM");
-						$(fixture.debugElement.nativeElement).find("#editor1").focus().trigger("focus").val("06:00 PM").blur().trigger("blur");
+						$(fixture.debugElement.nativeElement).find("#editor1").focus().trigger("focus").val("06:00 AM").blur().trigger("blur");
 						setTimeout(() => {
 							expect(fixture.debugElement.componentInstance.val.getHours()).toBe(6);
 							expect(fixture.debugElement.componentInstance.val.getMinutes()).toBe(0);
