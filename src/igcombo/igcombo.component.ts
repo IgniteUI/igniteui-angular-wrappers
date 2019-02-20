@@ -41,17 +41,19 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
         super.ngOnInit();
 
         if (this._model) {
-            jQuery(this._el).on("input", function (evt) {
-                that._model.viewToModelUpdate(evt.target.value);
-            });
-
-            jQuery(this._el).closest(".ui-igcombo-wrapper").find(".ui-igcombo-clear").on("click", function() {
-                if (that.options.multiSelection && that.options.multiSelection.enabled) {
-                    that._model.viewToModelUpdate([]);
-                } else {
-                    that._model.viewToModelUpdate(null);
-                }
-            });
+            if (this.options.allowCustomValue) {
+                jQuery(this._el).on("input", function (evt) {
+                    that._model.viewToModelUpdate(evt.target.value);
+                });
+    
+                jQuery(this._el).closest(".ui-igcombo-wrapper").find(".ui-igcombo-clear").on("click", function() {
+                    if (that.options.multiSelection && that.options.multiSelection.enabled) {
+                        that._model.viewToModelUpdate([]);
+                    } else {
+                        that._model.viewToModelUpdate(null);
+                    }
+                });
+            }
 
             // D.P. #244 only attach selectionchanged handler if there's a model to update
             jQuery(this._el).on(this._widgetName.toLowerCase() + "selectionchanged", function (evt, ui) {
@@ -59,7 +61,9 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
                 const valueKey = ui.owner.options.valueKey;
 
                 if (items.length <= 0 && !ui.owner.options.multiSelection.enabled) {
-                    that._model.viewToModelUpdate(null);
+                    if (!ui.owner.options.allowCustomValue) {
+                        that._model.viewToModelUpdate(null);
+                    }
                     return;
                 }
 
