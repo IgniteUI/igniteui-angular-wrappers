@@ -196,7 +196,13 @@ export function main() {
                     fixture.detectChanges();
                     setTimeout(function () {
                         expect(fixture.componentInstance.combo.value1).toEqual("foo");
-                        done();
+                        //clear
+                        $("#combo1").parents("ig-combo").find(".ui-igcombo-clearicon").click();
+                        fixture.detectChanges();
+                        setTimeout(function () {
+                            expect(fixture.componentInstance.combo.value1).toBeNull();
+                            done();
+                        }, 10);
                     }, 10);
                 }, 100);
             });
