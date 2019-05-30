@@ -3,15 +3,18 @@ import commonjs from 'rollup-plugin-commonjs';
 import angular from 'rollup-plugin-angular';
 import typescript from 'rollup-plugin-typescript';
 export default {
-    entry: 'src/main.ts',
-    format: 'umd',
-    moduleName: 'igniteui-angular-wrappers',
-    sourceMap:true,
+    input: 'src/main.ts',
+    
+    output: {
+        name: 'igniteui-angular-wrappers',
+        sourcemap:true,
+        file: "dist/npm/bundles/igniteui-angular-wrappers.umd.js",
+        format: 'umd'
+    },
     external: [
         '@angular/core',
         '@angular/forms'
     ],
-    dest: "dist/npm/bundles/igniteui-angular-wrappers.umd.js",
     plugins: [
     angular(
         {

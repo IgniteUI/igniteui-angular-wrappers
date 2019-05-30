@@ -23,12 +23,12 @@ export class AppComponent {
 	private filterColType: string;
 	private currPageSize: number;
 
- 	  @ViewChild("grid") grid: IgGridComponent;
-	  @ViewChild("columnsCombo") columnsCombo: IgComboComponent;
-	  @ViewChild("condCombo") condCombo: IgComboComponent;
-	  @ViewChild("exprEditor") strExprEditor: IgTextEditorComponent;
-	  @ViewChild("exprEditor") numExprEditor: IgNumericEditorComponent;
-	  @ViewChild("selectionEditor") selectionEditor: IgNumericEditorComponent;
+ 	  @ViewChild("grid", {static: false}) grid: IgGridComponent;
+	  @ViewChild("columnsCombo", {static: false}) columnsCombo: IgComboComponent;
+	  @ViewChild("condCombo", {static: false}) condCombo: IgComboComponent;
+	  @ViewChild("exprEditor", {static: false}) strExprEditor: IgTextEditorComponent;
+	  @ViewChild("exprEditor", {static: false}) numExprEditor: IgNumericEditorComponent;
+	  @ViewChild("selectionEditor", {static: false}) selectionEditor: IgNumericEditorComponent;
 	  
 
 	constructor() {

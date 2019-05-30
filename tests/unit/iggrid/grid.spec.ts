@@ -821,7 +821,7 @@ class TestComponent {
     public optsAllFeatures: any;
     public optsAllFeatures2: any;
     public optsAllFeatures3: any;
-    @ViewChild(Infragistics.IgGridComponent) public viewChild: Infragistics.IgGridComponent;
+    @ViewChild(Infragistics.IgGridComponent, {static: false}) public viewChild: Infragistics.IgGridComponent;
 
     constructor() {
         this.singleRecData = [{ "Id": 1, "Name": "John Smith", "Age": 45, "HireDate": "2002-05-09" }];

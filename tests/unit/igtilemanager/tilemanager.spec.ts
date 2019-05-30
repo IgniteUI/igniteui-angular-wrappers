@@ -56,7 +56,7 @@ class TestComponent {
     private cdi = 10;
     data: any[];
 
-    @ViewChild(Infragistics.IgTileManagerComponent) public viewChild: Infragistics.IgTileManagerComponent;
+    @ViewChild(Infragistics.IgTileManagerComponent, {static: false}) public viewChild: Infragistics.IgTileManagerComponent;
 
     constructor() {
         this.data = [{name:"foo"}];

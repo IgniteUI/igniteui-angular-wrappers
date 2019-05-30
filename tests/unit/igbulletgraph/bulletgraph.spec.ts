@@ -38,7 +38,7 @@ export function main() {
 class TestComponent {
     private opts: any;
     
-    @ViewChild(Infragistics.IgBulletGraphComponent) public viewChild: Infragistics.IgBulletGraphComponent;
+    @ViewChild(Infragistics.IgBulletGraphComponent, {static: false}) public viewChild: Infragistics.IgBulletGraphComponent;
     
     constructor() {
         this.opts = {

@@ -37,7 +37,7 @@ export function main() {
 class TestComponent {
     private opts: any;
 
-    @ViewChild(Infragistics.IgVideoPlayerComponent) public viewChild: Infragistics.IgVideoPlayerComponent;
+    @ViewChild(Infragistics.IgVideoPlayerComponent, {static: false}) public viewChild: Infragistics.IgVideoPlayerComponent;
 
     constructor() {
         this.opts = {

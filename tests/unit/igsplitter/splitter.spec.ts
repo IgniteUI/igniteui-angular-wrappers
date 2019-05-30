@@ -37,7 +37,7 @@ export function main() {
 class TestComponent {
     private opts: any;
 
-    @ViewChild(Infragistics.IgSplitterComponent) public viewChild: Infragistics.IgSplitterComponent;
+    @ViewChild(Infragistics.IgSplitterComponent, {static: false}) public viewChild: Infragistics.IgSplitterComponent;
 
     constructor() {
         this.opts = { height: "300px", panels: [{ size: 160, min: 100, max: 250 }] };

@@ -573,7 +573,7 @@ class TestIgTextEditorComponent {
 	private editorId:string;
     private cdi: number = 0;
     private validatorOpts: IgValidator;
-	@ViewChild(Infragistics.IgTextEditorComponent) public viewChild: Infragistics.IgTextEditorComponent;
+	@ViewChild(Infragistics.IgTextEditorComponent, {static: false}) public viewChild: Infragistics.IgTextEditorComponent;
 
 	constructor() {
 		this.val = "test_value";
@@ -599,7 +599,7 @@ class TestIgNumericEditorComponent {
 	private val:number;
 	private editorId:string;
 	private cdi: number = 0;
-	@ViewChild(Infragistics.IgNumericEditorComponent) public viewChild: Infragistics.IgNumericEditorComponent;
+	@ViewChild(Infragistics.IgNumericEditorComponent, {static: false}) public viewChild: Infragistics.IgNumericEditorComponent;
 
 	constructor() {
 		this.val = 42;
@@ -614,7 +614,7 @@ class TestIgNumericEditorComponent {
 class TestIgPercentEditorComponent {
 	private val:number;
 	private editorId:string;
-	@ViewChild(Infragistics.IgPercentEditorComponent) public viewChild: Infragistics.IgPercentEditorComponent;
+	@ViewChild(Infragistics.IgPercentEditorComponent, {static: false}) public viewChild: Infragistics.IgPercentEditorComponent;
 
 	constructor() {
 		this.val = 0.4;
@@ -629,7 +629,7 @@ class TestIgPercentEditorComponent {
 class TestIgMaskEditorComponent {
 	private val:string;
 	private editorId:string;
-	@ViewChild(Infragistics.IgMaskEditorComponent) public viewChild: Infragistics.IgMaskEditorComponent;
+	@ViewChild(Infragistics.IgMaskEditorComponent, {static: false}) public viewChild: Infragistics.IgMaskEditorComponent;
 
 	constructor() {
 		this.val = "test";
@@ -644,7 +644,7 @@ class TestIgMaskEditorComponent {
 class TestIgDatePickerComponent {
 	private val: Date;
 	private editorId:string;
-	@ViewChild(Infragistics.IgDatePickerComponent) public viewChild: Infragistics.IgDatePickerComponent;
+	@ViewChild(Infragistics.IgDatePickerComponent, {static: false}) public viewChild: Infragistics.IgDatePickerComponent;
 
 	constructor() {
 		this.val = new Date("4/20/2016");
@@ -659,7 +659,7 @@ class TestIgDatePickerComponent {
 class TestIgTimePickerComponent {
 	private val: string;
 	private editorId:string;
-	@ViewChild(Infragistics.IgTimePickerComponent) public viewChild: Infragistics.IgTimePickerComponent;
+	@ViewChild(Infragistics.IgTimePickerComponent, {static: false}) public viewChild: Infragistics.IgTimePickerComponent;
 
 	constructor() {
 		this.val = "12:36 AM";
@@ -674,7 +674,7 @@ class TestIgTimePickerComponent {
 class TestIgDateEditorComponent {
 	private val: Date;
 	private editorId:string;
-	@ViewChild(Infragistics.IgDateEditorComponent) public viewChild: Infragistics.IgDateEditorComponent;
+	@ViewChild(Infragistics.IgDateEditorComponent, {static: false}) public viewChild: Infragistics.IgDateEditorComponent;
 
 	constructor() {
 		this.val = new Date("4/20/2016");
@@ -689,7 +689,7 @@ class TestIgDateEditorComponent {
 class TestIgCurrencyEditorComponent {
 	private val: number;
 	private editorId:string;
-	@ViewChild(Infragistics.IgCurrencyEditorComponent) public viewChild: Infragistics.IgCurrencyEditorComponent;
+	@ViewChild(Infragistics.IgCurrencyEditorComponent, {static: false}) public viewChild: Infragistics.IgCurrencyEditorComponent;
 
 	constructor() {
 		this.val = 42;
@@ -704,7 +704,7 @@ class TestIgCurrencyEditorComponent {
 class TestIgCheckboxEditorComponent {
 	private val: boolean;
     private editorId:string;
-	@ViewChild(Infragistics.IgCheckboxEditorComponent) public viewChild: Infragistics.IgCheckboxEditorComponent;
+	@ViewChild(Infragistics.IgCheckboxEditorComponent, {static: false}) public viewChild: Infragistics.IgCheckboxEditorComponent;
 
 	constructor() {
 		this.val = true;

@@ -59,7 +59,7 @@ class TestComponent {
     private opts: any;
     private gridID: string;
 
-    @ViewChild(Infragistics.IgPivotDataSelectorComponent) public viewChild: Infragistics.IgPivotDataSelectorComponent;
+    @ViewChild(Infragistics.IgPivotDataSelectorComponent, {static: false}) public viewChild: Infragistics.IgPivotDataSelectorComponent;
 
     constructor() {
         this.data =

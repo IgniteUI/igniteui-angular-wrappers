@@ -39,7 +39,7 @@ class TestComponent {
     private opts: any;
     private cdi = 10;
 
-    @ViewChild(Infragistics.IgLayoutManagerComponent) public viewChild: Infragistics.IgLayoutManagerComponent;
+    @ViewChild(Infragistics.IgLayoutManagerComponent, {static: false}) public viewChild: Infragistics.IgLayoutManagerComponent;
 
     constructor() {
         this.opts = {

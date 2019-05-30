@@ -54,7 +54,7 @@ export function main() {
 class TestComponent {
     private opts: any;
 
-    @ViewChild(Infragistics.IgPopoverComponent) public viewChild: Infragistics.IgPopoverComponent;
+    @ViewChild(Infragistics.IgPopoverComponent, {static: false}) public viewChild: Infragistics.IgPopoverComponent;
 
     constructor() {
         this.opts = {

@@ -37,7 +37,7 @@ export function main() {
 class TestComponent {
     private opts: any;
 
-    @ViewChild(Infragistics.IgQRCodeBarcodeComponent) public viewChild: Infragistics.IgQRCodeBarcodeComponent;
+    @ViewChild(Infragistics.IgQRCodeBarcodeComponent, {static: false}) public viewChild: Infragistics.IgQRCodeBarcodeComponent;
 
     constructor() {
         this.opts = {

@@ -23,23 +23,23 @@ import { IgGridMultiColumnHeadersFeature } from "./iggridfeatures/iggridmulticol
 export class Features implements AfterContentInit {
 	public allFeatures:Array<any> = new Array<any>()
 
-	@ContentChild(IgGridSortingFeature) sorting: IgGridSortingFeature;
-	@ContentChild(IgGridFilteringFeature) filtering: IgGridFilteringFeature;
-	@ContentChild(IgGridPagingFeature) paging: IgGridPagingFeature;
-	@ContentChild(IgGridUpdatingFeature) updating: IgGridUpdatingFeature;
-	@ContentChild(IgGridGroupByFeature) groupBy: IgGridGroupByFeature;
-	@ContentChild(IgGridColumnMovingFeature) columnMoving: IgGridColumnMovingFeature;
-	@ContentChild(IgGridHidingFeature) hiding: IgGridHidingFeature;
-	@ContentChild(IgGridCellMergingFeature) cellMerging: IgGridCellMergingFeature;
-	@ContentChild(IgGridResponsiveFeature) responsive: IgGridResponsiveFeature;
-	@ContentChild(IgGridResizingFeature) resizing: IgGridResizingFeature;
-	@ContentChild(IgGridSelectionFeature) selection: IgGridSelectionFeature;
-	@ContentChild(IgGridRowSelectorsFeature) rowSelectors: IgGridRowSelectorsFeature;
-	@ContentChild(IgGridSummariesFeature) summaries: IgGridSummariesFeature;
-	@ContentChild(IgGridColumnFixingFeature) columnFixing: IgGridColumnFixingFeature;
-	@ContentChild(IgGridTooltipsFeature) tooltips: IgGridTooltipsFeature;
-	@ContentChild(IgGridAppendRowsOnDemandFeature) appendRowsOnDemand: IgGridAppendRowsOnDemandFeature;
-	@ContentChild(IgGridMultiColumnHeadersFeature) multiColumnHeaders: IgGridMultiColumnHeadersFeature;
+	@ContentChild(IgGridSortingFeature, {static: false}) sorting: IgGridSortingFeature;
+	@ContentChild(IgGridFilteringFeature, {static: false}) filtering: IgGridFilteringFeature;
+	@ContentChild(IgGridPagingFeature, {static: false}) paging: IgGridPagingFeature;
+	@ContentChild(IgGridUpdatingFeature, {static: false}) updating: IgGridUpdatingFeature;
+	@ContentChild(IgGridGroupByFeature, {static: false}) groupBy: IgGridGroupByFeature;
+	@ContentChild(IgGridColumnMovingFeature, {static: false}) columnMoving: IgGridColumnMovingFeature;
+	@ContentChild(IgGridHidingFeature, {static: false}) hiding: IgGridHidingFeature;
+	@ContentChild(IgGridCellMergingFeature, {static: false}) cellMerging: IgGridCellMergingFeature;
+	@ContentChild(IgGridResponsiveFeature, {static: false}) responsive: IgGridResponsiveFeature;
+	@ContentChild(IgGridResizingFeature, {static: false}) resizing: IgGridResizingFeature;
+	@ContentChild(IgGridSelectionFeature, {static: false}) selection: IgGridSelectionFeature;
+	@ContentChild(IgGridRowSelectorsFeature, {static: false}) rowSelectors: IgGridRowSelectorsFeature;
+	@ContentChild(IgGridSummariesFeature, {static: false}) summaries: IgGridSummariesFeature;
+	@ContentChild(IgGridColumnFixingFeature, {static: false}) columnFixing: IgGridColumnFixingFeature;
+	@ContentChild(IgGridTooltipsFeature, {static: false}) tooltips: IgGridTooltipsFeature;
+	@ContentChild(IgGridAppendRowsOnDemandFeature, {static: false}) appendRowsOnDemand: IgGridAppendRowsOnDemandFeature;
+	@ContentChild(IgGridMultiColumnHeadersFeature, {static: false}) multiColumnHeaders: IgGridMultiColumnHeadersFeature;
 
 	addFeature(name, parent){
 		var nodeName = name.replace(/([A-Z])/g, function (g) { return '-' + g[0].toLowerCase() });
