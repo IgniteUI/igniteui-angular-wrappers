@@ -129,8 +129,8 @@ class TestComponent {
     private zoombarOpts: any;
     public data: Array<any>;
     public isChartAreaVisible: boolean = true;
-    @ViewChild(Infragistics.IgDataChartComponent, {static: false}) public viewChild: Infragistics.IgDataChartComponent;
-    @ViewChild(Infragistics.IgZoombarComponent, {static: false}) public viewChild2: Infragistics.IgZoombarComponent;
+    @ViewChild(Infragistics.IgDataChartComponent, {static: true}) public viewChild: Infragistics.IgDataChartComponent;
+    @ViewChild(Infragistics.IgZoombarComponent, {static: true}) public viewChild2: Infragistics.IgZoombarComponent;
 
     constructor() {
         this.data = [{

@@ -15,7 +15,7 @@ export class AppComponent {
 	protected data: any;
 	protected newProductCategory: any;
 	protected newProductSubcategory: any;
-	 @ViewChild("tree", {static: false}) tree: IgTreeComponent;
+	 @ViewChild("tree", {static: true}) tree: IgTreeComponent;
 
 	constructor() {
 		this.data = ProductCategories.getData();

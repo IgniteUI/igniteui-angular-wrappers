@@ -53,7 +53,7 @@ export function main() {
 class TestComponent {
     private opts: any;
 
-    @ViewChild(Infragistics.IgNotifierComponent, {static: false}) public viewChild: Infragistics.IgNotifierComponent;
+    @ViewChild(Infragistics.IgNotifierComponent, {static: true}) public viewChild: Infragistics.IgNotifierComponent;
 
     constructor() {
         this.opts = {

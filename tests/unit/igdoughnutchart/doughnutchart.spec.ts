@@ -52,7 +52,7 @@ class TestComponent {
     private opts: any;
     private data: any;
 
-    @ViewChild(Infragistics.IgDoughnutChartComponent, {static: false}) public viewChild: Infragistics.IgDoughnutChartComponent;
+    @ViewChild(Infragistics.IgDoughnutChartComponent, {static: true}) public viewChild: Infragistics.IgDoughnutChartComponent;
 
     constructor() {
         this.data = [

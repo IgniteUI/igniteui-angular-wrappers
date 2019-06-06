@@ -37,7 +37,7 @@ export function main() {
 class TestComponent {
     private opts: any;
 
-    @ViewChild(Infragistics.IgRadialMenuComponent, {static: false}) public viewChild: Infragistics.IgRadialMenuComponent;
+    @ViewChild(Infragistics.IgRadialMenuComponent, {static: true}) public viewChild: Infragistics.IgRadialMenuComponent;
 
     constructor() {
         this.opts = {

@@ -38,7 +38,7 @@ export function main() {
 class TestComponent {
     private opts: any;
 
-    @ViewChild(Infragistics.IgLinearGaugeComponent, {static: false}) public viewChild: Infragistics.IgLinearGaugeComponent;
+    @ViewChild(Infragistics.IgLinearGaugeComponent, {static: true}) public viewChild: Infragistics.IgLinearGaugeComponent;
 
     constructor() {
         this.opts = {

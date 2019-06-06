@@ -53,7 +53,7 @@ class TestComponent {
     private opts: any;
     private data:any;
     
-    @ViewChild(Infragistics.IgFunnelChartComponent, {static: false}) public viewChild: Infragistics.IgFunnelChartComponent;
+    @ViewChild(Infragistics.IgFunnelChartComponent, {static: true}) public viewChild: Infragistics.IgFunnelChartComponent;
     
     constructor() {
         this.data = [

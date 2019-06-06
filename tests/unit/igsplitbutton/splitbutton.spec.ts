@@ -37,7 +37,7 @@ export function main() {
 class TestComponent {
     private opts: any;
 
-    @ViewChild(Infragistics.IgSplitButtonComponent, {static: false}) public viewChild: Infragistics.IgSplitButtonComponent;
+    @ViewChild(Infragistics.IgSplitButtonComponent, {static: true}) public viewChild: Infragistics.IgSplitButtonComponent;
 
     constructor() {
         this.opts = {

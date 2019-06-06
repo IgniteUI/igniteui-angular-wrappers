@@ -220,7 +220,7 @@ class TestComponent {
     public singleRecData: Array<any>;
     public singleRecData2: Array<any>;
 
-    @ViewChild(Infragistics.IgTreeGridComponent, {static: false}) public viewChild: Infragistics.IgTreeGridComponent;
+    @ViewChild(Infragistics.IgTreeGridComponent, {static: true}) public viewChild: Infragistics.IgTreeGridComponent;
 
     constructor() {
         this.gridID = "grid1";

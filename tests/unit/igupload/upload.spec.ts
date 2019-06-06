@@ -37,7 +37,7 @@ export function main() {
 class TestComponent {
     private opts: any;
 
-    @ViewChild(Infragistics.IgUploadComponent, {static: false}) public viewChild: Infragistics.IgUploadComponent;
+    @ViewChild(Infragistics.IgUploadComponent, {static: true}) public viewChild: Infragistics.IgUploadComponent;
 
     constructor() {
     }

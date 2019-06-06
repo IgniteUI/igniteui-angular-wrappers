@@ -14,7 +14,7 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
     };
     protected _changes: any;
     @ContentChildren(Column) _columns: QueryList<Column>;
-    @ContentChild(Features, {static: false}) featuresList: Features;
+    @ContentChild(Features, {static: true}) featuresList: Features;
     private _dataSource;
 
     constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }

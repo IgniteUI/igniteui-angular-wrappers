@@ -57,7 +57,7 @@ class TestComponent {
     private opts: any;
     private gridID: string;
 
-    @ViewChild(Infragistics.IgPivotGridComponent, {static: false}) public viewChild: Infragistics.IgPivotGridComponent;
+    @ViewChild(Infragistics.IgPivotGridComponent, {static: true}) public viewChild: Infragistics.IgPivotGridComponent;
 
     constructor() {
         this.data =

@@ -114,7 +114,7 @@ class TestComponent {
     private treeID: string;
     public data: Array<any>;
     private cdi: number;
-    @ViewChild(Infragistics.IgTreeComponent, {static: false}) public viewChild: Infragistics.IgTreeComponent;
+    @ViewChild(Infragistics.IgTreeComponent, {static: true}) public viewChild: Infragistics.IgTreeComponent;
 
     constructor() {
         this.treeID = "tree1";

@@ -309,7 +309,7 @@ class TestComponent {
     public singleRecData: Array<any>;
     public singleRecData2: Array<any>;
 
-    @ViewChild(Infragistics.IgHierarchicalGridComponent, {static: false}) public viewChild: Infragistics.IgHierarchicalGridComponent;
+    @ViewChild(Infragistics.IgHierarchicalGridComponent, {static: true}) public viewChild: Infragistics.IgHierarchicalGridComponent;
 
     constructor() {
         this.data = [
