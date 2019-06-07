@@ -54,7 +54,7 @@ class TestComponent {
     private opts: any;
     private data: any;
 
-    @ViewChild(Infragistics.IgPieChartComponent) public viewChild: Infragistics.IgPieChartComponent;
+    @ViewChild(Infragistics.IgPieChartComponent, {static: true}) public viewChild: Infragistics.IgPieChartComponent;
 
     constructor() {
         this.data = [

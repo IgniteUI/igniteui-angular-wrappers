@@ -51,7 +51,7 @@ export function main() {
     template: '<div></div>' //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
 })
 class TestComponent {
-    @ViewChild(Infragistics.IgMapComponent) public viewChild: Infragistics.IgMapComponent;
+    @ViewChild(Infragistics.IgMapComponent, {static: true}) public viewChild: Infragistics.IgMapComponent;
 
     data: any[];
 

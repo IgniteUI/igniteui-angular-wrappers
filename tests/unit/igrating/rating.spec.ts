@@ -37,7 +37,7 @@ export function main() {
 class TestComponent {
     private opts: any;
 
-    @ViewChild(Infragistics.IgRatingComponent) public viewChild: Infragistics.IgRatingComponent;
+    @ViewChild(Infragistics.IgRatingComponent, {static: true}) public viewChild: Infragistics.IgRatingComponent;
 
     constructor() {
 

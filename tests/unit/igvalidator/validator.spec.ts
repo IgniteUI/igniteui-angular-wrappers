@@ -37,7 +37,7 @@ export function main() {
 class TestComponent {
     private opts: any;
 
-    @ViewChild(Infragistics.IgValidatorComponent) public viewChild: Infragistics.IgValidatorComponent;
+    @ViewChild(Infragistics.IgValidatorComponent, {static: true}) public viewChild: Infragistics.IgValidatorComponent;
 
     constructor() {
         this.opts = { required: true };

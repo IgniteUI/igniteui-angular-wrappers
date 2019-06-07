@@ -16,7 +16,7 @@ export class AppComponent {
 	private id: string;
 	private data: any;
 	private newProduct:any;
-	@ViewChild("grid1") grid: IgGridComponent;
+	@ViewChild("grid1", {static: true}) grid: IgGridComponent;
 	//private deleteRecord: any;
 
 	constructor() {

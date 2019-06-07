@@ -36,7 +36,7 @@ export function main() {
 })
 class TestComponent {
     private opts: any;
-    @ViewChild(Infragistics.IgRadialGaugeComponent) public viewChild: Infragistics.IgRadialGaugeComponent;
+    @ViewChild(Infragistics.IgRadialGaugeComponent, {static: true}) public viewChild: Infragistics.IgRadialGaugeComponent;
 
     constructor() {
 

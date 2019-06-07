@@ -39,7 +39,7 @@ export function main() {
 class TestComponent {
     private opts: any;
     
-    @ViewChild(Infragistics.IgDialogComponent) public viewChild: Infragistics.IgDialogComponent;
+    @ViewChild(Infragistics.IgDialogComponent, {static: true}) public viewChild: Infragistics.IgDialogComponent;
     
     constructor() {
         this.opts = {

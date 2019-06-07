@@ -55,7 +55,7 @@ class TestComponent {
     private opts: any;
     private data: any[];
 
-    @ViewChild(Infragistics.IgSparklineComponent) public viewChild: Infragistics.IgSparklineComponent;
+    @ViewChild(Infragistics.IgSparklineComponent, {static: true}) public viewChild: Infragistics.IgSparklineComponent;
 
     constructor() {
         this.data = [{ "OrderDate": "\/Date(836452800000)\/", "ExtendedPrice": 168.0000, "Freight": 32.3800 }];

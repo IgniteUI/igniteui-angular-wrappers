@@ -311,7 +311,7 @@ class TestComponent {
     private comboID: string
     public data: Array<any> = [];
     public val = [];
-    @ViewChild(Infragistics.IgComboComponent) public viewChild: Infragistics.IgComboComponent;
+    @ViewChild(Infragistics.IgComboComponent, {static: true}) public viewChild: Infragistics.IgComboComponent;
 
     constructor() {
         this.northwind = Northwind.getData();

@@ -83,7 +83,7 @@ class TestComponent {
     private cdi: number;
     public data: string;
 
-    @ViewChild(Infragistics.IgHtmlEditorComponent) public viewChild: Infragistics.IgHtmlEditorComponent;
+    @ViewChild(Infragistics.IgHtmlEditorComponent, {static: true}) public viewChild: Infragistics.IgHtmlEditorComponent;
 
     constructor() {
         this.cdi = 10;

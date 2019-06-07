@@ -23,12 +23,12 @@ export class AppComponent {
 	private filterColType: string;
 	private currPageSize: number;
 
- 	  @ViewChild("grid") grid: IgGridComponent;
-	  @ViewChild("columnsCombo") columnsCombo: IgComboComponent;
-	  @ViewChild("condCombo") condCombo: IgComboComponent;
-	  @ViewChild("exprEditor") strExprEditor: IgTextEditorComponent;
-	  @ViewChild("exprEditor") numExprEditor: IgNumericEditorComponent;
-	  @ViewChild("selectionEditor") selectionEditor: IgNumericEditorComponent;
+ 	  @ViewChild("grid", {static: true}) grid: IgGridComponent;
+	  @ViewChild("columnsCombo", {static: true}) columnsCombo: IgComboComponent;
+	  @ViewChild("condCombo", {static: true}) condCombo: IgComboComponent;
+	  @ViewChild("exprEditor", {static: false}) strExprEditor: IgTextEditorComponent;
+	  @ViewChild("exprEditor", {static: false}) numExprEditor: IgNumericEditorComponent;
+	  @ViewChild("selectionEditor", {static: true}) selectionEditor: IgNumericEditorComponent;
 	  
 
 	constructor() {
@@ -132,7 +132,7 @@ export class AppComponent {
 
 	reCalcPageIndexes(){
 		var indexes = [];
-		for(var i = 0; i < Math.ceil(this.grid.widget()["data"]("igGrid").dataSource._filteredData.length/this.currPageSize) ; i++){
+		for(var i = 0; i < Math.ceil(this.grid.widget()["data"]("igGrid").dataSource.data().length/this.currPageSize) ; i++){
 				indexes.push({value: i+1});
 		}
 		this.pageIndexes = indexes;
