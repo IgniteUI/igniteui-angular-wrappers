@@ -1,0 +1,84 @@
+
+<div class="billboard" [@shrinkAnimation]="isHomePage(outlet) ? 'open' : 'closed'">
+    <div class="container">
+        <div class="row">
+            <a href="http://www.igniteui.com" target="_blank"><img src="http://www.igniteui.com/images/headerIcon.PNG"
+                    style="width: 200px" /></a>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-lg-5" [@appearAnimation]="isHomePage(outlet) ? 'open' : 'closed'">
+                <h1>Ignite UI</h1>
+                <h2>Angular Wrappers Components</h2>
+            </div>
+            <div class="col-sm-12 header-fg col-lg-7"></div>
+        </div>
+
+    </div>
+</div>
+<div class="container">
+    <div [@routeAnimations]="prepareRoute(outlet)">
+        <router-outlet #outlet="outlet"></router-outlet>
+    </div>
+    <hr />
+
+    <h2>Samples</h2>
+    <div class="links">
+        <div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                igGrid <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><a routerLink="">Default</a></li>
+                <li><a routerLink="/grid-data-binding">Data Binding</a></li>
+                <li><a routerLink="/grid-top-level-options">Top-level template options</a></li>
+                <li><a href="samples/igGrid-ComplexOpts/igGrid-ComplexOpts.html">Complex template options</a></li>
+                <li><a href="/grid-http-client">Grid with HTTP client</a></li>
+                <li><a href="samples/igGrid-callingMethods/igGrid-callingMethods.html">Calling API methods</a></li>
+                <li><a href="samples/igGrid-AoT/igGrid-AoT.html">Grid AoT</a></li>
+                <li><a href="samples/igGrid-ExcelExporter/igGrid-ExcelExporter.html">Excel Exporting</a></li>
+            </ul>
+        </div>
+        <a class="btn btn-default" href="samples/igHierarchicalGrid/igHierarchicalGrid.html">igHierarchicalGrid</a>
+        <a class="btn btn-default" href="samples/igTreeGrid/igTreeGrid.html">igTreeGrid</a>
+        <div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                igPivotGrid <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="samples/igPivotGrid-FlatDataSource/igPivotGrid-FlatDataSource.html">igPivotGrid with Flat
+                        Data Source</a></li>
+                <li><a href="samples/igPivotGrid-XmlaDataSource/igPivotGrid-XmlaDataSource.html">igPivotGrid with Xmla
+                        Data Source</a></li>
+            </ul>
+        </div>
+        <a class="btn btn-default" href="samples/igCombo/igCombo.html">igCombo</a>
+        <a class="btn btn-default" href="samples/igDataChart/igDataChart.html">igDataChart</a>
+        <a class="btn btn-default" href="samples/igDialog/igDialog.html">igDialog</a>
+        <a class="btn btn-default" href="samples/igEditors/igEditors.html">igEditors</a>
+        <a class="btn btn-default" href="samples/igHtmlEditor/igHtmlEditor.html">igHtmlEditor</a>
+        <a class="btn btn-default" href="samples/igLayoutManager/igLayoutManager.html">igLayoutManager</a>
+        <a class="btn btn-default" href="samples/igTileManager/igTileManager.html">igTileManager</a>
+        <a class="btn btn-default" href="samples/igMap/igMap.html">igMap</a>
+        <a class="btn btn-default" href="samples/igTree/igTree.html">igTree</a>
+        <a class="btn btn-default" href="samples/igUpload/igUpload.html">igUpload</a>
+        <a class="btn btn-default" href="samples/igVideoPlayer/igVideoPlayer.html">igVideoPlayer</a>
+    </div>
+
+    <div class="push-down-md">
+        <a href="https://github.com/IgniteUI/igniteui-angular-wrappers" class="btn btn-default btn-primary btn-lg"><i
+                class="fa fa-github"></i> View source on GitHub</a>
+    </div>
+
+</div>
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <p><a href="https://github.com/IgniteUI/igniteui-angular-wrappers/issues">Feedback &amp; Questions</a>
+                </p>
+                <p class="small">For more information or to download a trial of Ignite UI, please visit: <a
+                        href="http://www.igniteui.com">http://www.igniteui.com</a></p>
+            </div>
+        </div>
+    </div>
+</footer>

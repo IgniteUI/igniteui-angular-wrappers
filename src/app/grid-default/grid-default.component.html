@@ -1,0 +1,76 @@
+<div class="row">
+    <div class="col-sm-12 col-lg-6">
+        <h2>Live sample...</h2>
+        <ig-grid [(options)]="gridOptions" [(widgetId)]='id' (cellClick)="cellClickHandler($event)" (rendering)='renderedEventHandler($event)' ></ig-grid>
+    </div>
+    <div class="col-sm-12 col-lg-6">
+        <h2>Code...</h2>
+        <div style="height: 511px; overflow-y: scroll;">
+            <pre>
+import {{ '{' }} Component {{ '}' }} from '@angular/core';
+
+declare var jQuery: any;
+@Component({{ '{' }}
+    selector: "my-app",
+    template: `
+        &lt;ig-grid 
+            [(options)]=&quot;gridOptions&quot; 
+            [(widgetId)]="id" 
+            (cellClick)=&quot;cellClickHandler($event)&quot; 
+            (rendering)="renderedEventHandler($event)" 
+        &gt;&lt;/ig-grid&gt;
+        `
+{{ '}' }})
+export class AppComponent {{ '{' }}
+    private gridOptions: IgGrid;
+    private cellClickHandler: any;
+    private renderedEventHandler:any;
+    private data: Array&lt;any&gt;;
+    private id: string = "grid1";
+    
+    constructor() {{ '{' }}
+        this.data = [/* data omitted */];
+
+        this.cellClickHandler= function(ui){{ '{' }}
+            console.log("grid cell click event fired");
+        {{ '}' }};
+
+        this.renderedEventHandler= function(ui){{ '{' }}
+            console.log("grid rendered event fired");
+        {{ '}' }};
+
+        this.gridOptions = {{ '{' }}
+            dataSource: this.data,
+            width: "100%",
+            primaryKey: "ProductID",
+            autoCommit: true,
+            autoGenerateColumns: false,
+            columns: [
+                        {{ '{' }} "headerText": "Product ID", "key": "ProductID", "dataType": "number", "width": "10%" {{ '}' }},
+                        {{ '{' }} "headerText": "Name", "key": "ProductName", "dataType": "string", "width": "40%" {{ '}' }},
+                        {{ '{' }} "headerText": "Quantity per unit", "key": "QuantityPerUnit", "dataType": "string", "width": "25%" {{ '}' }},
+                        {{ '{' }} "headerText": "Unit Price", "key": "UnitPrice", "dataType": "string", "width": "25%" {{ '}' }}
+            ],
+            features: [{{ '{' }}
+                name: "Updating",
+                columnSettings: [{{ '{' }}
+                    columnKey: "ProductID",
+                    readOnly: true
+                {{ '}' }}]
+            {{ '}' }}, {{ '{' }}
+                name: "Paging",
+                pageSize: 10
+            {{ '}' }}, {{ '{' }}
+                name: "Filtering"
+            {{ '}' }}, {{ '{' }}
+                name: "Sorting"
+            {{ '}' }}]
+        {{ '}' }};
+    {{ '}' }}
+{{ '}' }}
+                </pre>
+            </div>
+        </div>
+    </div>
+
+

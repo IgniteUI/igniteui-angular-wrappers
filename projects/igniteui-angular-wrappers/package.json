@@ -1,0 +1,12 @@
+{
+  "name": "igniteui-angular-wrappers",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^8.0.0",
+    "@angular/core": "^8.0.0"
+  },
+  "dependencies": {
+    "@types/ignite-ui": "^18.1.1",
+    "@types/jquery": "2.0.47"
+  }
+}

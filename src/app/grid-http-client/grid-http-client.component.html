@@ -1,0 +1,42 @@
+<h1 class="push-down-md"><a href="http://igniteui.com/grid/overview" target="_blank">igGrid</a></h1>
+	
+<div class="row description">
+    <div class="col-md-12">
+        <p class="lead">
+            This sample demonstrates how to configure IgGrid Component to talk to remote server. It is based on the <a href="https://angular.io/docs/ts/latest/guide/server-communication.html#!#http-client">HTTP Client demo with Observables</a>.
+            It is using <a href="https://angular.io/docs/ts/latest/guide/server-communication.html#!#in-mem-web-api">in-memory web API simulator</a>, to avoid the hassle in creating web API server.
+            There is also an ability to create new products and send them to the backend.
+        </p>
+        <p class="lead">
+            The grid is created when bound to an empty data source and then using a service to populate the data.
+        </p>
+        <p><a href="https://github.com/IgniteUI/igniteui-angular-wrappers/blob/master/samples/igGrid-HTTPClient/igGrid-HTTPClient.html" class="btn btn-default btn-lg btn-primary" target="_blank"><i class="fa fa-code fa-lg"></i> Explore the Code</a></p>
+    </div>
+</div>
+
+<ig-grid [options]="gridOptions" [(dataSource)]="products" [(widgetId)]='id'></ig-grid>
+<br>
+
+<div class="form-group">
+	<div class="row">
+		<div class="col-sm-3">ProductName:
+			<input type="text" class="form-control" #newProductName />
+		</div>
+		<div class="col-sm-3">DealerName:
+			<input type="text" class="form-control" #newDealerName />
+		</div>
+		<div class="col-sm-3">CategoryName:
+			<input type="text" class="form-control" #newCategoryName />
+		</div>
+		<div class="col-sm-3">InStock:
+			<input type="number" class="form-control" #newInStock />
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<button type="button" class="btn btn-default" (click)="addProduct(newProductName.value, newDealerName.value, newCategoryName.value, newInStock.value); newProductName.value=''; newDealerName.value=''; newCategoryName.value=''; newInStock.value=''">Add Product</button>
+		</div>
+	</div>
+</div>
+
+<div class="error" *ngIf="errorMessage">{{errorMessage}}</div>
