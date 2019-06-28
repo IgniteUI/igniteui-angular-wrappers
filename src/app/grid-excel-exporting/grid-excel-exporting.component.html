@@ -1,0 +1,33 @@
+<h1 class="push-down-md">
+    <a href="https://www.igniteui.com/grid/export-feature-rich-grid" target="_blank">igGrid - Excel Exporting</a>
+</h1>
+
+<div class="row description">
+    <div class="alert alert-info col-md-6 try-it-out">
+        <span class="h4">This sample shows how easy it is to export the Infragistics Ignite UI data grid to Excel. TRY IT OUT:</span>
+        <hr />
+        <ul>
+            <li>Edit a cell</li>
+            <li>Sort a column</li>
+            <li>Add a new row</li>
+            <li>Remove a row</li>
+            <li>Click the Export button to export the grid in Excel table</li>
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <p class="lead">This sample demonstrates how Ignite UI Angular Wrappers components are used with the igGrid to allow exporting to Excel</p>
+        <p>
+            <a href="https://github.com/IgniteUI/igniteui-angular-wrappers/blob/master/samples/igGrid-ExcelExporter/igGrid-ExcelExporter.html"
+                class="btn btn-default btn-lg btn-primary" target="_blank">
+                <i class="fa fa-code fa-lg"></i> Explore the Code</a>
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <ig-grid [(options)]="gridOptions" [(widgetId)]='id' #grid1 [dataSource]='data'></ig-grid>
+        <br>
+        <button type="button" class="btn btn-default" (click)="exportExcelGrid()">Export</button>
+    </div>
+</div>

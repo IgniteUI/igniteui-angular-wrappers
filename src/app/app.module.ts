@@ -13,6 +13,24 @@ import { GridHttpClientComponent } from './grid-http-client/grid-http-client.com
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { ProductData } from './shared/product-data';
 import { HttpClientModule } from '@angular/common/http';
+import { GridComplexOptionsComponent } from './grid-complex-options/grid-complex-options.component';
+import { GridApiMethodsComponent } from './grid-api-methods/grid-api-methods.component';
+import { EditorsComponent } from './editors/editors.component';
+import { GridExcelExportingComponent } from './grid-excel-exporting/grid-excel-exporting.component';
+import { HierarchicalGridComponent } from './hierarchical-grid/hierarchical-grid.component';
+import { TreeGridComponent } from './tree-grid/tree-grid.component';
+import { PivotGridFlatDataSourceComponent } from './pivot-grid-flat-data-source/pivot-grid-flat-data-source.component';
+import { PivotGridXmlaDataSourceComponent } from './pivot-grid-xmla-data-source/pivot-grid-xmla-data-source.component';
+import { ComboComponent } from './combo/combo.component';
+import { DataChartComponent } from './data-chart/data-chart.component';
+import { DialogComponent } from './dialog/dialog.component';
+import { HtmlEditorComponent } from './html-editor/html-editor.component';
+import { LayoutManagerComponent } from './layout-manager/layout-manager.component';
+import { TileManagerComponent } from './tile-manager/tile-manager.component';
+import { MapComponent } from './map/map.component';
+import { TreeComponent } from './tree/tree.component';
+import { UploadComponent } from './upload/upload.component';
+import { VideoPlayerComponent } from './video-player/video-player.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +38,25 @@ import { HttpClientModule } from '@angular/common/http';
     GridDefaultComponent,
     GridDataBindingComponent,
     GridTopLevelOptionsComponent,
-    GridHttpClientComponent
+    GridHttpClientComponent,
+    GridComplexOptionsComponent,
+    GridApiMethodsComponent,
+    EditorsComponent,
+    GridExcelExportingComponent,
+    HierarchicalGridComponent,
+    TreeGridComponent,
+    PivotGridFlatDataSourceComponent,
+    PivotGridXmlaDataSourceComponent,
+    ComboComponent,
+    DataChartComponent,
+    DialogComponent,
+    HtmlEditorComponent,
+    LayoutManagerComponent,
+    TileManagerComponent,
+    MapComponent,
+    TreeComponent,
+    UploadComponent,
+    VideoPlayerComponent
   ],
   imports: [
     BrowserModule,

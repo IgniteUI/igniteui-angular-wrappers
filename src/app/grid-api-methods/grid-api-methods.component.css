@@ -1,0 +1,20 @@
+fieldset.explorer {
+    float: left;
+    width: 45%;
+}
+fieldset {
+    border: none;
+    margin: 1em;
+}
+fieldset legend {
+    color: #5F6564;
+    font-family: 'Open Sans',sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+}
+fieldset label {
+    display: block;
+    margin: 0.5em 0;
+    font-size: 12px;
+    color: #666;
+}

@@ -1,0 +1,24 @@
+<h1 class="push-down-md"><a href="http://igniteui.com/html-editor/overview" target="_blank">igHtmlEditor</a></h1>
+<div class="row description">
+    <div class="alert alert-info col-md-5 try-it-out">
+        <span class="h4">TRY IT OUT:</span>
+        <hr />
+        <ul>
+            <li>Change the content in the TEXTAREA on the right to see igHtmlEditor on the left updated and vice versa</li>
+        </ul>
+    </div>
+    <div class="col-md-4">
+        <p class="lead">This sample demonstrates how Ignite UI Angular Wrappers components are used with the igHtmlEditor to allow for two-way binding.</p>
+        <p><a href="https://github.com/IgniteUI/igniteui-angular-wrappers/blob/master/samples/igHtmlEditor/igHtmlEditor.html"
+                class="btn btn-default btn-lg btn-primary" target="_blank"><i class="fa fa-code fa-lg"></i> Explore the Code</a></p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8">
+        <ig-html-editor widgetId='htmlEditor' [(options)]='options' [(ngModel)]="data">
+        </ig-html-editor>
+     </div>
+    <div class="col-md-4">
+        <textarea [(ngModel)]="data"></textarea>
+     </div>
+</div>
