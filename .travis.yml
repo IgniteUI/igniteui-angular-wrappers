@@ -1,11 +1,11 @@
 language: node_js
 node_js:
 - '8'
+services:
+  - xvfb
 before_install:
 - export CHROME_BIN=chromium-browser
 - export DISPLAY=:99.0
-- sh -e /etc/init.d/xvfb start
-- sleep 3
 script:
 - npm run test
 - cat ./coverage/lcov.info | coveralls
