@@ -10,7 +10,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test",
+    "test:lib": "ng test igniteui-angular-wrappers",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
