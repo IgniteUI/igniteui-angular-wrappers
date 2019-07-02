@@ -13,6 +13,8 @@ module.exports = function (config) {
       require('@angular-devkit/build-angular/plugins/karma')
     ],
     files: [
+        'http://cdn-na.infragistics.com/igniteui/latest/css/themes/infragistics/infragistics.theme.css',
+        'http://cdn-na.infragistics.com/igniteui/latest/css/structure/infragistics.css',
         'http://code.jquery.com/jquery-1.12.3.js',
         'http://code.jquery.com/ui/1.10.3/jquery-ui.min.js',
         'http://cdn-na.infragistics.com/igniteui/latest/js/infragistics.core.js',

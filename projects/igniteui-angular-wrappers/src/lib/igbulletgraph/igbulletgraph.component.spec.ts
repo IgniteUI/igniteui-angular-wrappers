@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IgBulletGraphComponent } from '../../public-api';
 import { Component, ViewChild } from '@angular/core';
 
-describe('Infragistics Angular2 BulletGraph', () => {
+describe('Infragistics Angular BulletGraph', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
@@ -32,5 +32,36 @@ describe('Infragistics Angular2 BulletGraph', () => {
 })
 class TestComponent {
     @ViewChild(IgBulletGraphComponent, { static: false }) bulletgraph: IgBulletGraphComponent;
-    public opts = {};
+    public opts = {
+        width: "100%",
+        height: "80px",
+        ranges: [
+            {
+                brush: '#803E01',
+                name: 'Bad',
+                startValue: 0,
+                endValue: 3000
+            },
+            {
+                brush: '#BA5A05',
+                name: 'Acceptable',
+                startValue: 3000,
+                endValue: 4000
+            },
+            {
+                brush: '#FF7A04',
+                name: 'Good',
+                startValue: 4000,
+                endValue: 10000
+            }
+        ],
+        minimumValue: 0,
+        maximumValue: 10000,
+        value: 5000,
+        valueInnerExtent: 0.5,
+        valueOuterExtent: 0.65,
+        targetValue: 6000,
+        targetValueBreadth: 12,
+        showToolTip: true
+    };
 }
