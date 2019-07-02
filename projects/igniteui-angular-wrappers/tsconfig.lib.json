@@ -5,7 +5,10 @@
     "target": "es2015",
     "declaration": true,
     "inlineSources": true,
-    "types": [],
+    "types": [
+        "jquery",
+        "ignite-ui"
+    ],
     "lib": [
       "dom",
       "es2018"
