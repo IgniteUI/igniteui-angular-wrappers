@@ -9,7 +9,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build:lib": "ng build igniteui-angular-wrappers",
     "test:lib": "ng test igniteui-angular-wrappers",
     "lint": "ng lint",
     "e2e": "ng e2e"
