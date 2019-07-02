@@ -6,6 +6,8 @@ services:
 before_install:
 - export CHROME_BIN=chromium-browser
 - export DISPLAY=:99.0
+-- sleep 3
+
 script:
 - npm run test:lib
 - cat ./coverage/lcov.info | coveralls
