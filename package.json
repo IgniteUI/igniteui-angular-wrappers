@@ -10,7 +10,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build:lib": "ng build igniteui-angular-wrappers",
-    "test:lib": "ng test igniteui-angular-wrappers",
+    "test:lib": "ng test igniteui-angular-wrappers --watch=false --no-progress --code-coverage",
+    "test:lib:watch": "ng test igniteui-angular-wrappers",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
