@@ -4,7 +4,7 @@ import { Component, ViewChild } from '@angular/core';
 import * as Infragistics from '../../public-api';
 
 
-describe('Infragistics Angular2 PivotGrid', () => {
+describe('Infragistics Angular PivotGrid', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({

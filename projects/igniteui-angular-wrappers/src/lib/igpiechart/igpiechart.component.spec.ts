@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
 import * as Infragistics from '../../public-api';
 
-describe('Infragistics Angular2 PieChart', () => {
+describe('Infragistics Angular PieChart', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({

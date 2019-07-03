@@ -5,7 +5,7 @@ import * as Infragistics from '../../public-api';
 import { Tasks } from 'src/app/shared/tasks';
 
 export function main() {
-    describe('Infragistics Angular2 TreeGrid', () => {
+    describe('Infragistics Angular TreeGrid', () => {
 
         beforeEach(() => {
             TestBed.configureTestingModule({

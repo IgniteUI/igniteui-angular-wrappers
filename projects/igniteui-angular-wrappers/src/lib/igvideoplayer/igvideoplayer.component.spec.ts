@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
 import * as Infragistics from '../../public-api';
 
-describe('Infragistics Angular2 VideoPlayer', () => {
+describe('Infragistics Angular VideoPlayer', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({

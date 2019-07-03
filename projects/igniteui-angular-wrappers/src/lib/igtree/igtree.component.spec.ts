@@ -6,7 +6,7 @@ import { ProductCategories } from 'src/app/shared/product-categories';
 
 
 export function main() {
-    describe('Infragistics Angular2 Tree', () => {
+    describe('Infragistics Angular Tree', () => {
 
         beforeEach(() => {
             TestBed.configureTestingModule({

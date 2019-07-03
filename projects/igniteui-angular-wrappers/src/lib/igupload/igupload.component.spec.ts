@@ -4,7 +4,7 @@ import { Component, ViewChild } from '@angular/core';
 import * as Infragistics from '../../public-api';
 
 export function main() {
-    describe('Infragistics Angular2 Upload', () => {
+    describe('Infragistics Angular Upload', () => {
 
         beforeEach(() => {
             TestBed.configureTestingModule({
