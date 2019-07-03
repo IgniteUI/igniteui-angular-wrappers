@@ -19,7 +19,8 @@ module.exports = function (config) {
         'http://code.jquery.com/ui/1.10.3/jquery-ui.min.js',
         'http://cdn-na.infragistics.com/igniteui/latest/js/infragistics.core.js',
         'http://cdn-na.infragistics.com/igniteui/latest/js/infragistics.lob.js',
-        'http://cdn-na.infragistics.com/igniteui/latest/js/infragistics.dv.js'
+        'http://cdn-na.infragistics.com/igniteui/latest/js/infragistics.dv.js',
+        '../../node_modules/jquery-mockjax/dist/jquery.mockjax.js',
     ],
     crossOriginAttribute: false,
     client: {

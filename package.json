@@ -55,6 +55,7 @@
     "tsickle": "^0.35.0",
     "tslint": "~5.15.0",
     "typescript": "~3.4.3",
-    "coveralls": "^3.0.4"
+    "coveralls": "^3.0.4",
+    "jquery-mockjax": "2.2.2"
   }
 }
