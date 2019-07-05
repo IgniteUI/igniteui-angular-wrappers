@@ -5,105 +5,103 @@ import * as Infragistics from '../../public-api';
 import { ProductCategories } from 'src/app/shared/product-categories';
 
 
-export function main() {
-    describe('Infragistics Angular Tree', () => {
+describe('Infragistics Angular Tree', () => {
 
-        beforeEach(() => {
-            TestBed.configureTestingModule({
-                declarations: [ Infragistics.IgTreeComponent, TestComponent]
-            });
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            declarations: [ Infragistics.IgTreeComponent, TestComponent]
         });
+    });
 
-        it('should initialize correctly', (done) => {
+    it('should initialize correctly', (done) => {
+        var template = '<div><ig-tree [(widgetId)]="treeID" [(options)]="opts" [dataSource]="data"></ig-tree></div>';
+        TestBed.overrideComponent(TestComponent, {
+            set: {
+                template: template
+            }
+        });
+        TestBed.compileComponents().then(() => {
+            let fixture = TestBed.createComponent(TestComponent);
+            fixture.detectChanges();
+            expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgTreeComponent)
+                .toBe(true);
+            done();
+        });
+    });
+
+    it('should reflect changes when a record in the data changes', (done) => {
             var template = '<div><ig-tree [(widgetId)]="treeID" [(options)]="opts" [dataSource]="data"></ig-tree></div>';
             TestBed.overrideComponent(TestComponent, {
-                set: {
-                    template: template
-                }
-            });
-            TestBed.compileComponents().then(() => {
-                let fixture = TestBed.createComponent(TestComponent);
-                fixture.detectChanges();
-                expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgTreeComponent)
-                    .toBe(true);
-                done();
-            });
+            set: {
+                template: template
+            }
         });
-
-        it('should reflect changes when a record in the data changes', (done) => {
-                var template = '<div><ig-tree [(widgetId)]="treeID" [(options)]="opts" [dataSource]="data"></ig-tree></div>';
-                TestBed.overrideComponent(TestComponent, {
-                set: {
-                    template: template
-                }
-            });
-            TestBed.compileComponents().then(() => {
-                let fixture = TestBed.createComponent(TestComponent);
+        TestBed.compileComponents().then(() => {
+            let fixture = TestBed.createComponent(TestComponent);
+            fixture.detectChanges();
+            fixture.componentInstance.data[0].Name = "Test";
+            setTimeout(() => {
                 fixture.detectChanges();
-                fixture.componentInstance.data[0].Name = "Test";
-                setTimeout(() => {
-                    fixture.detectChanges();
-                    expect($($("#tree1").igTree("nodeByIndex", 0)).children("a").text())
-                        .toBe("Test");
-                        done();
-                }, 10);
-            });
+                expect($($("#tree1").igTree("nodeByIndex", 0)).children("a").text())
+                    .toBe("Test");
+                    done();
+            }, 10);
         });
+    });
 
-        it('should reflect changes when a record is added/removed from the data', (done) => {
-            var template = '<div><ig-tree [(widgetId)]="treeID" [(options)]="opts" [dataSource]="data"></ig-tree></div>';
-            TestBed.overrideComponent(TestComponent, {
-                set: {
-                    template: template
-                }
-            });
-            TestBed.compileComponents().then(() => {
-                let fixture = TestBed.createComponent(TestComponent);
+    it('should reflect changes when a record is added/removed from the data', (done) => {
+        var template = '<div><ig-tree [(widgetId)]="treeID" [(options)]="opts" [dataSource]="data"></ig-tree></div>';
+        TestBed.overrideComponent(TestComponent, {
+            set: {
+                template: template
+            }
+        });
+        TestBed.compileComponents().then(() => {
+            let fixture = TestBed.createComponent(TestComponent);
+            fixture.detectChanges();
+            //remove item
+            fixture.componentInstance.data.splice(0, 1);
+
+            setTimeout(() => {
                 fixture.detectChanges();
-                //remove item
-                fixture.componentInstance.data.splice(0, 1);
-
+                expect($(fixture.debugElement.nativeElement).find("#tree1 li.ui-igtree-noderoot").length)
+                    .toBe(3);
+                //add item
+                fixture.componentInstance.data.push({ Name: "Category", ProductCategoryID: 100 });
                 setTimeout(() => {
                     fixture.detectChanges();
                     expect($(fixture.debugElement.nativeElement).find("#tree1 li.ui-igtree-noderoot").length)
-                        .toBe(3);
-                    //add item
-                    fixture.componentInstance.data.push({ Name: "Category", ProductCategoryID: 100 });
-                    setTimeout(() => {
-                        fixture.detectChanges();
-                        expect($(fixture.debugElement.nativeElement).find("#tree1 li.ui-igtree-noderoot").length)
-                            .toBe(4);
-                        expect($(fixture.debugElement.nativeElement).find("#tree1 li.ui-igtree-noderoot").last().children("a").text())
-                            .toBe("Category");
-                            done();
-                    }, 10);
+                        .toBe(4);
+                    expect($(fixture.debugElement.nativeElement).find("#tree1 li.ui-igtree-noderoot").last().children("a").text())
+                        .toBe("Category");
+                        done();
                 }, 10);
-            });
-        });
-
-        it('should initialize correctly when datasource is remote', (done) => {
-            $['mockjax']({
-				url: "myURL/ProductCategories",
-				contentType: 'application/json',
-				dataType: 'json',
-				responseText: '[{"Name": "Bikes", "ProductCategoryID": 1, "ProductSubcategories": [{ "Name": "Mountain Bikes","ProductSubcategoryID": 1,"Products": null }]}]'
-			});
-            var template = '<div><ig-tree [(widgetId)]="treeID" [(options)]="opts2" [changeDetectionInterval]="cdi"></ig-tree></div>';
-            TestBed.overrideComponent(TestComponent, {
-                set: {
-                    template: template
-                }
-            });
-            TestBed.compileComponents().then(() => {
-                let fixture = TestBed.createComponent(TestComponent);
-                fixture.detectChanges();
-                expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgTreeComponent)
-                    .toBe(true);
-                done();
-            });
+            }, 10);
         });
     });
-}
+
+    it('should initialize correctly when datasource is remote', (done) => {
+        $['mockjax']({
+            url: "myURL/ProductCategories",
+            contentType: 'application/json',
+            dataType: 'json',
+            responseText: '[{"Name": "Bikes", "ProductCategoryID": 1, "ProductSubcategories": [{ "Name": "Mountain Bikes","ProductSubcategoryID": 1,"Products": null }]}]'
+        });
+        var template = '<div><ig-tree [(widgetId)]="treeID" [(options)]="opts2" [changeDetectionInterval]="cdi"></ig-tree></div>';
+        TestBed.overrideComponent(TestComponent, {
+            set: {
+                template: template
+            }
+        });
+        TestBed.compileComponents().then(() => {
+            let fixture = TestBed.createComponent(TestComponent);
+            fixture.detectChanges();
+            expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgTreeComponent)
+                .toBe(true);
+            done();
+        });
+    });
+});
 
 @Component({
     selector: 'test-cmp',

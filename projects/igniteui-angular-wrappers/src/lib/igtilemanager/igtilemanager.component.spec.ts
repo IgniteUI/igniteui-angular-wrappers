@@ -3,48 +3,46 @@ import { TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
 import * as Infragistics from '../../public-api';
 
-export function main() {
-    describe('Infragistics Angular TileManager', () => {
+describe('Infragistics Angular TileManager', () => {
 
-        beforeEach(() => {
-            TestBed.configureTestingModule({
-                declarations: [ Infragistics.IgTileManagerComponent, TestComponent]
-            });
-        });
-
-        it('should initialize correctly', (done) => {
-            var template = '<div><ig-tile-manager widgetId="dashboard" [(options)]="opts" [changeDetectionInterval]="cdi" ></ig-tile-manager></div>';
-            TestBed.overrideComponent(TestComponent, {
-                set: {
-                    template: template
-                }
-            });
-            TestBed.compileComponents().then(() => {
-                let fixture = TestBed.createComponent(TestComponent);
-                fixture.detectChanges();
-                expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgTileManagerComponent)
-                    .toBe(true);
-                done();
-            });
-        });
-
-        it('should allow initializing data source as a top level option', (done) => {
-            var template = '<div><ig-tile-manager [widgetId]="\'tm1\'" [(options)]="opts" [(dataSource)]="data"></ig-tile-manager></div>';
-            TestBed.overrideComponent(TestComponent, {
-                set: {
-                    template: template
-                }
-            });
-            TestBed.compileComponents().then(() => {
-                let fixture = TestBed.createComponent(TestComponent);
-                fixture.detectChanges();
-                expect($(fixture.debugElement.nativeElement).find("#tm1").igTileManager("option", "dataSource").data()[0].name)
-                    .toBe("foo");
-                done();
-            });
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            declarations: [ Infragistics.IgTileManagerComponent, TestComponent]
         });
     });
-}
+
+    it('should initialize correctly', (done) => {
+        var template = '<div><ig-tile-manager widgetId="dashboard" [(options)]="opts" [changeDetectionInterval]="cdi" ></ig-tile-manager></div>';
+        TestBed.overrideComponent(TestComponent, {
+            set: {
+                template: template
+            }
+        });
+        TestBed.compileComponents().then(() => {
+            let fixture = TestBed.createComponent(TestComponent);
+            fixture.detectChanges();
+            expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgTileManagerComponent)
+                .toBe(true);
+            done();
+        });
+    });
+
+    it('should allow initializing data source as a top level option', (done) => {
+        var template = '<div><ig-tile-manager [widgetId]="\'tm1\'" [(options)]="opts" [(dataSource)]="data"></ig-tile-manager></div>';
+        TestBed.overrideComponent(TestComponent, {
+            set: {
+                template: template
+            }
+        });
+        TestBed.compileComponents().then(() => {
+            let fixture = TestBed.createComponent(TestComponent);
+            fixture.detectChanges();
+            expect($(fixture.debugElement.nativeElement).find("#tm1").igTileManager("option", "dataSource").data()[0].name)
+                .toBe("foo");
+            done();
+        });
+    });
+});
 
 @Component({
     selector: 'test-cmp',

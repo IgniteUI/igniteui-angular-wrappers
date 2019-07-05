@@ -4,15 +4,15 @@ import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 @Component({
     selector: "ig-pivot-data-selector",
     template: "<ng-content></ng-content>",
-    inputs: ["widgetId", "options", "changeDetectionInterval","disabled","create","width","height","dataSource","dataSourceOptions","deferUpdate","dragAndDropSettings","dropDownParent","disableRowsDropArea","disableColumnsDropArea","disableMeasuresDropArea","disableFiltersDropArea","customMoveValidation"],
-    outputs: ["dataSelectorRendered","dataSourceInitialized","dataSourceUpdated","deferUpdateChanged","dragStart","drag","dragStop","metadataDropping","metadataDropped","metadataRemoving","metadataRemoved","filterDropDownOpening","filterDropDownOpened","filterMembersLoaded","filterDropDownOk","filterDropDownClosing","filterDropDownClosed"]
+    inputs: ["widgetId", "options", "changeDetectionInterval", "disabled", "create", "width", "height", "dataSource", "dataSourceOptions", "deferUpdate", "dragAndDropSettings", "dropDownParent", "disableRowsDropArea", "disableColumnsDropArea", "disableMeasuresDropArea", "disableFiltersDropArea", "customMoveValidation"],
+    outputs: ["dataSelectorRendered", "dataSourceInitialized", "dataSourceUpdated", "deferUpdateChanged", "dragStart", "drag", "dragStop", "metadataDropping", "metadataDropped", "metadataRemoving", "metadataRemoved", "filterDropDownOpening", "filterDropDownOpened", "filterMembersLoaded", "filterDropDownOk", "filterDropDownClosing", "filterDropDownClosed"]
 })
-export class IgPivotDataSelectorComponent extends IgControlBase<IgPivotDataSelector> { 
-    constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }	public option(): void { return; } ;
+export class IgPivotDataSelectorComponent extends IgControlBase<IgPivotDataSelector> {
+    constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); } public option(): void { return; };
 
-    @Input()
-    public set dataSource(value: any) {
-        this._dataSource = value;
+        @Input()
+        public set dataSource(value: any) {
+            this._dataSource = value;
         const widget = jQuery(this._el).data(this._widgetName);
         if (widget) {
             jQuery(this._el)[this._widgetName]("option", "dataSource", this._dataSource);
@@ -34,7 +34,8 @@ export class IgPivotDataSelectorComponent extends IgControlBase<IgPivotDataSelec
     /**
      * Updates the data source.
      */
-    public update(): void { return; } ;
+    /* istanbul ignore next */
+    public update(): void { return; };
 
     /**
      * Destroy is part of the jQuery UI widget API and does the following:
@@ -42,5 +43,6 @@ export class IgPivotDataSelectorComponent extends IgControlBase<IgPivotDataSelec
      *                 2. Unwrap any wrapping elements such as scrolling divs and other containers.
      *                 3. Unbind all events that were bound.
      */
-    public destroy(): void { return; } ;
+    /* istanbul ignore next */
+    public destroy(): void { return; };
 }

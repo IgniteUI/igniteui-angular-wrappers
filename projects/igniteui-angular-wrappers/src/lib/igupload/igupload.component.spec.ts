@@ -3,32 +3,30 @@ import { TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
 import * as Infragistics from '../../public-api';
 
-export function main() {
-    describe('Infragistics Angular Upload', () => {
+describe('Infragistics Angular Upload', () => {
 
-        beforeEach(() => {
-            TestBed.configureTestingModule({
-                declarations: [ Infragistics.IgUploadComponent, TestComponent]
-            });
-        });
-
-        it('should initialize correctly', (done) => {
-            var template = '<div><ig-upload widgetId="upload"></ig-upload></div>';
-            TestBed.overrideComponent(TestComponent, {
-                set: {
-                    template: template
-                }
-            });
-            TestBed.compileComponents().then(() => {
-                let fixture = TestBed.createComponent(TestComponent);
-                fixture.detectChanges();
-                expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgUploadComponent)
-                    .toBe(true);
-                done();
-            });
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            declarations: [ Infragistics.IgUploadComponent, TestComponent]
         });
     });
-}
+
+    it('should initialize correctly', (done) => {
+        var template = '<div><ig-upload widgetId="upload"></ig-upload></div>';
+        TestBed.overrideComponent(TestComponent, {
+            set: {
+                template: template
+            }
+        });
+        TestBed.compileComponents().then(() => {
+            let fixture = TestBed.createComponent(TestComponent);
+            fixture.detectChanges();
+            expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgUploadComponent)
+                .toBe(true);
+            done();
+        });
+    });
+});
 
 @Component({
     selector: 'test-cmp',

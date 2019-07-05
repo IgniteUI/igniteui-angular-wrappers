@@ -37,6 +37,7 @@ export class IgDoughnutChartComponent extends IgControlBase<IgDoughnutChart> {
      *
      * @param seriesObj     The series object to be added.
      */
+    /* istanbul ignore next */
     public addSeries(seriesObj: Object): void { return; };
 
     /**
@@ -44,6 +45,7 @@ export class IgDoughnutChartComponent extends IgControlBase<IgDoughnutChart> {
      *
      * @param seriesObj     The series object identifying the series to be removed.
      */
+    /* istanbul ignore next */
     public removeSeries(seriesObj: Object): void { return; };
 
     /**
@@ -51,30 +53,36 @@ export class IgDoughnutChartComponent extends IgControlBase<IgDoughnutChart> {
      *
      * @param value     The series object identifying the series to be updated.
      */
+    /* istanbul ignore next */
     public updateSeries(value: Object): void { return; };
 
     /**
      * Returns the center of the doughnut chart.
      */
+    /* istanbul ignore next */
     public getCenterCoordinates(): Object { return; };
 
     /**
      * Returns the radius of the chart's hole.
      */
+    /* istanbul ignore next */
     public getHoleRadius(): number { return; };
 
     /**
      * Returns information about how the doughnut chart is rendered.
      */
+    /* istanbul ignore next */
     public exportVisualData(): Object { return; };
 
     /**
      * Causes all of the series that have pending changes e.g. by changed property values to be rendered immediately.
      */
+    /* istanbul ignore next */
     public flush(): void { return; };
 
     /**
      * Destroys the widget.
      */
+    /* istanbul ignore next */
     public destroy(): void { return; };
 }

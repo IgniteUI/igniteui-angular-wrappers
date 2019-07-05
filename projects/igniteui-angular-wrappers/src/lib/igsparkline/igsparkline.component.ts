@@ -33,5 +33,6 @@ export class IgSparklineComponent extends IgControlBase<IgSparkline> {
         super.ngOnInit();
     }
 
+    /* istanbul ignore next */
     public destroy(): void { return; } ;
 }

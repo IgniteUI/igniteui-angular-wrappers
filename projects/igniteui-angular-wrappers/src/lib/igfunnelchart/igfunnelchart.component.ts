@@ -37,6 +37,7 @@ export class IgFunnelChartComponent extends IgControlBase<IgFunnelChart> {
      * @param selection     Array or selected slice items.
      * @return array|object     If parameter is undefined, then array of selected items is returned. Otherwise, it returns reference to igFunnelChart.
      */
+    /* istanbul ignore next */
     public selectedSliceItems(selection?: any[]): any[] { return; };
 
     /**
@@ -45,6 +46,7 @@ export class IgFunnelChartComponent extends IgControlBase<IgFunnelChart> {
      * @param selection     Array or selected slice indexes.
      * @return array|object     If parameter is undefined, then array of selected indexes is returned. Otherwise, it returns reference to igFunnelChart.
      */
+    /* istanbul ignore next */
     public selectedSliceIndexes(selection?: any[]): any[] { return; };
 
     /**
@@ -52,6 +54,7 @@ export class IgFunnelChartComponent extends IgControlBase<IgFunnelChart> {
      *
      * @param slice     Index of slice or reference to slice-data-item.
      */
+    /* istanbul ignore next */
     public isSelected(slice: Object): boolean { return; };
 
     /**
@@ -59,11 +62,13 @@ export class IgFunnelChartComponent extends IgControlBase<IgFunnelChart> {
      *
      * @param slice     Index of slice or reference to slice-data-item.
      */
+    /* istanbul ignore next */
     public toggleSelection(slice: Object): Object { return; };
     public exportVisualData(): void { return; };
 
     /**
      * Destroys widget.
      */
+    /* istanbul ignore next */
     public destroy(): void { return; };
 }

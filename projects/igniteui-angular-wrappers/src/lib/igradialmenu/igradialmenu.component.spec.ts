@@ -3,32 +3,30 @@ import { TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
 import * as Infragistics from '../../public-api';
 
-export function main() {
-    describe('Infragistics Angular RadialMenu', () => {
+describe('Infragistics Angular RadialMenu', () => {
 
-        beforeEach(() => {
-            TestBed.configureTestingModule({
-                declarations: [ Infragistics.IgRadialMenuComponent, TestComponent]
-            });
-        });
-
-        it('should initialize correctly', (done) => {
-            var template = '<div><ig-radial-menu [widgetId]="\'rmenu\'" [(options)]="opts"></ig-radial-menu></div>';
-            TestBed.overrideComponent(TestComponent, {
-                set: {
-                    template: template
-                }
-            });
-            TestBed.compileComponents().then(() => {
-                let fixture = TestBed.createComponent(TestComponent);
-                fixture.detectChanges();
-                expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgRadialMenuComponent)
-                    .toBe(true);
-                done();
-            });
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            declarations: [ Infragistics.IgRadialMenuComponent, TestComponent]
         });
     });
-}
+
+    it('should initialize correctly', (done) => {
+        var template = '<div><ig-radial-menu [widgetId]="\'rmenu\'" [(options)]="opts"></ig-radial-menu></div>';
+        TestBed.overrideComponent(TestComponent, {
+            set: {
+                template: template
+            }
+        });
+        TestBed.compileComponents().then(() => {
+            let fixture = TestBed.createComponent(TestComponent);
+            fixture.detectChanges();
+            expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgRadialMenuComponent)
+                .toBe(true);
+            done();
+        });
+    });
+});
 
 @Component({
     selector: 'test-cmp',

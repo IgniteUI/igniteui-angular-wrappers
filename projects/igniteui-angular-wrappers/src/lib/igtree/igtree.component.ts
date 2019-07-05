@@ -103,228 +103,261 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
     // 	super.optionChange(opts);
     // }
 
-	/**
- 	 * Performs databinding on the igTree.
-	 */
+    /**
+     * Performs databinding on the igTree.
+     */
+    /* istanbul ignore next */
     public dataBind(): void { return; };
 
-	/**
- 	 * Toggles the checkstate of a node if checkboxMode is not set to off, otherwise does nothing.
-	 *
-	 * @param node     Specifies the node element the checkbox of which would be toggled.
-	 * @param event     Indicates the browser event which triggered this action, if this is not an API call.
-	 */
+    /**
+     * Toggles the checkstate of a node if checkboxMode is not set to off, otherwise does nothing.
+     *
+     * @param node     Specifies the node element the checkbox of which would be toggled.
+     * @param event     Indicates the browser event which triggered this action, if this is not an API call.
+     */
+    /* istanbul ignore next */
     public toggleCheckstate(node: Object, event?: Object): void { return; };
 
-	/**
- 	 * Toggles the collapse/expand state for the specified node.
-	 *
-	 * @param node     Specifies the node element the checkbox of which would be toggled.
-	 * @param event     Indicates the browser event which triggered this action, if this is not an API call.
-	 */
+    /**
+     * Toggles the collapse/expand state for the specified node.
+     *
+     * @param node     Specifies the node element the checkbox of which would be toggled.
+     * @param event     Indicates the browser event which triggered this action, if this is not an API call.
+     */
+    /* istanbul ignore next */
     public toggle(node: Object, event?: Object): void { return; };
 
-	/**
- 	 * Expands the tree down to the specified node and selects the node if specified.
-	 *
-	 * @param node     Specifies the node element down to which the tree would be expanded.
-	 * @param toSelect     Specifies the whether to select the node after expanding to it.
-	 */
+    /**
+     * Expands the tree down to the specified node and selects the node if specified.
+     *
+     * @param node     Specifies the node element down to which the tree would be expanded.
+     * @param toSelect     Specifies the whether to select the node after expanding to it.
+     */
+    /* istanbul ignore next */
     public expandToNode(node: Object, toSelect?: boolean): void { return; };
 
-	/**
- 	 * Expands the specified node.
-	 *
-	 * @param node     Specifies the node element to expand.
-	 */
+    /**
+     * Expands the specified node.
+     *
+     * @param node     Specifies the node element to expand.
+     */
+    /* istanbul ignore next */
     public expand(node: Object): void { return; };
 
-	/**
- 	 * Collapses the specified node.
-	 *
-	 * @param node     Specifies the node element to collapse.
-	 */
+    /**
+     * Collapses the specified node.
+     *
+     * @param node     Specifies the node element to collapse.
+     */
+    /* istanbul ignore next */
     public collapse(node: Object): void { return; };
 
-	/**
- 	 * Retrieves the parent node element of the specified node element.
-	 *
-	 * @param node     Specifies the jQuery selected node element to collapse.
-	 */
+    /**
+     * Retrieves the parent node element of the specified node element.
+     *
+     * @param node     Specifies the jQuery selected node element to collapse.
+     */
+    /* istanbul ignore next */
     public parentNode(node: Object): Object { return; };
 
-	/**
- 	 * Retrieves the jQuery element of the node with the specified path.
-	 *
-	 * @param nodePath     Specifies the path to the required node.
-	 */
+    /**
+     * Retrieves the jQuery element of the node with the specified path.
+     *
+     * @param nodePath     Specifies the path to the required node.
+     */
+    /* istanbul ignore next */
     public nodeByPath(nodePath: string): Object { return; };
 
-	/**
- 	 * Retrieves the jQuery element of the node with the specified value.
-	 *
-	 * @param value     Specifies the value of the required node.
-	 */
+    /**
+     * Retrieves the jQuery element of the node with the specified value.
+     *
+     * @param value     Specifies the value of the required node.
+     */
+    /* istanbul ignore next */
     public nodesByValue(value: string): Object { return; };
 
-	/**
- 	 * Retrieves all the node objects for the nodes that have their checkboxes checked.
-	 */
+    /**
+     * Retrieves all the node objects for the nodes that have their checkboxes checked.
+     */
+    /* istanbul ignore next */
     public checkedNodes(): any[] { return; };
 
-	/**
- 	 * Retrieves all the node objects for the nodes that have their checkboxes unchecked.
-	 */
+    /**
+     * Retrieves all the node objects for the nodes that have their checkboxes unchecked.
+     */
+    /* istanbul ignore next */
     public uncheckedNodes(): any[] { return; };
 
-	/**
- 	 * Retrieves all the node objects for the nodes that have their checkboxes partially checked.
-	 */
+    /**
+     * Retrieves all the node objects for the nodes that have their checkboxes partially checked.
+     */
+    /* istanbul ignore next */
     public partiallyCheckedNodes(): any[] { return; };
 
-	/**
- 	 * Selects a node.
-	 *
-	 * @param node     Specifies the node element to be selected.
-	 * @param event     Indicates the browser event which triggered this action, if this is not an API call.
-	 */
+    /**
+     * Selects a node.
+     *
+     * @param node     Specifies the node element to be selected.
+     * @param event     Indicates the browser event which triggered this action, if this is not an API call.
+     */
+    /* istanbul ignore next */
     public select(node: Object, event?: Object): void { return; };
 
-	/**
- 	 * Deselects the specified node.
-	 *
-	 * @param node     Specifies the node element to be deselected.
-	 */
+    /**
+     * Deselects the specified node.
+     *
+     * @param node     Specifies the node element to be deselected.
+     */
+    /* istanbul ignore next */
     public deselect(node: Object): void { return; };
 
-	/**
- 	 * Deselects all the selected nodes.
-	 */
+    /**
+     * Deselects all the selected nodes.
+     */
+    /* istanbul ignore next */
     public clearSelection(): void { return; };
 
-	/**
- 	 * Retrieves the node object for the selected node.
-	 */
+    /**
+     * Retrieves the node object for the selected node.
+     */
+    /* istanbul ignore next */
     public selectedNode(): Object { return; };
 
-	/**
- 	 * Retrieves all node objects with the specified text (case sensitive).
-	 *
-	 * @param text     The text to search for.
-	 * @param parent     The node element to start the search from. If not specified then search would start from the root of the tree.
-	 */
+    /**
+     * Retrieves all node objects with the specified text (case sensitive).
+     *
+     * @param text     The text to search for.
+     * @param parent     The node element to start the search from. If not specified then search would start from the root of the tree.
+     */
+    /* istanbul ignore next */
     public findNodesByText(text: string, parent?: Object): any[] { return; };
 
-	/**
- 	 * Retrieves all node objects for the immediate children of the specified parent with the specified text (case sensitive).
-	 *
-	 * @param text     The text to search for.
-	 * @param parent     The node element the children of which would be searched.
-	 */
+    /**
+     * Retrieves all node objects for the immediate children of the specified parent with the specified text (case sensitive).
+     *
+     * @param text     The text to search for.
+     * @param parent     The node element the children of which would be searched.
+     */
+    /* istanbul ignore next */
     public findImmediateNodesByText(text: string, parent?: Object): any[] { return; };
 
-	/**
- 	 * Retrieves the n-th jQuery node element child of the specified parent.
-	 *
-	 * @param index     Specifies the index the node at which to be retrieved.
-	 * @param parent     The parent node element to start the search from.
-	 */
+    /**
+     * Retrieves the n-th jQuery node element child of the specified parent.
+     *
+     * @param index     Specifies the index the node at which to be retrieved.
+     * @param parent     The parent node element to start the search from.
+     */
+    /* istanbul ignore next */
     public nodeByIndex(index: number, parent?: Object): Object { return; };
 
-	/**
- 	 * Retrieves a node object for the specified node element.
-	 *
-	 * @param element     Specifies the node element.
-	 */
+    /**
+     * Retrieves a node object for the specified node element.
+     *
+     * @param element     Specifies the node element.
+     */
+    /* istanbul ignore next */
     public nodeFromElement(element: Object): Object { return; };
 
-	/**
- 	 * Retrieves a node object collection of the immediate children of the provided node element.
-	 *
-	 * @param parent     Specifies the node element.
-	 */
+    /**
+     * Retrieves a node object collection of the immediate children of the provided node element.
+     *
+     * @param parent     Specifies the node element.
+     */
+    /* istanbul ignore next */
     public children(parent: Object): any[] { return; };
 
-	/**
- 	 * Retrieves a node object collection of the immediate children of the node with the provided path.
-	 *
-	 * @param path     Specifies the path of the node the children of which are to be retrieved.
-	 */
+    /**
+     * Retrieves a node object collection of the immediate children of the node with the provided path.
+     *
+     * @param path     Specifies the path of the node the children of which are to be retrieved.
+     */
+    /* istanbul ignore next */
     public childrenByPath(path: string): any[] { return; };
 
-	/**
- 	 * Returns true if the provided node element is selected and false otherwise.
-	 *
-	 * @param node     Specifies the node element.
-	 */
+    /**
+     * Returns true if the provided node element is selected and false otherwise.
+     *
+     * @param node     Specifies the node element.
+     */
+    /* istanbul ignore next */
     public isSelected(node: Object): boolean { return; };
 
-	/**
- 	 * Returns true if the provided node element is expanded and false otherwise.
-	 *
-	 * @param node     Specifies the node element.
-	 */
+    /**
+     * Returns true if the provided node element is expanded and false otherwise.
+     *
+     * @param node     Specifies the node element.
+     */
+    /* istanbul ignore next */
     public isExpanded(node: Object): boolean { return; };
 
-	/**
- 	 * Returns true if the provided node element has its checkbox checkstate checked and false otherwise.
-	 *
-	 * @param node     Specifies the node element.
-	 */
+    /**
+     * Returns true if the provided node element has its checkbox checkstate checked and false otherwise.
+     *
+     * @param node     Specifies the node element.
+     */
+    /* istanbul ignore next */
     public isChecked(node: Object): boolean { return; };
 
-	/**
- 	 * Returns the specified node checkstate.
-	 *
-	 * @param node     Specifies the node element.
-	 */
+    /**
+     * Returns the specified node checkstate.
+     *
+     * @param node     Specifies the node element.
+     */
+    /* istanbul ignore next */
     public checkState(node: Object): string { return; };
 
-	/**
- 	 * Adds a new array of nodes to the tree. New nodes are appended to the root or to a specified parent node, at a specified index.
-	 *
-	 * @param node     Specifies the data used to create the new nodeс.
-	 * @param parent     Specifies the element of the parent node the nodes are to be appended to.
-	 * @param nodeIndex     Specifies the index at which the nodes to be inserted.
-	 */
+    /**
+     * Adds a new array of nodes to the tree. New nodes are appended to the root or to a specified parent node, at a specified index.
+     *
+     * @param node     Specifies the data used to create the new nodeс.
+     * @param parent     Specifies the element of the parent node the nodes are to be appended to.
+     * @param nodeIndex     Specifies the index at which the nodes to be inserted.
+     */
+    /* istanbul ignore next */
     public addNode(node: Object, parent?: Object, nodeIndex?: number): void { return; };
 
-	/**
- 	 * Removes the node with with the specified path and all of its children.
-	 *
-	 * @param path     Specifies the path of the node to be removed.
-	 */
+    /**
+     * Removes the node with with the specified path and all of its children.
+     *
+     * @param path     Specifies the path of the node to be removed.
+     */
+    /* istanbul ignore next */
     public removeAt(path: string): void { return; };
 
-	/**
- 	 * Removing all the nodes with the specified value.
-	 *
-	 * @param value     Specifies the value of the nodes to be removed.
-	 */
+    /**
+     * Removing all the nodes with the specified value.
+     *
+     * @param value     Specifies the value of the nodes to be removed.
+     */
+    /* istanbul ignore next */
     public removeNodesByValue(value: string): void { return; };
 
-	/**
- 	 * Performs a UI update on the provided node element with the provided data.
-	 *
-	 * @param element     Specifies the node to be updated.
-	 * @param data     Specifies the new data item the node would update according to.
-	 */
+    /**
+     * Performs a UI update on the provided node element with the provided data.
+     *
+     * @param element     Specifies the node to be updated.
+     * @param data     Specifies the new data item the node would update according to.
+     */
+    /* istanbul ignore next */
     public applyChangesToNode(element: Object, data: Object): void { return; };
 
-	/**
- 	 * Returns the transaction log stack.
-	 */
+    /**
+     * Returns the transaction log stack.
+     */
+    /* istanbul ignore next */
     public transactionLog(): any[] { return; };
 
-	/**
- 	 * Returns the data for the node with specified path.
-	 *
-	 * @param path     Specifies the node path for which the data is returned.
-	 */
+    /**
+     * Returns the data for the node with specified path.
+     *
+     * @param path     Specifies the node path for which the data is returned.
+     */
+    /* istanbul ignore next */
     public nodeDataFor(path: string): Object { return; };
 
-	/**
- 	 * Destructor for the igTree widget.
-	 */
+    /**
+     * Destructor for the igTree widget.
+     */
+    /* istanbul ignore next */
     public destroy(): void { return; };
 }
