@@ -1,4 +1,4 @@
-#dataSelector, #pivotGrid {
+:host /deep/ #dataSelector, #pivotGrid {
     float: left;
 }
 #pivotGrid {
