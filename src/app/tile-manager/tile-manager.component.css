@@ -1,0 +1,56 @@
+:host /deep/ #dashboard {
+    position: relative;
+    width: 100%;
+    height: 550px;
+}
+
+:host /deep/ #dashboard h4 {
+    font-size: 18px;
+    text-align: center;
+}
+
+:host /deep/ #dashboard h3 {
+    text-align: center;
+}
+
+:host /deep/ #dashboard img {
+    width: 150px;
+    height: 175px;
+    margin-left: -75px;
+    margin-top: 15px;
+    position: absolute;
+    left: 50%;
+}
+
+:host /deep/ #dashboard .ui-igtile-maximized img {
+    width: 200px;
+    height: 250px;
+    position: static;
+    float: left;
+    margin: 20px 20px 20px 0;
+}
+
+:host /deep/ #dashboard .ui-igtilemanager-right img {
+    width: 60px;
+    height: 80px;
+    margin-left: -30px;
+    margin-top: 15px;
+}
+
+:host /deep/ .ui-igtile-maximized .text {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+:host /deep/ .ui-igtile-maximized div {
+    text-align: left;
+}
+
+:host /deep/ .linkedIn,
+:host /deep/ .skills {
+    word-wrap: break-word;
+}
+
+:host /deep/ div.ui-igtile-inner-container h4 {
+    margin-bottom: 0.1em;
+}

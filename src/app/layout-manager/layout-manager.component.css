@@ -4,44 +4,44 @@ body {
     /*overflow-x:hidden;*/
 }
 
-div#layout h2 {
+:host /deep/ div#layout h2 {
     margin: 0;
 }
 
-div#layout .left,
-div#layout .right,
-div#layout .center,
-div#layout .footer,
-div#layout .header {
+:host /deep/ div#layout .left,
+:host /deep/ div#layout .right,
+:host /deep/ div#layout .center,
+:host /deep/ div#layout .footer,
+:host /deep/ div#layout .header {
     color: #fff;
 }
 
-div#layout .left p,
-div#layout .right p,
-div#layout .center p,
-div#layout h3 {
+:host /deep/ div#layout .left p,
+:host /deep/ div#layout .right p,
+:host /deep/ div#layout .center p,
+:host /deep/ div#layout h3 {
     margin: 15px;
 }
 
-div#layout .center {
+:host /deep/ div#layout .center {
     background-color: #EEE;
     color: #555;
 }
 
-div#layout .right {
+:host /deep/ div#layout .right {
     background-color: #555;
     color: #EEE;
 }
 
-div#layout .left {
+:host /deep/ div#layout .left {
     background-color: #FFA72D;
 }
 
-div#layout .header {
+:host /deep/ div#layout .header {
     background-color: #2CBDF9;
 }
 
-div#layout .footer {
+:host /deep/ div#layout .footer {
     background-color: #2CBDF9;
 }
 

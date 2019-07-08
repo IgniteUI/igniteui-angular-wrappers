@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { slideInAnimation } from '../animations';
 
 @Component({
     selector: 'app-grid-default',

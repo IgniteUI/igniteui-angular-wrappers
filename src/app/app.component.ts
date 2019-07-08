@@ -1,23 +1,16 @@
 import { Component } from '@angular/core';
-import { slideInAnimation, billboardAnimation, headerAnimation } from './animations';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    animations: [
-        slideInAnimation,
-        billboardAnimation,
-        headerAnimation
-    ]
+    styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    prepareRoute(outlet: RouterOutlet) {
-        return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
-    }
-
-    isHomePage(outlet: RouterOutlet) {
-        return this.prepareRoute(outlet) === 'HomePage';
-    }
+prepareRoute(outlet: RouterOutlet) {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
 }
+
+isHomePage(outlet: RouterOutlet) {
+    return this.prepareRoute(outlet) === 'HomePage';
+} }

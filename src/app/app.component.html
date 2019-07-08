@@ -1,12 +1,11 @@
-
-<div class="billboard" [@shrinkAnimation]="isHomePage(outlet) ? 'open' : 'closed'">
+<div class="billboard" *ngIf="isHomePage(outlet); else sampleHeader">
     <div class="container">
         <div class="row">
             <a href="http://www.igniteui.com" target="_blank"><img src="http://www.igniteui.com/images/headerIcon.PNG"
                     style="width: 200px" /></a>
         </div>
         <div class="row">
-            <div class="col-sm-12 col-lg-5" [@appearAnimation]="isHomePage(outlet) ? 'open' : 'closed'">
+            <div class="col-sm-12 col-lg-5">
                 <h1>Ignite UI</h1>
                 <h2>Angular Wrappers Components</h2>
             </div>
@@ -15,8 +14,33 @@
 
     </div>
 </div>
-<div class="container">
-    <div [@routeAnimations]="prepareRoute(outlet)">
+
+<ng-template #sampleHeader>
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" routerLink="">Ignite UI Angular components </a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="https://github.com/IgniteUI/igniteui-angular-wrappers">View on GitHub
+                        <i class="fa fa-github"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<div class="container push-down">
+    <div>
         <router-outlet #outlet="outlet"></router-outlet>
     </div>
     <hr />
