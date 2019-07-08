@@ -4,7 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/IgniteUI/igniteui-angular-wrappers/badge.svg?branch=master)](https://coveralls.io/github/IgniteUI/igniteui-angular-wrappers?branch=master)  
 [![npm version](https://badge.fury.io/js/igniteui-angular-wrappers.svg)](https://badge.fury.io/js/igniteui-angular-wrappers)
 
-Use the components found in `src\main.ts` to use [Ignite UI](http://igniteui.com) controls in [Angular](https://angular.io/) applications. [Work with the running samples here](http://igniteui.github.io/igniteui-angular-wrappers).
+Use the components found in `projects\igniteui-angular-wrappers\src\public-api.ts` to use [Ignite UI](http://igniteui.com) controls in [Angular](https://angular.io/) applications. [Work with the running samples here](http://igniteui.github.io/igniteui-angular-wrappers).
 
 **IMPORTANT** The repository has been renamed from `igniteui-angular2` to `igniteui-angular-wrappers`. Read more on our new [naming convention](https://www.infragistics.com/community/blogs/b/infragistics/posts/ignite-ui-github-repo-name-changes). 
 
@@ -339,91 +339,6 @@ Component methods can be called by accessing the component from the view. For ex
         }
     }
 
-## Using Ignite UI Wrappers for Angular inside AOT app
-As a starting point, you can review the [Angular documentation on the subject](https://angular.io/docs/ts/latest/cookbook/aot-compiler.html), which provides a guide how to compile an app with AOT. Follow their instructions to AOT compile the quickstart app.
-
-Once you have a running application compiled with AOT, the next step is to add the Ignite UI Components into this app. In this demo IgComboComponent is being added to the app, igCombo is an OSS widget and it is part of the ignite-ui npm package.
-First we need to install the required packages:
-- `npm install ignite-ui`
-- `npm install igniteui-angular-wrappers`
-- `npm install jquery-ui-bundle`
-
-**Note**: You have to download the full Ignite UI product if you would like to use widgets which are not part of the OSS widgets. This is a [list](https://github.com/IgniteUI/ignite-ui#available-features-in-ignite-ui-open-source-version) of the controls available in the Open-source version
-
-Then go to the app module and import the combo - `import 'ignite-ui/js/modules/infragistics.ui.combo.js';`. But before that add all the dependencies for it:
-
-    import 'jquery';
-    import 'jquery-ui-bundle/jquery-ui.min.js';
-    import 'ignite-ui/js/modules/infragistics.util.js';
-    import 'ignite-ui/js/modules/infragistics.templating.js';
-    import 'ignite-ui/js/modules/infragistics.datasource.js';
-    import 'ignite-ui/js/modules/infragistics.ui.combo.js';
-
-In addition, at the end import the IgniteUIModule:
-
-    import { IgniteUIModule } from 'igniteui-angular-wrappers';
-    @NgModule({
-    imports: [ BrowserModule, IgniteUIModule ],
-    …
-    })
-    export class AppModule {}
-
-In order to take advantage of the [Tree shaking](https://angular.io/docs/ts/latest/cookbook/aot-compiler.html#!#tree-shaking) the Rollup has to be set up.
-Open rollup-config.js, include igniteui-angular-wrappers to `commonjs` plugin and add `namedExport` for jquery:
-
-    commonjs({
-        include: ['node_modules/rxjs/**',
-            'node_modules/igniteui-angular-wrappers/**',
-        ],
-        namedExports: {
-            'node_modules/jquery/dist/jquery.min.js': [ 'jquery' ]
-        }
-    }),
-
-Additional plugin rollup-plugin-replace should be installed
-`npm install rollup-plugin-replace` in order to fix the offline compilation of Ignite UI util module.
-`this.Class` should be changed to `window.Class`, because the offline compilation is not having the same [context and this is changed to undefined](https://github.com/rollup/rollup/issues/942).
-
-      replace({
-        // this is undefined for the specified context, so replace it with window to access Class
-        include: 'node_modules/ignite-ui/js/modules/infragistics.util.js',
-        values: { 'this.Class': 'window.Class' }
-      }),
-
-Now we are ready to use the IgComboComponent
-`<ig-combo [dataSource]="heroesCombo" [widgetId]="comboId" [textKey]="'name'" [valueKey]="'id'"></ig-combo>` in app.component.html 
-And also define the used properties in AppComponent class:
-
-    export class AppComponent {
-    comboId = 'combo1';
-    showHeading = true;
-    heroes = ['Magneta', 'Bombasto', 'Magma', 'Tornado'];
-    heroesCombo = [{id: 0, name: 'Magneta'}, {id: 1, name:'Bombasto'}, {id: 2, name:'Magma'}, {id: 3, name:'Tornado'}];
-
-    toggleHeading() {
-        this.showHeading = !this.showHeading;
-    }
-    }
-
-At the end, apply Ignite UI styling. To achieve this, postcss plugin should be installed
-`npm install rollup-plugin-postcss` 
-
-Open rollup-config.js file and import postcss:
-
-    import postcss from 'rollup-plugin-postcss'
-    …
-      postcss({
-        extensions: ['.css']
-      }),
-
-
-[Download](https://github.com/IgniteUI/igniteui-angular-wrappers/files/975676/quickstart-igniteui-angular-wrappers-aot.zip) the modified app which uses the specified product. To run it with AOT:
-1. npm install
-2. npm run build:aot
-3. npm run serve
-
-
-
 ## Two-way Data Binding
 The following controls currently support two-way data binding:
 
@@ -465,12 +380,9 @@ The command for running the tests is:
 
     npm test
 
-After that, if all tests successfully passed a code coverage for the `main.ts` filse will be generated under the `./coverage` folder.
+After that, if all tests successfully passed a code coverage for the `public-api.ts` file will be generated under the `./coverage/igniteui-angular-wrappers` folder.
 
-To see the code coverage you can open one of the html files under `./coverage/html-report/src`.
-
-**Note:** The code coverage is actually being generated on the `main.js` file (comes from compilation of the source .ts file). That coverage is saved under the `coverage/karma-tmp` folder.
-Since we need the code coverage of the `main.js` file itself, we use the remap-istanbul module to remap the report from the .js file to the .ts file and save it under the `coverage/html-report` and `coverage/lcov.info`.
+To see the code coverage you can open one of the html files under `./coverage/igniteui-angular-wrappers/src`.
 
 ---------------------------------------
 

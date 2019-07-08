@@ -98,7 +98,8 @@
               "e2e/tsconfig.json"
             ],
             "exclude": [
-              "**/node_modules/**"
+              "**/node_modules/**",
+              "src/app/shared/**"
             ]
           }
         },
@@ -112,41 +113,6 @@
             "production": {
               "devServerTarget": "wrappers:serve:production"
             }
-          }
-        }
-      }
-    },
-    "lib": {
-      "projectType": "library",
-      "root": "projects/lib",
-      "sourceRoot": "projects/lib/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/lib/tsconfig.lib.json",
-            "project": "projects/lib/ng-package.json"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/lib/src/test.ts",
-            "tsConfig": "projects/lib/tsconfig.spec.json",
-            "karmaConfig": "projects/lib/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/lib/tsconfig.lib.json",
-              "projects/lib/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
           }
         }
       }
@@ -180,7 +146,8 @@
               "projects/igniteui-angular-wrappers/tsconfig.spec.json"
             ],
             "exclude": [
-              "**/node_modules/**"
+              "**/node_modules/**",
+              "src/app/shared/**"
             ]
           }
         }
