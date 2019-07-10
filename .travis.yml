@@ -1,19 +1,27 @@
+sudo: required
+dist: trusty
 language: node_js
 node_js:
-- '8'
+- '10.12.0'
 before_install:
-- export CHROME_BIN=chromium-browser
+- export NG_CLI_ANALYTICS=false
+- export CHROME_BIN=/usr/bin/google-chrome
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
+- sudo apt-get -qq update
+- sudo apt-get install -y libappindicator1 fonts-liberation
+- wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+- sudo dpkg -i google-chrome*.deb
 - sleep 3
+
 script:
-- npm run test
-- cat ./coverage/lcov.info | coveralls
+- npm run test:lib
+- cat ./coverage/igniteui-angular-wrappers/lcov.info | coveralls
 
 before_deploy:
 # package and navigate to dist
-- npm run bundle
-- cd dist/npm
+- npm run build:lib
+- cd dist/igniteui-angular-wrappers
 # update package version
 - npm version "$TRAVIS_TAG" --no-git-tag-version --save
 

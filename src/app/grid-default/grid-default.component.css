@@ -1,0 +1,11 @@
+.billboard {
+    background: url(../../assets/images/home-background.jpg) no-repeat center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color:#fff;
+    background-color: #aa8c68;
+    border-bottom: 10px solid #d16717;
+    min-height: 600px;
+}

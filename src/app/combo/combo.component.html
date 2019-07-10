@@ -1,0 +1,49 @@
+<div>
+    <h1 class="push-down-md"><a href="http://igniteui.com/combo/overview" target="_blank">igCombo</a></h1>
+    <div class="row description">
+        <div class="alert alert-info col-md-5 try-it-out">
+            <span class="h4">TRY IT OUT:</span>
+            <hr />
+            <ul>
+                <li>Enter a Product ID in the textbox and see how the combos change</li>
+                <li>Change a product's name in the group of textboxes below and see how the names change in each combo
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <p class="lead">This sample demonstrates how to use Angular Components to create igCombos.</p>
+            <p><a href="https://github.com/IgniteUI/igniteui-angular-wrappers/blob/master/samples/igCombo/igCombo.html"
+                    class="btn btn-default btn-lg btn-primary" target="_blank"><i class="fa fa-code fa-lg"></i> Explore
+                    the Code</a></p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2">
+            <input id="product-id" class="form-control" type="text" [(ngModel)]="combo.value1" />
+            <div class="text-sm text-muted text-right">values: 1 - 20</div>
+        </div>
+        <div class="col-sm-3 col-md-2">
+
+            <ig-combo id="'combo1'" [(options)]="options" [(ngModel)]="combo.value1" [dataSource]='northwind'>
+            </ig-combo>
+
+        </div>
+        <div class="col-sm-3 col-md-2">
+
+            <ig-combo [widgetId]="'combo2'" [(options)]="options" [dataSource]='northwind' [(ngModel)]="combo.value1">
+            </ig-combo>
+
+        </div>
+    </div>
+
+    <hr />
+    <h2 class="h3">Edit Product Name</h2>
+    <div class="row">
+
+        <div class="col-sm-3" *ngFor="let record of northwind">
+            <input class="form-control" [(ngModel)]="record.ProductName">
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,107 @@
+<div class="billboard" *ngIf="isHomePage(outlet); else sampleHeader">
+    <div class="container">
+        <div class="row">
+            <a href="http://www.igniteui.com" target="_blank"><img src="http://www.igniteui.com/images/headerIcon.PNG"
+                    style="width: 200px" /></a>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-lg-5">
+                <h1>Ignite UI</h1>
+                <h2>Angular Wrappers Components</h2>
+            </div>
+            <div class="col-sm-12 header-fg col-lg-7"></div>
+        </div>
+
+    </div>
+</div>
+
+<ng-template #sampleHeader>
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" routerLink="">Ignite UI Angular components </a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="https://github.com/IgniteUI/igniteui-angular-wrappers">View on GitHub
+                        <i class="fa fa-github"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<div class="container push-down">
+    <div>
+        <router-outlet #outlet="outlet"></router-outlet>
+    </div>
+    <hr />
+
+    <h2>Samples</h2>
+    <div class="links">
+        <div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                igGrid <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><a routerLink="">Default</a></li>
+                <li><a routerLink="/grid-data-binding">Data Binding</a></li>
+                <li><a routerLink="/grid-top-level-options">Top-level template options</a></li>
+                <li><a routerLink="/grid-complex-options">Complex template options</a></li>
+                <li><a routerLink="/grid-http-client">Grid with HTTP client</a></li>
+                <li><a routerLink="/grid-api-methods">Invoking API methods</a></li>
+                <li><a routerLink="/grid-excel-exporting">Excel Exporting</a></li>
+            </ul>
+        </div>
+        <a class="btn btn-default" routerLink="/hierarchical-grid">igHierarchicalGrid</a>
+        <a class="btn btn-default" routerLink="/tree-grid">igTreeGrid</a>
+        <div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                igPivotGrid <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><a routerLink="/pivot-grid-flat-data-source">igPivotGrid with Flat
+                        Data Source</a></li>
+                <li><a routerLink="/pivot-grid-xmla-data-source">igPivotGrid with Xmla
+                        Data Source</a></li>
+            </ul>
+        </div>
+        <a class="btn btn-default" routerLink="/combo">igCombo</a>
+        <a class="btn btn-default" routerLink="/data-chart">igDataChart</a>
+        <a class="btn btn-default" routerLink="/dialog">igDialog</a>
+        <a class="btn btn-default" routerLink="/editors">igEditors</a>
+        <a class="btn btn-default" routerLink="/html-editor">igHtmlEditor</a>
+        <a class="btn btn-default" routerLink="/layout-manager">igLayoutManager</a>
+        <a class="btn btn-default" routerLink="/tile-manager">igTileManager</a>
+        <a class="btn btn-default" routerLink="/map">igMap</a>
+        <a class="btn btn-default" routerLink="/tree">igTree</a>
+        <a class="btn btn-default" routerLink="/upload">igUpload</a>
+        <a class="btn btn-default" routerLink="/video-player">igVideoPlayer</a>
+    </div>
+
+    <div class="push-down-md">
+        <a href="https://github.com/IgniteUI/igniteui-angular-wrappers" class="btn btn-default btn-primary btn-lg"><i
+                class="fa fa-github"></i> View source on GitHub</a>
+    </div>
+
+</div>
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <p><a href="https://github.com/IgniteUI/igniteui-angular-wrappers/issues">Feedback &amp; Questions</a>
+                </p>
+                <p class="small">For more information or to download a trial of Ignite UI, please visit: <a
+                        href="http://www.igniteui.com">http://www.igniteui.com</a></p>
+            </div>
+        </div>
+    </div>
+</footer>

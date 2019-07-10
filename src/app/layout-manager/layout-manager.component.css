@@ -1,0 +1,50 @@
+body {
+    background-color: #fff;
+    font-family: 'segoe ui', 'arial', 'helvetica', 'sans-serif';
+    /*overflow-x:hidden;*/
+}
+
+:host /deep/ div#layout h2 {
+    margin: 0;
+}
+
+:host /deep/ div#layout .left,
+:host /deep/ div#layout .right,
+:host /deep/ div#layout .center,
+:host /deep/ div#layout .footer,
+:host /deep/ div#layout .header {
+    color: #fff;
+}
+
+:host /deep/ div#layout .left p,
+:host /deep/ div#layout .right p,
+:host /deep/ div#layout .center p,
+:host /deep/ div#layout h3 {
+    margin: 15px;
+}
+
+:host /deep/ div#layout .center {
+    background-color: #EEE;
+    color: #555;
+}
+
+:host /deep/ div#layout .right {
+    background-color: #555;
+    color: #EEE;
+}
+
+:host /deep/ div#layout .left {
+    background-color: #FFA72D;
+}
+
+:host /deep/ div#layout .header {
+    background-color: #2CBDF9;
+}
+
+:host /deep/ div#layout .footer {
+    background-color: #2CBDF9;
+}
+
+#sampleContainer {
+    height: 370px;
+}

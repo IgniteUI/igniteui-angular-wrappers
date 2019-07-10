@@ -1,0 +1,25 @@
+<h1 class="push-down-md"><a href="http://www.igniteui.com/data-chart/overview" target="_blank">igChart</a> &amp; <a href="http://www.igniteui.com/zoombar/overview" target="_blank">igZoombar</a></h1>
+<div class="row description">
+    <div class="alert alert-info col-md-5 try-it-out">
+        <span class="h4">TRY IT OUT:</span>
+        <hr />
+        <ul>
+            <li>Scroll the chart with the scroll bar</li>
+            <li>Change the viewable area of the chart by dragging the handles inside the zoombar</li>
+        </ul>
+    </div>
+    <div class="col-md-4">
+        <p class="lead">This sample demonstrates how to link together the igDataChart and igZoomBar using Ignite UI Angular Wrappers components.</p>
+        <p>
+            <a href="https://github.com/IgniteUI/igniteui-angular-wrappers/blob/master/samples/igDataChart/igDataChart.html" class="btn btn-default btn-lg btn-primary" target="_blank"><i class="fa fa-code fa-lg"></i> Explore the Code</a>
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <ig-data-chart [(options)]="options" [widgetId]='"datachart1"'></ig-data-chart>
+        <ig-zoombar [(options)]="zoombarOptions" [widgetId]='"zoombar"'></ig-zoombar>
+        <br/>
+        <button type="button" class="btn btn-default" (click)="changeZB()">Change Zoombar Type</button>
+    </div>
+</div>

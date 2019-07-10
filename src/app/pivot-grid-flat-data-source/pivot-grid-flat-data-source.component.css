@@ -1,0 +1,13 @@
+
+:host /deep/ #dataSelector, #pivotGrid {
+    float: left;
+}
+#pivotGrid {
+    width: 75%;
+}
+#dataSelector, #pivotGrid_container {
+    float: left;
+}
+#pivotGrid_container {
+    width: 75%;
+}
