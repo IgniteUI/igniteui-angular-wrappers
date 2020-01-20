@@ -1,8 +1,9 @@
 import { IgControlBase } from '../igcontrolbase/igcontrolbase';
-import { AfterContentInit, QueryList, ContentChild, ContentChildren, ElementRef, Renderer, KeyValueDiffers, IterableDiffers, SimpleChanges, Input, ChangeDetectorRef } from '@angular/core';
+import { AfterContentInit, QueryList, ContentChild, ContentChildren, ElementRef, KeyValueDiffers, IterableDiffers, SimpleChanges, Input, ChangeDetectorRef, Renderer2, Directive } from '@angular/core';
 import { Column } from './column.directive';
 import { Features } from './features.directive';
 
+@Directive()
 export class IgGridBase<Model> extends IgControlBase<Model> implements AfterContentInit {
     @Input()
     public set dataSource(value: any) {
@@ -17,7 +18,7 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
     @ContentChild(Features, {static: true}) featuresList: Features;
     private _dataSource;
 
-    constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }
 
     ngOnInit() {
         if (this._dataSource === null || this._dataSource === undefined) {

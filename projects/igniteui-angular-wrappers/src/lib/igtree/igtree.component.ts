@@ -1,4 +1,4 @@
-import { Component, Renderer, ElementRef, IterableDiffers, KeyValueDiffers, ChangeDetectorRef, SimpleChanges, Input } from "@angular/core";
+import { Component, ElementRef, IterableDiffers, KeyValueDiffers, ChangeDetectorRef, SimpleChanges, Input, Renderer2 } from "@angular/core";
 import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 
 @Component({
@@ -15,7 +15,7 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
         this._dataSource = value;
     };
 
-    constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {
         super(el, renderer, differs, kvalDiffers, cdr);
     }
 

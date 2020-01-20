@@ -1,5 +1,5 @@
 import { IgControlBase } from "../igcontrolbase/igcontrolbase";
-import { ElementRef, Renderer, IterableDiffers, Component, KeyValueDiffers, ChangeDetectorRef, Input } from "@angular/core";
+import { ElementRef, IterableDiffers, Component, KeyValueDiffers, ChangeDetectorRef, Input, Renderer2 } from "@angular/core";
 
 @Component({
     selector: "ig-pie-chart",
@@ -8,7 +8,7 @@ import { ElementRef, Renderer, IterableDiffers, Component, KeyValueDiffers, Chan
     outputs: ["tooltipShowing", "tooltipShown", "tooltipHiding", "tooltipHidden", "browserNotSupported", "sliceClick", "labelClick", "selectedItemChanging", "selectedItemChanged", "selectedItemsChanging", "selectedItemsChanged"]
 })
 export class IgPieChartComponent extends IgControlBase<IgPieChart> {
-    constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); } public option(): void { return; };
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); } public option(): void { return; };
     //public option(): void { return; } ;
 
     @Input()

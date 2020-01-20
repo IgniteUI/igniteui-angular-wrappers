@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HtmlEditorComponent {
 
-    private options: any;
-    private data: any
+    public options: any;
+    public data: any
 
     constructor() {
         this.data = "<p>Ignite UI controls:</p><p><ul><li>igEditors</li><li>igHtmlEditor</li><li>igGrid</li><li>igDataChart</li><li>etc.</li></ul></p>";

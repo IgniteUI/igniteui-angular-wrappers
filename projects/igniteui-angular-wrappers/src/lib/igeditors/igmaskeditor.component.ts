@@ -1,5 +1,5 @@
 import { IgEditorBase } from "./igeditorbase";
-import { Renderer, IterableDiffers, Optional, ElementRef, Component, KeyValueDiffers, ChangeDetectorRef } from "@angular/core";
+import { IterableDiffers, Optional, ElementRef, Component, KeyValueDiffers, ChangeDetectorRef, Renderer2 } from "@angular/core";
 import { NgModel } from "@angular/forms";
 
 @Component({
@@ -9,7 +9,7 @@ import { NgModel } from "@angular/forms";
     outputs: ["rendering", "rendered", "mousedown", "mouseup", "mousemove", "mouseover", "mouseout", "blur", "focus", "keydown", "keypress", "keyup", "valueChanging", "valueChanged", "dropDownListOpening", "dropDownListOpened", "dropDownListClosing", "dropDownListClosed", "dropDownItemSelecting", "dropDownItemSelected", "textChanged"]
 })
 export class IgMaskEditorComponent extends IgEditorBase<IgMaskEditor> {
-    constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef, @Optional() public model: NgModel) { super(el, renderer, differs, kvalDiffers, cdr, model); }
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef, @Optional() public model: NgModel) { super(el, renderer, differs, kvalDiffers, cdr, model); }
     /**
      * Gets/Sets mask editor value.
      *

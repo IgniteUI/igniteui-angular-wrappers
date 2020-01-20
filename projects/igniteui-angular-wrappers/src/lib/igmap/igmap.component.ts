@@ -1,4 +1,4 @@
-import { Component, Renderer, IterableDiffers, ElementRef, KeyValueDiffers, ChangeDetectorRef, Input } from "@angular/core";
+import { Component, IterableDiffers, ElementRef, KeyValueDiffers, ChangeDetectorRef, Input, Renderer2 } from "@angular/core";
 import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 
 @Component({
@@ -8,7 +8,7 @@ import { IgControlBase } from "../igcontrolbase/igcontrolbase";
     outputs: ["tooltipShowing", "tooltipShown", "tooltipHiding", "tooltipHidden", "browserNotSupported", "seriesCursorMouseMove", "seriesMouseLeftButtonDown", "seriesMouseLeftButtonUp", "seriesMouseMove", "seriesMouseEnter", "seriesMouseLeave", "windowRectChanged", "gridAreaRectChanged", "refreshCompleted", "triangulationStatusChanged"]
 })
 export class IgMapComponent extends IgControlBase<IgMap> {
-    constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); } public option(): void { return; };
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); } public option(): void { return; };
 
     @Input()
     public set dataSource(value: any) {

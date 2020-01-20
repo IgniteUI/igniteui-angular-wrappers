@@ -1,4 +1,4 @@
-import { Component, ElementRef, Renderer, IterableDiffers, KeyValueDiffers, ChangeDetectorRef } from "@angular/core";
+import { Component, ElementRef, IterableDiffers, KeyValueDiffers, ChangeDetectorRef, Renderer2 } from "@angular/core";
 import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 
 @Component({
@@ -8,7 +8,7 @@ import { IgControlBase } from "../igcontrolbase/igcontrolbase";
     outputs: ["errorMessageDisplaying", "dataChanged"]
 })
 export class IgQRCodeBarcodeComponent extends IgControlBase<IgQRCodeBarcode> {
-    constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); } public option(): void { return; };
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); } public option(): void { return; };
 
     /**
      * Returns information about how the barcode is rendered.

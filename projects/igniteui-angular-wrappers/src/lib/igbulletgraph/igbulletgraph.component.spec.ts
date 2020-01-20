@@ -31,7 +31,7 @@ describe('Infragistics Angular BulletGraph', () => {
     template: `<div><ig-bullet-graph widgetId="bulletGraph" [(options)]="opts"></ig-bullet-graph></div>`
 })
 class TestComponent {
-    @ViewChild(IgBulletGraphComponent, { static: false }) bulletgraph: IgBulletGraphComponent;
+    @ViewChild(IgBulletGraphComponent) bulletgraph: IgBulletGraphComponent;
     public opts = {
         width: "100%",
         height: "80px",

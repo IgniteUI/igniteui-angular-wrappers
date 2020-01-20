@@ -1,4 +1,4 @@
-import { Component, ElementRef, Renderer, IterableDiffers, Optional, NgZone, KeyValueDiffers, ChangeDetectorRef } from "@angular/core";
+import { Component, ElementRef, IterableDiffers, Optional, NgZone, KeyValueDiffers, ChangeDetectorRef, Renderer2 } from "@angular/core";
 import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 import { ControlValueAccessor, NgModel } from "@angular/forms";
 
@@ -13,7 +13,7 @@ declare var jQuery: any;
 export class IgHtmlEditorComponent extends IgControlBase<IgHtmlEditor> implements ControlValueAccessor {
     protected _model: any;
     protected _zone: any;
-    constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, @Optional() public model: NgModel, private zone: NgZone, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, @Optional() public model: NgModel, private zone: NgZone, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {
         super(el, renderer, differs, kvalDiffers, cdr);
         if (model) {
             model.valueAccessor = this;

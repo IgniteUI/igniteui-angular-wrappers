@@ -11,10 +11,10 @@ declare var jQuery: any;
 })
 export class TreeComponent {
 
-    protected options: IgTree;
-    protected data: any;
-    protected newProductCategory: any;
-    protected newProductSubcategory: any;
+    public options: IgTree;
+    public data: any;
+    public newProductCategory: any;
+    public newProductSubcategory: any;
     @ViewChild("tree", { static: true }) tree: IgTreeComponent;
 
     constructor() {

@@ -1,4 +1,4 @@
-import { Component, Optional, ElementRef, Renderer, IterableDiffers, KeyValueDiffers, ChangeDetectorRef, SimpleChanges, Input } from "@angular/core";
+import { Component, Optional, ElementRef, IterableDiffers, KeyValueDiffers, ChangeDetectorRef, SimpleChanges, Input, Renderer2 } from "@angular/core";
 import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 import { ControlValueAccessor, NgModel } from "@angular/forms";
 
@@ -22,7 +22,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
     protected _model: any;
     private _changes: any;
 
-    constructor(@Optional() public model: NgModel, el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {
+    constructor(@Optional() public model: NgModel, el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {
         super(el, renderer, differs, kvalDiffers, cdr);
         if (model) {
             model.valueAccessor = this;

@@ -1,11 +1,11 @@
 import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 import { ControlValueAccessor, NgModel } from "@angular/forms";
-import { ElementRef, Renderer, IterableDiffers, Optional, KeyValueDiffers, ChangeDetectorRef } from "@angular/core";
+import { ElementRef, IterableDiffers, Optional, KeyValueDiffers, ChangeDetectorRef, Renderer2 } from "@angular/core";
 
 export class IgEditorBase<Model> extends IgControlBase<Model> implements ControlValueAccessor {
     protected _model: any;
 
-    constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef, @Optional() public model: NgModel) {
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef, @Optional() public model: NgModel) {
         super(el, renderer, differs, kvalDiffers, cdr);
         if (model) {
             model.valueAccessor = this;

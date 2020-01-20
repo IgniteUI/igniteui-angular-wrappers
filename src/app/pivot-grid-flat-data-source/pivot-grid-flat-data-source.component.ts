@@ -7,11 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PivotGridFlatDataSourceComponent {
 
-	private optsGrid: IgPivotGrid;
-	private optsSelector: IgPivotDataSelector;
-	private selectorId: string;
-	private gridId: string;
-	private data: any;
+	public optsGrid: IgPivotGrid;
+	public optsSelector: IgPivotDataSelector;
+	public selectorId: string;
+	public gridId: string;
+	public data: any;
 
 	constructor() {
 		this.data = new jQuery.ig.OlapFlatDataSource({

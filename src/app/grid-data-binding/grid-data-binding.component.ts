@@ -9,10 +9,10 @@ import { Northwind } from '../shared/northwind';
 })
 export class GridDataBindingComponent {
 
-    private gridOptions: IgGrid;
-    private id: string;
-    private data: any;
-    private newProduct: any;
+    public gridOptions: IgGrid;
+    public id: string;
+    public data: any;
+    public newProduct: any;
     @ViewChild("grid1", { static: true }) grid: IgGridComponent;
     //private deleteRecord: any;
 

@@ -1,4 +1,4 @@
-import { Component, Renderer, ElementRef, IterableDiffers, KeyValueDiffers, ChangeDetectorRef } from "@angular/core";
+import { Component, ElementRef, IterableDiffers, KeyValueDiffers, ChangeDetectorRef, Renderer2 } from "@angular/core";
 import { IgGridBase } from "../iggrid/iggridbase";
 
 @Component({
@@ -8,7 +8,7 @@ import { IgGridBase } from "../iggrid/iggridbase";
     outputs: ["cellClick", "cellRightClick", "dataBinding", "dataBound", "rendering", "rendered", "dataRendering", "dataRendered", "headerRendering", "headerRendered", "footerRendering", "footerRendered", "headerCellRendered", "rowsRendering", "rowsRendered", "schemaGenerated", "columnsCollectionModified", "requestError", "created", "destroyed", "rowExpanding", "rowExpanded", "rowCollapsing", "rowCollapsed"]
 })
 export class IgTreeGridComponent extends IgGridBase<IgTreeGrid> {
-    constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }
 
     deleteRow(id) {
         var element = jQuery(this._el),
