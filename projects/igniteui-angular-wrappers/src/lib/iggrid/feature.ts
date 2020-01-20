@@ -19,9 +19,23 @@ export class Feature<Model> {
         }
     }
 
+    cloneObject(obj: any): any {
+        var clone = {};
+        for(var i in obj) {
+            if (obj[i] != null) {
+                if(!i.startsWith("_") && typeof(obj[i])=="object") {
+                    clone[i] = this.cloneObject(obj[i]);
+                } else {
+                    clone[i] = obj[i];
+                }
+            }
+        }
+        return clone;
+    }
+
     ngOnInit() {
         let self = this;
-        this.initSettings = jQuery.extend(true, {}, this);
+        this.initSettings = this.cloneObject(this);
         let evtName;
         this._events = new Map<string, string>();
         let grid = jQuery(this._el.nativeElement).closest("ig-grid").find("table");
