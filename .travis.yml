@@ -20,7 +20,7 @@ script:
 
 before_deploy:
 # package and navigate to dist
-- npm run build:lib
+- ng build igniteui-angular-wrappers --prod
 - cd dist/igniteui-angular-wrappers
 # update package version
 - npm version "$TRAVIS_TAG" --no-git-tag-version --save
