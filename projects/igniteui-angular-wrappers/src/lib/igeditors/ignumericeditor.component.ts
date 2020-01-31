@@ -1,4 +1,4 @@
-import { Component, Renderer, ElementRef, IterableDiffers, Optional, KeyValueDiffers, ChangeDetectorRef } from "@angular/core";
+import { Component, ElementRef, IterableDiffers, Optional, KeyValueDiffers, ChangeDetectorRef, Renderer2 } from "@angular/core";
 import { IgEditorBase } from "./igeditorbase";
 import { NgModel } from "@angular/forms";
 
@@ -9,7 +9,7 @@ import { NgModel } from "@angular/forms";
     outputs: ["rendering", "rendered", "mousedown", "mouseup", "mousemove", "mouseover", "mouseout", "blur", "focus", "keydown", "keypress", "keyup", "valueChanging", "valueChanged", "dropDownListOpening", "dropDownListOpened", "dropDownListClosing", "dropDownListClosed", "dropDownItemSelecting", "dropDownItemSelected", "textChanged"]
 })
 export class IgNumericEditorComponent extends IgEditorBase<IgNumericEditor> {
-    constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef, @Optional() public model: NgModel) { super(el, renderer, differs, kvalDiffers, cdr, model); }
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef, @Optional() public model: NgModel) { super(el, renderer, differs, kvalDiffers, cdr, model); }
 
     /**
      * Gets/Sets editor value.

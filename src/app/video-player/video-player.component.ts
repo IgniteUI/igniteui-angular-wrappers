@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VideoPlayerComponent {
 
-    protected options: any;
+    public options: any;
     constructor() {
         this.options = {
             width: "700px",

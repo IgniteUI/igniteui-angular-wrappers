@@ -7,7 +7,7 @@ import { candidates } from '../shared/candidates';
   styleUrls: ['./tile-manager.component.css']
 })
 export class TileManagerComponent {
-	private options: any;
+	public options: any;
 
 	constructor() {
 		this.options={

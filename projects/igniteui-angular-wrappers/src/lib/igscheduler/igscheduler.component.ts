@@ -1,4 +1,4 @@
-import { Component, ElementRef, Renderer, IterableDiffers, KeyValueDiffers, ChangeDetectorRef } from "@angular/core";
+import { Component, ElementRef, IterableDiffers, KeyValueDiffers, ChangeDetectorRef, Renderer2 } from "@angular/core";
 import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 
 @Component({
@@ -8,7 +8,7 @@ import { IgControlBase } from "../igcontrolbase/igcontrolbase";
     outputs:["agendaRangeChanging","agendaRangeChanged","daySelected","monthChanging","monthChanged","rendering","rendered","viewChanging","viewChanged","appointmentDialogOpening","appointmentDialogOpened","appointmentDialogClosing","appointmentDialogClosed","appointmentCreating","appointmentCreated","appointmentDeleting","appointmentDeleted","appointmentEditing","appointmentEdited"]
 })
 export class IgSchedulerComponent extends IgControlBase<IgScheduler> {
-    constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { 
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { 
         super(el, renderer, differs, kvalDiffers, cdr);
     }	
 

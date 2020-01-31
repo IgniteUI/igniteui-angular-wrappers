@@ -9,11 +9,11 @@ import { ProductService } from './product.service';
 })
 export class GridHttpClientComponent {
 
-    private gridOptions: IgGrid;
-    private id: string;
-    private products: Product[] = [];
+    public gridOptions: IgGrid;
+    public id: string;
+    public products: Product[] = [];
     errorMessage: string;
-    private newId: number;
+    public newId: number;
 
     constructor(private productService: ProductService) {
         this.productService.getAll().subscribe(

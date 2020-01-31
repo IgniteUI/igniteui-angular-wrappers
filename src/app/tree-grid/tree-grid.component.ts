@@ -8,10 +8,10 @@ import { Tasks } from '../shared/tasks';
 })
 export class TreeGridComponent {
 
-	private tgridOptions: IgTreeGrid;
-	private id: string;
-	private data: any;
-	private newProduct:any;
+	public tgridOptions: IgTreeGrid;
+	public id: string;
+	public data: any;
+	public newProduct:any;
 
 	constructor() {
 		this.data = Tasks.getData();

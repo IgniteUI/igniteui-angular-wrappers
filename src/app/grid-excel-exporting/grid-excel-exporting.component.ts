@@ -10,10 +10,10 @@ declare var jQuery: any;
 })
 export class GridExcelExportingComponent {
 
-    private gridOptions: IgGrid;
-    private id: string;
-    private data: any;
-  
+    public gridOptions: IgGrid;
+    public id: string;
+    public data: any;
+
     constructor() {
       this.data = Northwind.getData();
   

@@ -8,12 +8,12 @@ import { Northwind } from '../shared/northwind';
 })
 export class GridTopLevelOptionsComponent {
 
-	private cols: Array<any>;
-	private id: string;
-	private data: any;
-	private w: string;
-	private h: string;
-	private pKey: string;
+	public cols: Array<any>;
+	public id: string;
+	public data: any;
+	public w: string;
+	public h: string;
+	public pKey: string;
 
 	constructor() {
 		this.data = Northwind.getData();

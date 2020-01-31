@@ -1,4 +1,4 @@
-import { Component, ElementRef, Renderer, IterableDiffers, Optional, KeyValueDiffers, ChangeDetectorRef } from "@angular/core";
+import { Component, ElementRef, IterableDiffers, Optional, KeyValueDiffers, ChangeDetectorRef, Renderer2 } from "@angular/core";
 import { IgEditorBase } from "./igeditorbase";
 import { NgModel } from "@angular/forms";
 
@@ -10,7 +10,7 @@ import { NgModel } from "@angular/forms";
     outputs: ["rendering", "rendered", "mousedown", "mouseup", "mousemove", "mouseover", "mouseout", "blur", "focus", "keydown", "keypress", "keyup", "valueChanging", "valueChanged", "dropDownListOpening", "dropDownListOpened", "dropDownListClosing", "dropDownListClosed", "dropDownItemSelecting", "dropDownItemSelected", "textChanged", "itemSelected"]
 })
 export class IgDatePickerComponent extends IgEditorBase<IgDatePicker> {
-    constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef, @Optional() public model: NgModel) { super(el, renderer, differs, kvalDiffers, cdr, model); }
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef, @Optional() public model: NgModel) { super(el, renderer, differs, kvalDiffers, cdr, model); }
     /**
      * Changes the the regional settings of widget element to the language specified in [options.regional](ui.igdatepicker#options:regional)
      * Note that this method is for rare scenarios, use [regional](ui.igdatepicker#options:regional) option setter

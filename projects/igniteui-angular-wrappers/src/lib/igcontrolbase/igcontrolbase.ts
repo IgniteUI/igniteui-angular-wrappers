@@ -1,4 +1,4 @@
-import { ElementRef, EventEmitter, Renderer, IterableDiffers, DoCheck, SimpleChanges, Input, ChangeDetectorRef, KeyValueDiffers } from '@angular/core';
+import { ElementRef, EventEmitter, IterableDiffers, DoCheck, SimpleChanges, Input, ChangeDetectorRef, KeyValueDiffers, Renderer2, Directive } from '@angular/core';
 
 declare var jQuery: any;
 
@@ -47,6 +47,7 @@ var NODES = {
     "ig-scheduler": "div"
 };
 
+@Directive()
 export class IgControlBase<Model> implements DoCheck {
     @Input()
     public options: any = {};
@@ -62,7 +63,7 @@ export class IgControlBase<Model> implements DoCheck {
     private _nativeElement: any;
     public widgetId: string;
 
-    constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, public kvalDiffers: KeyValueDiffers, public cdr: ChangeDetectorRef) {
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, public kvalDiffers: KeyValueDiffers, public cdr: ChangeDetectorRef) {
         this._differs = differs;
         this._nativeElement = el.nativeElement;
         this._widgetName = this.convertToCamelCase(el.nativeElement.nodeName.toLowerCase());//ig-grid -> igGrid

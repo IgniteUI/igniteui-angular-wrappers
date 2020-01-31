@@ -7,11 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GridDefaultComponent implements OnInit {
 
-    private gridOptions: IgGrid;
-    private cellClickHandler: any;
-    private renderedEventHandler: any;
-    private data: Array<any>;
-    private id: string = "grid1";
+    public gridOptions: IgGrid;
+    public cellClickHandler: any;
+    public renderedEventHandler: any;
+    public data: Array<any>;
+    public id: string = "grid1";
 
     constructor() {
         this.data = [{

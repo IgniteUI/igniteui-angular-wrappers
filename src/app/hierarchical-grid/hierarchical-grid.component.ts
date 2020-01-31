@@ -8,10 +8,10 @@ import { NorthwindEmployees } from '../shared/northwind-emplyoees';
 })
 export class HierarchicalGridComponent {
 
-    private hgridOptions: IgHierarchicalGrid;
-    private id: string;
-    private data: any;
-    private newProduct: any;
+    public hgridOptions: IgHierarchicalGrid;
+    public id: string;
+    public data: any;
+    public newProduct: any;
 
     constructor() {
         this.data = NorthwindEmployees.getData();

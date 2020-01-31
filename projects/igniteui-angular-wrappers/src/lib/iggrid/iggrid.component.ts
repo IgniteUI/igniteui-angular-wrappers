@@ -1,4 +1,4 @@
-import { Component, ElementRef, Renderer, KeyValueDiffers, IterableDiffers, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, ElementRef, KeyValueDiffers, IterableDiffers, ChangeDetectionStrategy, ChangeDetectorRef, Renderer2 } from '@angular/core';
 import { IgGridBase } from './iggridbase';
 
 @Component({
@@ -9,7 +9,7 @@ import { IgGridBase } from './iggridbase';
     outputs: ["cellClick", "cellRightClick", "dataBinding", "dataBound", "rendering", "rendered", "dataRendering", "dataRendered", "headerRendering", "headerRendered", "footerRendering", "footerRendered", "headerCellRendered", "rowsRendering", "rowsRendered", "schemaGenerated", "columnsCollectionModified", "requestError", "created", "destroyed"]
 })
 export class IgGridComponent extends IgGridBase<IgGrid> {
-    constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiff: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiff, cdr); }
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiff: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiff, cdr); }
 
     /**
      * Returns the element holding the data records

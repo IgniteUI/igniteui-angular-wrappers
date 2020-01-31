@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutManagerComponent {
 
-    private layoutOptions: any;
+    public layoutOptions: any;
 
     constructor() {
         this.layoutOptions = {

@@ -1,4 +1,4 @@
-import { ElementRef, Renderer, IterableDiffers, Component, KeyValueDiffers, ChangeDetectorRef } from "@angular/core";
+import { ElementRef, IterableDiffers, Component, KeyValueDiffers, ChangeDetectorRef, Renderer2 } from "@angular/core";
 import { IgContentControlBase } from "../igcontrolbase/igcontentcontrolbase";
 
 @Component({
@@ -8,7 +8,7 @@ import { IgContentControlBase } from "../igcontrolbase/igcontentcontrolbase";
     outputs: ["internalResized", "internalResizing", "itemRendered", "itemRendering", "rendered"]
 })
 export class IgLayoutManagerComponent extends IgContentControlBase<IgLayoutManager> {
-    constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }
 
 
     /**

@@ -9,7 +9,7 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<ig-grid [widgetId]='id' [width]='w' [autoCommit]='true' [dataSource]='data' [height]='h' [autoGenerateColumns]='false' [primaryKey]='"ProductID"' #grid>
+		<ig-grid [widgetId]='id' [autoCommit]='true' [dataSource]='data' [autoGenerateColumns]='false' [primaryKey]='"ProductID"' #grid>
 			<column [key]="'ProductID'" [headerText]="'Product ID'" [width]="'165px'" [dataType]="'number'"></column>
 			<column [key]="'ProductName'" [headerText]="'Product Name'" [width]="'250px'" [dataType]="'string'"></column>
 			<column [key]="'QuantityPerUnit'" [headerText]="'Quantity per unit'" [width]="'250px'" [dataType]="'string'"></column>

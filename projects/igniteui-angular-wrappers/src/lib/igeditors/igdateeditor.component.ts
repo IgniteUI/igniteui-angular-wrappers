@@ -1,5 +1,5 @@
 import { IgEditorBase } from "./igeditorbase";
-import { Renderer, ElementRef, IterableDiffers, Optional, Component, KeyValueDiffers, ChangeDetectorRef } from "@angular/core";
+import { ElementRef, IterableDiffers, Optional, Component, KeyValueDiffers, ChangeDetectorRef, Renderer2 } from "@angular/core";
 import { NgModel } from "@angular/forms";
 
 @Component({
@@ -9,7 +9,7 @@ import { NgModel } from "@angular/forms";
     outputs: ["rendering", "rendered", "mousedown", "mouseup", "mousemove", "mouseover", "mouseout", "blur", "focus", "keydown", "keypress", "keyup", "valueChanging", "valueChanged", "dropDownListOpening", "dropDownListOpened", "dropDownListClosing", "dropDownListClosed", "dropDownItemSelecting", "dropDownItemSelected", "textChanged"]
 })
 export class IgDateEditorComponent extends IgEditorBase<IgDateEditor> {
-    constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef, @Optional() public model: NgModel) { super(el, renderer, differs, kvalDiffers, cdr, model); }
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef, @Optional() public model: NgModel) { super(el, renderer, differs, kvalDiffers, cdr, model); }
 
     /**
      * Changes the the regional settings of widget element to the language specified in [options.regional](ui.igdateeditor#options:regional)

@@ -1,4 +1,4 @@
-import { Component, Renderer, IterableDiffers, ElementRef, KeyValueDiffers, ChangeDetectorRef } from "@angular/core";
+import { Component, IterableDiffers, ElementRef, KeyValueDiffers, ChangeDetectorRef, Renderer2 } from "@angular/core";
 import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 
 @Component({
@@ -8,7 +8,7 @@ import { IgControlBase } from "../igcontrolbase/igcontrolbase";
     outputs: ["formatLabel", "alignLabel", "valueChanged"]
 })
 export class IgRadialMenuComponent extends IgControlBase<IgRadialMenu> {
-    constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {
         super(el, renderer, differs, kvalDiffers, cdr);
     }
     /* istanbul ignore next */

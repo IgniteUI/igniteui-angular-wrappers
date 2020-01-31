@@ -1,4 +1,4 @@
-import { Component, Renderer, IterableDiffers, ElementRef, KeyValueDiffers, ChangeDetectorRef } from "@angular/core";
+import { Component, IterableDiffers, ElementRef, KeyValueDiffers, ChangeDetectorRef, Renderer2 } from "@angular/core";
 import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 
 declare var jQuery: any;
@@ -10,7 +10,7 @@ declare var jQuery: any;
     outputs: ["validating", "validated", "success", "error", "errorShowing", "errorHiding", "errorShown", "errorHidden", "successShowing", "successHiding", "successShown", "successHidden", "formValidating", "formValidated", "formError", "formSuccess"]
 })
 export class IgValidatorComponent extends IgControlBase<IgValidator> {
-    constructor(el: ElementRef, renderer: Renderer, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {
         super(el, renderer, differs, kvalDiffers, cdr);
     }
 

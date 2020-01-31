@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DialogComponent {
 
-    private options: any;
+    public options: any;
 
     constructor() {
         this.options = {
