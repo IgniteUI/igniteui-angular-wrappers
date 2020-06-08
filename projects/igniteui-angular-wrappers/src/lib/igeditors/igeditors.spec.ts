@@ -65,7 +65,6 @@ describe('Infragistics Angular TextEditor', () => {
                     expect($(fixture.debugElement.nativeElement).find("#editor1").igTextEditor("displayValue")).toBe("changed_test_value");
                     // on key change:
                     field = $(fixture.debugElement.nativeElement).find("#editor1 input.ui-igedit-input");
-                    field.trigger("focus");
                     window.typeInInput("2", field);
                     expect(fixture.debugElement.componentInstance.val).toBe("changed_test_value2");
                     window.typeInInput("2", field);
