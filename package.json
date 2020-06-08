@@ -10,7 +10,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build:lib": "ng build igniteui-angular-wrappers",
-    "test:lib": "ng test igniteui-angular-wrappers --watch=false --no-progress --code-coverage",
+    "test:lib": "ng test igniteui-angular-wrappers --watch=false --no-progress --code-coverage --browsers=ChromeHeadless",
     "test:lib:watch": "ng test igniteui-angular-wrappers"
   },
   "private": true,
