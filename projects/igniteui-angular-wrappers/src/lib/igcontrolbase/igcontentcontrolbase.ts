@@ -1,7 +1,8 @@
 import { IgControlBase } from "./igcontrolbase";
-import { ElementRef, KeyValueDiffers, IterableDiffers, ChangeDetectorRef, Renderer2 } from "@angular/core";
+import { ElementRef, KeyValueDiffers, IterableDiffers, ChangeDetectorRef, Renderer2, Directive } from "@angular/core";
 
 
+@Directive()
 export class IgContentControlBase<Model> extends IgControlBase<Model> {
 	private childNodes: Array<any>;
 

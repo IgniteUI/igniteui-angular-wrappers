@@ -1,7 +1,8 @@
 import { IgControlBase } from "../igcontrolbase/igcontrolbase";
 import { ControlValueAccessor, NgModel } from "@angular/forms";
-import { ElementRef, IterableDiffers, Optional, KeyValueDiffers, ChangeDetectorRef, Renderer2 } from "@angular/core";
+import { ElementRef, IterableDiffers, Optional, KeyValueDiffers, ChangeDetectorRef, Renderer2, Directive } from "@angular/core";
 
+@Directive()
 export class IgEditorBase<Model> extends IgControlBase<Model> implements ControlValueAccessor {
     protected _model: any;
 

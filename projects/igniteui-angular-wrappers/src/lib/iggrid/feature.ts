@@ -1,7 +1,8 @@
-import { ElementRef, EventEmitter } from "@angular/core";
+import { ElementRef, EventEmitter, Directive } from "@angular/core";
 
 declare var jQuery: any;
 
+@Directive()
 export class Feature<Model> {
     public _el: any;
     public _settings: any = {};
