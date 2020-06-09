@@ -14,9 +14,9 @@ export class IgHierarchicalGridComponent extends IgGridBase<IgHierarchicalGrid> 
     constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }
 
     deleteRow(id) {
-        const element = jQuery(this._el),
-            tr = element.find('tr[data-id=\'' + id + '\']'),
-            childContainer = tr.next('tr[data-container]');
+        const element = jQuery(this._el);
+        const tr = element.find('tr[data-id=\'' + id + '\']');
+        const childContainer = tr.next('tr[data-container]');
 
         if (tr.length > 0) {
             tr.remove();
@@ -49,9 +49,9 @@ export class IgHierarchicalGridComponent extends IgGridBase<IgHierarchicalGrid> 
         const element = jQuery(this._el);
         const childrenDataProperty = this.childrenDataProperty || this.options.childrenDataProperty;
         const childGrids = element.data(this._widgetName).allChildrenWidgets();
-        for (let i = 0; i < childGrids.length; i++) {
-            childGrids[i].dataBind();
-        }
+        childGrids.array.forEach(grid => {
+          grid.dataBind();
+        });
     }
     /**
      * Data binds the hierarchical grid. No child grids will be created or rendered by default, unless there is initialExpandDepth >= 0 set.
