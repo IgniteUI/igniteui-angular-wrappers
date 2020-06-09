@@ -12,6 +12,7 @@ before_install:
 - sleep 3
 
 script:
+- npm run lint
 - npm run test:lib
 - cat ./coverage/igniteui-angular-wrappers/lcov.info | coveralls
 
