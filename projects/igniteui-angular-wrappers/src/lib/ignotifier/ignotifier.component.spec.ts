@@ -12,14 +12,14 @@ describe('Infragistics Angular Notifier', () => {
     });
 
     it('should initialize correctly', (done) => {
-        var template = '<div><ig-notifier widgetId="notifier" [(options)]="opts"></ig-notifier></div>';
+        const template = '<div><ig-notifier widgetId="notifier" [(options)]="opts"></ig-notifier></div>';
         TestBed.overrideComponent(TestComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestComponent);
+            const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
             expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgNotifierComponent)
                 .toBe(true);
@@ -28,14 +28,14 @@ describe('Infragistics Angular Notifier', () => {
     });
 
     it('should initialize correctly when having a target element', (done) => {
-        var template = '<div><ig-notifier widgetId="successEditor" [(options)]="opts"></ig-notifier> <input id="successEditor"/></div>';
+        const template = '<div><ig-notifier widgetId="successEditor" [(options)]="opts"></ig-notifier> <input id="successEditor"/></div>';
         TestBed.overrideComponent(TestComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestComponent);
+            const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
             expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgNotifierComponent)
                 .toBe(true);
@@ -46,7 +46,7 @@ describe('Infragistics Angular Notifier', () => {
 
 @Component({
     selector: 'test-cmp',
-    template: '<div></div>' //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
 })
 class TestComponent {
     private opts: any;
@@ -55,7 +55,7 @@ class TestComponent {
 
     constructor() {
         this.opts = {
-            contentTemplate: "<div>Test Content</div>"
+            contentTemplate: '<div>Test Content</div>'
         };
     }
 }

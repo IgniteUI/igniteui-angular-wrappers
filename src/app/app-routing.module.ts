@@ -46,7 +46,7 @@ const routes: Routes = [
     { path: 'tree', component: TreeComponent, data: {animation: 'TreePage'} },
     { path: 'upload', component: UploadComponent, data: {animation: 'UploadPage'} },
     { path: 'video-player', component: VideoPlayerComponent, data: {animation: 'VideoPlayerPage'} }
-    
+
   ];
 
 @NgModule({

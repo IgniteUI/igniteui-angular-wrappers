@@ -16,14 +16,14 @@ describe('Infragistics Angular TextEditor', () => {
     });
 
     it('should initialize correctly', (done) => {
-        var template = '<div><ig-text-editor></ig-text-editor></div>';
+        const template = '<div><ig-text-editor></ig-text-editor></div>';
         TestBed.overrideComponent(TestIgTextEditorComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestIgTextEditorComponent);
+            const fixture = TestBed.createComponent(TestIgTextEditorComponent);
             fixture.detectChanges();
             expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgTextEditorComponent)
                 .toBe(true);
@@ -32,48 +32,48 @@ describe('Infragistics Angular TextEditor', () => {
     });
 
     it('should allow invoking validator() API method for the IgTextEditorComponent', (done) => {
-        var template = '<div><ig-text-editor [validatorOptions]="validatorOpts" [(ngModel)]="val" [widgetId]="editorId"></ig-text-editor></div>';
+        const template = '<div><ig-text-editor [validatorOptions]="validatorOpts" [(ngModel)]="val" [widgetId]="editorId"></ig-text-editor></div>';
         TestBed.overrideComponent(TestIgTextEditorComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestIgTextEditorComponent);
+            const fixture = TestBed.createComponent(TestIgTextEditorComponent);
             fixture.detectChanges();
-            let validator = fixture.componentInstance.viewChild.validator();
+            const validator = fixture.componentInstance.viewChild.validator();
             expect(validator instanceof $.ui.igValidator).toBe(true);
             done();
         });
     });
 
     it('should allow setting value with ngModel', (done) => {
-        var template = '<div><ig-text-editor [(ngModel)]="val" [widgetId]="editorId" [changeDetectionInterval]="cdi"></ig-text-editor></div>', field, event;
+        let template = '<div><ig-text-editor [(ngModel)]="val" [widgetId]="editorId" [changeDetectionInterval]="cdi"></ig-text-editor></div>', field, event;
         TestBed.overrideComponent(TestIgTextEditorComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestIgTextEditorComponent);
+            const fixture = TestBed.createComponent(TestIgTextEditorComponent);
             fixture.detectChanges();
             setTimeout(() => {
-                expect($(fixture.debugElement.nativeElement).find("#editor1").igTextEditor("displayValue")).toBe("test_value");
-                fixture.debugElement.componentInstance.val = "changed_test_value";
+                expect($(fixture.debugElement.nativeElement).find('#editor1').igTextEditor('displayValue')).toBe('test_value');
+                fixture.debugElement.componentInstance.val = 'changed_test_value';
                 fixture.detectChanges();
                 setTimeout(() => {
-                    expect($(fixture.debugElement.nativeElement).find("#editor1").igTextEditor("displayValue")).toBe("changed_test_value");
+                    expect($(fixture.debugElement.nativeElement).find('#editor1').igTextEditor('displayValue')).toBe('changed_test_value');
                     // on key change:
-                    field = $(fixture.debugElement.nativeElement).find("#editor1 input.ui-igedit-input");
-                    window.typeInInput("2", field);
-                    expect(fixture.debugElement.componentInstance.val).toBe("changed_test_value2");
-                    window.typeInInput("2", field);
-                    expect(fixture.debugElement.componentInstance.val).toBe("changed_test_value22");
-                    field.focus().trigger("focus").val("changed_again_test_value").blur().trigger("blur");
+                    field = $(fixture.debugElement.nativeElement).find('#editor1 input.ui-igedit-input');
+                    window.typeInInput('2', field);
+                    expect(fixture.debugElement.componentInstance.val).toBe('changed_test_value2');
+                    window.typeInInput('2', field);
+                    expect(fixture.debugElement.componentInstance.val).toBe('changed_test_value22');
+                    field.focus().trigger('focus').val('changed_again_test_value').blur().trigger('blur');
                     fixture.detectChanges();
                     setTimeout(() => {
-                        expect(fixture.debugElement.componentInstance.val).toBe("changed_again_test_value");
-                        expect($(fixture.debugElement.nativeElement).find("ig-text-editor").hasClass("ng-touched")).toBe(true);
+                        expect(fixture.debugElement.componentInstance.val).toBe('changed_again_test_value');
+                        expect($(fixture.debugElement.nativeElement).find('ig-text-editor').hasClass('ng-touched')).toBe(true);
                         done();
                     }, 100);
                 }, 1);
@@ -82,21 +82,21 @@ describe('Infragistics Angular TextEditor', () => {
     });
 
     it('should allow changing options', (done) => {
-        var template = '<div><ig-text-editor [(options)]="opts" [(ngModel)]="val" [widgetId]="editorId" [changeDetectionInterval]="cdi"></ig-text-editor></div>';
+        const template = '<div><ig-text-editor [(options)]="opts" [(ngModel)]="val" [widgetId]="editorId" [changeDetectionInterval]="cdi"></ig-text-editor></div>';
         TestBed.overrideComponent(TestIgTextEditorComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestIgTextEditorComponent);
+            const fixture = TestBed.createComponent(TestIgTextEditorComponent);
             fixture.detectChanges();
             setTimeout(() => {
                 fixture.debugElement.componentInstance.opts.disabled = false;
                 fixture.detectChanges();
                 setTimeout(() => {
-                    expect($(fixture.debugElement.nativeElement).find("#editor1").igTextEditor("option", "disabled")).toBe(false);
-                    expect($(fixture.debugElement.nativeElement).find("#editor1 input.ui-igedit-input")[0].hasAttribute("disabled")).toBe(false);
+                    expect($(fixture.debugElement.nativeElement).find('#editor1').igTextEditor('option', 'disabled')).toBe(false);
+                    expect($(fixture.debugElement.nativeElement).find('#editor1 input.ui-igedit-input')[0].hasAttribute('disabled')).toBe(false);
                     done();
                 }, 1);
             }, 1);
@@ -104,38 +104,38 @@ describe('Infragistics Angular TextEditor', () => {
     });
 
     it('should allow creating text editor in multiline mode', (done) => {
-        var template = '<div><ig-text-editor [textMode]="\'multiline\'" [(ngModel)]="val" [widgetId]="editorId" [changeDetectionInterval]="cdi"></ig-text-editor></div>';
+        const template = '<div><ig-text-editor [textMode]="\'multiline\'" [(ngModel)]="val" [widgetId]="editorId" [changeDetectionInterval]="cdi"></ig-text-editor></div>';
         TestBed.overrideComponent(TestIgTextEditorComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestIgTextEditorComponent);
+            const fixture = TestBed.createComponent(TestIgTextEditorComponent);
             fixture.detectChanges();
             setTimeout(() => {
-                expect($(fixture.debugElement.nativeElement).find("#editor1").igTextEditor("option", "textMode")).toBe("multiline");
-                expect($(fixture.debugElement.nativeElement).find("#editor1 textarea.ui-igedit-input").length).toBe(1);
-                expect($(fixture.debugElement.nativeElement).find("#editor1 textarea.ui-igedit-input").val()).toBe("test_value");
+                expect($(fixture.debugElement.nativeElement).find('#editor1').igTextEditor('option', 'textMode')).toBe('multiline');
+                expect($(fixture.debugElement.nativeElement).find('#editor1 textarea.ui-igedit-input').length).toBe(1);
+                expect($(fixture.debugElement.nativeElement).find('#editor1 textarea.ui-igedit-input').val()).toBe('test_value');
                 done();
             }, 1);
         });
     });
 
     it('should allow creating text editor in normal mode', (done) => {
-        var template = '<div><ig-text-editor [textMode]="\'text\'" [(ngModel)]="val" [widgetId]="editorId" [changeDetectionInterval]="cdi"></ig-text-editor></div>';
+        const template = '<div><ig-text-editor [textMode]="\'text\'" [(ngModel)]="val" [widgetId]="editorId" [changeDetectionInterval]="cdi"></ig-text-editor></div>';
         TestBed.overrideComponent(TestIgTextEditorComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestIgTextEditorComponent);
+            const fixture = TestBed.createComponent(TestIgTextEditorComponent);
             fixture.detectChanges();
             setTimeout(() => {
-                expect($(fixture.debugElement.nativeElement).find("#editor1").igTextEditor("option", "textMode")).toBe("text");
-                expect($(fixture.debugElement.nativeElement).find("#editor1 input.ui-igedit-input").length).toBe(1);
-                expect($(fixture.debugElement.nativeElement).find("#editor1 input.ui-igedit-input").val()).toBe("test_value");
+                expect($(fixture.debugElement.nativeElement).find('#editor1').igTextEditor('option', 'textMode')).toBe('text');
+                expect($(fixture.debugElement.nativeElement).find('#editor1 input.ui-igedit-input').length).toBe(1);
+                expect($(fixture.debugElement.nativeElement).find('#editor1 input.ui-igedit-input').val()).toBe('test_value');
                 done();
             }, 1);
         });
@@ -152,14 +152,14 @@ describe('Infragistics Angular NumericEditor', () => {
     });
 
     it('should initialize correctly', (done) => {
-        var template = '<div><ig-numeric-editor></ig-numeric-editor></div>';
+        const template = '<div><ig-numeric-editor></ig-numeric-editor></div>';
         TestBed.overrideComponent(TestIgNumericEditorComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestIgNumericEditorComponent);
+            const fixture = TestBed.createComponent(TestIgNumericEditorComponent);
             fixture.detectChanges();
             expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgNumericEditorComponent)
                 .toBe(true);
@@ -168,26 +168,26 @@ describe('Infragistics Angular NumericEditor', () => {
     });
 
     it('should allow setting value with ngModel', (done) => {
-        var template = '<div><ig-numeric-editor [(ngModel)]="val" [widgetId]="editorId" [changeDetectionInterval]="cdi"></ig-numeric-editor></div>';
+        const template = '<div><ig-numeric-editor [(ngModel)]="val" [widgetId]="editorId" [changeDetectionInterval]="cdi"></ig-numeric-editor></div>';
         TestBed.overrideComponent(TestIgNumericEditorComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestIgNumericEditorComponent);
+            const fixture = TestBed.createComponent(TestIgNumericEditorComponent);
             fixture.detectChanges();
             setTimeout(() => {
-                expect($(fixture.debugElement.nativeElement).find("#editor1").igNumericEditor("displayValue")).toBe("42");
+                expect($(fixture.debugElement.nativeElement).find('#editor1').igNumericEditor('displayValue')).toBe('42');
                 fixture.debugElement.componentInstance.val = 1;
                 fixture.detectChanges();
                 setTimeout(() => {
-                    expect($(fixture.debugElement.nativeElement).find("#editor1").igNumericEditor("displayValue")).toBe("1");
-                    $(fixture.debugElement.nativeElement).find("#editor1").focus().trigger("focus").val(154).blur().trigger("blur");
+                    expect($(fixture.debugElement.nativeElement).find('#editor1').igNumericEditor('displayValue')).toBe('1');
+                    $(fixture.debugElement.nativeElement).find('#editor1').focus().trigger('focus').val(154).blur().trigger('blur');
                     fixture.detectChanges();
                     setTimeout(() => {
                         expect(fixture.debugElement.componentInstance.val).toBe(154);
-                        expect($(fixture.debugElement.nativeElement).find("ig-numeric-editor").hasClass("ng-touched")).toBe(true);
+                        expect($(fixture.debugElement.nativeElement).find('ig-numeric-editor').hasClass('ng-touched')).toBe(true);
                         done();
                     }, 100);
                 }, 1);
@@ -206,14 +206,14 @@ describe('Infragistics Angular PercentEditor', () => {
     });
 
     it('should initialize correctly', (done) => {
-        var template = '<div><ig-percent-editor></ig-percent-editor></div>';
+        const template = '<div><ig-percent-editor></ig-percent-editor></div>';
         TestBed.overrideComponent(TestIgPercentEditorComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestIgPercentEditorComponent);
+            const fixture = TestBed.createComponent(TestIgPercentEditorComponent);
             fixture.detectChanges();
             expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgPercentEditorComponent)
                 .toBe(true);
@@ -222,22 +222,22 @@ describe('Infragistics Angular PercentEditor', () => {
     });
 
     it('should allow setting value with ngModel', (done) => {
-        var template = '<div><ig-percent-editor [(ngModel)]="val" [widgetId]="editorId"></ig-percent-editor></div>';
+        const template = '<div><ig-percent-editor [(ngModel)]="val" [widgetId]="editorId"></ig-percent-editor></div>';
         TestBed.overrideComponent(TestIgPercentEditorComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestIgPercentEditorComponent);
+            const fixture = TestBed.createComponent(TestIgPercentEditorComponent);
             fixture.detectChanges();
             setTimeout(() => {
-                expect($(fixture.debugElement.nativeElement).find("#editor1").igPercentEditor("displayValue")).toBe("40.00%");
+                expect($(fixture.debugElement.nativeElement).find('#editor1').igPercentEditor('displayValue')).toBe('40.00%');
                 fixture.debugElement.componentInstance.val = 0.1;
                 fixture.detectChanges();
                 setTimeout(() => {
-                    expect($(fixture.debugElement.nativeElement).find("#editor1").igPercentEditor("displayValue")).toBe("10.00%");
-                    $(fixture.debugElement.nativeElement).find("#editor1").focus().trigger("focus").val(100).blur().trigger("blur");
+                    expect($(fixture.debugElement.nativeElement).find('#editor1').igPercentEditor('displayValue')).toBe('10.00%');
+                    $(fixture.debugElement.nativeElement).find('#editor1').focus().trigger('focus').val(100).blur().trigger('blur');
                     setTimeout(() => {
                         expect(fixture.debugElement.componentInstance.val).toBe(1);
                         done();
@@ -258,14 +258,14 @@ describe('Infragistics Angular MaskEditor', () => {
     });
 
     it('should initialize correctly', (done) => {
-        var template = '<div><ig-mask-editor></ig-mask-editor></div>';
+        const template = '<div><ig-mask-editor></ig-mask-editor></div>';
         TestBed.overrideComponent(TestIgMaskEditorComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestIgMaskEditorComponent);
+            const fixture = TestBed.createComponent(TestIgMaskEditorComponent);
             fixture.detectChanges();
             expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgMaskEditorComponent)
                 .toBe(true);
@@ -274,29 +274,29 @@ describe('Infragistics Angular MaskEditor', () => {
     });
 
     it('should allow setting value with ngModel', (done) => {
-        var template = '<div><ig-mask-editor [(ngModel)]="val" [widgetId]="editorId"></ig-mask-editor></div>';
+        const template = '<div><ig-mask-editor [(ngModel)]="val" [widgetId]="editorId"></ig-mask-editor></div>';
         TestBed.overrideComponent(TestIgMaskEditorComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestIgMaskEditorComponent);
+            const fixture = TestBed.createComponent(TestIgMaskEditorComponent);
             fixture.detectChanges();
             setTimeout(() => {
-                expect($(fixture.debugElement.nativeElement).find("#editor1").igMaskEditor("displayValue")).toBe("test");
-                fixture.debugElement.componentInstance.val = "changed";
+                expect($(fixture.debugElement.nativeElement).find('#editor1').igMaskEditor('displayValue')).toBe('test');
+                fixture.debugElement.componentInstance.val = 'changed';
                 fixture.detectChanges();
                 setTimeout(() => {
-                    expect($(fixture.debugElement.nativeElement).find("#editor1").igMaskEditor("displayValue")).toBe("changed");
-                    $(fixture.debugElement.nativeElement).find("#editor1").focus().trigger("focus").val("test again").blur().trigger("blur");
+                    expect($(fixture.debugElement.nativeElement).find('#editor1').igMaskEditor('displayValue')).toBe('changed');
+                    $(fixture.debugElement.nativeElement).find('#editor1').focus().trigger('focus').val('test again').blur().trigger('blur');
                     setTimeout(() => {
-                        expect(fixture.debugElement.componentInstance.val).toBe("test again");
+                        expect(fixture.debugElement.componentInstance.val).toBe('test again');
                         done();
                     }, 100);
                 }, 1);
             }, 1);
-        })
+        });
     });
 });
 
@@ -310,14 +310,14 @@ describe('Infragistics Angular DatePicker', () => {
     });
 
     it('should initialize correctly', (done) => {
-        var template = '<div><ig-date-picker></ig-date-picker></div>';
+        const template = '<div><ig-date-picker></ig-date-picker></div>';
         TestBed.overrideComponent(TestIgDatePickerComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestIgDatePickerComponent);
+            const fixture = TestBed.createComponent(TestIgDatePickerComponent);
             fixture.detectChanges();
             expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgDatePickerComponent)
                 .toBe(true);
@@ -326,24 +326,24 @@ describe('Infragistics Angular DatePicker', () => {
     });
 
     it('should allow setting value with ngModel', (done) => {
-        var template = '<div><ig-date-picker [(ngModel)]="val" [widgetId]="editorId"></ig-date-picker></div>';
+        const template = '<div><ig-date-picker [(ngModel)]="val" [widgetId]="editorId"></ig-date-picker></div>';
         TestBed.overrideComponent(TestIgDatePickerComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestIgDatePickerComponent);
+            const fixture = TestBed.createComponent(TestIgDatePickerComponent);
             fixture.detectChanges();
             setTimeout(() => {
-                expect($(fixture.debugElement.nativeElement).find("#editor1").igDatePicker("displayValue")).toBe("4/20/2016");
-                fixture.debugElement.componentInstance.val = new Date("3/15/2016");
+                expect($(fixture.debugElement.nativeElement).find('#editor1').igDatePicker('displayValue')).toBe('4/20/2016');
+                fixture.debugElement.componentInstance.val = new Date('3/15/2016');
                 fixture.detectChanges();
                 setTimeout(() => {
-                    expect($(fixture.debugElement.nativeElement).find("#editor1").igDatePicker("displayValue")).toBe("3/15/2016");
-                    $(fixture.debugElement.nativeElement).find("#editor1").focus().trigger("focus").val("03/03/2016").blur().trigger("blur");
+                    expect($(fixture.debugElement.nativeElement).find('#editor1').igDatePicker('displayValue')).toBe('3/15/2016');
+                    $(fixture.debugElement.nativeElement).find('#editor1').focus().trigger('focus').val('03/03/2016').blur().trigger('blur');
                     setTimeout(() => {
-                        expect(fixture.debugElement.componentInstance.val.getTime()).toBe(new Date("03/03/2016").getTime());
+                        expect(fixture.debugElement.componentInstance.val.getTime()).toBe(new Date('03/03/2016').getTime());
                         done();
                     }, 100);
                 }, 1);
@@ -362,14 +362,14 @@ describe('Infragistics Angular DateEditor', () => {
     });
 
     it('should initialize correctly', (done) => {
-        var template = '<div><ig-date-editor></ig-date-editor></div>';
+        const template = '<div><ig-date-editor></ig-date-editor></div>';
         TestBed.overrideComponent(TestIgDateEditorComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestIgDateEditorComponent);
+            const fixture = TestBed.createComponent(TestIgDateEditorComponent);
             fixture.detectChanges();
             expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgDateEditorComponent)
                 .toBe(true);
@@ -378,24 +378,24 @@ describe('Infragistics Angular DateEditor', () => {
     });
 
     it('should allow setting value with ngModel', (done) => {
-        var template = '<div><ig-date-editor [(ngModel)]="val" [widgetId]="editorId"></ig-date-editor></div>';
+        const template = '<div><ig-date-editor [(ngModel)]="val" [widgetId]="editorId"></ig-date-editor></div>';
         TestBed.overrideComponent(TestIgDateEditorComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestIgDateEditorComponent);
+            const fixture = TestBed.createComponent(TestIgDateEditorComponent);
             fixture.detectChanges();
             setTimeout(() => {
-                expect($(fixture.debugElement.nativeElement).find("#editor1").igDateEditor("displayValue")).toBe("4/20/2016");
-                fixture.debugElement.componentInstance.val = new Date("3/15/2016");
+                expect($(fixture.debugElement.nativeElement).find('#editor1').igDateEditor('displayValue')).toBe('4/20/2016');
+                fixture.debugElement.componentInstance.val = new Date('3/15/2016');
                 fixture.detectChanges();
                 setTimeout(() => {
-                    expect($(fixture.debugElement.nativeElement).find("#editor1").igDateEditor("displayValue")).toBe("3/15/2016");
-                    $(fixture.debugElement.nativeElement).find("#editor1").focus().trigger("focus").val("03/03/2016").blur().trigger("blur");
+                    expect($(fixture.debugElement.nativeElement).find('#editor1').igDateEditor('displayValue')).toBe('3/15/2016');
+                    $(fixture.debugElement.nativeElement).find('#editor1').focus().trigger('focus').val('03/03/2016').blur().trigger('blur');
                     setTimeout(() => {
-                        expect(fixture.debugElement.componentInstance.val.getTime()).toBe(new Date("03/03/2016").getTime());
+                        expect(fixture.debugElement.componentInstance.val.getTime()).toBe(new Date('03/03/2016').getTime());
                         done();
                     }, 100);
                 }, 1);
@@ -414,14 +414,14 @@ describe('Infragistics Angular CurrencyEditor', () => {
     });
 
     it('should initialize correctly', (done) => {
-        var template = '<div><ig-currency-editor></ig-currency-editor></div>';
+        const template = '<div><ig-currency-editor></ig-currency-editor></div>';
         TestBed.overrideComponent(TestIgCurrencyEditorComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestIgCurrencyEditorComponent);
+            const fixture = TestBed.createComponent(TestIgCurrencyEditorComponent);
             fixture.detectChanges();
             expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgCurrencyEditorComponent)
                 .toBe(true);
@@ -430,22 +430,22 @@ describe('Infragistics Angular CurrencyEditor', () => {
     });
 
     it('should allow setting value with ngModel', (done) => {
-        var template = '<div><ig-currency-editor [(ngModel)]="val" [widgetId]="editorId"></ig-currency-editor></div>';
+        const template = '<div><ig-currency-editor [(ngModel)]="val" [widgetId]="editorId"></ig-currency-editor></div>';
         TestBed.overrideComponent(TestIgCurrencyEditorComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestIgCurrencyEditorComponent);
+            const fixture = TestBed.createComponent(TestIgCurrencyEditorComponent);
             fixture.detectChanges();
             setTimeout(() => {
-                expect($(fixture.debugElement.nativeElement).find("#editor1").igCurrencyEditor("displayValue")).toBe("$42.00");
+                expect($(fixture.debugElement.nativeElement).find('#editor1').igCurrencyEditor('displayValue')).toBe('$42.00');
                 fixture.debugElement.componentInstance.val = 1;
                 fixture.detectChanges();
                 setTimeout(() => {
-                    expect($(fixture.debugElement.nativeElement).find("#editor1").igCurrencyEditor("displayValue")).toBe("$1.00");
-                    $(fixture.debugElement.nativeElement).find("#editor1").focus().trigger("focus").val(154).blur().trigger("blur");
+                    expect($(fixture.debugElement.nativeElement).find('#editor1').igCurrencyEditor('displayValue')).toBe('$1.00');
+                    $(fixture.debugElement.nativeElement).find('#editor1').focus().trigger('focus').val(154).blur().trigger('blur');
                     setTimeout(() => {
                         expect(fixture.debugElement.componentInstance.val).toBe(154);
                         done();
@@ -466,14 +466,14 @@ describe('Infragistics Angular CheckboxEditor', () => {
     });
 
     it('should initialize correctly', (done) => {
-        var template = '<div><ig-checkbox-editor></ig-checkbox-editor></div>';
+        const template = '<div><ig-checkbox-editor></ig-checkbox-editor></div>';
         TestBed.overrideComponent(TestIgCheckboxEditorComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestIgCheckboxEditorComponent);
+            const fixture = TestBed.createComponent(TestIgCheckboxEditorComponent);
             fixture.detectChanges();
             expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgCheckboxEditorComponent)
                 .toBe(true);
@@ -482,22 +482,22 @@ describe('Infragistics Angular CheckboxEditor', () => {
     });
 
     it('should allow setting value with ngModel', (done) => {
-        var template = '<div><ig-checkbox-editor [(ngModel)]="val" [widgetId]="editorId"></ig-checkbox-editor></div>';
+        const template = '<div><ig-checkbox-editor [(ngModel)]="val" [widgetId]="editorId"></ig-checkbox-editor></div>';
         TestBed.overrideComponent(TestIgCheckboxEditorComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestIgCheckboxEditorComponent);
+            const fixture = TestBed.createComponent(TestIgCheckboxEditorComponent);
             fixture.detectChanges();
             setTimeout(() => {
-                expect($(fixture.debugElement.nativeElement).find("#editor1").igCheckboxEditor("value")).toBe(true);
+                expect($(fixture.debugElement.nativeElement).find('#editor1').igCheckboxEditor('value')).toBe(true);
                 fixture.debugElement.componentInstance.val = false;
                 fixture.detectChanges();
                 setTimeout(() => {
-                    expect($(fixture.debugElement.nativeElement).find("#editor1").igCheckboxEditor("value")).toBe(false);
-                    $(fixture.debugElement.nativeElement).find("#editor1").click();
+                    expect($(fixture.debugElement.nativeElement).find('#editor1').igCheckboxEditor('value')).toBe(false);
+                    $(fixture.debugElement.nativeElement).find('#editor1').click();
                     setTimeout(() => {
                         expect(fixture.debugElement.componentInstance.val).toBe(true);
                         done();
@@ -517,14 +517,14 @@ describe('Infragistics Angular TimePicker', () => {
     });
 
     it('should initialize correctly', (done) => {
-        var template = '<div><ig-time-picker></ig-time-picker></div>';
+        const template = '<div><ig-time-picker></ig-time-picker></div>';
         TestBed.overrideComponent(TestIgTimePickerComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestIgTimePickerComponent);
+            const fixture = TestBed.createComponent(TestIgTimePickerComponent);
             fixture.detectChanges();
             expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgTimePickerComponent)
                 .toBe(true);
@@ -533,22 +533,22 @@ describe('Infragistics Angular TimePicker', () => {
     });
 
     it('should allow setting value with ngModel', (done) => {
-        var template = '<div><ig-time-picker [(ngModel)]="val" [widgetId]="editorId" [options]="{isLimitedToListValues:false}"></ig-time-picker></div>';
+        const template = '<div><ig-time-picker [(ngModel)]="val" [widgetId]="editorId" [options]="{isLimitedToListValues:false}"></ig-time-picker></div>';
         TestBed.overrideComponent(TestIgTimePickerComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestIgTimePickerComponent);
+            const fixture = TestBed.createComponent(TestIgTimePickerComponent);
             fixture.detectChanges();
             setTimeout(() => {
-                expect($(fixture.debugElement.nativeElement).find("#editor1").igTimePicker("displayValue")).toBe("12:36 AM");
-                fixture.debugElement.componentInstance.val = "05:50 AM";
+                expect($(fixture.debugElement.nativeElement).find('#editor1').igTimePicker('displayValue')).toBe('12:36 AM');
+                fixture.debugElement.componentInstance.val = '05:50 AM';
                 fixture.detectChanges();
                 setTimeout(() => {
-                    expect($(fixture.debugElement.nativeElement).find("#editor1").igTimePicker("displayValue")).toBe("5:50 AM");
-                    $(fixture.debugElement.nativeElement).find("#editor1").focus().trigger("focus").val("06:00 AM").blur().trigger("blur");
+                    expect($(fixture.debugElement.nativeElement).find('#editor1').igTimePicker('displayValue')).toBe('5:50 AM');
+                    $(fixture.debugElement.nativeElement).find('#editor1').focus().trigger('focus').val('06:00 AM').blur().trigger('blur');
                     setTimeout(() => {
                         expect(fixture.debugElement.componentInstance.val.getHours()).toBe(6);
                         expect(fixture.debugElement.componentInstance.val.getMinutes()).toBe(0);
@@ -562,51 +562,51 @@ describe('Infragistics Angular TimePicker', () => {
 
 @Component({
     selector: 'test-text-editor-cmp',
-    template: '<div></div>' //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
 })
 class TestIgTextEditorComponent {
     private opts: IgTextEditor;
     private val: string;
     private editorId: string;
-    private cdi: number = 0;
+    private cdi = 0;
     private validatorOpts: IgValidator;
     @ViewChild(Infragistics.IgTextEditorComponent, { static: true }) public viewChild: Infragistics.IgTextEditorComponent;
 
     constructor() {
-        this.val = "test_value";
-        this.editorId = "editor1";
+        this.val = 'test_value';
+        this.editorId = 'editor1';
         this.opts = {
             disabled: true
         };
 
         this.validatorOpts = {
-            successMessage: "Success",
+            successMessage: 'Success',
             required: true,
             onchange: true,
-            notificationOptions: { mode: "popover" }
+            notificationOptions: { mode: 'popover' }
         };
     }
 }
 
 @Component({
     selector: 'test-numeric-editor-cmp',
-    template: '<div></div>' //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
 })
 class TestIgNumericEditorComponent {
     private val: number;
     private editorId: string;
-    private cdi: number = 0;
+    private cdi = 0;
     @ViewChild(Infragistics.IgNumericEditorComponent, { static: true }) public viewChild: Infragistics.IgNumericEditorComponent;
 
     constructor() {
         this.val = 42;
-        this.editorId = "editor1";
+        this.editorId = 'editor1';
     }
 }
 
 @Component({
     selector: 'test-percent-editor-cmp',
-    template: '<div></div>' //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
 })
 class TestIgPercentEditorComponent {
     private val: number;
@@ -615,13 +615,13 @@ class TestIgPercentEditorComponent {
 
     constructor() {
         this.val = 0.4;
-        this.editorId = "editor1";
+        this.editorId = 'editor1';
     }
 }
 
 @Component({
     selector: 'test-mask-editor-cmp',
-    template: '<div></div>' //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
 })
 class TestIgMaskEditorComponent {
     private val: string;
@@ -629,14 +629,14 @@ class TestIgMaskEditorComponent {
     @ViewChild(Infragistics.IgMaskEditorComponent, { static: true }) public viewChild: Infragistics.IgMaskEditorComponent;
 
     constructor() {
-        this.val = "test";
-        this.editorId = "editor1";
+        this.val = 'test';
+        this.editorId = 'editor1';
     }
 }
 
 @Component({
     selector: 'test-date-picker-cmp',
-    template: '<div></div>' //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
 })
 class TestIgDatePickerComponent {
     private val: Date;
@@ -644,14 +644,14 @@ class TestIgDatePickerComponent {
     @ViewChild(Infragistics.IgDatePickerComponent, { static: true }) public viewChild: Infragistics.IgDatePickerComponent;
 
     constructor() {
-        this.val = new Date("4/20/2016");
-        this.editorId = "editor1";
+        this.val = new Date('4/20/2016');
+        this.editorId = 'editor1';
     }
 }
 
 @Component({
     selector: 'test-time-picker-cmp',
-    template: '<div></div>' //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
 })
 class TestIgTimePickerComponent {
     private val: string;
@@ -659,14 +659,14 @@ class TestIgTimePickerComponent {
     @ViewChild(Infragistics.IgTimePickerComponent, { static: true }) public viewChild: Infragistics.IgTimePickerComponent;
 
     constructor() {
-        this.val = "12:36 AM";
-        this.editorId = "editor1";
+        this.val = '12:36 AM';
+        this.editorId = 'editor1';
     }
 }
 
 @Component({
     selector: 'test-date-editor-cmp',
-    template: '<div></div>' //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
 })
 class TestIgDateEditorComponent {
     private val: Date;
@@ -674,14 +674,14 @@ class TestIgDateEditorComponent {
     @ViewChild(Infragistics.IgDateEditorComponent, { static: true }) public viewChild: Infragistics.IgDateEditorComponent;
 
     constructor() {
-        this.val = new Date("4/20/2016");
-        this.editorId = "editor1";
+        this.val = new Date('4/20/2016');
+        this.editorId = 'editor1';
     }
 }
 
 @Component({
     selector: 'test-currency-editor-cmp',
-    template: '<div></div>' //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
 })
 class TestIgCurrencyEditorComponent {
     private val: number;
@@ -690,13 +690,13 @@ class TestIgCurrencyEditorComponent {
 
     constructor() {
         this.val = 42;
-        this.editorId = "editor1";
+        this.editorId = 'editor1';
     }
 }
 
 @Component({
     selector: 'test-checkbox-editor-cmp',
-    template: '<div></div>' //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
 })
 class TestIgCheckboxEditorComponent {
     private val: boolean;
@@ -705,7 +705,7 @@ class TestIgCheckboxEditorComponent {
 
     constructor() {
         this.val = true;
-        this.editorId = "editor1";
+        this.editorId = 'editor1';
     }
 }
 
@@ -714,13 +714,13 @@ interface MyWindow extends Window {
 }
 declare var window: MyWindow;
 
-window.typeInInput = function (characters: String, element: JQuery) {
-    var keyDown = jQuery.Event("keydown"),
-        keyPress = jQuery.Event("keypress"),
-        keyUp = jQuery.Event("keyup"),
+window.typeInInput = function(characters: String, element: JQuery) {
+    let keyDown = jQuery.Event('keydown'),
+        keyPress = jQuery.Event('keypress'),
+        keyUp = jQuery.Event('keyup'),
         value: string = element.val(), selectionStart;
 
-    characters.split('').forEach(function (ch) {
+    characters.split('').forEach(function(ch) {
         selectionStart = (element[0] as HTMLInputElement).selectionStart;
         keyDown.keyCode = keyUp.keyCode = keyPress.keyCode = ch.charCodeAt(0);
         keyDown.charCode = keyUp.charCode = keyPress.charCode = ch.charCodeAt(0);

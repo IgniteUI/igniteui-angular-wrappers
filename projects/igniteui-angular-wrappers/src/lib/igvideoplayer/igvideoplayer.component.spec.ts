@@ -12,14 +12,14 @@ describe('Infragistics Angular VideoPlayer', () => {
     });
 
     it('should initialize correctly', (done) => {
-        var template = '<div><ig-video-player widgetId="vplayer" [(options)]="opts"></ig-video-player></div>';
+        const template = '<div><ig-video-player widgetId="vplayer" [(options)]="opts"></ig-video-player></div>';
         TestBed.overrideComponent(TestComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestComponent);
+            const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
             expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgVideoPlayerComponent)
                 .toBe(true);
@@ -31,7 +31,7 @@ describe('Infragistics Angular VideoPlayer', () => {
 
 @Component({
     selector: 'test-cmp',
-    template: '<div></div>' //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
 })
 class TestComponent {
     private opts: any;
@@ -40,12 +40,12 @@ class TestComponent {
 
     constructor() {
         this.opts = {
-            width: "700px",
-            height: "400px",
+            width: '700px',
+            height: '400px',
             sources: [
-                "http://dl.infragistics.com/pg/2011-1/web/shared/videoplayer/videos/Infragistics_Presentation_lowRes_1.h264.mp4",
-                "http://dl.infragistics.com/pg/2011-1/web/shared/videoplayer/videos/Infragistics_Presentation_lowRes_1.webmvp8.webm",
-                "http://dl.infragistics.com/pg/2011-1/web/shared/videoplayer/videos/Infragistics_Presentation_lowRes_1.theora.ogv"
+                'http://dl.infragistics.com/pg/2011-1/web/shared/videoplayer/videos/Infragistics_Presentation_lowRes_1.h264.mp4',
+                'http://dl.infragistics.com/pg/2011-1/web/shared/videoplayer/videos/Infragistics_Presentation_lowRes_1.webmvp8.webm',
+                'http://dl.infragistics.com/pg/2011-1/web/shared/videoplayer/videos/Infragistics_Presentation_lowRes_1.theora.ogv'
             ]
         };
 

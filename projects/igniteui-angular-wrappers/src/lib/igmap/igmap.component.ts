@@ -1,32 +1,61 @@
-import { Component, IterableDiffers, ElementRef, KeyValueDiffers, ChangeDetectorRef, Input, Renderer2 } from "@angular/core";
-import { IgControlBase } from "../igcontrolbase/igcontrolbase";
+import { Component, IterableDiffers, ElementRef, KeyValueDiffers, ChangeDetectorRef, Input, Renderer2 } from '@angular/core';
+import { IgControlBase } from '../igcontrolbase/igcontrolbase';
 
 @Component({
-    selector: "ig-map",
-    template: "<ng-content></ng-content>",
-    inputs: ["widgetId", "options", "changeDetectionInterval", "disabled", "create", "width", "height", "dataSource", "dataSourceUrl", "dataSourceType", "responseDataKey", "autoMarginWidth", "autoMarginHeight", "crosshairVisibility", "crosshairPoint", "plotAreaBackground", "defaultInteraction", "dragModifier", "panModifier", "previewRect", "windowRect", "zoomable", "windowScale", "windowResponse", "windowRectMinWidth", "windowPositionHorizontal", "windowPositionVertical", "circleMarkerTemplate", "triangleMarkerTemplate", "pyramidMarkerTemplate", "squareMarkerTemplate", "diamondMarkerTemplate", "pentagonMarkerTemplate", "hexagonMarkerTemplate", "tetragramMarkerTemplate", "pentagramMarkerTemplate", "hexagramMarkerTemplate", "overviewPlusDetailPaneBackgroundImageUri", "useTiledZooming", "preferHigherResolutionTiles", "zoomTileCacheSize", "backgroundContent", "series", "theme"],
-    outputs: ["tooltipShowing", "tooltipShown", "tooltipHiding", "tooltipHidden", "browserNotSupported", "seriesCursorMouseMove", "seriesMouseLeftButtonDown", "seriesMouseLeftButtonUp", "seriesMouseMove", "seriesMouseEnter", "seriesMouseLeave", "windowRectChanged", "gridAreaRectChanged", "refreshCompleted", "triangulationStatusChanged"]
+    selector: 'ig-map',
+    template: '<ng-content></ng-content>',
+    inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'width', 'height', 'dataSource', 'dataSourceUrl', 'dataSourceType', 'responseDataKey', 'autoMarginWidth', 'autoMarginHeight', 'crosshairVisibility', 'crosshairPoint', 'plotAreaBackground', 'defaultInteraction', 'dragModifier', 'panModifier', 'previewRect', 'windowRect', 'zoomable', 'windowScale', 'windowResponse', 'windowRectMinWidth', 'windowPositionHorizontal', 'windowPositionVertical', 'circleMarkerTemplate', 'triangleMarkerTemplate', 'pyramidMarkerTemplate', 'squareMarkerTemplate', 'diamondMarkerTemplate', 'pentagonMarkerTemplate', 'hexagonMarkerTemplate', 'tetragramMarkerTemplate', 'pentagramMarkerTemplate', 'hexagramMarkerTemplate', 'overviewPlusDetailPaneBackgroundImageUri', 'useTiledZooming', 'preferHigherResolutionTiles', 'zoomTileCacheSize', 'backgroundContent', 'series', 'theme'],
+    outputs: ['tooltipShowing', 'tooltipShown', 'tooltipHiding', 'tooltipHidden', 'browserNotSupported', 'seriesCursorMouseMove', 'seriesMouseLeftButtonDown', 'seriesMouseLeftButtonUp', 'seriesMouseMove', 'seriesMouseEnter', 'seriesMouseLeave', 'windowRectChanged', 'gridAreaRectChanged', 'refreshCompleted', 'triangulationStatusChanged']
 })
 export class IgMapComponent extends IgControlBase<IgMap> {
-    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); } public option(): void { return; };
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }
 
     @Input()
     public set dataSource(value: any) {
         this._dataSource = value;
         const map = jQuery(this._el).data(this._widgetName);
         if (map) {
-            jQuery(this._el)[this._widgetName]("option", "dataSource", this._dataSource);
+            jQuery(this._el)[this._widgetName]('option', 'dataSource', this._dataSource);
         }
-    };
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     private _dataSource: any;
-
+public option(): void { return; }
     ngOnInit() {
         if (this._dataSource === null || this._dataSource === undefined) {
-            this._dataSource = this.options["dataSource"];
+            this._dataSource = this.options.dataSource;
         }
-        if (!this.options["dataSource"] && this._dataSource) {
-            this.options["dataSource"] = this._dataSource;
+        if (!this.options.dataSource && this._dataSource) {
+            this.options.dataSource = this._dataSource;
         }
         super.ngOnInit();
     }
@@ -35,14 +64,12 @@ export class IgMapComponent extends IgControlBase<IgMap> {
      * Destroys the widget.
      */
     /* istanbul ignore next */
-    public destroy(): void { return; };
-
+    public destroy(): void { return; }
     /**
      * Returns the ID of parent element holding the map.
      */
     /* istanbul ignore next */
-    public id(): string { return; };
-
+    public id(): string { return; }
     /**
      * Exports the map to a PNG image.
      *
@@ -50,20 +77,17 @@ export class IgMapComponent extends IgControlBase<IgMap> {
      * @param height The height of the image.
      */
     /* istanbul ignore next */
-    public exportImage(width?: Object, height?: Object): Object { return; };
-
+    public exportImage(width?: Object, height?: Object): Object { return; }
     /**
      * Notify the map that styles it draws colors from may have been updated.
      */
     /* istanbul ignore next */
-    public styleUpdated(): Object { return; };
-
+    public styleUpdated(): Object { return; }
     /**
      * Resets the zoom level of the map to default.
      */
     /* istanbul ignore next */
-    public resetZoom(): Object { return; };
-
+    public resetZoom(): Object { return; }
     /**
      * Adds a new item to the data source and notifies the map.
      *
@@ -71,8 +95,7 @@ export class IgMapComponent extends IgControlBase<IgMap> {
      * @param targetName     The name of the series bound to the data source.
      */
     /* istanbul ignore next */
-    public addItem(item: Object, targetName: string): void { return; };
-
+    public addItem(item: Object, targetName: string): void { return; }
     /**
      * Inserts a new item to the data source and notifies the map.
      *
@@ -81,8 +104,7 @@ export class IgMapComponent extends IgControlBase<IgMap> {
      * @param targetName     The name of the series bound to the data source.
      */
     /* istanbul ignore next */
-    public insertItem(item: Object, index: number, targetName: string): void { return; };
-
+    public insertItem(item: Object, index: number, targetName: string): void { return; }
     /**
      * Deletes an item from the data source and notifies the map.
      *
@@ -90,8 +112,7 @@ export class IgMapComponent extends IgControlBase<IgMap> {
      * @param targetName     The name of the series bound to the data source.
      */
     /* istanbul ignore next */
-    public removeItem(index: number, targetName: string): void { return; };
-
+    public removeItem(index: number, targetName: string): void { return; }
     /**
      * Updates an item in the data source and notifies the map.
      *
@@ -100,8 +121,7 @@ export class IgMapComponent extends IgControlBase<IgMap> {
      * @param targetName     The name of the series bound to the data source.
      */
     /* istanbul ignore next */
-    public setItem(index: number, item: Object, targetName: string): void { return; };
-
+    public setItem(index: number, item: Object, targetName: string): void { return; }
     /**
      * Notifies the the map that an item has been set in an associated data source.
      *
@@ -111,8 +131,7 @@ export class IgMapComponent extends IgControlBase<IgMap> {
      * @param oldItem the old item that has been overwritten in the collection.
      */
     /* istanbul ignore next */
-    public notifySetItem(dataSource: Object, index: number, newItem: Object, oldItem: Object): Object { return; };
-
+    public notifySetItem(dataSource: Object, index: number, newItem: Object, oldItem: Object): Object { return; }
     /**
      * Notifies the the map that the items have been cleared from an associated data source.
      *                 It's not necessary to notify more than one target of a change if they share the same items source.
@@ -120,8 +139,7 @@ export class IgMapComponent extends IgControlBase<IgMap> {
      * @param dataSource The data source in which the change happened.
      */
     /* istanbul ignore next */
-    public notifyClearItems(dataSource: Object): Object { return; };
-
+    public notifyClearItems(dataSource: Object): Object { return; }
     /**
      * Notifies the the target series that an item has been inserted at the specified index in its data source.
      *                 It's not necessary to notify more than one target of a change if they share the same items source.
@@ -131,8 +149,7 @@ export class IgMapComponent extends IgControlBase<IgMap> {
      * @param newItem the new item that has been set in the collection.
      */
     /* istanbul ignore next */
-    public notifyInsertItem(dataSource: Object, index: number, newItem: Object): Object { return; };
-
+    public notifyInsertItem(dataSource: Object, index: number, newItem: Object): Object { return; }
     /**
      * Notifies the the target series that an item has been removed from the specified index in its data source.
      *                 It's not necessary to notify more than one target of a change if they share the same items source.
@@ -142,8 +159,7 @@ export class IgMapComponent extends IgControlBase<IgMap> {
      * @param oldItem the old item that has been removed from the collection.
      */
     /* istanbul ignore next */
-    public notifyRemoveItem(dataSource: Object, index: number, oldItem: Object): Object { return; };
-
+    public notifyRemoveItem(dataSource: Object, index: number, oldItem: Object): Object { return; }
     /**
      * Notifies the target series or axis that it should scroll the requested data item into view.
      *
@@ -151,8 +167,7 @@ export class IgMapComponent extends IgControlBase<IgMap> {
      * @param item The data item to bring into view, if possible.
      */
     /* istanbul ignore next */
-    public scrollIntoView(targetName: string, item: Object): Object { return; };
-
+    public scrollIntoView(targetName: string, item: Object): Object { return; }
     /**
      * Either xAxis or yAxis (longitude or latitude) that it should scale the requested value into map space from axis space.
      * 				For example you can use this method if you want to find where longitude 50 stands scaled to map's width.
@@ -161,8 +176,7 @@ export class IgMapComponent extends IgControlBase<IgMap> {
      * @param unscaledValue The value in axis space to translate into map space.
      */
     /* istanbul ignore next */
-    public scaleValue(targetName: string, unscaledValue: number): number { return; };
-
+    public scaleValue(targetName: string, unscaledValue: number): number { return; }
     /**
      * Either xAxis or yAxis (longitude or latitude) that it should unscale the requested value into axis space from map space.
      * 				For example you can use this method if you want to find what is the longitude unscaled from 0 width of the map.
@@ -171,90 +185,77 @@ export class IgMapComponent extends IgControlBase<IgMap> {
      * @param scaledValue The value in map space to translate into axis space.
      */
     /* istanbul ignore next */
-    public unscaleValue(targetName: string, scaledValue: number): number { return; };
-
+    public unscaleValue(targetName: string, scaledValue: number): number { return; }
     /**
      * Manually starts a tiled zoom if one isn't already running.
      */
     /* istanbul ignore next */
-    public startTiledZoomingIfNecessary(): void { return; };
-
+    public startTiledZoomingIfNecessary(): void { return; }
     /**
      * Manually ends a tiled zoom if one is running.
      */
     /* istanbul ignore next */
-    public endTiledZoomingIfRunning(): void { return; };
-
+    public endTiledZoomingIfRunning(): void { return; }
     /**
      * Clears the tile zoom tile cache so that new tiles will be generated. Only applies if the viewer is using a tile based zoom..
      */
     /* istanbul ignore next */
-    public clearTileZoomCache(): void { return; };
-
+    public clearTileZoomCache(): void { return; }
     /**
      * Forces any pending deferred work to render on the map before continuing
      */
     /* istanbul ignore next */
-    public flush(): void { return; };
-
+    public flush(): void { return; }
     /**
      * Exports visual data from the map to aid in unit testing
      */
     /* istanbul ignore next */
-    public exportVisualData(): void { return; };
-
+    public exportVisualData(): void { return; }
     /**
      * Gets the actual minimum value of the target xAxis or yAxis
      *
-     * @param targetName 
+     * @param targetName
      */
     /* istanbul ignore next */
-    public getActualMinimumValue(targetName: Object): void { return; };
-
+    public getActualMinimumValue(targetName: Object): void { return; }
     /**
      * Gets the actual maximum value of the target xAxis or yAxis
      *
-     * @param targetName 
+     * @param targetName
      */
     /* istanbul ignore next */
-    public getActualMaximumValue(targetName: Object): void { return; };
-
+    public getActualMaximumValue(targetName: Object): void { return; }
     /**
      * Notifies the map that the container was resized
      */
     /* istanbul ignore next */
-    public notifyContainerResized(): void { return; };
-
+    public notifyContainerResized(): void { return; }
     /**
      * Zoom in to the geographic region specified, when possible (may need to wait fior map to be initialized).
      *
      * @param rect The geographic area rectangle.
      */
     /* istanbul ignore next */
-    public zoomToGeographic(rect: Object): Object { return; };
-
+    public zoomToGeographic(rect: Object): Object { return; }
     /**
      * Given the current plot area of the control and a geographic region, get the WindowRect that would encompass that geographic region.
      *
      * @param rect The geographic area rectangle.
      */
     /* istanbul ignore next */
-    public getGeographicFromZoom(rect: Object): Object { return; };
-
+    public getGeographicFromZoom(rect: Object): Object { return; }
     /**
      * Given the current plot area of the control and a geographic region, get the WindowRect that would encompass that geographic region.
      *
      * @param rect The geographic area rectangle.
      */
     /* istanbul ignore next */
-    public getZoomFromGeographic(rect: Object): Object { return; };
-
+    public getZoomFromGeographic(rect: Object): Object { return; }
     /**
      * Creates a print preview page with the map, hiding all other elements on the page.
      */
     /* istanbul ignore next */
-    public print(): void { return; };
-
+    public print(): void { return; }
     /**
      * Indicates that a series should render, even though no option has been modified that would normally cause it to refresh.
      *
@@ -262,5 +263,4 @@ export class IgMapComponent extends IgControlBase<IgMap> {
      * @param animate     Whether the change should be animated, if possible.
      */
     /* istanbul ignore next */
-    public renderSeries(targetName: string, animate: boolean): void { return; };
-}
+    public renderSeries(targetName: string, animate: boolean): void { return; }}

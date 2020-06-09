@@ -12,14 +12,14 @@ describe('Infragistics Angular LayoutManager', () => {
     });
 
     it('should initialize correctly', (done) => {
-        var template = '<div><ig-layout-manager widgetId="layoutManager1" [(options)]="opts"></ig-layout-manager></div>';
+        const template = '<div><ig-layout-manager widgetId="layoutManager1" [(options)]="opts"></ig-layout-manager></div>';
         TestBed.overrideComponent(TestComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestComponent);
+            const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
             expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgLayoutManagerComponent)
                 .toBe(true);
@@ -31,7 +31,7 @@ describe('Infragistics Angular LayoutManager', () => {
 
 @Component({
     selector: 'test-cmp',
-    template: '<div></div>' //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
 })
 class TestComponent {
     private opts: any;

@@ -1,11 +1,11 @@
-import { ElementRef, IterableDiffers, Component, KeyValueDiffers, ChangeDetectorRef, Renderer2 } from "@angular/core";
-import { IgContentControlBase } from "../igcontrolbase/igcontentcontrolbase";
+import { ElementRef, IterableDiffers, Component, KeyValueDiffers, ChangeDetectorRef, Renderer2 } from '@angular/core';
+import { IgContentControlBase } from '../igcontrolbase/igcontentcontrolbase';
 
 @Component({
-    selector: "ig-layout-manager",
-    template: "<ng-content></ng-content>",
-    inputs: ["widgetId", "options", "changeDetectionInterval", "disabled", "create", "borderLayout", "gridLayout", "height", "itemCount", "items", "layoutMode", "width"],
-    outputs: ["internalResized", "internalResizing", "itemRendered", "itemRendering", "rendered"]
+    selector: 'ig-layout-manager',
+    template: '<ng-content></ng-content>',
+    inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'borderLayout', 'gridLayout', 'height', 'itemCount', 'items', 'layoutMode', 'width'],
+    outputs: ['internalResized', 'internalResizing', 'itemRendered', 'itemRendering', 'rendered']
 })
 export class IgLayoutManagerComponent extends IgContentControlBase<IgLayoutManager> {
     constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }
@@ -20,7 +20,7 @@ export class IgLayoutManagerComponent extends IgContentControlBase<IgLayoutManag
      * @param event Indicates the browser even which triggered this action (not API).
      */
     /* istanbul ignore next */
-    public reflow(forceReflow?: boolean, animationDuration?: number, event?: Object): void { return; };
+    public reflow(forceReflow?: boolean, animationDuration?: number, event?: Object): void { return; }
 
     /**
      * Destroy is part of the jQuery UI widget API and does the following:
@@ -29,5 +29,5 @@ export class IgLayoutManagerComponent extends IgContentControlBase<IgLayoutManag
      *                     3. Unbind all events that were bound.
      */
     /* istanbul ignore next */
-    public destroy(): void { return; };
+    public destroy(): void { return; }
 }

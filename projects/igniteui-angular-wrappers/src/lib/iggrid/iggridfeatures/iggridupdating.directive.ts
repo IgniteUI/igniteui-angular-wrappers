@@ -1,10 +1,10 @@
-import { ElementRef, Directive } from "@angular/core";
-import { Feature } from "../feature";
+import { ElementRef, Directive } from '@angular/core';
+import { Feature } from '../feature';
 
 @Directive({
     selector: 'updating',
-    inputs: ["disabled", "create", "columnSettings", "editMode", "enableDeleteRow", "enableAddRow", "validation", "doneLabel", "doneTooltip", "cancelLabel", "cancelTooltip", "addRowLabel", "addRowTooltip", "deleteRowLabel", "deleteRowTooltip", "showDoneCancelButtons", "enableDataDirtyException", "startEditTriggers", "horizontalMoveOnEnter", "excelNavigationMode", "saveChangesSuccessHandler", "saveChangesErrorHandler", "swipeDistance", "wrapAround", "rowEditDialogOptions", "dialogWidget", "inherit"],
-    outputs: ["editRowStarting", "editRowStarted", "editRowEnding", "editRowEnded", "editCellStarting", "editCellStarted", "editCellEnding", "editCellEnded", "rowAdding", "rowAdded", "rowDeleting", "rowDeleted", "dataDirty", "generatePrimaryKeyValue", "rowEditDialogBeforeOpen", "rowEditDialogAfterOpen", "rowEditDialogBeforeClose", "rowEditDialogAfterClose", "rowEditDialogContentsRendered"]
+    inputs: ['disabled', 'create', 'columnSettings', 'editMode', 'enableDeleteRow', 'enableAddRow', 'validation', 'doneLabel', 'doneTooltip', 'cancelLabel', 'cancelTooltip', 'addRowLabel', 'addRowTooltip', 'deleteRowLabel', 'deleteRowTooltip', 'showDoneCancelButtons', 'enableDataDirtyException', 'startEditTriggers', 'horizontalMoveOnEnter', 'excelNavigationMode', 'saveChangesSuccessHandler', 'saveChangesErrorHandler', 'swipeDistance', 'wrapAround', 'rowEditDialogOptions', 'dialogWidget', 'inherit'],
+    outputs: ['editRowStarting', 'editRowStarted', 'editRowEnding', 'editRowEnded', 'editCellStarting', 'editCellStarted', 'editCellEnding', 'editCellEnded', 'rowAdding', 'rowAdded', 'rowDeleting', 'rowDeleted', 'dataDirty', 'generatePrimaryKeyValue', 'rowEditDialogBeforeOpen', 'rowEditDialogAfterOpen', 'rowEditDialogBeforeClose', 'rowEditDialogAfterClose', 'rowEditDialogContentsRendered']
 })
 export class IgGridUpdatingFeature extends Feature<IgGridUpdating> {
     constructor(el: ElementRef) {
@@ -20,7 +20,7 @@ export class IgGridUpdatingFeature extends Feature<IgGridUpdating> {
      * @param value    The new value for the cell.
      */
     /* istanbul ignore next */
-    public setCellValue(rowId: Object, colKey: string, value: Object): void { return; };
+    public setCellValue(rowId: Object, colKey: string, value: Object): void { return; }
 
     /**
      * Sets values for specified cells in a row. It also creates a transaction and updates the UI.
@@ -30,7 +30,7 @@ export class IgGridUpdatingFeature extends Feature<IgGridUpdating> {
      * @param values    Pairs of values in the format { column1Key: value1, column2Key: value2, ... } .
      */
     /* istanbul ignore next */
-    public updateRow(rowId: Object, values: Object): void { return; };
+    public updateRow(rowId: Object, values: Object): void { return; }
 
     /**
      * Adds a new row to the grid. It also creates a transaction and updates the UI.
@@ -38,7 +38,7 @@ export class IgGridUpdatingFeature extends Feature<IgGridUpdating> {
      * @param values    Pairs of values in the format { column1Key: value1, column2Key: value2, ... } .
      */
     /* istanbul ignore next */
-    public addRow(values: Object): void { return; };
+    public addRow(values: Object): void { return; }
 
     /**
      * Deletes a row from the grid. It also creates a transaction and updates the UI.
@@ -46,7 +46,7 @@ export class IgGridUpdatingFeature extends Feature<IgGridUpdating> {
      * @param rowId    The primary key of the row to delete.
      */
     /* istanbul ignore next */
-    public deleteRow(rowId: Object): void { return; };
+    public deleteRow(rowId: Object): void { return; }
 
     /**
      * Starts editing for the row or cell specified (depending on the [editMode](ui.iggridupdating#options:editMode)).
@@ -56,7 +56,7 @@ export class IgGridUpdatingFeature extends Feature<IgGridUpdating> {
      * @param raiseEvents    Specifies whether or not updating events should be raised for this operation.
      */
     /* istanbul ignore next */
-    public startEdit(rowId: Object, column: Object, raiseEvents?: boolean): boolean { return; };
+    public startEdit(rowId: Object, column: Object, raiseEvents?: boolean): boolean { return; }
 
     /**
      * Starts editing for adding a new row.
@@ -64,7 +64,7 @@ export class IgGridUpdatingFeature extends Feature<IgGridUpdating> {
      * @param raiseEvents    Specifies whether or not updating events should be raised for this operation.
      */
     /* istanbul ignore next */
-    public startAddRowEdit(raiseEvents?: boolean): boolean { return; };
+    public startAddRowEdit(raiseEvents?: boolean): boolean { return; }
 
     /**
      * Ends the currently active edit mode.
@@ -73,19 +73,19 @@ export class IgGridUpdatingFeature extends Feature<IgGridUpdating> {
      * @param raiseEvents    Specifies whether or not updating events should be raised for this operation.
      */
     /* istanbul ignore next */
-    public endEdit(update?: boolean, raiseEvents?: boolean): boolean { return; };
+    public endEdit(update?: boolean, raiseEvents?: boolean): boolean { return; }
 
     /**
      * Finds and returns the key of the first column the editor for which has invalid value.
      */
     /* istanbul ignore next */
-    public findInvalid(): string { return; };
+    public findInvalid(): string { return; }
 
     /**
      * Checks if the grid is in edit mode.
      */
     /* istanbul ignore next */
-    public isEditing(): boolean { return; };
+    public isEditing(): boolean { return; }
 
     /**
      * Gets the editor for a column by the column key. That method can be used only after the editor has been created.
@@ -93,7 +93,7 @@ export class IgGridUpdatingFeature extends Feature<IgGridUpdating> {
      * @param key    The key of the column.
      */
     /* istanbul ignore next */
-    public editorForKey(key: string): Object { return; };
+    public editorForKey(key: string): Object { return; }
 
     /**
      * Gets the editor for a column by the cell it resides in. If allowed the function can create the editor if it has not been created yet.
@@ -102,13 +102,13 @@ export class IgGridUpdatingFeature extends Feature<IgGridUpdating> {
      * @param create    Requests to create the editor if it has not been created yet.
      */
     /* istanbul ignore next */
-    public editorForCell(cell: string, create?: boolean): Object { return; };
+    public editorForCell(cell: string, create?: boolean): Object { return; }
 
     /**
      * Destroys igGridUpdating.
      */
     /* istanbul ignore next */
-    public destroy(): Object { return; };
+    public destroy(): Object { return; }
 
     /**
      * Shows the delete button for specific row.
@@ -116,11 +116,11 @@ export class IgGridUpdatingFeature extends Feature<IgGridUpdating> {
      * @param row    A jQuery object of the targeted row.
      */
     /* istanbul ignore next */
-    public showDeleteButtonFor(row: Object): void { return; };
+    public showDeleteButtonFor(row: Object): void { return; }
 
     /**
      * Hides the delete button.
      */
     /* istanbul ignore next */
-    public hideDeleteButton(): void { return; };
+    public hideDeleteButton(): void { return; }
 }

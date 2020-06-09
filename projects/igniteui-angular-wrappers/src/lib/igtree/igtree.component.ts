@@ -1,11 +1,11 @@
-import { Component, ElementRef, IterableDiffers, KeyValueDiffers, ChangeDetectorRef, SimpleChanges, Input, Renderer2 } from "@angular/core";
-import { IgControlBase } from "../igcontrolbase/igcontrolbase";
+import { Component, ElementRef, IterableDiffers, KeyValueDiffers, ChangeDetectorRef, SimpleChanges, Input, Renderer2 } from '@angular/core';
+import { IgControlBase } from '../igcontrolbase/igcontrolbase';
 
 @Component({
-    selector: "ig-tree",
-    template: "<ng-content></ng-content>",
-    inputs: ["widgetId", "options", "changeDetectionInterval", "disabled", "create", "width", "height", "checkboxMode", "singleBranchExpand", "hotTracking", "parentNodeImageUrl", "parentNodeImageClass", "parentNodeImageTooltip", "leafNodeImageUrl", "leafNodeImageClass", "leafNodeImageTooltip", "animationDuration", "pathSeparator", "dataSource", "dataSourceUrl", "dataSourceType", "responseDataKey", "responseDataType", "requestType", "responseContentType", "initialExpandDepth", "loadOnDemand", "bindings", "defaultNodeTarget", "dragAndDrop", "updateUrl", "dragAndDropSettings"],
-    outputs: ["dataBinding", "dataBound", "rendering", "rendered", "selectionChanging", "selectionChanged", "nodeCheckstateChanging", "nodeCheckstateChanged", "nodePopulating", "nodePopulated", "nodeCollapsing", "nodeCollapsed", "nodeExpanding", "nodeExpanded", "nodeClick", "nodeDoubleClick", "dragStart", "drag", "dragStop", "nodeDropping", "nodeDropped"]
+    selector: 'ig-tree',
+    template: '<ng-content></ng-content>',
+    inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'width', 'height', 'checkboxMode', 'singleBranchExpand', 'hotTracking', 'parentNodeImageUrl', 'parentNodeImageClass', 'parentNodeImageTooltip', 'leafNodeImageUrl', 'leafNodeImageClass', 'leafNodeImageTooltip', 'animationDuration', 'pathSeparator', 'dataSource', 'dataSourceUrl', 'dataSourceType', 'responseDataKey', 'responseDataType', 'requestType', 'responseContentType', 'initialExpandDepth', 'loadOnDemand', 'bindings', 'defaultNodeTarget', 'dragAndDrop', 'updateUrl', 'dragAndDropSettings'],
+    outputs: ['dataBinding', 'dataBound', 'rendering', 'rendered', 'selectionChanging', 'selectionChanged', 'nodeCheckstateChanging', 'nodeCheckstateChanged', 'nodePopulating', 'nodePopulated', 'nodeCollapsing', 'nodeCollapsed', 'nodeExpanding', 'nodeExpanded', 'nodeClick', 'nodeDoubleClick', 'dragStart', 'drag', 'dragStop', 'nodeDropping', 'nodeDropped']
 })
 export class IgTreeComponent extends IgControlBase<IgTree> {
     private _dataSource: any;
@@ -13,33 +13,32 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
     @Input()
     public set dataSource(value: any) {
         this._dataSource = value;
-    };
+    }
 
     constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {
         super(el, renderer, differs, kvalDiffers, cdr);
     }
 
     ngOnInit() {
-        if (!this.options["dataSource"] && this._dataSource) {
-            this.options["dataSource"] = this._dataSource;
+        if (!this.options.dataSource && this._dataSource) {
+            this.options.dataSource = this._dataSource;
         }
         super.ngOnInit();
     }
     public ngOnChanges(changes: SimpleChanges): void {
-        const ds = "dataSource";
-        //const options = "options";
+        const ds = 'dataSource';
+        // const options = "options";
         if (ds in changes) {
             const value = changes[ds].currentValue;
             if (!this._differ && value) {
                 try {
                     this._differ = this._differs.find(value).create();
                     this._changes = [];
-                    for (var i = 0; i < this._dataSource.length; i++) {
+                    for (let i = 0; i < this._dataSource.length; i++) {
                         this._changes.push(this.kvalDiffers.find({}).create());
                     }
-                }
-                catch (e) {
-                    throw new Error("Only binding to arrays is supported.");
+                } catch (e) {
+                    throw new Error('Only binding to arrays is supported.');
                 }
             }
         }
@@ -48,16 +47,16 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
     ngDoCheck() {
         if (this._differ) {
             const changes = this._differ.diff(this._dataSource);
-            //check if grid is initialized
+            // check if grid is initialized
             const elem = jQuery(this._el).data(this._widgetName);
             if (changes && elem) {
                 this.dataSourceApplyChanges(changes);
             }
             if (this._changes && elem) {
-                //check recs
-                for (var i = 0; i < this._dataSource.length; i++) {
-                    var item = this._dataSource[i];
-                    var rowChanges = this._changes[i].diff(item);
+                // check recs
+                for (let i = 0; i < this._dataSource.length; i++) {
+                    const item = this._dataSource[i];
+                    const rowChanges = this._changes[i].diff(item);
                     if (rowChanges) {
                         rowChanges.forEachChangedItem((change: any) => {
                             this.updateItem(item, change.currentValue, change.key);
@@ -89,7 +88,7 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
 
     public markForCheck() {
         super.markForCheck();
-        const bindings = this["bindings"] || this.options.bindings;
+        const bindings = this.bindings || this.options.bindings;
         if (bindings && bindings.childDataProperty) {
             this.dataBind();
         }
@@ -107,7 +106,7 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
      * Performs databinding on the igTree.
      */
     /* istanbul ignore next */
-    public dataBind(): void { return; };
+    public dataBind(): void { return; }
 
     /**
      * Toggles the checkstate of a node if checkboxMode is not set to off, otherwise does nothing.
@@ -116,7 +115,7 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
      * @param event     Indicates the browser event which triggered this action, if this is not an API call.
      */
     /* istanbul ignore next */
-    public toggleCheckstate(node: Object, event?: Object): void { return; };
+    public toggleCheckstate(node: Object, event?: Object): void { return; }
 
     /**
      * Toggles the collapse/expand state for the specified node.
@@ -125,7 +124,7 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
      * @param event     Indicates the browser event which triggered this action, if this is not an API call.
      */
     /* istanbul ignore next */
-    public toggle(node: Object, event?: Object): void { return; };
+    public toggle(node: Object, event?: Object): void { return; }
 
     /**
      * Expands the tree down to the specified node and selects the node if specified.
@@ -134,7 +133,7 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
      * @param toSelect     Specifies the whether to select the node after expanding to it.
      */
     /* istanbul ignore next */
-    public expandToNode(node: Object, toSelect?: boolean): void { return; };
+    public expandToNode(node: Object, toSelect?: boolean): void { return; }
 
     /**
      * Expands the specified node.
@@ -142,7 +141,7 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
      * @param node     Specifies the node element to expand.
      */
     /* istanbul ignore next */
-    public expand(node: Object): void { return; };
+    public expand(node: Object): void { return; }
 
     /**
      * Collapses the specified node.
@@ -150,7 +149,7 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
      * @param node     Specifies the node element to collapse.
      */
     /* istanbul ignore next */
-    public collapse(node: Object): void { return; };
+    public collapse(node: Object): void { return; }
 
     /**
      * Retrieves the parent node element of the specified node element.
@@ -158,7 +157,7 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
      * @param node     Specifies the jQuery selected node element to collapse.
      */
     /* istanbul ignore next */
-    public parentNode(node: Object): Object { return; };
+    public parentNode(node: Object): Object { return; }
 
     /**
      * Retrieves the jQuery element of the node with the specified path.
@@ -166,7 +165,7 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
      * @param nodePath     Specifies the path to the required node.
      */
     /* istanbul ignore next */
-    public nodeByPath(nodePath: string): Object { return; };
+    public nodeByPath(nodePath: string): Object { return; }
 
     /**
      * Retrieves the jQuery element of the node with the specified value.
@@ -174,25 +173,25 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
      * @param value     Specifies the value of the required node.
      */
     /* istanbul ignore next */
-    public nodesByValue(value: string): Object { return; };
+    public nodesByValue(value: string): Object { return; }
 
     /**
      * Retrieves all the node objects for the nodes that have their checkboxes checked.
      */
     /* istanbul ignore next */
-    public checkedNodes(): any[] { return; };
+    public checkedNodes(): any[] { return; }
 
     /**
      * Retrieves all the node objects for the nodes that have their checkboxes unchecked.
      */
     /* istanbul ignore next */
-    public uncheckedNodes(): any[] { return; };
+    public uncheckedNodes(): any[] { return; }
 
     /**
      * Retrieves all the node objects for the nodes that have their checkboxes partially checked.
      */
     /* istanbul ignore next */
-    public partiallyCheckedNodes(): any[] { return; };
+    public partiallyCheckedNodes(): any[] { return; }
 
     /**
      * Selects a node.
@@ -201,7 +200,7 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
      * @param event     Indicates the browser event which triggered this action, if this is not an API call.
      */
     /* istanbul ignore next */
-    public select(node: Object, event?: Object): void { return; };
+    public select(node: Object, event?: Object): void { return; }
 
     /**
      * Deselects the specified node.
@@ -209,19 +208,19 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
      * @param node     Specifies the node element to be deselected.
      */
     /* istanbul ignore next */
-    public deselect(node: Object): void { return; };
+    public deselect(node: Object): void { return; }
 
     /**
      * Deselects all the selected nodes.
      */
     /* istanbul ignore next */
-    public clearSelection(): void { return; };
+    public clearSelection(): void { return; }
 
     /**
      * Retrieves the node object for the selected node.
      */
     /* istanbul ignore next */
-    public selectedNode(): Object { return; };
+    public selectedNode(): Object { return; }
 
     /**
      * Retrieves all node objects with the specified text (case sensitive).
@@ -230,7 +229,7 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
      * @param parent     The node element to start the search from. If not specified then search would start from the root of the tree.
      */
     /* istanbul ignore next */
-    public findNodesByText(text: string, parent?: Object): any[] { return; };
+    public findNodesByText(text: string, parent?: Object): any[] { return; }
 
     /**
      * Retrieves all node objects for the immediate children of the specified parent with the specified text (case sensitive).
@@ -239,7 +238,7 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
      * @param parent     The node element the children of which would be searched.
      */
     /* istanbul ignore next */
-    public findImmediateNodesByText(text: string, parent?: Object): any[] { return; };
+    public findImmediateNodesByText(text: string, parent?: Object): any[] { return; }
 
     /**
      * Retrieves the n-th jQuery node element child of the specified parent.
@@ -248,7 +247,7 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
      * @param parent     The parent node element to start the search from.
      */
     /* istanbul ignore next */
-    public nodeByIndex(index: number, parent?: Object): Object { return; };
+    public nodeByIndex(index: number, parent?: Object): Object { return; }
 
     /**
      * Retrieves a node object for the specified node element.
@@ -256,7 +255,7 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
      * @param element     Specifies the node element.
      */
     /* istanbul ignore next */
-    public nodeFromElement(element: Object): Object { return; };
+    public nodeFromElement(element: Object): Object { return; }
 
     /**
      * Retrieves a node object collection of the immediate children of the provided node element.
@@ -264,7 +263,7 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
      * @param parent     Specifies the node element.
      */
     /* istanbul ignore next */
-    public children(parent: Object): any[] { return; };
+    public children(parent: Object): any[] { return; }
 
     /**
      * Retrieves a node object collection of the immediate children of the node with the provided path.
@@ -272,7 +271,7 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
      * @param path     Specifies the path of the node the children of which are to be retrieved.
      */
     /* istanbul ignore next */
-    public childrenByPath(path: string): any[] { return; };
+    public childrenByPath(path: string): any[] { return; }
 
     /**
      * Returns true if the provided node element is selected and false otherwise.
@@ -280,7 +279,7 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
      * @param node     Specifies the node element.
      */
     /* istanbul ignore next */
-    public isSelected(node: Object): boolean { return; };
+    public isSelected(node: Object): boolean { return; }
 
     /**
      * Returns true if the provided node element is expanded and false otherwise.
@@ -288,7 +287,7 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
      * @param node     Specifies the node element.
      */
     /* istanbul ignore next */
-    public isExpanded(node: Object): boolean { return; };
+    public isExpanded(node: Object): boolean { return; }
 
     /**
      * Returns true if the provided node element has its checkbox checkstate checked and false otherwise.
@@ -296,7 +295,7 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
      * @param node     Specifies the node element.
      */
     /* istanbul ignore next */
-    public isChecked(node: Object): boolean { return; };
+    public isChecked(node: Object): boolean { return; }
 
     /**
      * Returns the specified node checkstate.
@@ -304,7 +303,7 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
      * @param node     Specifies the node element.
      */
     /* istanbul ignore next */
-    public checkState(node: Object): string { return; };
+    public checkState(node: Object): string { return; }
 
     /**
      * Adds a new array of nodes to the tree. New nodes are appended to the root or to a specified parent node, at a specified index.
@@ -314,7 +313,7 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
      * @param nodeIndex     Specifies the index at which the nodes to be inserted.
      */
     /* istanbul ignore next */
-    public addNode(node: Object, parent?: Object, nodeIndex?: number): void { return; };
+    public addNode(node: Object, parent?: Object, nodeIndex?: number): void { return; }
 
     /**
      * Removes the node with with the specified path and all of its children.
@@ -322,7 +321,7 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
      * @param path     Specifies the path of the node to be removed.
      */
     /* istanbul ignore next */
-    public removeAt(path: string): void { return; };
+    public removeAt(path: string): void { return; }
 
     /**
      * Removing all the nodes with the specified value.
@@ -330,7 +329,7 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
      * @param value     Specifies the value of the nodes to be removed.
      */
     /* istanbul ignore next */
-    public removeNodesByValue(value: string): void { return; };
+    public removeNodesByValue(value: string): void { return; }
 
     /**
      * Performs a UI update on the provided node element with the provided data.
@@ -339,13 +338,13 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
      * @param data     Specifies the new data item the node would update according to.
      */
     /* istanbul ignore next */
-    public applyChangesToNode(element: Object, data: Object): void { return; };
+    public applyChangesToNode(element: Object, data: Object): void { return; }
 
     /**
      * Returns the transaction log stack.
      */
     /* istanbul ignore next */
-    public transactionLog(): any[] { return; };
+    public transactionLog(): any[] { return; }
 
     /**
      * Returns the data for the node with specified path.
@@ -353,11 +352,11 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
      * @param path     Specifies the node path for which the data is returned.
      */
     /* istanbul ignore next */
-    public nodeDataFor(path: string): Object { return; };
+    public nodeDataFor(path: string): Object { return; }
 
     /**
      * Destructor for the igTree widget.
      */
     /* istanbul ignore next */
-    public destroy(): void { return; };
+    public destroy(): void { return; }
 }

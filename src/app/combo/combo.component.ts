@@ -15,14 +15,14 @@ export class ComboComponent {
     constructor() {
         this.northwind = Northwind.getData();
         this.options = {
-            valueKey: "ProductID",
-            textKey: "ProductName",
-            width: "100%"
+            valueKey: 'ProductID',
+            textKey: 'ProductName',
+            width: '100%'
         };
         this.combo = {
             value1: 20,
-            value2: "Chang"
-        }
+            value2: 'Chang'
+        };
     }
 
 }

@@ -12,14 +12,14 @@ describe('Infragistics Angular Rating', () => {
     });
 
     it('should initialize correctly', (done) => {
-        var template = '<div><ig-rating widgetId="rating" ></ig-rating></div>';
+        const template = '<div><ig-rating widgetId="rating" ></ig-rating></div>';
         TestBed.overrideComponent(TestComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestComponent);
+            const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
             expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgRatingComponent)
                 .toBe(true);
@@ -30,7 +30,7 @@ describe('Infragistics Angular Rating', () => {
 
 @Component({
     selector: 'test-cmp',
-    template: '<div></div>' //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
 })
 class TestComponent {
     private opts: any;

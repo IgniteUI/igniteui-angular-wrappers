@@ -1,4 +1,4 @@
-import { ElementRef, Directive } from "@angular/core";
+import { ElementRef, Directive } from '@angular/core';
 
 declare var jQuery: any;
 
@@ -12,9 +12,9 @@ export class Column {
 
 	constructor(el: ElementRef) {
 		this._el = el;
-		let self = this;
+		const self = this;
 		let i, settings = ['headerText', 'key', 'formatter', 'format', 'dataType', 'width', 'hidden', 'template', 'unbound', 'group', 'rowspan', 'formula', 'unboundValues', 'unboundValuesUpdateMode', 'headerCssClass', 'columnCssClass'];
-		for(i = 0; i < settings.length; i++) {
+		for (i = 0; i < settings.length; i++) {
 			Object.defineProperty(self, settings[i], {
 				set: self.createColumnsSetter(settings[i]),
 				get: self.createColumnsGetter(settings[i]),
@@ -25,24 +25,24 @@ export class Column {
 	}
 
 	createColumnsSetter(name) {
-		return function (value) {
-			let grid = jQuery(this._el.nativeElement.parentElement).find("table[role='grid']");
-			let columns = grid["igGrid"]("option", "columns");
+		return function(value) {
+			const grid = jQuery(this._el.nativeElement.parentElement).find('table[role=\'grid\']');
+			const columns = grid.igGrid('option', 'columns');
 			this._settings[name] = value;
 
-			if (jQuery.ui["igGrid"] &&
-				jQuery.ui["igGrid"].prototype.options &&
-				jQuery.ui["igGrid"].prototype.options.hasOwnProperty("columns") &&
-				grid.data("igGrid")) {
-				//reapply all column settings when a column setting is changed
-				grid["igGrid"]("option", "columns", columns);
+			if (jQuery.ui.igGrid &&
+				jQuery.ui.igGrid.prototype.options &&
+				jQuery.ui.igGrid.prototype.options.hasOwnProperty('columns') &&
+				grid.data('igGrid')) {
+				// reapply all column settings when a column setting is changed
+				grid.igGrid('option', 'columns', columns);
 			}
-		}
+		};
 	}
 
 	createColumnsGetter(name) {
-		return function () {
+		return function() {
 			return this._settings[name];
-		}
+		};
 	}
 }

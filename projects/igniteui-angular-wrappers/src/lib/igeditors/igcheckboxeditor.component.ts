@@ -1,12 +1,12 @@
-import { Component, ElementRef, IterableDiffers, Optional, KeyValueDiffers, ChangeDetectorRef, Renderer2 } from "@angular/core";
-import { IgEditorBase } from "./igeditorbase";
-import { NgModel } from "@angular/forms";
+import { Component, ElementRef, IterableDiffers, Optional, KeyValueDiffers, ChangeDetectorRef, Renderer2 } from '@angular/core';
+import { IgEditorBase } from './igeditorbase';
+import { NgModel } from '@angular/forms';
 
 @Component({
-    selector: "ig-checkbox-editor",
-    template: "<ng-content></ng-content>",
-    inputs: ["widgetId", "options", "changeDetectionInterval", "disabled", "create", "width", "height", "value", "tabIndex", "allowNullValue", "nullValue", "inputName", "readOnly", "validatorOptions", "checked", "size", "iconClass"],
-    outputs: ["rendering", "rendered", "mousedown", "mouseup", "mousemove", "mouseover", "mouseout", "blur", "focus", "keydown", "keypress", "keyup", "valueChanging", "valueChanged"]
+    selector: 'ig-checkbox-editor',
+    template: '<ng-content></ng-content>',
+    inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'width', 'height', 'value', 'tabIndex', 'allowNullValue', 'nullValue', 'inputName', 'readOnly', 'validatorOptions', 'checked', 'size', 'iconClass'],
+    outputs: ['rendering', 'rendered', 'mousedown', 'mouseup', 'mousemove', 'mouseover', 'mouseout', 'blur', 'focus', 'keydown', 'keypress', 'keyup', 'valueChanging', 'valueChanged']
 })
 export class IgCheckboxEditorComponent extends IgEditorBase<IgCheckboxEditor> {
     constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef, @Optional() public model: NgModel) { super(el, renderer, differs, kvalDiffers, cdr, model); }
@@ -15,7 +15,7 @@ export class IgCheckboxEditorComponent extends IgEditorBase<IgCheckboxEditor> {
      * Checks if the value in the editor is valid. Note: This function will not trigger automatic notifications.
      */
     /* istanbul ignore next */
-    public isValid(): boolean { return; };
+    public isValid(): boolean { return; }
 
     /**
      * Gets/Sets Current checked state/Value of the igCheckboxEditor that will be submitted by the HTML form.
@@ -27,13 +27,13 @@ export class IgCheckboxEditorComponent extends IgEditorBase<IgCheckboxEditor> {
      * @param newValue
      */
     /* istanbul ignore next */
-    public value(newValue: Object): string { return; };
+    public value(newValue: Object): string { return; }
 
     /**
      * Toggles the state of the checkbox.
      */
     /* istanbul ignore next */
-    public toggle(): void { return; };
+    public toggle(): void { return; }
 
     /**
      * Gets/Sets name attribute applied to the editor element.
@@ -41,25 +41,25 @@ export class IgCheckboxEditorComponent extends IgEditorBase<IgCheckboxEditor> {
      * @param newValue The new input name.
      */
     /* istanbul ignore next */
-    public inputName(newValue?: string): string { return; };
+    public inputName(newValue?: string): string { return; }
 
     /**
      * Gets the input element of the editor.
      */
     /* istanbul ignore next */
-    public field(): string { return; };
+    public field(): string { return; }
 
     /**
      * Gets a reference to the jQuery element that wraps the editor.
      */
     /* istanbul ignore next */
-    public editorContainer(): string { return; };
+    public editorContainer(): string { return; }
 
     /**
      * Gets whether the editor has focus.
      */
     /* istanbul ignore next */
-    public hasFocus(): boolean { return; };
+    public hasFocus(): boolean { return; }
 
     /**
      * Sets focus to the editor after the specified delay.
@@ -67,35 +67,35 @@ export class IgCheckboxEditorComponent extends IgEditorBase<IgCheckboxEditor> {
      * @param delay The delay before focusing the editor.
      */
     /* istanbul ignore next */
-    public setFocus(delay?: number): void { return; };
+    public setFocus(delay?: number): void { return; }
 
     /**
      * Hides the editor.
      */
     /* istanbul ignore next */
-    public hide(): void { return; };
+    public hide(): void { return; }
 
     /**
      * Shows the editor.
      */
     /* istanbul ignore next */
-    public show(): void { return; };
+    public show(): void { return; }
 
     /**
      * Gets a reference to [igValidator](ui.igvalidator) used by the editor.
      */
     /* istanbul ignore next */
-    public validator(): Object { return; };
+    public validator(): Object { return; }
 
     /**
      * Triggers validation for the editor. If validatorOptions are set will also call validate on the [igValidator](ui.igvalidator).
      */
     /* istanbul ignore next */
-    public validate(): boolean { return; };
+    public validate(): boolean { return; }
 
     /**
      * Destroys the widget
      */
     /* istanbul ignore next */
-    public destroy(): void { return; };
+    public destroy(): void { return; }
 }

@@ -18,16 +18,16 @@ export class GridTopLevelOptionsComponent {
 	constructor() {
 		this.data = Northwind.getData();
 
-		this.id ='grid1';
+		this.id = 'grid1';
 		this.w = '100%';
 		this.h = '400px';
 		this.pKey = 'ProductID';
 
 		this.cols = [
-			{ key: "ProductID", headerText: "Product ID", width:"50px", dataType:"number" },
-			{ key: "ProductName", headerText: "Name", width:"250px", dataType:"string" },
-			{ key: "QuantityPerUnit", headerText: "Quantity per unit", width:"250px", dataType:"string" },
-			{ key: "UnitPrice", headerText: "Unit Price", width:"100px", dataType:"number" }
+			{ key: 'ProductID', headerText: 'Product ID', width: '50px', dataType: 'number' },
+			{ key: 'ProductName', headerText: 'Name', width: '250px', dataType: 'string' },
+			{ key: 'QuantityPerUnit', headerText: 'Quantity per unit', width: '250px', dataType: 'string' },
+			{ key: 'UnitPrice', headerText: 'Unit Price', width: '100px', dataType: 'number' }
 		];
 	}
 

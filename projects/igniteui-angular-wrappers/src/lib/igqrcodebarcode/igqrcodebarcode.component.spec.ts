@@ -12,14 +12,14 @@ describe('Infragistics Angular QRBarCode', () => {
     });
 
     it('should initialize correctly', (done) => {
-        var template = '<div><ig-q-r-code-barcode [widgetId]="\'bCode\'" [(options)]="opts"></ig-q-r-code-barcode></div>';
+        const template = '<div><ig-q-r-code-barcode [widgetId]="\'bCode\'" [(options)]="opts"></ig-q-r-code-barcode></div>';
         TestBed.overrideComponent(TestComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestComponent);
+            const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
             expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgQRCodeBarcodeComponent)
                 .toBe(true);
@@ -31,7 +31,7 @@ describe('Infragistics Angular QRBarCode', () => {
 
 @Component({
     selector: 'test-cmp',
-    template: '<div></div>' //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
 })
 class TestComponent {
     private opts: any;
@@ -40,9 +40,9 @@ class TestComponent {
 
     constructor() {
         this.opts = {
-            height: "300px",
-            width: "100%",
-            data: "http://www.infragistics.com/products/jquery/samples"
+            height: '300px',
+            width: '100%',
+            data: 'http://www.infragistics.com/products/jquery/samples'
         };
     }
 }

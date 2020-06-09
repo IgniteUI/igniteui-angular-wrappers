@@ -11,11 +11,11 @@ export class LayoutManagerComponent {
 
     constructor() {
         this.layoutOptions = {
-            layoutMode: "border",
-            height: "300px",
+            layoutMode: 'border',
+            height: '300px',
             borderLayout: {
-                leftWidth: "10%",
-                rightWidth: "20%"
+                leftWidth: '10%',
+                rightWidth: '20%'
             }
         };
     }

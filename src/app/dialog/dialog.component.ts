@@ -11,8 +11,8 @@ export class DialogComponent {
 
     constructor() {
         this.options = {
-            headerText: "Foo",
-            height: "325px"
+            headerText: 'Foo',
+            height: '325px'
         };
     }
 }

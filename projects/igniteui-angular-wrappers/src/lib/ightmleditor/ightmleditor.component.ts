@@ -1,14 +1,14 @@
-import { Component, ElementRef, IterableDiffers, Optional, NgZone, KeyValueDiffers, ChangeDetectorRef, Renderer2 } from "@angular/core";
-import { IgControlBase } from "../igcontrolbase/igcontrolbase";
-import { ControlValueAccessor, NgModel } from "@angular/forms";
+import { Component, ElementRef, IterableDiffers, Optional, NgZone, KeyValueDiffers, ChangeDetectorRef, Renderer2 } from '@angular/core';
+import { IgControlBase } from '../igcontrolbase/igcontrolbase';
+import { ControlValueAccessor, NgModel } from '@angular/forms';
 
 declare var jQuery: any;
 
 @Component({
-    selector: "ig-html-editor",
-    template: "<ng-content></ng-content>",
-    inputs: ["widgetId", "options", "changeDetectionInterval", "disabled", "create", "showFormattingToolbar", "showTextToolbar", "showInsertObjectToolbar", "showCopyPasteToolbar", "width", "height", "toolbarSettings", "customToolbars", "inputName", "value"],
-    outputs: ["rendered", "rendering", "actionExecuting", "actionExecuted", "toolbarCollapsing", "toolbarCollapsed", "toolbarExpanding", "toolbarExpanded", "cut", "copy", "paste", "undo", "redo", "workspaceResized"]
+    selector: 'ig-html-editor',
+    template: '<ng-content></ng-content>',
+    inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'showFormattingToolbar', 'showTextToolbar', 'showInsertObjectToolbar', 'showCopyPasteToolbar', 'width', 'height', 'toolbarSettings', 'customToolbars', 'inputName', 'value'],
+    outputs: ['rendered', 'rendering', 'actionExecuting', 'actionExecuted', 'toolbarCollapsing', 'toolbarCollapsed', 'toolbarExpanding', 'toolbarExpanded', 'cut', 'copy', 'paste', 'undo', 'redo', 'workspaceResized']
 })
 export class IgHtmlEditorComponent extends IgControlBase<IgHtmlEditor> implements ControlValueAccessor {
     protected _model: any;
@@ -23,10 +23,10 @@ export class IgHtmlEditorComponent extends IgControlBase<IgHtmlEditor> implement
     }
     ngOnInit() {
         super.ngOnInit();
-        let that = this;
+        const that = this;
         if (this._model) {
-            var iframe = jQuery(this._el).find("iframe")[0].contentWindow.document;
-            jQuery(iframe).find("body[contenteditable=true]").on("keyup", function (evt, ui) {
+            const iframe = jQuery(this._el).find('iframe')[0].contentWindow.document;
+            jQuery(iframe).find('body[contenteditable=true]').on('keyup', function(evt, ui) {
                 that._model.viewToModelUpdate(jQuery(evt.target).html());
                 that._zone.run(() => {
                     that._model.viewToModelUpdate(jQuery(evt.target).html());
@@ -36,15 +36,15 @@ export class IgHtmlEditorComponent extends IgControlBase<IgHtmlEditor> implement
 
     }
     writeValue(value: any) {
-        if (!!jQuery(this._el).data(this._widgetName) && value !== null && value !== jQuery(this._el)[this._widgetName]("getContent", "html")) {
-            jQuery(this._el)[this._widgetName]("setContent", value, "html");
+        if (!!jQuery(this._el).data(this._widgetName) && value !== null && value !== jQuery(this._el)[this._widgetName]('getContent', 'html')) {
+            jQuery(this._el)[this._widgetName]('setContent', value, 'html');
         }
     }
 
     onChange = (_: any) => {
-    };
+    }
     onTouched = () => {
-    };
+    }
 
     registerOnChange(fn: (_: any) => {}): void {
         this.onChange = fn;
@@ -58,13 +58,13 @@ export class IgHtmlEditorComponent extends IgControlBase<IgHtmlEditor> implement
      * Returns the element on which the widget was instantiated
      */
     /* istanbul ignore next */
-    public widget(): void { return; };
+    public widget(): void { return; }
 
     /**
      * Resizes the height of the workspace
      */
     /* istanbul ignore next */
-    public resizeWorkspace(): void { return; };
+    public resizeWorkspace(): void { return; }
 
     /**
      * Gets the content of the html editor.
@@ -72,7 +72,7 @@ export class IgHtmlEditorComponent extends IgControlBase<IgHtmlEditor> implement
      * @param format Returns the content as html or plain text. Values can be "text" or "html".
      */
     /* istanbul ignore next */
-    public getContent(format: string): string { return; };
+    public getContent(format: string): string { return; }
 
     /**
      * Sets the content of the html editor.
@@ -81,13 +81,13 @@ export class IgHtmlEditorComponent extends IgControlBase<IgHtmlEditor> implement
      * @param format The content type: "text" or "html".
      */
     /* istanbul ignore next */
-    public setContent(content: string, format: string): void { return; };
+    public setContent(content: string, format: string): void { return; }
 
     /**
      * Destroys the widget.
      */
     /* istanbul ignore next */
-    public destroy(): void { return; };
+    public destroy(): void { return; }
 
     /**
      * Executes htmleditor commands.
@@ -96,43 +96,43 @@ export class IgHtmlEditorComponent extends IgControlBase<IgHtmlEditor> implement
      * @param args Additional parameter for the command.
      */
     /* istanbul ignore next */
-    public executeAction(actionName: string, args?: Object): void { return; };
+    public executeAction(actionName: string, args?: Object): void { return; }
 
     /**
      * Returns true/false if the editor contents were modified or not.
      */
     /* istanbul ignore next */
-    public isDirty(): Object { return; };
+    public isDirty(): Object { return; }
 
     /**
      * Returns the window object associated with the Html Editor's content editable area
      */
     /* istanbul ignore next */
-    public contentWindow(): Object { return; };
+    public contentWindow(): Object { return; }
 
     /**
      * Returns the document object associated with the Html Editor's content editable area
      */
     /* istanbul ignore next */
-    public contentDocument(): Object { return; };
+    public contentDocument(): Object { return; }
 
     /**
      * Returns the content editable associated with this Html Editor
      */
     /* istanbul ignore next */
-    public contentEditable(): Object { return; };
+    public contentEditable(): Object { return; }
 
     /**
      * Returns Selection object that represent the current selection in the content editable
      */
     /* istanbul ignore next */
-    public selection(): Object { return; };
+    public selection(): Object { return; }
 
     /**
      * Returns Range object that represent the current range in the content editable
      */
     /* istanbul ignore next */
-    public range(): Object { return; };
+    public range(): Object { return; }
 
     /**
      * Inserts the provided content at the position of the caret.
@@ -140,5 +140,5 @@ export class IgHtmlEditorComponent extends IgControlBase<IgHtmlEditor> implement
      * @param element Accepts html string, DOM element or a jQuery object.
      */
     /* istanbul ignore next */
-    public insertAtCaret(element: Object): void { return; };
+    public insertAtCaret(element: Object): void { return; }
 }

@@ -1,10 +1,10 @@
-import { ElementRef, Directive } from "@angular/core";
-import { Feature } from "../feature";
+import { ElementRef, Directive } from '@angular/core';
+import { Feature } from '../feature';
 
 @Directive({
     selector: 'group-by',
-    inputs: ["disabled", "create", "groupByAreaVisibility", "initialExpand", "emptyGroupByAreaContent", "emptyGroupByAreaContentSelectColumns", "expansionIndicatorVisibility", "groupByLabelWidth", "labelDragHelperOpacity", "indentation", "defaultSortingDirection", "groupedColumns", "resultResponseKey", "groupedRowTextTemplate", "type", "groupByUrlKey", "groupByUrlKeyAscValue", "groupByUrlKeyDescValue", "summarySettings", "columnSettings", "expandTooltip", "collapseTooltip", "removeButtonTooltip", "modalDialogGroupByOnClick", "modalDialogGroupByButtonText", "modalDialogCaptionButtonDesc", "modalDialogCaptionButtonAsc", "modalDialogCaptionButtonUngroup", "modalDialogCaptionText", "modalDialogDropDownLabel", "modalDialogRootLevelHierarchicalGrid", "modalDialogDropDownButtonCaption", "modalDialogClearAllButtonLabel", "emptyGroupByAreaContentSelectColumnsCaption", "modalDialogDropDownWidth", "modalDialogDropDownAreaWidth", "modalDialogAnimationDuration", "modalDialogWidth", "modalDialogHeight", "modalDialogButtonApplyText", "modalDialogButtonCancelText", "useGridColumnFormatter", "persist", "groupByDialogContainment", "dialogWidget", "inherit"],
-    outputs: ["groupedColumnsChanging", "groupedColumnsChanged", "modalDialogMoving", "modalDialogClosing", "modalDialogClosed", "modalDialogOpening", "modalDialogOpened", "modalDialogContentsRendering", "modalDialogContentsRendered", "modalDialogButtonApplyClick", "modalDialogButtonResetClick", "modalDialogGroupingColumn", "modalDialogGroupColumn", "modalDialogUngroupingColumn", "modalDialogUngroupColumn", "modalDialogSortGroupedColumn"]
+    inputs: ['disabled', 'create', 'groupByAreaVisibility', 'initialExpand', 'emptyGroupByAreaContent', 'emptyGroupByAreaContentSelectColumns', 'expansionIndicatorVisibility', 'groupByLabelWidth', 'labelDragHelperOpacity', 'indentation', 'defaultSortingDirection', 'groupedColumns', 'resultResponseKey', 'groupedRowTextTemplate', 'type', 'groupByUrlKey', 'groupByUrlKeyAscValue', 'groupByUrlKeyDescValue', 'summarySettings', 'columnSettings', 'expandTooltip', 'collapseTooltip', 'removeButtonTooltip', 'modalDialogGroupByOnClick', 'modalDialogGroupByButtonText', 'modalDialogCaptionButtonDesc', 'modalDialogCaptionButtonAsc', 'modalDialogCaptionButtonUngroup', 'modalDialogCaptionText', 'modalDialogDropDownLabel', 'modalDialogRootLevelHierarchicalGrid', 'modalDialogDropDownButtonCaption', 'modalDialogClearAllButtonLabel', 'emptyGroupByAreaContentSelectColumnsCaption', 'modalDialogDropDownWidth', 'modalDialogDropDownAreaWidth', 'modalDialogAnimationDuration', 'modalDialogWidth', 'modalDialogHeight', 'modalDialogButtonApplyText', 'modalDialogButtonCancelText', 'useGridColumnFormatter', 'persist', 'groupByDialogContainment', 'dialogWidget', 'inherit'],
+    outputs: ['groupedColumnsChanging', 'groupedColumnsChanged', 'modalDialogMoving', 'modalDialogClosing', 'modalDialogClosed', 'modalDialogOpening', 'modalDialogOpened', 'modalDialogContentsRendering', 'modalDialogContentsRendered', 'modalDialogButtonApplyClick', 'modalDialogButtonResetClick', 'modalDialogGroupingColumn', 'modalDialogGroupColumn', 'modalDialogUngroupingColumn', 'modalDialogUngroupColumn', 'modalDialogSortGroupedColumn']
 })
 export class IgGridGroupByFeature extends Feature<IgGridGroupBy> {
     constructor(el: ElementRef) {
@@ -15,31 +15,31 @@ export class IgGridGroupByFeature extends Feature<IgGridGroupBy> {
      * Open groupby modal dialog
      */
     /* istanbul ignore next */
-    public openGroupByDialog(): void { return; };
+    public openGroupByDialog(): void { return; }
 
     /**
      * Close groupby modal dialog
      */
     /* istanbul ignore next */
-    public closeGroupByDialog(): void { return; };
+    public closeGroupByDialog(): void { return; }
 
     /**
      * Render groupby modal dialog and its content
      */
     /* istanbul ignore next */
-    public renderGroupByModalDialog(): void { return; };
+    public renderGroupByModalDialog(): void { return; }
 
     /**
      * Open layouts dropdown
      */
     /* istanbul ignore next */
-    public openDropDown(): void { return; };
+    public openDropDown(): void { return; }
 
     /**
      * Close layouts dropdown
      */
     /* istanbul ignore next */
-    public closeDropDown(): void { return; };
+    public closeDropDown(): void { return; }
 
     /**
      * Check whether column with specified key and layout is grouped
@@ -48,7 +48,7 @@ export class IgGridGroupByFeature extends Feature<IgGridGroupBy> {
      * @param layout    layout name
      */
     /* istanbul ignore next */
-    public checkColumnIsGrouped(key: string, layout: string): void { return; };
+    public checkColumnIsGrouped(key: string, layout: string): void { return; }
 
     /**
      * Get grouped data by value for the specific column. NOTE: Before calling this function the data(that is passed as an argument) should be sorted by colKey.
@@ -58,13 +58,13 @@ export class IgGridGroupByFeature extends Feature<IgGridGroupBy> {
      * @param idval    value of the column by which grouping will be applied.
      */
     /* istanbul ignore next */
-    public getGroupedData(data: any[], colKey: string, idval?: string): any[] { return; };
+    public getGroupedData(data: any[], colKey: string, idval?: string): any[] { return; }
 
     /**
      * Adds a column to the group by columns list, executes the group by operation and updates the view.
      */
     /* istanbul ignore next */
-    public groupByColumns(): Object { return; };
+    public groupByColumns(): Object { return; }
 
     /**
      * Groups by a column
@@ -74,7 +74,7 @@ export class IgGridGroupByFeature extends Feature<IgGridGroupBy> {
      * @param sortingDirection    if not set it is taken from option defaultSortingDirection
      */
     /* istanbul ignore next */
-    public groupByColumn(key: string, layout?: string, sortingDirection?: Object): void { return; };
+    public groupByColumn(key: string, layout?: string, sortingDirection?: Object): void { return; }
 
     /**
      * Removes the specified column from the group by columns list, executes the group by operation and updates the view.
@@ -83,7 +83,7 @@ export class IgGridGroupByFeature extends Feature<IgGridGroupBy> {
      * @param layout    Layout is an optional parameter. If set it means the grouped column is not in the root level but is a child layout column.
      */
     /* istanbul ignore next */
-    public ungroupByColumn(key: string, layout?: string): void { return; };
+    public ungroupByColumn(key: string, layout?: string): void { return; }
 
     /**
      * Expand group row with specified id
@@ -91,7 +91,7 @@ export class IgGridGroupByFeature extends Feature<IgGridGroupBy> {
      * @param rowId    data-id attribute of the group row in the DOM
      */
     /* istanbul ignore next */
-    public expand(rowId: string): void { return; };
+    public expand(rowId: string): void { return; }
 
     /**
      * Expand group row with specified id
@@ -99,17 +99,17 @@ export class IgGridGroupByFeature extends Feature<IgGridGroupBy> {
      * @param rowId    data-id attribute of the group row in the DOM
      */
     /* istanbul ignore next */
-    public collapse(rowId: string): void { return; };
+    public collapse(rowId: string): void { return; }
 
     /**
      * Clears the group by columns list and updates the view.
      */
     /* istanbul ignore next */
-    public ungroupAll(): void { return; };
+    public ungroupAll(): void { return; }
 
     /**
      * Destroys the group by feature object.
      */
     /* istanbul ignore next */
-    public destroy(): void { return; };
+    public destroy(): void { return; }
 }

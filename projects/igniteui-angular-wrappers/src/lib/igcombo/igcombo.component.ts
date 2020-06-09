@@ -1,21 +1,21 @@
-import { Component, Optional, ElementRef, IterableDiffers, KeyValueDiffers, ChangeDetectorRef, SimpleChanges, Input, Renderer2 } from "@angular/core";
-import { IgControlBase } from "../igcontrolbase/igcontrolbase";
-import { ControlValueAccessor, NgModel } from "@angular/forms";
+import { Component, Optional, ElementRef, IterableDiffers, KeyValueDiffers, ChangeDetectorRef, SimpleChanges, Input, Renderer2 } from '@angular/core';
+import { IgControlBase } from '../igcontrolbase/igcontrolbase';
+import { ControlValueAccessor, NgModel } from '@angular/forms';
 
 declare var jQuery: any;
 
 @Component({
-    selector: "ig-combo",
-    template: "<ng-content></ng-content>",
-    inputs: ["widgetId", "options", "changeDetectionInterval", "disabled", "create", "width", "height", "dropDownWidth", "dataSource", "dataSourceType", "dataSourceUrl", "responseTotalRecCountKey", "responseDataKey", "responseDataType", "responseContentType", "requestType", "valueKey", "textKey", "itemTemplate", "headerTemplate", "footerTemplate", "inputName", "animationShowDuration", "animationHideDuration", "dropDownAttachedToBody", "filteringType", "filterExprUrlKey", "filteringCondition", "filteringLogic", "noMatchFoundText", "loadOnDemandSettings", "visibleItemsCount", "placeHolder", "mode", "virtualization", "multiSelection", "grouping", "validatorOptions", "highlightMatchesMode", "caseSensitive", "autoSelectFirstMatch", "autoComplete", "allowCustomValue", "closeDropDownOnBlur", "delayInputChangeProcessing", "tabIndex", "dropDownOnFocus", "closeDropDownOnSelect", "selectItemBySpaceKey", "initialSelectedItems", "preventSubmitOnEnter", "format", "suppressKeyboard", "enableClearButton", "dropDownButtonTitle", "clearButtonTitle", "dropDownOrientation"],
-    outputs: ["rendered", "dataBinding", "dataBound", "filtering", "filtered", "itemsRendering", "itemsRendered", "dropDownOpening", "dropDownOpened", "dropDownClosing", "dropDownClosed", "selectionChanging", "selectionChanged"]
+    selector: 'ig-combo',
+    template: '<ng-content></ng-content>',
+    inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'width', 'height', 'dropDownWidth', 'dataSource', 'dataSourceType', 'dataSourceUrl', 'responseTotalRecCountKey', 'responseDataKey', 'responseDataType', 'responseContentType', 'requestType', 'valueKey', 'textKey', 'itemTemplate', 'headerTemplate', 'footerTemplate', 'inputName', 'animationShowDuration', 'animationHideDuration', 'dropDownAttachedToBody', 'filteringType', 'filterExprUrlKey', 'filteringCondition', 'filteringLogic', 'noMatchFoundText', 'loadOnDemandSettings', 'visibleItemsCount', 'placeHolder', 'mode', 'virtualization', 'multiSelection', 'grouping', 'validatorOptions', 'highlightMatchesMode', 'caseSensitive', 'autoSelectFirstMatch', 'autoComplete', 'allowCustomValue', 'closeDropDownOnBlur', 'delayInputChangeProcessing', 'tabIndex', 'dropDownOnFocus', 'closeDropDownOnSelect', 'selectItemBySpaceKey', 'initialSelectedItems', 'preventSubmitOnEnter', 'format', 'suppressKeyboard', 'enableClearButton', 'dropDownButtonTitle', 'clearButtonTitle', 'dropDownOrientation'],
+    outputs: ['rendered', 'dataBinding', 'dataBound', 'filtering', 'filtered', 'itemsRendering', 'itemsRendered', 'dropDownOpening', 'dropDownOpened', 'dropDownClosing', 'dropDownClosed', 'selectionChanging', 'selectionChanged']
 })
 export class IgComboComponent extends IgControlBase<IgCombo> implements ControlValueAccessor {
 
     @Input()
     public set dataSource(value: any) {
         this._dataSource = value;
-    };
+    }
 
     private _dataSource: any;
 
@@ -31,22 +31,22 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
     }
 
     ngOnInit() {
-        let that = this;
+        const that = this;
         if (this._dataSource === null || this._dataSource === undefined) {
-            this._dataSource = this.options["dataSource"];
+            this._dataSource = this.options.dataSource;
         }
-        if (!this.options["dataSource"] && this._dataSource) {
-            this.options["dataSource"] = this._dataSource;
+        if (!this.options.dataSource && this._dataSource) {
+            this.options.dataSource = this._dataSource;
         }
         super.ngOnInit();
 
         if (this._model) {
             if (this.options.allowCustomValue) {
-                jQuery(this._el).on("input", function (evt) {
+                jQuery(this._el).on('input', function(evt) {
                     that._model.viewToModelUpdate(evt.target.value);
                 });
-    
-                jQuery(this._el).closest(".ui-igcombo-wrapper").find(".ui-igcombo-clear").on("click", function() {
+
+                jQuery(this._el).closest('.ui-igcombo-wrapper').find('.ui-igcombo-clear').on('click', function() {
                     if (that.options.multiSelection && that.options.multiSelection.enabled) {
                         that._model.viewToModelUpdate([]);
                     } else {
@@ -56,8 +56,8 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
             }
 
             // D.P. #244 only attach selectionchanged handler if there's a model to update
-            jQuery(this._el).on(this._widgetName.toLowerCase() + "selectionchanged", function (evt, ui) {
-                var items = ui.items;
+            jQuery(this._el).on(this._widgetName.toLowerCase() + 'selectionchanged', function(evt, ui) {
+                const items = ui.items;
                 const valueKey = ui.owner.options.valueKey;
 
                 if (items.length <= 0 && !ui.owner.options.multiSelection.enabled) {
@@ -68,27 +68,27 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
                 }
 
                 if (ui.owner.options.multiSelection.enabled) {
-                    that._model.viewToModelUpdate(items.map(function (item) {
+                    that._model.viewToModelUpdate(items.map(function(item) {
                         return item.data[valueKey];
                     }));
                 } else {
                     that._model.viewToModelUpdate(items[0].data[valueKey]);
                 }
             });
-            //manually call writeValue, because the LifeCycle has been changed and writeValue is executed before ngOnInit
+            // manually call writeValue, because the LifeCycle has been changed and writeValue is executed before ngOnInit
             this.writeValue(this._model.value);
         }
     }
     writeValue(value) {
         if (!!jQuery(this._el).data(this._widgetName)) {
-            jQuery(this._el)[this._widgetName]("value", value);
+            jQuery(this._el)[this._widgetName]('value', value);
         }
     }
 
     onChange = (_: any) => {
-    };
+    }
     onTouched = () => {
-    };
+    }
 
     registerOnChange(fn: () => any): void {
         this.onChange = fn;
@@ -99,10 +99,10 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
     }
 
     dataSourceApplyChanges(changes) {
-        //dataSource has changed.
+        // dataSource has changed.
         const element = jQuery(this._el);
         if (element[this._widgetName]) {
-            element[this._widgetName]("option", "dataSource", this._dataSource);
+            element[this._widgetName]('option', 'dataSource', this._dataSource);
         }
         if (this.model && this.model.value) {
             this.writeValue(this.model.value);
@@ -110,28 +110,27 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
     }
     updateComboItem(rec, val, key, index) {
         const element = jQuery(this._el);
-        const comboItem = element.data("igCombo").itemsFromIndex(index);
-        element.data("igCombo")._updateItem(comboItem.element, rec);
-        if (element.data("igCombo").isSelected(comboItem.element)) {
-            //should update the input
-            element.data("igCombo")._updateInputValues(false);
+        const comboItem = element.data('igCombo').itemsFromIndex(index);
+        element.data('igCombo')._updateItem(comboItem.element, rec);
+        if (element.data('igCombo').isSelected(comboItem.element)) {
+            // should update the input
+            element.data('igCombo')._updateInputValues(false);
         }
 
     }
     public ngOnChanges(changes: SimpleChanges): void {
-        const ds = "dataSource";
+        const ds = 'dataSource';
         if (ds in changes) {
             const value = changes[ds].currentValue;
             if (value) {
                 try {
                     this._differ = this._differs.find(value).create();
                     this._changes = [];
-                    for (var i = 0; i < this._dataSource.length; i++) {
+                    for (let i = 0; i < this._dataSource.length; i++) {
                         this._changes.push(this.kvalDiffers.find({}).create());
                     }
-                }
-                catch (e) {
-                    throw new Error("Only binding to arrays is supported.");
+                } catch (e) {
+                    throw new Error('Only binding to arrays is supported.');
                 }
             }
         }
@@ -140,16 +139,16 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
     ngDoCheck() {
         if (this._differ) {
             const changes = this._differ.diff(this._dataSource);
-            //check if grid is initialized
+            // check if grid is initialized
             const combo = jQuery(this._el).data(this._widgetName);
             if (changes && combo) {
                 this.dataSourceApplyChanges(changes);
             }
             if (this._changes && combo) {
-                //check recs
-                for (var i = 0; i < this._dataSource.length; i++) {
-                    var item = this._dataSource[i];
-                    var recChanges = this._changes[i].diff(item);
+                // check recs
+                for (let i = 0; i < this._dataSource.length; i++) {
+                    const item = this._dataSource[i];
+                    const recChanges = this._changes[i].diff(item);
                     if (recChanges) {
                         recChanges.forEachChangedItem((change: any) => {
                             this.updateComboItem(item, change.currentValue, change.key, i);
@@ -165,16 +164,16 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * Performs databinding on the combo box. The [databinding](ui.igcombo#events:dataBinding) and [dataBound](ui.igcombo#events:dataBound) events are always raised.
      */
     /* istanbul ignore next */
-    public dataBind(): Object { return; };
+    public dataBind(): Object { return; }
 
     /**
      * Forces an update of the igCombo value according to the current text in the igCombo input.
-     *             
+     *
      * 				The refresh is primarily intended to be used with [allowCustomValue](ui.igcombo#options:allowCustomValue) set to true.
      * 				The refresh will take the current text and, if no selection is applied, will set it as igCombo value provided that [allowCustomValue](ui.igcombo#options:allowCustomValue) true.
      */
     /* istanbul ignore next */
-    public refreshValue(): Object { return; };
+    public refreshValue(): Object { return; }
 
     /**
      * Gets the associated data of an item by value matching it's [valueKey](ui.igcombo#options:valueKey) property.
@@ -182,7 +181,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * @param value Value matching the valueKey property of item to be tested if it is selected
      */
     /* istanbul ignore next */
-    public dataForValue(value: Object): Object { return; };
+    public dataForValue(value: Object): Object { return; }
 
     /**
      * Gets the associated data of li element in the combo.
@@ -190,7 +189,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * @param $element jQuery element of item in the drop down list
      */
     /* istanbul ignore next */
-    public dataForElement($element: Object): Object { return; };
+    public dataForElement($element: Object): Object { return; }
 
     /**
      * Gets object/s containing data and list item in the combo by element/s.
@@ -198,7 +197,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * @param $element jQuery object with drop down list item element or elements
      */
     /* istanbul ignore next */
-    public itemsFromElement($element: Object): Object { return; };
+    public itemsFromElement($element: Object): Object { return; }
 
     /**
      * Gets object/s containing data and list item in the combo by value/s.
@@ -206,7 +205,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * @param value Value of item in the drop down list or array with values.
      */
     /* istanbul ignore next */
-    public itemsFromValue(value: Object): Object { return; };
+    public itemsFromValue(value: Object): Object { return; }
 
     /**
      * Gets object/s containing data and list item in the combo by index/es.
@@ -214,25 +213,25 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * @param index Index or array of indexes of items in the drop down list
      */
     /* istanbul ignore next */
-    public itemsFromIndex(index: number): Object { return; };
+    public itemsFromIndex(index: number): Object { return; }
 
     /**
      * Gets array with data and objects representing li elements in combo box.
      */
     /* istanbul ignore next */
-    public items(): any[] { return; };
+    public items(): any[] { return; }
 
     /**
      * Gets array with objects representing the filtered li elements in combo box.
      */
     /* istanbul ignore next */
-    public filteredItems(): any[] { return; };
+    public filteredItems(): any[] { return; }
 
     /**
      * Gets array with objects representing selected li elements in combo box.
      */
     /* istanbul ignore next */
-    public selectedItems(): any[] { return; };
+    public selectedItems(): any[] { return; }
 
     /**
      * Triggers filtering.
@@ -241,7 +240,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * @param event Indicates the browser event which triggered this action (not API). Calling the method with this param set to "true" will trigger [filtering](ui.igcombo#events:filtering) and [filtered](ui.igcombo#events:filtered) events.
      */
     /* istanbul ignore next */
-    public filter(texts?: Object, event?: Object): Object { return; };
+    public filter(texts?: Object, event?: Object): Object { return; }
 
     /**
      * Clears filtering.
@@ -249,7 +248,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * @param event Indicates the browser event which triggered this action (not API). Calling the method with this param set to "true" will trigger [filtering](ui.igcombo#events:filtering) and [filtered](ui.igcombo#events:filtered) events.
      */
     /* istanbul ignore next */
-    public clearFiltering(event?: Object): Object { return; };
+    public clearFiltering(event?: Object): Object { return; }
 
     /**
      * Opens the drop-down.
@@ -259,7 +258,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * @param event Indicates the browser event which triggered this action (not API). Calling the method with this param set to "true" will trigger [dropDownOpening](ui.igcombo#events:dropDownOpening) and [dropDownOpened](ui.igcombo#events:dropDownOpened) events.
      */
     /* istanbul ignore next */
-    public openDropDown(callback?: Function, focusCombo?: boolean, event?: Object): Object { return; };
+    public openDropDown(callback?: Function, focusCombo?: boolean, event?: Object): Object { return; }
 
     /**
      * Closes the drop down.
@@ -268,7 +267,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * @param event Indicates the browser event which triggered this action (not API). Calling the method with this param set to "true" will trigger [dropDownClosing](ui.igcombo#events:dropDownClosing) and [dropDownClosed](ui.igcombo#events:dropDownClosed) events.
      */
     /* istanbul ignore next */
-    public closeDropDown(callback?: Function, event?: Object): Object { return; };
+    public closeDropDown(callback?: Function, event?: Object): Object { return; }
 
     /**
      * Clears the input text, resets highlighting, filtering and selection.
@@ -278,7 +277,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
     * @param event Indicates the browser event which triggered this action (not API). Calling the method with this param set to "true" will trigger [selectionChanging](ui.igcombo#events:selectionChanging) and [selectionChanged](ui.igcombo#events:selectionChanged) events.
     */
     /* istanbul ignore next */
-    public clearInput(options?: Object, event?: Object): Object { return; };
+    public clearInput(options?: Object, event?: Object): Object { return; }
 
     /**
      * Verifies whether a specified value is selected.
@@ -286,7 +285,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * @param value Value matching the [valueKey](ui.igcombo#options:valueKey) property of item to be tested if it is selected
      */
     /* istanbul ignore next */
-    public isValueSelected(value: Object): boolean { return; };
+    public isValueSelected(value: Object): boolean { return; }
 
     /**
      * Verifies whether the li representing the data source's record at the specified index is selected.
@@ -294,7 +293,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * @param index Index of data source record
      */
     /* istanbul ignore next */
-    public isIndexSelected(index: Object): boolean { return; };
+    public isIndexSelected(index: Object): boolean { return; }
 
     /**
      * Selects list item/items from the drop-down list by specified value or array of values. When called witout params will return the value of the selected item or if [multiSelection](ui.igcombo#options:multiSelection) is enabled array of selected values.
@@ -312,7 +311,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
     * @param event Indicates the browser event which triggered this action (not API). Calling the method with this param set to "true" will trigger [selectionChanging](ui.igcombo#events:selectionChanging) and [selectionChanged](ui.igcombo#events:selectionChanged) events.
     */
     /* istanbul ignore next */
-    public value(value?: Object, options?: Object, event?: Object): Object { return; };
+    public value(value?: Object, options?: Object, event?: Object): Object { return; }
 
     /**
      * Selects a list item from the drop-down list.
@@ -330,7 +329,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
     * @param event Indicates the browser event which triggered this action (not API). Calling the method with this param set to "true" will trigger [selectionChanging](ui.igcombo#events:selectionChanging) and [selectionChanged](ui.igcombo#events:selectionChanged) events.
     */
     /* istanbul ignore next */
-    public select($items: Object, options?: Object, event?: Object): Object { return; };
+    public select($items: Object, options?: Object, event?: Object): Object { return; }
 
     /**
      * Gets/Sets selected item/s from the drop-down list by specified index.
@@ -348,7 +347,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
     * @param event Indicates the browser event which triggered this action (not API). Calling the method with this param set to "true" will trigger [selectionChanging](ui.igcombo#events:selectionChanging) and [selectionChanged](ui.igcombo#events:selectionChanged) events.
     */
     /* istanbul ignore next */
-    public index(index?: Object, options?: Object, event?: Object): Object { return; };
+    public index(index?: Object, options?: Object, event?: Object): Object { return; }
 
     /**
      * Selects all items from the drop-down list.
@@ -364,7 +363,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
     * @param event Indicates the browser event which triggered this action (not API). Calling the method with this param set to "true" will trigger [selectionChanging](ui.igcombo#events:selectionChanging) and [selectionChanged](ui.igcombo#events:selectionChanged) events.
     */
     /* istanbul ignore next */
-    public selectAll(options?: Object, event?: Object): Object { return; };
+    public selectAll(options?: Object, event?: Object): Object { return; }
 
     /**
      * Deselects a list item from the drop down list by value.
@@ -376,7 +375,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
     * @param event Indicates the browser event which triggered this action (not API). Calling the method with this param set to "true" will trigger [selectionChanging](ui.igcombo#events:selectionChanging) and [selectionChanged](ui.igcombo#events:selectionChanged) events.
     */
     /* istanbul ignore next */
-    public deselectByValue(value: Object, options?: Object, event?: Object): Object { return; };
+    public deselectByValue(value: Object, options?: Object, event?: Object): Object { return; }
 
     /**
      * Deselects a list item from the drop down list.
@@ -388,7 +387,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
     * @param event Indicates the browser event which triggered this action (not API). Calling the method with this param set to "true" will trigger [selectionChanging](ui.igcombo#events:selectionChanging) and [selectionChanged](ui.igcombo#events:selectionChanged) events.
     */
     /* istanbul ignore next */
-    public deselect($items: Object, options?: Object, event?: Object): Object { return; };
+    public deselect($items: Object, options?: Object, event?: Object): Object { return; }
 
     /**
      * Deselects a list item from the drop down list by index.
@@ -400,7 +399,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
     * @param event Indicates the browser event which triggered this action (not API). Calling the method with this param set to "true" will trigger [selectionChanging](ui.igcombo#events:selectionChanging) and [selectionChanged](ui.igcombo#events:selectionChanged) events.
     */
     /* istanbul ignore next */
-    public deselectByIndex(index: Object, options?: Object, event?: Object): Object { return; };
+    public deselectByIndex(index: Object, options?: Object, event?: Object): Object { return; }
 
     /**
      * Deselects all selected items from the drop down list.
@@ -411,7 +410,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
     * @param event Indicates the browser event which triggered this action (not API). Calling the method with this param set to "true" will trigger [selectionChanging](ui.igcombo#events:selectionChanging) and [selectionChanged](ui.igcombo#events:selectionChanged) events.
     */
     /* istanbul ignore next */
-    public deselectAll(options?: Object, event?: Object): Object { return; };
+    public deselectAll(options?: Object, event?: Object): Object { return; }
 
     /**
      * Gets/Sets index of active item in list.
@@ -420,7 +419,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * @return number|object Returns index of active item in list or -1, if parameter is undefined. Otherwise, it returns reference to this igCombo.
      */
     /* istanbul ignore next */
-    public activeIndex(index?: number): number | Object { return; };
+    public activeIndex(index?: number): number | Object { return; }
 
     /**
      * Gets/Sets text in text input field.
@@ -429,7 +428,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * @return string|object If parameter is undefined, then current text in field is returned. Otherwise, it returns reference to this igCombo.
      */
     /* istanbul ignore next */
-    public text(text?: string): string | Object { return; };
+    public text(text?: string): string | Object { return; }
 
     /**
      * Gets/Sets scrollTop attribute of html element, which scrolls drop-down list of items.
@@ -438,43 +437,43 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * @return number|object If parameter is undefined, then scrollTop is returned. Otherwise, it returns reference to this igCombo.
      */
     /* istanbul ignore next */
-    public listScrollTop(value?: number): number | Object { return; };
+    public listScrollTop(value?: number): number | Object { return; }
 
     /**
      * Gets jQuery objects representing all rendered list items in the combo drop down list.
      */
     /* istanbul ignore next */
-    public listItems(): Object { return; };
+    public listItems(): Object { return; }
 
     /**
      * Gets jQuery object of the outer element of the combo.
      */
     /* istanbul ignore next */
-    public comboWrapper(): Object { return; };
+    public comboWrapper(): Object { return; }
 
     /**
      * Gets jQuery object of the drop down associated with this combo widget
      */
     /* istanbul ignore next */
-    public dropDown(): Object { return; };
+    public dropDown(): Object { return; }
 
     /**
      * Gets jQuery object of the container that holds the list with items.
      */
     /* istanbul ignore next */
-    public list(): Object { return; };
+    public list(): Object { return; }
 
     /**
      * Gets jQuery object of the text input associated with this combo widget.
      */
     /* istanbul ignore next */
-    public textInput(): Object { return; };
+    public textInput(): Object { return; }
 
     /**
      * Gets jQuery object of the value input associated with this combo widget.
      */
     /* istanbul ignore next */
-    public valueInput(): Object { return; };
+    public valueInput(): Object { return; }
 
     /**
      * Gets reference to [igValidator](ui.igvalidator) used by igCombo.
@@ -482,29 +481,29 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * @param destroy Request to destroy validator.
      */
     /* istanbul ignore next */
-    public validator(destroy?: boolean): Object { return; };
+    public validator(destroy?: boolean): Object { return; }
 
     /**
      * Trigger validation.
      */
     /* istanbul ignore next */
-    public validate(): boolean { return; };
+    public validate(): boolean { return; }
 
     /**
      * Returns boolean representing whether the combo drop down list is opened.
      */
     /* istanbul ignore next */
-    public dropDownOpened(): boolean { return; };
+    public dropDownOpened(): boolean { return; }
 
     /**
      * Repositions drop down under combo input. Has effect only when the drop down is attached to body.
      */
     /* istanbul ignore next */
-    public positionDropDown(): Object { return; };
+    public positionDropDown(): Object { return; }
 
     /**
      * Destroys the igCombo widget.
      */
     /* istanbul ignore next */
-    public destroy(): Object { return; };
+    public destroy(): Object { return; }
 }

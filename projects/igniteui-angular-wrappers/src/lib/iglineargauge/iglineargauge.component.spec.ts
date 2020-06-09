@@ -12,14 +12,14 @@ describe('Infragistics Angular Linear Gauge', () => {
     });
 
     it('should initialize correctly', (done) => {
-        var template = '<div><ig-linear-gauge widgetId="lGauge" [(options)]="opts"></ig-linear-gauge></div>';
+        const template = '<div><ig-linear-gauge widgetId="lGauge" [(options)]="opts"></ig-linear-gauge></div>';
         TestBed.overrideComponent(TestComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestComponent);
+            const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
             expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgLinearGaugeComponent)
                 .toBe(true);
@@ -31,7 +31,7 @@ describe('Infragistics Angular Linear Gauge', () => {
 
 @Component({
     selector: 'test-cmp',
-    template: '<div></div>' //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
 })
 class TestComponent {
     private opts: any;
@@ -40,11 +40,11 @@ class TestComponent {
 
     constructor() {
         this.opts = {
-            height: "80px",
-            width: "100%",
+            height: '80px',
+            width: '100%',
             value: 27,
             maximumValue: 30,
-            ranges: [{ startValue: 0, endValue: 22, name: "target" }]
+            ranges: [{ startValue: 0, endValue: 22, name: 'target' }]
         };
     }
 }

@@ -1,12 +1,12 @@
-import { Directive, ElementRef } from "@angular/core";
-import { Feature } from "../feature";
+import { Directive, ElementRef } from '@angular/core';
+import { Feature } from '../feature';
 
 @Directive({
     selector: 'column-moving',
-    inputs: ["disabled","create","columnSettings","mode","moveType","addMovingDropdown","movingDialogWidth","movingDialogHeight","movingDialogAnimationDuration","movingAcceptanceTolerance","movingScrollTolerance","scrollSpeedMultiplier","scrollDelta","hideHeaderContentsDuringDrag","dragHelperOpacity","movingDialogCaptionButtonDesc","movingDialogCaptionButtonAsc","movingDialogCaptionText","movingDialogDisplayText","movingDialogDropTooltipText","movingDialogDropTooltipMarkup","dropDownMoveLeftText","dropDownMoveRightText","dropDownMoveFirstText","dropDownMoveLastText","movingToolTipMove","featureChooserSubmenuText","columnMovingDialogContainment","dialogWidget","inherit"],
-    outputs: ["columnDragStart","columnDragEnd","columnDragCanceled","columnMoving","columnMoved","movingDialogOpening","movingDialogOpened","movingDialogDragged","movingDialogClosing","movingDialogClosed","movingDialogContentsRendering","movingDialogContentsRendered","movingDialogMoveUpButtonPressed","movingDialogMoveDownButtonPressed","movingDialogDragColumnMoving","movingDialogDragColumnMoved"]
+    inputs: ['disabled', 'create', 'columnSettings', 'mode', 'moveType', 'addMovingDropdown', 'movingDialogWidth', 'movingDialogHeight', 'movingDialogAnimationDuration', 'movingAcceptanceTolerance', 'movingScrollTolerance', 'scrollSpeedMultiplier', 'scrollDelta', 'hideHeaderContentsDuringDrag', 'dragHelperOpacity', 'movingDialogCaptionButtonDesc', 'movingDialogCaptionButtonAsc', 'movingDialogCaptionText', 'movingDialogDisplayText', 'movingDialogDropTooltipText', 'movingDialogDropTooltipMarkup', 'dropDownMoveLeftText', 'dropDownMoveRightText', 'dropDownMoveFirstText', 'dropDownMoveLastText', 'movingToolTipMove', 'featureChooserSubmenuText', 'columnMovingDialogContainment', 'dialogWidget', 'inherit'],
+    outputs: ['columnDragStart', 'columnDragEnd', 'columnDragCanceled', 'columnMoving', 'columnMoved', 'movingDialogOpening', 'movingDialogOpened', 'movingDialogDragged', 'movingDialogClosing', 'movingDialogClosed', 'movingDialogContentsRendering', 'movingDialogContentsRendered', 'movingDialogMoveUpButtonPressed', 'movingDialogMoveDownButtonPressed', 'movingDialogDragColumnMoving', 'movingDialogDragColumnMoved']
 })
-export class IgGridColumnMovingFeature extends Feature<IgGridColumnMoving> {	
+export class IgGridColumnMovingFeature extends Feature<IgGridColumnMoving> {
     constructor(el: ElementRef) {
         super(el);
     }
@@ -15,7 +15,7 @@ export class IgGridColumnMovingFeature extends Feature<IgGridColumnMoving> {
      * Restoring overwritten functions
      */
     /* istanbul ignore next */
-    public destroy(): void { return; } ;
+    public destroy(): void { return; }
 
     /**
      * Moves a visible column at a specified place, in front or behind a target column or at a target index
@@ -28,5 +28,5 @@ export class IgGridColumnMovingFeature extends Feature<IgGridColumnMoving> {
      * @param callback    Specifies a custom function to be called when the column is moved.
      */
     /* istanbul ignore next */
-    public moveColumn(column: Object, target: Object, after?: boolean, inDom?: boolean, callback?: Function): void { return; } ;
+    public moveColumn(column: Object, target: Object, after?: boolean, inDom?: boolean, callback?: Function): void { return; }
 }

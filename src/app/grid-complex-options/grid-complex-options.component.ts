@@ -14,10 +14,10 @@ export class GridComplexOptionsComponent {
     public w: string;
     public h: string;
     public pKey: string;
-    public isReadOnly: boolean = true;
-    public cs: Array<any> = [{ columnKey: "ProductID", readOnly: this.isReadOnly }];
-    public pi: number = 0;
-    public idHeaderText: string = "Id";
+    public isReadOnly = true;
+    public cs: Array<any> = [{ columnKey: 'ProductID', readOnly: this.isReadOnly }];
+    public pi = 0;
+    public idHeaderText = 'Id';
     public pages: Array<number> = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
     constructor() {
@@ -29,10 +29,10 @@ export class GridComplexOptionsComponent {
         this.pKey = 'ProductID';
 
         this.cols = [
-            { key: "ProductID", headerText: "Product ID", width: "50px", dataType: "number" },
-            { key: "ProductName", headerText: "Name", width: "250px", dataType: "string" },
-            { key: "QuantityPerUnit", headerText: "Quantity per unit", width: "250px", dataType: "string" },
-            { key: "UnitPrice", headerText: "Unit Price", width: "100px", dataType: "number" }
+            { key: 'ProductID', headerText: 'Product ID', width: '50px', dataType: 'number' },
+            { key: 'ProductName', headerText: 'Name', width: '250px', dataType: 'string' },
+            { key: 'QuantityPerUnit', headerText: 'Quantity per unit', width: '250px', dataType: 'string' },
+            { key: 'UnitPrice', headerText: 'Unit Price', width: '100px', dataType: 'number' }
         ];
     }
 

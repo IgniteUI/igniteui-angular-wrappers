@@ -13,8 +13,8 @@ export class GridDataBindingComponent {
     public id: string;
     public data: any;
     public newProduct: any;
-    @ViewChild("grid1", { static: true }) grid: IgGridComponent;
-    //private deleteRecord: any;
+    @ViewChild('grid1', { static: true }) grid: IgGridComponent;
+    // private deleteRecord: any;
 
     constructor() {
         this.data = Northwind.getData();
@@ -24,60 +24,60 @@ export class GridDataBindingComponent {
 
         this.gridOptions = {
             autoCommit: true,
-            width: "100%",
-            height: "400px",
+            width: '100%',
+            height: '400px',
             autoGenerateColumns: false,
             columns: [
-                { key: "ProductID", headerText: "Product ID", width: "50px", dataType: "number" },
-                { key: "ProductName", headerText: "Name", width: "250px", dataType: "string" },
-                { key: "QuantityPerUnit", headerText: "Quantity per unit", width: "250px", dataType: "string" },
-                { key: "UnitPrice", headerText: "Unit Price", width: "100px", dataType: "number", template: jQuery("#colTmpl").html() }
+                { key: 'ProductID', headerText: 'Product ID', width: '50px', dataType: 'number' },
+                { key: 'ProductName', headerText: 'Name', width: '250px', dataType: 'string' },
+                { key: 'QuantityPerUnit', headerText: 'Quantity per unit', width: '250px', dataType: 'string' },
+                { key: 'UnitPrice', headerText: 'Unit Price', width: '100px', dataType: 'number', template: jQuery('#colTmpl').html() }
             ],
-            primaryKey: "ProductID",
+            primaryKey: 'ProductID',
             features: [
                 {
-                    name: "Updating",
+                    name: 'Updating',
                     columnSettings: [
-                        { columnKey: "ProductID", readOnly: true }
+                        { columnKey: 'ProductID', readOnly: true }
                     ]
                 },
                 {
-                    name: "Paging",
+                    name: 'Paging',
                     pageSize: 10
                 },
                 {
-                    name: "Filtering"
+                    name: 'Filtering'
                 },
                 {
-                    name: "Sorting"
+                    name: 'Sorting'
                 }
             ]
         };
     }
 
     createNewProduct() {
-        var newProduct = {};
-        newProduct["ProductID"] = this.data.length + 1;
-        newProduct["ProductName"] = null;
-        newProduct["QuantityPerUnit"] = null;
-        newProduct["UnitPrice"] = null;
+        const newProduct = {};
+        newProduct.ProductID = this.data.length + 1;
+        newProduct.ProductName = null;
+        newProduct.QuantityPerUnit = null;
+        newProduct.UnitPrice = null;
         return newProduct;
     }
 
     addRecord() {
         this.data.push(this.newProduct);
         this.newProduct = this.createNewProduct();
-    };
+    }
 
     deleteRecord(val) {
-        var ind = 0;
-        this.data.filter(function (item, index) {
-            if (item["ProductID"] === val) {
-                ind = index
-            };
-            return item["ProductID"] === val;
+        let ind = 0;
+        this.data.filter(function(item, index) {
+            if (item.ProductID === val) {
+                ind = index;
+            }
+            return item.ProductID === val;
         });
         this.data.splice(ind, 1);
-    };
+    }
 
 }

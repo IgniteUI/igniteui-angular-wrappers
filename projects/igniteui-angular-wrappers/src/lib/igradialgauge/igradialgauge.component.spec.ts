@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
 import * as Infragistics from '../../public-api';
 
-    describe('Infragistics Angular RadialGauge', () => {
+describe('Infragistics Angular RadialGauge', () => {
 
         beforeEach(() => {
             TestBed.configureTestingModule({
@@ -12,14 +12,14 @@ import * as Infragistics from '../../public-api';
         });
 
         it('should initialize correctly', (done) => {
-            var template = '<div><ig-radial-gauge  [widgetId]="\'gauge\'" [(options)]="opts"></ig-radial-gauge></div>';
+            const template = '<div><ig-radial-gauge  [widgetId]="\'gauge\'" [(options)]="opts"></ig-radial-gauge></div>';
             TestBed.overrideComponent(TestComponent, {
                 set: {
-                    template: template
+                    template
                 }
             });
             TestBed.compileComponents().then(() => {
-                let fixture = TestBed.createComponent(TestComponent);
+                const fixture = TestBed.createComponent(TestComponent);
                 fixture.detectChanges();
                 expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgRadialGaugeComponent)
                     .toBe(true);
@@ -30,7 +30,7 @@ import * as Infragistics from '../../public-api';
 
 @Component({
     selector: 'test-cmp',
-    template: '<div></div>' //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
 })
 class TestComponent {
     private opts: any;
@@ -40,37 +40,37 @@ class TestComponent {
 
 
         this.opts = {
-            height: "500px",
-            width: "500px",
-            minimumValue: "0",
-            maximumValue: "10",
-            value: "10",
+            height: '500px',
+            width: '500px',
+            minimumValue: '0',
+            maximumValue: '10',
+            value: '10',
 
-            //Scale Settings
-            scaleStartAngle: "180",
-            scaleEndAngle: "0",
-            scaleBrush: "transparent",
+            // Scale Settings
+            scaleStartAngle: '180',
+            scaleEndAngle: '0',
+            scaleBrush: 'transparent',
 
-            //Backing Settings
-            backingShape: "fitted",
-            backingOutline: "rgba(22, 169, 231, 1)",
-            backingBrush: "rgba(224, 224, 224, 1)",
+            // Backing Settings
+            backingShape: 'fitted',
+            backingOutline: 'rgba(22, 169, 231, 1)',
+            backingBrush: 'rgba(224, 224, 224, 1)',
 
-            transitionDuration: "3000",
+            transitionDuration: '3000',
 
-            //Needle Settings
-            needleShape: "needle",
-            needlePivotShape: "circleOverlay",
-            needleEndExtent: "0.55",
-            needlePointFeatureExtent: "0.3",
-            needlePivotWidthRatio: "0.2",
+            // Needle Settings
+            needleShape: 'needle',
+            needlePivotShape: 'circleOverlay',
+            needleEndExtent: '0.55',
+            needlePointFeatureExtent: '0.3',
+            needlePivotWidthRatio: '0.2',
 
-            //TickMark Settings
-            tickBrush: "rgba(160, 160, 160, 1)",
-            minorTickBrush: "gray",
+            // TickMark Settings
+            tickBrush: 'rgba(160, 160, 160, 1)',
+            minorTickBrush: 'gray',
 
-            //Label Settings
-            labelExtent: "0.7"
+            // Label Settings
+            labelExtent: '0.7'
         };
     }
 }

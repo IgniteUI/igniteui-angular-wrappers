@@ -1,10 +1,10 @@
-import { ElementRef, Directive } from "@angular/core";
-import { Feature } from "../feature";
+import { ElementRef, Directive } from '@angular/core';
+import { Feature } from '../feature';
 
 @Directive({
     selector: 'resizing',
-    inputs: ["disabled", "create", "allowDoubleClickToResize", "deferredResizing", "columnSettings", "handleThreshold", "inherit"],
-    outputs: ["columnResizing", "columnResizingRefused", "columnResized"]
+    inputs: ['disabled', 'create', 'allowDoubleClickToResize', 'deferredResizing', 'columnSettings', 'handleThreshold', 'inherit'],
+    outputs: ['columnResizing', 'columnResizingRefused', 'columnResized']
 })
 export class IgGridResizingFeature extends Feature<IgGridResizing> {
     constructor(el: ElementRef) {
@@ -15,7 +15,7 @@ export class IgGridResizingFeature extends Feature<IgGridResizing> {
      * Destroys the resizing widget
      */
     /* istanbul ignore next */
-    public destroy(): void { return; };
+    public destroy(): void { return; }
 
     /**
      * Resizes a column to a specified width in pixels, percents or auto if no width is specified.
@@ -24,5 +24,5 @@ export class IgGridResizingFeature extends Feature<IgGridResizing> {
      * @param width    Width of the column in pixels or percents. If no width or "*" is specified the column will be auto-sized to the width of the data in it (including header and footer cells).
      */
     /* istanbul ignore next */
-    public resize(column: Object, width?: Object): void { return; };
+    public resize(column: Object, width?: Object): void { return; }
 }
