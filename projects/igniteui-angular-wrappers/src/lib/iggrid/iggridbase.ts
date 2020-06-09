@@ -13,6 +13,9 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
             jQuery(this._el)[this._widgetName]('option', 'dataSource', this._dataSource);
         }
     }
+    @Input()
+    public primaryKey: string;
+
     protected _changes: any;
     @ContentChildren(Column) _columns: QueryList<Column>;
     @ContentChild(Features, {static: true}) featuresList: Features;

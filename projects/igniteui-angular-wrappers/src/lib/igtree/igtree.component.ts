@@ -15,6 +15,9 @@ export class IgTreeComponent extends IgControlBase<IgTree> {
         this._dataSource = value;
     }
 
+    @Input()
+    public bindings: IgTreeBindings;
+
     constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {
         super(el, renderer, differs, kvalDiffers, cdr);
     }

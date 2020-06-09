@@ -1,4 +1,13 @@
-import { Component, IterableDiffers, KeyValueDiffers, ChangeDetectorRef, ElementRef, ChangeDetectionStrategy, Renderer2 } from '@angular/core';
+import {
+  Component,
+  IterableDiffers,
+  KeyValueDiffers,
+  ChangeDetectorRef,
+  ElementRef,
+  ChangeDetectionStrategy,
+  Renderer2,
+  Input
+} from '@angular/core';
 import { IgGridBase } from '../iggrid/iggridbase';
 
 declare var jQuery: any;
@@ -11,7 +20,12 @@ declare var jQuery: any;
     outputs: ['rowExpanding', 'rowExpanded', 'rowCollapsing', 'rowCollapsed', 'childrenPopulating', 'childrenPopulated', 'childGridRendered', 'childGridCreating', 'childGridCreated', 'cellClick', 'cellRightClick', 'dataBinding', 'dataBound', 'rendering', 'rendered', 'dataRendering', 'dataRendered', 'headerRendering', 'headerRendered', 'footerRendering', 'footerRendered', 'headerCellRendered', 'rowsRendering', 'rowsRendered', 'schemaGenerated', 'columnsCollectionModified', 'requestError', 'created', 'destroyed']
 })
 export class IgHierarchicalGridComponent extends IgGridBase<IgHierarchicalGrid> {
-    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }
+    @Input()
+    public childrenDataProperty: string;
+
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {
+      super(el, renderer, differs, kvalDiffers, cdr);
+    }
 
     deleteRow(id) {
         const element = jQuery(this._el);
