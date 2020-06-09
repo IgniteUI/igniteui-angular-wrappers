@@ -142,7 +142,7 @@ describe('Infragistics Angular TreeGrid', () => {
     });
 
     it('should initialize correctly when datasource is remote', (done) => {
-        $.mockjax({
+        $['mockjax']({
             url: 'myURL/Categories',
             contentType: 'application/json',
             dataType: 'json',

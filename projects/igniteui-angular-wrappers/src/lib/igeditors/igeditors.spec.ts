@@ -720,7 +720,7 @@ window.typeInInput = function(characters: String, element: JQuery) {
         keyUp = jQuery.Event('keyup'),
         value: string = element.val(), selectionStart;
 
-    characters.split('').forEach(function(ch) {
+    characters.split('').forEach(ch => {
         selectionStart = (element[0] as HTMLInputElement).selectionStart;
         keyDown.keyCode = keyUp.keyCode = keyPress.keyCode = ch.charCodeAt(0);
         keyDown.charCode = keyUp.charCode = keyPress.charCode = ch.charCodeAt(0);

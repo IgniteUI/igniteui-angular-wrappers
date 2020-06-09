@@ -43,17 +43,17 @@ export class IgHierarchicalGridComponent extends IgGridBase<IgHierarchicalGrid> 
         const element = jQuery(this._el);
         const childrenDataProperty = this.childrenDataProperty || this.options.childrenDataProperty;
 
-        const childGrid = element.data(this._widgetName).allChildrenWidgets().filter(function(indx) {
-            const parentRow = jQuery(this.element).closest('tr[data-container]').prev();
+        const childGrids = element.data(this._widgetName).allChildrenWidgets().filter(widget => {
+            const parentRow = widget.closest('tr[data-container]').prev();
             const parentGridPK = parentRow.closest('.ui-iggrid-table').data('igGrid').options.primaryKey;
             return (childrenDataProperty === key ||
                 parentRow.next('[data-container]').find('table[role=\'grid\']').attr('id').contains('_' + key + '_'))
-                && parentRow.attr('data-id') == rec[parentGridPK];
+                && parentRow.attr('data-id') === rec[parentGridPK];
         });
-        if (childGrid.length > 0) {
-            jQuery(childGrid).each(function() {
-                this.dataBind();
-            });
+        if (childGrids.length > 0) {
+          for (let i = 0; i < childGrids.length; i++) {
+            childGrids[i].dataBind();
+          }
         } else {
             super.updateRow(rec, currValue, key);
         }
@@ -61,11 +61,10 @@ export class IgHierarchicalGridComponent extends IgGridBase<IgHierarchicalGrid> 
     public markForCheck() {
         super.markForCheck();
         const element = jQuery(this._el);
-        const childrenDataProperty = this.childrenDataProperty || this.options.childrenDataProperty;
         const childGrids = element.data(this._widgetName).allChildrenWidgets();
-        childGrids.array.forEach(grid => {
-          grid.dataBind();
-        });
+        for (let i = 0; i < childGrids.length; i++) {
+            childGrids[i].dataBind();
+        }
     }
     /**
      * Data binds the hierarchical grid. No child grids will be created or rendered by default, unless there is initialExpandDepth >= 0 set.

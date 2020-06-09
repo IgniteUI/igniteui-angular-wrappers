@@ -43,7 +43,7 @@ describe('Infragistics Angular Combo', () => {
             fixture.detectChanges();
             fixture.componentInstance.combo.value1 = 1;
             fixture.detectChanges();
-            setTimeout(function() {
+            setTimeout(() => {
                 expect($('#combo1').igCombo('value')).toBe(1);
                 expect($('#combo1').igCombo('text')).toBe('Chai');
                 done();
@@ -55,11 +55,11 @@ describe('Infragistics Angular Combo', () => {
             fixture.detectChanges();
             fixture.componentInstance.combo.value1 = 1;
             fixture.detectChanges();
-            setTimeout(function() {
+            setTimeout(() => {
                 // clear
                 $('#combo1').parents('ig-combo').find('.ui-igcombo-clearicon').click();
                 fixture.detectChanges();
-                setTimeout(function() {
+                setTimeout(() => {
                     expect(fixture.componentInstance.combo.value1).toBeNull();
                     done();
                 }, 10);
@@ -68,10 +68,10 @@ describe('Infragistics Angular Combo', () => {
 
         it('the ngModel should be updated correctly if the combo selection is updated', (done) => {
             fixture.detectChanges();
-            const elem = $('#combo1').igCombo('itemsFromIndex', 0).element;
+            const elem = $('#combo1').igCombo('itemsFromIndex', 0)['element'];
             $('#combo1').igCombo('select', elem, {}, true);
             fixture.detectChanges();
-            setTimeout(function() {
+            setTimeout(() => {
                 expect(fixture.componentInstance.combo.value1).toEqual(1);
                 done();
             }, 10);
@@ -81,10 +81,10 @@ describe('Infragistics Angular Combo', () => {
             fixture.detectChanges();
             fixture.componentInstance.northwind[19].ProductName = 'Test';
 
-            setTimeout(function() {
+            setTimeout(() => {
                 fixture.detectChanges();
 
-                const elem = $('#combo1').igCombo('itemsFromIndex', 19).element;
+                const elem = $('#combo1').igCombo('itemsFromIndex', 19)['element'];
                 expect(elem.text()).toBe('Test');
                 expect($('#combo1').igCombo('text')).toBe('Test');
                 done();
@@ -110,7 +110,7 @@ describe('Infragistics Angular Combo', () => {
         it('should select correctly without ngModel', () => {
 
             fixture.detectChanges();
-            const elem = $('#combo1').igCombo('itemsFromIndex', 0).element;
+            const elem = $('#combo1').igCombo('itemsFromIndex', 0)['element'];
             const select = () => {
                 $('#combo1').igCombo('select', elem, {}, true);
             };
@@ -132,12 +132,13 @@ describe('Infragistics Angular Combo', () => {
             fixture.detectChanges();
             fixture.componentInstance.combo.value1 = 1;
             fixture.detectChanges();
-            setTimeout(function() {
+            setTimeout(() => {
                 // clear
                 $('#combo1').parents('ig-combo').find('.ui-igcombo-clearicon').click();
                 fixture.detectChanges();
-                setTimeout(function() {
-                    expect(fixture.componentInstance.combo.value1 instanceof Array && fixture.componentInstance.combo.value1.length === 0).toBeTruthy();
+                setTimeout(() => {
+                    expect(fixture.componentInstance.combo.value1 instanceof Array &&
+                      fixture.componentInstance.combo.value1.length === 0).toBeTruthy();
                     done();
                 }, 10);
             }, 10);
@@ -149,7 +150,7 @@ describe('Infragistics Angular Combo', () => {
             };
             fixture.componentInstance.viewChild.dataSource = ['foo', 'bar', 'bas'];
             fixture.detectChanges();
-            const elem = $('#combo1').igCombo('itemsFromIndex', 0).element;
+            const elem = $('#combo1').igCombo('itemsFromIndex', 0)['element'];
             $('#combo1').igCombo('select', elem, {}, true);
             fixture.detectChanges();
             expect(fixture.componentInstance.combo.value1.length).toBe(1);
@@ -163,7 +164,7 @@ describe('Infragistics Angular Combo', () => {
             $('#combo1').igCombo('select', $firstThreeItems, {}, true);
 
             fixture.detectChanges();
-            setTimeout(function() {
+            setTimeout(() => {
                 expect(fixture.componentInstance.combo.value1).toEqual([1, 2, 3]);
                 done();
             }, 10);
@@ -179,17 +180,17 @@ describe('Infragistics Angular Combo', () => {
 
         it('the ngModel should be updated correctly if the combo is allowing custom values', (done) => {
             fixture.detectChanges();
-            setTimeout(function() {
+            setTimeout(() => {
                 // var elem = $("#combo1").igCombo("itemsFromIndex", 0)["element"];
                 // $("#combo1").igCombo("select", elem, {}, true);
                 $(fixture.debugElement.nativeElement).find('#combo1').val('foo').trigger('input');
                 fixture.detectChanges();
-                setTimeout(function() {
+                setTimeout(() => {
                     expect(fixture.componentInstance.combo.value1).toEqual('foo');
                     // clear
                     $('#combo1').parents('ig-combo').find('.ui-igcombo-clearicon').click();
                     fixture.detectChanges();
-                    setTimeout(function() {
+                    setTimeout(() => {
                         expect(fixture.componentInstance.combo.value1).toBeNull();
                         done();
                     }, 10);
@@ -208,7 +209,7 @@ describe('Infragistics Angular Combo', () => {
         it('should apply the model if there is a new data assigned', (done) => {
             fixture.detectChanges();
             fixture.componentInstance.data = fixture.componentInstance.northwind;
-            setTimeout(function() {
+            setTimeout(() => {
                 fixture.detectChanges();
                 expect($('#combo1').igCombo('value')).toBe(fixture.componentInstance.combo.value1);
                 expect($('#combo1').val())
@@ -220,7 +221,7 @@ describe('Infragistics Angular Combo', () => {
 
     describe('With remote data', () => {
         beforeEach(() => {
-            $.mockjax({
+            $['mockjax']({
                 url: 'myURL/Northwind',
                 contentType: 'application/json',
                 dataType: 'json',
@@ -242,7 +243,9 @@ describe('Infragistics Angular Combo', () => {
 
 @Component({
     selector: 'test-cmp',
-    template: '<div><ig-combo [(widgetId)]="comboID" [(options)]="options" [(ngModel)]="combo.value1" [dataSource]="northwind"></ig-combo></div>'
+    template: `<div>
+                <ig-combo [(widgetId)]="comboID" [(options)]="options" [(ngModel)]="combo.value1" [dataSource]="northwind"></ig-combo>
+              </div>`
 })
 class TestComponent {
     public options: IgCombo;
@@ -253,7 +256,9 @@ class TestComponent {
     private comboID: string;
     public data: Array<any> = [];
     public val = [];
-    @ViewChild(IgComboComponent, { static: true }) public viewChild: IgComboComponent;
+
+    @ViewChild(IgComboComponent, { static: true })
+    public viewChild: IgComboComponent;
 
     constructor() {
         this.northwind = Northwind.getData();
@@ -300,13 +305,25 @@ class TestComponentMultipleSelection extends TestComponent { }
 
 @Component({
     selector: 'test-cmp',
-    template: '<div><ig-combo [(widgetId)]="comboID" [(options)]="options" [(ngModel)]="combo.value1" [dataSource]="northwind" [allowCustomValue]="true"></ig-combo></div>'
+    template: `<div>
+      <ig-combo [(widgetId)]="comboID"
+                [(options)]="options"
+                [(ngModel)]="combo.value1"
+                [dataSource]="northwind"
+                [allowCustomValue]="true"></ig-combo>
+    </div>`
 })
 class TestComponentAllowCustomValue extends TestComponent { }
 
 @Component({
     selector: 'test-cmp',
-    template: '<div><ig-combo [(widgetId)]="comboID" [valueKey]="\'ProductID\'" [textKey]="\'ProductName\'" [dataSource]="data" [(ngModel)]="combo.value1"></ig-combo></div>'
+    template: `<div>
+      <ig-combo [(widgetId)]="comboID"
+                [valueKey]="\'ProductID\'"
+                [textKey]="\'ProductName\'"
+                [dataSource]="data"
+                [(ngModel)]="combo.value1"></ig-combo>
+    </div>`
 })
 class TestComponentEmptyData extends TestComponent { }
 

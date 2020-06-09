@@ -81,7 +81,7 @@ describe('Infragistics Angular Tree', () => {
     });
 
     it('should initialize correctly when datasource is remote', (done) => {
-        $.mockjax({
+        $['mockjax']({
             url: 'myURL/ProductCategories',
             contentType: 'application/json',
             dataType: 'json',
