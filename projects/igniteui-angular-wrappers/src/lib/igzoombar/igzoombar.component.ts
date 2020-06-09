@@ -2,10 +2,39 @@ import { Component, ElementRef, IterableDiffers, KeyValueDiffers, ChangeDetector
 import { IgControlBase } from '../igcontrolbase/igcontrolbase';
 
 @Component({
+    // tslint:disable-next-line:component-selector
     selector: 'ig-zoombar',
     template: '<ng-content></ng-content>',
-    inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'target', 'clone', 'width', 'height', 'zoomAction', 'zoomWindowMoveDistance', 'defaultZoomWindow', 'zoomWindowMinWidth', 'hoverStyleAnimationDuration', 'windowPanDuration', 'tabIndex'],
-    outputs: ['zoomChanging', 'zoomChanged', 'providerCreated', 'windowDragStarting', 'windowDragStarted', 'windowDragging', 'windowDragEnding', 'windowDragEnded', 'windowResizing', 'windowResized']
+    inputs: [
+      'widgetId',
+      'options',
+      'changeDetectionInterval',
+      'disabled',
+      'create',
+      'target',
+      'clone',
+      'width',
+      'height',
+      'zoomAction',
+      'zoomWindowMoveDistance',
+      'defaultZoomWindow',
+      'zoomWindowMinWidth',
+      'hoverStyleAnimationDuration',
+      'windowPanDuration',
+      'tabIndex'
+    ],
+    outputs: [
+      'zoomChanging',
+      'zoomChanged',
+      'providerCreated',
+      'windowDragStarting',
+      'windowDragStarted',
+      'windowDragging',
+      'windowDragEnding',
+      'windowDragEnded',
+      'windowResizing',
+      'windowResized'
+    ]
 })
 export class IgZoombarComponent extends IgControlBase<IgZoombar> {
     constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {
@@ -49,5 +78,5 @@ export class IgZoombarComponent extends IgControlBase<IgZoombar> {
      * @param width     The width parameter of the new zoom window in percentages
      */
     /* istanbul ignore next */
-    public zoom(left?: number, width?: number): Object { return; }
+    public zoom(left?: number, width?: number): object { return; }
 }

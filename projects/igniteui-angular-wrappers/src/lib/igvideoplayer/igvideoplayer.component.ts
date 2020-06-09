@@ -4,8 +4,51 @@ import { IgControlBase } from '../igcontrolbase/igcontrolbase';
 @Component({
     selector: 'ig-video-player',
     template: '<ng-content></ng-content>',
-    inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'sources', 'width', 'height', 'posterUrl', 'preload', 'autoplay', 'autohide', 'volumeAutohideDelay', 'centerButtonHideDelay', 'loop', 'browserControls', 'fullscreen', 'volume', 'muted', 'title', 'showSeekTime', 'progressLabelFormat', 'bookmarks', 'relatedVideos', 'banners', 'commercials'],
-    outputs: ['ended', 'playing', 'paused', 'buffering', 'progress', 'waiting', 'bookmarkHit', 'bookmarkClick', 'enterFullScreen', 'exitFullScreen', 'relatedVideoClick', 'bannerVisible', 'bannerHidden', 'bannerClick', 'browserNotSupported']
+    inputs: [
+      'widgetId',
+      'options',
+      'changeDetectionInterval',
+      'disabled',
+      'create',
+      'sources',
+      'width',
+      'height',
+      'posterUrl',
+      'preload',
+      'autoplay',
+      'autohide',
+      'volumeAutohideDelay',
+      'centerButtonHideDelay',
+      'loop',
+      'browserControls',
+      'fullscreen',
+      'volume',
+      'muted',
+      'title',
+      'showSeekTime',
+      'progressLabelFormat',
+      'bookmarks',
+      'relatedVideos',
+      'banners',
+      'commercials'
+    ],
+    outputs: [
+      'ended',
+      'playing',
+      'paused',
+      'buffering',
+      'progress',
+      'waiting',
+      'bookmarkHit',
+      'bookmarkClick',
+      'enterFullScreen',
+      'exitFullScreen',
+      'relatedVideoClick',
+      'bannerVisible',
+      'bannerHidden',
+      'bannerClick',
+      'browserNotSupported'
+    ]
 })
 export class IgVideoPlayerComponent extends IgControlBase<IgVideoPlayer> {
     constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {
@@ -30,7 +73,7 @@ export class IgVideoPlayerComponent extends IgControlBase<IgVideoPlayer> {
      * @param commercial     Specify the linked commercial to play.
      */
     /* istanbul ignore next */
-    public playCommercial(commercial: Object): void { return; }
+    public playCommercial(commercial: object): void { return; }
 
     /**
      * Shows the ad banner, if there is such.
@@ -81,12 +124,13 @@ export class IgVideoPlayerComponent extends IgControlBase<IgVideoPlayer> {
     public currentTime(val: number): number { return; }
 
     /**
-     * Get a screenshot of the current video frame. It returns a canvas object that you can position and show on the page. This depends on the browser support for canvas.
+     * Get a screenshot of the current video frame.
+     * It returns a canvas object that you can position and show on the page. This depends on the browser support for canvas.
      *
      * @param scaleFactor    Specify scale factor between 0 and 1.
      */
     /* istanbul ignore next */
-    public screenshot(scaleFactor?: number): Object { return; }
+    public screenshot(scaleFactor?: number): object { return; }
 
     /**
      * Get whether the current browser supports video tag.

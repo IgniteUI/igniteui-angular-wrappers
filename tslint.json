@@ -104,11 +104,9 @@
     "no-conflicting-lifecycle": true,
     "no-host-metadata-property": true,
     "no-input-rename": true,
-    "no-inputs-metadata-property": true,
     "no-output-native": true,
     "no-output-on-prefix": true,
     "no-output-rename": true,
-    "no-outputs-metadata-property": true,
     "template-banana-in-box": true,
     "template-no-negated-async": true,
     "typedef-whitespace": {
