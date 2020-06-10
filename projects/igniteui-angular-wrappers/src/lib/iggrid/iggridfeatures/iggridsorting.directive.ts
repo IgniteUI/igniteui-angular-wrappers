@@ -14,15 +14,16 @@ export class IgGridSortingFeature extends Feature<IgGridSorting> {
     /**
      * Sorts the data in a grid column  and updates the UI.
      *
-     * @param index     Column key (string) or index (number) - for multi-row grid only column key can be used. Specifies the column which we want to sort. If the mode is multiple, previous sorting states are not cleared.
+     * @param index     Column key (string) or index (number) - for multi-row grid only column key can be used.
+     * Specifies the column which we want to sort. If the mode is multiple, previous sorting states are not cleared.
      * @param direction     Specifies sorting direction (ascending or descending)
-     * @param header
+     * @param header header
      */
     /* istanbul ignore next */
     public sortColumn(index: object, direction: object, header: object): void { return; }
 
     /**
-     * Sorts the data in grid columns and updates the UI.\
+     * Sorts the data in grid columns and updates the UI.
      */
     /* istanbul ignore next */
     public sortMultiple(): void { return; }
@@ -36,8 +37,9 @@ export class IgGridSortingFeature extends Feature<IgGridSorting> {
     /**
      * Removes sorting for the grid column with the specified columnKey/columnIndex and updates the UI.
      *
-     * @param index     Column key (string) or index (number) - for multi-row grid only column key can be used. Specifies the column for which we want to remove sorting. If the mode is multiple, previous sorting states are not cleared.
-     * @param header     - if specified client events should be fired
+     * @param index     Column key (string) or index (number) - for multi-row grid only column key can be used.
+     * Specifies the column for which we want to remove sorting. If the mode is multiple, previous sorting states are not cleared.
+     * @param header    header
      */
     /* istanbul ignore next */
     public unsortColumn(index: object, header: object): void { return; }
@@ -63,7 +65,7 @@ export class IgGridSortingFeature extends Feature<IgGridSorting> {
     /**
      * Renders content of multiple sorting dialog - sorted and unsorted columns.
      *
-     * @param isToCallEvents
+     * @param isToCallEvents - if specified client events should be fired
      */
     /* istanbul ignore next */
     public renderMultipleSortingDialogContent(isToCallEvents: object): void { return; }

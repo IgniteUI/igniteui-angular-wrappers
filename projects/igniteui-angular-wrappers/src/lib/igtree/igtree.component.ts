@@ -85,9 +85,6 @@ export class IgTreeComponent extends IgControlBase<IgTree> implements OnInit, On
                     this._dataSource.forEach(item => {
                       this._changes.push(this.kvalDiffers.find({}).create());
                     });
-                    // for (let i = 0; i < this._dataSource.length; i++) {
-                    //     this._changes.push(this.kvalDiffers.find({}).create());
-                    // }
                 } catch (e) {
                     throw new Error('Only binding to arrays is supported.');
                 }
@@ -144,14 +141,6 @@ export class IgTreeComponent extends IgControlBase<IgTree> implements OnInit, On
             this.dataBind();
         }
     }
-    // optionChange(options?) {
-    // 	var opts = options || jQuery.extend(true, {}, this._config);
-    // 	// Bindings are modified internally by the tree. Excluding them from the change detection
-    // 	if (opts.bindings) {
-    // 		delete opts.bindings;
-    // 	}
-    // 	super.optionChange(opts);
-    // }
 
     /**
      * Performs databinding on the igTree.

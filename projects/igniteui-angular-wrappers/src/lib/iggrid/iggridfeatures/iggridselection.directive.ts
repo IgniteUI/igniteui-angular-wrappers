@@ -94,7 +94,8 @@ export class IgGridSelectionFeature extends Feature<IgGridSelection> {
     public deselectRowById(id: object): void { return; }
 
     /**
-     * Returns an array of selected cells in arbitrary order where every objects has the format { element: , row: , index: , rowIndex: , columnKey: } .
+     * Returns an array of selected cells in arbitrary order where every objects has the format
+     * { element: , row: , index: , rowIndex: , columnKey: } .
      *
      * 				If multiple selection is disabled the function will return null.
      */

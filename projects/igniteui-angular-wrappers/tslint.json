@@ -3,8 +3,8 @@
   "rules": {
     "directive-selector": [
       true,
-      "attribute",
-      "ig",
+      "element",
+      "",
       "camelCase"
     ],
     "component-selector": [

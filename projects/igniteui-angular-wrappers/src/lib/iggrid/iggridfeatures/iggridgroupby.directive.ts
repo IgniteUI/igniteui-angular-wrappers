@@ -2,6 +2,7 @@ import { ElementRef, Directive } from '@angular/core';
 import { Feature } from '../feature';
 
 @Directive({
+    // tslint:disable-next-line:directive-selector
     selector: 'group-by',
     inputs: ['disabled', 'create', 'groupByAreaVisibility', 'initialExpand', 'emptyGroupByAreaContent', 'emptyGroupByAreaContentSelectColumns', 'expansionIndicatorVisibility', 'groupByLabelWidth', 'labelDragHelperOpacity', 'indentation', 'defaultSortingDirection', 'groupedColumns', 'resultResponseKey', 'groupedRowTextTemplate', 'type', 'groupByUrlKey', 'groupByUrlKeyAscValue', 'groupByUrlKeyDescValue', 'summarySettings', 'columnSettings', 'expandTooltip', 'collapseTooltip', 'removeButtonTooltip', 'modalDialogGroupByOnClick', 'modalDialogGroupByButtonText', 'modalDialogCaptionButtonDesc', 'modalDialogCaptionButtonAsc', 'modalDialogCaptionButtonUngroup', 'modalDialogCaptionText', 'modalDialogDropDownLabel', 'modalDialogRootLevelHierarchicalGrid', 'modalDialogDropDownButtonCaption', 'modalDialogClearAllButtonLabel', 'emptyGroupByAreaContentSelectColumnsCaption', 'modalDialogDropDownWidth', 'modalDialogDropDownAreaWidth', 'modalDialogAnimationDuration', 'modalDialogWidth', 'modalDialogHeight', 'modalDialogButtonApplyText', 'modalDialogButtonCancelText', 'useGridColumnFormatter', 'persist', 'groupByDialogContainment', 'dialogWidget', 'inherit'],
     outputs: ['groupedColumnsChanging', 'groupedColumnsChanged', 'modalDialogMoving', 'modalDialogClosing', 'modalDialogClosed', 'modalDialogOpening', 'modalDialogOpened', 'modalDialogContentsRendering', 'modalDialogContentsRendered', 'modalDialogButtonApplyClick', 'modalDialogButtonResetClick', 'modalDialogGroupingColumn', 'modalDialogGroupColumn', 'modalDialogUngroupingColumn', 'modalDialogUngroupColumn', 'modalDialogSortGroupedColumn']
@@ -51,7 +52,8 @@ export class IgGridGroupByFeature extends Feature<IgGridGroupBy> {
     public checkColumnIsGrouped(key: string, layout: string): void { return; }
 
     /**
-     * Get grouped data by value for the specific column. NOTE: Before calling this function the data(that is passed as an argument) should be sorted by colKey.
+     * Get grouped data by value for the specific column.
+     * NOTE: Before calling this function the data(that is passed as an argument) should be sorted by colKey.
      *
      * @param data    data (sorted by colKey) that is used to get the records from.
      * @param colKey    key of the column for which grouping will be applied.
@@ -70,7 +72,8 @@ export class IgGridGroupByFeature extends Feature<IgGridGroupBy> {
      * Groups by a column
      *
      * @param key    Column Key - group by the column with the specified key
-     * @param layout    layout is an optional parameter. if set it means the grouped column is not in the root level but is a child layout column
+     * @param layout    layout is an optional parameter.
+     * If set it means the grouped column is not in the root level but is a child layout column
      * @param sortingDirection    if not set it is taken from option defaultSortingDirection
      */
     /* istanbul ignore next */
@@ -80,7 +83,8 @@ export class IgGridGroupByFeature extends Feature<IgGridGroupBy> {
      * Removes the specified column from the group by columns list, executes the group by operation and updates the view.
      *
      * @param key    Column Key - ungroup by the column with the specified key
-     * @param layout    Layout is an optional parameter. If set it means the grouped column is not in the root level but is a child layout column.
+     * @param layout    Layout is an optional parameter.
+     * If set it means the grouped column is not in the root level but is a child layout column.
      */
     /* istanbul ignore next */
     public ungroupByColumn(key: string, layout?: string): void { return; }

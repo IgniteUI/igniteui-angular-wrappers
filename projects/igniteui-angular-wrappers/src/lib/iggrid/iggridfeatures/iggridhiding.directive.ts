@@ -31,10 +31,13 @@ export class IgGridHidingFeature extends Feature<IgGridHiding> {
 
     /**
      * Shows a hidden column. If the column is not hidden the method does nothing.
-     * 			Note: This method is asynchronous which means that it returns immediately and any subsequent code will execute in parallel. This may lead to runtime errors. To avoid them put the subsequent code in the callback parameter provided by the method.
+     * Note: This method is asynchronous which means that it returns immediately and any subsequent code will execute in parallel.
+     * This may lead to runtime errors. To avoid them put the subsequent code in the callback parameter provided by the method.
      *
-     * @param column    An identifier for the column. If a number is provided it will be used as a column index else if a strings is provided it will be used as a column key.
-     * @param isMultiColumnHeader    If it is true then the column is of type multicolumnheader. An identifier for the column should be of type string.
+     * @param column    An identifier for the column.
+     * If a number is provided it will be used as a column index else if a strings is provided it will be used as a column key.
+     * @param isMultiColumnHeader    If it is true then the column is of type multicolumnheader.
+     * An identifier for the column should be of type string.
      * @param callback    Specifies a custom function to be called when the column(s) is shown(optional)
      */
     /* istanbul ignore next */
@@ -42,10 +45,13 @@ export class IgGridHidingFeature extends Feature<IgGridHiding> {
 
     /**
      * Hides a visible column. If the column is hidden the method does nothing.
-     * 			Note: This method is asynchronous which means that it returns immediately and any subsequent code will execute in parallel. This may lead to runtime errors. To avoid them put the subsequent code in the callback parameter provided by the method.
+     * Note: This method is asynchronous which means that it returns immediately and any subsequent code will execute in parallel.
+     * This may lead to runtime errors. To avoid them put the subsequent code in the callback parameter provided by the method.
      *
-     * @param column    An identifier for the column. If a number is provided it will be used as a column index else if a strings is provided it will be used as a column key.
-     * @param isMultiColumnHeader    If it is true then the column is of type multicolumnheader. An identifier for the column should be of type string.
+     * @param column An identifier for the column.
+     * If a number is provided it will be used as a column index else if a strings is provided it will be used as a column key.
+     * @param isMultiColumnHeader    If it is true then the column is of type multicolumnheader.
+     * An identifier for the column should be of type string.
      * @param callback    Specifies a custom function to be called when the column is hidden(optional)
      */
     /* istanbul ignore next */
@@ -53,9 +59,11 @@ export class IgGridHidingFeature extends Feature<IgGridHiding> {
 
     /**
      * Hides visible columns specified by the array. If the column is hidden the method does nothing.
-     * 			Note: This method is asynchronous which means that it returns immediately and any subsequent code will execute in parallel. This may lead to runtime errors. To avoid them put the subsequent code in the callback parameter provided by the method.
+     * Note: This method is asynchronous which means that it returns immediately and any subsequent code will execute in parallel.
+     * This may lead to runtime errors. To avoid them put the subsequent code in the callback parameter provided by the method.
      *
-     * @param columns    An array of identifiers for the columns. If a number is provided it will be used as a column index else if a strings is provided it will be used as a column key.
+     * @param columns    An array of identifiers for the columns.
+     * If a number is provided it will be used as a column index else if a strings is provided it will be used as a column key.
      * @param callback    Specifies a custom function to be called when all columns are hidden(optional)
      */
     /* istanbul ignore next */
@@ -63,9 +71,11 @@ export class IgGridHidingFeature extends Feature<IgGridHiding> {
 
     /**
      * Show visible columns specified by the array. If the column is shown the method does nothing.
-     * 			Note: This method is asynchronous which means that it returns immediately and any subsequent code will execute in parallel. This may lead to runtime errors. To avoid them put the subsequent code in the callback parameter provided by the method.
+     * Note: This method is asynchronous which means that it returns immediately and any subsequent code will execute in parallel.
+     * This may lead to runtime errors. To avoid them put the subsequent code in the callback parameter provided by the method.
      *
-     * @param columns    An array of identifiers for the columns. If a number is provided it will be used as a column index else if a strings is provided it will be used as a column key.
+     * @param columns An array of identifiers for the columns.
+     * If a number is provided it will be used as a column index else if a strings is provided it will be used as a column key.
      * @param callback    Specifies a custom function to be called when all columns are shown(optional)
      */
     /* istanbul ignore next */

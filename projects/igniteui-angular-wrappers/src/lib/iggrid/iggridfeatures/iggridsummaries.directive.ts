@@ -76,14 +76,14 @@ export class IgGridSummariesFeature extends Feature<IgGridSummaries> {
     public selectCheckBox($checkbox: object, isToSelect: boolean): void { return; }
 
     /**
-     * Summary calculate the whole data for the specified column key, columnMethods and dataType (used when datasource is remote and dataType is date)
+     * Summary calculate the whole data for the specified column key,
+     * columnMethods and dataType (used when datasource is remote and dataType is date)
      *
      * @param ck    ColumnKey
      * @param columnMethods    Array of column methods objects
-     * @param data    object which represents result
- represents dataType for the current column
-    * @param dataType
-    */
+     * @param data    object which represents result represents dataType for the current column
+     * @param dataType data type
+     */
     /* istanbul ignore next */
     public calculateSummaryColumn(ck: string, columnMethods: any[], data: object, dataType: object): void { return; }
 
@@ -96,7 +96,7 @@ export class IgGridSummariesFeature extends Feature<IgGridSummaries> {
     /**
      * Return a JQUERY object which holds all summaries for column with the specified column key
      *
-     * @param columnKey
+     * @param columnKey column key
      */
     /* istanbul ignore next */
     public summariesFor(columnKey: object): void { return; }

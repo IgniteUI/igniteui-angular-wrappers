@@ -28,7 +28,8 @@ export class IgGridPagingFeature extends Feature<IgGridPaging> {
     public pageSize(size?: number): number { return; }
 
     /**
-     * Destroys the igGridPaging feature by removing all elements in the pager area, unbinding events, and resetting data to discard data filtering on paging.
+     * Destroys the igGridPaging feature by removing all elements in the pager area,
+     * unbinding events, and resetting data to discard data filtering on paging.
      */
     /* istanbul ignore next */
     public destroy(): void { return; }
