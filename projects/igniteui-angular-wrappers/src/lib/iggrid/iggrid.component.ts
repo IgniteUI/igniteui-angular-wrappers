@@ -292,18 +292,20 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
     public activeRow(): object { return; }
 
     /**
-     * Retrieves a cell value using the row index and the column key. If a primaryKey is defined, rowId is assumed to be the row Key (not index).
-     * 				If primary key is not defined, then rowId is converted to a number and is used as a row index.
+     * Retrieves a cell value using the row index and the column key.
+     * If a primaryKey is defined, rowId is assumed to be the row Key (not index).
+     * If primary key is not defined, then rowId is converted to a number and is used as a row index.
      *
      * @param rowId     Row index or row key (primary key).
      * @param colKey     The column key.
      */
     /* istanbul ignore next */
-    public getCellValue(rowId: object, colKey: string): object { return; }
+    public getCellValue(rowId: any, colKey: string): any { return; }
 
     /**
-     * Returns the cell text. If colKey is a number, the index of the column is used (instead of a column name)- does not apply when using a Multi-Row Layout grid.
-     * 				This is the actual text (or HTML string) for the contents of the cell.
+     * Returns the cell text. If colKey is a number, the index of the column is used (instead of a column name)
+     * - does not apply when using a Multi-Row Layout grid.
+     * This is the actual text (or HTML string) for the contents of the cell.
      *
      * @param rowId     Row index or row data key (primary key)
      * @param colKey     Column key.
@@ -312,7 +314,8 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
     public getCellText(rowId: object, colKey: string): string { return; }
 
     /**
-     * Sets a new template for a column after initialization and renders the grid if not explicitly disabled. This method will replace any existing explicitly set row template and will build one anew from the column ones.
+     * Sets a new template for a column after initialization and renders the grid if not explicitly disabled.
+     * This method will replace any existing explicitly set row template and will build one anew from the column ones.
      *
      * @param col     An identifier of the column to set template for (index or key)
      * @param tmpl     The column template to set
@@ -322,7 +325,9 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
     public setColumnTemplate(col: object, tmpl: string, render?: boolean): void { return; }
 
     /**
-     * Commits all pending transactions to the client data source. Note that there won't be anything to commit on the UI, since it is updated instantly. In order to rollback the actual UI, a call to dataBind() is required.
+     * Commits all pending transactions to the client data source.
+     * Note that there won't be anything to commit on the UI, since it is updated instantly.
+     * In order to rollback the actual UI, a call to dataBind() is required.
      *
      * @param rowId     If specified, will commit only that transaction corresponding to the specified record key.
      */
@@ -330,7 +335,9 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
     public commit(rowId?: object): void { return; }
 
     /**
-     * Clears the transaction log (delegates to igDataSource). Note that this does not update the UI. In case the UI must be updated, set the second parameter "updateUI" to true, which will trigger a call to dataBind() to re-render the contents.
+     * Clears the transaction log (delegates to igDataSource). Note that this does not update the UI.
+     * In case the UI must be updated, set the second parameter "updateUI" to true,
+     * which will trigger a call to dataBind() to re-render the contents.
      *
      * @param rowId     If specified, will only rollback the transactions with that row id.
      * @param updateUI     Whether to update the UI or not.

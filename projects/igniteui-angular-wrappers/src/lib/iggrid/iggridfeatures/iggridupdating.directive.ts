@@ -30,7 +30,7 @@ export class IgGridUpdatingFeature extends Feature<IgGridUpdating> {
      * @param values    Pairs of values in the format { column1Key: value1, column2Key: value2, ... } .
      */
     /* istanbul ignore next */
-    public updateRow(rowId: object, values: object): void { return; }
+    public updateRow(rowId: any, values: object): void { return; }
 
     /**
      * Adds a new row to the grid. It also creates a transaction and updates the UI.
@@ -46,7 +46,7 @@ export class IgGridUpdatingFeature extends Feature<IgGridUpdating> {
      * @param rowId    The primary key of the row to delete.
      */
     /* istanbul ignore next */
-    public deleteRow(rowId: object): void { return; }
+    public deleteRow(rowId: any): void { return; }
 
     /**
      * Starts editing for the row or cell specified (depending on the [editMode](ui.iggridupdating#options:editMode)).

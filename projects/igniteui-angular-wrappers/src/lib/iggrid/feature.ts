@@ -50,18 +50,18 @@ export class Feature<Model> {
             });
         }
         for (const setting in jQuery.ui[this.featureName].prototype.options) {
-            object.defineProperty(self, setting, {
+            Object.defineProperty(self, setting, {
                 set: self.createFeatureSetter(setting),
                 get: self.createFeatureGetter(setting),
                 enumerable: true,
                 configurable: true
             });
         }
-        const propNames = object.getOwnPropertyNames(jQuery.ui[this.featureName].prototype);
+        const propNames = Object.getOwnPropertyNames(jQuery.ui[this.featureName].prototype);
         for (let i = 0; i < propNames.length; i++) {
             const name = propNames[i];
             if (name.indexOf('_') !== 0 && typeof jQuery.ui[this.featureName].prototype[name] === 'function') {
-                object.defineProperty(self, name, {
+                Object.defineProperty(self, name, {
                     get: self.createMethodGetter(name)
                 });
             }

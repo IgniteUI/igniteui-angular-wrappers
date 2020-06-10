@@ -311,7 +311,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
     * @param event Indicates the browser event which triggered this action (not API). Calling the method with this param set to "true" will trigger [selectionChanging](ui.igcombo#events:selectionChanging) and [selectionChanged](ui.igcombo#events:selectionChanged) events.
     */
     /* istanbul ignore next */
-    public value(value?: object, options?: object, event?: object): object { return; }
+    public value(value?: object, options?: object, event?: object): any { return; }
 
     /**
      * Selects a list item from the drop-down list.

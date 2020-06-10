@@ -1,4 +1,16 @@
-import { ElementRef, EventEmitter, IterableDiffers, DoCheck, SimpleChanges, Input, ChangeDetectorRef, KeyValueDiffers, Renderer2, Directive } from '@angular/core';
+import {
+  ElementRef,
+  EventEmitter,
+  IterableDiffers,
+  DoCheck,
+  SimpleChanges,
+  Input,
+  ChangeDetectorRef,
+  KeyValueDiffers,
+  Renderer2,
+  Directive,
+  OnInit
+} from '@angular/core';
 
 declare var jQuery: any;
 
@@ -48,7 +60,7 @@ const NODES = {
 };
 
 @Directive()
-export class IgControlBase<Model> implements DoCheck {
+export class IgControlBase<Model> implements DoCheck, OnInit {
     @Input()
     public options: any = {};
 
@@ -63,16 +75,19 @@ export class IgControlBase<Model> implements DoCheck {
     private _nativeElement: any;
     public widgetId: string;
 
-    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, public kvalDiffers: KeyValueDiffers, public cdr: ChangeDetectorRef) {
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers,
+                public kvalDiffers: KeyValueDiffers, public cdr: ChangeDetectorRef) {
         this._differs = differs;
         this._nativeElement = el.nativeElement;
         this._widgetName = this.convertToCamelCase(el.nativeElement.nodeName.toLowerCase()); // ig-grid -> igGrid
         this._el = el.nativeElement.appendChild(document.createElement(NODES[el.nativeElement.nodeName.toLowerCase()]));
 
         for (const propt in jQuery.ui[this._widgetName].prototype.events) {
+          if (jQuery.ui[this._widgetName].prototype.events.hasOwnProperty(propt)) {
             this[propt] = new EventEmitter();
             // cahcing the event emmitters for cases when the event name is the same as a method name.
             this._evtEmmiters[propt] = this[propt];
+          }
         }
     }
 
@@ -105,7 +120,7 @@ export class IgControlBase<Model> implements DoCheck {
 
         for (const opt in jQuery.ui[this._widgetName].prototype.options) {
             if (opt !== 'dataSource') {
-                object.defineProperty(this, opt, {
+                Object.defineProperty(this, opt, {
                     set: this.createSetter(opt),
                     enumerable: true,
                     configurable: true
@@ -117,19 +132,21 @@ export class IgControlBase<Model> implements DoCheck {
         for (const name in propNames) {
             if (name.indexOf('_') !== 0 && typeof jQuery.ui[this._widgetName].prototype[name] === 'function'
                 && name !== 'dataSource') {
-                object.defineProperty(that, name, {
+                Object.defineProperty(that, name, {
                     get: that.createMethodGetter(name)
                 });
             }
         }
         // events binding
         for (const propt in jQuery.ui[this._widgetName].prototype.events) {
+          if (jQuery.ui[this._widgetName].prototype.events.hasOwnProperty(propt)) {
             evtName = this._widgetName.toLowerCase() + propt.toLowerCase();
             this._events[evtName] = propt;
-            jQuery(this._el).on(evtName, function(evt, ui) {
+            jQuery(this._el).on(evtName, (evt, ui) => {
                 const emmiter = that._evtEmmiters[that._events[evt.type]];
                 emmiter.emit({ event: evt, ui });
             });
+          }
         }
 
         jQuery(this._el).attr('id', this.widgetId);
