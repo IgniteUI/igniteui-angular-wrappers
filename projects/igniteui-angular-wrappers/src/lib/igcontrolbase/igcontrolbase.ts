@@ -9,7 +9,9 @@ import {
   KeyValueDiffers,
   Renderer2,
   Directive,
-  OnInit
+  OnInit,
+  OnChanges,
+  OnDestroy
 } from '@angular/core';
 
 declare var jQuery: any;
@@ -60,7 +62,7 @@ const NODES = {
 };
 
 @Directive()
-export class IgControlBase<Model> implements DoCheck, OnInit {
+export class IgControlBase<Model> implements DoCheck, OnInit, OnChanges, OnDestroy {
     @Input()
     public options: any = {};
 
@@ -191,9 +193,7 @@ export class IgControlBase<Model> implements DoCheck, OnInit {
 
     convertToCamelCase(str) {
         // convert hyphen to camelCase
-        return str.replace(/-([a-z])/g, function(group) {
-            return group[1].toUpperCase();
-        });
+        return str.replace(/-([a-z])/g, group => group[1].toUpperCase());
     }
 
     ngOnDestroy() {

@@ -9,7 +9,9 @@ import { IgGridBase } from './iggridbase';
     outputs: ['cellClick', 'cellRightClick', 'dataBinding', 'dataBound', 'rendering', 'rendered', 'dataRendering', 'dataRendered', 'headerRendering', 'headerRendered', 'footerRendering', 'footerRendered', 'headerCellRendered', 'rowsRendering', 'rowsRendered', 'schemaGenerated', 'columnsCollectionModified', 'requestError', 'created', 'destroyed']
 })
 export class IgGridComponent extends IgGridBase<IgGrid> {
-    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiff: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiff, cdr); }
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiff: KeyValueDiffers, cdr: ChangeDetectorRef) {
+      super(el, renderer, differs, kvalDiff, cdr);
+    }
 
     /**
      * Returns the element holding the data records
@@ -45,7 +47,8 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
     public isFixedColumn(colKey: object): boolean { return; }
 
     /**
-     * Called to detect whether grid container is resized. When autoAdjustHeight is true and height of the grid is changed then the height of grid is re-set.
+     * Called to detect whether grid container is resized.
+     * When autoAdjustHeight is true and height of the grid is changed then the height of grid is re-set.
      */
     /* istanbul ignore next */
     public resizeContainer(): void { return; }
@@ -204,7 +207,8 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
     public rowById(rowId: object, isFixed?: boolean): Element { return; }
 
     /**
-     * Returns the fixed row (TR element) at the specified index. jQuery selectors aren't used for performance reasons(in ColumnFixing scenario - only when there is at least one fixed column)
+     * Returns the fixed row (TR element) at the specified index.
+     * jQuery selectors aren't used for performance reasons(in ColumnFixing scenario - only when there is at least one fixed column)
      *
      * @param i     The row index.
      */
@@ -212,25 +216,29 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
     public fixedRowAt(i: number): Element { return; }
 
     /**
-     * Returns a list of all fixed TR elements holding data in the grid(in ColumnFixing scenario - only when there is at least one fixed column)
+     * Returns a list of all fixed TR elements holding data in the grid,
+     * in ColumnFixing scenario - only when there is at least one fixed column
      */
     /* istanbul ignore next */
     public fixedRows(): any[] { return; }
 
     /**
-     * Returns a list of all TR elements holding data in the grid(when there is at least one fixed column returns rows only in the UNFIXED table)
+     * Returns a list of all TR elements holding data in the grid,
+     * when there is at least one fixed column returns rows only in the UNFIXED table
      */
     /* istanbul ignore next */
     public rows(): any[] { return; }
 
     /**
-     * Returns all data fixed rows recursively, not only the immediate ones(in ColumnFixing scenario - only when there is at least one fixed column)
+     * Returns all data fixed rows recursively, not only the immediate ones,
+     * in ColumnFixing scenario - only when there is at least one fixed column
      */
     /* istanbul ignore next */
     public allFixedRows(): any[] { return; }
 
     /**
-     * Returns all data rows recursively, not only the immediate ones(when there is at least one fixed column returns rows only in the UNFIXED table)
+     * Returns all data rows recursively, not only the immediate ones,
+     * when there is at least one fixed column returns rows only in the UNFIXED table
      */
     /* istanbul ignore next */
     public allRows(): any[] { return; }
@@ -252,14 +260,15 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
     public columnByText(text: string): object { return; }
 
     /**
-     * Returns an array of selected cells in arbitrary order where every objects has the format { element: , row: , index: , rowIndex: , columnKey: } .
+     * Returns an array of selected cells in arbitrary order where every objects has the format
+     * { element: , row: , index: , rowIndex: , columnKey: } .
      * 				If multiple selection is disabled the function will return null.
      */
     /* istanbul ignore next */
     public selectedCells(): any[] { return; }
 
     /**
-     * Returns an array of selected rows in arbitrary order where every object has the format { element: , index: } .
+     * Returns an array of selected rows in arbitrary order where every object has the format { element: , index: }.
      * 				If multiple selection is disabled the function will return null.
      */
     /* istanbul ignore next */
@@ -385,7 +394,8 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
     public transactionsAsString(): string { return; }
 
     /**
-     * Invokes an AJAX request to the updateUrl option (if specified) and passes the serialized transaction log (a serialized JSON string) as part of the POST request.
+     * Invokes an AJAX request to the updateUrl option (if specified) and passes the serialized transaction log
+     * (a serialized JSON string) as part of the POST request.
      *
      * @param success    Specifies a custom function to be called when AJAX request to the updateUrl option succeeds(optional)
      * @param error    Specifies a custom function to be called when AJAX request to the updateUrl option fails(optional)
@@ -402,7 +412,8 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
     public renderNewRow(rec?: string): void { return; }
 
     /**
-     * If the data source points to a local JSON array of data, and it is necessary to reset it at runtime, it must be done through this API member instead of the options (options.dataSource)
+     * If the data source points to a local JSON array of data, and it is necessary to reset it at runtime,
+     * it must be done through this API member instead of the options (options.dataSource)
      *
      * @param dataSource     New data source object.
      */
@@ -410,9 +421,11 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
     public dataSourceObject(dataSource: object): void { return; }
 
     /**
-     * Returns the total number of records in the underlying backend. If paging or filtering is enabled, this may differ from the number of records in the client-side data source.
-     * 				In order for this to work, the response JSON/XML must include a property that specifies the total number of records, which name is specified by options.responseTotalRecCountKey.
-     * 				This functionality is completely delegated to the data source control.
+     * Returns the total number of records in the underlying backend.
+     * If paging or filtering is enabled, this may differ from the number of records in the client-side data source.
+     * In order for this to work, the response JSON/XML must include a property that specifies the total number of records,
+     * which name is specified by options.responseTotalRecCountKey.
+     * This functionality is completely delegated to the data source control.
      */
     /* istanbul ignore next */
     public totalRecordsCount(): number { return; }
@@ -420,18 +433,23 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
     /**
      * Causes the grid to data bind to the data source (local or remote) , and re-render all of the data as well
      *
-     * @param internal
+     * @param internal internal call flag
      */
     /* istanbul ignore next */
     dataBind(internal: object): void { return; }
 
     /**
      * Moves a visible column at a specified place, in front or behind a target column or at a target index
-     * 			Note: This method is asynchronous which means that it returns immediately and any subsequent code will execute in parallel. This may lead to runtime errors. To avoid them put the subsequent code in the callback parameter provided by the method.
+     * Note: This method is asynchronous which means that it returns immediately and any subsequent code will execute in parallel.
+     * This may lead to runtime errors. To avoid them put the subsequent code in the callback parameter provided by the method.
      *
-     * @param column    An identifier of the column to be moved. It can be a key, a Multi-Column Header identificator, or an index in a number format. The latter is not supported when the grid contains multi-column headers.
-     * @param target    An identifier of a column where the moved column should move to or an index at which the moved column should be moved to. In the case of a column identifier the column will be moved after it by default.
-     * @param after    Specifies whether the column moved should be moved after or before the target column. This parameter is disregarded if there is no target column specified but a target index is used.
+     * @param column An identifier of the column to be moved.
+     * It can be a key, a Multi-Column Header identificator, or an index in a number format.
+     * The latter is not supported when the grid contains multi-column headers.
+     * @param target An identifier of a column where the moved column should move to or an index at which the moved
+     * column should be moved to. In the case of a column identifier the column will be moved after it by default.
+     * @param after    Specifies whether the column moved should be moved after or before the target column.
+     * This parameter is disregarded if there is no target column specified but a target index is used.
      * @param inDom    Specifies whether the column moving will be enacted through DOM manipulation or through rerendering of the grid.
      * @param callback    Specifies a custom function to be called when the column is moved.
      */
@@ -440,9 +458,11 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
 
     /**
      * Shows a hidden column. If the column is not hidden the method does nothing.
-     * 				Note: This method is asynchronous which means that it returns immediately and any subsequent code will execute in parallel. This may lead to runtime errors. To avoid them put the subsequent code in the callback parameter provided by the method.
+     * Note: This method is asynchronous which means that it returns immediately and any subsequent code will execute in parallel.
+     * This may lead to runtime errors. To avoid them put the subsequent code in the callback parameter provided by the method.
      *
-     * @param column     An identifier for the column. If a number is provided it will be used as a column index. If a string is provided it will be used as a column key.
+     * @param column     An identifier for the column. If a number is provided it will be used as a column index.
+     * If a string is provided it will be used as a column key.
      * @param callback     Specifies a custom function to be called when the column is shown(optional)
      */
     /* istanbul ignore next */
@@ -450,10 +470,12 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
 
     /**
      * Hides a visible column. If the column is hidden the method does nothing.
-     * 				Note: This method is asynchronous which means that it returns immediately and any subsequent code will execute in parallel. This may lead to runtime errors. To avoid them put the subsequent code in the callback parameter provided by the method.
+     * Note: This method is asynchronous which means that it returns immediately and any subsequent code will execute in parallel.
+     * This may lead to runtime errors. To avoid them put the subsequent code in the callback parameter provided by the method.
      *
-     * @param column     An identifier for the column. If a number is provided it will be used as a column index else if a string is provided it will be used as a column key.
-     * @param callback     Specifies a custom function to be called when the column is hidden(optional)
+     * @param column An identifier for the column.
+     * If a number is provided it will be used as a column index else if a string is provided it will be used as a column key.
+     * @param callback Specifies a custom function to be called when the column is hidden(optional)
      */
     /* istanbul ignore next */
     public hideColumn(column: object, callback: () => void): void { return; }
@@ -467,11 +489,13 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
     public getUnboundValues(key: string): object { return; }
 
     /**
-     * Sets unbound values for the unbound column with the specified key. If removeOldValues is true then values(if any) for the unbound columns are re-set with the new values
+     * Sets unbound values for the unbound column with the specified key.
+     * If removeOldValues is true then values(if any) for the unbound columns are re-set with the new values
      *
-     * @param key     key of the unbound column
-     * @param values     array of values to be set on unbound values
-     * @param removeOldValues     if true removes current unbound values(if any) for the specified column and apply the new ones specified in parameter values. Otherwise merge current values with the specified in parameter values
+     * @param key key of the unbound column
+     * @param values array of values to be set on unbound values
+     * @param removeOldValues if true removes current unbound values(if any) for the specified column and apply the new ones specified
+     * in parameter values. Otherwise merge current values with the specified in parameter values
      */
     /* istanbul ignore next */
     public setUnboundValues(key: string, values: any[], removeOldValues: object): void { return; }
@@ -496,19 +520,23 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
     public getUnboundColumnByKey(key: string): object { return; }
 
     /**
-     * Returns whether there is vertical scrollbar. Because of perfrormance issues in older Internet Explorer especially 8,9 - there is no need to check if height is not set - there is no scrollbar OR if row virtualization is enabled - it is supposed there is vertical scrollbar
+     * Returns whether there is vertical scrollbar. Because of perfrormance issues in older Internet Explorer especially 8,9 -
+     * there is no need to check if height is not set - there is no scrollbar OR if row virtualization is enabled -
+     * it is supposed there is vertical scrollbar
      */
     /* istanbul ignore next */
     public hasVerticalScrollbar(): object { return; }
 
     /**
-     * Auto resize columns that have property width set to "*" so content to be auto-fitted(not shrinked/cutted). Auto-resizing is applied ONLY for visible columns
+     * Auto resize columns that have property width set to "*" so content to be auto-fitted(not shrinked/cutted).
+     * Auto-resizing is applied ONLY for visible columns
      */
     /* istanbul ignore next */
     public autoSizeColumns(): void { return; }
 
     /**
-     * Calculates the width of the column so its content to be auto-fitted to the width of the data in it(the content should NOT be shrinked/cutted)
+     * Calculates the width of the column so its content to be auto-fitted to the width of the data in it
+     * (the content should NOT be shrinked/cutted)
      *
      * @param columnIndex    Visible column index
      */
@@ -520,7 +548,8 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
      * 				Note: Method does not count column groups (Multi-Column Headers).
      *
      * @param columnKey     columnKey
-     * @param includeDataSkip     Optional parameter - if set to true include non data columns(like expander column, row selectors column, etc.) in calculations
+     * @param includeDataSkip     Optional parameter - if set to true include non data columns
+     * (like expander column, row selectors column, etc.) in calculations
      */
     /* istanbul ignore next */
     public getVisibleIndexByKey(columnKey: string, includeDataSkip: boolean): number { return; }
@@ -536,7 +565,8 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
     /**
      * Scroll to the specified row or specified position(in pixels)
      *
-     * @param scrollerPosition     An identifier of the vertical scroll position. When it is string then it is interpreted as pixels otherwise it is the row number
+     * @param scrollerPosition An identifier of the vertical scroll position.
+     * When it is string then it is interpreted as pixels otherwise it is the row number
      */
     /* istanbul ignore next */
     public virtualScrollTo(scrollerPosition: object): void { return; }
@@ -555,7 +585,7 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
      * 				2. Unwrap any wrapping elements such as scrolling divs and other containers.
      * 				3. Unbind all events that were bound.
      *
-     * @param notToCallDestroy
+     * @param notToCallDestroy flag whether to propagate the destroy call
      */
     /* istanbul ignore next */
     public destroy(notToCallDestroy: object): void { return; }

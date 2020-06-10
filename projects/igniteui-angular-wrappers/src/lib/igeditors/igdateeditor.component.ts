@@ -9,7 +9,10 @@ import { NgModel } from '@angular/forms';
     outputs: ['rendering', 'rendered', 'mousedown', 'mouseup', 'mousemove', 'mouseover', 'mouseout', 'blur', 'focus', 'keydown', 'keypress', 'keyup', 'valueChanging', 'valueChanged', 'dropDownListOpening', 'dropDownListOpened', 'dropDownListClosing', 'dropDownListClosed', 'dropDownItemSelecting', 'dropDownItemSelected', 'textChanged']
 })
 export class IgDateEditorComponent extends IgEditorBase<IgDateEditor> {
-    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef, @Optional() public model: NgModel) { super(el, renderer, differs, kvalDiffers, cdr, model); }
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers,
+                cdr: ChangeDetectorRef, @Optional() public model: NgModel) {
+      super(el, renderer, differs, kvalDiffers, cdr, model);
+    }
 
     /**
      * Changes the the regional settings of widget element to the language specified in [options.regional](ui.igdateeditor#options:regional)
@@ -23,7 +26,9 @@ export class IgDateEditorComponent extends IgEditorBase<IgDateEditor> {
      *
      * Note! This option doesn't use the dateInputFormat to extract the date
      *
-     * @param newValue New editor value. Date object can be set as value. String value can be passed and the editor will use the javascript Date object constructor to create date object and will use it for the comparison. MVC date format can be used too. For example Date(/"thicks"/).
+     * @param newValue New editor value. Date object can be set as value. String value can be passed and the editor will use
+     * the javascript Date object constructor to create date object and will use it for the comparison.
+     * MVC date format can be used too. For example Date(/"ticks"/).
      */
     /* istanbul ignore next */
     public value(newValue?: Date): Date { return; }
@@ -39,7 +44,7 @@ export class IgDateEditorComponent extends IgEditorBase<IgDateEditor> {
      * Sets selected date. This method can be used when dataMode is set as either displayModeText or editModeText.
      * In such cases the value() cannot accept a date object as a new value and getSelectedDate() can be used to replace that functionality.
      *
-     * @param date
+     * @param date date
      */
     /* istanbul ignore next */
     public selectDate(date: Date): void { return; }

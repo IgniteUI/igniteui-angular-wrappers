@@ -71,7 +71,7 @@ export class GridDataBindingComponent {
 
     deleteRecord(val) {
         let ind = 0;
-        this.data.filter(function(item, index) {
+        this.data.filter((item, index) => {
             if (item.ProductID === val) {
                 ind = index;
             }

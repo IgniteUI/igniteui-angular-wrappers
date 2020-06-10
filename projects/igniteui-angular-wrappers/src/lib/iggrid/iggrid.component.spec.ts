@@ -1,3 +1,4 @@
+// tslint:disable-next-line:max-line-length
 // modeled after https://github.com/angular/angular/blob/cee2318110eeea115e5f6fc5bfc814cbaa7d90d8/modules/Angular/test/common/directives/ng_for_spec.ts
 import { TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
@@ -125,7 +126,9 @@ describe('Infragistics Angular Grid', () => {
     });
 
     it('should allow changing top level options', (done) => {
-        const template = '<div><ig-grid [(widgetId)]="gridID" [(caption)]="caption" [(options)]="opts" [dataSource]="data"></ig-grid></div>';
+        const template = `<div>
+          <ig-grid [(widgetId)]="gridID" [(caption)]="caption" [(options)]="opts" [dataSource]="data"></ig-grid>
+        </div>`;
         TestBed.overrideComponent(TestComponent, {
             set: {
                 template
@@ -216,9 +219,9 @@ describe('Infragistics Angular Grid', () => {
         TestBed.compileComponents().then(() => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
-            $(fixture.debugElement.nativeElement).find('#grid1 tr[data-id=\'2\'] td[aria-describedby=\'grid1_Name\']').click();
+            $(fixture.debugElement.nativeElement).find('#grid1 tr[data-id=\'2\'] td[aria-describedby=\'grid1_Name\']').trigger('click');
             $(fixture.debugElement.nativeElement).find('#grid1').igGridUpdating('setCellValue', 2, 'Name', 'Mary Jackson');
-            $(fixture.debugElement.nativeElement).find('#grid1_container #grid1_updating_done').click();
+            $(fixture.debugElement.nativeElement).find('#grid1_container #grid1_updating_done').trigger('click');
             expect(fixture.debugElement.componentInstance.data[1].Name)
                 .toBe('Mary Jackson');
             done();
@@ -269,7 +272,7 @@ describe('Infragistics Angular Grid', () => {
         TestBed.compileComponents().then(() => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
-            $(fixture.debugElement.nativeElement).find('#grid1 tr[data-id=\'1\'] td[aria-describedby=\'grid1_Name\']').click();
+            $(fixture.debugElement.nativeElement).find('#grid1 tr[data-id=\'1\'] td[aria-describedby=\'grid1_Name\']').trigger('click');
             setTimeout(() => {
                 expect(fixture.debugElement.componentInstance.firedEvent.event.type)
                     .toBe('iggridcellclick');
@@ -332,14 +335,14 @@ describe('Infragistics Angular Grid', () => {
             }
         });
         TestBed.compileComponents().then(() => {
-            const fixture = TestBed.createComponent(TestComponent);
-            fixture.detectChanges();
-            $(fixture.debugElement.nativeElement).find('#grid1 tr[data-id=\'2\'] td[aria-describedby=\'grid1_HireDate\']').click();
-            $(fixture.debugElement.nativeElement).find('#grid1').igGridUpdating('setCellValue', 2, 'HireDate', '11/11/2016');
-            $(fixture.debugElement.nativeElement).find('#grid1_container #grid1_updating_done').click();
-            expect(fixture.debugElement.componentInstance.data[1].HireDate.getTime())
-                .toBe(new Date('11/11/2016').getTime());
-            done();
+          const fixture = TestBed.createComponent(TestComponent);
+          fixture.detectChanges();
+          $(fixture.debugElement.nativeElement).find('#grid1 tr[data-id=\'2\'] td[aria-describedby=\'grid1_HireDate\']').trigger('click');
+          $(fixture.debugElement.nativeElement).find('#grid1').igGridUpdating('setCellValue', 2, 'HireDate', '11/11/2016');
+          $(fixture.debugElement.nativeElement).find('#grid1_container #grid1_updating_done').trigger('click');
+          expect(fixture.debugElement.componentInstance.data[1].HireDate.getTime())
+              .toBe(new Date('11/11/2016').getTime());
+          done();
         });
     });
 
@@ -383,7 +386,8 @@ describe('Infragistics Angular Grid', () => {
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestComponent), $grid;
+            const fixture = TestBed.createComponent(TestComponent);
+            let $grid;
             fixture.detectChanges();
             $grid = $('#grid1');
             expect($grid.data('igGridPaging') !== undefined).toBeTruthy('Paging feature not initialized');
@@ -433,7 +437,8 @@ describe('Infragistics Angular Grid', () => {
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestComponent), $grid;
+            const fixture = TestBed.createComponent(TestComponent);
+            let $grid;
             fixture.detectChanges();
             fixture.componentInstance.gridWidth = '400px';
             $grid = $('#grid1');
@@ -461,7 +466,8 @@ describe('Infragistics Angular Grid', () => {
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestComponent), $grid;
+            const fixture = TestBed.createComponent(TestComponent);
+            let $grid;
             fixture.detectChanges();
             fixture.componentInstance.gridWidth = '400px';
             $grid = $('#grid1');
@@ -633,9 +639,10 @@ describe('Infragistics Angular Grid', () => {
             ];
             setTimeout(() => {
                 fixture.detectChanges();
-                $(fixture.debugElement.nativeElement).find('#grid1').igGridFiltering('filter', ([{ fieldName: 'Date', expr: '2017-06-09', cond: 'notOn' }]));
+                $(fixture.debugElement.nativeElement).find('#grid1').igGridFiltering('filter',
+                  ([{ fieldName: 'Date', expr: '2017-06-09', cond: 'notOn' }]));
                 expect($(fixture.debugElement.nativeElement).find('#grid1_container .ui-iggrid-results').text())
-                    .toBe('3 matching records');
+                  .toBe('3 matching records');
                 done();
             }, 500);
         });
@@ -746,6 +753,7 @@ describe('Infragistics Angular Grid', () => {
         });
     });
     // issue #242 (bug #247937)
+    // tslint:disable-next-line:max-line-length
     // 	it('should detect changes properly when grid column with validation is updated and then an option(s) change has been performed', (done) => {
     // 		var template = '<div><ig-grid [(widgetId)]="gridID" [(options)]="opts" [changeDetectionInterval]="0"></ig-grid></div>';
     // 		TestBed.overrideComponent(TestComponent, {

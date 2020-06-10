@@ -9,10 +9,14 @@ import { NgModel } from '@angular/forms';
     outputs: ['rendering', 'rendered', 'mousedown', 'mouseup', 'mousemove', 'mouseover', 'mouseout', 'blur', 'focus', 'keydown', 'keypress', 'keyup', 'valueChanging', 'valueChanged', 'dropDownListOpening', 'dropDownListOpened', 'dropDownListClosing', 'dropDownListClosed', 'dropDownItemSelecting', 'dropDownItemSelected', 'textChanged']
 })
 export class IgCurrencyEditorComponent extends IgEditorBase<IgCurrencyEditor> {
-    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef, @Optional() public model: NgModel) { super(el, renderer, differs, kvalDiffers, cdr, model); }
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers,
+                cdr: ChangeDetectorRef, @Optional() public model: NgModel) {
+      super(el, renderer, differs, kvalDiffers, cdr, model);
+    }
 
     /**
-     * Gets/sets a string that is used as the currency symbol shown with the number in the input. The value provided as a param is propagated to the currencySymbol option and thus has the same priority as the option.
+     * Gets/sets a string that is used as the currency symbol shown with the number in the input.
+     * The value provided as a param is propagated to the currencySymbol option and thus has the same priority as the option.
      *
      * @param symbol New currency symbol.
      */
@@ -30,10 +34,10 @@ export class IgCurrencyEditorComponent extends IgEditorBase<IgCurrencyEditor> {
     /**
      * Finds index of list item by text that matches with the search parameters.
      *
-     * @param number The text to search for.
+     * @param value The text to search for.
      */
     /* istanbul ignore next */
-    public findListItemIndex(number: number): number { return; }
+    public findListItemIndex(value: number): number { return; }
     /* istanbul ignore next */
     public getSelectedText(): void { return; }
     /* istanbul ignore next */
@@ -42,7 +46,8 @@ export class IgCurrencyEditorComponent extends IgEditorBase<IgCurrencyEditor> {
     public getSelectionEnd(): void { return; }
 
     /**
-     * Increments value in editor according to the parameter or selects the previous item from the drop-down list if [isLimitedToListValues](ui.%%WidgetNameLowered%%#options:isLimitedToListValues) is enabled.
+     * Increments value in editor according to the parameter or selects the previous item from the drop-down list if
+     * [isLimitedToListValues](ui.%%WidgetNameLowered%%#options:isLimitedToListValues) is enabled.
      *
      * @param delta Increments value.
      */
@@ -50,7 +55,8 @@ export class IgCurrencyEditorComponent extends IgEditorBase<IgCurrencyEditor> {
     public spinUp(delta?: number): void { return; }
 
     /**
-     * Decrements value in editor according to the parameter selects the next item from the drop-down list if [isLimitedToListValues](ui.%%WidgetNameLowered%%#options:isLimitedToListValues) is enabled.
+     * Decrements value in editor according to the parameter selects the next item from the drop-down list if
+     * [isLimitedToListValues](ui.%%WidgetNameLowered%%#options:isLimitedToListValues) is enabled.
      *
      * @param delta Decrement value.
      */
@@ -76,7 +82,8 @@ export class IgCurrencyEditorComponent extends IgEditorBase<IgCurrencyEditor> {
     public getRegionalOption(): string { return; }
 
     /**
-     * Changes the the regional settings of widget element to the language specified in [options.regional](ui.ignumericeditor#options:regional)
+     * Changes the the regional settings of widget element to the language specified in
+     * [options.regional](ui.ignumericeditor#options:regional)
      * Note that this method is for rare scenarios, use [regional](ui.ignumericeditor#options:regional) option setter
      */
     /* istanbul ignore next */

@@ -10,7 +10,10 @@ import { NgModel } from '@angular/forms';
     outputs: ['rendering', 'rendered', 'mousedown', 'mouseup', 'mousemove', 'mouseover', 'mouseout', 'blur', 'focus', 'keydown', 'keypress', 'keyup', 'valueChanging', 'valueChanged', 'dropDownListOpening', 'dropDownListOpened', 'dropDownListClosing', 'dropDownListClosed', 'dropDownItemSelecting', 'dropDownItemSelected', 'textChanged']
 })
 export class IgTimePickerComponent extends IgEditorBase<IgTimePicker> {
-    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef, @Optional() public model: NgModel) { super(el, renderer, differs, kvalDiffers, cdr, model); }
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers,
+                cdr: ChangeDetectorRef, @Optional() public model: NgModel) {
+      super(el, renderer, differs, kvalDiffers, cdr, model);
+    }
     /**
      * Gets the selected list item.
      */

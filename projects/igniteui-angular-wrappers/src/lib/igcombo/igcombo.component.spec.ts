@@ -14,11 +14,11 @@ describe('Infragistics Angular Combo', () => {
             imports: [FormsModule],
             declarations: [IgComboComponent,
                 TestComponent,
-                TestComponentNoNgModel,
-                TestComponentMultipleSelection,
-                TestComponentAllowCustomValue,
-                TestComponentEmptyData,
-                TestComponentRemoteData
+                TestComponentNoNgModelComponent,
+                TestComponentMultipleSelectionComponent,
+                TestComponentAllowCustomValueComponent,
+                TestComponentEmptyDataComponent,
+                TestComponentRemoteDataComponent
             ]
         })
             .compileComponents();
@@ -57,7 +57,7 @@ describe('Infragistics Angular Combo', () => {
             fixture.detectChanges();
             setTimeout(() => {
                 // clear
-                $('#combo1').parents('ig-combo').find('.ui-igcombo-clearicon').click();
+                $('#combo1').parents('ig-combo').find('.ui-igcombo-clearicon').trigger('click');
                 fixture.detectChanges();
                 setTimeout(() => {
                     expect(fixture.componentInstance.combo.value1).toBeNull();
@@ -95,7 +95,7 @@ describe('Infragistics Angular Combo', () => {
     describe('Without ngModel', () => {
 
         beforeEach(() => {
-            fixture = TestBed.createComponent(TestComponentNoNgModel);
+            fixture = TestBed.createComponent(TestComponentNoNgModelComponent);
             component = fixture.componentInstance;
             fixture.detectChanges();
         });
@@ -123,7 +123,7 @@ describe('Infragistics Angular Combo', () => {
 
     describe('With multiple selection', () => {
         beforeEach(() => {
-            fixture = TestBed.createComponent(TestComponentMultipleSelection);
+            fixture = TestBed.createComponent(TestComponentMultipleSelectionComponent);
             component = fixture.componentInstance;
             fixture.detectChanges();
         });
@@ -134,7 +134,7 @@ describe('Infragistics Angular Combo', () => {
             fixture.detectChanges();
             setTimeout(() => {
                 // clear
-                $('#combo1').parents('ig-combo').find('.ui-igcombo-clearicon').click();
+                $('#combo1').parents('ig-combo').find('.ui-igcombo-clearicon').trigger('click');
                 fixture.detectChanges();
                 setTimeout(() => {
                     expect(fixture.componentInstance.combo.value1 instanceof Array &&
@@ -173,7 +173,7 @@ describe('Infragistics Angular Combo', () => {
 
     describe('With allowed custom values', () => {
         beforeEach(() => {
-            fixture = TestBed.createComponent(TestComponentAllowCustomValue);
+            fixture = TestBed.createComponent(TestComponentAllowCustomValueComponent);
             component = fixture.componentInstance;
             fixture.detectChanges();
         });
@@ -188,7 +188,7 @@ describe('Infragistics Angular Combo', () => {
                 setTimeout(() => {
                     expect(fixture.componentInstance.combo.value1).toEqual('foo');
                     // clear
-                    $('#combo1').parents('ig-combo').find('.ui-igcombo-clearicon').click();
+                    $('#combo1').parents('ig-combo').find('.ui-igcombo-clearicon').trigger('click');
                     fixture.detectChanges();
                     setTimeout(() => {
                         expect(fixture.componentInstance.combo.value1).toBeNull();
@@ -201,7 +201,7 @@ describe('Infragistics Angular Combo', () => {
 
     describe('With empty data', () => {
         beforeEach(() => {
-            fixture = TestBed.createComponent(TestComponentEmptyData);
+            fixture = TestBed.createComponent(TestComponentEmptyDataComponent);
             component = fixture.componentInstance;
             fixture.detectChanges();
         });
@@ -227,7 +227,7 @@ describe('Infragistics Angular Combo', () => {
                 dataType: 'json',
                 responseText: '[{"ProductID": 1, "ProductName": "Chai"}]'
             });
-            fixture = TestBed.createComponent(TestComponentRemoteData);
+            fixture = TestBed.createComponent(TestComponentRemoteDataComponent);
             component = fixture.componentInstance;
             fixture.detectChanges();
         });
@@ -295,13 +295,13 @@ class TestComponent {
     selector: 'test-cmp',
     template: '<div><ig-combo [(widgetId)]="comboID" [(options)]="options" [(dataSource)]="northwind"></ig-combo></div>'
 })
-class TestComponentNoNgModel extends TestComponent { }
+class TestComponentNoNgModelComponent extends TestComponent { }
 
 @Component({
     selector: 'test-cmp',
     template: '<div><ig-combo [(widgetId)]="comboID" [(options)]="optionsMultipleSelection" [(ngModel)]="combo.value1" [(dataSource)]="northwind"></ig-combo></div>'
 })
-class TestComponentMultipleSelection extends TestComponent { }
+class TestComponentMultipleSelectionComponent extends TestComponent { }
 
 @Component({
     selector: 'test-cmp',
@@ -313,7 +313,7 @@ class TestComponentMultipleSelection extends TestComponent { }
                 [allowCustomValue]="true"></ig-combo>
     </div>`
 })
-class TestComponentAllowCustomValue extends TestComponent { }
+class TestComponentAllowCustomValueComponent extends TestComponent { }
 
 @Component({
     selector: 'test-cmp',
@@ -325,10 +325,10 @@ class TestComponentAllowCustomValue extends TestComponent { }
                 [(ngModel)]="combo.value1"></ig-combo>
     </div>`
 })
-class TestComponentEmptyData extends TestComponent { }
+class TestComponentEmptyDataComponent extends TestComponent { }
 
 @Component({
     selector: 'test-cmp',
     template: '<div><ig-combo [(widgetId)]="comboID" [(options)]="options2" [(ngModel)]="combo.value1"></ig-combo></div>'
 })
-class TestComponentRemoteData extends TestComponent { }
+class TestComponentRemoteDataComponent extends TestComponent { }

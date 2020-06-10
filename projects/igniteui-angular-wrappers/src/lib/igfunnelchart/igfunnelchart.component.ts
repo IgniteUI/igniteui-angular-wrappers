@@ -1,4 +1,4 @@
-import { Component, ElementRef, IterableDiffers, KeyValueDiffers, ChangeDetectorRef, Input, Renderer2 } from '@angular/core';
+import { Component, ElementRef, IterableDiffers, KeyValueDiffers, ChangeDetectorRef, Input, Renderer2, OnInit } from '@angular/core';
 import { IgControlBase } from '../igcontrolbase/igcontrolbase';
 
 @Component({
@@ -7,8 +7,10 @@ import { IgControlBase } from '../igcontrolbase/igcontrolbase';
     inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'width', 'height', 'tooltipTemplate', 'maxRecCount', 'dataSource', 'dataSourceType', 'dataSourceUrl', 'responseTotalRecCountKey', 'responseDataKey', 'bezierPoints', 'legend', 'valueMemberPath', 'brushes', 'outlines', 'bottomEdgeWidth', 'innerLabelMemberPath', 'outerLabelMemberPath', 'innerLabelVisibility', 'outerLabelVisibility', 'outerLabelAlignment', 'funnelSliceDisplay', 'formatInnerLabel', 'formatOuterLabel', 'transitionDuration', 'isInverted', 'useBezierCurve', 'allowSliceSelection', 'useUnselectedStyle', 'selectedSliceStyle', 'unselectedSliceStyle', 'legendItemBadgeTemplate', 'useOuterLabelsForLegend', 'textStyle', 'outerLabelTextStyle', 'outlineThickness', 'pixelScalingRatio', 'outerLabelTextColor', 'textColor'],
     outputs: ['dataBinding', 'dataBound', 'updateTooltip', 'hideTooltip', 'sliceClicked']
 })
-export class IgFunnelChartComponent extends IgControlBase<IgFunnelChart> {
-    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }
+export class IgFunnelChartComponent extends IgControlBase<IgFunnelChart> implements OnInit {
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {
+      super(el, renderer, differs, kvalDiffers, cdr);
+    }
 
     @Input()
     public set dataSource(value: any) {
@@ -35,7 +37,8 @@ export class IgFunnelChartComponent extends IgControlBase<IgFunnelChart> {
      * Gets array of selected slice items.
      *
      * @param selection     Array or selected slice items.
-     * @return array|object     If parameter is undefined, then array of selected items is returned. Otherwise, it returns reference to igFunnelChart.
+     * @return array|object If parameter is undefined, then array of selected items is returned.
+     * Otherwise, it returns reference to igFunnelChart.
      */
     /* istanbul ignore next */
     public selectedSliceItems(selection?: any[]): any[] { return; }
@@ -44,7 +47,8 @@ export class IgFunnelChartComponent extends IgControlBase<IgFunnelChart> {
      * Gets sets array of indexes of selected slices.
      *
      * @param selection     Array or selected slice indexes.
-     * @return array|object     If parameter is undefined, then array of selected indexes is returned. Otherwise, it returns reference to igFunnelChart.
+     * @return array|object     If parameter is undefined, then array of selected indexes is returned.
+     * Otherwise, it returns reference to igFunnelChart.
      */
     /* istanbul ignore next */
     public selectedSliceIndexes(selection?: any[]): any[] { return; }

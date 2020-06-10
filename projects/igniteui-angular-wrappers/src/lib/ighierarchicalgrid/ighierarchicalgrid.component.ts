@@ -52,9 +52,7 @@ export class IgHierarchicalGridComponent extends IgGridBase<IgHierarchicalGrid> 
                 && parentRow.attr('data-id') === rec[parentGridPK];
         });
         if (childGrids.length > 0) {
-          for (let i = 0; i < childGrids.length; i++) {
-            childGrids[i].dataBind();
-          }
+          childGrids.each((index, grid) => grid.dataBind());
         } else {
             super.updateRow(rec, currValue, key);
         }
@@ -62,10 +60,8 @@ export class IgHierarchicalGridComponent extends IgGridBase<IgHierarchicalGrid> 
     public markForCheck() {
         super.markForCheck();
         const element = jQuery(this._el);
-        const childGrids = element.data(this._widgetName).allChildrenWidgets();
-        for (let i = 0; i < childGrids.length; i++) {
-            childGrids[i].dataBind();
-        }
+        const childGrids = element.data(this._widgetName).allChildrenWidgets().filter(widget => true);
+        childGrids.each((index, grid) => grid.dataBind());
     }
     /**
      * Data binds the hierarchical grid. No child grids will be created or rendered by default, unless there is initialExpandDepth >= 0 set.

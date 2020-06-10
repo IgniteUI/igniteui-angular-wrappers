@@ -81,7 +81,8 @@ describe('Infragistics Angular DataChart and Zoombar', () => {
     });
 
     it('should allow initializing data source as a top level option', (done) => {
-        const template = '<div><ig-data-chart  [widgetId]="\'datachart1\'" [(options)]="opts2" [(dataSource)]="data"></ig-data-chart></div>';
+        const template = `<div>
+          <ig-data-chart  [widgetId]="\'datachart1\'" [(options)]="opts2" [(dataSource)]="data"></ig-data-chart></div>`;
         TestBed.overrideComponent(TestComponent, {
             set: {
                 template

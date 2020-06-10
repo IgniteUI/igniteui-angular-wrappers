@@ -617,15 +617,9 @@ export class GridDefaultComponent implements OnInit {
         }
         ];
 
-        this.cellClickHandler = function(ui) {
-            console.log('grid cell click');
+        this.cellClickHandler = ui => console.log('grid cell click');
 
-        };
-
-        this.renderedEventHandler = function(ui) {
-            console.log('grid is rendered.');
-
-        };
+        this.renderedEventHandler = ui => console.log('grid is rendered.');
 
         this.gridOptions = {
             dataSource: this.data,

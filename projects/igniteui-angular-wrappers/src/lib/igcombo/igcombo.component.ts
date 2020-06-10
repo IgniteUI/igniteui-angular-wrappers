@@ -428,10 +428,12 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      *
      * @param $items jQuery object with item or items to be deselected
      * @param options object with set of options controlling the behavior of this api method.
-                    focusCombo (boolean): Set to true to focus combo after the deselection.
-                    keepInputText (boolean): Set to true to keep input text unchanged after the deselection. By default input text is updated.
-    * @param event Indicates the browser event which triggered this action (not API). Calling the method with this param set to "true" will trigger [selectionChanging](ui.igcombo#events:selectionChanging) and [selectionChanged](ui.igcombo#events:selectionChanged) events.
-    */
+     * focusCombo (boolean): Set to true to focus combo after the deselection.
+     * keepInputText (boolean): Set to true to keep input text unchanged after the deselection. By default input text is updated.
+     * @param event Indicates the browser event which triggered this action (not API).
+     * Calling the method with this param set to "true" will trigger
+     * [selectionChanging](ui.igcombo#events:selectionChanging) and [selectionChanged](ui.igcombo#events:selectionChanged) events.
+     */
     /* istanbul ignore next */
     public deselect($items: object, options?: object, event?: object): object { return; }
 
@@ -440,10 +442,12 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      *
      * @param index Index or array of indexes of items to be selected
      * @param options object with set of options controlling the behavior of this api method.
-                    focusCombo (boolean): Set to true to focus combo after the deselection.
-                    keepInputText (boolean): Set to true to keep input text unchanged after the deselection. By default input text is updated.
-    * @param event Indicates the browser event which triggered this action (not API). Calling the method with this param set to "true" will trigger [selectionChanging](ui.igcombo#events:selectionChanging) and [selectionChanged](ui.igcombo#events:selectionChanged) events.
-    */
+     * focusCombo (boolean): Set to true to focus combo after the deselection.
+     * keepInputText (boolean): Set to true to keep input text unchanged after the deselection. By default input text is updated.
+     * @param event Indicates the browser event which triggered this action (not API).
+     * Calling the method with this param set to "true" will trigger
+     * [selectionChanging](ui.igcombo#events:selectionChanging) and [selectionChanged](ui.igcombo#events:selectionChanged) events.
+     */
     /* istanbul ignore next */
     public deselectByIndex(index: object, options?: object, event?: object): object { return; }
 
@@ -451,10 +455,12 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * Deselects all selected items from the drop down list.
      *
      * @param options object with set of options controlling the behavior of this api method.
-                    focusCombo (boolean): Set to true to focus combo after the deselection.
-                    keepInputText (boolean): Set to true to keep input text unchanged after the deselection. By default input text is updated.
-    * @param event Indicates the browser event which triggered this action (not API). Calling the method with this param set to "true" will trigger [selectionChanging](ui.igcombo#events:selectionChanging) and [selectionChanged](ui.igcombo#events:selectionChanged) events.
-    */
+     * focusCombo (boolean): Set to true to focus combo after the deselection.
+     * keepInputText (boolean): Set to true to keep input text unchanged after the deselection. By default input text is updated.
+     * @param event Indicates the browser event which triggered this action (not API).
+     * Calling the method with this param set to "true" will trigger
+     * [selectionChanging](ui.igcombo#events:selectionChanging) and [selectionChanged](ui.igcombo#events:selectionChanged) events.
+     */
     /* istanbul ignore next */
     public deselectAll(options?: object, event?: object): object { return; }
 
@@ -462,7 +468,8 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * Gets/Sets index of active item in list.
      *
      * @param index New active index for list. In order to clear active item, use -1.
-     * @return number|object Returns index of active item in list or -1, if parameter is undefined. Otherwise, it returns reference to this igCombo.
+     * @return number|object Returns index of active item in list or -1, if parameter is undefined.
+     * Otherwise, it returns reference to this igCombo.
      */
     /* istanbul ignore next */
     public activeIndex(index?: number): number | object { return; }
@@ -471,7 +478,8 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * Gets/Sets text in text input field.
      *
      * @param text New text value for combo's input field.
-     * @return string|object If parameter is undefined, then current text in field is returned. Otherwise, it returns reference to this igCombo.
+     * @return string|object If parameter is undefined, then current text in field is returned.
+     * Otherwise, it returns reference to this igCombo.
      */
     /* istanbul ignore next */
     public text(text?: string): string | object { return; }
@@ -479,7 +487,8 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
     /**
      * Gets/Sets scrollTop attribute of html element, which scrolls drop-down list of items.
      *
-     * @param value New value for scroll top in list. Note: if list is closed and new value is provided, then openDropDown() is called automatically.
+     * @param value New value for scroll top in list.
+     * Note: if list is closed and new value is provided, then openDropDown() is called automatically.
      * @return number|object If parameter is undefined, then scrollTop is returned. Otherwise, it returns reference to this igCombo.
      */
     /* istanbul ignore next */

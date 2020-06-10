@@ -1,14 +1,17 @@
-import { Component, ElementRef, IterableDiffers, KeyValueDiffers, ChangeDetectorRef, Input, Renderer2 } from '@angular/core';
+import { Component, ElementRef, IterableDiffers, KeyValueDiffers, ChangeDetectorRef, Input, Renderer2, OnInit } from '@angular/core';
 import { IgControlBase } from '../igcontrolbase/igcontrolbase';
 
 @Component({
     selector: 'ig-doughnut-chart',
     template: '<ng-content></ng-content>',
     inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'width', 'height', 'tooltipTemplate', 'maxRecCount', 'dataSource', 'dataSourceType', 'dataSourceUrl', 'responseTotalRecCountKey', 'responseDataKey', 'series', 'allowSliceSelection', 'isSurfaceInteractionDisabled', 'allowSliceExplosion', 'innerExtent', 'selectedStyle'],
-    outputs: ['dataBinding', 'dataBound', 'updateTooltip', 'hideTooltip', 'tooltipShowing', 'tooltipShown', 'tooltipHiding', 'tooltipHidden', 'browserNotSupported', 'sliceClick', 'holeDimensionsChanged']
+    outputs: ['dataBinding', 'dataBound', 'updateTooltip', 'hideTooltip', 'tooltipShowing', 'tooltipShown', 'tooltipHiding',
+    'tooltipHidden', 'browserNotSupported', 'sliceClick', 'holeDimensionsChanged']
 })
-export class IgDoughnutChartComponent extends IgControlBase<IgDoughnutChart> {
-    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }
+export class IgDoughnutChartComponent extends IgControlBase<IgDoughnutChart> implements OnInit {
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {
+      super(el, renderer, differs, kvalDiffers, cdr);
+    }
 
 
     @Input()

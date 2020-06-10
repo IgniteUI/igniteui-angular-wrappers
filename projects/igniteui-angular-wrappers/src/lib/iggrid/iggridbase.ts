@@ -1,10 +1,26 @@
 import { IgControlBase } from '../igcontrolbase/igcontrolbase';
-import { AfterContentInit, QueryList, ContentChild, ContentChildren, ElementRef, KeyValueDiffers, IterableDiffers, SimpleChanges, Input, ChangeDetectorRef, Renderer2, Directive } from '@angular/core';
+import {
+  AfterContentInit,
+  QueryList,
+  ContentChild,
+  ContentChildren,
+  ElementRef,
+  KeyValueDiffers,
+  IterableDiffers,
+  SimpleChanges,
+  Input,
+  ChangeDetectorRef,
+  Renderer2,
+  Directive,
+  OnInit,
+  OnChanges,
+  DoCheck
+} from '@angular/core';
 import { Column } from './column.directive';
 import { Features } from './features.directive';
 
 @Directive()
-export class IgGridBase<Model> extends IgControlBase<Model> implements AfterContentInit {
+export class IgGridBase<Model> extends IgControlBase<Model> implements AfterContentInit, OnInit, OnChanges, DoCheck {
     @Input()
     public set dataSource(value: any) {
         this._dataSource = value;
@@ -21,7 +37,9 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
     @ContentChild(Features, {static: true}) featuresList: Features;
     private _dataSource;
 
-    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {
+      super(el, renderer, differs, kvalDiffers, cdr);
+    }
 
     ngOnInit() {
         if (this._dataSource === null || this._dataSource === undefined) {
@@ -45,10 +63,10 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
         if (this.options && this.options.features && !this.featuresList) {
             this.featuresList = new Features();
             // populate featuresList
-            for (let i = 0; i < this.options.features.length; i++) {
-                const featureName = this.options.features[i].name.charAt(0).toLowerCase() + this.options.features[i].name.slice(1);
+            this.options.features.forEach(feature => {
+                const featureName = feature.name.charAt(0).toLowerCase() + feature.name.slice(1);
                 this.featuresList.addFeature(featureName, this._el);
-            }
+            });
         }
         super.ngOnInit();
     }
@@ -58,8 +76,8 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
     }
 
     deleteRow(id, index) {
-        const element = jQuery(this._el),
-            tr = element.find('tr[data-id=\'' + id + '\']');
+        const element = jQuery(this._el);
+        const tr = element.find('tr[data-id=\'' + id + '\']');
 
         if (tr.length > 0) {
             tr.remove();
@@ -70,9 +88,12 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
     }
 
     addRow(rowData, index) {
-        let grid, pkKey = this.primaryKey || this.options.primaryKey,
-            existingDomRow = jQuery(this._el).find('tr[data-id=\'' + rowData[pkKey] + '\']'),
-            widgetName = this._widgetName, existingRow, t;
+        let grid;
+        const pkKey = this.primaryKey || this.options.primaryKey;
+        const existingDomRow = jQuery(this._el).find('tr[data-id=\'' + rowData[pkKey] + '\']');
+        let widgetName = this._widgetName;
+        let existingRow;
+        let t;
 
         if (this._widgetName === 'igHierarchicalGrid') {
             widgetName = 'igGrid';
@@ -104,7 +125,6 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
         }
         const element = jQuery(this._el);
         const grid = element.data(widgetName);
-        const tr = element.find('tr[data-id=\'' + rec[pkKey] + '\']');
         const column = grid.columnByKey(key);
         let newFormattedVal;
         let td;
@@ -137,9 +157,9 @@ export class IgGridBase<Model> extends IgControlBase<Model> implements AfterCont
                 try {
                     this._differ = this._differs.find(value).create();
                     this._changes = [];
-                    for (let i = 0; i < this._dataSource.length; i++) {
-                        this._changes.push(this.kvalDiffers.find({}).create());
-                    }
+                    this._dataSource.forEach(item => {
+                      this._changes.push(this.kvalDiffers.find({}).create());
+                    });
                 } catch (e) {
                     throw new Error('Only binding to arrays is supported.');
                 }

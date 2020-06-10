@@ -8,7 +8,9 @@ import { IgContentControlBase } from '../igcontrolbase/igcontentcontrolbase';
     outputs: ['stateChanging', 'stateChanged', 'animationEnded', 'focus', 'blur']
 })
 export class IgDialogComponent extends IgContentControlBase<IgDialog> {
-    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {
+      super(el, renderer, differs, kvalDiffers, cdr);
+    }
 
     /**
      * Destroys the igDialog and moves the target element to its original parent.
@@ -46,7 +48,9 @@ export class IgDialogComponent extends IgContentControlBase<IgDialog> {
     /**
      * Opens the dialog if it is closed. Notes:
      * 				1. If the state of the dialog changes, then stateChanging and stateChanged events are raised.
-     * 				2. That method does not change minimized or maximized state of the dialog. It means that if the dialog was in minimized or maximized stated when closed by "close" method, then the dialog will open in minimized or maximized state respectively.
+     * 				2. That method does not change minimized or maximized state of the dialog.
+     * It means that if the dialog was in minimized or maximized stated when closed by "close" method,
+     * then the dialog will open in minimized or maximized state respectively.
      */
     /* istanbul ignore next */
     public open(): object { return; }
@@ -74,7 +78,8 @@ export class IgDialogComponent extends IgContentControlBase<IgDialog> {
 
     /**
      * Pins the dialog if it is not pinned.
-     * 				When the dialog is pinned, then the html element of the dialog is moved to the original container where the target element was located and position:absolute is removed.
+     * 				When the dialog is pinned, then the html element of the dialog is moved to the original container where the target elemen
+     *  was located and position:absolute is removed.
      * 				The pinned dialog does not support modal state, maximized state and it can not be moved.
      * 				Notes:
      * 				1. If the parent element of the original target-element is invisible, then the pinned dialog becomes invisible as well.
