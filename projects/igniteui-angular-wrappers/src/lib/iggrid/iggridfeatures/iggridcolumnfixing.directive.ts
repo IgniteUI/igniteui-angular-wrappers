@@ -20,7 +20,7 @@ export class IgGridColumnFixingFeature extends Feature<IgGridColumnFixing> {
      * @param after    Specifies where the unfixed column should be rendered after or before the target column. This parameter is disregarded if there is no target column specified.
      */
     /* istanbul ignore next */
-    public unfixColumn(colIdentifier: Object, target?: string, after?: boolean): Object { return; }
+    public unfixColumn(colIdentifier: object, target?: string, after?: boolean): object { return; }
 
     /**
      * Checks whether the heights of fixed and unfixed tables are equal - if not sync them. Similar check is made for heights of table rows.

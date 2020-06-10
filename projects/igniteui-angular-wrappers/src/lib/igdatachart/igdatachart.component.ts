@@ -53,7 +53,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param height     The height of the image.
      */
     /* istanbul ignore next */
-    public exportImage(width?: Object, height?: Object): Object { return; }
+    public exportImage(width?: object, height?: object): object { return; }
 
     /**
      * Destroys the widget.
@@ -65,13 +65,13 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * Notify the chart that styles it draws colors from may have been updated.
      */
     /* istanbul ignore next */
-    public styleUpdated(): Object { return; }
+    public styleUpdated(): object { return; }
 
     /**
      * Resets the zoom level of the chart to default.
      */
     /* istanbul ignore next */
-    public resetZoom(): Object { return; }
+    public resetZoom(): object { return; }
 
     /**
      * Adds a new item to the data source and notifies the chart.
@@ -80,7 +80,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param targetName     The name of the series or axis bound to the data source. This is required only when the data is bound to series or axis. If the data is bound to dataSource of igDataChart, the second parameter should not be set.
      */
     /* istanbul ignore next */
-    public addItem(item: Object, targetName: string): void { return; }
+    public addItem(item: object, targetName: string): void { return; }
 
     /**
      * Inserts a new item to the data source and notifies the chart.
@@ -90,7 +90,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param targetName     The name of the series or axis bound to the data source.
      */
     /* istanbul ignore next */
-    public insertItem(item: Object, index: number, targetName: string): void { return; }
+    public insertItem(item: object, index: number, targetName: string): void { return; }
 
     /**
      * Deletes an item from the data source and notifies the chart.
@@ -109,7 +109,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param targetName     The name of the series or axis bound to the data source.
      */
     /* istanbul ignore next */
-    public setItem(index: number, item: Object, targetName: string): void { return; }
+    public setItem(index: number, item: object, targetName: string): void { return; }
 
     /**
      * Notifies the chart that an item has been set in an associated data source.
@@ -120,7 +120,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param oldItem     the old item that has been overwritten in the collection.
      */
     /* istanbul ignore next */
-    public notifySetItem(dataSource: Object, index: number, newItem: Object, oldItem: Object): Object { return; }
+    public notifySetItem(dataSource: object, index: number, newItem: object, oldItem: object): object { return; }
 
     /**
      * Notifies the chart that the items have been cleared from an associated data source.
@@ -129,7 +129,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param dataSource     The data source in which the change happened.
      */
     /* istanbul ignore next */
-    public notifyClearItems(dataSource: Object): Object { return; }
+    public notifyClearItems(dataSource: object): object { return; }
 
     /**
      * Notifies the target axis or series that an item has been inserted at the specified index in its data source.
@@ -140,7 +140,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param newItem     the new item that has been set in the collection.
      */
     /* istanbul ignore next */
-    public notifyInsertItem(dataSource: Object, index: number, newItem: Object): Object { return; }
+    public notifyInsertItem(dataSource: object, index: number, newItem: object): object { return; }
 
     /**
      * Notifies the target axis or series that an item has been removed from the specified index in its data source.
@@ -151,7 +151,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param oldItem     the old item that has been removed from the collection.
      */
     /* istanbul ignore next */
-    public notifyRemoveItem(dataSource: Object, index: number, oldItem: Object): Object { return; }
+    public notifyRemoveItem(dataSource: object, index: number, oldItem: object): object { return; }
 
     /**
      * Notifies the target axis or series that it should scroll the requested data item into view.
@@ -160,7 +160,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param item     The data item to bring into view, if possible.
      */
     /* istanbul ignore next */
-    public scrollIntoView(targetName: string, item: Object): Object { return; }
+    public scrollIntoView(targetName: string, item: object): object { return; }
 
     /**
      * Notifies the target axis that it should scale the requested value into chart space from axis space.
@@ -188,7 +188,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param targetName     The name of the axis to notify.
      */
     /* istanbul ignore next */
-    public resetCachedEnhancedInterval(targetName: string): Object { return; }
+    public resetCachedEnhancedInterval(targetName: string): object { return; }
 
     /**
      * Notifies the target series that something that affects its visual properties has changed and the visual output needs a repaint.
@@ -196,7 +196,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param targetName     The name of the series to notify.
      */
     /* istanbul ignore next */
-    public notifyVisualPropertiesChanged(targetName: string): Object { return; }
+    public notifyVisualPropertiesChanged(targetName: string): object { return; }
 
     /**
      * Forces any pending deferred work to render on the chart before continuing
@@ -256,7 +256,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param worldPoint    The world position (in the form {x: [number from 0 to 1], y: [number from 0 to 1]} ) that represents a position in the space of the axes.
      */
     /* istanbul ignore next */
-    public getItemIndex(targetName: string, worldPoint: Object): number { return; }
+    public getItemIndex(targetName: string, worldPoint: object): number { return; }
 
     /**
      * Gets the item that is the best match for the specified world coordinates.
@@ -265,7 +265,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param worldPoint    The world position (in the form {x: [number from 0 to 1], y: [number from 0 to 1]} ) that represents a position in the space of the axes.
      */
     /* istanbul ignore next */
-    public getItem(targetName: string, worldPoint: Object): Object { return; }
+    public getItem(targetName: string, worldPoint: object): object { return; }
 
     /**
      * For a category plotted series, gets the current width of the items within the categories. This only returns a value if the items have some form of width (e.g. columns, bars, etc.) otherwise 0 is returned.
@@ -284,7 +284,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param skipUnknowns    If true, unknown values should be skipped.
      */
     /* istanbul ignore next */
-    public getSeriesValue(targetName: string, worldPoint: Object, useInterpolation: boolean, skipUnknowns: boolean): number { return; }
+    public getSeriesValue(targetName: string, worldPoint: object, useInterpolation: boolean, skipUnknowns: boolean): number { return; }
 
     /**
      * If possible, will return the best available value bounding box within the series that has the best value match for the world position provided.
@@ -293,7 +293,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param worldPoint    The world position (in the form {x: [number from 0 to 1], y: [number from 0 to 1]} ) that represents a position in the space of the axes.
      */
     /* istanbul ignore next */
-    public getSeriesValueBoundingBox(targetName: string, worldPoint: Object): Object { return; }
+    public getSeriesValueBoundingBox(targetName: string, worldPoint: object): object { return; }
 
     /**
      * If possible, will return the best available value fine grained bounding boxes within the series that have the best value match for the world position provided.
@@ -302,7 +302,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param worldPoint    The world position (in the form {x: [number from 0 to 1], y: [number from 0 to 1]} ) that represents a position in the space of the axes.
      */
     /* istanbul ignore next */
-    public getSeriesValueFineGrainedBoundingBoxes(targetName: string, worldPoint: Object): Object { return; }
+    public getSeriesValueFineGrainedBoundingBoxes(targetName: string, worldPoint: object): object { return; }
 
     /**
      * If possible, will return the best available main value position of the series for a given world coordinate.
@@ -313,7 +313,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param skipUnknowns    If true, unknown values should be skipped.
      */
     /* istanbul ignore next */
-    public getSeriesValuePosition(targetName: string, worldPoint: Object, useInterpolation: boolean, skipUnknowns: boolean): Object { return; }
+    public getSeriesValuePosition(targetName: string, worldPoint: object, useInterpolation: boolean, skipUnknowns: boolean): object { return; }
 
     /**
      * If possible, will return the best available main value position of the series for a given world coordinate.
@@ -324,7 +324,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param skipUnknowns    If true, unknown values should be skipped.
      */
     /* istanbul ignore next */
-    public getSeriesValuePositionFromSeriesPixel(targetName: string, seriesPoint: Object, useInterpolation: boolean, skipUnknowns: boolean): Object { return; }
+    public getSeriesValuePositionFromSeriesPixel(targetName: string, seriesPoint: object, useInterpolation: boolean, skipUnknowns: boolean): object { return; }
 
     /**
      * If possible, will return the best available main value of the series for a given world coordinate.
@@ -335,7 +335,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param skipUnknowns    If true, unknown values should be skipped.
      */
     /* istanbul ignore next */
-    public getSeriesValueFromSeriesPixel(targetName: string, seriesPoint: Object, useInterpolation: boolean, skipUnknowns: boolean): number { return; }
+    public getSeriesValueFromSeriesPixel(targetName: string, seriesPoint: object, useInterpolation: boolean, skipUnknowns: boolean): number { return; }
 
     /**
      * If possible, will return the best available value bounding box within the series that has the best value match for the given series pixel coordinate.
@@ -344,7 +344,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param seriesPoint    The series pixel position (in the form {x: [number], y: [number]} ) that represents a position in the pixel space of the series.
      */
     /* istanbul ignore next */
-    public getSeriesValueBoundingBoxFromSeriesPixel(targetName: string, seriesPoint: Object): Object { return; }
+    public getSeriesValueBoundingBoxFromSeriesPixel(targetName: string, seriesPoint: object): object { return; }
 
     /**
      * If possible, will return the best available value fine grained bounding boxes within the series that have the best value match for series pixel position provided.
@@ -353,7 +353,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param worldPoint    The series pixel position (in the form {x: [number], y: [number]} ) that represents a position in the pixel space of the series.
      */
     /* istanbul ignore next */
-    public getSeriesValueFineGrainedBoundingBoxesFromSeriesPixel(targetName: string, worldPoint: Object): Object { return; }
+    public getSeriesValueFineGrainedBoundingBoxesFromSeriesPixel(targetName: string, worldPoint: object): object { return; }
 
     /**
      * If possible, will return the best available high value of the series for a given world coordinate.
@@ -364,7 +364,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param skipUnknowns    If true, unknown values should be skipped.
      */
     /* istanbul ignore next */
-    public getSeriesHighValue(targetName: string, worldPoint: Object, useInterpolation: boolean, skipUnknowns: boolean): number { return; }
+    public getSeriesHighValue(targetName: string, worldPoint: object, useInterpolation: boolean, skipUnknowns: boolean): number { return; }
 
     /**
      * If possible, will return the best available high value position of the series for a given world coordinate.
@@ -375,7 +375,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param skipUnknowns    If true, unknown values should be skipped.
      */
     /* istanbul ignore next */
-    public getSeriesHighValuePosition(targetName: string, worldPoint: Object, useInterpolation: boolean, skipUnknowns: boolean): Object { return; }
+    public getSeriesHighValuePosition(targetName: string, worldPoint: object, useInterpolation: boolean, skipUnknowns: boolean): object { return; }
 
     /**
      * If possible, will return the best available high value position of the series for a given world coordinate.
@@ -386,7 +386,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param skipUnknowns    If true, unknown values should be skipped.
      */
     /* istanbul ignore next */
-    public getSeriesHighValuePositionFromSeriesPixel(targetName: string, seriesPoint: Object, useInterpolation: boolean, skipUnknowns: boolean): Object { return; }
+    public getSeriesHighValuePositionFromSeriesPixel(targetName: string, seriesPoint: object, useInterpolation: boolean, skipUnknowns: boolean): object { return; }
 
     /**
      * If possible, will return the best available high value of the series for a given world coordinate.
@@ -397,7 +397,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param skipUnknowns    If true, unknown values should be skipped.
      */
     /* istanbul ignore next */
-    public getSeriesHighValueFromSeriesPixel(targetName: string, seriesPoint: Object, useInterpolation: boolean, skipUnknowns: boolean): number { return; }
+    public getSeriesHighValueFromSeriesPixel(targetName: string, seriesPoint: object, useInterpolation: boolean, skipUnknowns: boolean): number { return; }
 
     /**
      * If possible, will return the best available low value of the series for a given world coordinate.
@@ -408,7 +408,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param skipUnknowns    If true, unknown values should be skipped.
      */
     /* istanbul ignore next */
-    public getSeriesLowValue(targetName: string, worldPoint: Object, useInterpolation: boolean, skipUnknowns: boolean): number { return; }
+    public getSeriesLowValue(targetName: string, worldPoint: object, useInterpolation: boolean, skipUnknowns: boolean): number { return; }
 
     /**
      * If possible, will return the best available low value position of the series for a given world coordinate.
@@ -419,7 +419,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param skipUnknowns    If true, unknown values should be skipped.
      */
     /* istanbul ignore next */
-    public getSeriesLowValuePosition(targetName: string, worldPoint: Object, useInterpolation: boolean, skipUnknowns: boolean): Object { return; }
+    public getSeriesLowValuePosition(targetName: string, worldPoint: object, useInterpolation: boolean, skipUnknowns: boolean): object { return; }
 
     /**
      * If possible, will return the best available low value position of the series for a given world coordinate.
@@ -430,7 +430,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param skipUnknowns    If true, unknown values should be skipped.
      */
     /* istanbul ignore next */
-    public getSeriesLowValuePositionFromSeriesPixel(targetName: string, seriesPoint: Object, useInterpolation: boolean, skipUnknowns: boolean): Object { return; }
+    public getSeriesLowValuePositionFromSeriesPixel(targetName: string, seriesPoint: object, useInterpolation: boolean, skipUnknowns: boolean): object { return; }
 
     /**
      * If possible, will return the best available low value of the series for a given world coordinate.
@@ -441,7 +441,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param skipUnknowns    If true, unknown values should be skipped.
      */
     /* istanbul ignore next */
-    public getSeriesLowValueFromSeriesPixel(targetName: string, seriesPoint: Object, useInterpolation: boolean, skipUnknowns: boolean): number { return; }
+    public getSeriesLowValueFromSeriesPixel(targetName: string, seriesPoint: object, useInterpolation: boolean, skipUnknowns: boolean): number { return; }
 
     /**
      * Gets the item item index associated with the specified series pixel coordinate.
@@ -450,7 +450,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param seriesPoint    The world position (in the form {x: [number from 0 to 1], y: [number from 0 to 1]} ) that represents a position in the space of the axes.
      */
     /* istanbul ignore next */
-    public getItemIndexFromSeriesPixel(targetName: string, seriesPoint: Object): number { return; }
+    public getItemIndexFromSeriesPixel(targetName: string, seriesPoint: object): number { return; }
 
     /**
      * Gets the item that is the best match for the specified world coordinates.
@@ -459,7 +459,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param seriesPoint    The series pixel position (in the form {x: [number], y: [number]} ) that represents a position in the pixel space of the series.
      */
     /* istanbul ignore next */
-    public getItemFromSeriesPixel(targetName: string, seriesPoint: Object): Object { return; }
+    public getItemFromSeriesPixel(targetName: string, seriesPoint: object): object { return; }
 
     /**
      * Gets the category offset for a series, if applicable.
@@ -483,7 +483,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param targetName    The name of the series to target.
      */
     /* istanbul ignore next */
-    public replayTransitionIn(targetName: string): Object { return; }
+    public replayTransitionIn(targetName: string): object { return; }
 
     /**
      * Simulates a hover interaction over a given point in the viewport of a series.
@@ -492,7 +492,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param seriesPoint    The point at which to hover. Should have an x property with type number and a y property with type number.
      */
     /* istanbul ignore next */
-    public simulateHover(targetName: string, seriesPoint: Object): Object { return; }
+    public simulateHover(targetName: string, seriesPoint: object): object { return; }
 
     /**
      * Moves the cursor point of the target annotation layer to the desired world coordinates.
@@ -501,7 +501,7 @@ export class IgDataChartComponent extends IgControlBase<IgDataChart> {
      * @param worldPoint    The point to which to move the cursor. Should have an x property with type number and a y property with type number.
      */
     /* istanbul ignore next */
-    public moveCursorPoint(targetName: string, worldPoint: Object): Object { return; }
+    public moveCursorPoint(targetName: string, worldPoint: object): object { return; }
 
     /**
      * Manually starts a tiled zoom if one isn't already running.

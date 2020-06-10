@@ -67,7 +67,7 @@ export class IgTextEditorComponent extends IgEditorBase<IgTextEditor> {
      * @param matchType The rule that is applied for searching the text.
      */
     /* istanbul ignore next */
-    public findListItemIndex(text: string, matchType?: Object): number { return; }
+    public findListItemIndex(text: string, matchType?: object): number { return; }
 
     /**
      * Gets the index of the selected list item. Sets selected item by index.
@@ -151,7 +151,7 @@ export class IgTextEditorComponent extends IgEditorBase<IgTextEditor> {
     /* istanbul ignore next */
     public inputName(newValue?: string): string { return; }
 
-    public value(newValue: Object): void { return; }
+    public value(newValue: object): void { return; }
 
     /**
      * Gets the input element of the editor.
@@ -195,7 +195,7 @@ export class IgTextEditorComponent extends IgEditorBase<IgTextEditor> {
      * Gets a reference to [igValidator](ui.igvalidator) used by the editor.
      */
     /* istanbul ignore next */
-    public validator(): Object { return; }
+    public validator(): object { return; }
 
     /**
      * Checks if the value in the editor is valid. Note: This function will not trigger automatic notifications.

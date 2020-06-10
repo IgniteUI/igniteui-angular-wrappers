@@ -50,18 +50,18 @@ export class Feature<Model> {
             });
         }
         for (const setting in jQuery.ui[this.featureName].prototype.options) {
-            Object.defineProperty(self, setting, {
+            object.defineProperty(self, setting, {
                 set: self.createFeatureSetter(setting),
                 get: self.createFeatureGetter(setting),
                 enumerable: true,
                 configurable: true
             });
         }
-        const propNames = Object.getOwnPropertyNames(jQuery.ui[this.featureName].prototype);
+        const propNames = object.getOwnPropertyNames(jQuery.ui[this.featureName].prototype);
         for (let i = 0; i < propNames.length; i++) {
             const name = propNames[i];
             if (name.indexOf('_') !== 0 && typeof jQuery.ui[this.featureName].prototype[name] === 'function') {
-                Object.defineProperty(self, name, {
+                object.defineProperty(self, name, {
                     get: self.createMethodGetter(name)
                 });
             }
@@ -83,12 +83,12 @@ export class Feature<Model> {
     }
 
     createFeatureGetter(name) {
-        return function() {
+        return () => {
             return this._settings[name];
         };
     }
     createMethodGetter(name) {
-        return function() {
+        return () => {
             let grid = jQuery(this._el.nativeElement).closest('ig-grid').find('table[role=\'grid\']');
             if (grid.length === 0) {
                 grid = jQuery(this._el.nativeElement).closest('ig-hierarchical-grid').find('table[role=\'grid\']');

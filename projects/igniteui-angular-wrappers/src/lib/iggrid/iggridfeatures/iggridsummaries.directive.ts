@@ -39,7 +39,7 @@ export class IgGridSummariesFeature extends Feature<IgGridSummaries> {
      * @param event    event object. Its data should contain current columnKey, isAnimating, buttonId
      */
     /* istanbul ignore next */
-    public toggleDropDown(columnKey: string, event: Object): void { return; }
+    public toggleDropDown(columnKey: string, event: object): void { return; }
 
     /**
      * Show/Hide dialog
@@ -47,7 +47,7 @@ export class IgGridSummariesFeature extends Feature<IgGridSummaries> {
      * @param $dialog     jQuery object representation of dropdown div element
      */
     /* istanbul ignore next */
-    public showHideDialog($dialog: Object): void { return; }
+    public showHideDialog($dialog: object): void { return; }
 
     /**
      * Toggle summaries rows
@@ -64,7 +64,7 @@ export class IgGridSummariesFeature extends Feature<IgGridSummaries> {
      * @param $checkbox     Specifies the jQuery object of the checkbox.
      */
     /* istanbul ignore next */
-    public toggleCheckstate($checkbox: Object): void { return; }
+    public toggleCheckstate($checkbox: object): void { return; }
 
     /**
      * Select/Unselect specified checkbox
@@ -73,19 +73,19 @@ export class IgGridSummariesFeature extends Feature<IgGridSummaries> {
      * @param isToSelect     Specify whether to select or not checkbox
      */
     /* istanbul ignore next */
-    public selectCheckBox($checkbox: Object, isToSelect: boolean): void { return; }
+    public selectCheckBox($checkbox: object, isToSelect: boolean): void { return; }
 
     /**
      * Summary calculate the whole data for the specified column key, columnMethods and dataType (used when datasource is remote and dataType is date)
      *
      * @param ck    ColumnKey
      * @param columnMethods    Array of column methods objects
-     * @param data    Object which represents result
+     * @param data    object which represents result
  represents dataType for the current column
     * @param dataType
     */
     /* istanbul ignore next */
-    public calculateSummaryColumn(ck: string, columnMethods: any[], data: Object, dataType: Object): void { return; }
+    public calculateSummaryColumn(ck: string, columnMethods: any[], data: object, dataType: object): void { return; }
 
     /**
      * Return a JQUERY object which holds all summaries for all columns
@@ -99,5 +99,5 @@ export class IgGridSummariesFeature extends Feature<IgGridSummaries> {
      * @param columnKey
      */
     /* istanbul ignore next */
-    public summariesFor(columnKey: Object): void { return; }
+    public summariesFor(columnKey: object): void { return; }
 }

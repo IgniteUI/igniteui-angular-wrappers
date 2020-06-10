@@ -8,7 +8,9 @@ import { IgControlBase } from '../igcontrolbase/igcontrolbase';
     outputs: ['formatLabel', 'alignLabel', 'valueChanged']
 })
 export class IgLinearGaugeComponent extends IgControlBase<IgLinearGauge> {
-    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {
+      super(el, renderer, differs, kvalDiffers, cdr);
+    }
 
     /**
      * Returns a string containing the names of all the ranges delimited with a \n symbol.
@@ -22,7 +24,7 @@ export class IgLinearGaugeComponent extends IgControlBase<IgLinearGauge> {
      * @param value     The range object to be added.
      */
     /* istanbul ignore next */
-    public addRange(value: Object): void { return; }
+    public addRange(value: object): void { return; }
 
     /**
      * Removes a range from the linear gauge.
@@ -30,7 +32,7 @@ export class IgLinearGaugeComponent extends IgControlBase<IgLinearGauge> {
      * @param value     A JS object with properties set as follows: name: nameOfTheRangeToRemove, remove: true
      */
     /* istanbul ignore next */
-    public removeRange(value: Object): void { return; }
+    public removeRange(value: object): void { return; }
 
     /**
      * Updates the specified range of the linear gauge.
@@ -38,16 +40,16 @@ export class IgLinearGaugeComponent extends IgControlBase<IgLinearGauge> {
      * @param value     The range object to be updated.
      */
     /* istanbul ignore next */
-    public updateRange(value: Object): void { return; }
+    public updateRange(value: object): void { return; }
 
     /**
      * Gets the value for the main scale of the gauge for a given point within the bounds of the gauge.
      *
-     * @param x
-     * @param y
+     * @param x x-coordinate
+     * @param y y-coordiante
      */
     /* istanbul ignore next */
-    public getValueForPoint(x: Object, y: Object): number { return; }
+    public getValueForPoint(x: object, y: object): number { return; }
 
     /**
      * Returns true if the main gauge needle bounding box contains the point provided, otherwise false.
@@ -62,7 +64,7 @@ export class IgLinearGaugeComponent extends IgControlBase<IgLinearGauge> {
      * Returns information about how the linear gauge is rendered.
      */
     /* istanbul ignore next */
-    public exportVisualData(): Object { return; }
+    public exportVisualData(): object { return; }
 
     /**
      * Causes all pending changes of the linear gauge e.g. by changed property values to be rendered immediately.

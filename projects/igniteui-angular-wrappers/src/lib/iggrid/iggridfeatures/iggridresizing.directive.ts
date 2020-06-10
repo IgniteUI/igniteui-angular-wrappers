@@ -24,5 +24,5 @@ export class IgGridResizingFeature extends Feature<IgGridResizing> {
      * @param width    Width of the column in pixels or percents. If no width or "*" is specified the column will be auto-sized to the width of the data in it (including header and footer cells).
      */
     /* istanbul ignore next */
-    public resize(column: Object, width?: Object): void { return; }
+    public resize(column: object, width?: object): void { return; }
 }

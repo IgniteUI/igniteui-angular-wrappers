@@ -24,7 +24,7 @@ export class IgBulletGraphComponent extends IgControlBase<IgBulletGraph> {
      * @param value     The range object to be added.
      */
     /* istanbul ignore next */
-    public addRange(value: Object): void { return; }
+    public addRange(value: object): void { return; }
 
     /**
      * Removes a range from the bullet graph.
@@ -32,7 +32,7 @@ export class IgBulletGraphComponent extends IgControlBase<IgBulletGraph> {
      * @param value     A JS object with properties set as follows: name: nameOfTheRangeToRemove, remove: true
      */
     /* istanbul ignore next */
-    public removeRange(value: Object): void { return; }
+    public removeRange(value: object): void { return; }
 
     /**
      * Updates the specified range of the bullet graph.
@@ -40,13 +40,13 @@ export class IgBulletGraphComponent extends IgControlBase<IgBulletGraph> {
      * @param value     The range object to be updated.
      */
     /* istanbul ignore next */
-    public updateRange(value: Object): void { return; }
+    public updateRange(value: object): void { return; }
 
     /**
      * Returns information about how the bullet graph is rendered.
      */
     /* istanbul ignore next */
-    public exportVisualData(): Object { return; }
+    public exportVisualData(): object { return; }
 
     /**
      * Causes all pending changes of the bullet graph e.g. by changed property values to be rendered immediately.

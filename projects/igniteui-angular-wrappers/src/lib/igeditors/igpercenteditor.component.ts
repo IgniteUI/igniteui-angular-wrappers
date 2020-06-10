@@ -26,7 +26,7 @@ export class IgPercentEditorComponent extends IgEditorBase<IgPercentEditor> {
      * @param symbol New percent symbol.
      */
     /* istanbul ignore next */
-    public percentSymbol(symbol?: Object): string { return; }
+    public percentSymbol(symbol?: object): string { return; }
 
     /**
      * Gets/Sets editor value.

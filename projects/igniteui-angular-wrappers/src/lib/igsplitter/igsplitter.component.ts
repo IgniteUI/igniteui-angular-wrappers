@@ -4,18 +4,32 @@ import { IgContentControlBase } from '../igcontrolbase/igcontentcontrolbase';
 @Component({
     selector: 'ig-splitter',
     template: '<ng-content></ng-content>',
-    inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'width', 'height', 'orientation', 'panels', 'dragDelta', 'resizeOtherSplitters'],
+    inputs: [
+      'widgetId',
+      'options',
+      'changeDetectionInterval',
+      'disabled',
+      'create',
+      'width',
+      'height',
+      'orientation',
+      'panels',
+      'dragDelta',
+      'resizeOtherSplitters'
+    ],
     outputs: ['collapsed', 'expanded', 'resizeStarted', 'resizing', 'resizeEnded', 'layoutRefreshing', 'layoutRefreshed']
 })
 export class IgSplitterComponent extends IgContentControlBase<IgSplitter> {
-    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {
+      super(el, renderer, differs, kvalDiffers, cdr);
+    }
 
 
     /**
      * Returns the element that represents this widget.
      */
     /* istanbul ignore next */
-    public widget(): Object { return; }
+    public widget(): object { return; }
 
 
     /**
@@ -24,7 +38,7 @@ export class IgSplitterComponent extends IgContentControlBase<IgSplitter> {
      * @param index Specifies the index of the panel to expand.
      */
     /* istanbul ignore next */
-    public expandAt(index: Object): void { return; }
+    public expandAt(index: object): void { return; }
 
 
     /**
@@ -33,21 +47,21 @@ export class IgSplitterComponent extends IgContentControlBase<IgSplitter> {
      * @param index Specifies the index of the panel to collapse.
      */
     /* istanbul ignore next */
-    public collapseAt(index: Object): void { return; }
+    public collapseAt(index: object): void { return; }
 
 
     /**
      * Retrieves the jQuery element of the first panel.
      */
     /* istanbul ignore next */
-    public firstPanel(): Object { return; }
+    public firstPanel(): object { return; }
 
 
     /**
      * Retrieves the jQuery element of the second panel.
      */
     /* istanbul ignore next */
-    public secondPanel(): Object { return; }
+    public secondPanel(): object { return; }
 
 
     /**
@@ -63,7 +77,7 @@ export class IgSplitterComponent extends IgContentControlBase<IgSplitter> {
      * @param size Specifies the new size of the first panel.
      */
     /* istanbul ignore next */
-    public setFirstPanelSize(size: Object): void { return; }
+    public setFirstPanelSize(size: object): void { return; }
 
 
     /**
@@ -72,7 +86,7 @@ export class IgSplitterComponent extends IgContentControlBase<IgSplitter> {
      * @param size Specifies the new size of the second panel.
      */
     /* istanbul ignore next */
-    public setSecondPanelSize(size: Object): void { return; }
+    public setSecondPanelSize(size: object): void { return; }
 
     /**
      * Destroys the igSplitter widget

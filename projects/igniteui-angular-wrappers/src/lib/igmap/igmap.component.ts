@@ -1,4 +1,4 @@
-import { Component, IterableDiffers, ElementRef, KeyValueDiffers, ChangeDetectorRef, Input, Renderer2 } from '@angular/core';
+import { Component, IterableDiffers, ElementRef, KeyValueDiffers, ChangeDetectorRef, Input, Renderer2, OnInit } from '@angular/core';
 import { IgControlBase } from '../igcontrolbase/igcontrolbase';
 
 @Component({
@@ -7,8 +7,10 @@ import { IgControlBase } from '../igcontrolbase/igcontrolbase';
     inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'width', 'height', 'dataSource', 'dataSourceUrl', 'dataSourceType', 'responseDataKey', 'autoMarginWidth', 'autoMarginHeight', 'crosshairVisibility', 'crosshairPoint', 'plotAreaBackground', 'defaultInteraction', 'dragModifier', 'panModifier', 'previewRect', 'windowRect', 'zoomable', 'windowScale', 'windowResponse', 'windowRectMinWidth', 'windowPositionHorizontal', 'windowPositionVertical', 'circleMarkerTemplate', 'triangleMarkerTemplate', 'pyramidMarkerTemplate', 'squareMarkerTemplate', 'diamondMarkerTemplate', 'pentagonMarkerTemplate', 'hexagonMarkerTemplate', 'tetragramMarkerTemplate', 'pentagramMarkerTemplate', 'hexagramMarkerTemplate', 'overviewPlusDetailPaneBackgroundImageUri', 'useTiledZooming', 'preferHigherResolutionTiles', 'zoomTileCacheSize', 'backgroundContent', 'series', 'theme'],
     outputs: ['tooltipShowing', 'tooltipShown', 'tooltipHiding', 'tooltipHidden', 'browserNotSupported', 'seriesCursorMouseMove', 'seriesMouseLeftButtonDown', 'seriesMouseLeftButtonUp', 'seriesMouseMove', 'seriesMouseEnter', 'seriesMouseLeave', 'windowRectChanged', 'gridAreaRectChanged', 'refreshCompleted', 'triangulationStatusChanged']
 })
-export class IgMapComponent extends IgControlBase<IgMap> {
-    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }
+export class IgMapComponent extends IgControlBase<IgMap> implements OnInit {
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {
+      super(el, renderer, differs, kvalDiffers, cdr);
+    }
 
     @Input()
     public set dataSource(value: any) {
@@ -19,37 +21,8 @@ export class IgMapComponent extends IgControlBase<IgMap> {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     private _dataSource: any;
-public option(): void { return; }
+    public option(): void { return; }
     ngOnInit() {
         if (this._dataSource === null || this._dataSource === undefined) {
             this._dataSource = this.options.dataSource;
@@ -77,17 +50,17 @@ public option(): void { return; }
      * @param height The height of the image.
      */
     /* istanbul ignore next */
-    public exportImage(width?: Object, height?: Object): Object { return; }
+    public exportImage(width?: object, height?: object): object { return; }
     /**
      * Notify the map that styles it draws colors from may have been updated.
      */
     /* istanbul ignore next */
-    public styleUpdated(): Object { return; }
+    public styleUpdated(): object { return; }
     /**
      * Resets the zoom level of the map to default.
      */
     /* istanbul ignore next */
-    public resetZoom(): Object { return; }
+    public resetZoom(): object { return; }
     /**
      * Adds a new item to the data source and notifies the map.
      *
@@ -95,7 +68,7 @@ public option(): void { return; }
      * @param targetName     The name of the series bound to the data source.
      */
     /* istanbul ignore next */
-    public addItem(item: Object, targetName: string): void { return; }
+    public addItem(item: object, targetName: string): void { return; }
     /**
      * Inserts a new item to the data source and notifies the map.
      *
@@ -104,7 +77,7 @@ public option(): void { return; }
      * @param targetName     The name of the series bound to the data source.
      */
     /* istanbul ignore next */
-    public insertItem(item: Object, index: number, targetName: string): void { return; }
+    public insertItem(item: object, index: number, targetName: string): void { return; }
     /**
      * Deletes an item from the data source and notifies the map.
      *
@@ -121,7 +94,7 @@ public option(): void { return; }
      * @param targetName     The name of the series bound to the data source.
      */
     /* istanbul ignore next */
-    public setItem(index: number, item: Object, targetName: string): void { return; }
+    public setItem(index: number, item: object, targetName: string): void { return; }
     /**
      * Notifies the the map that an item has been set in an associated data source.
      *
@@ -131,7 +104,7 @@ public option(): void { return; }
      * @param oldItem the old item that has been overwritten in the collection.
      */
     /* istanbul ignore next */
-    public notifySetItem(dataSource: Object, index: number, newItem: Object, oldItem: Object): Object { return; }
+    public notifySetItem(dataSource: object, index: number, newItem: object, oldItem: object): object { return; }
     /**
      * Notifies the the map that the items have been cleared from an associated data source.
      *                 It's not necessary to notify more than one target of a change if they share the same items source.
@@ -139,7 +112,7 @@ public option(): void { return; }
      * @param dataSource The data source in which the change happened.
      */
     /* istanbul ignore next */
-    public notifyClearItems(dataSource: Object): Object { return; }
+    public notifyClearItems(dataSource: object): object { return; }
     /**
      * Notifies the the target series that an item has been inserted at the specified index in its data source.
      *                 It's not necessary to notify more than one target of a change if they share the same items source.
@@ -149,7 +122,7 @@ public option(): void { return; }
      * @param newItem the new item that has been set in the collection.
      */
     /* istanbul ignore next */
-    public notifyInsertItem(dataSource: Object, index: number, newItem: Object): Object { return; }
+    public notifyInsertItem(dataSource: object, index: number, newItem: object): object { return; }
     /**
      * Notifies the the target series that an item has been removed from the specified index in its data source.
      *                 It's not necessary to notify more than one target of a change if they share the same items source.
@@ -159,7 +132,7 @@ public option(): void { return; }
      * @param oldItem the old item that has been removed from the collection.
      */
     /* istanbul ignore next */
-    public notifyRemoveItem(dataSource: Object, index: number, oldItem: Object): Object { return; }
+    public notifyRemoveItem(dataSource: object, index: number, oldItem: object): object { return; }
     /**
      * Notifies the target series or axis that it should scroll the requested data item into view.
      *
@@ -167,7 +140,7 @@ public option(): void { return; }
      * @param item The data item to bring into view, if possible.
      */
     /* istanbul ignore next */
-    public scrollIntoView(targetName: string, item: Object): Object { return; }
+    public scrollIntoView(targetName: string, item: object): object { return; }
     /**
      * Either xAxis or yAxis (longitude or latitude) that it should scale the requested value into map space from axis space.
      * 				For example you can use this method if you want to find where longitude 50 stands scaled to map's width.
@@ -214,17 +187,17 @@ public option(): void { return; }
     /**
      * Gets the actual minimum value of the target xAxis or yAxis
      *
-     * @param targetName
+     * @param targetName target name
      */
     /* istanbul ignore next */
-    public getActualMinimumValue(targetName: Object): void { return; }
+    public getActualMinimumValue(targetName: object): void { return; }
     /**
      * Gets the actual maximum value of the target xAxis or yAxis
      *
-     * @param targetName
+     * @param targetName target name
      */
     /* istanbul ignore next */
-    public getActualMaximumValue(targetName: Object): void { return; }
+    public getActualMaximumValue(targetName: object): void { return; }
     /**
      * Notifies the map that the container was resized
      */
@@ -236,21 +209,21 @@ public option(): void { return; }
      * @param rect The geographic area rectangle.
      */
     /* istanbul ignore next */
-    public zoomToGeographic(rect: Object): Object { return; }
+    public zoomToGeographic(rect: object): object { return; }
     /**
      * Given the current plot area of the control and a geographic region, get the WindowRect that would encompass that geographic region.
      *
      * @param rect The geographic area rectangle.
      */
     /* istanbul ignore next */
-    public getGeographicFromZoom(rect: Object): Object { return; }
+    public getGeographicFromZoom(rect: object): object { return; }
     /**
      * Given the current plot area of the control and a geographic region, get the WindowRect that would encompass that geographic region.
      *
      * @param rect The geographic area rectangle.
      */
     /* istanbul ignore next */
-    public getZoomFromGeographic(rect: Object): Object { return; }
+    public getZoomFromGeographic(rect: object): object { return; }
     /**
      * Creates a print preview page with the map, hiding all other elements on the page.
      */

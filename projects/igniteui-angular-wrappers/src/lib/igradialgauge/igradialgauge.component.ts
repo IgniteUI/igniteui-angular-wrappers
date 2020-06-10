@@ -8,7 +8,9 @@ import { IgControlBase } from '../igcontrolbase/igcontrolbase';
     outputs: ['formatLabel', 'alignLabel', 'valueChanged']
 })
 export class IgRadialGaugeComponent extends IgControlBase<IgRadialGauge> {
-    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {
+      super(el, renderer, differs, kvalDiffers, cdr);
+    }
 
     /**
      * Returns a string containing the names of all the ranges delimited with a \n symbol.
@@ -19,26 +21,26 @@ export class IgRadialGaugeComponent extends IgControlBase<IgRadialGauge> {
     /**
      * Adds a new range to the radial gauge.
      *
-     * @param value
+     * @param value value
      */
     /* istanbul ignore next */
-    public addRange(value: Object): void { return; }
+    public addRange(value: object): void { return; }
 
     /**
      * Removes a specified range.
      *
-     * @param value
+     * @param value value
      */
     /* istanbul ignore next */
-    public removeRange(value: Object): void { return; }
+    public removeRange(value: object): void { return; }
 
     /**
      * Updates the range.
      *
-     * @param value
+     * @param value value
      */
     /* istanbul ignore next */
-    public updateRange(value: Object): void { return; }
+    public updateRange(value: object): void { return; }
 
     /**
      * Clears the ranges in the radial gauge.
@@ -49,45 +51,45 @@ export class IgRadialGaugeComponent extends IgControlBase<IgRadialGauge> {
     /**
      * Scales a value on the gauge's main scale to an angle around the center point of the gauge, in radians.
      *
-     * @param value
+     * @param value value
      */
     /* istanbul ignore next */
-    public scaleValue(value: Object): void { return; }
+    public scaleValue(value: object): void { return; }
 
     /**
      * Unscales a value from an angle in radians to the represented value along the main scale of the gauge.
      *
-     * @param value
+     * @param value value
      */
     /* istanbul ignore next */
-    public unscaleValue(value: Object): void { return; }
+    public unscaleValue(value: object): void { return; }
 
     /**
      * Gets the value for the main scale of the gauge for a given point within the bounds of the gauge.
      *
-     * @param x
-     * @param y
+     * @param x x-coordinate
+     * @param y y-coordinate
      */
     /* istanbul ignore next */
-    public getValueForPoint(x: Object, y: Object): number { return; }
+    public getValueForPoint(x: object, y: object): number { return; }
 
     /**
      * Gets the point on the gauge for a given scale value and extent.
      *
-     * @param value
-     * @param extent
+     * @param value value
+     * @param extent extent
      */
     /* istanbul ignore next */
-    public getPointForValue(value: Object, extent: Object): void { return; }
+    public getPointForValue(value: object, extent: object): void { return; }
 
     /**
      * Returns true if the main gauge needle bounding box contains the point provided, otherwise false.
      *
-     * @param x
-     * @param y
+     * @param x x-coordinate
+     * @param y y-coordinate
      */
     /* istanbul ignore next */
-    public needleContainsPoint(x: Object, y: Object): void { return; }
+    public needleContainsPoint(x: object, y: object): void { return; }
 
     /**
      * Exports the visual data for the radial gauge.

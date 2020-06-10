@@ -17,7 +17,8 @@ declare var jQuery: any;
     selector: 'ig-hierarchical-grid',
     template: '<ng-content></ng-content>',
     inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'initialDataBindDepth', 'initialExpandDepth', 'odata', 'rest', 'maxDataBindDepth', 'defaultChildrenDataProperty', 'autoGenerateLayouts', 'expandCollapseAnimations', 'expandColWidth', 'pathSeparator', 'animationDuration', 'expandTooltip', 'collapseTooltip', 'columnLayouts', 'width', 'height', 'autoAdjustHeight', 'avgRowHeight', 'avgColumnWidth', 'defaultColumnWidth', 'autoGenerateColumns', 'virtualization', 'virtualizationMode', 'requiresDataBinding', 'rowVirtualization', 'columnVirtualization', 'virtualizationMouseWheelStep', 'adjustVirtualHeights', 'templatingEngine', 'columns', 'dataSource', 'dataSourceUrl', 'dataSourceType', 'responseDataKey', 'responseTotalRecCountKey', 'requestType', 'responseContentType', 'showHeader', 'showFooter', 'fixedHeaders', 'fixedFooters', 'caption', 'features', 'tabIndex', 'localSchemaTransform', 'primaryKey', 'serializeTransactionLog', 'autoCommit', 'aggregateTransactions', 'autoFormat', 'renderCheckboxes', 'updateUrl', 'restSettings', 'alternateRowStyles', 'autofitLastColumn', 'enableHoverStyles', 'enableUTCDates', 'mergeUnboundColumns', 'jsonpRequest', 'enableResizeContainerCheck', 'featureChooserIconDisplay', 'scrollSettings'],
-    outputs: ['rowExpanding', 'rowExpanded', 'rowCollapsing', 'rowCollapsed', 'childrenPopulating', 'childrenPopulated', 'childGridRendered', 'childGridCreating', 'childGridCreated', 'cellClick', 'cellRightClick', 'dataBinding', 'dataBound', 'rendering', 'rendered', 'dataRendering', 'dataRendered', 'headerRendering', 'headerRendered', 'footerRendering', 'footerRendered', 'headerCellRendered', 'rowsRendering', 'rowsRendered', 'schemaGenerated', 'columnsCollectionModified', 'requestError', 'created', 'destroyed']
+    outputs: ['rowExpanding', 'rowExpanded', 'rowCollapsing', 'rowCollapsed', 'childrenPopulating', 'childrenPopulated',
+    'childGridRendered', 'childGridCreating', 'childGridCreated', 'cellClick', 'cellRightClick', 'dataBinding', 'dataBound', 'rendering', 'rendered', 'dataRendering', 'dataRendered', 'headerRendering', 'headerRendered', 'footerRendering', 'footerRendered', 'headerCellRendered', 'rowsRendering', 'rowsRendered', 'schemaGenerated', 'columnsCollectionModified', 'requestError', 'created', 'destroyed']
 })
 export class IgHierarchicalGridComponent extends IgGridBase<IgHierarchicalGrid> {
     @Input()
@@ -76,49 +77,55 @@ export class IgHierarchicalGridComponent extends IgGridBase<IgHierarchicalGrid> 
      * Returns the element of the root grid (igGrid)
      */
     /* istanbul ignore next */
-    public root(): Object { return; }
+    public root(): object { return; }
 
     /**
      * Returns the widget object of the root grid (igGrid)
      */
     /* istanbul ignore next */
-    public rootWidget(): Object { return; }
+    public rootWidget(): object { return; }
 
     /**
      * Returns a flat list of all child grid elements (recursive)
      */
     /* istanbul ignore next */
-    public allChildren(): Object { return; }
+    public allChildren(): object { return; }
 
     /**
      * Expands or collapses (toggles) a parent row
-     * 				Note: This method is asynchronous which means that it returns immediately and any subsequent code will execute in parallel. This may lead to runtime errors. To avoid them put the subsequent code in the callback parameter provided by the method.
+     * Note: This method is asynchronous which means that it returns immediately and any subsequent code will execute in parallel.
+     * This may lead to runtime errors. To avoid them put the subsequent code in the callback parameter provided by the method.
      *
      * @param element     accepts a dom element, or a jquery wrapped dom element that should be a TR and should specify a parent row
-     * @param callback     Specifies a custom function to be called when parent row is toggled(optional). Takes 2 arguments - first is hierarchical grid object, second is the row element that was toggled
+     * @param callback     Specifies a custom function to be called when parent row is toggled(optional).
+     * Takes 2 arguments - first is hierarchical grid object, second is the row element that was toggled
      */
     /* istanbul ignore next */
-    public toggle(element: Element, callback?: Function): void { return; }
+    public toggle(element: Element, callback?: () => void): void { return; }
 
     /**
      * Expands (toggles) a parent row
-     * 				Note: This method is asynchronous which means that it returns immediately and any subsequent code will execute in parallel. This may lead to runtime errors. To avoid them put the subsequent code in the callback parameter provided by the method.
+     * Note: This method is asynchronous which means that it returns immediately and any subsequent code will execute in parallel.
+     * This may lead to runtime errors. To avoid them put the subsequent code in the callback parameter provided by the method.
      *
      * @param id     accepts a dom element, or a jquery wrapped dom element that should be a TR and should specify a parent row
-     * @param callback     Specifies a custom function to be called when parent row is expanded(optional). Takes 2 arguments first is hierarchical grid object, second is the row element that was expanded
+     * @param callback     Specifies a custom function to be called when parent row is expanded(optional).
+     * Takes 2 arguments first is hierarchical grid object, second is the row element that was expanded
      */
     /* istanbul ignore next */
-    public expand(id: Element, callback?: Function): void { return; }
+    public expand(id: Element, callback?: () => void): void { return; }
 
     /**
      * Collapses a parent row
-     * 				Note: This method is asynchronous which means that it returns immediately and any subsequent code will execute in parallel. This may lead to runtime errors. To avoid them put the subsequent code in the callback parameter provided by the method.
+     * Note: This method is asynchronous which means that it returns immediately and any subsequent code will execute in parallel.
+     * This may lead to runtime errors. To avoid them put the subsequent code in the callback parameter provided by the method.
      *
-     * @param id     accepts a dom element, or a jquery wrapped dom element that should be a TR and should specify a parent row
-     * @param callback     Specifies a custom function to be called when parent row is expanded(optional). Takes 2 arguments - first is hierarchical grid object, second is the row element that was collapsed
+     * @param id accepts a dom element, or a jquery wrapped dom element that should be a TR and should specify a parent row
+     * @param callback Specifies a custom function to be called when parent row is expanded(optional).
+     * Takes 2 arguments - first is hierarchical grid object, second is the row element that was collapsed
      */
     /* istanbul ignore next */
-    public collapse(id: Element, callback?: Function): void { return; }
+    public collapse(id: Element, callback?: () => void): void { return; }
 
     /**
      * Checks if a parent row is currently collapsed
@@ -143,7 +150,9 @@ export class IgHierarchicalGridComponent extends IgGridBase<IgHierarchicalGrid> 
     public commit(): void { return; }
 
     /**
-     * Clears the transaction log (delegates to igDataSource). Note that this does not update the UI. In case the UI must be updated, set the second parameter "updateUI" to true, which will trigger a call to dataBind() to re-render the contents.
+     * Clears the transaction log (delegates to igDataSource). Note that this does not update the UI.
+     * In case the UI must be updated, set the second parameter "updateUI" to true, which will trigger a call to dataBind()
+     * to re-render the contents.
      *
      * @param rebind     Whether to perform a rebind.
      */
@@ -157,7 +166,7 @@ export class IgHierarchicalGridComponent extends IgGridBase<IgHierarchicalGrid> 
      * @param error    Specifies a custom function to be called when AJAX request to the updateUrl option fails(optional)
      */
     /* istanbul ignore next */
-    public saveChanges(success: Function, error: Function): void { return; }
+    public saveChanges(success: () => void, error: () => void): void { return; }
 
     /**
      * Destroys the hierarchical grid by recursively destroying all child grids

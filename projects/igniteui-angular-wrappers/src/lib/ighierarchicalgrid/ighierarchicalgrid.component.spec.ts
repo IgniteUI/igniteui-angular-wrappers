@@ -1,3 +1,4 @@
+// tslint:disable-next-line:max-line-length
 // modeled after https://github.com/angular/angular/blob/cee2318110eeea115e5f6fc5bfc814cbaa7d90d8/modules/Angular/test/common/directives/ng_for_spec.ts
 import { TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
@@ -5,7 +6,7 @@ import * as Infragistics from '../../public-api';
 
 declare const $: any;
 
-describe('Infragistics Angular HierarchicalGrid', function() {
+describe('Infragistics Angular HierarchicalGrid', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -178,8 +179,8 @@ describe('Infragistics Angular HierarchicalGrid', function() {
 
                 setTimeout(() => {
                     fixture.detectChanges();
-                    expect($(fixture.debugElement.nativeElement).find('#grid1').igHierarchicalGrid('option', 'dataSource')[0].Products.length)
-                        .toBe(0);
+                    expect($(fixture.debugElement.nativeElement).find('#grid1')
+                      .igHierarchicalGrid('option', 'dataSource')[0].Products.length).toBe(0);
                     done();
                 }, 10);
             });
@@ -310,7 +311,8 @@ class TestComponent {
     public singleRecData: Array<any>;
     public singleRecData2: Array<any>;
 
-    @ViewChild(Infragistics.IgHierarchicalGridComponent, { static: true }) public viewChild: Infragistics.IgHierarchicalGridComponent;
+    @ViewChild(Infragistics.IgHierarchicalGridComponent, { static: true })
+    public viewChild: Infragistics.IgHierarchicalGridComponent;
 
     constructor() {
         this.data = [

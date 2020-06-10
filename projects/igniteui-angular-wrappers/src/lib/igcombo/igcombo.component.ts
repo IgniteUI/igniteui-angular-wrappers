@@ -46,7 +46,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
                     that._model.viewToModelUpdate(evt.target.value);
                 });
 
-                jQuery(this._el).closest('.ui-igcombo-wrapper').find('.ui-igcombo-clear').on('click', function() {
+                jQuery(this._el).closest('.ui-igcombo-wrapper').find('.ui-igcombo-clear').on('click', () => {
                     if (that.options.multiSelection && that.options.multiSelection.enabled) {
                         that._model.viewToModelUpdate([]);
                     } else {
@@ -164,7 +164,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * Performs databinding on the combo box. The [databinding](ui.igcombo#events:dataBinding) and [dataBound](ui.igcombo#events:dataBound) events are always raised.
      */
     /* istanbul ignore next */
-    public dataBind(): Object { return; }
+    public dataBind(): object { return; }
 
     /**
      * Forces an update of the igCombo value according to the current text in the igCombo input.
@@ -173,7 +173,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * 				The refresh will take the current text and, if no selection is applied, will set it as igCombo value provided that [allowCustomValue](ui.igcombo#options:allowCustomValue) true.
      */
     /* istanbul ignore next */
-    public refreshValue(): Object { return; }
+    public refreshValue(): object { return; }
 
     /**
      * Gets the associated data of an item by value matching it's [valueKey](ui.igcombo#options:valueKey) property.
@@ -181,7 +181,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * @param value Value matching the valueKey property of item to be tested if it is selected
      */
     /* istanbul ignore next */
-    public dataForValue(value: Object): Object { return; }
+    public dataForValue(value: object): object { return; }
 
     /**
      * Gets the associated data of li element in the combo.
@@ -189,7 +189,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * @param $element jQuery element of item in the drop down list
      */
     /* istanbul ignore next */
-    public dataForElement($element: Object): Object { return; }
+    public dataForElement($element: object): object { return; }
 
     /**
      * Gets object/s containing data and list item in the combo by element/s.
@@ -197,7 +197,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * @param $element jQuery object with drop down list item element or elements
      */
     /* istanbul ignore next */
-    public itemsFromElement($element: Object): Object { return; }
+    public itemsFromElement($element: object): object { return; }
 
     /**
      * Gets object/s containing data and list item in the combo by value/s.
@@ -205,7 +205,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * @param value Value of item in the drop down list or array with values.
      */
     /* istanbul ignore next */
-    public itemsFromValue(value: Object): Object { return; }
+    public itemsFromValue(value: object): object { return; }
 
     /**
      * Gets object/s containing data and list item in the combo by index/es.
@@ -213,7 +213,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * @param index Index or array of indexes of items in the drop down list
      */
     /* istanbul ignore next */
-    public itemsFromIndex(index: number): Object { return; }
+    public itemsFromIndex(index: number): object { return; }
 
     /**
      * Gets array with data and objects representing li elements in combo box.
@@ -240,7 +240,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * @param event Indicates the browser event which triggered this action (not API). Calling the method with this param set to "true" will trigger [filtering](ui.igcombo#events:filtering) and [filtered](ui.igcombo#events:filtered) events.
      */
     /* istanbul ignore next */
-    public filter(texts?: Object, event?: Object): Object { return; }
+    public filter(texts?: object, event?: object): object { return; }
 
     /**
      * Clears filtering.
@@ -248,7 +248,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * @param event Indicates the browser event which triggered this action (not API). Calling the method with this param set to "true" will trigger [filtering](ui.igcombo#events:filtering) and [filtered](ui.igcombo#events:filtered) events.
      */
     /* istanbul ignore next */
-    public clearFiltering(event?: Object): Object { return; }
+    public clearFiltering(event?: object): object { return; }
 
     /**
      * Opens the drop-down.
@@ -258,7 +258,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * @param event Indicates the browser event which triggered this action (not API). Calling the method with this param set to "true" will trigger [dropDownOpening](ui.igcombo#events:dropDownOpening) and [dropDownOpened](ui.igcombo#events:dropDownOpened) events.
      */
     /* istanbul ignore next */
-    public openDropDown(callback?: Function, focusCombo?: boolean, event?: Object): Object { return; }
+    public openDropDown(callback?: () => void, focusCombo?: boolean, event?: object): object { return; }
 
     /**
      * Closes the drop down.
@@ -267,17 +267,17 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * @param event Indicates the browser event which triggered this action (not API). Calling the method with this param set to "true" will trigger [dropDownClosing](ui.igcombo#events:dropDownClosing) and [dropDownClosed](ui.igcombo#events:dropDownClosed) events.
      */
     /* istanbul ignore next */
-    public closeDropDown(callback?: Function, event?: Object): Object { return; }
+    public closeDropDown(callback?: () => void, event?: object): object { return; }
 
     /**
      * Clears the input text, resets highlighting, filtering and selection.
      *
-     * @param options     Object with set of options controlling the behavior of this api method.
+     * @param options     object with set of options controlling the behavior of this api method.
      focusCombo (boolean): Set to true to focus combo after clearing the input.
     * @param event Indicates the browser event which triggered this action (not API). Calling the method with this param set to "true" will trigger [selectionChanging](ui.igcombo#events:selectionChanging) and [selectionChanged](ui.igcombo#events:selectionChanged) events.
     */
     /* istanbul ignore next */
-    public clearInput(options?: Object, event?: Object): Object { return; }
+    public clearInput(options?: object, event?: object): object { return; }
 
     /**
      * Verifies whether a specified value is selected.
@@ -285,7 +285,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * @param value Value matching the [valueKey](ui.igcombo#options:valueKey) property of item to be tested if it is selected
      */
     /* istanbul ignore next */
-    public isValueSelected(value: Object): boolean { return; }
+    public isValueSelected(value: object): boolean { return; }
 
     /**
      * Verifies whether the li representing the data source's record at the specified index is selected.
@@ -293,13 +293,13 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * @param index Index of data source record
      */
     /* istanbul ignore next */
-    public isIndexSelected(index: Object): boolean { return; }
+    public isIndexSelected(index: object): boolean { return; }
 
     /**
      * Selects list item/items from the drop-down list by specified value or array of values. When called witout params will return the value of the selected item or if [multiSelection](ui.igcombo#options:multiSelection) is enabled array of selected values.
      *
      * @param value Value or array of values matching the valueKey property of item/items to be selected
-     * @param options Object with set of options controlling the behavior of this api method.
+     * @param options object with set of options controlling the behavior of this api method.
                     closeDropDown (boolean): Set to true to close the drop down list after the selection.
                     focusCombo (boolean): Set to true to focus combo after the selection.
                     additive (boolean): Set to true to select the item without losing other selection. Works only when multi selection is enabled.
@@ -311,13 +311,13 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
     * @param event Indicates the browser event which triggered this action (not API). Calling the method with this param set to "true" will trigger [selectionChanging](ui.igcombo#events:selectionChanging) and [selectionChanged](ui.igcombo#events:selectionChanged) events.
     */
     /* istanbul ignore next */
-    public value(value?: Object, options?: Object, event?: Object): Object { return; }
+    public value(value?: object, options?: object, event?: object): object { return; }
 
     /**
      * Selects a list item from the drop-down list.
      *
      * @param $items jQuery object with item or items to be selected.
-     * @param options Object with set of options controlling the behavior of this api method.
+     * @param options object with set of options controlling the behavior of this api method.
                     closeDropDown (boolean): Set to true to close the drop down list after the selection.
                     focusCombo (boolean): Set to true to focus combo after the selection.
                     additive (boolean): Set to true to select the item without losing other selection. Works only when multi selection is enabled.
@@ -329,13 +329,13 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
     * @param event Indicates the browser event which triggered this action (not API). Calling the method with this param set to "true" will trigger [selectionChanging](ui.igcombo#events:selectionChanging) and [selectionChanged](ui.igcombo#events:selectionChanged) events.
     */
     /* istanbul ignore next */
-    public select($items: Object, options?: Object, event?: Object): Object { return; }
+    public select($items: object, options?: object, event?: object): object { return; }
 
     /**
      * Gets/Sets selected item/s from the drop-down list by specified index.
      *
      * @param index Index or array of indexes of items to be selected
-     * @param options Object with set of options controlling the behavior of this api method.
+     * @param options object with set of options controlling the behavior of this api method.
                     closeDropDown (boolean): Set to true to close the drop down list after the selection.
                     focusCombo (boolean): Set to true to focus combo after the selection.
                     additive (boolean): Set to true to select the item without losing other selection. Works only when multi selection is enabled.
@@ -347,12 +347,12 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
     * @param event Indicates the browser event which triggered this action (not API). Calling the method with this param set to "true" will trigger [selectionChanging](ui.igcombo#events:selectionChanging) and [selectionChanged](ui.igcombo#events:selectionChanged) events.
     */
     /* istanbul ignore next */
-    public index(index?: Object, options?: Object, event?: Object): Object { return; }
+    public index(index?: object, options?: object, event?: object): object { return; }
 
     /**
      * Selects all items from the drop-down list.
      *
-     * @param options Object with set of options controlling the behavior of this api method.
+     * @param options object with set of options controlling the behavior of this api method.
                     closeDropDown (boolean): Set to true to close the drop down list after the selection.
                     focusCombo (boolean): Set to true to focus combo after the selection.
                     keepFiltering (boolean): Set to true to keep filtering after the selection. By default the filtering is cleared.
@@ -363,54 +363,54 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
     * @param event Indicates the browser event which triggered this action (not API). Calling the method with this param set to "true" will trigger [selectionChanging](ui.igcombo#events:selectionChanging) and [selectionChanged](ui.igcombo#events:selectionChanged) events.
     */
     /* istanbul ignore next */
-    public selectAll(options?: Object, event?: Object): Object { return; }
+    public selectAll(options?: object, event?: object): object { return; }
 
     /**
      * Deselects a list item from the drop down list by value.
      *
      * @param value Value or array of values matching the [valueKey](ui.igcombo#options:valueKey) property of item/items to be deselected
-     * @param options Object with set of options controlling the behavior of this api method.
+     * @param options object with set of options controlling the behavior of this api method.
                     focusCombo (boolean): Set to true to focus combo after the deselection.
                     keepInputText (boolean): Set to true to keep input text unchanged after the deselection. By default input text is updated.
     * @param event Indicates the browser event which triggered this action (not API). Calling the method with this param set to "true" will trigger [selectionChanging](ui.igcombo#events:selectionChanging) and [selectionChanged](ui.igcombo#events:selectionChanged) events.
     */
     /* istanbul ignore next */
-    public deselectByValue(value: Object, options?: Object, event?: Object): Object { return; }
+    public deselectByValue(value: object, options?: object, event?: object): object { return; }
 
     /**
      * Deselects a list item from the drop down list.
      *
      * @param $items jQuery object with item or items to be deselected
-     * @param options Object with set of options controlling the behavior of this api method.
+     * @param options object with set of options controlling the behavior of this api method.
                     focusCombo (boolean): Set to true to focus combo after the deselection.
                     keepInputText (boolean): Set to true to keep input text unchanged after the deselection. By default input text is updated.
     * @param event Indicates the browser event which triggered this action (not API). Calling the method with this param set to "true" will trigger [selectionChanging](ui.igcombo#events:selectionChanging) and [selectionChanged](ui.igcombo#events:selectionChanged) events.
     */
     /* istanbul ignore next */
-    public deselect($items: Object, options?: Object, event?: Object): Object { return; }
+    public deselect($items: object, options?: object, event?: object): object { return; }
 
     /**
      * Deselects a list item from the drop down list by index.
      *
      * @param index Index or array of indexes of items to be selected
-     * @param options Object with set of options controlling the behavior of this api method.
+     * @param options object with set of options controlling the behavior of this api method.
                     focusCombo (boolean): Set to true to focus combo after the deselection.
                     keepInputText (boolean): Set to true to keep input text unchanged after the deselection. By default input text is updated.
     * @param event Indicates the browser event which triggered this action (not API). Calling the method with this param set to "true" will trigger [selectionChanging](ui.igcombo#events:selectionChanging) and [selectionChanged](ui.igcombo#events:selectionChanged) events.
     */
     /* istanbul ignore next */
-    public deselectByIndex(index: Object, options?: Object, event?: Object): Object { return; }
+    public deselectByIndex(index: object, options?: object, event?: object): object { return; }
 
     /**
      * Deselects all selected items from the drop down list.
      *
-     * @param options Object with set of options controlling the behavior of this api method.
+     * @param options object with set of options controlling the behavior of this api method.
                     focusCombo (boolean): Set to true to focus combo after the deselection.
                     keepInputText (boolean): Set to true to keep input text unchanged after the deselection. By default input text is updated.
     * @param event Indicates the browser event which triggered this action (not API). Calling the method with this param set to "true" will trigger [selectionChanging](ui.igcombo#events:selectionChanging) and [selectionChanged](ui.igcombo#events:selectionChanged) events.
     */
     /* istanbul ignore next */
-    public deselectAll(options?: Object, event?: Object): Object { return; }
+    public deselectAll(options?: object, event?: object): object { return; }
 
     /**
      * Gets/Sets index of active item in list.
@@ -419,7 +419,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * @return number|object Returns index of active item in list or -1, if parameter is undefined. Otherwise, it returns reference to this igCombo.
      */
     /* istanbul ignore next */
-    public activeIndex(index?: number): number | Object { return; }
+    public activeIndex(index?: number): number | object { return; }
 
     /**
      * Gets/Sets text in text input field.
@@ -428,7 +428,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * @return string|object If parameter is undefined, then current text in field is returned. Otherwise, it returns reference to this igCombo.
      */
     /* istanbul ignore next */
-    public text(text?: string): string | Object { return; }
+    public text(text?: string): string | object { return; }
 
     /**
      * Gets/Sets scrollTop attribute of html element, which scrolls drop-down list of items.
@@ -437,43 +437,43 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * @return number|object If parameter is undefined, then scrollTop is returned. Otherwise, it returns reference to this igCombo.
      */
     /* istanbul ignore next */
-    public listScrollTop(value?: number): number | Object { return; }
+    public listScrollTop(value?: number): number | object { return; }
 
     /**
      * Gets jQuery objects representing all rendered list items in the combo drop down list.
      */
     /* istanbul ignore next */
-    public listItems(): Object { return; }
+    public listItems(): object { return; }
 
     /**
      * Gets jQuery object of the outer element of the combo.
      */
     /* istanbul ignore next */
-    public comboWrapper(): Object { return; }
+    public comboWrapper(): object { return; }
 
     /**
      * Gets jQuery object of the drop down associated with this combo widget
      */
     /* istanbul ignore next */
-    public dropDown(): Object { return; }
+    public dropDown(): object { return; }
 
     /**
      * Gets jQuery object of the container that holds the list with items.
      */
     /* istanbul ignore next */
-    public list(): Object { return; }
+    public list(): object { return; }
 
     /**
      * Gets jQuery object of the text input associated with this combo widget.
      */
     /* istanbul ignore next */
-    public textInput(): Object { return; }
+    public textInput(): object { return; }
 
     /**
      * Gets jQuery object of the value input associated with this combo widget.
      */
     /* istanbul ignore next */
-    public valueInput(): Object { return; }
+    public valueInput(): object { return; }
 
     /**
      * Gets reference to [igValidator](ui.igvalidator) used by igCombo.
@@ -481,7 +481,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * @param destroy Request to destroy validator.
      */
     /* istanbul ignore next */
-    public validator(destroy?: boolean): Object { return; }
+    public validator(destroy?: boolean): object { return; }
 
     /**
      * Trigger validation.
@@ -499,11 +499,11 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
      * Repositions drop down under combo input. Has effect only when the drop down is attached to body.
      */
     /* istanbul ignore next */
-    public positionDropDown(): Object { return; }
+    public positionDropDown(): object { return; }
 
     /**
      * Destroys the igCombo widget.
      */
     /* istanbul ignore next */
-    public destroy(): Object { return; }
+    public destroy(): object { return; }
 }

@@ -32,22 +32,35 @@ export class IgUploadComponent extends IgControlBase<IgUpload> {
     public clearAll(): void { return; }
 
     /**
-     * Append additional data field to formData(before submitting it to the server). Usually this function is used in the handler of the event onFormDataSubmit. If the browser supports HTML5 file API formData is instance of FormData, otherwise(like IE10 and older) formData is jQuery representation of the <form> that should be submitted to the server
+     * Append additional data field to formData(before submitting it to the server).
+     * Usually this function is used in the handler of the event onFormDataSubmit.
+     * If the browser supports HTML5 file API formData is instance of FormData,
+     * otherwise(like IE10 and older) formData is jQuery representation of the <form> that should be submitted to the server
      *
-     * @param formData    If the browser supports HTML5 file API formData is instance of FormData, otherwise(like IE10 and older) formData is jQuery representation of the <form> that should be submitted to the server
-     * @param field    Data field that should be appended to the formData. The object has 2 properties - value and name. If the browser supports HTML5 the data field is appended to the formData object. Otherwise it is appended as input hidden field to the <form>
+     * @param formData    If the browser supports HTML5 file API formData is instance of FormData,
+     * otherwise(like IE10 and older) formData is jQuery representation of the <form> that should be submitted to the server
+     * @param field    Data field that should be appended to the formData. The object has 2 properties - value and name.
+     * If the browser supports HTML5 the data field is appended to the formData object.
+     * Otherwise it is appended as input hidden field to the <form>
      */
     /* istanbul ignore next */
-    public addDataField(formData: Object, field: Object): void { return; }
+    public addDataField(formData: object, field: object): void { return; }
 
     /**
-     * Append additional data fields to formData(before submitting it to the server). Usually this function is used in the handler of the event onFormDataSubmit. If the browser supports HTML5 file API formData is instance of FormData, otherwise(like IE10 and older) formData is jQuery representation of the <form> that should be submitted to the server
+     * Append additional data fields to formData(before submitting it to the server).
+     * Usually this function is used in the handler of the event onFormDataSubmit.
+     * If the browser supports HTML5 file API formData is instance of FormData,
+     * otherwise(like IE10 and older) formData is jQuery representation of the <form> that should be submitted to the server
      *
-     * @param formData    If the browser supports HTML5 file API formData is instance of FormData, otherwise(like IE10 and older) formData is jQuery representation of the <form> that should be submitted to the server
-     * @param fields    Array of data fields that should be appended to the formData. Each data field is object with 2 properties - value and name. If the browser supports HTML5 these data fields are added to the formData. Otherwise each of these data field is appended as input hidden field to the <form>
+     * @param formData    If the browser supports HTML5 file API formData is instance of FormData,
+     * otherwise(like IE10 and older) formData is jQuery representation of the <form> that should be submitted to the server
+     * @param fields    Array of data fields that should be appended to the formData.
+     * Each data field is object with 2 properties - value and name.
+     * If the browser supports HTML5 these data fields are added to the formData.
+     * Otherwise each of these data field is appended as input hidden field to the <form>
      */
     /* istanbul ignore next */
-    public addDataFields(formData: Object, fields: any[]): void { return; }
+    public addDataFields(formData: object, fields: any[]): void { return; }
 
     /**
      * Start uploading file as submitting form with the specified formNumber.
@@ -76,7 +89,7 @@ export class IgUploadComponent extends IgControlBase<IgUpload> {
      * Returns the information about uploading files - all files uploaded/uploading/pending
      */
     /* istanbul ignore next */
-    public getFileInfoData(): Object { return; }
+    public getFileInfoData(): object { return; }
 
     /**
      * Cancel all uploading and pending files
@@ -85,10 +98,11 @@ export class IgUploadComponent extends IgControlBase<IgUpload> {
     public cancelAll(): void { return; }
 
     /**
-     * Returns the information about the file by specified file identifier. It could be file which is uploading/uploaded or uploading is not started. If there isn"t file with the specified file id returns null
+     * Returns the information about the file by specified file identifier.
+     * It could be file which is uploading/uploaded or uploading is not started. If there isn"t file with the specified file id returns null
      *
      * @param fileIndex    unique identifier of the file
      */
     /* istanbul ignore next */
-    public getFileInfo(fileIndex: number): Object { return; }
+    public getFileInfo(fileIndex: number): object { return; }
 }

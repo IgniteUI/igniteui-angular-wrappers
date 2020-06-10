@@ -1,3 +1,4 @@
+// tslint:disable-next-line:max-line-length
 // modeled after https://github.com/angular/angular/blob/cee2318110eeea115e5f6fc5bfc814cbaa7d90d8/modules/angular2/test/common/directives/ng_for_spec.ts
 import { TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
@@ -129,7 +130,8 @@ describe('Infragistics Angular TreeGrid', () => {
                     fixture.detectChanges();
                     expect(fixture.componentInstance.data[0].products.length).toBe(6);
                     // add row
-                    $('#grid1').igTreeGridUpdating('addRow', { id: 1000, tasks: 'Project Plan', start: '6/2/2014', finish: '8/22/2014', duration: '60d', progress: '32%' });
+                    $('#grid1').igTreeGridUpdating('addRow',
+                      { id: 1000, tasks: 'Project Plan', start: '6/2/2014', finish: '8/22/2014', duration: '60d', progress: '32%' });
                     setTimeout(() => {
                         fixture.detectChanges();
                         expect(fixture.componentInstance.data.length).toBe(2);

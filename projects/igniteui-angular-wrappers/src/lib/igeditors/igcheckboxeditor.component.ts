@@ -27,7 +27,7 @@ export class IgCheckboxEditorComponent extends IgEditorBase<IgCheckboxEditor> {
      * @param newValue
      */
     /* istanbul ignore next */
-    public value(newValue: Object): string { return; }
+    public value(newValue: object): string { return; }
 
     /**
      * Toggles the state of the checkbox.
@@ -85,7 +85,7 @@ export class IgCheckboxEditorComponent extends IgEditorBase<IgCheckboxEditor> {
      * Gets a reference to [igValidator](ui.igvalidator) used by the editor.
      */
     /* istanbul ignore next */
-    public validator(): Object { return; }
+    public validator(): object { return; }
 
     /**
      * Triggers validation for the editor. If validatorOptions are set will also call validate on the [igValidator](ui.igvalidator).

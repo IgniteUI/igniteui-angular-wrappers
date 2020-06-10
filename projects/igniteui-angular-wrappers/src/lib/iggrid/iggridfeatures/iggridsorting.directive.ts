@@ -19,7 +19,7 @@ export class IgGridSortingFeature extends Feature<IgGridSorting> {
      * @param header
      */
     /* istanbul ignore next */
-    public sortColumn(index: Object, direction: Object, header: Object): void { return; }
+    public sortColumn(index: object, direction: object, header: object): void { return; }
 
     /**
      * Sorts the data in grid columns and updates the UI.\
@@ -40,7 +40,7 @@ export class IgGridSortingFeature extends Feature<IgGridSorting> {
      * @param header     - if specified client events should be fired
      */
     /* istanbul ignore next */
-    public unsortColumn(index: Object, header: Object): void { return; }
+    public unsortColumn(index: object, header: object): void { return; }
 
     /**
      * Destroys the sorting feature. Unbinds events, removes added sorting elements, etc.
@@ -66,7 +66,7 @@ export class IgGridSortingFeature extends Feature<IgGridSorting> {
      * @param isToCallEvents
      */
     /* istanbul ignore next */
-    public renderMultipleSortingDialogContent(isToCallEvents: Object): void { return; }
+    public renderMultipleSortingDialogContent(isToCallEvents: object): void { return; }
 
     /**
      * Remove clear button for multiple sorting dialog

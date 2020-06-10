@@ -42,7 +42,7 @@ export class IgTimePickerComponent extends IgEditorBase<IgTimePicker> {
      * @param matchType The rule that is applied for searching the text.
      */
     /* istanbul ignore next */
-    public findListItemIndex(text: string, matchType?: Object): number { return; }
+    public findListItemIndex(text: string, matchType?: object): number { return; }
 
     /**
      * Gets the index of the selected list item. Sets selected item by index.
@@ -52,7 +52,7 @@ export class IgTimePickerComponent extends IgEditorBase<IgTimePicker> {
     /* istanbul ignore next */
     public selectedListIndex(index?: number): number { return; }
     /* istanbul ignore next */
-    public value(newValue: Object): void { return; }
+    public value(newValue: object): void { return; }
     /* istanbul ignore next */
     public selectDate(): void { return; }
 

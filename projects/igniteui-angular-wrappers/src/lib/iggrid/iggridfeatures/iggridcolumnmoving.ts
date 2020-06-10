@@ -28,5 +28,5 @@ export class IgGridColumnMovingFeature extends Feature<IgGridColumnMoving> {
      * @param callback    Specifies a custom function to be called when the column is moved.
      */
     /* istanbul ignore next */
-    public moveColumn(column: Object, target: Object, after?: boolean, inDom?: boolean, callback?: Function): void { return; }
+    public moveColumn(column: object, target: object, after?: boolean, inDom?: boolean, callback?: () => void): void { return; }
 }

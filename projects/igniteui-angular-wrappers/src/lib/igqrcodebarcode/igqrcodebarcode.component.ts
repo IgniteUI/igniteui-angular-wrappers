@@ -8,13 +8,17 @@ import { IgControlBase } from '../igcontrolbase/igcontrolbase';
     outputs: ['errorMessageDisplaying', 'dataChanged']
 })
 export class IgQRCodeBarcodeComponent extends IgControlBase<IgQRCodeBarcode> {
-    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); } public option(): void { return; }
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {
+      super(el, renderer, differs, kvalDiffers, cdr);
+    }
+
+    public option(): void { return; }
 
     /**
      * Returns information about how the barcode is rendered.
      */
     /* istanbul ignore next */
-    public exportVisualData(): Object { return; }
+    public exportVisualData(): object { return; }
 
     /**
      * Causes all pending changes of the barcode e.g. by changed property values to be rendered immediately.

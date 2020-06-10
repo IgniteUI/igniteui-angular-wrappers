@@ -15,23 +15,23 @@ export class IgSpreadsheetComponent extends IgControlBase<IgSpreadsheet> {
      * Returns an object that represents the pane with the focus.
      */
     /* istanbul ignore next */
-    public getActivePane(): Object { return; }
+    public getActivePane(): object { return; }
 
     /**
      * Returns an object that represents the current selection of the active pane.
      */
     /* istanbul ignore next */
-    public getActiveSelection(): Object { return; }
+    public getActiveSelection(): object { return; }
 
-    /**
+    /*
      * Returns an object used to get the formatting of the activeCell and where modifications are applied to the entire active selection.
-     *				Any changes made to this object will affect all the objects in the selection. So for example, the
-    *				Font.Name may return "Arial" because the active cell has that as its resolved font name even though the other
-    *				cells are using a different font but if you set the Font.Name of this object to "Arial" then all the objects
-    *				affected by the selection will have their Font.Name updated to that value.
+     * Any changes made to this object will affect all the objects in the selection. So for example, the
+     * Font.Name may return "Arial" because the active cell has that as its resolved font name even though the other
+     * cells are using a different font but if you set the Font.Name of this object to "Arial" then all the objects
+     * affected by the selection will have their Font.Name updated to that value.
     */
     /* istanbul ignore next */
-    public getActiveSelectionCellRangeFormat(): Object { return; }
+    public getActiveSelectionCellRangeFormat(): object { return; }
 
     /**
      * Returns a boolean indicating if the user is currently editing the name of the active worksheet.
@@ -39,10 +39,10 @@ export class IgSpreadsheetComponent extends IgControlBase<IgSpreadsheet> {
     /* istanbul ignore next */
     public getIsRenamingWorksheet(): boolean { return; }
 
-    /**
+    /*
      * Returns an array of the panes for the activeWorksheet.
      *
-    *				 returnType="ig.spreadsheet.SpreadsheetPane[]"
+     *				 returnType="ig.spreadsheet.SpreadsheetPane[]"
     */
     /* istanbul ignore next */
     public getPanes(): void { return; }
@@ -53,7 +53,7 @@ export class IgSpreadsheetComponent extends IgControlBase<IgSpreadsheet> {
      * @param action An [enumeration](ig.spreadsheet.SpreadsheetAction) or string that identifies the action to execute.
      */
     /* istanbul ignore next */
-    public executeAction(action: Object): boolean { return; }
+    public executeAction(action: object): boolean { return; }
 
     /**
      * Forces any pending deferred work to render on the spreadsheet before continuing

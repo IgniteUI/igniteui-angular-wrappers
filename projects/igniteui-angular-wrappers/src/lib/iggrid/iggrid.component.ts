@@ -42,7 +42,7 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
      * @param colKey     An identifier of the column which should be checked. It can be a key or visible index.
      */
     /* istanbul ignore next */
-    public isFixedColumn(colKey: Object): boolean { return; }
+    public isFixedColumn(colKey: object): boolean { return; }
 
     /**
      * Called to detect whether grid container is resized. When autoAdjustHeight is true and height of the grid is changed then the height of grid is re-set.
@@ -56,7 +56,7 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
      * @param colKey     value of the column key
      */
     /* istanbul ignore next */
-    public isGroupHeader(colKey: string): Object { return; }
+    public isGroupHeader(colKey: string): object { return; }
 
     /**
      * Returns an object that contains information on the passed Dom element
@@ -69,7 +69,7 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
      * @param elem    The Dom element or jQuery object which can be a TD or TR element from the grid.
      */
     /* istanbul ignore next */
-    public getElementInfo(elem: Element): Object { return; }
+    public getElementInfo(elem: Element): object { return; }
 
     /**
      * Returns the ID of the TABLE element where data records are rendered
@@ -117,13 +117,13 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
      * Returns container(jQuery representation) containing fixed footer - contains fixed columns(in ColumnFixing scenario)
      */
     /* istanbul ignore next */
-    public fixedFooterContainer(): Object { return; }
+    public fixedFooterContainer(): object { return; }
 
     /**
      * Returns container(jQuery representation) containing fixed header - contains fixed columns(in ColumnFixing scenario)
      */
     /* istanbul ignore next */
-    public fixedHeaderContainer(): Object { return; }
+    public fixedHeaderContainer(): object { return; }
 
     /**
      * Returns the table that contains the FIXED header cells - contains fixed columns(in ColumnFixing scenario)
@@ -154,13 +154,13 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
      * @param columnKey     The column key.
      */
     /* istanbul ignore next */
-    public cellById(rowId: Object, columnKey: string): Element { return; }
+    public cellById(rowId: object, columnKey: string): Element { return; }
 
     /**
      * Returns the fixed table - contains fixed columns(in ColumnFixing scenario). If there aren't fixed columns returns the grid table
      */
     /* istanbul ignore next */
-    public fixedTable(): Object { return; }
+    public fixedTable(): object { return; }
 
     /**
      * Gets all immediate children of the current grid
@@ -201,7 +201,7 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
      * @param isFixed     Specify search in the fixed container.
      */
     /* istanbul ignore next */
-    public rowById(rowId: Object, isFixed?: boolean): Element { return; }
+    public rowById(rowId: object, isFixed?: boolean): Element { return; }
 
     /**
      * Returns the fixed row (TR element) at the specified index. jQuery selectors aren't used for performance reasons(in ColumnFixing scenario - only when there is at least one fixed column)
@@ -241,7 +241,7 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
      * @param key     The column key.
      */
     /* istanbul ignore next */
-    public columnByKey(key: string): Object { return; }
+    public columnByKey(key: string): object { return; }
 
     /**
      * Returns a column object by the specified header text. If there are multiple matches, returns the first one.
@@ -249,7 +249,7 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
      * @param text     The column header text.
      */
     /* istanbul ignore next */
-    public columnByText(text: string): Object { return; }
+    public columnByText(text: string): object { return; }
 
     /**
      * Returns an array of selected cells in arbitrary order where every objects has the format { element: , row: , index: , rowIndex: , columnKey: } .
@@ -270,26 +270,26 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
      * 				If multiple selection is enabled the function will return null.
      */
     /* istanbul ignore next */
-    public selectedCell(): Object { return; }
+    public selectedCell(): object { return; }
 
     /**
      * Returns the currently selected row that has the format { element: , index: }, if any.
      * 				If multiple selection is enabled the function will return null.
      */
     /* istanbul ignore next */
-    public selectedRow(): Object { return; }
+    public selectedRow(): object { return; }
 
     /**
      * Returns the currently active (focused) cell that has the format { element: , row: , index: , rowIndex: , columnKey: }, if any.
      */
     /* istanbul ignore next */
-    public activeCell(): Object { return; }
+    public activeCell(): object { return; }
 
     /**
      * Returns the currently active (focused) row that has the format { element: , index: }, if any.
      */
     /* istanbul ignore next */
-    public activeRow(): Object { return; }
+    public activeRow(): object { return; }
 
     /**
      * Retrieves a cell value using the row index and the column key. If a primaryKey is defined, rowId is assumed to be the row Key (not index).
@@ -299,7 +299,7 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
      * @param colKey     The column key.
      */
     /* istanbul ignore next */
-    public getCellValue(rowId: Object, colKey: string): Object { return; }
+    public getCellValue(rowId: object, colKey: string): object { return; }
 
     /**
      * Returns the cell text. If colKey is a number, the index of the column is used (instead of a column name)- does not apply when using a Multi-Row Layout grid.
@@ -309,7 +309,7 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
      * @param colKey     Column key.
      */
     /* istanbul ignore next */
-    public getCellText(rowId: Object, colKey: string): string { return; }
+    public getCellText(rowId: object, colKey: string): string { return; }
 
     /**
      * Sets a new template for a column after initialization and renders the grid if not explicitly disabled. This method will replace any existing explicitly set row template and will build one anew from the column ones.
@@ -319,7 +319,7 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
      * @param render     Should the grid rerender after template is set
      */
     /* istanbul ignore next */
-    public setColumnTemplate(col: Object, tmpl: string, render?: boolean): void { return; }
+    public setColumnTemplate(col: object, tmpl: string, render?: boolean): void { return; }
 
     /**
      * Commits all pending transactions to the client data source. Note that there won't be anything to commit on the UI, since it is updated instantly. In order to rollback the actual UI, a call to dataBind() is required.
@@ -327,7 +327,7 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
      * @param rowId     If specified, will commit only that transaction corresponding to the specified record key.
      */
     /* istanbul ignore next */
-    public commit(rowId?: Object): void { return; }
+    public commit(rowId?: object): void { return; }
 
     /**
      * Clears the transaction log (delegates to igDataSource). Note that this does not update the UI. In case the UI must be updated, set the second parameter "updateUI" to true, which will trigger a call to dataBind() to re-render the contents.
@@ -336,7 +336,7 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
      * @param updateUI     Whether to update the UI or not.
      */
     /* istanbul ignore next */
-    public rollback(rowId?: Object, updateUI?: boolean): any[] { return; }
+    public rollback(rowId?: object, updateUI?: boolean): any[] { return; }
 
     /**
      * Returns a record by a specified key (requires that primaryKey is set in the settings).
@@ -345,7 +345,7 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
      * @param key     Primary key of the record
      */
     /* istanbul ignore next */
-    public findRecordByKey(key: Object): Object { return; }
+    public findRecordByKey(key: object): object { return; }
 
     /**
      * Returns a standalone object (copy) that represents the committed transactions, but detached from the data source.
@@ -354,7 +354,7 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
      * @param t     A transaction object.
      */
     /* istanbul ignore next */
-    public getDetachedRecord(t: Object): Object { return; }
+    public getDetachedRecord(t: object): object { return; }
 
     /**
      * Returns a list of all transaction objects that are pending to be committed or rolled back to the data source.
@@ -384,7 +384,7 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
      * @param error    Specifies a custom function to be called when AJAX request to the updateUrl option fails(optional)
      */
     /* istanbul ignore next */
-    public saveChanges(success: Function, error: Function): void { return; }
+    public saveChanges(success: () => void, error: () => void): void { return; }
 
     /**
      * Adds a new row (TR) to the grid, by taking a data row object. Assumes the record will have the primary key.
@@ -400,7 +400,7 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
      * @param dataSource     New data source object.
      */
     /* istanbul ignore next */
-    public dataSourceObject(dataSource: Object): void { return; }
+    public dataSourceObject(dataSource: object): void { return; }
 
     /**
      * Returns the total number of records in the underlying backend. If paging or filtering is enabled, this may differ from the number of records in the client-side data source.
@@ -416,7 +416,7 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
      * @param internal
      */
     /* istanbul ignore next */
-    dataBind(internal: Object): void { return; }
+    dataBind(internal: object): void { return; }
 
     /**
      * Moves a visible column at a specified place, in front or behind a target column or at a target index
@@ -429,7 +429,7 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
      * @param callback    Specifies a custom function to be called when the column is moved.
      */
     /* istanbul ignore next */
-    public moveColumn(column: Object, target: Object, after?: boolean, inDom?: boolean, callback?: Function): void { return; }
+    public moveColumn(column: object, target: object, after?: boolean, inDom?: boolean, callback?: () => void): void { return; }
 
     /**
      * Shows a hidden column. If the column is not hidden the method does nothing.
@@ -439,7 +439,7 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
      * @param callback     Specifies a custom function to be called when the column is shown(optional)
      */
     /* istanbul ignore next */
-    public showColumn(column: Object, callback: Function): void { return; }
+    public showColumn(column: object, callback: () => void): void { return; }
 
     /**
      * Hides a visible column. If the column is hidden the method does nothing.
@@ -449,7 +449,7 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
      * @param callback     Specifies a custom function to be called when the column is hidden(optional)
      */
     /* istanbul ignore next */
-    public hideColumn(column: Object, callback: Function): void { return; }
+    public hideColumn(column: object, callback: () => void): void { return; }
 
     /**
      * Gets unbound values for the specified column key. If key is not specified returns all unboundvalues
@@ -457,7 +457,7 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
      * @param key     column key
      */
     /* istanbul ignore next */
-    public getUnboundValues(key: string): Object { return; }
+    public getUnboundValues(key: string): object { return; }
 
     /**
      * Sets unbound values for the unbound column with the specified key. If removeOldValues is true then values(if any) for the unbound columns are re-set with the new values
@@ -467,7 +467,7 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
      * @param removeOldValues     if true removes current unbound values(if any) for the specified column and apply the new ones specified in parameter values. Otherwise merge current values with the specified in parameter values
      */
     /* istanbul ignore next */
-    public setUnboundValues(key: string, values: any[], removeOldValues: Object): void { return; }
+    public setUnboundValues(key: string, values: any[], removeOldValues: object): void { return; }
 
     /**
      * Sets unbound value for the unbound cell by the specified column key and row primary key.
@@ -478,7 +478,7 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
      * @param notToRender     if false will re-render the row
      */
     /* istanbul ignore next */
-    public setUnboundValueByPK(col: string, rowId: string, val: Object, notToRender: Object): void { return; }
+    public setUnboundValueByPK(col: string, rowId: string, val: object, notToRender: object): void { return; }
 
     /**
      * Returns an unbound column with the specified key. If not found returns null
@@ -486,13 +486,13 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
      * @param key    a column key
      */
     /* istanbul ignore next */
-    public getUnboundColumnByKey(key: string): Object { return; }
+    public getUnboundColumnByKey(key: string): object { return; }
 
     /**
      * Returns whether there is vertical scrollbar. Because of perfrormance issues in older Internet Explorer especially 8,9 - there is no need to check if height is not set - there is no scrollbar OR if row virtualization is enabled - it is supposed there is vertical scrollbar
      */
     /* istanbul ignore next */
-    public hasVerticalScrollbar(): Object { return; }
+    public hasVerticalScrollbar(): object { return; }
 
     /**
      * Auto resize columns that have property width set to "*" so content to be auto-fitted(not shrinked/cutted). Auto-resizing is applied ONLY for visible columns
@@ -532,7 +532,7 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
      * @param scrollerPosition     An identifier of the vertical scroll position. When it is string then it is interpreted as pixels otherwise it is the row number
      */
     /* istanbul ignore next */
-    public virtualScrollTo(scrollerPosition: Object): void { return; }
+    public virtualScrollTo(scrollerPosition: object): void { return; }
 
     /**
      * Returns column object and visible index for the table cell(TD) which is passed as argument
@@ -540,7 +540,7 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
      * @param $td     cell(TD) - either DOM TD element or jQuery object
      */
     /* istanbul ignore next */
-    public getColumnByTD($td: Object): Object { return; }
+    public getColumnByTD($td: object): object { return; }
 
     /**
      * Destroy is part of the jQuery UI widget API and does the following:
@@ -551,5 +551,5 @@ export class IgGridComponent extends IgGridBase<IgGrid> {
      * @param notToCallDestroy
      */
     /* istanbul ignore next */
-    public destroy(notToCallDestroy: Object): void { return; }
+    public destroy(notToCallDestroy: object): void { return; }
 }

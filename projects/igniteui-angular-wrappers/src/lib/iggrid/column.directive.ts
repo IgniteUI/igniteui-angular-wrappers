@@ -15,7 +15,7 @@ export class Column {
 		const self = this;
 		let i, settings = ['headerText', 'key', 'formatter', 'format', 'dataType', 'width', 'hidden', 'template', 'unbound', 'group', 'rowspan', 'formula', 'unboundValues', 'unboundValuesUpdateMode', 'headerCssClass', 'columnCssClass'];
 		for (i = 0; i < settings.length; i++) {
-			Object.defineProperty(self, settings[i], {
+			object.defineProperty(self, settings[i], {
 				set: self.createColumnsSetter(settings[i]),
 				get: self.createColumnsGetter(settings[i]),
 				enumerable: true,
@@ -41,7 +41,7 @@ export class Column {
 	}
 
 	createColumnsGetter(name) {
-		return function() {
+		return () => {
 			return this._settings[name];
 		};
 	}

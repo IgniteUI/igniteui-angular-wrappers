@@ -15,18 +15,18 @@ export class IgSchedulerComponent extends IgControlBase<IgScheduler> {
     /**
      * Gets reference to appointment by id
      *
-     * @param id
+     * @param id id
      */
     /* istanbul ignore next */
-    public getAppointmentById(id: Object): Object { return; }
+    public getAppointmentById(id: object): object { return; }
 
     /**
      * Creates a new appointment and renders it to the scheduler
      *
-     * @param appointment
+     * @param appointment appointment
      */
     /* istanbul ignore next */
-    public createAppointment(appointment: Object): Object { return; }
+    public createAppointment(appointment: object): object { return; }
 
     /**
      * Deletes appointment from the appointment collection
@@ -34,7 +34,7 @@ export class IgSchedulerComponent extends IgControlBase<IgScheduler> {
      * @param appointment	appointment
      */
     /* istanbul ignore next */
-    public deleteAppointment(appointment: Object): Object { return; }
+    public deleteAppointment(appointment: object): object { return; }
 
     /**
      * Deletes appointment from the appointment collection
@@ -43,7 +43,7 @@ export class IgSchedulerComponent extends IgControlBase<IgScheduler> {
      * @param updateAppoinment	updateAppoinment
      */
     /* istanbul ignore next */
-    public editAppointment(appointment: Object, updateAppoinment: Object): Object { return; }
+    public editAppointment(appointment: object, updateAppoinment: object): object { return; }
 
     /**
      * Destroys the widget

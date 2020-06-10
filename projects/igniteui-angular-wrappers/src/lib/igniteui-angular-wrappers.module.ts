@@ -124,7 +124,30 @@ export { IgSpreadsheetComponent };
 export { IgSchedulerComponent };
 
 @NgModule({
-	declarations: [Column, IgGridMultiColumnHeadersFeature, IgGridSortingFeature, IgGridFilteringFeature, IgGridPagingFeature, IgGridUpdatingFeature, IgGridGroupByFeature, IgGridColumnMovingFeature, IgGridHidingFeature, IgGridCellMergingFeature, IgGridResponsiveFeature, IgGridResizingFeature, IgGridSelectionFeature, IgGridRowSelectorsFeature, IgGridSummariesFeature, IgGridColumnFixingFeature, IgGridTooltipsFeature, IgGridAppendRowsOnDemandFeature, Features, IgGridComponent, IgTreeGridComponent, IgHierarchicalGridComponent, IgComboComponent, IgCheckboxEditorComponent, IgCurrencyEditorComponent, IgDateEditorComponent, IgDatePickerComponent, IgDatePickerComponent, IgTimePickerComponent, IgMaskEditorComponent, IgNumericEditorComponent, IgPercentEditorComponent, IgTextEditorComponent, IgTreeComponent, IgDialogComponent, IgSplitterComponent, IgLayoutManagerComponent, IgTileManagerComponent, IgHtmlEditorComponent, IgValidatorComponent, IgPivotDataSelectorComponent, IgPivotGridComponent, IgDataChartComponent, IgPieChartComponent, IgDoughnutChartComponent, IgFunnelChartComponent, IgRadialGaugeComponent, IgZoombarComponent, IgMapComponent, IgSparklineComponent, IgBulletGraphComponent, IgLinearGaugeComponent, IgQRCodeBarcodeComponent, IgUploadComponent, IgPopoverComponent, IgNotifierComponent, IgRatingComponent, IgVideoPlayerComponent, IgRadialMenuComponent, IgSplitButtonComponent, IgSpreadsheetComponent, IgSchedulerComponent],
-	exports: [Column, IgGridMultiColumnHeadersFeature, IgGridSortingFeature, IgGridFilteringFeature, IgGridPagingFeature, IgGridUpdatingFeature, IgGridGroupByFeature, IgGridColumnMovingFeature, IgGridHidingFeature, IgGridCellMergingFeature, IgGridResponsiveFeature, IgGridResizingFeature, IgGridSelectionFeature, IgGridRowSelectorsFeature, IgGridSummariesFeature, IgGridColumnFixingFeature, IgGridTooltipsFeature, IgGridAppendRowsOnDemandFeature, Features, IgGridComponent, IgTreeGridComponent, IgHierarchicalGridComponent, IgComboComponent, IgCheckboxEditorComponent, IgCurrencyEditorComponent, IgDateEditorComponent, IgDatePickerComponent, IgDatePickerComponent, IgTimePickerComponent, IgMaskEditorComponent, IgNumericEditorComponent, IgPercentEditorComponent, IgTextEditorComponent, IgTreeComponent, IgDialogComponent, IgSplitterComponent, IgLayoutManagerComponent, IgTileManagerComponent, IgHtmlEditorComponent, IgValidatorComponent, IgPivotDataSelectorComponent, IgPivotGridComponent, IgDataChartComponent, IgPieChartComponent, IgDoughnutChartComponent, IgFunnelChartComponent, IgRadialGaugeComponent, IgZoombarComponent, IgMapComponent, IgSparklineComponent, IgBulletGraphComponent, IgLinearGaugeComponent, IgQRCodeBarcodeComponent, IgUploadComponent, IgPopoverComponent, IgNotifierComponent, IgRatingComponent, IgVideoPlayerComponent, IgRadialMenuComponent, IgSplitButtonComponent, IgSpreadsheetComponent, IgSchedulerComponent]
+  declarations: [Column, IgGridMultiColumnHeadersFeature, IgGridSortingFeature, IgGridFilteringFeature, IgGridPagingFeature,
+    IgGridUpdatingFeature, IgGridGroupByFeature, IgGridColumnMovingFeature, IgGridHidingFeature,
+    IgGridCellMergingFeature, IgGridResponsiveFeature, IgGridResizingFeature, IgGridSelectionFeature,
+    IgGridRowSelectorsFeature, IgGridSummariesFeature, IgGridColumnFixingFeature, IgGridTooltipsFeature,
+    IgGridAppendRowsOnDemandFeature, Features, IgGridComponent, IgTreeGridComponent, IgHierarchicalGridComponent,
+    IgComboComponent, IgCheckboxEditorComponent, IgCurrencyEditorComponent, IgDateEditorComponent, IgDatePickerComponent,
+    IgDatePickerComponent, IgTimePickerComponent, IgMaskEditorComponent, IgNumericEditorComponent, IgPercentEditorComponent,
+    IgTextEditorComponent, IgTreeComponent, IgDialogComponent, IgSplitterComponent, IgLayoutManagerComponent,
+    IgTileManagerComponent, IgHtmlEditorComponent, IgValidatorComponent, IgPivotDataSelectorComponent, IgPivotGridComponent,
+    IgDataChartComponent, IgPieChartComponent, IgDoughnutChartComponent, IgFunnelChartComponent, IgRadialGaugeComponent,
+    IgZoombarComponent, IgMapComponent, IgSparklineComponent, IgBulletGraphComponent, IgLinearGaugeComponent,
+    IgQRCodeBarcodeComponent, IgUploadComponent, IgPopoverComponent, IgNotifierComponent, IgRatingComponent,
+    IgVideoPlayerComponent, IgRadialMenuComponent, IgSplitButtonComponent, IgSpreadsheetComponent, IgSchedulerComponent],
+  exports: [Column, IgGridMultiColumnHeadersFeature, IgGridSortingFeature, IgGridFilteringFeature, IgGridPagingFeature,
+    IgGridUpdatingFeature, IgGridGroupByFeature, IgGridColumnMovingFeature, IgGridHidingFeature, IgGridCellMergingFeature,
+    IgGridResponsiveFeature, IgGridResizingFeature, IgGridSelectionFeature, IgGridRowSelectorsFeature, IgGridSummariesFeature,
+    IgGridColumnFixingFeature, IgGridTooltipsFeature, IgGridAppendRowsOnDemandFeature, Features, IgGridComponent, IgTreeGridComponent,
+    IgHierarchicalGridComponent, IgComboComponent, IgCheckboxEditorComponent, IgCurrencyEditorComponent, IgDateEditorComponent,
+    IgDatePickerComponent, IgDatePickerComponent, IgTimePickerComponent, IgMaskEditorComponent, IgNumericEditorComponent,
+    IgPercentEditorComponent, IgTextEditorComponent, IgTreeComponent, IgDialogComponent, IgSplitterComponent, IgLayoutManagerComponent,
+    IgTileManagerComponent, IgHtmlEditorComponent, IgValidatorComponent, IgPivotDataSelectorComponent, IgPivotGridComponent,
+    IgDataChartComponent, IgPieChartComponent, IgDoughnutChartComponent, IgFunnelChartComponent, IgRadialGaugeComponent,
+    IgZoombarComponent, IgMapComponent, IgSparklineComponent, IgBulletGraphComponent, IgLinearGaugeComponent, IgQRCodeBarcodeComponent,
+    IgUploadComponent, IgPopoverComponent, IgNotifierComponent, IgRatingComponent, IgVideoPlayerComponent, IgRadialMenuComponent,
+    IgSplitButtonComponent, IgSpreadsheetComponent, IgSchedulerComponent]
 })
 export class IgniteUIModule {}

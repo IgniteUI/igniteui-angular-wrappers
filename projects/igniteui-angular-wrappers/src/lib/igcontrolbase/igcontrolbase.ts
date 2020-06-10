@@ -105,7 +105,7 @@ export class IgControlBase<Model> implements DoCheck {
 
         for (const opt in jQuery.ui[this._widgetName].prototype.options) {
             if (opt !== 'dataSource') {
-                Object.defineProperty(this, opt, {
+                object.defineProperty(this, opt, {
                     set: this.createSetter(opt),
                     enumerable: true,
                     configurable: true
@@ -117,7 +117,7 @@ export class IgControlBase<Model> implements DoCheck {
         for (const name in propNames) {
             if (name.indexOf('_') !== 0 && typeof jQuery.ui[this._widgetName].prototype[name] === 'function'
                 && name !== 'dataSource') {
-                Object.defineProperty(that, name, {
+                object.defineProperty(that, name, {
                     get: that.createMethodGetter(name)
                 });
             }
@@ -136,7 +136,7 @@ export class IgControlBase<Model> implements DoCheck {
         jQuery(this._el)[this._widgetName](this.options);
     }
     createMethodGetter(name) {
-        return function() {
+        return () => {
             const widget = jQuery(this._el).data(this._widgetName);
             return jQuery.proxy(widget[name], widget);
         };

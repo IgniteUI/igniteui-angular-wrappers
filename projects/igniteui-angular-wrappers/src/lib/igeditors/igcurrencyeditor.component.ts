@@ -17,7 +17,7 @@ export class IgCurrencyEditorComponent extends IgEditorBase<IgCurrencyEditor> {
      * @param symbol New currency symbol.
      */
     /* istanbul ignore next */
-    public currencySymbol(symbol?: Object): string { return; }
+    public currencySymbol(symbol?: object): string { return; }
 
     /**
      * Gets/Sets editor value.

@@ -1,4 +1,4 @@
-import { ElementRef, IterableDiffers, Component, KeyValueDiffers, ChangeDetectorRef, Input, Renderer2 } from '@angular/core';
+import { ElementRef, IterableDiffers, Component, KeyValueDiffers, ChangeDetectorRef, Input, Renderer2, OnInit } from '@angular/core';
 import { IgContentControlBase } from '../igcontrolbase/igcontentcontrolbase';
 
 @Component({
@@ -7,7 +7,7 @@ import { IgContentControlBase } from '../igcontrolbase/igcontentcontrolbase';
     inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'width', 'height', 'columnWidth', 'columnHeight', 'cols', 'rows', 'marginLeft', 'marginTop', 'rearrangeItems', 'items', 'dataSource', 'minimizedState', 'maximizedState', 'maximizedTileIndex', 'rightPanelCols', 'rightPanelTilesWidth', 'rightPanelTilesHeight', 'showRightPanelScroll', 'splitterOptions', 'preventMaximizingSelector', 'animationDuration', 'dataSourceUrl', 'responseDataKey', 'responseDataType', 'dataSourceType', 'requestType', 'responseContentType'],
     outputs: ['dataBinding', 'dataBound', 'rendering', 'rendered', 'tileRendering', 'tileRendered', 'tileMaximizing', 'tileMaximized', 'tileMinimizing', 'tileMinimized']
 })
-export class IgTileManagerComponent extends IgContentControlBase<IgTileManager> {
+export class IgTileManagerComponent extends IgContentControlBase<IgTileManager> implements OnInit {
     constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {
         super(el, renderer, differs, kvalDiffers, cdr);
     }
@@ -41,7 +41,7 @@ export class IgTileManagerComponent extends IgContentControlBase<IgTileManager> 
      * @param event Indicates the browser even which triggered this action (not API).
      */
     /* istanbul ignore next */
-    public maximize($tileToMaximize: Object, animDuration?: number, event?: Object): void { return; }
+    public maximize($tileToMaximize: object, animDuration?: number, event?: object): void { return; }
 
     /**
      * Minimizes the maximized tile. Has no effect if no maximized tile is present.
@@ -50,51 +50,53 @@ export class IgTileManagerComponent extends IgContentControlBase<IgTileManager> 
      * @param event Indicates the browser even which triggered this action (not API).
      */
     /* istanbul ignore next */
-    public minimize(animDuration?: number, event?: Object): void { return; }
+    public minimize(animDuration?: number, event?: object): void { return; }
 
     /**
      * Returns the maximized tile or null if such is not present.
      * @return object|null Returns the maximized tile or null if such is not present.
      */
     /* istanbul ignore next */
-    public maximizedTile(): Object { return; }
+    public maximizedTile(): object { return; }
 
     /**
      * Returns an array with the tiles in minimized state or null if such are not present.
      * @return object|null Returns an array with the tiles in minimized state or null if such are not present.
      */
     /* istanbul ignore next */
-    public minimizedTiles(): Object { return; }
+    public minimizedTiles(): object { return; }
 
     /**
      * Returns the splitter associated with this tile manager or
      *                 null if the tile manager was instantiated with maximizedTileIndex.
-     * @return object|null Returns the splitter associated with this tile manager or null if the tile manager was instantiated with maximizedTileIndex.
+     * @return object|null Returns the splitter associated with this tile manager or null
+     * if the tile manager was instantiated with maximizedTileIndex.
      */
     /* istanbul ignore next */
-    public splitter(): Object { return; }
+    public splitter(): object { return; }
 
     /**
      * Returns the [layout manager](ui.iglayoutmanager) associated with current tile manager.
      */
     /* istanbul ignore next */
-    public layoutManager(): Object { return; }
+    public layoutManager(): object { return; }
 
     /**
      * Reflow the tile manager. Rearranging the tiles to fit in the container
      *
-     * @param forceReflow Indicates whether the reflow should be forced. Useful in cases where the items size and position was changed manually.
+     * @param forceReflow Indicates whether the reflow should be forced.
+     * Useful in cases where the items size and position was changed manually.
      * @param animationDuration The animation duration to be used for this reflow only.
      * @param event Indicates the browser even which triggered this action (not API).
      */
     /* istanbul ignore next */
-    public reflow(forceReflow?: Object, animationDuration?: number, event?: Object): void { return; }
+    public reflow(forceReflow?: object, animationDuration?: number, event?: object): void { return; }
 
     /**
      * Returns the element that represents this widget.
      */
     /* istanbul ignore next */
-    public widget(): Object { return; }
+    public widget(): object { return; }
 
     /**
      * Causes the TileManager to data bind to the data source (local or remote) , and re-render all of the data as well.
@@ -103,8 +105,9 @@ export class IgTileManagerComponent extends IgContentControlBase<IgTileManager> 
     public dataBind(): void { return; }
 
     /**
-     * Deletes the widget instance (client object). It is no longer accessible and all its event handlers stop working. Destroys all child widgets. Removes auto-generated HTML content, which is outside the widget, e.g. detached popups, dropdowns, etc.
+     * Deletes the widget instance (client object). It is no longer accessible and all its event handlers stop working.
+     * Destroys all child widgets. Removes auto-generated HTML content, which is outside the widget, e.g. detached popups, dropdowns, etc.
      */
     /* istanbul ignore next */
-    public destroy(): Object { return; }
+    public destroy(): object { return; }
 }

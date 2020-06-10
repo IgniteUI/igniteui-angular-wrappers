@@ -12,7 +12,7 @@ export class IgRadialMenuComponent extends IgControlBase<IgRadialMenu> {
         super(el, renderer, differs, kvalDiffers, cdr);
     }
     /* istanbul ignore next */
-    public itemOption(itemKey: Object, key: Object, value: Object): void { return; }
+    public itemOption(itemKey: object, key: object, value: object): void { return; }
     /* istanbul ignore next */
     public exportVisualData(): void { return; }
     /* istanbul ignore next */

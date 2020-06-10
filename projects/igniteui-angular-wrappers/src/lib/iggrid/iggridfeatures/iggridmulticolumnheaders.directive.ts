@@ -24,13 +24,13 @@ export class IgGridMultiColumnHeadersFeature extends Feature<IgGridMultiColumnHe
      * Note: This method is asynchronous which means that it returns immediately and any subsequent code will execute in parallel. This may lead to runtime errors. To avoid them put the subsequent code in the callback parameter provided by the method.
      */
     /* istanbul ignore next */
-    public collapseGroup(groupKey: string, callback?: Function): void { return; }
+    public collapseGroup(groupKey: string, callback?: () => void): void { return; }
     /**
      * Expands a collapsed group. If the group is expanded, the method does nothing.
      * Note: This method is asynchronous which means that it returns immediately and any subsequent code will execute in parallel. This may lead to runtime errors. To avoid them put the subsequent code in the callback parameter provided by the method.
      */
     /* istanbul ignore next */
-    public expandGroup(groupKey: string, callback?: Function): void { return; }
+    public expandGroup(groupKey: string, callback?: () => void): void { return; }
     /**
      * Returns multicolumn headers array. if there aren"t multicolumn headers returns undefined.
      */
@@ -41,5 +41,5 @@ export class IgGridMultiColumnHeadersFeature extends Feature<IgGridMultiColumnHe
      * Note: This method is asynchronous which means that it returns immediately and any subsequent code will execute in parallel. This may lead to runtime errors. To avoid them put the subsequent code in the callback parameter provided by the method.
      */
     /* istanbul ignore next */
-    public toggleGroup(groupKey: string, callback?: Function): void { return; }
+    public toggleGroup(groupKey: string, callback?: () => void): void { return; }
 }

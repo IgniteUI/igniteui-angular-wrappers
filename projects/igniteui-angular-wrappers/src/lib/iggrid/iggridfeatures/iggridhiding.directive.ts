@@ -38,7 +38,7 @@ export class IgGridHidingFeature extends Feature<IgGridHiding> {
      * @param callback    Specifies a custom function to be called when the column(s) is shown(optional)
      */
     /* istanbul ignore next */
-    public showColumn(column: Object, isMultiColumnHeader?: boolean, callback?: Function): void { return; }
+    public showColumn(column: object, isMultiColumnHeader?: boolean, callback?: () => void): void { return; }
 
     /**
      * Hides a visible column. If the column is hidden the method does nothing.
@@ -49,7 +49,7 @@ export class IgGridHidingFeature extends Feature<IgGridHiding> {
      * @param callback    Specifies a custom function to be called when the column is hidden(optional)
      */
     /* istanbul ignore next */
-    public hideColumn(column: Object, isMultiColumnHeader?: boolean, callback?: Function): void { return; }
+    public hideColumn(column: object, isMultiColumnHeader?: boolean, callback?: () => void): void { return; }
 
     /**
      * Hides visible columns specified by the array. If the column is hidden the method does nothing.
@@ -59,7 +59,7 @@ export class IgGridHidingFeature extends Feature<IgGridHiding> {
      * @param callback    Specifies a custom function to be called when all columns are hidden(optional)
      */
     /* istanbul ignore next */
-    public hideMultiColumns(columns: any[], callback?: Function): void { return; }
+    public hideMultiColumns(columns: any[], callback?: () => void): void { return; }
 
     /**
      * Show visible columns specified by the array. If the column is shown the method does nothing.
@@ -69,7 +69,7 @@ export class IgGridHidingFeature extends Feature<IgGridHiding> {
      * @param callback    Specifies a custom function to be called when all columns are shown(optional)
      */
     /* istanbul ignore next */
-    public showMultiColumns(columns: any[], callback?: Function): void { return; }
+    public showMultiColumns(columns: any[], callback?: () => void): void { return; }
 
     /**
      * Gets whether the reset button in the column chooser dialog is to be rendered or not.

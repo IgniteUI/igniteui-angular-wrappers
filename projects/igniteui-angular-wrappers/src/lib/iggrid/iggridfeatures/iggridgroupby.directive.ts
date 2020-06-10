@@ -64,7 +64,7 @@ export class IgGridGroupByFeature extends Feature<IgGridGroupBy> {
      * Adds a column to the group by columns list, executes the group by operation and updates the view.
      */
     /* istanbul ignore next */
-    public groupByColumns(): Object { return; }
+    public groupByColumns(): object { return; }
 
     /**
      * Groups by a column
@@ -74,7 +74,7 @@ export class IgGridGroupByFeature extends Feature<IgGridGroupBy> {
      * @param sortingDirection    if not set it is taken from option defaultSortingDirection
      */
     /* istanbul ignore next */
-    public groupByColumn(key: string, layout?: string, sortingDirection?: Object): void { return; }
+    public groupByColumn(key: string, layout?: string, sortingDirection?: object): void { return; }
 
     /**
      * Removes the specified column from the group by columns list, executes the group by operation and updates the view.

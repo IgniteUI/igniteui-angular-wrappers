@@ -18,7 +18,7 @@ export class IgRatingComponent extends IgControlBase<IgRating> {
      * @param destroy     Request to destroy validator.
      */
     /* istanbul ignore next */
-    public validator(destroy?: boolean): Object { return; }
+    public validator(destroy?: boolean): object { return; }
 
     /**
      * Triggers validation.
@@ -30,19 +30,21 @@ export class IgRatingComponent extends IgControlBase<IgRating> {
      * Gets/Sets (selected) value.
      *
      * @param val     New value which is rendered with selected css.
-     * @return number|object     If parameter is not 'number', then exact value rendered with selected css is returned. Otherwise, reference to igRating is returned.
+     * @return number|object     If parameter is not 'number', then exact value rendered with selected css is returned.
+     * Otherwise, reference to igRating is returned.
      */
     /* istanbul ignore next */
-    public value(val: number): number|Object { return; }
+    public value(val: number): number|object { return; }
 
     /**
      * Gets/Sets hover value.
      *
      * @param val     New value which will be rendered with hover css when rating gets mouse.
-     * @return number|object     If parameter is not "number", then last value which was rendered with hover css is returned. Otherwise, reference to igRating is returned.
+     * @return number|object     If parameter is not "number", then last value which was rendered with hover css is returned.
+     * Otherwise, reference to igRating is returned.
      */
     /* istanbul ignore next */
-    public valueHover(val?: number): number|Object { return; }
+    public valueHover(val?: number): number|object { return; }
 
     /**
      * Checks if igRating has focus.
@@ -54,11 +56,11 @@ export class IgRatingComponent extends IgControlBase<IgRating> {
      * Sets focus to igRating. That has effect only when options.focusable is enabled.
      */
     /* istanbul ignore next */
-    public focus(): Object { return; }
+    public focus(): object { return; }
 
     /**
      * Destroys igRating widget.
      */
     /* istanbul ignore next */
-    public destroy(): Object { return; }
+    public destroy(): object { return; }
 }

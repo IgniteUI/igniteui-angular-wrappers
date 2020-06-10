@@ -40,7 +40,7 @@ export class IgGridSelectionFeature extends Feature<IgGridSelection> {
      * @param colKey     Column key
      */
     /* istanbul ignore next */
-    public selectCellById(id: Object, colKey: string): void { return; }
+    public selectCellById(id: object, colKey: string): void { return; }
 
     /**
      * Deselects a cell by row/col
@@ -59,7 +59,7 @@ export class IgGridSelectionFeature extends Feature<IgGridSelection> {
      * @param colKey     Column key
      */
     /* istanbul ignore next */
-    public deselectCellById(id: Object, colKey: string): void { return; }
+    public deselectCellById(id: object, colKey: string): void { return; }
 
     /**
      * Selects a row by index
@@ -75,7 +75,7 @@ export class IgGridSelectionFeature extends Feature<IgGridSelection> {
      * @param id     Row Id
      */
     /* istanbul ignore next */
-    public selectRowById(id: Object): void { return; }
+    public selectRowById(id: object): void { return; }
 
     /**
      * Deselects a row by index
@@ -91,7 +91,7 @@ export class IgGridSelectionFeature extends Feature<IgGridSelection> {
      * @param id     Row Id
      */
     /* istanbul ignore next */
-    public deselectRowById(id: Object): void { return; }
+    public deselectRowById(id: object): void { return; }
 
     /**
      * Returns an array of selected cells in arbitrary order where every objects has the format { element: , row: , index: , rowIndex: , columnKey: } .
@@ -115,7 +115,7 @@ export class IgGridSelectionFeature extends Feature<IgGridSelection> {
      * 				If multiple selection is enabled the function will return null.
      */
     /* istanbul ignore next */
-    public selectedCell(): Object { return; }
+    public selectedCell(): object { return; }
 
     /**
      * Returns the currently selected row that has the format { element: , index: }, if any.
@@ -123,17 +123,17 @@ export class IgGridSelectionFeature extends Feature<IgGridSelection> {
      * 				If multiple selection is enabled the function will return null.
      */
     /* istanbul ignore next */
-    public selectedRow(): Object { return; }
+    public selectedRow(): object { return; }
 
     /**
      * Returns the currently active (focused) cell that has the format { element: , row: , index: , rowIndex: , columnKey: }, if any.
      */
     /* istanbul ignore next */
-    public activeCell(): Object { return; }
+    public activeCell(): object { return; }
 
     /**
      * Returns the currently active (focused) row that has the format { element: , index: }, if any.
      */
     /* istanbul ignore next */
-    public activeRow(): Object { return; }
+    public activeRow(): object { return; }
 }

@@ -16,9 +16,9 @@ export class IgTreeGridComponent extends IgGridBase<IgTreeGrid> {
     }
 
     deleteRow(id) {
-        const element = jQuery(this._el),
-            tr = element.find('tr[data-id=\'' + id + '\']'),
-            dataLevel = tr.attr('aria-level');
+        const element = jQuery(this._el);
+        const tr = element.find('tr[data-id=\'' + id + '\']');
+        const dataLevel = tr.attr('aria-level');
         if (tr.length > 0) {
 
             element.data(this._widgetName).dataSource.deleteRow(id, true);
@@ -56,13 +56,15 @@ export class IgTreeGridComponent extends IgGridBase<IgTreeGrid> {
     }
 
     /**
-     * Clears the transaction log (delegates to igDataSource). Note that this does not update the UI. In case the UI must be updated, set the second parameter "updateUI" to true, which will trigger a call to dataBind() to re-render the contents.
+     * Clears the transaction log (delegates to igDataSource).
+     * Note that this does not update the UI. In case the UI must be updated,
+     * set the second parameter "updateUI" to true, which will trigger a call to dataBind() to re-render the contents.
      *
      * @param rowId     If specified, will only rollback the transactions with that row id.
      * @param updateUI     Whether to update the UI or not.
      */
     /* istanbul ignore next */
-    public rollback(rowId?: Object, updateUI?: boolean): any[] { return; }
+    public rollback(rowId?: object, updateUI?: boolean): any[] { return; }
 
     /**
      * Causes the treegrid to data bind to the data source (local or remote) , and re-render all of the data
@@ -74,41 +76,54 @@ export class IgTreeGridComponent extends IgGridBase<IgTreeGrid> {
      * Toggle row by specified row or row identifier
      *
      * @param row     jQuery table row object or a row id.
-     * @param callback     Specifies a custom function to be called when row is expanded/collapsed. The callback has 4 arguments- a reference to the current context(this), object that holds 2 properties(unfixedRow - DOM representation of the unfixed row, fixedRow - DOM representation of the fixed row, if there is no fixed columns it is undefined), reference to the dataRecord, expand - specifies whether row is expanded
+     * @param callback     Specifies a custom function to be called when row is expanded/collapsed.
+     * The callback has 4 arguments- a reference to the current context(this),
+     * object that holds 2 properties(unfixedRow - DOM representation of the unfixed row,
+     * fixedRow - DOM representation of the fixed row, if there is no fixed columns it is undefined),
+     * reference to the dataRecord, expand - specifies whether row is expanded
      */
     /* istanbul ignore next */
-    public toggleRow(row: Object, callback?: Function): void { return; }
+    public toggleRow(row: object, callback?: () => void): void { return; }
 
     /**
      * Expands a parent row by specified row or row identifier
      *
      * @param row     jQuery table row object or a row id.
-     * @param callback     Specifies a custom function to be called when row is expanded/collapsed. The callback has 4 arguments- a reference to the current context(this), object that holds 2 properties(unfixedRow - DOM representation of the unfixed row, fixedRow - DOM representation of the fixed row, if there is no fixed columns it is undefined), reference to the dataRecord, expand - specifies whether row is expanded
+     * @param callback     Specifies a custom function to be called when row is expanded/collapsed.
+     * The callback has 4 arguments- a reference to the current context(this),
+     * object that holds 2 properties(unfixedRow - DOM representation of the unfixed row,
+     * fixedRow - DOM representation of the fixed row, if there is no fixed columns it is undefined),
+     * reference to the dataRecord, expand - specifies whether row is expanded
      */
     /* istanbul ignore next */
-    public expandRow(row: Object, callback?: Function): void { return; }
+    public expandRow(row: object, callback?: () => void): void { return; }
 
     /**
      * Collapses a parent row by specified row or row identifier
      *
      * @param row     jQuery table row object, raw DOM row object or a row id.
-     * @param callback     Specifies a custom function to be called when row is expanded/collapsed. The callback has 4 arguments- a reference to the current context(this), object that holds 2 properties(unfixedRow - DOM representation of the unfixed row, fixedRow - DOM representation of the fixed row, if there is no fixed columns it is undefined), reference to the dataRecord, expand - specifies whether row is expanded
+     * @param callback     Specifies a custom function to be called when row is expanded/collapsed.
+     * The callback has 4 arguments- a reference to the current context(this),
+     * object that holds 2 properties(unfixedRow - DOM representation of the unfixed row,
+     * fixedRow - DOM representation of the fixed row, if there is no fixed columns it is undefined),
+     * reference to the dataRecord, expand - specifies whether row is expanded
      */
     /* istanbul ignore next */
-    public collapseRow(row: Object, callback?: Function): void { return; }
+    public collapseRow(row: object, callback?: () => void): void { return; }
 
     /**
-     * Adds a new row (TR) to the grid as a child of a specific row, by taking a data row object. Assumes the record will have the primary key.
+     * Adds a new row (TR) to the grid as a child of a specific row, by taking a data row object.
+     * Assumes the record will have the primary key.
      *
      * @param rec     The data row JavaScript object.
      * @param parentId     Identifier/key of the targeted parent row. If missing, then the new row is rendered to the bottom of the grid.
      */
     /* istanbul ignore next */
-    public renderNewChild(rec: Object, parentId?: string): void { return; }
+    public renderNewChild(rec: object, parentId?: string): void { return; }
 
     /**
      * Destroys igTreeGrid
      */
     /* istanbul ignore next */
-    public destroy(): Object { return; }
+    public destroy(): object { return; }
 }

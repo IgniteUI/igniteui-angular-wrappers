@@ -55,7 +55,7 @@ export class IgFunnelChartComponent extends IgControlBase<IgFunnelChart> {
      * @param slice     Index of slice or reference to slice-data-item.
      */
     /* istanbul ignore next */
-    public isSelected(slice: Object): boolean { return; }
+    public isSelected(slice: object): boolean { return; }
 
     /**
      * Toggles selected state of slice.
@@ -63,7 +63,7 @@ export class IgFunnelChartComponent extends IgControlBase<IgFunnelChart> {
      * @param slice     Index of slice or reference to slice-data-item.
      */
     /* istanbul ignore next */
-    public toggleSelection(slice: Object): Object { return; }
+    public toggleSelection(slice: object): object { return; }
     public exportVisualData(): void { return; }
 
     /**

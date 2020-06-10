@@ -1,3 +1,4 @@
+// tslint:disable-next-line:max-line-length
 // modeled after https://github.com/angular/angular/blob/cee2318110eeea115e5f6fc5bfc814cbaa7d90d8/modules/Angular/test/common/directives/ng_for_spec.ts
 import { TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
@@ -43,7 +44,7 @@ describe('Infragistics Angular HtmlEditor', () => {
             fixture.detectChanges();
             fixture.componentInstance.data = '<span>Test Update</span>';
             fixture.detectChanges();
-            setTimeout(function() {
+            setTimeout(() => {
                 expect($('#htmlEditor').igHtmlEditor('getContent', 'html')).toBe('<span>Test Update</span>');
                 done();
             }, 10);
@@ -64,7 +65,7 @@ describe('Infragistics Angular HtmlEditor', () => {
             // simulate keyup
             $($('#htmlEditor').find('iframe')[0].contentWindow.document).find('body[contenteditable=true]').trigger('keyup');
             fixture.detectChanges();
-            setTimeout(function() {
+            setTimeout(() => {
                 expect(fixture.componentInstance.data).toBe('<h1>Test</h1>');
                 done();
             }, 10);
