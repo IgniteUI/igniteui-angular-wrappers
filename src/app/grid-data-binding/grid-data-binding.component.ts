@@ -56,11 +56,12 @@ export class GridDataBindingComponent {
     }
 
     createNewProduct() {
-        const newProduct = {};
-        newProduct.ProductID = this.data.length + 1;
-        newProduct.ProductName = null;
-        newProduct.QuantityPerUnit = null;
-        newProduct.UnitPrice = null;
+        const newProduct = {
+          ProductID: this.data.length + 1,
+          ProductName: null,
+          QuantityPerUnit: null,
+          UnitPrice: null
+        };
         return newProduct;
     }
 

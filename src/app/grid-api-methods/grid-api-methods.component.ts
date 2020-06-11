@@ -99,7 +99,7 @@ export class GridApiMethodsComponent {
 
     if (!this.condCombo.selectedItems()) {
       const fElem = this.condCombo.itemsFromIndex(0);
-      this.condCombo.select(fElem.element);
+      this.condCombo.select(fElem['element']);
     }
     const condition = this.condCombo.value();
 
@@ -130,7 +130,7 @@ export class GridApiMethodsComponent {
 
   reCalcPageIndexes() {
     const indexes = [];
-    for (let i = 0; i < Math.ceil(this.grid.widget().data('igGrid').dataSource.data().length / this.currPageSize); i++) {
+    for (let i = 0; i < Math.ceil(this.grid.widget()['data']('igGrid').dataSource.data().length / this.currPageSize); i++) {
       indexes.push({ value: i + 1 });
     }
     this.pageIndexes = indexes;
