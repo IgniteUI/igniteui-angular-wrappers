@@ -1,33 +1,19 @@
+// This is a "Solution Style" tsconfig.json file, and is used by editors and TypeScript’slanguage server to improve development experience.
+// It is not intended to be used to perform a compilation.
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
-    "declaration": false,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
-    "target": "es2015",
-    "lib": [
-      "es2018",
-      "dom"
-    ],
-    "paths": {
-      "lib": [
-        "dist/lib"
-      ],
-      "lib/*": [
-        "dist/lib/*"
-      ],
-      "igniteui-angular-wrappers": [
-        "dist/igniteui-angular-wrappers"
-      ],
-      "igniteui-angular-wrappers/*": [
-        "dist/igniteui-angular-wrappers/*"
-      ]
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/igniteui-angular-wrappers/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/igniteui-angular-wrappers/tsconfig.spec.json"
     }
-  }
+  ]
 }

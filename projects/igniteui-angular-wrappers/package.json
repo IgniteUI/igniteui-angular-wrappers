@@ -10,7 +10,8 @@
   "dependencies": {
     "@types/ignite-ui": "^18.1.1",
     "@types/jquery": "2.0.47"
-  },
+  ,    "tslib": "^2.0.0"
+},
   "repository": {
     "type": "git",
     "url": "https://github.com/IgniteUI/igniteui-angular-wrappers.git"

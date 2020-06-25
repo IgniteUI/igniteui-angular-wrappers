@@ -1,3 +1,4 @@
+// tslint:disable-next-line:max-line-length
 // modeled after https://github.com/angular/angular/blob/cee2318110eeea115e5f6fc5bfc814cbaa7d90d8/modules/Angular/test/common/directives/ng_for_spec.ts
 import { TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
@@ -12,14 +13,14 @@ describe('Infragistics Angular FunnelChart', () => {
     });
 
     it('should initialize correctly', (done) => {
-        var template = '<div><ig-funnel-chart  widgetId="chart1" [(options)]="opts" ></ig-funnel-chart></div>';
+        const template = '<div><ig-funnel-chart  widgetId="chart1" [(options)]="opts" ></ig-funnel-chart></div>';
         TestBed.overrideComponent(TestComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestComponent);
+            const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
             expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgFunnelChartComponent)
                 .toBe(true);
@@ -28,16 +29,16 @@ describe('Infragistics Angular FunnelChart', () => {
     });
 
     it('should allow initializing data source as a top level option', (done) => {
-        var template = '<div><ig-funnel-chart  [widgetId]="\'chart1\'" [(dataSource)]="data"></ig-funnel-chart></div>';
+        const template = '<div><ig-funnel-chart  [widgetId]="\'chart1\'" [(dataSource)]="data"></ig-funnel-chart></div>';
         TestBed.overrideComponent(TestComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestComponent);
+            const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
-            expect($(fixture.debugElement.nativeElement).find("#chart1").igFunnelChart("option", "dataSource")[0].Budget)
+            expect($(fixture.debugElement.nativeElement).find('#chart1').igFunnelChart('option', 'dataSource')[0].Budget)
                 .toBe(30);
             done();
         });
@@ -46,7 +47,7 @@ describe('Infragistics Angular FunnelChart', () => {
 
 @Component({
     selector: 'test-cmp',
-    template: '<div></div>' //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
 })
 class TestComponent {
     private opts: any;
@@ -56,22 +57,22 @@ class TestComponent {
 
     constructor() {
         this.data = [
-            { Budget: 30, Department: "Administration" },
-            { Budget: 50, Department: "Sales" },
-            { Budget: 60, Department: "IT" },
-            { Budget: 50, Department: "Marketing" },
-            { Budget: 100, Department: "Development" },
-            { Budget: 20, Department: "Support" }
+            { Budget: 30, Department: 'Administration' },
+            { Budget: 50, Department: 'Sales' },
+            { Budget: 60, Department: 'IT' },
+            { Budget: 50, Department: 'Marketing' },
+            { Budget: 100, Department: 'Development' },
+            { Budget: 20, Department: 'Support' }
         ];
         this.opts = {
-            width: "100%",
-            height: "450px",
+            width: '100%',
+            height: '450px',
             dataSource: this.data,
-            valueMemberPath: "Budget",
-            innerLabelMemberPath: "Budget",
-            innerLabelVisibility: "visible",
-            outerLabelMemberPath: "Department",
-            outerLabelVisibility: "visible"
+            valueMemberPath: 'Budget',
+            innerLabelMemberPath: 'Budget',
+            innerLabelVisibility: 'visible',
+            outerLabelMemberPath: 'Department',
+            outerLabelVisibility: 'visible'
         };
     }
 }

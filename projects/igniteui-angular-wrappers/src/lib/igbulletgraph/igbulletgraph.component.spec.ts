@@ -33,8 +33,8 @@ describe('Infragistics Angular BulletGraph', () => {
 class TestComponent {
     @ViewChild(IgBulletGraphComponent) bulletgraph: IgBulletGraphComponent;
     public opts = {
-        width: "100%",
-        height: "80px",
+        width: '100%',
+        height: '80px',
         ranges: [
             {
                 brush: '#803E01',

@@ -1,14 +1,16 @@
-import { ElementRef, IterableDiffers, Component, KeyValueDiffers, ChangeDetectorRef, Renderer2 } from "@angular/core";
-import { IgControlBase } from "../igcontrolbase/igcontrolbase";
+import { ElementRef, IterableDiffers, Component, KeyValueDiffers, ChangeDetectorRef, Renderer2 } from '@angular/core';
+import { IgControlBase } from '../igcontrolbase/igcontrolbase';
 
 @Component({
-    selector: "ig-split-button",
-    template: "<ng-content></ng-content>",
-    inputs: ["widgetId", "options", "changeDetectionInterval", "disabled", "create", "items", "defaultItemName", "swapDefaultEnabled"],
-    outputs: ["click", "expanded", "expanding", "collapsed", "collapsing"]
+    selector: 'ig-split-button',
+    template: '<ng-content></ng-content>',
+    inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'items', 'defaultItemName', 'swapDefaultEnabled'],
+    outputs: ['click', 'expanded', 'expanding', 'collapsed', 'collapsing']
 })
 export class IgSplitButtonComponent extends IgControlBase<IgSplitButton> {
-    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) { super(el, renderer, differs, kvalDiffers, cdr); }
+    constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {
+      super(el, renderer, differs, kvalDiffers, cdr);
+    }
 
 
     /**
@@ -17,7 +19,7 @@ export class IgSplitButtonComponent extends IgControlBase<IgSplitButton> {
      * @param button . The button jQuery element.
      */
     /* istanbul ignore next */
-    public switchToButton(button: Object): void { return; };
+    public switchToButton(button: object): void { return; }
 
 
     /**
@@ -26,7 +28,7 @@ export class IgSplitButtonComponent extends IgControlBase<IgSplitButton> {
      * @param e The igSplitButton to be expanded/collapsed.
      */
     /* istanbul ignore next */
-    public toggle(e: Object): Object { return; };
+    public toggle(e: object): object { return; }
 
 
     /**
@@ -35,7 +37,7 @@ export class IgSplitButtonComponent extends IgControlBase<IgSplitButton> {
      * @param e Indicates the browser event which triggered this action (not API).
      */
     /* istanbul ignore next */
-    public collapse(e?: Object): Object { return; };
+    public collapse(e?: object): object { return; }
 
 
     /**
@@ -44,13 +46,13 @@ export class IgSplitButtonComponent extends IgControlBase<IgSplitButton> {
      * @param e Indicates the browser event which triggered this action (not API).
      */
     /* istanbul ignore next */
-    public expand(e?: Object): Object { return; };
+    public expand(e?: object): object { return; }
 
     /**
      * Destroy the widget.
      */
     /* istanbul ignore next */
-    public destroy(): void { return; };
+    public destroy(): void { return; }
     /* istanbul ignore next */
-    public widget(): void { return; };
+    public widget(): void { return; }
 }

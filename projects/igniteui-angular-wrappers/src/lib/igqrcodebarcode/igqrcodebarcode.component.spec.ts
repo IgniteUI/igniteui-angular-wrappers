@@ -1,3 +1,4 @@
+// tslint:disable-next-line:max-line-length
 // modeled after https://github.com/angular/angular/blob/cee2318110eeea115e5f6fc5bfc814cbaa7d90d8/modules/angular2/test/common/directives/ng_for_spec.ts
 import { TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
@@ -12,14 +13,14 @@ describe('Infragistics Angular QRBarCode', () => {
     });
 
     it('should initialize correctly', (done) => {
-        var template = '<div><ig-q-r-code-barcode [widgetId]="\'bCode\'" [(options)]="opts"></ig-q-r-code-barcode></div>';
+        const template = '<div><ig-q-r-code-barcode [widgetId]="\'bCode\'" [(options)]="opts"></ig-q-r-code-barcode></div>';
         TestBed.overrideComponent(TestComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestComponent);
+            const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
             expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgQRCodeBarcodeComponent)
                 .toBe(true);
@@ -31,7 +32,7 @@ describe('Infragistics Angular QRBarCode', () => {
 
 @Component({
     selector: 'test-cmp',
-    template: '<div></div>' //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
 })
 class TestComponent {
     private opts: any;
@@ -40,9 +41,9 @@ class TestComponent {
 
     constructor() {
         this.opts = {
-            height: "300px",
-            width: "100%",
-            data: "http://www.infragistics.com/products/jquery/samples"
+            height: '300px',
+            width: '100%',
+            data: 'http://www.infragistics.com/products/jquery/samples'
         };
     }
 }

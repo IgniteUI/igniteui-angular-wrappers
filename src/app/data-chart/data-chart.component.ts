@@ -12,35 +12,36 @@ export class DataChartComponent {
     public zoombarOptions: any;
 
     constructor() {
-        this.data = [{ "CountryName": "China", "Pop1995": 1216, "Pop2005": 1297, "Pop2015": 1361, "Pop2025": 1394 }, { "CountryName": "India", "Pop1995": 920, "Pop2005": 1090, "Pop2015": 1251, "Pop2025": 1396 }, { "CountryName": "United States", "Pop1995": 266, "Pop2005": 295, "Pop2015": 322, "Pop2025": 351 }, { "CountryName": "Indonesia", "Pop1995": 197, "Pop2005": 229, "Pop2015": 256, "Pop2025": 277 }, { "CountryName": "Brazil", "Pop1995": 161, "Pop2005": 186, "Pop2015": 204, "Pop2025": 218 }];
+        // tslint:disable-next-line:max-line-length
+        this.data = [{ CountryName: 'China', Pop1995: 1216, Pop2005: 1297, Pop2015: 1361, Pop2025: 1394 }, { CountryName: 'India', Pop1995: 920, Pop2005: 1090, Pop2015: 1251, Pop2025: 1396 }, { CountryName: 'United States', Pop1995: 266, Pop2005: 295, Pop2015: 322, Pop2025: 351 }, { CountryName: 'Indonesia', Pop1995: 197, Pop2005: 229, Pop2015: 256, Pop2025: 277 }, { CountryName: 'Brazil', Pop1995: 161, Pop2005: 186, Pop2015: 204, Pop2025: 218 }];
 
         this.options = {
             dataSource: this.data,
             axes: [{
-                name: "NameAxis",
-                type: "categoryX",
-                title: "Country",
-                label: "CountryName"
+                name: 'NameAxis',
+                type: 'categoryX',
+                title: 'Country',
+                label: 'CountryName'
             },
             {
-                name: "PopulationAxis",
-                type: "numericY",
+                name: 'PopulationAxis',
+                type: 'numericY',
                 minimumvalue: 0,
-                title: "Milions of People"
+                title: 'Milions of People'
             }],
             series: [{
-                name: "2015Population",
-                type: "column",
+                name: '2015Population',
+                type: 'column',
                 isHighlightingEnabled: true,
                 isTransitionInEnabled: true,
-                xAxis: "NameAxis",
-                yAxis: "PopulationAxis",
-                valueMemberPath: "Pop2015"
+                xAxis: 'NameAxis',
+                yAxis: 'PopulationAxis',
+                valueMemberPath: 'Pop2015'
             }]
         };
 
         this.zoombarOptions = {
-            target: "#datachart1"
+            target: '#datachart1'
         };
     }
 
@@ -48,26 +49,26 @@ export class DataChartComponent {
         let opts = {};
 
         opts = {
-            target: "#datachart1",
+            target: '#datachart1',
             clone: {
                 dataSource: this.data,
-                gridMode: "none",
+                gridMode: 'none',
                 axes: [{
-                    name: "NameAxis",
-                    type: "categoryX",
-                    labelVisibility: "collapsed"
+                    name: 'NameAxis',
+                    type: 'categoryX',
+                    labelVisibility: 'collapsed'
                 },
                 {
-                    name: "PopulationAxis",
-                    type: "numericY",
-                    labelVisibility: "collapsed"
+                    name: 'PopulationAxis',
+                    type: 'numericY',
+                    labelVisibility: 'collapsed'
                 }],
                 series: [{
-                    name: "2015Population",
-                    type: "line",
-                    xAxis: "NameAxis",
-                    yAxis: "PopulationAxis",
-                    valueMemberPath: "Pop2015"
+                    name: '2015Population',
+                    type: 'line',
+                    xAxis: 'NameAxis',
+                    yAxis: 'PopulationAxis',
+                    valueMemberPath: 'Pop2015'
                 }]
             }
         };

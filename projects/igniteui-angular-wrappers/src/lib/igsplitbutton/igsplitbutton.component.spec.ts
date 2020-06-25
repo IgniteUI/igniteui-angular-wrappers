@@ -1,3 +1,4 @@
+// tslint:disable-next-line:max-line-length
 // modeled after https://github.com/angular/angular/blob/cee2318110eeea115e5f6fc5bfc814cbaa7d90d8/modules/angular2/test/common/directives/ng_for_spec.ts
 import { TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
@@ -12,14 +13,14 @@ describe('Infragistics Angular SplitButton', () => {
     });
 
     it('should initialize correctly', (done) => {
-        var template = '<div><ig-split-button widgetId="splButton" [(options)]="opts"></ig-split-button></div>';
+        const template = '<div><ig-split-button widgetId="splButton" [(options)]="opts"></ig-split-button></div>';
         TestBed.overrideComponent(TestComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestComponent);
+            const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
             expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgSplitButtonComponent)
                 .toBe(true);
@@ -31,7 +32,7 @@ describe('Infragistics Angular SplitButton', () => {
 
 @Component({
     selector: 'test-cmp',
-    template: '<div></div>' //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
 })
 class TestComponent {
     private opts: any;
@@ -41,15 +42,15 @@ class TestComponent {
     constructor() {
         this.opts = {
             items: [{
-                name: "InsertUnorderedList",
-                label: "Bullets",
-                icon: "ui-igbutton-unorderedlist"
+                name: 'InsertUnorderedList',
+                label: 'Bullets',
+                icon: 'ui-igbutton-unorderedlist'
             }, {
-                name: "InsertOrderedList",
-                label: "Numbering",
-                icon: "ui-igbutton-orderedlist"
+                name: 'InsertOrderedList',
+                label: 'Numbering',
+                icon: 'ui-igbutton-orderedlist'
             }],
-            defaultItemName: "InsertUnorderedList"
+            defaultItemName: 'InsertUnorderedList'
         };
     }
 }

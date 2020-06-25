@@ -1,3 +1,4 @@
+// tslint:disable-next-line:max-line-length
 // modeled after https://github.com/angular/angular/blob/cee2318110eeea115e5f6fc5bfc814cbaa7d90d8/modules/angular2/test/common/directives/ng_for_spec.ts
 import { TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
@@ -12,14 +13,14 @@ describe('Infragistics Angular Splitter', () => {
     });
 
     it('should initialize correctly', (done) => {
-        var template = '<div><ig-splitter widgetId="splitter" [(options)]="opts"></ig-splitter></div>';
+        const template = '<div><ig-splitter widgetId="splitter" [(options)]="opts"></ig-splitter></div>';
         TestBed.overrideComponent(TestComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestComponent);
+            const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
             expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgSplitterComponent)
                 .toBe(true);
@@ -30,7 +31,7 @@ describe('Infragistics Angular Splitter', () => {
 
 @Component({
     selector: 'test-cmp',
-    template: '<div></div>' //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
 })
 class TestComponent {
     private opts: any;
@@ -38,6 +39,6 @@ class TestComponent {
     @ViewChild(Infragistics.IgSplitterComponent, { static: true }) public viewChild: Infragistics.IgSplitterComponent;
 
     constructor() {
-        this.opts = { height: "300px", panels: [{ size: 160, min: 100, max: 250 }] };
+        this.opts = { height: '300px', panels: [{ size: 160, min: 100, max: 250 }] };
     }
 }

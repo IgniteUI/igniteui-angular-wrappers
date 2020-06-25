@@ -1,3 +1,4 @@
+// tslint:disable-next-line:max-line-length
 // modeled after https://github.com/angular/angular/blob/cee2318110eeea115e5f6fc5bfc814cbaa7d90d8/modules/angular2/test/common/directives/ng_for_spec.ts
 import { TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
@@ -12,14 +13,14 @@ describe('Infragistics Angular TileManager', () => {
     });
 
     it('should initialize correctly', (done) => {
-        var template = '<div><ig-tile-manager widgetId="dashboard" [(options)]="opts" [changeDetectionInterval]="cdi" ></ig-tile-manager></div>';
+        const template = '<div><ig-tile-manager widgetId="dashboard" [(options)]="opts" [changeDetectionInterval]="cdi" ></ig-tile-manager></div>';
         TestBed.overrideComponent(TestComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestComponent);
+            const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
             expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgTileManagerComponent)
                 .toBe(true);
@@ -28,17 +29,17 @@ describe('Infragistics Angular TileManager', () => {
     });
 
     it('should allow initializing data source as a top level option', (done) => {
-        var template = '<div><ig-tile-manager [widgetId]="\'tm1\'" [(options)]="opts" [(dataSource)]="data"></ig-tile-manager></div>';
+        const template = '<div><ig-tile-manager [widgetId]="\'tm1\'" [(options)]="opts" [(dataSource)]="data"></ig-tile-manager></div>';
         TestBed.overrideComponent(TestComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestComponent);
+            const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
-            expect($(fixture.debugElement.nativeElement).find("#tm1").igTileManager("option", "dataSource").data()[0].name)
-                .toBe("foo");
+            expect($(fixture.debugElement.nativeElement).find('#tm1').igTileManager('option', 'dataSource').data()[0].name)
+                .toBe('foo');
             done();
         });
     });
@@ -46,7 +47,7 @@ describe('Infragistics Angular TileManager', () => {
 
 @Component({
     selector: 'test-cmp',
-    template: '<div></div>' //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
 })
 class TestComponent {
     private opts: any;
@@ -56,10 +57,10 @@ class TestComponent {
     @ViewChild(Infragistics.IgTileManagerComponent, {static: true}) public viewChild: Infragistics.IgTileManagerComponent;
 
     constructor() {
-        this.data = [{name:"foo"}];
+        this.data = [{name: 'foo'}];
 
         this.opts = {
-            //dataSource: candidates.getData(),
+            // dataSource: candidates.getData(),
             marginLeft: 10,
             marginTop: 10,
             rightPanelTilesWidth: 200,

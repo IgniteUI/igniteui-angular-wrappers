@@ -15,32 +15,32 @@ export class TreeComponent {
     public data: any;
     public newProductCategory: any;
     public newProductSubcategory: any;
-    @ViewChild("tree", { static: true }) tree: IgTreeComponent;
+    @ViewChild('tree', { static: true }) tree: IgTreeComponent;
 
     constructor() {
         this.data = ProductCategories.getData();
         this.newProductCategory = {
-            "Name": "",
-            "ProductCategoryID": this.data.length + 1,
-            "ProductSubcategories": []
+            Name: '',
+            ProductCategoryID: this.data.length + 1,
+            ProductSubcategories: []
         };
 
         this.newProductSubcategory = {
-            "Name": "",
-            "ProductSubcategoryID": 0
+            Name: '',
+            ProductSubcategoryID: 0
         };
         this.options = {
-            //dataSource: this.data,
+            // dataSource: this.data,
             bindings: {
-                childDataProperty: "ProductSubcategories",
-                textKey: "Name",
-                valueKey: "ProductCategoryID"
+                childDataProperty: 'ProductSubcategories',
+                textKey: 'Name',
+                valueKey: 'ProductCategoryID'
             }
         };
     }
 
     addNodeRootLevel() {
-        this.data.push({ "Name": "New Node", "ProductCategoryID": this.data.length + 1, "ProductSubcategories": [] });
+        this.data.push({ Name: 'New Node', ProductCategoryID: this.data.length + 1, ProductSubcategories: [] });
         this.newProductCategory.ProductCategoryID = this.data.length + 1;
     }
     addProductCategory() {
@@ -67,7 +67,7 @@ export class TreeComponent {
     }
 
     removeSelectedNode() {
-        var selected = jQuery('#tree1').igTree('selectedNode');
+        const selected = jQuery('#tree1').igTree('selectedNode');
         if (selected.path !== null) {
             jQuery('#tree1').igTree('removeAt', selected.path);
         } else {

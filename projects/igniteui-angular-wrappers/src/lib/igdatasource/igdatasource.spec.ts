@@ -1,7 +1,7 @@
+// tslint:disable-next-line:max-line-length
 // modeled after https://github.com/angular/angular/blob/cee2318110eeea115e5f6fc5bfc814cbaa7d90d8/modules/angular2/test/common/directives/ng_for_spec.ts
 import { TestBed } from '@angular/core/testing';
-import { Component, ViewChild } from '@angular/core';
-import * as IG from '../../public-api';
+import { Component } from '@angular/core';
 
 describe('Infragistics Angular DataSource', () => {
     beforeEach(() => {
@@ -11,14 +11,14 @@ describe('Infragistics Angular DataSource', () => {
     });
 
     it('should initialize correctly', (done) => {
-        var template = '';
+        const template = '';
         TestBed.overrideComponent(TestComponent, {
             set: {
-                template: template
+                template
             }
         });
         TestBed.compileComponents().then(() => {
-            let fixture = TestBed.createComponent(TestComponent);
+            const fixture = TestBed.createComponent(TestComponent);
             expect(fixture.debugElement.componentInstance.source instanceof Infragistics.DataSource)
                 .toBe(true);
             fixture.debugElement.componentInstance.source.dataBind();
@@ -31,21 +31,21 @@ describe('Infragistics Angular DataSource', () => {
 
 @Component({
     selector: 'test-cmp',
-    template: '<div></div>' //"Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
 })
 class TestComponent {
     private source: Infragistics.DataSource;
     data: Array<any> = [
-        { "Name": "John Smith", "Age": 45 },
-        { "Name": "Mary Johnson", "Age": 32 },
-        { "Name": "Bob Ferguson", "Age": 27 }
+        { Name: 'John Smith', Age: 45 },
+        { Name: 'Mary Johnson', Age: 32 },
+        { Name: 'Bob Ferguson', Age: 27 }
     ];
     constructor() {
-        let opts = {
-            type: "json",
+        const opts = {
+            type: 'json',
             dataSource: this.data
         };
-        //this.source = new IgDataSource(this.opts);
+        // this.source = new IgDataSource(this.opts);
         this.source = new Infragistics.DataSource(opts);
     }
 }
