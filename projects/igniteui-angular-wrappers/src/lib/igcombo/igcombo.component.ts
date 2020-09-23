@@ -57,7 +57,7 @@ export class IgComboComponent extends IgControlBase<IgCombo> implements ControlV
             if (this.options.allowCustomValue) {
                 jQuery(this._el).on('input', evt => {
                     // D.K. #324 Do not override the model value if the text value is representing the same model value
-                    let item = jQuery(this._el).data("igCombo").itemsFromValue(this._model.model);
+                    const item = jQuery(this._el).data('igCombo').itemsFromValue(this._model.model);
                     if (this.options.multiSelection && this.options.multiSelection.enabled ||
                         !item ||
                         item.data && item.data.text !== evt.target.value) {
