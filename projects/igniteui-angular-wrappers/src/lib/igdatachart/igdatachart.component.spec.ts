@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { IgZoombarComponent, IgDataChartComponent } from '../../public-api';
 import { Component, ViewChild } from '@angular/core';
