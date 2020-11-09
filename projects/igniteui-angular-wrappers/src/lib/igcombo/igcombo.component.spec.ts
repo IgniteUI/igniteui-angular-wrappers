@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { Component, ViewChild } from '@angular/core';
 import { IgComboComponent } from '../igniteui-angular-wrappers.module';
@@ -9,7 +9,7 @@ describe('Infragistics Angular Combo', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [FormsModule],
             declarations: [IgComboComponent,
