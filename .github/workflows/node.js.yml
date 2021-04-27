@@ -33,4 +33,5 @@ jobs:
       if: github.repository == 'IgniteUI/igniteui-angular-wrappers' && matrix.node-version == '14.x'
       uses: coverallsapp/github-action@v1.1.2
       with:
+          path-to-lcov: ./coverage/igniteui-angular-wrappers/lcov.info
           github-token: ${{ github.token }}
