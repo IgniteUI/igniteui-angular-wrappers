@@ -17,20 +17,20 @@ script:
 - npm run build
 - cat ./coverage/igniteui-angular-wrappers/lcov.info | coveralls
 
-before_deploy:
+#before_deploy:
 # package and navigate to dist
-- ng build igniteui-angular-wrappers --prod
-- cd dist/igniteui-angular-wrappers
+#- ng build igniteui-angular-wrappers --prod
+#- cd dist/igniteui-angular-wrappers
 # update package version
-- npm version "$TRAVIS_TAG" --no-git-tag-version --save
+#- npm version "$TRAVIS_TAG" --no-git-tag-version --save
 
-deploy:
-  provider: npm
-  skip_cleanup: true
-  email: igniteui@infragistics.com
-  api_key:
-    secure: hGvEnVxB5T9XEea22TbvcaxlzYgPuBnzh6pfPnKxt6xrRzp3HCI3sDlH2VhcTCmszeUa0HxRzmbIvCZS8MOa1h7Y7rLLNanv4/VYu45uLsupUyXQ7YvKZEElOvYHrWdvgJbfHhbneH2xNSPr8zXMfmNgeLCKGJeHPy4d3OzuIJhNvctAsywjQImjn77drwFffRTSu9wCp4W/bAVUPe9AVR+8dpQs25haKBgdVRYIAYC7sCGanuFLlnVC5dFOlbZNdcpGQ7YU8ge1uli0yNqFcS0h7/ULD16/IcaJ55iNLcH0l0HJUQc+kIdXuwzUBaqyS+vB/5isxCc1gNnjn724w1Sar2VOxyYSNRxZZ8+5LL2c/sGlu+1MRaWehD+IIjtzgOmMVAd7fSMSwACvA3HnkRkFboZMWdmxkvNWHVtScXn6etXrS1pO+aMLEj388TWf4fMz4o3yQae0ax/RBu46UG1SFvo3jiftgBoygZoMqeItDzWcIp38XMx1CnNTb6s8ty4lMkiT7Gxa6tddQmkZhmK58IXxES/bnkFDkebxVxDHSWuUhM8qBy0FBVabDYrtzMskCa6ullTNi7eaT0oXlfZ0nAgQtR/WfXkMPFBb/0ryyh1glAc4XzjsSowDMGEkdn+Z1NHcRtGEoQ9KK7MgwQGdgllzjYEZhFQImyzxqTg=
-  on:
-    tags: true
-    repo: IgniteUI/igniteui-angular-wrappers
-    branch: master
+#deploy:
+#  provider: npm
+#  skip_cleanup: true
+#  email: igniteui@infragistics.com
+#  api_key:
+#    secure: hGvEnVxB5T9XEea22TbvcaxlzYgPuBnzh6pfPnKxt6xrRzp3HCI3sDlH2VhcTCmszeUa0HxRzmbIvCZS8MOa1h7Y7rLLNanv4/VYu45uLsupUyXQ7YvKZEElOvYHrWdvgJbfHhbneH2xNSPr8zXMfmNgeLCKGJeHPy4d3OzuIJhNvctAsywjQImjn77drwFffRTSu9wCp4W/bAVUPe9AVR+8dpQs25haKBgdVRYIAYC7sCGanuFLlnVC5dFOlbZNdcpGQ7YU8ge1uli0yNqFcS0h7/ULD16/IcaJ55iNLcH0l0HJUQc+kIdXuwzUBaqyS+vB/5isxCc1gNnjn724w1Sar2VOxyYSNRxZZ8+5LL2c/sGlu+1MRaWehD+IIjtzgOmMVAd7fSMSwACvA3HnkRkFboZMWdmxkvNWHVtScXn6etXrS1pO+aMLEj388TWf4fMz4o3yQae0ax/RBu46UG1SFvo3jiftgBoygZoMqeItDzWcIp38XMx1CnNTb6s8ty4lMkiT7Gxa6tddQmkZhmK58IXxES/bnkFDkebxVxDHSWuUhM8qBy0FBVabDYrtzMskCa6ullTNi7eaT0oXlfZ0nAgQtR/WfXkMPFBb/0ryyh1glAc4XzjsSowDMGEkdn+Z1NHcRtGEoQ9KK7MgwQGdgllzjYEZhFQImyzxqTg=
+#  on:
+#    tags: true
+#    repo: IgniteUI/igniteui-angular-wrappers
+#    branch: master

@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x]
+        node-version: [12.x, 14.x]
 
     steps:
     - uses: actions/checkout@v2
@@ -28,3 +28,10 @@ jobs:
     - run: npm run lint
     - run: npm run build --if-present
     - run: npm run test:lib
+
+    - name: Publish to coveralls.io
+      if: github.repository == 'IgniteUI/igniteui-angular-wrappers' && matrix.node-version == '14.x'
+      uses: coverallsapp/github-action@v1.1.2
+      with:
+          path-to-lcov: ./coverage/lcov.info
+          github-token: ${{ github.token }}
