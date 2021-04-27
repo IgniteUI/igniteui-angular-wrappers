@@ -12,6 +12,7 @@
     "lint": "ng lint",
     "build": "ng build --prod",
     "build:lib": "ng build igniteui-angular-wrappers",
+    "build:lib:prod": "ng build igniteui-angular-wrappers --prod",
     "test:lib": "ng test igniteui-angular-wrappers --watch=false --no-progress --code-coverage --browsers=ChromeHeadless",
     "test:lib:watch": "ng test igniteui-angular-wrappers --browsers=ChromeHeadless"
   },
