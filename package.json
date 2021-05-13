@@ -10,9 +10,9 @@
     "ng": "ng",
     "start": "ng serve",
     "lint": "ng lint",
-    "build": "ng build --prod",
+    "build": "ng build --configuration production",
     "build:lib": "ng build igniteui-angular-wrappers",
-    "build:lib:prod": "ng build igniteui-angular-wrappers --prod",
+    "build:lib:prod": "ng build igniteui-angular-wrappers --configuration production",
     "test:lib": "ng test igniteui-angular-wrappers --watch=false --no-progress --code-coverage --browsers=ChromeHeadless",
     "test:lib:watch": "ng test igniteui-angular-wrappers --browsers=ChromeHeadless"
   },

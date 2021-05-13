@@ -55,7 +55,8 @@
                   "type": "anyComponentStyle",
                   "maximumWarning": "6kb"
                 }
-              ]
+              ],
+              "aot": true
             }
           }
         },
