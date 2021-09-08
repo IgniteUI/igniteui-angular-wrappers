@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "whitelistedNonPeerDependencies": ["@types/jquery", "@types/ignite-ui"],
+  "allowedNonPeerDependencies": ["@types/jquery", "@types/ignite-ui"],
   "dest": "../../dist/igniteui-angular-wrappers",
   "lib": {
     "entryFile": "src/public-api.ts"

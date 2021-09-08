@@ -1,9 +1,9 @@
 
-:host /deep/ #dataSelector, #pivotGrid {
+:host ::ng-deep #dataSelector, #pivotGrid {
     float: left;
 }
 
-:host /deep/ #pivotGrid_container {
+:host ::ng-deep #pivotGrid_container {
     float: right;
     width: 75%;
 }
