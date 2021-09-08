@@ -1,0 +1,50 @@
+{
+  "extends": "../../.eslintrc.json",
+  "ignorePatterns": [
+    "!**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "projects/igniteui-angular-wrappers/tsconfig.lib.json",
+          "projects/igniteui-angular-wrappers/tsconfig.spec.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "rules": {
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": ["element", "attribute"],
+            "prefix": ["ig", "updating", "summaries", "tooltips", "selection", "paging", "resizing", "hiding", "responsive", "sorting", "filtering", "column", "features"],
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": ["ig", "test"],
+            "style": "kebab-case"
+          }
+        ],
+        "@angular-eslint/no-inputs-metadata-property": 0,
+        "@angular-eslint/no-outputs-metadata-property": 0,
+        "@angular-eslint/no-output-native": 0,
+        "@angular-eslint/no-output-on-prefix": 0,
+        "@angular-eslint/directive-class-suffix": 0,
+        "@angular-eslint/no-conflicting-lifecycle": 0
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "rules": {}
+    }
+  ]
+}

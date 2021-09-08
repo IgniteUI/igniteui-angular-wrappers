@@ -1,3 +1,4 @@
+
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { Component, ViewChild } from '@angular/core';
@@ -319,8 +320,8 @@ class TestComponentAllowCustomValueComponent extends TestComponent { }
     selector: 'test-cmp',
     template: `<div>
       <ig-combo [(widgetId)]="comboID"
-                [valueKey]="\'ProductID\'"
-                [textKey]="\'ProductName\'"
+                [valueKey]="'ProductID'"
+                [textKey]="'ProductName'"
                 [dataSource]="data"
                 [(ngModel)]="combo.value1"></ig-combo>
     </div>`

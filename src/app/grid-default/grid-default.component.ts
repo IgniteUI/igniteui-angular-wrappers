@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-grid-default',
     templateUrl: './grid-default.component.html',
     styleUrls: ['./grid-default.component.css']
 })
-export class GridDefaultComponent implements OnInit {
+export class GridDefaultComponent {
 
     public gridOptions: IgGrid;
     public cellClickHandler: any;
@@ -648,9 +648,6 @@ export class GridDefaultComponent implements OnInit {
                 name: 'Sorting'
             }]
         };
-    }
-
-    ngOnInit() {
     }
 
 }

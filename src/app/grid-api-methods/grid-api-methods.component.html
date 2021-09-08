@@ -27,13 +27,13 @@
             <legend>Filtering settings</legend>
             <ig-combo widgetId='columnsCombo' width='140px' [(dataSource)]='cols' textKey='headerText' valueKey='key' mode='dropdown' (selectionChanged)="columnSelChanged($event)" #columnsCombo></ig-combo>
             <ig-combo widgetId='columnsConditionsCombo'  width='140px' [dataSource]='filteringConditions' textKey='text' valueKey='cond' mode='dropdown'  #condCombo></ig-combo>
-            <div *ngIf="(filterColType == 'string')" style='display:inline-block;'>                
+            <div *ngIf="(filterColType === 'string')" style='display:inline-block;'>                
                  <ig-text-editor widgetId='stringExprEditor'  width='140px' #exprEditor></ig-text-editor>
             </div>
-           <div  *ngIf="(filterColType == 'number')" style='display:inline-block;'>
+           <div  *ngIf="(filterColType === 'number')" style='display:inline-block;'>
                <ig-numeric-editor widgetId='numberExprEditor'  width='140px' #exprEditor></ig-numeric-editor>
            </div>
-            <div *ngIf="(filterColType == 'date')" style='display:inline-block;'>
+            <div *ngIf="(filterColType === 'date')" style='display:inline-block;'>
                  <ig-date-editor widgetId='dateExprEditor'  width='140px' #exprEditor></ig-date-editor>
             </div>            
             <br />

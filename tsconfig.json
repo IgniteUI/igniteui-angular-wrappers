@@ -22,5 +22,8 @@
         "dist/igniteui-angular-wrappers/*"
       ]
     }
+  },
+  "angularCompilerOptions": {
+      "strictTemplates": true
   }
 }

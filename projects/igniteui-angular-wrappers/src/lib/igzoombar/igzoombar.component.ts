@@ -2,7 +2,7 @@ import { Component, ElementRef, IterableDiffers, KeyValueDiffers, ChangeDetector
 import { IgControlBase } from '../igcontrolbase/igcontrolbase';
 
 @Component({
-    // tslint:disable-next-line:component-selector
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'ig-zoombar',
     template: '<ng-content></ng-content>',
     inputs: [
