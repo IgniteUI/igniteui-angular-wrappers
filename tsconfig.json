@@ -15,12 +15,6 @@
       "dom"
     ],
     "paths": {
-      "lib": [
-        "dist/lib"
-      ],
-      "lib/*": [
-        "dist/lib/*"
-      ],
       "igniteui-angular-wrappers": [
         "dist/igniteui-angular-wrappers"
       ],
