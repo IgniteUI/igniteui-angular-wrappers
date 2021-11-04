@@ -4,7 +4,6 @@ import { Column } from '../column.directive';
 
 
 @Directive({
-    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: 'multi-column-headers',
     inputs: ['inherit'],
     outputs: ['groupCollapsing', 'groupCollapsed', 'groupExpanding', 'groupExpanded']

@@ -17,7 +17,7 @@
       },
       "rules": {
         "@angular-eslint/directive-selector": [
-          "error",
+          "warn",
           {
             "type": "attribute",
             "prefix": "ig",
@@ -25,13 +25,19 @@
           }
         ],
         "@angular-eslint/component-selector": [
-          "error",
+          "warn",
           {
             "type": "element",
             "prefix": "ig",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "@angular-eslint/no-inputs-metadata-property": "warn",
+        "@angular-eslint/no-outputs-metadata-property": "warn",
+        "@angular-eslint/no-output-native": "warn",
+        "@angular-eslint/no-output-on-prefix": "warn",
+        "@angular-eslint/no-conflicting-lifecycle": "warn",
+        "@angular-eslint/directive-class-suffix": "warn"
       }
     },
     {

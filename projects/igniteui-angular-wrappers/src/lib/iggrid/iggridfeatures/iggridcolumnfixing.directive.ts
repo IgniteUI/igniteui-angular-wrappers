@@ -3,7 +3,6 @@ import { Feature } from '../feature';
 
 
 @Directive({
-    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: 'column-fixing',
     inputs: ['disabled', 'create', 'headerFixButtonText', 'headerUnfixButtonText', 'showFixButtons', 'syncRowHeights', 'scrollDelta', 'fixingDirection', 'columnSettings', 'featureChooserTextFixedColumn', 'featureChooserTextUnfixedColumn', 'minimalVisibleAreaWidth', 'fixNondataColumns', 'populateDataRowsAttributes'],
     outputs: ['columnFixing', 'columnFixed', 'columnUnfixing', 'columnUnfixed', 'columnFixingRefused', 'columnUnfixingRefused']

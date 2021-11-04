@@ -2,7 +2,6 @@ import { ElementRef, Directive } from '@angular/core';
 import { Feature } from '../feature';
 
 @Directive({
-    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: 'cell-merging',
     inputs: ['disabled', 'create', 'initialState', 'inherit'],
     outputs: ['cellsMerging', 'cellsMerged']

@@ -2,7 +2,6 @@ import { Directive, ElementRef } from '@angular/core';
 import { Feature } from '../feature';
 
 @Directive({
-    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: 'column-moving',
     inputs: ['disabled', 'create', 'columnSettings', 'mode', 'moveType', 'addMovingDropdown', 'movingDialogWidth', 'movingDialogHeight', 'movingDialogAnimationDuration', 'movingAcceptanceTolerance', 'movingScrollTolerance', 'scrollSpeedMultiplier', 'scrollDelta', 'hideHeaderContentsDuringDrag', 'dragHelperOpacity', 'movingDialogCaptionButtonDesc', 'movingDialogCaptionButtonAsc', 'movingDialogCaptionText', 'movingDialogDisplayText', 'movingDialogDropTooltipText', 'movingDialogDropTooltipMarkup', 'dropDownMoveLeftText', 'dropDownMoveRightText', 'dropDownMoveFirstText', 'dropDownMoveLastText', 'movingToolTipMove', 'featureChooserSubmenuText', 'columnMovingDialogContainment', 'dialogWidget', 'inherit'],
     outputs: ['columnDragStart', 'columnDragEnd', 'columnDragCanceled', 'columnMoving', 'columnMoved', 'movingDialogOpening', 'movingDialogOpened', 'movingDialogDragged', 'movingDialogClosing', 'movingDialogClosed', 'movingDialogContentsRendering', 'movingDialogContentsRendered', 'movingDialogMoveUpButtonPressed', 'movingDialogMoveDownButtonPressed', 'movingDialogDragColumnMoving', 'movingDialogDragColumnMoved']
