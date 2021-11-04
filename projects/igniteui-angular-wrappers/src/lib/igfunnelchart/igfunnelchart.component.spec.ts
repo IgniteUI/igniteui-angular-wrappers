@@ -1,4 +1,4 @@
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 // modeled after https://github.com/angular/angular/blob/cee2318110eeea115e5f6fc5bfc814cbaa7d90d8/modules/Angular/test/common/directives/ng_for_spec.ts
 import { TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
