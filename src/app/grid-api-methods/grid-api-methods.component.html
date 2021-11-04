@@ -1,5 +1,5 @@
 <h1 class="push-down-md"><a href="http://igniteui.com/grid/overview" target="_blank">igGrid</a></h1>
-	
+
 <div class="row description">
     <div class="col-md-12">
         <p class="lead">This sample demonstrates how to call Angular components API methods.</p>
@@ -27,20 +27,20 @@
             <legend>Filtering settings</legend>
             <ig-combo widgetId='columnsCombo' width='140px' [(dataSource)]='cols' textKey='headerText' valueKey='key' mode='dropdown' (selectionChanged)="columnSelChanged($event)" #columnsCombo></ig-combo>
             <ig-combo widgetId='columnsConditionsCombo'  width='140px' [dataSource]='filteringConditions' textKey='text' valueKey='cond' mode='dropdown'  #condCombo></ig-combo>
-            <div *ngIf="(filterColType == 'string')" style='display:inline-block;'>                
+            <div *ngIf="(filterColType === 'string')" style='display:inline-block;'>
                  <ig-text-editor widgetId='stringExprEditor'  width='140px' #exprEditor></ig-text-editor>
             </div>
-           <div  *ngIf="(filterColType == 'number')" style='display:inline-block;'>
+           <div  *ngIf="(filterColType === 'number')" style='display:inline-block;'>
                <ig-numeric-editor widgetId='numberExprEditor'  width='140px' #exprEditor></ig-numeric-editor>
            </div>
-            <div *ngIf="(filterColType == 'date')" style='display:inline-block;'>
+            <div *ngIf="(filterColType === 'date')" style='display:inline-block;'>
                  <ig-date-editor widgetId='dateExprEditor'  width='140px' #exprEditor></ig-date-editor>
-            </div>            
+            </div>
             <br />
             <input type="button" id="buttonFilter" value="Filter" (click)="filter()" />
         </fieldset>
 
-        
+
 
         <fieldset class="explorer">
             <legend>Paging settings</legend>
