@@ -3,7 +3,6 @@ import { Feature } from '../feature';
 
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
     selector: 'column-fixing',
     inputs: ['disabled', 'create', 'headerFixButtonText', 'headerUnfixButtonText', 'showFixButtons', 'syncRowHeights', 'scrollDelta', 'fixingDirection', 'columnSettings', 'featureChooserTextFixedColumn', 'featureChooserTextUnfixedColumn', 'minimalVisibleAreaWidth', 'fixNondataColumns', 'populateDataRowsAttributes'],
     outputs: ['columnFixing', 'columnFixed', 'columnUnfixing', 'columnUnfixed', 'columnFixingRefused', 'columnUnfixingRefused']

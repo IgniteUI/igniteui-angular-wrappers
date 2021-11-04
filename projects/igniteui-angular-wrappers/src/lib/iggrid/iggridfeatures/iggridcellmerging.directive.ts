@@ -2,7 +2,6 @@ import { ElementRef, Directive } from '@angular/core';
 import { Feature } from '../feature';
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
     selector: 'cell-merging',
     inputs: ['disabled', 'create', 'initialState', 'inherit'],
     outputs: ['cellsMerging', 'cellsMerged']

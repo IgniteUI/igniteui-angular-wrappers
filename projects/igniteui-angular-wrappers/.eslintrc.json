@@ -1,0 +1,50 @@
+{
+  "extends": "../../.eslintrc.json",
+  "ignorePatterns": [
+    "!**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "projects/igniteui-angular-wrappers/tsconfig.lib.json",
+          "projects/igniteui-angular-wrappers/tsconfig.spec.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "rules": {
+        "@angular-eslint/directive-selector": [
+          "warn",
+          {
+            "type": "attribute",
+            "prefix": "ig",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "warn",
+          {
+            "type": "element",
+            "prefix": "ig",
+            "style": "kebab-case"
+          }
+        ],
+        "@angular-eslint/no-inputs-metadata-property": "warn",
+        "@angular-eslint/no-outputs-metadata-property": "warn",
+        "@angular-eslint/no-output-native": "warn",
+        "@angular-eslint/no-output-on-prefix": "warn",
+        "@angular-eslint/no-conflicting-lifecycle": "warn",
+        "@angular-eslint/directive-class-suffix": "warn"
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "rules": {}
+    }
+  ]
+}
