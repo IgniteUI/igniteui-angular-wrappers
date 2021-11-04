@@ -144,15 +144,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/igniteui-angular-wrappers/tsconfig.lib.json",
-              "projects/igniteui-angular-wrappers/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "src/app/shared/**"
+            "lintFilePatterns": [
+              "projects/igniteui-angular-wrappers/**/*.ts",
+              "projects/igniteui-angular-wrappers/**/*.html"
             ]
           }
         }
@@ -161,6 +157,7 @@
   },
   "defaultProject": "wrappers",
   "cli": {
-    "analytics": false
+    "analytics": false,
+    "defaultCollection": "@angular-eslint/schematics"
   }
 }

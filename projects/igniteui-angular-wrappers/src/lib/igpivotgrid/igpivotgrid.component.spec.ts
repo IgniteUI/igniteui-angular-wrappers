@@ -1,4 +1,4 @@
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 // modeled after https://github.com/angular/angular/blob/cee2318110eeea115e5f6fc5bfc814cbaa7d90d8/modules/angular2/test/common/directives/ng_for_spec.ts
 import { TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
@@ -65,7 +65,7 @@ class TestComponent {
             [{ ProductCategory: 'Clothing', UnitPrice: 12.81, SellerName: 'Stanley Brooker', Country: 'Bulgaria', City: 'Plovdiv', Date: '01/01/2012', UnitsSold: 282 },
             { ProductCategory: 'Clothing', UnitPrice: 49.57, SellerName: 'Elisa Longbottom', Country: 'US', City: 'New York', Date: '01/05/2013', UnitsSold: 296 },
             { ProductCategory: 'Bikes', UnitPrice: 3.56, SellerName: 'Lydia Burson', Country: 'Uruguay', City: 'Ciudad de la Costa', Date: '01/06/2011', UnitsSold: 68 },
-            // tslint:disable-next-line:max-line-length
+            // eslint-disable-next-line max-len
             { ProductCategory: 'Accessories', UnitPrice: 85.58, SellerName: 'David Haley', Country: 'UK', City: 'London', Date: '04/07/2012', UnitsSold: 293 },
             { ProductCategory: 'Components', UnitPrice: 18.13, SellerName: 'John Smith', Country: 'Japan', City: 'Yokohama', Date: '12/08/2012', UnitsSold: 240 },
             { ProductCategory: 'Clothing', UnitPrice: 68.33, SellerName: 'Larry Lieb', Country: 'Uruguay', City: 'Ciudad de la Costa', Date: '05/12/2011', UnitsSold: 456 },
