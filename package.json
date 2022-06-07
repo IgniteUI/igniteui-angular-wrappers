@@ -41,6 +41,7 @@
     "@angular/cli": "^14.0.0",
     "@angular/compiler-cli": "^14.0.0",
     "@angular/language-service": "^14.0.0",
+    "@types/estree": "^0.0.51",
     "@types/ignite-ui": "^18.1.1",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
