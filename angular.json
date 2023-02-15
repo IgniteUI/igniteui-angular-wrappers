@@ -29,8 +29,7 @@
             "vendorChunk": true,
             "buildOptimizer": false,
             "sourceMap": true,
-            "optimization": false,
-            "aot": false
+            "optimization": false
           },
           "configurations": {
             "production": {
