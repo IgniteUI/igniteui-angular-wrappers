@@ -9,7 +9,7 @@
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2020",
+    "target": "ES2022",
     "lib": [
       "es2018",
       "dom"
@@ -27,6 +27,7 @@
       "igniteui-angular-wrappers/*": [
         "dist/igniteui-angular-wrappers/*"
       ]
-    }
+    },
+    "useDefineForClassFields": false
   }
 }
