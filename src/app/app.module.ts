@@ -12,7 +12,7 @@ import { GridTopLevelOptionsComponent } from './grid-top-level-options/grid-top-
 import { GridHttpClientComponent } from './grid-http-client/grid-http-client.component';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { ProductData } from './shared/product-data';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { GridComplexOptionsComponent } from './grid-complex-options/grid-complex-options.component';
 import { GridApiMethodsComponent } from './grid-api-methods/grid-api-methods.component';
 import { EditorsComponent } from './editors/editors.component';
@@ -32,42 +32,35 @@ import { TreeComponent } from './tree/tree.component';
 import { UploadComponent } from './upload/upload.component';
 import { VideoPlayerComponent } from './video-player/video-player.component';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    GridDefaultComponent,
-    GridDataBindingComponent,
-    GridTopLevelOptionsComponent,
-    GridHttpClientComponent,
-    GridComplexOptionsComponent,
-    GridApiMethodsComponent,
-    EditorsComponent,
-    GridExcelExportingComponent,
-    HierarchicalGridComponent,
-    TreeGridComponent,
-    PivotGridFlatDataSourceComponent,
-    PivotGridXmlaDataSourceComponent,
-    ComboComponent,
-    DataChartComponent,
-    DialogComponent,
-    HtmlEditorComponent,
-    LayoutManagerComponent,
-    TileManagerComponent,
-    MapComponent,
-    TreeComponent,
-    UploadComponent,
-    VideoPlayerComponent
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    IgniteUIModule,
-    FormsModule,
-    HttpClientModule,
-    AppRoutingModule,
-    InMemoryWebApiModule.forRoot(ProductData)
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        GridDefaultComponent,
+        GridDataBindingComponent,
+        GridTopLevelOptionsComponent,
+        GridHttpClientComponent,
+        GridComplexOptionsComponent,
+        GridApiMethodsComponent,
+        EditorsComponent,
+        GridExcelExportingComponent,
+        HierarchicalGridComponent,
+        TreeGridComponent,
+        PivotGridFlatDataSourceComponent,
+        PivotGridXmlaDataSourceComponent,
+        ComboComponent,
+        DataChartComponent,
+        DialogComponent,
+        HtmlEditorComponent,
+        LayoutManagerComponent,
+        TileManagerComponent,
+        MapComponent,
+        TreeComponent,
+        UploadComponent,
+        VideoPlayerComponent
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        BrowserAnimationsModule,
+        IgniteUIModule,
+        FormsModule,
+        AppRoutingModule,
+        InMemoryWebApiModule.forRoot(ProductData)], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }
