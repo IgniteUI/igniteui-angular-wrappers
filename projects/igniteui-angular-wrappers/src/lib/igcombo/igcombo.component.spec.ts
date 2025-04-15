@@ -245,7 +245,8 @@ describe('Infragistics Angular Combo', () => {
     selector: 'test-cmp',
     template: `<div>
                 <ig-combo [(widgetId)]="comboID" [(options)]="options" [(ngModel)]="combo.value1" [dataSource]="northwind"></ig-combo>
-              </div>`
+              </div>`,
+    standalone: false
 })
 class TestComponent {
     public options: IgCombo;
@@ -293,13 +294,15 @@ class TestComponent {
 
 @Component({
     selector: 'test-cmp',
-    template: '<div><ig-combo [(widgetId)]="comboID" [(options)]="options" [(dataSource)]="northwind"></ig-combo></div>'
+    template: '<div><ig-combo [(widgetId)]="comboID" [(options)]="options" [(dataSource)]="northwind"></ig-combo></div>',
+    standalone: false
 })
 class TestComponentNoNgModelComponent extends TestComponent { }
 
 @Component({
     selector: 'test-cmp',
-    template: '<div><ig-combo [(widgetId)]="comboID" [(options)]="optionsMultipleSelection" [(ngModel)]="combo.value1" [(dataSource)]="northwind"></ig-combo></div>'
+    template: '<div><ig-combo [(widgetId)]="comboID" [(options)]="optionsMultipleSelection" [(ngModel)]="combo.value1" [(dataSource)]="northwind"></ig-combo></div>',
+    standalone: false
 })
 class TestComponentMultipleSelectionComponent extends TestComponent { }
 
@@ -311,7 +314,8 @@ class TestComponentMultipleSelectionComponent extends TestComponent { }
                 [(ngModel)]="combo.value1"
                 [dataSource]="northwind"
                 [allowCustomValue]="true"></ig-combo>
-    </div>`
+    </div>`,
+    standalone: false
 })
 class TestComponentAllowCustomValueComponent extends TestComponent { }
 
@@ -323,12 +327,14 @@ class TestComponentAllowCustomValueComponent extends TestComponent { }
                 [textKey]="\'ProductName\'"
                 [dataSource]="data"
                 [(ngModel)]="combo.value1"></ig-combo>
-    </div>`
+    </div>`,
+    standalone: false
 })
 class TestComponentEmptyDataComponent extends TestComponent { }
 
 @Component({
     selector: 'test-cmp',
-    template: '<div><ig-combo [(widgetId)]="comboID" [(options)]="options2" [(ngModel)]="combo.value1"></ig-combo></div>'
+    template: '<div><ig-combo [(widgetId)]="comboID" [(options)]="options2" [(ngModel)]="combo.value1"></ig-combo></div>',
+    standalone: false
 })
 class TestComponentRemoteDataComponent extends TestComponent { }

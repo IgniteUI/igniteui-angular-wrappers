@@ -5,7 +5,8 @@ import { IgControlBase } from '../igcontrolbase/igcontrolbase';
     selector: 'ig-radial-gauge',
     template: '<ng-content></ng-content>',
     inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'width', 'height', 'ranges', 'rangeBrushes', 'rangeOutlines', 'minimumValue', 'maximumValue', 'interval', 'centerX', 'centerY', 'value', 'scaleStartAngle', 'scaleEndAngle', 'scaleSweepDirection', 'transitionDuration', 'transitionEasingFunction', 'needleBrush', 'needleOutline', 'needleStartExtent', 'needleEndExtent', 'needleShape', 'needleStartWidthRatio', 'needleEndWidthRatio', 'needleBaseFeatureWidthRatio', 'needleBaseFeatureExtent', 'needlePointFeatureWidthRatio', 'needlePointFeatureExtent', 'needlePivotWidthRatio', 'needlePivotInnerWidthRatio', 'needlePivotShape', 'scaleStartExtent', 'needlePivotBrush', 'needlePivotOutline', 'needleStrokeThickness', 'needlePivotStrokeThickness', 'scaleEndExtent', 'labelExtent', 'labelInterval', 'tickStartExtent', 'tickEndExtent', 'tickStrokeThickness', 'tickBrush', 'fontBrush', 'minorTickStartExtent', 'minorTickEndExtent', 'minorTickStrokeThickness', 'minorTickBrush', 'minorTickCount', 'scaleBrush', 'backingBrush', 'backingOutline', 'backingStrokeThickness', 'backingOuterExtent', 'backingOversweep', 'scaleOversweep', 'scaleOversweepShape', 'backingCornerRadius', 'backingInnerExtent', 'backingShape', 'radiusMultiplier', 'duplicateLabelOmissionStrategy', 'isNeedleDraggingEnabled', 'isNeedleDraggingConstrained', 'font', 'transitionProgress', 'pixelScalingRatio'],
-    outputs: ['formatLabel', 'alignLabel', 'valueChanged']
+    outputs: ['formatLabel', 'alignLabel', 'valueChanged'],
+    standalone: false
 })
 export class IgRadialGaugeComponent extends IgControlBase<IgRadialGauge> {
     constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {

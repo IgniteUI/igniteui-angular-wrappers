@@ -4,7 +4,8 @@ import { NorthwindEmployees } from '../shared/northwind-emplyoees';
 @Component({
     selector: 'app-hierarchical-grid',
     templateUrl: './hierarchical-grid.component.html',
-    styleUrls: ['./hierarchical-grid.component.css']
+    styleUrls: ['./hierarchical-grid.component.css'],
+    standalone: false
 })
 export class HierarchicalGridComponent {
 

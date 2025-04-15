@@ -3,7 +3,8 @@ import { Component, OnInit } from '@angular/core';
 @Component({
     selector: 'app-data-chart',
     templateUrl: './data-chart.component.html',
-    styleUrls: ['./data-chart.component.css']
+    styleUrls: ['./data-chart.component.css'],
+    standalone: false
 })
 export class DataChartComponent {
 

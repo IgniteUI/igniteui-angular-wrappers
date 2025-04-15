@@ -4,8 +4,9 @@ import { Feature } from '../feature';
 @Directive({
     selector: 'updating',
     inputs: ['disabled', 'create', 'columnSettings', 'editMode', 'enableDeleteRow', 'enableAddRow', 'validation', 'doneLabel',
-    'doneTooltip', 'cancelLabel', 'cancelTooltip', 'addRowLabel', 'addRowTooltip', 'deleteRowLabel', 'deleteRowTooltip', 'showDoneCancelButtons', 'enableDataDirtyException', 'startEditTriggers', 'horizontalMoveOnEnter', 'excelNavigationMode', 'saveChangesSuccessHandler', 'saveChangesErrorHandler', 'swipeDistance', 'wrapAround', 'rowEditDialogOptions', 'dialogWidget', 'inherit'],
-    outputs: ['editRowStarting', 'editRowStarted', 'editRowEnding', 'editRowEnded', 'editCellStarting', 'editCellStarted', 'editCellEnding', 'editCellEnded', 'rowAdding', 'rowAdded', 'rowDeleting', 'rowDeleted', 'dataDirty', 'generatePrimaryKeyValue', 'rowEditDialogBeforeOpen', 'rowEditDialogAfterOpen', 'rowEditDialogBeforeClose', 'rowEditDialogAfterClose', 'rowEditDialogContentsRendered']
+        'doneTooltip', 'cancelLabel', 'cancelTooltip', 'addRowLabel', 'addRowTooltip', 'deleteRowLabel', 'deleteRowTooltip', 'showDoneCancelButtons', 'enableDataDirtyException', 'startEditTriggers', 'horizontalMoveOnEnter', 'excelNavigationMode', 'saveChangesSuccessHandler', 'saveChangesErrorHandler', 'swipeDistance', 'wrapAround', 'rowEditDialogOptions', 'dialogWidget', 'inherit'],
+    outputs: ['editRowStarting', 'editRowStarted', 'editRowEnding', 'editRowEnded', 'editCellStarting', 'editCellStarted', 'editCellEnding', 'editCellEnded', 'rowAdding', 'rowAdded', 'rowDeleting', 'rowDeleted', 'dataDirty', 'generatePrimaryKeyValue', 'rowEditDialogBeforeOpen', 'rowEditDialogAfterOpen', 'rowEditDialogBeforeClose', 'rowEditDialogAfterClose', 'rowEditDialogContentsRendered'],
+    standalone: false
 })
 export class IgGridUpdatingFeature extends Feature<IgGridUpdating> {
     constructor(el: ElementRef) {

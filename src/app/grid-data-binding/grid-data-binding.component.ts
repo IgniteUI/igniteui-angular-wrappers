@@ -5,7 +5,8 @@ import { Northwind } from '../shared/northwind';
 @Component({
     selector: 'app-grid-data-binding',
     templateUrl: './grid-data-binding.component.html',
-    styleUrls: ['./grid-data-binding.component.css']
+    styleUrls: ['./grid-data-binding.component.css'],
+    standalone: false
 })
 export class GridDataBindingComponent {
 

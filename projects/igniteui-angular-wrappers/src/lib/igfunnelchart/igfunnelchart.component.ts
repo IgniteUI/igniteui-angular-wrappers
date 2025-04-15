@@ -5,7 +5,8 @@ import { IgControlBase } from '../igcontrolbase/igcontrolbase';
     selector: 'ig-funnel-chart',
     template: '<ng-content></ng-content>',
     inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'width', 'height', 'tooltipTemplate', 'maxRecCount', 'dataSource', 'dataSourceType', 'dataSourceUrl', 'responseTotalRecCountKey', 'responseDataKey', 'bezierPoints', 'legend', 'valueMemberPath', 'brushes', 'outlines', 'bottomEdgeWidth', 'innerLabelMemberPath', 'outerLabelMemberPath', 'innerLabelVisibility', 'outerLabelVisibility', 'outerLabelAlignment', 'funnelSliceDisplay', 'formatInnerLabel', 'formatOuterLabel', 'transitionDuration', 'isInverted', 'useBezierCurve', 'allowSliceSelection', 'useUnselectedStyle', 'selectedSliceStyle', 'unselectedSliceStyle', 'legendItemBadgeTemplate', 'useOuterLabelsForLegend', 'textStyle', 'outerLabelTextStyle', 'outlineThickness', 'pixelScalingRatio', 'outerLabelTextColor', 'textColor'],
-    outputs: ['dataBinding', 'dataBound', 'updateTooltip', 'hideTooltip', 'sliceClicked']
+    outputs: ['dataBinding', 'dataBound', 'updateTooltip', 'hideTooltip', 'sliceClicked'],
+    standalone: false
 })
 export class IgFunnelChartComponent extends IgControlBase<IgFunnelChart> implements OnInit {
     constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {

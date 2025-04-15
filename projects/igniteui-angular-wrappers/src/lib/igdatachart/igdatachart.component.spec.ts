@@ -119,6 +119,8 @@ describe('Infragistics Angular DataChart and Zoombar', () => {
 @Component({
     selector: 'test-cmp',
     template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    ,
+    standalone: false
 })
 class TestComponent {
     public opts: any;

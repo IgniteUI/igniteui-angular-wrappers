@@ -3,9 +3,10 @@ import { Product } from './product';
 import { ProductService } from './product.service';
 
 @Component({
-  selector: 'app-grid-http-client',
-  templateUrl: './grid-http-client.component.html',
-  styleUrls: ['./grid-http-client.component.css']
+    selector: 'app-grid-http-client',
+    templateUrl: './grid-http-client.component.html',
+    styleUrls: ['./grid-http-client.component.css'],
+    standalone: false
 })
 export class GridHttpClientComponent {
 

@@ -569,6 +569,8 @@ describe('Infragistics Angular TimePicker', () => {
 @Component({
     selector: 'test-text-editor-cmp',
     template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    ,
+    standalone: false
 })
 class TestIgTextEditorComponent {
     private opts: IgTextEditor;
@@ -598,6 +600,8 @@ class TestIgTextEditorComponent {
 @Component({
     selector: 'test-numeric-editor-cmp',
     template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    ,
+    standalone: false
 })
 class TestIgNumericEditorComponent {
     private val: number;
@@ -615,6 +619,8 @@ class TestIgNumericEditorComponent {
 @Component({
     selector: 'test-percent-editor-cmp',
     template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    ,
+    standalone: false
 })
 class TestIgPercentEditorComponent {
     private val: number;
@@ -630,6 +636,8 @@ class TestIgPercentEditorComponent {
 @Component({
     selector: 'test-mask-editor-cmp',
     template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    ,
+    standalone: false
 })
 class TestIgMaskEditorComponent {
     private val: string;
@@ -645,6 +653,8 @@ class TestIgMaskEditorComponent {
 @Component({
     selector: 'test-date-picker-cmp',
     template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    ,
+    standalone: false
 })
 class TestIgDatePickerComponent {
     private val: Date;
@@ -660,6 +670,8 @@ class TestIgDatePickerComponent {
 @Component({
     selector: 'test-time-picker-cmp',
     template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    ,
+    standalone: false
 })
 class TestIgTimePickerComponent {
     private val: string;
@@ -675,6 +687,8 @@ class TestIgTimePickerComponent {
 @Component({
     selector: 'test-date-editor-cmp',
     template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    ,
+    standalone: false
 })
 class TestIgDateEditorComponent {
     private val: Date;
@@ -690,6 +704,8 @@ class TestIgDateEditorComponent {
 @Component({
     selector: 'test-currency-editor-cmp',
     template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    ,
+    standalone: false
 })
 class TestIgCurrencyEditorComponent {
     private val: number;
@@ -705,6 +721,8 @@ class TestIgCurrencyEditorComponent {
 @Component({
     selector: 'test-checkbox-editor-cmp',
     template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    ,
+    standalone: false
 })
 class TestIgCheckboxEditorComponent {
     private val: boolean;

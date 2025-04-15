@@ -18,7 +18,8 @@ import { IgGridAppendRowsOnDemandFeature } from './iggridfeatures/iggridappendro
 import { IgGridMultiColumnHeadersFeature } from './iggridfeatures/iggridmulticolumnheaders.directive';
 
 @Directive({
-  selector: 'features'
+    selector: 'features',
+    standalone: false
 })
 export class Features implements AfterContentInit {
   public allFeatures: Array<any> = new Array<any>();

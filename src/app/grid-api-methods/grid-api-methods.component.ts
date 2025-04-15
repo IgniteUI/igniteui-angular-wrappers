@@ -5,9 +5,10 @@ import { Northwind } from '../shared/northwind';
 declare var jQuery: any;
 
 @Component({
-  selector: 'app-grid-api-methods',
-  templateUrl: './grid-api-methods.component.html',
-  styleUrls: ['./grid-api-methods.component.css']
+    selector: 'app-grid-api-methods',
+    templateUrl: './grid-api-methods.component.html',
+    styleUrls: ['./grid-api-methods.component.css'],
+    standalone: false
 })
 export class GridApiMethodsComponent {
 

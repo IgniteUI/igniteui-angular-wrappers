@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-pivot-grid-xmla-data-source',
-  templateUrl: './pivot-grid-xmla-data-source.component.html',
-  styleUrls: ['./pivot-grid-xmla-data-source.component.css']
+    selector: 'app-pivot-grid-xmla-data-source',
+    templateUrl: './pivot-grid-xmla-data-source.component.html',
+    styleUrls: ['./pivot-grid-xmla-data-source.component.css'],
+    standalone: false
 })
 export class PivotGridXmlaDataSourceComponent {
 

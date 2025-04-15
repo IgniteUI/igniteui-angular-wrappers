@@ -5,7 +5,8 @@ import { IgControlBase } from '../igcontrolbase/igcontrolbase';
     selector: 'ig-map',
     template: '<ng-content></ng-content>',
     inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'width', 'height', 'dataSource', 'dataSourceUrl', 'dataSourceType', 'responseDataKey', 'autoMarginWidth', 'autoMarginHeight', 'crosshairVisibility', 'crosshairPoint', 'plotAreaBackground', 'defaultInteraction', 'dragModifier', 'panModifier', 'previewRect', 'windowRect', 'zoomable', 'windowScale', 'windowResponse', 'windowRectMinWidth', 'windowPositionHorizontal', 'windowPositionVertical', 'circleMarkerTemplate', 'triangleMarkerTemplate', 'pyramidMarkerTemplate', 'squareMarkerTemplate', 'diamondMarkerTemplate', 'pentagonMarkerTemplate', 'hexagonMarkerTemplate', 'tetragramMarkerTemplate', 'pentagramMarkerTemplate', 'hexagramMarkerTemplate', 'overviewPlusDetailPaneBackgroundImageUri', 'useTiledZooming', 'preferHigherResolutionTiles', 'zoomTileCacheSize', 'backgroundContent', 'series', 'theme'],
-    outputs: ['tooltipShowing', 'tooltipShown', 'tooltipHiding', 'tooltipHidden', 'browserNotSupported', 'seriesCursorMouseMove', 'seriesMouseLeftButtonDown', 'seriesMouseLeftButtonUp', 'seriesMouseMove', 'seriesMouseEnter', 'seriesMouseLeave', 'windowRectChanged', 'gridAreaRectChanged', 'refreshCompleted', 'triangulationStatusChanged']
+    outputs: ['tooltipShowing', 'tooltipShown', 'tooltipHiding', 'tooltipHidden', 'browserNotSupported', 'seriesCursorMouseMove', 'seriesMouseLeftButtonDown', 'seriesMouseLeftButtonUp', 'seriesMouseMove', 'seriesMouseEnter', 'seriesMouseLeave', 'windowRectChanged', 'gridAreaRectChanged', 'refreshCompleted', 'triangulationStatusChanged'],
+    standalone: false
 })
 export class IgMapComponent extends IgControlBase<IgMap> implements OnInit {
     constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {

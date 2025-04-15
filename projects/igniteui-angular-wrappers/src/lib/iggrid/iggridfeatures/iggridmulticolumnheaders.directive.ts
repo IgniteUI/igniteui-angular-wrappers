@@ -6,7 +6,8 @@ import { Column } from '../column.directive';
 @Directive({
     selector: 'multi-column-headers',
     inputs: ['inherit'],
-    outputs: ['groupCollapsing', 'groupCollapsed', 'groupExpanding', 'groupExpanded']
+    outputs: ['groupCollapsing', 'groupCollapsed', 'groupExpanding', 'groupExpanded'],
+    standalone: false
 })
 export class IgGridMultiColumnHeadersFeature extends Feature<IgGridMultiColumnHeaders> {
     constructor(el: ElementRef) {

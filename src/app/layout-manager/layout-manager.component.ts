@@ -3,7 +3,8 @@ import { Component, OnInit } from '@angular/core';
 @Component({
     selector: 'app-layout-manager',
     templateUrl: './layout-manager.component.html',
-    styleUrls: ['./layout-manager.component.css']
+    styleUrls: ['./layout-manager.component.css'],
+    standalone: false
 })
 export class LayoutManagerComponent {
 

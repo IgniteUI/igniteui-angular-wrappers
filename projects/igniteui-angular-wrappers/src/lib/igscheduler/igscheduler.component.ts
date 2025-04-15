@@ -5,7 +5,8 @@ import { IgControlBase } from '../igcontrolbase/igcontrolbase';
     selector: 'ig-scheduler',
     template: '<ng-content></ng-content>',
     inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'views', 'viewMode', 'selectedDate', 'enableTodayButton', 'width', 'height', 'agendaViewSettings', 'monthViewSettings', 'appointmentDialogSuppress'],
-    outputs: ['agendaRangeChanging', 'agendaRangeChanged', 'daySelected', 'monthChanging', 'monthChanged', 'rendering', 'rendered', 'viewChanging', 'viewChanged', 'appointmentDialogOpening', 'appointmentDialogOpened', 'appointmentDialogClosing', 'appointmentDialogClosed', 'appointmentCreating', 'appointmentCreated', 'appointmentDeleting', 'appointmentDeleted', 'appointmentEditing', 'appointmentEdited']
+    outputs: ['agendaRangeChanging', 'agendaRangeChanged', 'daySelected', 'monthChanging', 'monthChanged', 'rendering', 'rendered', 'viewChanging', 'viewChanged', 'appointmentDialogOpening', 'appointmentDialogOpened', 'appointmentDialogClosing', 'appointmentDialogClosed', 'appointmentCreating', 'appointmentCreated', 'appointmentDeleting', 'appointmentDeleted', 'appointmentEditing', 'appointmentEdited'],
+    standalone: false
 })
 export class IgSchedulerComponent extends IgControlBase<IgScheduler> {
     constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {

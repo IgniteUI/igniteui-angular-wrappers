@@ -4,7 +4,8 @@ import { Northwind } from '../shared/northwind';
 @Component({
     selector: 'app-combo',
     templateUrl: './combo.component.html',
-    styleUrls: ['./combo.component.css']
+    styleUrls: ['./combo.component.css'],
+    standalone: false
 })
 export class ComboComponent {
 

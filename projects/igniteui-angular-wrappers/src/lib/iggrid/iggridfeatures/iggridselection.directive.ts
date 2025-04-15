@@ -4,7 +4,8 @@ import { Feature } from '../feature';
 @Directive({
     selector: 'selection',
     inputs: ['disabled', 'create', 'multipleSelection', 'mouseDragSelect', 'mode', 'activation', 'wrapAround', 'skipChildren', 'multipleCellSelectOnClick', 'touchDragSelect', 'persist', 'allowMultipleRangeSelection'],
-    outputs: ['rowSelectionChanging', 'rowSelectionChanged', 'cellSelectionChanging', 'cellSelectionChanged', 'activeCellChanging', 'activeCellChanged', 'activeRowChanging', 'activeRowChanged']
+    outputs: ['rowSelectionChanging', 'rowSelectionChanged', 'cellSelectionChanging', 'cellSelectionChanged', 'activeCellChanging', 'activeCellChanged', 'activeRowChanging', 'activeRowChanged'],
+    standalone: false
 })
 export class IgGridSelectionFeature extends Feature<IgGridSelection> {
     constructor(el: ElementRef) {

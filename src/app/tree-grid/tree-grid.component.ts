@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { Tasks } from '../shared/tasks';
 
 @Component({
-  selector: 'app-tree-grid',
-  templateUrl: './tree-grid.component.html',
-  styleUrls: ['./tree-grid.component.css']
+    selector: 'app-tree-grid',
+    templateUrl: './tree-grid.component.html',
+    styleUrls: ['./tree-grid.component.css'],
+    standalone: false
 })
 export class TreeGridComponent {
 

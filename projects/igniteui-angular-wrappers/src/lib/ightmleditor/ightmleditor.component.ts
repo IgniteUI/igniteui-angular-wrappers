@@ -8,7 +8,8 @@ declare var jQuery: any;
     selector: 'ig-html-editor',
     template: '<ng-content></ng-content>',
     inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'showFormattingToolbar', 'showTextToolbar', 'showInsertObjectToolbar', 'showCopyPasteToolbar', 'width', 'height', 'toolbarSettings', 'customToolbars', 'inputName', 'value'],
-    outputs: ['rendered', 'rendering', 'actionExecuting', 'actionExecuted', 'toolbarCollapsing', 'toolbarCollapsed', 'toolbarExpanding', 'toolbarExpanded', 'cut', 'copy', 'paste', 'undo', 'redo', 'workspaceResized']
+    outputs: ['rendered', 'rendering', 'actionExecuting', 'actionExecuted', 'toolbarCollapsing', 'toolbarCollapsed', 'toolbarExpanding', 'toolbarExpanded', 'cut', 'copy', 'paste', 'undo', 'redo', 'workspaceResized'],
+    standalone: false
 })
 export class IgHtmlEditorComponent extends IgControlBase<IgHtmlEditor> implements ControlValueAccessor, OnInit {
     protected _model: any;

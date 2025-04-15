@@ -6,7 +6,8 @@ import { IgControlBase } from '../igcontrolbase/igcontrolbase';
     selector: 'ig-bullet-graph',
     template: '<ng-content></ng-content>',
     inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'width', 'height', 'ranges', 'rangeToolTipTemplate', 'valueToolTipTemplate', 'targetValueToolTipTemplate', 'orientation', 'rangeBrushes', 'rangeOutlines', 'minimumValue', 'maximumValue', 'targetValue', 'targetValueName', 'value', 'valueName', 'rangeInnerExtent', 'rangeOuterExtent', 'valueInnerExtent', 'valueOuterExtent', 'interval', 'ticksPostInitial', 'ticksPreTerminal', 'labelInterval', 'labelExtent', 'labelsPostInitial', 'labelsPreTerminal', 'minorTickCount', 'tickStartExtent', 'tickEndExtent', 'tickStrokeThickness', 'tickBrush', 'fontBrush', 'valueBrush', 'valueOutline', 'valueStrokeThickness', 'minorTickStartExtent', 'minorTickEndExtent', 'minorTickStrokeThickness', 'minorTickBrush', 'isScaleInverted', 'backingBrush', 'backingOutline', 'backingStrokeThickness', 'backingInnerExtent', 'backingOuterExtent', 'scaleStartExtent', 'scaleEndExtent', 'targetValueBrush', 'targetValueBreadth', 'targetValueInnerExtent', 'targetValueOuterExtent', 'targetValueOutline', 'targetValueStrokeThickness', 'transitionDuration', 'showToolTipTimeout', 'showToolTip', 'font', 'pixelScalingRatio'],
-    outputs: ['formatLabel', 'alignLabel']
+    outputs: ['formatLabel', 'alignLabel'],
+    standalone: false
 })
 export class IgBulletGraphComponent extends IgControlBase<IgBulletGraph> {
     constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {

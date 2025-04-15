@@ -5,7 +5,8 @@ import { IgControlBase } from '../igcontrolbase/igcontrolbase';
     selector: 'ig-rating',
     template: '<ng-content></ng-content>',
     inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'vertical', 'value', 'valueHover', 'voteCount', 'voteWidth', 'voteHeight', 'swapDirection', 'valueAsPercent', 'focusable', 'precision', 'precisionZeroVote', 'roundedDecimalPlaces', 'theme', 'validatorOptions', 'cssVotes'],
-    outputs: ['hoverChange', 'valueChange']
+    outputs: ['hoverChange', 'valueChange'],
+    standalone: false
 })
 export class IgRatingComponent extends IgControlBase<IgRating> {
     constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {

@@ -49,6 +49,8 @@ describe('Infragistics Angular Map', () => {
 @Component({
     selector: 'test-cmp',
     template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    ,
+    standalone: false
 })
 class TestComponent {
     @ViewChild(Infragistics.IgMapComponent, { static: true }) public viewChild: Infragistics.IgMapComponent;

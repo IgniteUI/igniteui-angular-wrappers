@@ -7,7 +7,8 @@ declare var jQuery: any;
     selector: 'ig-popover',
     template: '<ng-content></ng-content>',
     inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'closeOnBlur', 'direction', 'position', 'width', 'height', 'minWidth', 'maxWidth', 'maxHeight', 'animationDuration', 'contentTemplate', 'selectors', 'headerTemplate', 'showOn', 'containment', 'appendTo'],
-    outputs: ['showing', 'shown', 'hiding', 'hidden']
+    outputs: ['showing', 'shown', 'hiding', 'hidden'],
+    standalone: false
 })
 export class IgPopoverComponent extends IgControlBase<IgPopover> implements OnInit {
     constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {

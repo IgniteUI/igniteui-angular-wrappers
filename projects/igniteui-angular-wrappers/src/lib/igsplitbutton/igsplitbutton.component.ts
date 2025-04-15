@@ -5,7 +5,8 @@ import { IgControlBase } from '../igcontrolbase/igcontrolbase';
     selector: 'ig-split-button',
     template: '<ng-content></ng-content>',
     inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'items', 'defaultItemName', 'swapDefaultEnabled'],
-    outputs: ['click', 'expanded', 'expanding', 'collapsed', 'collapsing']
+    outputs: ['click', 'expanded', 'expanding', 'collapsed', 'collapsing'],
+    standalone: false
 })
 export class IgSplitButtonComponent extends IgControlBase<IgSplitButton> {
     constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {

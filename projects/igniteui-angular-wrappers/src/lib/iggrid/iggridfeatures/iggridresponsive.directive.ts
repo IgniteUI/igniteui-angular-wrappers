@@ -4,7 +4,8 @@ import { ElementRef, Directive } from '@angular/core';
 @Directive({
     selector: 'responsive',
     inputs: ['disabled', 'create', 'columnSettings', 'reactOnContainerWidthChanges', 'forceResponsiveGridWidth', 'responsiveSensitivity', 'responsiveModes', 'enableVerticalRendering', 'windowWidthToRenderVertically', 'propertiesColumnWidth', 'valuesColumnWidth', 'allowedColumnWidthPerType', 'singleColumnTemplate', 'inherit'],
-    outputs: ['responsiveColumnHiding', 'responsiveColumnHidden', 'responsiveColumnShowing', 'responsiveColumnShown', 'responsiveModeChanged']
+    outputs: ['responsiveColumnHiding', 'responsiveColumnHidden', 'responsiveColumnShowing', 'responsiveColumnShown', 'responsiveModeChanged'],
+    standalone: false
 })
 export class IgGridResponsiveFeature extends Feature<IgGridResponsive> {
     constructor(el: ElementRef) {

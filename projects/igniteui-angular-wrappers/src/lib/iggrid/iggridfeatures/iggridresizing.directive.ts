@@ -4,7 +4,8 @@ import { Feature } from '../feature';
 @Directive({
     selector: 'resizing',
     inputs: ['disabled', 'create', 'allowDoubleClickToResize', 'deferredResizing', 'columnSettings', 'handleThreshold', 'inherit'],
-    outputs: ['columnResizing', 'columnResizingRefused', 'columnResized']
+    outputs: ['columnResizing', 'columnResizingRefused', 'columnResized'],
+    standalone: false
 })
 export class IgGridResizingFeature extends Feature<IgGridResizing> {
     constructor(el: ElementRef) {
