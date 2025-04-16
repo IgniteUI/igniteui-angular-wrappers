@@ -5,7 +5,8 @@ import { IgContentControlBase } from '../igcontrolbase/igcontentcontrolbase';
     selector: 'ig-tile-manager',
     template: '<ng-content></ng-content>',
     inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'width', 'height', 'columnWidth', 'columnHeight', 'cols', 'rows', 'marginLeft', 'marginTop', 'rearrangeItems', 'items', 'dataSource', 'minimizedState', 'maximizedState', 'maximizedTileIndex', 'rightPanelCols', 'rightPanelTilesWidth', 'rightPanelTilesHeight', 'showRightPanelScroll', 'splitterOptions', 'preventMaximizingSelector', 'animationDuration', 'dataSourceUrl', 'responseDataKey', 'responseDataType', 'dataSourceType', 'requestType', 'responseContentType'],
-    outputs: ['dataBinding', 'dataBound', 'rendering', 'rendered', 'tileRendering', 'tileRendered', 'tileMaximizing', 'tileMaximized', 'tileMinimizing', 'tileMinimized']
+    outputs: ['dataBinding', 'dataBound', 'rendering', 'rendered', 'tileRendering', 'tileRendered', 'tileMaximizing', 'tileMaximized', 'tileMinimizing', 'tileMinimized'],
+    standalone: false
 })
 export class IgTileManagerComponent extends IgContentControlBase<IgTileManager> implements OnInit {
     constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {

@@ -5,19 +5,20 @@ import { IgContentControlBase } from '../igcontrolbase/igcontentcontrolbase';
     selector: 'ig-splitter',
     template: '<ng-content></ng-content>',
     inputs: [
-      'widgetId',
-      'options',
-      'changeDetectionInterval',
-      'disabled',
-      'create',
-      'width',
-      'height',
-      'orientation',
-      'panels',
-      'dragDelta',
-      'resizeOtherSplitters'
+        'widgetId',
+        'options',
+        'changeDetectionInterval',
+        'disabled',
+        'create',
+        'width',
+        'height',
+        'orientation',
+        'panels',
+        'dragDelta',
+        'resizeOtherSplitters'
     ],
-    outputs: ['collapsed', 'expanded', 'resizeStarted', 'resizing', 'resizeEnded', 'layoutRefreshing', 'layoutRefreshed']
+    outputs: ['collapsed', 'expanded', 'resizeStarted', 'resizing', 'resizeEnded', 'layoutRefreshing', 'layoutRefreshed'],
+    standalone: false
 })
 export class IgSplitterComponent extends IgContentControlBase<IgSplitter> {
     constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {

@@ -3,7 +3,8 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'app-grid-default',
     templateUrl: './grid-default.component.html',
-    styleUrls: ['./grid-default.component.css']
+    styleUrls: ['./grid-default.component.css'],
+    standalone: false
 })
 export class GridDefaultComponent  {
 

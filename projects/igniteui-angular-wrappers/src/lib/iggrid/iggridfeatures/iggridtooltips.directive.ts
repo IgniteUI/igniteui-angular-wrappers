@@ -4,7 +4,8 @@ import { ElementRef, Directive } from '@angular/core';
 @Directive({
     selector: 'tooltips',
     inputs: ['disabled', 'create', 'visibility', 'style', 'showDelay', 'hideDelay', 'columnSettings', 'fadeTimespan', 'cursorLeftOffset', 'cursorTopOffset', 'inherit'],
-    outputs: ['tooltipShowing', 'tooltipShown', 'tooltipHiding', 'tooltipHidden']
+    outputs: ['tooltipShowing', 'tooltipShown', 'tooltipHiding', 'tooltipHidden'],
+    standalone: false
 })
 export class IgGridTooltipsFeature extends Feature<IgGridTooltips> {
     constructor(el: ElementRef) {

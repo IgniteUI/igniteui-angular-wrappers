@@ -5,7 +5,8 @@ import { IgContentControlBase } from '../igcontrolbase/igcontentcontrolbase';
     selector: 'ig-layout-manager',
     template: '<ng-content></ng-content>',
     inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'borderLayout', 'gridLayout', 'height', 'itemCount', 'items', 'layoutMode', 'width'],
-    outputs: ['internalResized', 'internalResizing', 'itemRendered', 'itemRendering', 'rendered']
+    outputs: ['internalResized', 'internalResizing', 'itemRendered', 'itemRendering', 'rendered'],
+    standalone: false
 })
 export class IgLayoutManagerComponent extends IgContentControlBase<IgLayoutManager> {
     constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {

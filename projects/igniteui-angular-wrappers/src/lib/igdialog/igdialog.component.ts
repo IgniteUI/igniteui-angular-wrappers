@@ -5,7 +5,8 @@ import { IgContentControlBase } from '../igcontrolbase/igcontentcontrolbase';
     selector: 'ig-dialog',
     template: '<ng-content></ng-content>',
     inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'mainElement', 'state', 'pinned', 'closeOnEscape', 'showCloseButton', 'showMaximizeButton', 'showMinimizeButton', 'showPinButton', 'pinOnMinimized', 'imageClass', 'headerText', 'showHeader', 'showFooter', 'footerText', 'dialogClass', 'container', 'height', 'width', 'minHeight', 'minWidth', 'maxHeight', 'maxWidth', 'draggable', 'position', 'resizable', 'tabIndex', 'openAnimation', 'closeAnimation', 'zIndex', 'modal', 'trackFocus', 'closeButtonTitle', 'minimizeButtonTitle', 'maximizeButtonTitle', 'pinButtonTitle', 'unpinButtonTitle', 'restoreButtonTitle', 'temporaryUrl', 'enableHeaderFocus', 'enableDblclick'],
-    outputs: ['stateChanging', 'stateChanged', 'animationEnded', 'focus', 'blur']
+    outputs: ['stateChanging', 'stateChanged', 'animationEnded', 'focus', 'blur'],
+    standalone: false
 })
 export class IgDialogComponent extends IgContentControlBase<IgDialog> {
     constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {

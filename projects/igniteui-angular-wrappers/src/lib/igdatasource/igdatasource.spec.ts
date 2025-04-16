@@ -32,6 +32,8 @@ describe('Infragistics Angular DataSource', () => {
 @Component({
     selector: 'test-cmp',
     template: '<div></div>' // "Component 'TestComponent' must have either 'template' or 'templateUrl' set."
+    ,
+    standalone: false
 })
 class TestComponent {
     private source: Infragistics.DataSource;

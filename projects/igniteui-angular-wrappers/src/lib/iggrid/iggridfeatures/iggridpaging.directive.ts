@@ -4,7 +4,8 @@ import { Feature } from '../feature';
 @Directive({
     selector: 'paging',
     inputs: ['disabled', 'create', 'pageSize', 'recordCountKey', 'pageSizeUrlKey', 'pageIndexUrlKey', 'currentPageIndex', 'type', 'showPageSizeDropDown', 'pageSizeDropDownLabel', 'pageSizeDropDownTrailingLabel', 'pageSizeDropDownLocation', 'showPagerRecordsLabel', 'pagerRecordsLabelTemplate', 'nextPageLabelText', 'prevPageLabelText', 'firstPageLabelText', 'lastPageLabelText', 'showFirstLastPages', 'showPrevNextPages', 'currentPageDropDownLeadingLabel', 'currentPageDropDownTrailingLabel', 'currentPageDropDownTooltip', 'pageSizeDropDownTooltip', 'pagerRecordsLabelTooltip', 'prevPageTooltip', 'nextPageTooltip', 'firstPageTooltip', 'lastPageTooltip', 'pageTooltipFormat', 'pageSizeList', 'pageCountLimit', 'visiblePageCount', 'defaultDropDownWidth', 'delayOnPageChanged', 'persist', 'inherit'],
-    outputs: ['pageIndexChanging', 'pageIndexChanged', 'pageSizeChanging', 'pageSizeChanged', 'pagerRendering', 'pagerRendered']
+    outputs: ['pageIndexChanging', 'pageIndexChanged', 'pageSizeChanging', 'pageSizeChanged', 'pagerRendering', 'pagerRendered'],
+    standalone: false
 })
 export class IgGridPagingFeature extends Feature<IgGridPaging> {
     constructor(el: ElementRef) {

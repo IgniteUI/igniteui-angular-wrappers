@@ -5,35 +5,36 @@ import { IgControlBase } from '../igcontrolbase/igcontrolbase';
     selector: 'ig-zoombar',
     template: '<ng-content></ng-content>',
     inputs: [
-      'widgetId',
-      'options',
-      'changeDetectionInterval',
-      'disabled',
-      'create',
-      'target',
-      'clone',
-      'width',
-      'height',
-      'zoomAction',
-      'zoomWindowMoveDistance',
-      'defaultZoomWindow',
-      'zoomWindowMinWidth',
-      'hoverStyleAnimationDuration',
-      'windowPanDuration',
-      'tabIndex'
+        'widgetId',
+        'options',
+        'changeDetectionInterval',
+        'disabled',
+        'create',
+        'target',
+        'clone',
+        'width',
+        'height',
+        'zoomAction',
+        'zoomWindowMoveDistance',
+        'defaultZoomWindow',
+        'zoomWindowMinWidth',
+        'hoverStyleAnimationDuration',
+        'windowPanDuration',
+        'tabIndex'
     ],
     outputs: [
-      'zoomChanging',
-      'zoomChanged',
-      'providerCreated',
-      'windowDragStarting',
-      'windowDragStarted',
-      'windowDragging',
-      'windowDragEnding',
-      'windowDragEnded',
-      'windowResizing',
-      'windowResized'
-    ]
+        'zoomChanging',
+        'zoomChanged',
+        'providerCreated',
+        'windowDragStarting',
+        'windowDragStarted',
+        'windowDragging',
+        'windowDragEnding',
+        'windowDragEnded',
+        'windowResizing',
+        'windowResized'
+    ],
+    standalone: false
 })
 export class IgZoombarComponent extends IgControlBase<IgZoombar> {
     constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {

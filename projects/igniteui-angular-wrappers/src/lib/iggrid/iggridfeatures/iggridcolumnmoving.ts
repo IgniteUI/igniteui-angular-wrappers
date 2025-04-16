@@ -4,7 +4,8 @@ import { Feature } from '../feature';
 @Directive({
     selector: 'column-moving',
     inputs: ['disabled', 'create', 'columnSettings', 'mode', 'moveType', 'addMovingDropdown', 'movingDialogWidth', 'movingDialogHeight', 'movingDialogAnimationDuration', 'movingAcceptanceTolerance', 'movingScrollTolerance', 'scrollSpeedMultiplier', 'scrollDelta', 'hideHeaderContentsDuringDrag', 'dragHelperOpacity', 'movingDialogCaptionButtonDesc', 'movingDialogCaptionButtonAsc', 'movingDialogCaptionText', 'movingDialogDisplayText', 'movingDialogDropTooltipText', 'movingDialogDropTooltipMarkup', 'dropDownMoveLeftText', 'dropDownMoveRightText', 'dropDownMoveFirstText', 'dropDownMoveLastText', 'movingToolTipMove', 'featureChooserSubmenuText', 'columnMovingDialogContainment', 'dialogWidget', 'inherit'],
-    outputs: ['columnDragStart', 'columnDragEnd', 'columnDragCanceled', 'columnMoving', 'columnMoved', 'movingDialogOpening', 'movingDialogOpened', 'movingDialogDragged', 'movingDialogClosing', 'movingDialogClosed', 'movingDialogContentsRendering', 'movingDialogContentsRendered', 'movingDialogMoveUpButtonPressed', 'movingDialogMoveDownButtonPressed', 'movingDialogDragColumnMoving', 'movingDialogDragColumnMoved']
+    outputs: ['columnDragStart', 'columnDragEnd', 'columnDragCanceled', 'columnMoving', 'columnMoved', 'movingDialogOpening', 'movingDialogOpened', 'movingDialogDragged', 'movingDialogClosing', 'movingDialogClosed', 'movingDialogContentsRendering', 'movingDialogContentsRendered', 'movingDialogMoveUpButtonPressed', 'movingDialogMoveDownButtonPressed', 'movingDialogDragColumnMoving', 'movingDialogDragColumnMoved'],
+    standalone: false
 })
 export class IgGridColumnMovingFeature extends Feature<IgGridColumnMoving> {
     constructor(el: ElementRef) {

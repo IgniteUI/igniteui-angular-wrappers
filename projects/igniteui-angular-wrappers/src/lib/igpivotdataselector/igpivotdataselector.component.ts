@@ -5,7 +5,8 @@ import { IgControlBase } from '../igcontrolbase/igcontrolbase';
     selector: 'ig-pivot-data-selector',
     template: '<ng-content></ng-content>',
     inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'width', 'height', 'dataSource', 'dataSourceOptions', 'deferUpdate', 'dragAndDropSettings', 'dropDownParent', 'disableRowsDropArea', 'disableColumnsDropArea', 'disableMeasuresDropArea', 'disableFiltersDropArea', 'customMoveValidation'],
-    outputs: ['dataSelectorRendered', 'dataSourceInitialized', 'dataSourceUpdated', 'deferUpdateChanged', 'dragStart', 'drag', 'dragStop', 'metadataDropping', 'metadataDropped', 'metadataRemoving', 'metadataRemoved', 'filterDropDownOpening', 'filterDropDownOpened', 'filterMembersLoaded', 'filterDropDownOk', 'filterDropDownClosing', 'filterDropDownClosed']
+    outputs: ['dataSelectorRendered', 'dataSourceInitialized', 'dataSourceUpdated', 'deferUpdateChanged', 'dragStart', 'drag', 'dragStop', 'metadataDropping', 'metadataDropped', 'metadataRemoving', 'metadataRemoved', 'filterDropDownOpening', 'filterDropDownOpened', 'filterMembersLoaded', 'filterDropDownOk', 'filterDropDownClosing', 'filterDropDownClosed'],
+    standalone: false
 })
 export class IgPivotDataSelectorComponent extends IgControlBase<IgPivotDataSelector> implements OnInit {
     constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {

@@ -4,7 +4,8 @@ import { ElementRef, Directive } from '@angular/core';
 @Directive({
     selector: 'append-rows-on-demand',
     inputs: ['type', 'chunkSize', 'recordCountKey', 'chunkSizeUrlKey', 'chunkIndexUrlKey', 'defaultChunkIndex', 'currentChunkIndex', 'loadTrigger', 'loadMoreDataButtonText'],
-    outputs: ['rowsRequesting', 'rowsRequested']
+    outputs: ['rowsRequesting', 'rowsRequested'],
+    standalone: false
 })
 export class IgGridAppendRowsOnDemandFeature extends Feature<IgGridAppendRowsOnDemand> {
     constructor(el: ElementRef) {

@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Northwind } from '../shared/northwind';
 
 @Component({
-  selector: 'app-grid-top-level-options',
-  templateUrl: './grid-top-level-options.component.html',
-  styleUrls: ['./grid-top-level-options.component.css']
+    selector: 'app-grid-top-level-options',
+    templateUrl: './grid-top-level-options.component.html',
+    styleUrls: ['./grid-top-level-options.component.css'],
+    standalone: false
 })
 export class GridTopLevelOptionsComponent {
 

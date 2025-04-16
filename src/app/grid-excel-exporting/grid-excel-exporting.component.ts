@@ -4,9 +4,10 @@ import { Northwind } from '../shared/northwind';
 declare var jQuery: any;
 
 @Component({
-  selector: 'app-grid-excel-exporting',
-  templateUrl: './grid-excel-exporting.component.html',
-  styleUrls: ['./grid-excel-exporting.component.css']
+    selector: 'app-grid-excel-exporting',
+    templateUrl: './grid-excel-exporting.component.html',
+    styleUrls: ['./grid-excel-exporting.component.css'],
+    standalone: false
 })
 export class GridExcelExportingComponent {
 

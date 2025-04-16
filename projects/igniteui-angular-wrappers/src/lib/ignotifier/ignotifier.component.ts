@@ -7,7 +7,8 @@ declare var jQuery;
     selector: 'ig-notifier',
     template: '<ng-content></ng-content>',
     inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'closeOnBlur', 'direction', 'position', 'width', 'height', 'minWidth', 'maxWidth', 'maxHeight', 'animationDuration', 'contentTemplate', 'selectors', 'headerTemplate', 'showOn', 'containment', 'appendTo', 'state', 'notifyLevel', 'mode', 'allowCSSOnTarget', 'messages', 'showIcon', 'animationSlideDistance'],
-    outputs: ['showing', 'shown', 'hiding', 'hidden']
+    outputs: ['showing', 'shown', 'hiding', 'hidden'],
+    standalone: false
 })
 // TODO: change the model from any to IgNotifier when added to igniteui typescript definitions
 export class IgNotifierComponent extends IgControlBase<IgNotifier> implements OnInit {

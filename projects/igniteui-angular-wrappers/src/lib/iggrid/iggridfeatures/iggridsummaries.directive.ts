@@ -5,7 +5,8 @@ import { Feature } from '../feature';
 @Directive({
     selector: 'summaries',
     inputs: ['disabled', 'create', 'type', 'dialogButtonOKText', 'dialogButtonCancelText', 'calculateRenderMode', 'featureChooserText', 'featureChooserTextHide', 'compactRenderingMode', 'defaultDecimalDisplay', 'showSummariesButton', 'summariesResponseKey', 'summaryExprUrlKey', 'callee', 'dropDownHeight', 'dropDownWidth', 'showDropDownButton', 'summaryExecution', 'dropDownDialogAnimationDuration', 'emptyCellText', 'summariesHeaderButtonTooltip', 'resultTemplate', 'isGridFormatter', 'renderSummaryCellFunc', 'columnSettings', 'inherit'],
-    outputs: ['dropDownOpening', 'dropDownOpened', 'dropDownClosing', 'dropDownClosed', 'summariesCalculating', 'summariesCalculated', 'summariesMethodSelectionChanged', 'summariesToggling', 'summariesToggled', 'dropDownOKClicked', 'dropDownCancelClicked']
+    outputs: ['dropDownOpening', 'dropDownOpened', 'dropDownClosing', 'dropDownClosed', 'summariesCalculating', 'summariesCalculated', 'summariesMethodSelectionChanged', 'summariesToggling', 'summariesToggled', 'dropDownOKClicked', 'dropDownCancelClicked'],
+    standalone: false
 })
 export class IgGridSummariesFeature extends Feature<IgGridSummaries> {
     constructor(el: ElementRef) {

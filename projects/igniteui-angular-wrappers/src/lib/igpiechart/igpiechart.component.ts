@@ -5,7 +5,8 @@ import { ElementRef, IterableDiffers, Component, KeyValueDiffers, ChangeDetector
     selector: 'ig-pie-chart',
     template: '<ng-content></ng-content>',
     inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'width', 'height', 'dataSource', 'dataSourceUrl', 'dataSourceType', 'responseDataKey', 'valueMemberPath', 'labelMemberPath', 'dataValue', 'dataLabel', 'labelsPosition', 'labelOuterColor', 'labelInnerColor', 'selectionMode', 'selectedItem', 'selectedItems', 'leaderLineVisibility', 'leaderLineType', 'leaderLineMargin', 'othersCategoryThreshold', 'formatLabel', 'othersCategoryStyle', 'othersCategoryType', 'othersCategoryText', 'explodedRadius', 'radiusFactor', 'allowSliceSelection', 'allowSliceExplosion', 'explodedSlices', 'selectedSlices', 'showTooltip', 'tooltipTemplate', 'legend', 'labelExtent', 'startAngle', 'sweepDirection', 'selectedStyle', 'brushes', 'outlines', 'legendItemTemplate', 'legendItemBadgeTemplate', 'textStyle', 'theme'],
-    outputs: ['tooltipShowing', 'tooltipShown', 'tooltipHiding', 'tooltipHidden', 'browserNotSupported', 'sliceClick', 'labelClick', 'selectedItemChanging', 'selectedItemChanged', 'selectedItemsChanging', 'selectedItemsChanged']
+    outputs: ['tooltipShowing', 'tooltipShown', 'tooltipHiding', 'tooltipHidden', 'browserNotSupported', 'sliceClick', 'labelClick', 'selectedItemChanging', 'selectedItemChanged', 'selectedItemsChanging', 'selectedItemsChanged'],
+    standalone: false
 })
 export class IgPieChartComponent extends IgControlBase<IgPieChart> implements OnInit {
     constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {

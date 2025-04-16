@@ -6,7 +6,8 @@ import { IgControlBase } from '../igcontrolbase/igcontrolbase';
     template: '<ng-content></ng-content>',
     inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'width', 'height', 'tooltipTemplate', 'maxRecCount', 'dataSource', 'dataSourceType', 'dataSourceUrl', 'responseTotalRecCountKey', 'responseDataKey', 'series', 'allowSliceSelection', 'isSurfaceInteractionDisabled', 'allowSliceExplosion', 'innerExtent', 'selectedStyle'],
     outputs: ['dataBinding', 'dataBound', 'updateTooltip', 'hideTooltip', 'tooltipShowing', 'tooltipShown', 'tooltipHiding',
-    'tooltipHidden', 'browserNotSupported', 'sliceClick', 'holeDimensionsChanged']
+        'tooltipHidden', 'browserNotSupported', 'sliceClick', 'holeDimensionsChanged'],
+    standalone: false
 })
 export class IgDoughnutChartComponent extends IgControlBase<IgDoughnutChart> implements OnInit {
     constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {

@@ -3,7 +3,8 @@ import { Component, OnInit } from '@angular/core';
 @Component({
     selector: 'app-video-player',
     templateUrl: './video-player.component.html',
-    styleUrls: ['./video-player.component.css']
+    styleUrls: ['./video-player.component.css'],
+    standalone: false
 })
 export class VideoPlayerComponent {
 

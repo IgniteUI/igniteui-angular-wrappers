@@ -4,7 +4,8 @@ import { Northwind } from '../shared/northwind';
 @Component({
     selector: 'app-grid-complex-options',
     templateUrl: './grid-complex-options.component.html',
-    styleUrls: ['./grid-complex-options.component.css']
+    styleUrls: ['./grid-complex-options.component.css'],
+    standalone: false
 })
 export class GridComplexOptionsComponent {
 

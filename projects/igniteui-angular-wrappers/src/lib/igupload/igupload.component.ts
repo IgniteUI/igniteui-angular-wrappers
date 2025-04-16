@@ -6,7 +6,8 @@ import { IgControlBase } from '../igcontrolbase/igcontrolbase';
     selector: 'ig-upload',
     template: '<ng-content></ng-content>',
     inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'width', 'height', 'autostartupload', 'labelUploadButton', 'labelAddButton', 'labelClearAllButton', 'labelSummaryTemplate', 'labelSummaryProgressBarTemplate', 'labelShowDetails', 'labelHideDetails', 'labelSummaryProgressButtonCancel', 'labelSummaryProgressButtonContinue', 'labelSummaryProgressButtonDone', 'labelProgressBarFileNameContinue', 'errorMessageMaxFileSizeExceeded', 'errorMessageGetFileStatus', 'errorMessageCancelUpload', 'errorMessageNoSuchFile', 'errorMessageOther', 'errorMessageValidatingFileExtension', 'errorMessageAJAXRequestFileSize', 'errorMessageTryToRemoveNonExistingFile', 'errorMessageTryToStartNonExistingFile', 'errorMessageMaxUploadedFiles', 'errorMessageMaxSimultaneousFiles', 'errorMessageDropMultipleFilesWhenSingleModel', 'uploadUrl', 'progressUrl', 'allowedExtensions', 'showFileExtensionIcon', 'css', 'fileExtensionIcons', 'mode', 'multipleFiles', 'maxUploadedFiles', 'maxSimultaneousFilesUploads', 'fileSizeMetric', 'controlId', 'fileSizeDecimalDisplay', 'maxFileSize'],
-    outputs: ['fileSelecting', 'fileSelected', 'fileUploading', 'fileUploaded', 'fileUploadAborted', 'cancelAllClicked', 'onError', 'fileExtensionsValidating', 'onXHRLoad', 'onFormDataSubmit']
+    outputs: ['fileSelecting', 'fileSelected', 'fileUploading', 'fileUploaded', 'fileUploadAborted', 'cancelAllClicked', 'onError', 'fileExtensionsValidating', 'onXHRLoad', 'onFormDataSubmit'],
+    standalone: false
 })
 export class IgUploadComponent extends IgControlBase<IgUpload> {
     constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {

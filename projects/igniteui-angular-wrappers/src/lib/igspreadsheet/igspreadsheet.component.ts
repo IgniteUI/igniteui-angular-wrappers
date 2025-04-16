@@ -5,7 +5,8 @@ import { IgControlBase } from '../igcontrolbase/igcontrolbase';
     selector: 'ig-spreadsheet',
     template: '<ng-content></ng-content>',
     inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'width', 'height', 'activeCell', 'isScrollLocked', 'activeWorksheet', 'allowAddWorksheet', 'allowDeleteWorksheet', 'areGridlinesVisible', 'areHeadersVisible', 'enterKeyNavigationDirection', 'isEnterKeyNavigationEnabled', 'isFormulaBarVisible', 'isInEndMode', 'isUndoEnabled', 'nameBoxWidth', 'selectionMode', 'selectedWorksheets', 'validationInputMessagePosition', 'workbook', 'zoomLevel'],
-    outputs: ['actionExecuted', 'actionExecuting', 'activeCellChanged', 'activePaneChanged', 'activeWorksheetChanged', 'editRangePasswordNeeded', 'hyperlinkExecuting', 'selectionChanged', 'userPromptDisplaying', 'workbookDirtied']
+    outputs: ['actionExecuted', 'actionExecuting', 'activeCellChanged', 'activePaneChanged', 'activeWorksheetChanged', 'editRangePasswordNeeded', 'hyperlinkExecuting', 'selectionChanged', 'userPromptDisplaying', 'workbookDirtied'],
+    standalone: false
 })
 export class IgSpreadsheetComponent extends IgControlBase<IgSpreadsheet> {
     constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {

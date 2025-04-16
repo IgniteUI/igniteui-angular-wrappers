@@ -7,7 +7,8 @@ import { NgModel } from '@angular/forms';
     selector: 'ig-time-picker',
     template: '<ng-content></ng-content>',
     inputs: ['widgetId', 'options', 'disabled', 'create', 'locale', 'language', 'regional', 'width', 'height', 'value', 'tabIndex', 'allowNullValue', 'nullValue', 'inputName', 'readOnly', 'validatorOptions', 'buttonType', 'listItems', 'listWidth', 'listItemHoverDuration', 'dropDownAttachedToBody', 'dropDownAnimationDuration', 'visibleItemsCount', 'includeKeys', 'excludeKeys', 'textAlign', 'placeHolder', 'selectionOnFocus', 'textMode', 'spinWrapAround', 'isLimitedToListValues', 'revertIfNotValid', 'preventSubmitOnEnter', 'dropDownOrientation', 'maxLength', 'dropDownOnReadOnly', 'toUpper', 'toLower', 'suppressNotifications', 'suppressKeyboard', 'inputMask', 'dataMode', 'unfilledCharsPrompt', 'padChar', 'emptyChar', 'minValue', 'maxValue', 'dateDisplayFormat', 'dateInputFormat', 'displayTimeOffset', 'spinDelta', 'limitSpinToCurrentField', 'enableUTCDates', 'centuryThreshold', 'yearShift', 'itemsDelta', 'timeInputFormat', 'timeDisplayFormat'],
-    outputs: ['rendering', 'rendered', 'mousedown', 'mouseup', 'mousemove', 'mouseover', 'mouseout', 'blur', 'focus', 'keydown', 'keypress', 'keyup', 'valueChanging', 'valueChanged', 'dropDownListOpening', 'dropDownListOpened', 'dropDownListClosing', 'dropDownListClosed', 'dropDownItemSelecting', 'dropDownItemSelected', 'textChanged']
+    outputs: ['rendering', 'rendered', 'mousedown', 'mouseup', 'mousemove', 'mouseover', 'mouseout', 'blur', 'focus', 'keydown', 'keypress', 'keyup', 'valueChanging', 'valueChanged', 'dropDownListOpening', 'dropDownListOpened', 'dropDownListClosing', 'dropDownListClosed', 'dropDownItemSelecting', 'dropDownItemSelected', 'textChanged'],
+    standalone: false
 })
 export class IgTimePickerComponent extends IgEditorBase<IgTimePicker> {
     constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers,

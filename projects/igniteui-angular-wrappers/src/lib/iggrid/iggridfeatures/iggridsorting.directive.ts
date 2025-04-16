@@ -4,7 +4,8 @@ import { Feature } from '../feature';
 @Directive({
     selector: 'sorting',
     inputs: ['disabled', 'create', 'type', 'caseSensitive', 'applySortedColumnCss', 'sortUrlKey', 'sortUrlKeyAscValue', 'sortUrlKeyDescValue', 'mode', 'customSortFunction', 'firstSortDirection', 'sortedColumnTooltip', 'modalDialogSortOnClick', 'modalDialogSortByButtonText', 'modalDialogResetButtonLabel', 'modalDialogCaptionButtonDesc', 'modalDialogCaptionButtonAsc', 'modalDialogCaptionButtonUnsort', 'modalDialogWidth', 'modalDialogHeight', 'modalDialogAnimationDuration', 'featureChooserText', 'unsortedColumnTooltip', 'columnSettings', 'modalDialogCaptionText', 'modalDialogButtonApplyText', 'modalDialogButtonCancelText', 'featureChooserSortAsc', 'featureChooserSortDesc', 'persist', 'sortingDialogContainment', 'dialogWidget', 'inherit'],
-    outputs: ['columnSorting', 'columnSorted', 'modalDialogOpening', 'modalDialogOpened', 'modalDialogMoving', 'modalDialogClosing', 'modalDialogClosed', 'modalDialogContentsRendering', 'modalDialogContentsRendered', 'modalDialogSortingChanged', 'modalDialogButtonUnsortClick', 'modalDialogSortClick', 'modalDialogButtonApplyClick', 'modalDialogButtonResetClick']
+    outputs: ['columnSorting', 'columnSorted', 'modalDialogOpening', 'modalDialogOpened', 'modalDialogMoving', 'modalDialogClosing', 'modalDialogClosed', 'modalDialogContentsRendering', 'modalDialogContentsRendered', 'modalDialogSortingChanged', 'modalDialogButtonUnsortClick', 'modalDialogSortClick', 'modalDialogButtonApplyClick', 'modalDialogButtonResetClick'],
+    standalone: false
 })
 export class IgGridSortingFeature extends Feature<IgGridSorting> {
     constructor(el: ElementRef) {

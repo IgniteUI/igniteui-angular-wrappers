@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-pivot-grid-flat-data-source',
-  templateUrl: './pivot-grid-flat-data-source.component.html',
-  styleUrls: ['./pivot-grid-flat-data-source.component.css']
+    selector: 'app-pivot-grid-flat-data-source',
+    templateUrl: './pivot-grid-flat-data-source.component.html',
+    styleUrls: ['./pivot-grid-flat-data-source.component.css'],
+    standalone: false
 })
 export class PivotGridFlatDataSourceComponent {
 

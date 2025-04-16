@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { candidates } from '../shared/candidates';
 
 @Component({
-  selector: 'app-tile-manager',
-  templateUrl: './tile-manager.component.html',
-  styleUrls: ['./tile-manager.component.css']
+    selector: 'app-tile-manager',
+    templateUrl: './tile-manager.component.html',
+    styleUrls: ['./tile-manager.component.css'],
+    standalone: false
 })
 export class TileManagerComponent {
   public options: any;

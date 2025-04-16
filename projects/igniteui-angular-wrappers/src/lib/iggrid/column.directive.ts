@@ -3,8 +3,9 @@ import { ElementRef, Directive } from '@angular/core';
 declare var jQuery: any;
 
 @Directive({
-  selector: 'column',
-  inputs: ['headerText', 'key', 'formatter', 'format', 'dataType', 'width', 'hidden', 'template', 'unbound', 'group', 'rowspan', 'formula', 'unboundValues', 'unboundValuesUpdateMode', 'headerCssClass', 'columnCssClass']
+    selector: 'column',
+    inputs: ['headerText', 'key', 'formatter', 'format', 'dataType', 'width', 'hidden', 'template', 'unbound', 'group', 'rowspan', 'formula', 'unboundValues', 'unboundValuesUpdateMode', 'headerCssClass', 'columnCssClass'],
+    standalone: false
 })
 export class Column {
   public _settings: any = {};

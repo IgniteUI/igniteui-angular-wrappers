@@ -4,7 +4,8 @@ import { Feature } from '../feature';
 @Directive({
     selector: 'hiding',
     inputs: ['disabled', 'create', 'columnSettings', 'hiddenColumnIndicatorHeaderWidth', 'columnChooserContainment', 'columnChooserWidth', 'columnChooserHeight', 'dropDownAnimationDuration', 'columnChooserCaptionText', 'columnChooserDisplayText', 'hiddenColumnIndicatorTooltipText', 'columnHideText', 'columnChooserShowText', 'columnChooserHideText', 'columnChooserHideOnClick', 'columnChooserResetButtonLabel', 'columnChooserAnimationDuration', 'columnChooserButtonApplyText', 'columnChooserButtonCancelText', 'dialogWidget', 'inherit'],
-    outputs: ['columnHiding', 'columnHidingRefused', 'columnShowingRefused', 'multiColumnHiding', 'columnHidden', 'columnShowing', 'columnShown', 'columnChooserOpening', 'columnChooserOpened', 'columnChooserMoving', 'columnChooserClosing', 'columnChooserClosed', 'columnChooserContentsRendering', 'columnChooserContentsRendered', 'columnChooserButtonApplyClick', 'columnChooserButtonResetClick']
+    outputs: ['columnHiding', 'columnHidingRefused', 'columnShowingRefused', 'multiColumnHiding', 'columnHidden', 'columnShowing', 'columnShown', 'columnChooserOpening', 'columnChooserOpened', 'columnChooserMoving', 'columnChooserClosing', 'columnChooserClosed', 'columnChooserContentsRendering', 'columnChooserContentsRendered', 'columnChooserButtonApplyClick', 'columnChooserButtonResetClick'],
+    standalone: false
 })
 export class IgGridHidingFeature extends Feature<IgGridHiding> {
     constructor(el: ElementRef) {

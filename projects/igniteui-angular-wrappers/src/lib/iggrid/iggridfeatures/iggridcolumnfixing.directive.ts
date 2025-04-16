@@ -5,7 +5,8 @@ import { Feature } from '../feature';
 @Directive({
     selector: 'column-fixing',
     inputs: ['disabled', 'create', 'headerFixButtonText', 'headerUnfixButtonText', 'showFixButtons', 'syncRowHeights', 'scrollDelta', 'fixingDirection', 'columnSettings', 'featureChooserTextFixedColumn', 'featureChooserTextUnfixedColumn', 'minimalVisibleAreaWidth', 'fixNondataColumns', 'populateDataRowsAttributes'],
-    outputs: ['columnFixing', 'columnFixed', 'columnUnfixing', 'columnUnfixed', 'columnFixingRefused', 'columnUnfixingRefused']
+    outputs: ['columnFixing', 'columnFixed', 'columnUnfixing', 'columnUnfixed', 'columnFixingRefused', 'columnUnfixingRefused'],
+    standalone: false
 })
 export class IgGridColumnFixingFeature extends Feature<IgGridColumnFixing> {
     constructor(el: ElementRef) {

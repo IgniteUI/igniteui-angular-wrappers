@@ -21,7 +21,8 @@ declare var jQuery: any;
     selector: 'ig-combo',
     template: '<ng-content></ng-content>',
     inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'width', 'height', 'dropDownWidth', 'dataSource', 'dataSourceType', 'dataSourceUrl', 'responseTotalRecCountKey', 'responseDataKey', 'responseDataType', 'responseContentType', 'requestType', 'valueKey', 'textKey', 'itemTemplate', 'headerTemplate', 'footerTemplate', 'inputName', 'animationShowDuration', 'animationHideDuration', 'dropDownAttachedToBody', 'filteringType', 'filterExprUrlKey', 'filteringCondition', 'filteringLogic', 'noMatchFoundText', 'loadOnDemandSettings', 'visibleItemsCount', 'placeHolder', 'mode', 'virtualization', 'multiSelection', 'grouping', 'validatorOptions', 'highlightMatchesMode', 'caseSensitive', 'autoSelectFirstMatch', 'autoComplete', 'allowCustomValue', 'closeDropDownOnBlur', 'delayInputChangeProcessing', 'tabIndex', 'dropDownOnFocus', 'closeDropDownOnSelect', 'selectItemBySpaceKey', 'initialSelectedItems', 'preventSubmitOnEnter', 'format', 'suppressKeyboard', 'enableClearButton', 'dropDownButtonTitle', 'clearButtonTitle', 'dropDownOrientation'],
-    outputs: ['rendered', 'dataBinding', 'dataBound', 'filtering', 'filtered', 'itemsRendering', 'itemsRendered', 'dropDownOpening', 'dropDownOpened', 'dropDownClosing', 'dropDownClosed', 'selectionChanging', 'selectionChanged']
+    outputs: ['rendered', 'dataBinding', 'dataBound', 'filtering', 'filtered', 'itemsRendering', 'itemsRendered', 'dropDownOpening', 'dropDownOpened', 'dropDownClosing', 'dropDownClosed', 'selectionChanging', 'selectionChanged'],
+    standalone: false
 })
 export class IgComboComponent extends IgControlBase<IgCombo> implements ControlValueAccessor, OnInit, OnChanges, DoCheck {
 

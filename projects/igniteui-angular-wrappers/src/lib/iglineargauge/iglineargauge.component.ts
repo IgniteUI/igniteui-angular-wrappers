@@ -5,7 +5,8 @@ import { IgControlBase } from '../igcontrolbase/igcontrolbase';
     selector: 'ig-linear-gauge',
     template: '<ng-content></ng-content>',
     inputs: ['widgetId', 'options', 'changeDetectionInterval', 'disabled', 'create', 'width', 'height', 'ranges', 'rangeToolTipTemplate', 'needleToolTipTemplate', 'orientation', 'rangeBrushes', 'rangeOutlines', 'minimumValue', 'maximumValue', 'value', 'needleShape', 'needleName', 'rangeInnerExtent', 'scaleInnerExtent', 'rangeOuterExtent', 'scaleOuterExtent', 'needleInnerExtent', 'needleOuterExtent', 'needleInnerBaseWidth', 'needleOuterBaseWidth', 'needleInnerPointWidth', 'needleOuterPointWidth', 'needleInnerPointExtent', 'needleOuterPointExtent', 'interval', 'ticksPostInitial', 'ticksPreTerminal', 'labelInterval', 'labelExtent', 'labelsPostInitial', 'labelsPreTerminal', 'minorTickCount', 'tickStartExtent', 'tickEndExtent', 'tickStrokeThickness', 'tickBrush', 'fontBrush', 'needleBreadth', 'needleBrush', 'needleOutline', 'needleStrokeThickness', 'minorTickStartExtent', 'minorTickEndExtent', 'minorTickStrokeThickness', 'minorTickBrush', 'isScaleInverted', 'backingBrush', 'backingOutline', 'backingStrokeThickness', 'backingInnerExtent', 'backingOuterExtent', 'scaleStartExtent', 'scaleEndExtent', 'scaleBrush', 'scaleOutline', 'scaleStrokeThickness', 'isNeedleDraggingEnabled', 'transitionDuration', 'showToolTipTimeout', 'showToolTip', 'font', 'pixelScalingRatio'],
-    outputs: ['formatLabel', 'alignLabel', 'valueChanged']
+    outputs: ['formatLabel', 'alignLabel', 'valueChanged'],
+    standalone: false
 })
 export class IgLinearGaugeComponent extends IgControlBase<IgLinearGauge> {
     constructor(el: ElementRef, renderer: Renderer2, differs: IterableDiffers, kvalDiffers: KeyValueDiffers, cdr: ChangeDetectorRef) {
