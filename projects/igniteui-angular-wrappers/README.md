@@ -1,5 +1,7 @@
 # Ignite UI wrappers for Angular
 
+## **NOTE**: Ignite UI wrappers for Angular are deprecated! Use [`igniteui-angular`](https://github.com/IgniteUI/igniteui-angular) native Angular components instead!
+
 [![Build Status](https://travis-ci.org/IgniteUI/igniteui-angular-wrappers.svg?branch=master)](https://travis-ci.org/IgniteUI/igniteui-angular-wrappers)
 [![Coverage Status](https://coveralls.io/repos/github/IgniteUI/igniteui-angular-wrappers/badge.svg?branch=master)](https://coveralls.io/github/IgniteUI/igniteui-angular-wrappers?branch=master)  
 [![npm version](https://badge.fury.io/js/igniteui-angular-wrappers.svg)](https://badge.fury.io/js/igniteui-angular-wrappers)
