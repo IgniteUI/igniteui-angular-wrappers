@@ -44,7 +44,8 @@ describe('Infragistics Angular Grid', () => {
         TestBed.compileComponents().then(() => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
-            fixture.componentInstance.opts = fixture.componentInstance.opts2;
+            fixture.componentInstance.viewChild.options = fixture.componentInstance.opts2;
+            fixture.componentInstance.viewChild.ngDoCheck();
             fixture.detectChanges();
 
             expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgGridComponent)
@@ -90,7 +91,8 @@ describe('Infragistics Angular Grid', () => {
             expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgGridComponent)
                 .toBe(true);
 
-            fixture.componentInstance.opts = fixture.componentInstance.opts2;
+            fixture.componentInstance.viewChild.options = fixture.componentInstance.opts2;
+            fixture.componentInstance.viewChild.ngDoCheck();
             fixture.detectChanges();
 
             expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgGridComponent)
@@ -137,7 +139,10 @@ describe('Infragistics Angular Grid', () => {
         TestBed.compileComponents().then(() => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
-            fixture.componentInstance.caption = 'Changed Caption';
+            let newOptions = { ...fixture.componentInstance.opts };
+            newOptions.caption = 'Changed Caption';
+            fixture.componentInstance.viewChild.options = newOptions;
+            fixture.componentInstance.viewChild.ngDoCheck();
             setTimeout(() => {
                 fixture.detectChanges();
                 expect($(fixture.debugElement.nativeElement).find('#grid1_caption').text())
@@ -157,9 +162,10 @@ describe('Infragistics Angular Grid', () => {
         TestBed.compileComponents().then(() => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
-            fixture.componentInstance.data[0].Name = '';
+            let newData = [...fixture.componentInstance.data];
+            newData[0].Name = 'Mr. Smith';
+            fixture.componentInstance.viewChild.dataSource = newData;
             fixture.detectChanges();
-            fixture.componentInstance.data[0].Name = 'Mr. Smith';
             setTimeout(() => {
                 fixture.detectChanges();
                 expect($(fixture.debugElement.nativeElement).find('#grid1 tr:first td[aria-describedby=\'grid1_Name\']').text())
@@ -180,6 +186,7 @@ describe('Infragistics Angular Grid', () => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
             fixture.componentInstance.data.splice(2, 1);
+            fixture.componentInstance.viewChild.ngDoCheck();
             setTimeout(() => {
                 fixture.detectChanges();
                 expect($(fixture.debugElement.nativeElement).find('#grid1 tbody tr').length)
@@ -200,6 +207,7 @@ describe('Infragistics Angular Grid', () => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
             fixture.componentInstance.data.push({ Id: 4, Name: 'Bob Ferguson', Age: 33 });
+            fixture.componentInstance.viewChild.ngDoCheck();
             setTimeout(() => {
                 fixture.detectChanges();
                 expect($(fixture.debugElement.nativeElement).find('#grid1 tbody tr').length)
@@ -296,6 +304,7 @@ describe('Infragistics Angular Grid', () => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
             fixture.componentInstance.opts1.height = '400px';
+            fixture.componentInstance.viewChild.ngDoCheck();
             setTimeout(() => {
                 fixture.detectChanges();
                 expect($(fixture.debugElement.nativeElement).find('#grid1_container').outerHeight())
@@ -315,9 +324,9 @@ describe('Infragistics Angular Grid', () => {
         TestBed.compileComponents().then(() => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
-            fixture.componentInstance.data[0].Age = 0;
-            fixture.detectChanges();
-            fixture.componentInstance.data[0].Age = 42;
+            let newData = [...fixture.componentInstance.data];
+            newData[0].Age = 42;
+            fixture.componentInstance.viewChild.dataSource = newData;
             setTimeout(() => {
                 fixture.detectChanges();
                 expect($(fixture.debugElement.nativeElement).find('#grid1 tr[data-id=\'1\'] td[aria-describedby=\'grid1_Age\']').text())
@@ -356,9 +365,9 @@ describe('Infragistics Angular Grid', () => {
         TestBed.compileComponents().then(() => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
-            fixture.componentInstance.data[0].HireDate = new Date('01/01/2016');
-            fixture.detectChanges();
-            fixture.componentInstance.data[0].HireDate = new Date('11/11/2016');
+            let newData = [...fixture.componentInstance.data];
+            newData[0].HireDate = new Date('11/11/2016');
+            fixture.componentInstance.viewChild.dataSource = newData;
             setTimeout(() => {
                 fixture.detectChanges();
                 expect($(fixture.debugElement.nativeElement).find('#grid1 tr:first td[aria-describedby=\'grid1_HireDate\']').text())
@@ -498,8 +507,11 @@ describe('Infragistics Angular Grid', () => {
                 .toBe('Product Id');
             expect($(fixture.debugElement.nativeElement).find('#grid1_pager li.ui-state-active').text())
                 .toBe('2');
-            fixture.componentInstance.pi = 0;
-            fixture.componentInstance.idHeaderText = 'Changed ID';
+            let newOpts = { ...fixture.componentInstance.viewChild.options };
+            newOpts.features[0].currentPageIndex = 0;
+            newOpts.columns[0].headerText = 'Changed ID';
+            fixture.componentInstance.viewChild.options = newOpts;
+            fixture.componentInstance.viewChild.ngDoCheck();
             setTimeout(() => {
                 fixture.detectChanges();
                 expect($(fixture.debugElement.nativeElement).find('#grid1 thead th#grid1_Id').text())
@@ -532,8 +544,11 @@ describe('Infragistics Angular Grid', () => {
                 .toBe('Product Id');
             expect($(fixture.debugElement.nativeElement).find('#grid1_pager li.ui-state-active').text())
                 .toBe('2');
-            fixture.componentInstance.pi = 0;
-            fixture.componentInstance.idHeaderText = 'Changed ID';
+            let newOpts = { ...fixture.componentInstance.viewChild.options };
+            newOpts.features[0].currentPageIndex = 0;
+            newOpts.columns[0].headerText = 'Changed ID';
+            fixture.componentInstance.viewChild.options = newOpts;
+            fixture.componentInstance.viewChild.ngDoCheck();
             setTimeout(() => {
                 fixture.detectChanges();
                 expect($(fixture.debugElement.nativeElement).find('#grid1_container thead th#grid1_Id').text())
@@ -609,7 +624,8 @@ describe('Infragistics Angular Grid', () => {
         TestBed.compileComponents().then(() => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
-            fixture.componentInstance.opts1 = fixture.componentInstance.opts3;
+            fixture.componentInstance.viewChild.options = fixture.componentInstance.opts3;
+            fixture.componentInstance.viewChild.ngDoCheck();
             fixture.detectChanges();
 
             expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgGridComponent)
@@ -722,7 +738,8 @@ describe('Infragistics Angular Grid', () => {
             fixture.detectChanges();
             expect($(fixture.debugElement.nativeElement).find('#grid1_container tbody tr').length)
                 .toBe(3);
-            fixture.componentInstance.data1 = [];
+            fixture.componentInstance.viewChild.dataSource = [];
+            fixture.componentInstance.viewChild.ngDoCheck();
             fixture.detectChanges();
             expect($(fixture.debugElement.nativeElement).find('#grid1_container tbody tr').length)
                 .toBe(0);
@@ -880,7 +897,6 @@ class TestComponent {
             width: '100%',
             height: '400px',
             autoCommit: true,
-            autoGenerateColumns: true,
             primaryKey: 'Id',
             dataSource: this.data
         };

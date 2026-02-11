@@ -65,7 +65,7 @@ describe('Infragistics Angular TreeGrid', () => {
             // remove item
             fixture.componentInstance.data[0].products.removeAt(4);
 
-            fixture.componentInstance.viewChild.markForCheck();
+            fixture.componentInstance.viewChild.ngDoCheck();
 
             setTimeout(() => {
                 fixture.detectChanges();
@@ -74,6 +74,7 @@ describe('Infragistics Angular TreeGrid', () => {
 
                 // add item
                 fixture.componentInstance.data.push({ id: 1000, tasks: 'Test Planning', start: '6/2/2014', finish: '6/4/2014', duration: '3d', progress: '100%' });
+                fixture.componentInstance.viewChild.ngDoCheck();
                 setTimeout(() => {
                     fixture.detectChanges();
                     expect($(fixture.debugElement.nativeElement).find('#grid1 tr').length)

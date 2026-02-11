@@ -1,7 +1,7 @@
 // eslint-disable-next-line max-len
 // modeled after https://github.com/angular/angular/blob/cee2318110eeea115e5f6fc5bfc814cbaa7d90d8/modules/Angular/test/common/directives/ng_for_spec.ts
 import { TestBed } from '@angular/core/testing';
-import { Component, ViewChild, TemplateRef } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import * as Infragistics from '../../public-api';
 
@@ -60,8 +60,9 @@ describe('Infragistics Angular TextEditor', () => {
             const fixture = TestBed.createComponent(TestIgTextEditorComponent);
             fixture.detectChanges();
             setTimeout(() => {
+                const editor = fixture.componentInstance.viewChild;
                 expect($(fixture.debugElement.nativeElement).find('#editor1').igTextEditor('displayValue')).toBe('test_value');
-                fixture.debugElement.componentInstance.val = 'changed_test_value';
+                editor.writeValue('changed_test_value');
                 fixture.detectChanges();
                 setTimeout(() => {
                     expect($(fixture.debugElement.nativeElement).find('#editor1').igTextEditor('displayValue')).toBe('changed_test_value');
@@ -94,8 +95,11 @@ describe('Infragistics Angular TextEditor', () => {
             const fixture = TestBed.createComponent(TestIgTextEditorComponent);
             fixture.detectChanges();
             setTimeout(() => {
-                fixture.debugElement.componentInstance.opts.disabled = false;
-                fixture.detectChanges();
+                const editor = fixture.componentInstance.viewChild;
+                const prevOpts = fixture.componentInstance.opts;
+
+                fixture.componentInstance.viewChild.options = { ...prevOpts, disabled: false };
+                editor.ngDoCheck();
                 setTimeout(() => {
                     expect($(fixture.debugElement.nativeElement).find('#editor1').igTextEditor('option', 'disabled')).toBe(false);
                     expect($(fixture.debugElement.nativeElement).find('#editor1 input.ui-igedit-input')[0].hasAttribute('disabled'))
@@ -181,8 +185,9 @@ describe('Infragistics Angular NumericEditor', () => {
             const fixture = TestBed.createComponent(TestIgNumericEditorComponent);
             fixture.detectChanges();
             setTimeout(() => {
+                const editor = fixture.componentInstance.viewChild;
                 expect($(fixture.debugElement.nativeElement).find('#editor1').igNumericEditor('displayValue')).toBe('42');
-                fixture.debugElement.componentInstance.val = 1;
+                editor.writeValue(1);
                 fixture.detectChanges();
                 setTimeout(() => {
                     expect($(fixture.debugElement.nativeElement).find('#editor1').igNumericEditor('displayValue')).toBe('1');
@@ -235,8 +240,9 @@ describe('Infragistics Angular PercentEditor', () => {
             const fixture = TestBed.createComponent(TestIgPercentEditorComponent);
             fixture.detectChanges();
             setTimeout(() => {
+                const editor = fixture.componentInstance.viewChild;
                 expect($(fixture.debugElement.nativeElement).find('#editor1').igPercentEditor('displayValue')).toBe('40.00%');
-                fixture.debugElement.componentInstance.val = 0.1;
+                editor.writeValue(0.1);
                 fixture.detectChanges();
                 setTimeout(() => {
                     expect($(fixture.debugElement.nativeElement).find('#editor1').igPercentEditor('displayValue')).toBe('10.00%');
@@ -287,8 +293,9 @@ describe('Infragistics Angular MaskEditor', () => {
             const fixture = TestBed.createComponent(TestIgMaskEditorComponent);
             fixture.detectChanges();
             setTimeout(() => {
+                const editor = fixture.componentInstance.viewChild;
                 expect($(fixture.debugElement.nativeElement).find('#editor1').igMaskEditor('displayValue')).toBe('test');
-                fixture.debugElement.componentInstance.val = 'changed';
+                editor.writeValue('changed');
                 fixture.detectChanges();
                 setTimeout(() => {
                     expect($(fixture.debugElement.nativeElement).find('#editor1').igMaskEditor('displayValue')).toBe('changed');
@@ -340,8 +347,9 @@ describe('Infragistics Angular DatePicker', () => {
             const fixture = TestBed.createComponent(TestIgDatePickerComponent);
             fixture.detectChanges();
             setTimeout(() => {
+                const editor = fixture.componentInstance.viewChild;
                 expect($(fixture.debugElement.nativeElement).find('#editor1').igDatePicker('displayValue')).toBe('4/20/2016');
-                fixture.debugElement.componentInstance.val = new Date('3/15/2016');
+                editor.writeValue(new Date('3/15/2016'));
                 fixture.detectChanges();
                 setTimeout(() => {
                     expect($(fixture.debugElement.nativeElement).find('#editor1').igDatePicker('displayValue')).toBe('3/15/2016');
@@ -393,8 +401,9 @@ describe('Infragistics Angular DateEditor', () => {
             const fixture = TestBed.createComponent(TestIgDateEditorComponent);
             fixture.detectChanges();
             setTimeout(() => {
+                const editor = fixture.componentInstance.viewChild;
                 expect($(fixture.debugElement.nativeElement).find('#editor1').igDateEditor('displayValue')).toBe('4/20/2016');
-                fixture.debugElement.componentInstance.val = new Date('3/15/2016');
+                editor.writeValue(new Date('3/15/2016'));
                 fixture.detectChanges();
                 setTimeout(() => {
                     expect($(fixture.debugElement.nativeElement).find('#editor1').igDateEditor('displayValue')).toBe('3/15/2016');
@@ -446,8 +455,9 @@ describe('Infragistics Angular CurrencyEditor', () => {
             const fixture = TestBed.createComponent(TestIgCurrencyEditorComponent);
             fixture.detectChanges();
             setTimeout(() => {
-                expect($(fixture.debugElement.nativeElement).find('#editor1').igCurrencyEditor('displayValue')).toBe('$42.00');
-                fixture.debugElement.componentInstance.val = 1;
+              const editor = fixture.componentInstance.viewChild;
+              expect($(fixture.debugElement.nativeElement).find('#editor1').igCurrencyEditor('displayValue')).toBe('$42.00');
+                editor.writeValue(1);
                 fixture.detectChanges();
                 setTimeout(() => {
                     expect($(fixture.debugElement.nativeElement).find('#editor1').igCurrencyEditor('displayValue')).toBe('$1.00');
@@ -498,8 +508,9 @@ describe('Infragistics Angular CheckboxEditor', () => {
             const fixture = TestBed.createComponent(TestIgCheckboxEditorComponent);
             fixture.detectChanges();
             setTimeout(() => {
+                const editor = fixture.componentInstance.viewChild;
                 expect($(fixture.debugElement.nativeElement).find('#editor1').igCheckboxEditor('value')).toBe(true);
-                fixture.debugElement.componentInstance.val = false;
+                editor.writeValue(false);
                 fixture.detectChanges();
                 setTimeout(() => {
                     expect($(fixture.debugElement.nativeElement).find('#editor1').igCheckboxEditor('value')).toBe(false);
@@ -549,8 +560,9 @@ describe('Infragistics Angular TimePicker', () => {
             const fixture = TestBed.createComponent(TestIgTimePickerComponent);
             fixture.detectChanges();
             setTimeout(() => {
+                const editor = fixture.componentInstance.viewChild;
                 expect($(fixture.debugElement.nativeElement).find('#editor1').igTimePicker('displayValue')).toBe('12:36 AM');
-                fixture.debugElement.componentInstance.val = '05:50 AM';
+                editor.writeValue('05:50 AM');
                 fixture.detectChanges();
                 setTimeout(() => {
                     expect($(fixture.debugElement.nativeElement).find('#editor1').igTimePicker('displayValue')).toBe('5:50 AM');
@@ -573,7 +585,7 @@ describe('Infragistics Angular TimePicker', () => {
     standalone: false
 })
 class TestIgTextEditorComponent {
-    private opts: IgTextEditor;
+    public opts: IgTextEditor;
     private val: string;
     private editorId: string;
     private cdi = 0;
