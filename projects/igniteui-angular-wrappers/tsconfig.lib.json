@@ -8,10 +8,6 @@
     "types": [
         "jquery",
         "ignite-ui"
-    ],
-    "lib": [
-      "dom",
-      "es2018"
     ]
   },
   "angularCompilerOptions": {

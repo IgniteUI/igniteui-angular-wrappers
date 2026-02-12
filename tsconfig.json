@@ -11,10 +11,6 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "ES2022",
-    "lib": [
-      "es2018",
-      "dom"
-    ],
     "paths": {
       "lib": [
         "dist/lib"

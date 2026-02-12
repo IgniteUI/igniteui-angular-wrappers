@@ -36,7 +36,8 @@ describe('Infragistics Angular DataChart and Zoombar', () => {
         TestBed.compileComponents().then(() => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
-            fixture.componentInstance.opts = fixture.componentInstance.opts1;
+            fixture.componentInstance.viewChild.options = fixture.componentInstance.opts1;
+            fixture.changeDetectorRef.detectChanges();
             fixture.detectChanges();
             expect($(fixture.debugElement.nativeElement).find('#datachart1').igDataChart('option', 'series')[0].type)
                 .toBe('line');
@@ -54,9 +55,10 @@ describe('Infragistics Angular DataChart and Zoombar', () => {
         TestBed.compileComponents().then(() => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
-            fixture.componentInstance.data = [
+            fixture.componentInstance.viewChild.dataSource = [
                 { CountryName: 'China', Pop1995: 6768, Pop2005: 7654, Pop2015: 7655, Pop2025: 8655 }
             ];
+            fixture.changeDetectorRef.detectChanges();
             fixture.detectChanges();
             expect($(fixture.debugElement.nativeElement).find('#datachart1').igDataChart('option', 'dataSource')[0].Pop1995)
                 .toBe(6768);
@@ -98,7 +100,7 @@ describe('Infragistics Angular DataChart and Zoombar', () => {
     });
 
     it('Zoombar should destroy correctly', (done) => {
-        const template = '<div><div *ngIf="isChartAreaVisible"><ig-data-chart  widgetId="datachart1" [(options)]="opts"></ig-data-chart><ig-zoombar [(options)]="zoombarOpts" widgetId="zoombar"></ig-zoombar></div></div>';
+        const template = '<div>@if (isChartAreaVisible) {<ig-data-chart  widgetId="datachart1" [(options)]="opts"></ig-data-chart><ig-zoombar [(options)]="zoombarOpts" widgetId="zoombar"></ig-zoombar>}</div>';
         TestBed.overrideComponent(TestComponent, {
             set: {
                 template
@@ -108,7 +110,7 @@ describe('Infragistics Angular DataChart and Zoombar', () => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
             fixture.componentInstance.isChartAreaVisible = false;
-            fixture.detectChanges();
+            fixture.changeDetectorRef.detectChanges();
             expect($(fixture.debugElement.nativeElement).find('#datachart1').data('igDataChart')).toBeUndefined();
             expect($(fixture.debugElement.nativeElement).find('#zoombar').data('igZoombar')).toBeUndefined();
             done();

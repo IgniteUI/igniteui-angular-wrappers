@@ -41,6 +41,7 @@ describe('Infragistics Angular Tree', () => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
             fixture.componentInstance.data[0].Name = 'Test';
+            fixture.changeDetectorRef.detectChanges();
             setTimeout(() => {
                 fixture.detectChanges();
                 expect($($('#tree1').igTree('nodeByIndex', 0)).children('a').text())
@@ -62,6 +63,7 @@ describe('Infragistics Angular Tree', () => {
             fixture.detectChanges();
             // remove item
             fixture.componentInstance.data.splice(0, 1);
+            fixture.changeDetectorRef.detectChanges();
 
             setTimeout(() => {
                 fixture.detectChanges();
@@ -69,6 +71,7 @@ describe('Infragistics Angular Tree', () => {
                     .toBe(3);
                 // add item
                 fixture.componentInstance.data.push({ Name: 'Category', ProductCategoryID: 100 });
+                fixture.changeDetectorRef.detectChanges();
                 setTimeout(() => {
                     fixture.detectChanges();
                     expect($(fixture.debugElement.nativeElement).find('#tree1 li.ui-igtree-noderoot').length)

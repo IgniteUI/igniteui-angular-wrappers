@@ -38,11 +38,9 @@ describe('Infragistics Angular TreeGrid', () => {
         });
         TestBed.compileComponents().then(() => {
             const fixture = TestBed.createComponent(TestComponent);
-            fixture.detectChanges();
-            fixture.componentInstance.data[0].tasks = '';
-            fixture.detectChanges();
-            fixture.componentInstance.data[0].tasks = 'Test';
-            fixture.detectChanges();
+            let newData = [...fixture.componentInstance.data];
+            newData[0].tasks = 'Test';
+            fixture.componentInstance.viewChild.dataSource = newData;
             setTimeout(() => {
                 fixture.detectChanges();
                 expect($(fixture.debugElement.nativeElement).find('#grid1 tr:first td[aria-describedby=\'grid1_tasks\']').text())
@@ -63,9 +61,9 @@ describe('Infragistics Angular TreeGrid', () => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
             // remove item
-            fixture.componentInstance.data[0].products.removeAt(4);
-
-            fixture.componentInstance.viewChild.markForCheck();
+            var newData = [...fixture.componentInstance.data];
+            newData[0].products.removeAt(4);
+            fixture.componentInstance.viewChild.dataSource = newData;
 
             setTimeout(() => {
                 fixture.detectChanges();
@@ -73,9 +71,10 @@ describe('Infragistics Angular TreeGrid', () => {
                     .toBe(11);
 
                 // add item
-                fixture.componentInstance.data.push({ id: 1000, tasks: 'Test Planning', start: '6/2/2014', finish: '6/4/2014', duration: '3d', progress: '100%' });
+                newData = [...fixture.componentInstance.data];
+                newData.push({ id: 1000, tasks: 'Test Planning', start: '6/2/2014', finish: '6/4/2014', duration: '3d', progress: '100%' });
+                fixture.componentInstance.viewChild.dataSource = newData;
                 setTimeout(() => {
-                    fixture.detectChanges();
                     expect($(fixture.debugElement.nativeElement).find('#grid1 tr').length)
                         .toBe(12);
                     expect($(fixture.debugElement.nativeElement).find('#grid1 tr:last td[aria-describedby=\'grid1_tasks\']').text())
@@ -97,7 +96,9 @@ describe('Infragistics Angular TreeGrid', () => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
             // remove root item
-            fixture.componentInstance.data.splice(0);
+            var newData = [...fixture.componentInstance.data];
+            newData.splice(0, 1);
+            fixture.componentInstance.viewChild.dataSource = newData;
 
             setTimeout(() => {
                 fixture.detectChanges();
@@ -196,11 +197,11 @@ describe('Infragistics Angular TreeGrid', () => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.componentInstance.singleRecData.length = 0;
             Array.prototype.push.apply(fixture.componentInstance.singleRecData, fixture.componentInstance.singleRecData2);
-            fixture.detectChanges();
+            fixture.changeDetectorRef.detectChanges();
             const $grid = $('#grid1');
             expect($grid.data('igTreeGrid').allRows().length === 1).toBeTruthy('There should be one record in treegrid.');
             fixture.componentInstance.singleRecData = [];
-            fixture.detectChanges();
+            fixture.changeDetectorRef.detectChanges();
             expect($grid.data('igTreeGrid').allRows().length === 0).toBeTruthy('There should be no records in the treegrid.');
             done();
         });

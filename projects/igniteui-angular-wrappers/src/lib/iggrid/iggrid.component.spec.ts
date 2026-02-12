@@ -45,7 +45,7 @@ describe('Infragistics Angular Grid', () => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
             fixture.componentInstance.opts = fixture.componentInstance.opts2;
-            fixture.detectChanges();
+            fixture.changeDetectorRef.detectChanges();
 
             expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgGridComponent)
                 .toBe(true);
@@ -91,7 +91,7 @@ describe('Infragistics Angular Grid', () => {
                 .toBe(true);
 
             fixture.componentInstance.opts = fixture.componentInstance.opts2;
-            fixture.detectChanges();
+            fixture.changeDetectorRef.detectChanges();
 
             expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgGridComponent)
                 .toBe(true);
@@ -138,8 +138,8 @@ describe('Infragistics Angular Grid', () => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
             fixture.componentInstance.caption = 'Changed Caption';
+            fixture.changeDetectorRef.detectChanges();
             setTimeout(() => {
-                fixture.detectChanges();
                 expect($(fixture.debugElement.nativeElement).find('#grid1_caption').text())
                     .toBe('Changed Caption');
                 done();
@@ -157,9 +157,10 @@ describe('Infragistics Angular Grid', () => {
         TestBed.compileComponents().then(() => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
-            fixture.componentInstance.data[0].Name = '';
+            let newData = [...fixture.componentInstance.data];
+            newData[0].Name = 'Mr. Smith';
+            fixture.componentInstance.viewChild.dataSource = newData;
             fixture.detectChanges();
-            fixture.componentInstance.data[0].Name = 'Mr. Smith';
             setTimeout(() => {
                 fixture.detectChanges();
                 expect($(fixture.debugElement.nativeElement).find('#grid1 tr:first td[aria-describedby=\'grid1_Name\']').text())
@@ -180,6 +181,7 @@ describe('Infragistics Angular Grid', () => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
             fixture.componentInstance.data.splice(2, 1);
+            fixture.changeDetectorRef.detectChanges();
             setTimeout(() => {
                 fixture.detectChanges();
                 expect($(fixture.debugElement.nativeElement).find('#grid1 tbody tr').length)
@@ -200,6 +202,7 @@ describe('Infragistics Angular Grid', () => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
             fixture.componentInstance.data.push({ Id: 4, Name: 'Bob Ferguson', Age: 33 });
+            fixture.changeDetectorRef.detectChanges();
             setTimeout(() => {
                 fixture.detectChanges();
                 expect($(fixture.debugElement.nativeElement).find('#grid1 tbody tr').length)
@@ -296,6 +299,7 @@ describe('Infragistics Angular Grid', () => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
             fixture.componentInstance.opts1.height = '400px';
+            fixture.changeDetectorRef.detectChanges();
             setTimeout(() => {
                 fixture.detectChanges();
                 expect($(fixture.debugElement.nativeElement).find('#grid1_container').outerHeight())
@@ -315,9 +319,9 @@ describe('Infragistics Angular Grid', () => {
         TestBed.compileComponents().then(() => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
-            fixture.componentInstance.data[0].Age = 0;
-            fixture.detectChanges();
-            fixture.componentInstance.data[0].Age = 42;
+            let newData = [...fixture.componentInstance.data];
+            newData[0].Age = 42;
+            fixture.componentInstance.viewChild.dataSource = newData;
             setTimeout(() => {
                 fixture.detectChanges();
                 expect($(fixture.debugElement.nativeElement).find('#grid1 tr[data-id=\'1\'] td[aria-describedby=\'grid1_Age\']').text())
@@ -356,9 +360,9 @@ describe('Infragistics Angular Grid', () => {
         TestBed.compileComponents().then(() => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
-            fixture.componentInstance.data[0].HireDate = new Date('01/01/2016');
-            fixture.detectChanges();
-            fixture.componentInstance.data[0].HireDate = new Date('11/11/2016');
+            let newData = [...fixture.componentInstance.data];
+            newData[0].HireDate = new Date('11/11/2016');
+            fixture.componentInstance.viewChild.dataSource = newData;
             setTimeout(() => {
                 fixture.detectChanges();
                 expect($(fixture.debugElement.nativeElement).find('#grid1 tr:first td[aria-describedby=\'grid1_HireDate\']').text())
@@ -500,6 +504,7 @@ describe('Infragistics Angular Grid', () => {
                 .toBe('2');
             fixture.componentInstance.pi = 0;
             fixture.componentInstance.idHeaderText = 'Changed ID';
+            fixture.changeDetectorRef.detectChanges();
             setTimeout(() => {
                 fixture.detectChanges();
                 expect($(fixture.debugElement.nativeElement).find('#grid1 thead th#grid1_Id').text())
@@ -534,6 +539,7 @@ describe('Infragistics Angular Grid', () => {
                 .toBe('2');
             fixture.componentInstance.pi = 0;
             fixture.componentInstance.idHeaderText = 'Changed ID';
+            fixture.changeDetectorRef.detectChanges();
             setTimeout(() => {
                 fixture.detectChanges();
                 expect($(fixture.debugElement.nativeElement).find('#grid1_container thead th#grid1_Id').text())
@@ -609,7 +615,8 @@ describe('Infragistics Angular Grid', () => {
         TestBed.compileComponents().then(() => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
-            fixture.componentInstance.opts1 = fixture.componentInstance.opts3;
+            fixture.componentInstance.viewChild.options = fixture.componentInstance.opts3;
+            fixture.changeDetectorRef.detectChanges();
             fixture.detectChanges();
 
             expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgGridComponent)
@@ -722,7 +729,8 @@ describe('Infragistics Angular Grid', () => {
             fixture.detectChanges();
             expect($(fixture.debugElement.nativeElement).find('#grid1_container tbody tr').length)
                 .toBe(3);
-            fixture.componentInstance.data1 = [];
+            fixture.componentInstance.viewChild.dataSource = [];
+            fixture.changeDetectorRef.detectChanges();
             fixture.detectChanges();
             expect($(fixture.debugElement.nativeElement).find('#grid1_container tbody tr').length)
                 .toBe(0);
@@ -880,7 +888,6 @@ class TestComponent {
             width: '100%',
             height: '400px',
             autoCommit: true,
-            autoGenerateColumns: true,
             primaryKey: 'Id',
             dataSource: this.data
         };
