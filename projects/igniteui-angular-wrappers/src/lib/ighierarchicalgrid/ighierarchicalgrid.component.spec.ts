@@ -43,7 +43,7 @@ describe('Infragistics Angular HierarchicalGrid', () => {
             let newData = [...fixture.componentInstance.data];
             newData[0].Name = 'Test';
             fixture.componentInstance.viewChild.dataSource = newData;
-            fixture.componentInstance.viewChild.ngDoCheck();
+            fixture.changeDetectorRef.detectChanges();
             fixture.detectChanges();
             expect($(fixture.debugElement.nativeElement).find('#grid1 tr:first td[aria-describedby=\'grid1_Name\']').text())
                 .toBe('Test');
@@ -64,7 +64,7 @@ describe('Infragistics Angular HierarchicalGrid', () => {
             fixture.detectChanges();
             // remove item
             fixture.componentInstance.data.removeAt(0);
-            fixture.componentInstance.viewChild.ngDoCheck();
+            fixture.changeDetectorRef.detectChanges();
 
             setTimeout(() => {
                 fixture.detectChanges();
@@ -89,7 +89,7 @@ describe('Infragistics Angular HierarchicalGrid', () => {
             fixture.detectChanges();
             // add item
             fixture.componentInstance.data.push({ ID: 200, Name: 'John Snow' });
-            fixture.componentInstance.viewChild.ngDoCheck();
+            fixture.changeDetectorRef.detectChanges();
             setTimeout(() => {
                 fixture.detectChanges();
                 expect($(fixture.debugElement.nativeElement).find('#grid1 tr').length)

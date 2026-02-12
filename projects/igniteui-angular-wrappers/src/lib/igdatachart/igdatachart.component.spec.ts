@@ -37,7 +37,7 @@ describe('Infragistics Angular DataChart and Zoombar', () => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
             fixture.componentInstance.viewChild.options = fixture.componentInstance.opts1;
-            fixture.componentInstance.viewChild.ngDoCheck();
+            fixture.changeDetectorRef.detectChanges();
             fixture.detectChanges();
             expect($(fixture.debugElement.nativeElement).find('#datachart1').igDataChart('option', 'series')[0].type)
                 .toBe('line');
@@ -58,7 +58,7 @@ describe('Infragistics Angular DataChart and Zoombar', () => {
             fixture.componentInstance.viewChild.dataSource = [
                 { CountryName: 'China', Pop1995: 6768, Pop2005: 7654, Pop2015: 7655, Pop2025: 8655 }
             ];
-            fixture.componentInstance.viewChild.ngDoCheck();
+            fixture.changeDetectorRef.detectChanges();
             fixture.detectChanges();
             expect($(fixture.debugElement.nativeElement).find('#datachart1').igDataChart('option', 'dataSource')[0].Pop1995)
                 .toBe(6768);

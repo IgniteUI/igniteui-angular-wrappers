@@ -42,7 +42,7 @@ describe('Infragistics Angular Combo', () => {
         it('should be updated correctly if the ngModel value is updated', (done) => {
             fixture.detectChanges();
             fixture.componentInstance.combo.value1 = 1;
-            fixture.componentInstance.viewChild.ngDoCheck();
+            fixture.changeDetectorRef.detectChanges();
             setTimeout(() => {
                 expect($('#combo1').igCombo('value')).toBe(1);
                 expect($('#combo1').igCombo('text')).toBe('Chai');
@@ -54,7 +54,7 @@ describe('Infragistics Angular Combo', () => {
         it('should be updated correctly if the ngModel value is cleared.', (done) => {
             fixture.detectChanges();
             fixture.componentInstance.combo.value1 = 1;
-            fixture.componentInstance.viewChild.ngDoCheck();
+            fixture.changeDetectorRef.detectChanges();
             setTimeout(() => {
                 // clear
                 $('#combo1').parents('ig-combo').find('.ui-igcombo-clearicon').trigger('click');
@@ -131,7 +131,7 @@ describe('Infragistics Angular Combo', () => {
         it('should be updated correctly if the ngModel value is cleared when multiple selection.', (done) => {
             fixture.detectChanges();
             fixture.componentInstance.viewChild.writeValue([1]);
-            fixture.componentInstance.viewChild.ngDoCheck();
+            fixture.changeDetectorRef.detectChanges();
             fixture.detectChanges();
             setTimeout(() => {
                 // clear
@@ -150,7 +150,7 @@ describe('Infragistics Angular Combo', () => {
                 multiSelection: { enabled: true, showCheckboxes: true }
             };
             fixture.componentInstance.viewChild.dataSource = ['foo', 'bar', 'bas'];
-            fixture.componentInstance.viewChild.ngDoCheck();
+            fixture.changeDetectorRef.detectChanges();
             fixture.detectChanges();
             const elem = $('#combo1').igCombo('itemsFromIndex', 0)['element'];
             $('#combo1').igCombo('select', elem, {}, true);

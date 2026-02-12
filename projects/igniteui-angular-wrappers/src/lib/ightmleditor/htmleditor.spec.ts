@@ -43,7 +43,7 @@ describe('Infragistics Angular HtmlEditor', () => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
             fixture.componentInstance.data = '<span>Test Update</span>';
-            fixture.componentInstance.viewChild.ngDoCheck();
+            fixture.changeDetectorRef.detectChanges();
             setTimeout(() => {
                 expect($('#htmlEditor').igHtmlEditor('getContent', 'html')).toBe('<span>Test Update</span>');
                 done();

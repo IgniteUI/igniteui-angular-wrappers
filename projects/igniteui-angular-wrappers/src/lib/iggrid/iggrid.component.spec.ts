@@ -181,7 +181,7 @@ describe('Infragistics Angular Grid', () => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
             fixture.componentInstance.data.splice(2, 1);
-            fixture.componentInstance.viewChild.ngDoCheck();
+            fixture.changeDetectorRef.detectChanges();
             setTimeout(() => {
                 fixture.detectChanges();
                 expect($(fixture.debugElement.nativeElement).find('#grid1 tbody tr').length)
@@ -202,7 +202,7 @@ describe('Infragistics Angular Grid', () => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
             fixture.componentInstance.data.push({ Id: 4, Name: 'Bob Ferguson', Age: 33 });
-            fixture.componentInstance.viewChild.ngDoCheck();
+            fixture.changeDetectorRef.detectChanges();
             setTimeout(() => {
                 fixture.detectChanges();
                 expect($(fixture.debugElement.nativeElement).find('#grid1 tbody tr').length)
@@ -299,7 +299,7 @@ describe('Infragistics Angular Grid', () => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
             fixture.componentInstance.opts1.height = '400px';
-            fixture.componentInstance.viewChild.ngDoCheck();
+            fixture.changeDetectorRef.detectChanges();
             setTimeout(() => {
                 fixture.detectChanges();
                 expect($(fixture.debugElement.nativeElement).find('#grid1_container').outerHeight())
@@ -616,7 +616,7 @@ describe('Infragistics Angular Grid', () => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
             fixture.componentInstance.viewChild.options = fixture.componentInstance.opts3;
-            fixture.componentInstance.viewChild.ngDoCheck();
+            fixture.changeDetectorRef.detectChanges();
             fixture.detectChanges();
 
             expect(fixture.debugElement.componentInstance.viewChild instanceof Infragistics.IgGridComponent)
@@ -730,7 +730,7 @@ describe('Infragistics Angular Grid', () => {
             expect($(fixture.debugElement.nativeElement).find('#grid1_container tbody tr').length)
                 .toBe(3);
             fixture.componentInstance.viewChild.dataSource = [];
-            fixture.componentInstance.viewChild.ngDoCheck();
+            fixture.changeDetectorRef.detectChanges();
             fixture.detectChanges();
             expect($(fixture.debugElement.nativeElement).find('#grid1_container tbody tr').length)
                 .toBe(0);
