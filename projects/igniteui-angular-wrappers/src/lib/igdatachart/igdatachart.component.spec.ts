@@ -100,7 +100,7 @@ describe('Infragistics Angular DataChart and Zoombar', () => {
     });
 
     it('Zoombar should destroy correctly', (done) => {
-        const template = '<div><div *ngIf="isChartAreaVisible"><ig-data-chart  widgetId="datachart1" [(options)]="opts"></ig-data-chart><ig-zoombar [(options)]="zoombarOpts" widgetId="zoombar"></ig-zoombar></div></div>';
+        const template = '<div>@if (isChartAreaVisible) {<ig-data-chart  widgetId="datachart1" [(options)]="opts"></ig-data-chart><ig-zoombar [(options)]="zoombarOpts" widgetId="zoombar"></ig-zoombar>}</div>';
         TestBed.overrideComponent(TestComponent, {
             set: {
                 template
@@ -110,7 +110,7 @@ describe('Infragistics Angular DataChart and Zoombar', () => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
             fixture.componentInstance.isChartAreaVisible = false;
-            fixture.detectChanges();
+            fixture.changeDetectorRef.detectChanges();
             expect($(fixture.debugElement.nativeElement).find('#datachart1').data('igDataChart')).toBeUndefined();
             expect($(fixture.debugElement.nativeElement).find('#zoombar').data('igZoombar')).toBeUndefined();
             done();

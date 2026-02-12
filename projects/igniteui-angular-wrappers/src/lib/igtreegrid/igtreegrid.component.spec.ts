@@ -38,11 +38,9 @@ describe('Infragistics Angular TreeGrid', () => {
         });
         TestBed.compileComponents().then(() => {
             const fixture = TestBed.createComponent(TestComponent);
-            fixture.detectChanges();
-            fixture.componentInstance.data[0].tasks = '';
-            fixture.detectChanges();
-            fixture.componentInstance.data[0].tasks = 'Test';
-            fixture.detectChanges();
+            let newData = [...fixture.componentInstance.data];
+            newData[0].tasks = 'Test';
+            fixture.componentInstance.viewChild.dataSource = newData;
             setTimeout(() => {
                 fixture.detectChanges();
                 expect($(fixture.debugElement.nativeElement).find('#grid1 tr:first td[aria-describedby=\'grid1_tasks\']').text())
@@ -63,9 +61,9 @@ describe('Infragistics Angular TreeGrid', () => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
             // remove item
-            fixture.componentInstance.data[0].products.removeAt(4);
-
-            fixture.componentInstance.viewChild.ngDoCheck();
+            var newData = [...fixture.componentInstance.data];
+            newData[0].products.removeAt(4);
+            fixture.componentInstance.viewChild.dataSource = newData;
 
             setTimeout(() => {
                 fixture.detectChanges();
@@ -73,10 +71,10 @@ describe('Infragistics Angular TreeGrid', () => {
                     .toBe(11);
 
                 // add item
-                fixture.componentInstance.data.push({ id: 1000, tasks: 'Test Planning', start: '6/2/2014', finish: '6/4/2014', duration: '3d', progress: '100%' });
-                fixture.componentInstance.viewChild.ngDoCheck();
+                newData = [...fixture.componentInstance.data];
+                newData.push({ id: 1000, tasks: 'Test Planning', start: '6/2/2014', finish: '6/4/2014', duration: '3d', progress: '100%' });
+                fixture.componentInstance.viewChild.dataSource = newData;
                 setTimeout(() => {
-                    fixture.detectChanges();
                     expect($(fixture.debugElement.nativeElement).find('#grid1 tr').length)
                         .toBe(12);
                     expect($(fixture.debugElement.nativeElement).find('#grid1 tr:last td[aria-describedby=\'grid1_tasks\']').text())
