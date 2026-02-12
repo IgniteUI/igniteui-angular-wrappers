@@ -96,7 +96,9 @@ describe('Infragistics Angular TreeGrid', () => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
             // remove root item
-            fixture.componentInstance.data.splice(0);
+            var newData = [...fixture.componentInstance.data];
+            newData.splice(0, 1);
+            fixture.componentInstance.viewChild.dataSource = newData;
 
             setTimeout(() => {
                 fixture.detectChanges();
@@ -195,11 +197,11 @@ describe('Infragistics Angular TreeGrid', () => {
             const fixture = TestBed.createComponent(TestComponent);
             fixture.componentInstance.singleRecData.length = 0;
             Array.prototype.push.apply(fixture.componentInstance.singleRecData, fixture.componentInstance.singleRecData2);
-            fixture.detectChanges();
+            fixture.changeDetectorRef.detectChanges();
             const $grid = $('#grid1');
             expect($grid.data('igTreeGrid').allRows().length === 1).toBeTruthy('There should be one record in treegrid.');
             fixture.componentInstance.singleRecData = [];
-            fixture.detectChanges();
+            fixture.changeDetectorRef.detectChanges();
             expect($grid.data('igTreeGrid').allRows().length === 0).toBeTruthy('There should be no records in the treegrid.');
             done();
         });
